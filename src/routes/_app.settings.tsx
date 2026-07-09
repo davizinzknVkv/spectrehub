@@ -14,27 +14,17 @@ function SettingsPage() {
   const setCreds = useQuestStore((s) => s.setCreds);
 
   const [token, setToken] = useState("");
-  const [xsp, setXsp] = useState("");
-  const [ua, setUa] = useState("");
   const [saving, setSaving] = useState(false);
 
   useEffect(() => {
-    if (creds) {
-      setToken(creds.token);
-      setXsp(creds.xSuperProperties ?? "");
-      setUa(creds.userAgent ?? "");
-    }
+    if (creds) setToken(creds.token);
   }, [creds]);
 
   const save = async (e: React.FormEvent) => {
     e.preventDefault();
     setSaving(true);
     try {
-      setCreds({
-        token: token.trim(),
-        xSuperProperties: xsp.trim() || undefined,
-        userAgent: ua.trim() || undefined,
-      });
+      setCreds({ token: token.trim() });
       const user = await fetchUserInfo();
       if (!user) throw new Error("Token inválido ou expirado");
       toast.success(`Conectado como ${(user as { username?: string }).username ?? "usuário"}`);
@@ -49,8 +39,6 @@ function SettingsPage() {
     if (!confirm("Remover o token salvo?")) return;
     setCreds(null);
     setToken("");
-    setXsp("");
-    setUa("");
     toast.success("Token removido");
   };
 
@@ -80,7 +68,7 @@ function SettingsPage() {
 
       <form onSubmit={save} className="space-y-4 rounded-xl border border-white/10 bg-white/[0.03] p-6">
         <div>
-          <label className="text-sm font-medium">Token do Discord *</label>
+          <label className="text-sm font-medium">Token do Discord</label>
           <p className="mt-1 text-xs text-slate-500">
             DevTools (F12) → Network → qualquer request → header <code>authorization</code>.
           </p>
@@ -91,26 +79,6 @@ function SettingsPage() {
             onChange={(e) => setToken(e.target.value)}
             placeholder="MTIzNDU2..."
             className="mt-2 w-full rounded-md border border-white/10 bg-[#0f1218] px-3 py-2 text-sm font-mono focus:border-[#5865F2] focus:outline-none"
-          />
-        </div>
-        <div>
-          <label className="text-sm font-medium">x-super-properties (opcional)</label>
-          <textarea
-            rows={2}
-            value={xsp}
-            onChange={(e) => setXsp(e.target.value)}
-            placeholder="deixe vazio para usar o padrão"
-            className="mt-2 w-full rounded-md border border-white/10 bg-[#0f1218] px-3 py-2 text-xs font-mono focus:border-[#5865F2] focus:outline-none"
-          />
-        </div>
-        <div>
-          <label className="text-sm font-medium">user-agent (opcional)</label>
-          <textarea
-            rows={2}
-            value={ua}
-            onChange={(e) => setUa(e.target.value)}
-            placeholder="deixe vazio para usar o padrão"
-            className="mt-2 w-full rounded-md border border-white/10 bg-[#0f1218] px-3 py-2 text-xs font-mono focus:border-[#5865F2] focus:outline-none"
           />
         </div>
         <button
