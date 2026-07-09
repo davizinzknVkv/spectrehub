@@ -9,6 +9,7 @@ export type Quest = {
   target: number;
   rewardText: string;
   isEnrolled: boolean;
+  imageUrl?: string;
 };
 
 export type Credentials = {
