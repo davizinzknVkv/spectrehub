@@ -1,28 +1,16 @@
-import { createFileRoute, Outlet, redirect, Link, useRouter } from "@tanstack/react-router";
-import { supabase } from "@/integrations/supabase/client";
-import { useQueryClient } from "@tanstack/react-query";
+import { createFileRoute, Outlet, Link } from "@tanstack/react-router";
+import { useEffect } from "react";
+import { useQuestStore } from "@/lib/quest-store";
 
-export const Route = createFileRoute("/_authenticated")({
-  ssr: false,
-  beforeLoad: async () => {
-    const { data, error } = await supabase.auth.getUser();
-    if (error || !data.user) throw redirect({ to: "/auth" });
-    return { user: data.user };
-  },
-  component: AuthenticatedLayout,
+export const Route = createFileRoute("/_app")({
+  component: AppLayout,
 });
 
-function AuthenticatedLayout() {
-  const router = useRouter();
-  const qc = useQueryClient();
-  const { user } = Route.useRouteContext();
-
-  const signOut = async () => {
-    await qc.cancelQueries();
-    qc.clear();
-    await supabase.auth.signOut();
-    router.navigate({ to: "/auth", replace: true });
-  };
+function AppLayout() {
+  const hydrate = useQuestStore((s) => s.hydrate);
+  useEffect(() => {
+    hydrate();
+  }, [hydrate]);
 
   return (
     <div className="min-h-screen bg-[#0b0d12] text-slate-100">
@@ -61,18 +49,9 @@ function AuthenticatedLayout() {
                 activeProps={{ className: "text-white" }}
                 className="hover:text-white"
               >
-                Conta
+                Token
               </Link>
             </nav>
-          </div>
-          <div className="flex items-center gap-3 text-sm">
-            <span className="hidden text-slate-500 md:inline">{user.email}</span>
-            <button
-              onClick={signOut}
-              className="rounded-md border border-white/10 bg-white/5 px-3 py-1.5 text-xs hover:bg-white/10"
-            >
-              Sair
-            </button>
           </div>
         </div>
       </header>

@@ -1,22 +1,20 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useQuery } from "@tanstack/react-query";
-import { listQuestRuns } from "@/lib/discord.functions";
+import { useQuestStore } from "@/lib/quest-store";
 
-export const Route = createFileRoute("/_authenticated/history")({
+export const Route = createFileRoute("/_app/history")({
   head: () => ({ meta: [{ title: "Histórico — DiscordHub" }] }),
   component: HistoryPage,
 });
 
 function HistoryPage() {
-  const { data, isLoading } = useQuery({
-    queryKey: ["quest-runs"],
-    queryFn: () => listQuestRuns(),
-  });
+  const runs = useQuestStore((s) => s.runs);
 
   return (
     <div className="space-y-4">
       <h1 className="text-2xl font-bold">Histórico</h1>
-      {isLoading && <div className="text-slate-400">Carregando...</div>}
+      <p className="text-sm text-slate-400">
+        Salvo apenas neste navegador. Limpar o localStorage apaga o histórico.
+      </p>
       <div className="overflow-hidden rounded-xl border border-white/10">
         <table className="w-full text-sm">
           <thead className="bg-white/[0.03] text-left text-xs uppercase tracking-wider text-slate-500">
@@ -29,7 +27,7 @@ function HistoryPage() {
             </tr>
           </thead>
           <tbody className="divide-y divide-white/5">
-            {(data ?? []).map((r) => (
+            {runs.map((r) => (
               <tr key={r.id}>
                 <td className="px-4 py-3">{r.quest_name}</td>
                 <td className="px-4 py-3 text-slate-400">{r.task_type}</td>
@@ -52,7 +50,7 @@ function HistoryPage() {
                 </td>
               </tr>
             ))}
-            {data && data.length === 0 && (
+            {runs.length === 0 && (
               <tr>
                 <td colSpan={5} className="px-4 py-8 text-center text-sm text-slate-500">
                   Nenhuma execução registrada ainda.

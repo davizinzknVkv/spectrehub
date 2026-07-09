@@ -11,7 +11,47 @@ export type Quest = {
   isEnrolled: boolean;
 };
 
+export type Credentials = {
+  token: string;
+  xSuperProperties?: string;
+  userAgent?: string;
+};
+
+export type RunRecord = {
+  id: string;
+  quest_id: string;
+  quest_name: string;
+  task_type: string;
+  reward_text: string | null;
+  status: "completed" | "failed" | "skipped";
+  error_message: string | null;
+  started_at: string;
+};
+
 type Progress = { current: number; total: number };
+
+const CREDS_KEY = "discordhub.creds";
+const RUNS_KEY = "discordhub.runs";
+
+function loadCreds(): Credentials | null {
+  if (typeof window === "undefined") return null;
+  try {
+    const raw = window.localStorage.getItem(CREDS_KEY);
+    return raw ? (JSON.parse(raw) as Credentials) : null;
+  } catch {
+    return null;
+  }
+}
+
+function loadRuns(): RunRecord[] {
+  if (typeof window === "undefined") return [];
+  try {
+    const raw = window.localStorage.getItem(RUNS_KEY);
+    return raw ? (JSON.parse(raw) as RunRecord[]) : [];
+  } catch {
+    return [];
+  }
+}
 
 type State = {
   running: boolean;
@@ -20,6 +60,8 @@ type State = {
   logs: LogEntry[];
   quests: Quest[];
   shouldStop: boolean;
+  creds: Credentials | null;
+  runs: RunRecord[];
   setQuests: (q: Quest[]) => void;
   setRunning: (r: boolean) => void;
   setActive: (id: string | null) => void;
@@ -28,17 +70,22 @@ type State = {
   clearLogs: () => void;
   requestStop: () => void;
   resetStop: () => void;
+  setCreds: (c: Credentials | null) => void;
+  addRun: (r: RunRecord) => void;
+  hydrate: () => void;
 };
 
 let logId = 0;
 
-export const useQuestStore = create<State>((set) => ({
+export const useQuestStore = create<State>((set, get) => ({
   running: false,
   activeQuestId: null,
   progress: null,
   logs: [],
   quests: [],
   shouldStop: false,
+  creds: null,
+  runs: [],
   setQuests: (quests) => set({ quests }),
   setRunning: (running) => set({ running }),
   setActive: (activeQuestId) => set({ activeQuestId, progress: null }),
@@ -50,4 +97,19 @@ export const useQuestStore = create<State>((set) => ({
   clearLogs: () => set({ logs: [] }),
   requestStop: () => set({ shouldStop: true }),
   resetStop: () => set({ shouldStop: false }),
+  setCreds: (creds) => {
+    set({ creds });
+    if (typeof window !== "undefined") {
+      if (creds) window.localStorage.setItem(CREDS_KEY, JSON.stringify(creds));
+      else window.localStorage.removeItem(CREDS_KEY);
+    }
+  },
+  addRun: (r) => {
+    const runs = [r, ...get().runs].slice(0, 200);
+    set({ runs });
+    if (typeof window !== "undefined") {
+      window.localStorage.setItem(RUNS_KEY, JSON.stringify(runs));
+    }
+  },
+  hydrate: () => set({ creds: loadCreds(), runs: loadRuns() }),
 }));

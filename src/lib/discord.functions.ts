@@ -1,5 +1,4 @@
 import { createServerFn } from "@tanstack/react-start";
-import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
 import { z } from "zod";
 
 const DEFAULT_XSP =
@@ -36,154 +35,19 @@ async function discordCall(
   return { status: res.status, body: body_text };
 }
 
-export const saveDiscordAccount = createServerFn({ method: "POST" })
-  .middleware([requireSupabaseAuth])
-  .inputValidator((input) =>
-    z
-      .object({
-        token: z.string().min(10),
-        xSuperProperties: z.string().optional(),
-        userAgent: z.string().optional(),
-      })
-      .parse(input),
-  )
-  .handler(async ({ data, context }) => {
-    const xsp = data.xSuperProperties?.trim() || DEFAULT_XSP;
-    const ua = data.userAgent?.trim() || DEFAULT_UA;
-    const me = await discordCall(data.token, xsp, ua, "/users/@me", "GET", null);
-    if (me.status !== 200) {
-      throw new Error(`Token inválido (status ${me.status})`);
-    }
-    const user = JSON.parse(me.body) as {
-      id: string;
-      username: string;
-      global_name?: string | null;
-    };
-    const { encryptToken } = await import("./discord-crypto.server");
-    const { ciphertext, iv } = await encryptToken(data.token);
-    const { error } = await context.supabase.from("discord_accounts").upsert(
-      {
-        user_id: context.userId,
-        token_ciphertext: ciphertext,
-        token_iv: iv,
-        x_super_properties: xsp,
-        user_agent: ua,
-        discord_user_id: user.id,
-        discord_username: user.username,
-        discord_global_name: user.global_name ?? null,
-        last_synced_at: new Date().toISOString(),
-      },
-      { onConflict: "user_id" },
-    );
-    if (error) throw new Error(error.message);
-    return { ok: true, user };
-  });
-
-export const getDiscordAccountStatus = createServerFn({ method: "GET" })
-  .middleware([requireSupabaseAuth])
-  .handler(async ({ context }) => {
-    const { data, error } = await context.supabase
-      .from("discord_accounts")
-      .select(
-        "discord_user_id, discord_username, discord_global_name, last_orbs, last_synced_at, updated_at",
-      )
-      .eq("user_id", context.userId)
-      .maybeSingle();
-    if (error) throw new Error(error.message);
-    return data;
-  });
-
-export const deleteDiscordAccount = createServerFn({ method: "POST" })
-  .middleware([requireSupabaseAuth])
-  .handler(async ({ context }) => {
-    const { error } = await context.supabase
-      .from("discord_accounts")
-      .delete()
-      .eq("user_id", context.userId);
-    if (error) throw new Error(error.message);
-    return { ok: true };
-  });
+const proxyInput = z.object({
+  token: z.string().min(10),
+  xSuperProperties: z.string().optional(),
+  userAgent: z.string().optional(),
+  endpoint: z.string().startsWith("/"),
+  method: z.enum(["GET", "POST", "PUT", "DELETE"]).default("GET"),
+  body: z.unknown().optional(),
+});
 
 export const discordProxy = createServerFn({ method: "POST" })
-  .middleware([requireSupabaseAuth])
-  .inputValidator((input) =>
-    z
-      .object({
-        endpoint: z.string().startsWith("/"),
-        method: z.enum(["GET", "POST", "PUT", "DELETE"]).default("GET"),
-        body: z.unknown().optional(),
-      })
-      .parse(input),
-  )
-  .handler(async ({ data, context }) => {
-    const { data: acc, error } = await context.supabase
-      .from("discord_accounts")
-      .select("token_ciphertext, token_iv, x_super_properties, user_agent")
-      .eq("user_id", context.userId)
-      .maybeSingle();
-    if (error) throw new Error(error.message);
-    if (!acc) throw new Error("Conta Discord não conectada");
-    const { decryptToken } = await import("./discord-crypto.server");
-    const token = await decryptToken(acc.token_ciphertext, acc.token_iv);
-    const result = await discordCall(
-      token,
-      acc.x_super_properties,
-      acc.user_agent,
-      data.endpoint,
-      data.method,
-      data.body ?? null,
-    );
-    // Cache orbs if this was the balance endpoint
-    if (data.endpoint === "/users/@me/virtual-currency/balance" && result.status === 200) {
-      const balance = (JSON.parse(result.body) as { balance?: number })?.balance;
-      if (typeof balance === "number") {
-        await context.supabase
-          .from("discord_accounts")
-          .update({ last_orbs: balance, last_synced_at: new Date().toISOString() })
-          .eq("user_id", context.userId);
-      }
-    }
-    return result;
-  });
-
-export const logQuestRun = createServerFn({ method: "POST" })
-  .middleware([requireSupabaseAuth])
-  .inputValidator((input) =>
-    z
-      .object({
-        quest_id: z.string(),
-        quest_name: z.string(),
-        task_type: z.string(),
-        reward_text: z.string().nullable().optional(),
-        status: z.enum(["completed", "failed", "skipped"]),
-        error_message: z.string().nullable().optional(),
-      })
-      .parse(input),
-  )
-  .handler(async ({ data, context }) => {
-    const { error } = await context.supabase.from("quest_runs").insert({
-      user_id: context.userId,
-      quest_id: data.quest_id,
-      quest_name: data.quest_name,
-      task_type: data.task_type,
-      reward_text: data.reward_text ?? null,
-      status: data.status,
-      completed_at: data.status === "completed" ? new Date().toISOString() : null,
-      error_message: data.error_message ?? null,
-    });
-    if (error) throw new Error(error.message);
-    return { ok: true };
-  });
-
-export const listQuestRuns = createServerFn({ method: "GET" })
-  .middleware([requireSupabaseAuth])
-  .handler(async ({ context }) => {
-    const { data, error } = await context.supabase
-      .from("quest_runs")
-      .select("*")
-      .eq("user_id", context.userId)
-      .order("started_at", { ascending: false })
-      .limit(100);
-    if (error) throw new Error(error.message);
-    return data ?? [];
+  .inputValidator((input) => proxyInput.parse(input))
+  .handler(async ({ data }) => {
+    const xsp = data.xSuperProperties?.trim() || DEFAULT_XSP;
+    const ua = data.userAgent?.trim() || DEFAULT_UA;
+    return await discordCall(data.token, xsp, ua, data.endpoint, data.method, data.body ?? null);
   });

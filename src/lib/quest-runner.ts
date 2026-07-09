@@ -1,5 +1,5 @@
-import { discordProxy, logQuestRun } from "./discord.functions";
-import { useQuestStore, type Quest } from "./quest-store";
+import { discordProxy } from "./discord.functions";
+import { useQuestStore, type Quest, type RunRecord } from "./quest-store";
 
 const TASK_TYPES: Record<string, string> = {
   WATCH_VIDEO: "🎬 Vídeo",
@@ -46,8 +46,24 @@ function getBestTask(tasks: Record<string, { target?: number }>) {
   return best;
 }
 
+function requireCreds() {
+  const creds = useQuestStore.getState().creds;
+  if (!creds?.token) throw new Error("Token não configurado");
+  return creds;
+}
+
 async function call(endpoint: string, method: "GET" | "POST" = "GET", body?: unknown) {
-  const res = await discordProxy({ data: { endpoint, method, body } });
+  const creds = requireCreds();
+  const res = await discordProxy({
+    data: {
+      token: creds.token,
+      xSuperProperties: creds.xSuperProperties,
+      userAgent: creds.userAgent,
+      endpoint,
+      method,
+      body,
+    },
+  });
   let parsed: unknown = null;
   try {
     parsed = res.body ? JSON.parse(res.body) : null;
@@ -65,7 +81,7 @@ export async function fetchUserInfo() {
 export async function fetchOrbs(): Promise<number | null> {
   const res = await call("/users/@me/virtual-currency/balance");
   if (res.status !== 200) return null;
-  return ((res.data as { balance?: number }).balance ?? 0);
+  return (res.data as { balance?: number }).balance ?? 0;
 }
 
 export async function fetchAvailableQuests(): Promise<Quest[]> {
@@ -110,6 +126,19 @@ export async function fetchAvailableQuests(): Promise<Quest[]> {
   return result;
 }
 
+function logRun(quest: Quest, status: RunRecord["status"], error_message: string | null = null) {
+  useQuestStore.getState().addRun({
+    id: `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
+    quest_id: quest.questId,
+    quest_name: quest.questName,
+    task_type: quest.taskType,
+    reward_text: quest.rewardText,
+    status,
+    error_message,
+    started_at: new Date().toISOString(),
+  });
+}
+
 export async function runQuest(quest: Quest): Promise<boolean> {
   const s = useQuestStore.getState();
   s.setActive(quest.questId);
@@ -125,16 +154,7 @@ export async function runQuest(quest: Quest): Promise<boolean> {
       });
       if (enroll.status !== 200) {
         s.log(`❌ Falha ao se inscrever (${enroll.status})`, "error");
-        await logQuestRun({
-          data: {
-            quest_id: quest.questId,
-            quest_name: quest.questName,
-            task_type: quest.taskType,
-            reward_text: quest.rewardText,
-            status: "failed",
-            error_message: `enroll ${enroll.status}`,
-          },
-        });
+        logRun(quest, "failed", `enroll ${enroll.status}`);
         return false;
       }
       s.log("✅ Inscrito na missão");
@@ -218,29 +238,12 @@ export async function runQuest(quest: Quest): Promise<boolean> {
 
     s.setProgress({ current: quest.target, total: quest.target });
     s.log(`✅ Concluída: ${quest.questName} — ${quest.rewardText}`, "success");
-    await logQuestRun({
-      data: {
-        quest_id: quest.questId,
-        quest_name: quest.questName,
-        task_type: quest.taskType,
-        reward_text: quest.rewardText,
-        status: "completed",
-      },
-    });
+    logRun(quest, "completed");
     return true;
   } catch (err) {
     const msg = err instanceof Error ? err.message : String(err);
     s.log(`❌ Erro: ${msg}`, "error");
-    await logQuestRun({
-      data: {
-        quest_id: quest.questId,
-        quest_name: quest.questName,
-        task_type: quest.taskType,
-        reward_text: quest.rewardText,
-        status: msg === "Interrompido" ? "skipped" : "failed",
-        error_message: msg,
-      },
-    });
+    logRun(quest, msg === "Interrompido" ? "skipped" : "failed", msg);
     return false;
   }
 }

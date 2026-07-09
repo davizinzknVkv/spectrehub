@@ -1,76 +1,78 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useEffect, useState } from "react";
 import { toast } from "sonner";
-import {
-  deleteDiscordAccount,
-  getDiscordAccountStatus,
-  saveDiscordAccount,
-} from "@/lib/discord.functions";
+import { useQuestStore } from "@/lib/quest-store";
+import { fetchUserInfo } from "@/lib/quest-runner";
 
-export const Route = createFileRoute("/_authenticated/settings")({
-  head: () => ({ meta: [{ title: "Conta — DiscordHub" }] }),
+export const Route = createFileRoute("/_app/settings")({
+  head: () => ({ meta: [{ title: "Token — DiscordHub" }] }),
   component: SettingsPage,
 });
 
 function SettingsPage() {
-  const qc = useQueryClient();
-  const accountQ = useQuery({
-    queryKey: ["discord-account"],
-    queryFn: () => getDiscordAccountStatus(),
-  });
+  const creds = useQuestStore((s) => s.creds);
+  const setCreds = useQuestStore((s) => s.setCreds);
+
   const [token, setToken] = useState("");
   const [xsp, setXsp] = useState("");
   const [ua, setUa] = useState("");
   const [saving, setSaving] = useState(false);
 
+  useEffect(() => {
+    if (creds) {
+      setToken(creds.token);
+      setXsp(creds.xSuperProperties ?? "");
+      setUa(creds.userAgent ?? "");
+    }
+  }, [creds]);
+
   const save = async (e: React.FormEvent) => {
     e.preventDefault();
     setSaving(true);
     try {
-      const res = await saveDiscordAccount({
-        data: { token, xSuperProperties: xsp, userAgent: ua },
+      setCreds({
+        token: token.trim(),
+        xSuperProperties: xsp.trim() || undefined,
+        userAgent: ua.trim() || undefined,
       });
-      toast.success(`Conectado como ${res.user.username}`);
-      setToken("");
-      qc.invalidateQueries({ queryKey: ["discord-account"] });
+      const user = await fetchUserInfo();
+      if (!user) throw new Error("Token inválido ou expirado");
+      toast.success(`Conectado como ${(user as { username?: string }).username ?? "usuário"}`);
     } catch (err) {
-      toast.error(err instanceof Error ? err.message : "Falha ao salvar");
+      toast.error(err instanceof Error ? err.message : "Falha ao validar");
     } finally {
       setSaving(false);
     }
   };
 
-  const disconnect = async () => {
-    if (!confirm("Remover a conta Discord conectada?")) return;
-    await deleteDiscordAccount();
-    qc.invalidateQueries({ queryKey: ["discord-account"] });
-    toast.success("Desconectado");
+  const disconnect = () => {
+    if (!confirm("Remover o token salvo?")) return;
+    setCreds(null);
+    setToken("");
+    setXsp("");
+    setUa("");
+    toast.success("Token removido");
   };
 
   return (
     <div className="max-w-2xl space-y-6">
       <div>
-        <h1 className="text-2xl font-bold">Conta Discord</h1>
+        <h1 className="text-2xl font-bold">Token do Discord</h1>
         <p className="mt-1 text-sm text-slate-400">
-          Cadastre seu token para o hub poder executar missões em seu nome.
+          Cole seu token abaixo. Ele fica salvo apenas no seu navegador (localStorage) — nada é
+          enviado para nenhum servidor além do próprio Discord (via proxy CORS).
         </p>
       </div>
 
-      {accountQ.data && (
+      {creds && (
         <div className="rounded-xl border border-emerald-500/30 bg-emerald-500/[0.05] p-4">
           <div className="flex items-center justify-between">
-            <div>
-              <div className="text-sm text-emerald-300">✓ Conectado</div>
-              <div className="mt-1 font-medium">
-                {accountQ.data.discord_global_name || accountQ.data.discord_username}
-              </div>
-            </div>
+            <div className="text-sm text-emerald-300">✓ Token salvo neste navegador</div>
             <button
               onClick={disconnect}
               className="rounded-md border border-red-500/30 bg-red-500/10 px-3 py-1.5 text-xs text-red-300 hover:bg-red-500/20"
             >
-              Desconectar
+              Remover
             </button>
           </div>
         </div>
@@ -121,8 +123,8 @@ function SettingsPage() {
       </form>
 
       <div className="rounded-md border border-yellow-500/20 bg-yellow-500/[0.05] p-4 text-xs text-yellow-200/80">
-        ⚠️ O token é armazenado criptografado. Usar automação com token pessoal viola os Termos do
-        Discord e pode causar banimento — use por sua conta e risco.
+        ⚠️ Usar automação com token pessoal viola os Termos do Discord e pode causar banimento —
+        use por sua conta e risco.
       </div>
     </div>
   );

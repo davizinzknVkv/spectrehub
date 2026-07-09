@@ -1,31 +1,25 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
-import { useQuery } from "@tanstack/react-query";
 import { toast } from "sonner";
-import {
-  getDiscordAccountStatus,
-} from "@/lib/discord.functions";
 import {
   fetchAvailableQuests,
   fetchOrbs,
+  fetchUserInfo,
   runAll,
   runQuest,
 } from "@/lib/quest-runner";
 import { useQuestStore, type Quest } from "@/lib/quest-store";
 
-export const Route = createFileRoute("/_authenticated/hub")({
+export const Route = createFileRoute("/_app/hub")({
   head: () => ({ meta: [{ title: "Hub — DiscordHub" }] }),
   component: HubPage,
 });
 
 function HubPage() {
-  const accountQ = useQuery({
-    queryKey: ["discord-account"],
-    queryFn: () => getDiscordAccountStatus(),
-  });
-
+  const creds = useQuestStore((s) => s.creds);
   const [quests, setQuests] = useState<Quest[]>([]);
   const [orbs, setOrbs] = useState<number | null>(null);
+  const [user, setUser] = useState<{ username?: string; global_name?: string } | null>(null);
   const [loadingQuests, setLoadingQuests] = useState(false);
   const running = useQuestStore((s) => s.running);
   const activeId = useQuestStore((s) => s.activeQuestId);
@@ -37,6 +31,13 @@ function HubPage() {
   useEffect(() => {
     logEnd.current?.scrollIntoView({ behavior: "smooth" });
   }, [logs]);
+
+  useEffect(() => {
+    if (!creds) return;
+    fetchUserInfo()
+      .then((u) => u && setUser(u as { username?: string; global_name?: string }))
+      .catch(() => {});
+  }, [creds]);
 
   const loadQuests = async () => {
     setLoadingQuests(true);
@@ -52,49 +53,43 @@ function HubPage() {
     }
   };
 
-  if (accountQ.isLoading) {
-    return <div className="text-slate-400">Carregando...</div>;
-  }
-
-  if (!accountQ.data) {
+  if (!creds) {
     return (
       <div className="rounded-xl border border-yellow-500/30 bg-yellow-500/[0.05] p-6">
-        <h2 className="text-lg font-semibold text-yellow-300">Conecte sua conta Discord</h2>
+        <h2 className="text-lg font-semibold text-yellow-300">Configure seu token</h2>
         <p className="mt-2 text-sm text-slate-300">
-          Antes de usar o hub, cadastre seu token do Discord em{" "}
+          Antes de usar o hub, cole seu token do Discord em{" "}
           <a href="/settings" className="underline hover:text-white">
-            Conta
+            Token
           </a>
-          .
+          . Ele fica salvo apenas no seu navegador (localStorage).
         </p>
       </div>
     );
   }
 
-  const acc = accountQ.data;
-
   return (
     <div className="space-y-6">
-      {/* Account card */}
       <div className="rounded-xl border border-white/10 bg-white/[0.03] p-6">
         <div className="flex flex-wrap items-center justify-between gap-4">
           <div>
             <div className="text-xs uppercase tracking-wider text-slate-500">Conta Discord</div>
             <div className="mt-1 text-xl font-semibold">
-              {acc.discord_global_name || acc.discord_username}
-              <span className="ml-2 text-sm text-slate-500">@{acc.discord_username}</span>
+              {user?.global_name || user?.username || "—"}
+              {user?.username && (
+                <span className="ml-2 text-sm text-slate-500">@{user.username}</span>
+              )}
             </div>
           </div>
           <div className="text-right">
             <div className="text-xs uppercase tracking-wider text-slate-500">Orbs</div>
             <div className="mt-1 text-2xl font-bold text-[#5865F2]">
-              {(orbs ?? acc.last_orbs ?? 0).toLocaleString("pt-BR")}
+              {(orbs ?? 0).toLocaleString("pt-BR")}
             </div>
           </div>
         </div>
       </div>
 
-      {/* Actions */}
       <div className="flex flex-wrap gap-3">
         <button
           onClick={loadQuests}
@@ -120,12 +115,13 @@ function HubPage() {
         )}
       </div>
 
-      {/* Quest list */}
       <div className="grid gap-3">
         {quests.map((q) => {
           const isActive = activeId === q.questId;
           const pct =
-            isActive && progress ? Math.min(100, Math.round((progress.current / progress.total) * 100)) : 0;
+            isActive && progress
+              ? Math.min(100, Math.round((progress.current / progress.total) * 100))
+              : 0;
           return (
             <div
               key={q.questId}
@@ -178,13 +174,10 @@ function HubPage() {
         )}
       </div>
 
-      {/* Live log */}
       <div className="overflow-hidden rounded-xl border border-white/10 bg-[#0f1218]">
         <div className="flex items-center justify-between border-b border-white/5 px-4 py-2 text-xs text-slate-500">
           <span>Log ao vivo</span>
-          <span className="text-emerald-400">
-            {running ? "● executando" : "○ parado"}
-          </span>
+          <span className="text-emerald-400">{running ? "● executando" : "○ parado"}</span>
         </div>
         <div className="max-h-72 overflow-y-auto p-4 font-mono text-xs leading-6">
           {logs.length === 0 ? (
