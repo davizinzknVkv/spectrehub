@@ -1,69 +1,52 @@
-## Objetivo
+# Planos: Free, Premium e Boost
 
-Transformar o site DiscordHub num painel web onde o usuário faz login, cadastra seu token do Discord e executa/monitora as quests direto do navegador — sem precisar rodar `node discordhub.js` localmente.
+## Regras
 
-## Aviso importante (leia antes de aprovar)
+| Plano   | Missões/dia | Cooldown entre missões | Como ganha |
+|---------|-------------|------------------------|------------|
+| Free    | 3           | 10 min                 | padrão     |
+| Premium | ilimitado   | 3 min                  | cargo `1511469574422401275` |
+| Boost   | ilimitado   | 1 min                  | cargo `1511469585704947943` (server booster) |
 
-1. **ToS**: usar o token de conta pessoal via API viola os Termos do Discord (self-bot). Risco real de banimento. O script original já tem esse aviso; o hub online amplifica esse risco.
-2. **Limite técnico do backend**: o backend do Lovable roda em Cloudflare Workers, que **não mantém processos longos**. Uma quest de vídeo dura 45s–15min e uma de jogo até 15min de heartbeats a cada ~24s. Solução: o loop de execução roda **no navegador do usuário** (mantendo a aba aberta) e usa o backend só como proxy autenticado para chamar a API do Discord. Assim contornamos CORS e mantemos o token fora do bundle client.
-3. **Token guardado no banco**: criptografado em repouso com uma chave secreta do servidor.
+Se o usuário tiver os dois cargos, vale o **Boost** (menor cooldown).
 
-## Escopo
+## Como detectar o cargo
 
-### Backend (Lovable Cloud)
-- Auth email/senha + Google.
-- Tabela `discord_accounts` (por usuário): token criptografado, `x_super_properties`, `user_agent`, última sincronização.
-- Tabela `quest_runs`: log de execuções (quest_id, nome, status, orbs, timestamps).
-- Server function `discord-proxy`: recebe `{ endpoint, method, body }`, busca o token do usuário logado, chama `https://discord.com/api/v9{endpoint}` com os headers do script, devolve status + body cru. Toda chamada à API do Discord passa por aqui.
-- Server function `save-discord-account`: valida token chamando `/users/@me`, criptografa e salva.
-- Server function `list-runs` / `log-run`: histórico.
+Preciso do **ID do servidor** onde esses cargos existem pra checar via API do Discord:
 
-### Frontend (novas rotas)
-- `/` — landing atual (mantém), com CTA "Abrir o Hub".
-- `/auth` — login/cadastro.
-- `/_authenticated/hub` — painel principal:
-  - Card do perfil Discord (avatar, username, Orbs atuais — busca via proxy).
-  - Botão "Buscar missões disponíveis".
-  - Lista de quests com tipo, duração, recompensa, botão "Executar".
-  - Botão "Executar todas em sequência".
-  - Barra de progresso em tempo real da quest ativa.
-  - Log ao vivo (estilo terminal) com as mensagens do script.
-- `/_authenticated/settings` — cadastrar/atualizar token, xSuperProperties, userAgent.
-- `/_authenticated/history` — tabela com execuções anteriores.
+```
+GET /users/@me/guilds/{GUILD_ID}/member  →  { roles: [...] }
+```
 
-### Lógica de execução (client-side)
-Porta do script Node para TS no browser:
-- `fetchAvailableQuests()`, `runQuest()`, `getBestTask()`, `createProgressBar()` — tudo em `src/lib/quest-runner.ts`.
-- Cada `makeRequest` chama a server function `discord-proxy` (não a API do Discord direto).
-- Estado da execução num Zustand store (`quest-store.ts`): quest ativa, progresso, log, fila.
-- Enquanto a aba estiver aberta o loop roda; se fechar, pausa. Aviso claro no UI.
+Isso usa o próprio token do usuário (mesmo já usado no app). Sem o guild ID não dá pra verificar o cargo — me passa o ID do servidor que hospeda esses cargos.
 
-## Detalhes técnicos
+Enquanto isso, deixo `GUILD_ID` como constante no topo de `src/lib/quest-runner.ts` marcada com `// TODO: preencher`.
 
-- **Criptografia do token**: `crypto.subtle` AES-GCM no server, chave em `DISCORD_TOKEN_ENCRYPTION_KEY` (gerada via `generate_secret`).
-- **RLS**: `discord_accounts` e `quest_runs` scoped a `auth.uid()`.
-- **Rate limiting**: mantém o `jitter()` do script original no loop client.
-- **Rotas auth**: `/hub`, `/settings`, `/history` sob `_authenticated/`.
-- **Google OAuth**: configurado via `configure_social_auth`.
+## Implementação
 
-## Passos de implementação
+### 1. `src/lib/quest-runner.ts`
+- Adicionar `fetchUserPlan(): Promise<"free" | "premium" | "boost">` que chama `/guilds/{GUILD_ID}/member` e cruza `roles[]` com os IDs.
+- Exportar constantes `PLAN_LIMITS = { free: {daily:3, cooldownMs:600_000}, premium:{daily:Infinity, cooldownMs:180_000}, boost:{daily:Infinity, cooldownMs:60_000} }`.
 
-1. Ativar Lovable Cloud + configurar auth (email/senha + Google).
-2. Migration: tabelas `discord_accounts`, `quest_runs` com RLS + grants.
-3. Gerar `DISCORD_TOKEN_ENCRYPTION_KEY`.
-4. Server functions: `save-discord-account`, `discord-proxy`, `list-runs`, `log-run`.
-5. Layout `_authenticated`, páginas `/auth`, `/hub`, `/settings`, `/history`.
-6. Portar lógica do script para `src/lib/quest-runner.ts` + store Zustand.
-7. Componentes: `QuestCard`, `ProgressBar`, `LiveLog`, `AccountCard`.
-8. Manter a landing atual em `/` com CTA para o hub.
+### 2. `src/lib/quest-store.ts`
+- Novo campo persistido `plan: "free"|"premium"|"boost"` (default `free`) + `setPlan`.
+- Adicionar seletor derivado `getUsageToday()`: conta `runs` com `status==="completed"` e `started_at` do dia atual.
+- Adicionar `getNextAllowedAt()`: `lastCompletedAt + cooldownMs`.
+- Bloquear `runQuest`/`runAll` se `usageToday >= dailyLimit` OU `Date.now() < nextAllowedAt` — retornar erro amigável.
 
-## Fora do escopo (posso adicionar depois se pedir)
+### 3. `src/routes/_app.hub.tsx`
+- Ao logar, chamar `fetchUserPlan()` e salvar no store.
+- Novo card "Plano" no grid principal mostrando badge (Free / Premium / Boost) + uso do dia (`2/3` ou `∞`) + countdown pro próximo run quando em cooldown.
+- Desabilitar botão "Completar" e "Run all" quando limite/cooldown ativos, com tooltip explicando.
+- Se `plan==="free"` e sem missões restantes, mostrar CTA "Faça boost/assine premium no servidor" com link pro Discord.
 
-- Execução via cron externo (rodar sem aba aberta).
-- Multi-contas Discord por usuário.
-- Notificações push quando terminar.
-- Dashboard com gráfico de Orbs ganhos por dia.
+### 4. UI do plano
+- Badge com cores: Free = `ink-mute`, Premium = `cyan`, Boost = `amber`.
+- Barra de cooldown animada usando o `pulse-dot`/gradiente já existentes (nada de token novo).
 
-## Confirmação
+## Fora de escopo
+- Sem persistência server-side de uso: a contagem diária vem do próprio `runs` já salvo no localStorage/Cloud. Se quiser reset à meia-noite server-side me avisa.
+- Sem pagamento embutido — quem quiser Premium/Boost precisa ter o cargo no servidor Discord.
 
-Aprova esse plano? Se sim, começo pela ativação do Cloud + auth + migrations, depois server functions, depois UI.
+## Pergunta pra desbloquear
+**Qual o ID do servidor Discord onde ficam esses cargos?** Sem ele a verificação de cargo não roda.

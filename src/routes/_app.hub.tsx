@@ -6,6 +6,9 @@ import {
   fetchGuilds,
   fetchOrbs,
   fetchUserInfo,
+  fetchUserPlan,
+  
+  PLAN_LIMITS,
   runAll,
   runQuest,
   type Guild,
@@ -80,18 +83,28 @@ function HubPage() {
     nsfw_allowed?: boolean;
   } | null>(null);
   const [loadingQuests, setLoadingQuests] = useState(false);
+  const [now, setNow] = useState(Date.now());
   const running = useQuestStore((s) => s.running);
   const activeId = useQuestStore((s) => s.activeQuestId);
   const progress = useQuestStore((s) => s.progress);
   const logs = useQuestStore((s) => s.logs);
+  const plan = useQuestStore((s) => s.plan);
+  const lastCompletedAt = useQuestStore((s) => s.lastCompletedAt);
+  const runs = useQuestStore((s) => s.runs);
+  const setPlan = useQuestStore((s) => s.setPlan);
   const requestStop = useQuestStore((s) => s.requestStop);
   const clearLogs = useQuestStore((s) => s.clearLogs);
-  const runsCount = useQuestStore((s) => s.runs.length);
+  const runsCount = runs.length;
   const logEnd = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     logEnd.current?.scrollIntoView({ behavior: "smooth" });
   }, [logs]);
+
+  useEffect(() => {
+    const id = setInterval(() => setNow(Date.now()), 1000);
+    return () => clearInterval(id);
+  }, []);
 
   useEffect(() => {
     if (!creds) return;
@@ -101,7 +114,25 @@ function HubPage() {
     fetchGuilds()
       .then(setGuilds)
       .catch(() => {});
-  }, [creds]);
+    fetchUserPlan()
+      .then(setPlan)
+      .catch(() => {});
+  }, [creds, setPlan]);
+
+  const limits = PLAN_LIMITS[plan];
+  const todayStart = new Date();
+  todayStart.setHours(0, 0, 0, 0);
+  const usedToday = runs.filter(
+    (r) => r.status === "completed" && new Date(r.started_at).getTime() >= todayStart.getTime(),
+  ).length;
+  const remaining = limits.daily === Infinity ? Infinity : Math.max(0, limits.daily - usedToday);
+  const cooldownLeft = Math.max(0, lastCompletedAt + limits.cooldownMs - now);
+  const gateBlocked = remaining <= 0 || cooldownLeft > 0;
+  const cooldownSecs = Math.ceil(cooldownLeft / 1000);
+  const cooldownText = cooldownLeft > 0
+    ? `${Math.floor(cooldownSecs / 60)}m${(cooldownSecs % 60).toString().padStart(2, "0")}s`
+    : null;
+
 
   const avatarUrl = user?.id
     ? user.avatar
@@ -158,7 +189,6 @@ function HubPage() {
 
   const totalTarget = quests.reduce((sum, q) => sum + q.target, 0);
   const orbQuests = quests.filter((q) => q.rewardText.includes("Orbs")).length;
-  const runs = useQuestStore.getState().runs;
   const totalOrbsEarned = runs
     .filter((r) => r.status === "completed" && r.reward_text?.includes("Orbs"))
     .reduce((sum, r) => {
@@ -255,6 +285,16 @@ function HubPage() {
           hint={created ? `dias desde criação · ${created.toLocaleDateString("pt-BR")}` : "—"}
         />
       </div>
+
+      {/* Plan banner */}
+      <PlanBanner
+        plan={plan}
+        limits={limits}
+        usedToday={usedToday}
+        remaining={remaining}
+        cooldownText={cooldownText}
+        cooldownLeft={cooldownLeft}
+      />
 
       {/* Secondary stats */}
       <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
@@ -392,7 +432,8 @@ function HubPage() {
             )}
             <button
               onClick={() => setCaptchaAll(true)}
-              disabled={running || quests.length === 0}
+              disabled={running || quests.length === 0 || remaining <= 0}
+              title={remaining <= 0 ? `Limite diário do plano ${limits.label} atingido` : undefined}
               className="rounded-md border border-mint/40 bg-mint/10 px-3 py-2 font-mono text-[11px] font-semibold uppercase tracking-widest text-mint transition hover:bg-mint/20 disabled:cursor-not-allowed disabled:opacity-40"
             >
               ▶ run all
@@ -415,7 +456,14 @@ function HubPage() {
               quest={q}
               active={activeId === q.questId}
               progress={activeId === q.questId ? progress : null}
-              disabled={running}
+              disabled={running || gateBlocked}
+              gateHint={
+                remaining <= 0
+                  ? `Limite diário ${limits.label}`
+                  : cooldownText
+                    ? `Cooldown ${cooldownText}`
+                    : undefined
+              }
               onExec={() => setCaptchaFor(q)}
             />
           ))}
@@ -600,12 +648,14 @@ function MissionCard({
   active,
   progress,
   disabled,
+  gateHint,
   onExec,
 }: {
   quest: Quest;
   active: boolean;
   progress: { current: number; total: number } | null;
   disabled: boolean;
+  gateHint?: string;
   onExec: () => void;
 }) {
   const pct = active && progress ? Math.min(100, Math.round((progress.current / progress.total) * 100)) : 0;
@@ -691,9 +741,10 @@ function MissionCard({
         <button
           onClick={onExec}
           disabled={disabled}
+          title={gateHint}
           className="mt-auto rounded-md border border-line bg-background/60 px-3 py-2 text-sm font-medium text-ink transition hover:border-cyan/50 hover:text-cyan disabled:cursor-not-allowed disabled:opacity-30"
         >
-          Completar
+          {gateHint ?? "Completar"}
         </button>
       </div>
     </article>
@@ -797,3 +848,105 @@ function EmptyState({ onScan }: { onScan: () => void }) {
     </div>
   );
 }
+
+function PlanBanner({
+  plan,
+  limits,
+  usedToday,
+  remaining,
+  cooldownText,
+  cooldownLeft,
+}: {
+  plan: "free" | "premium" | "boost";
+  limits: { daily: number; cooldownMs: number; label: string };
+  usedToday: number;
+  remaining: number;
+  cooldownText: string | null;
+  cooldownLeft: number;
+}) {
+  const tone =
+    plan === "boost"
+      ? { border: "border-amber/40", bg: "bg-amber/10", text: "text-amber" }
+      : plan === "premium"
+        ? { border: "border-cyan/40", bg: "bg-cyan/10", text: "text-cyan" }
+        : { border: "border-line", bg: "bg-surface/60", text: "text-ink-dim" };
+
+  const dailyText = limits.daily === Infinity ? "ilimitado" : `${usedToday}/${limits.daily}`;
+  const cooldownPct = cooldownLeft > 0 ? Math.min(100, (cooldownLeft / limits.cooldownMs) * 100) : 0;
+
+  return (
+    <section className={`overflow-hidden rounded-2xl border ${tone.border} ${tone.bg} p-4 sm:p-5`}>
+      <div className="flex flex-wrap items-center gap-4">
+        <div className="flex items-center gap-3">
+          <span
+            className={`grid h-10 w-10 place-items-center rounded-lg border ${tone.border} font-mono text-sm font-bold ${tone.text}`}
+          >
+            {plan === "boost" ? "★" : plan === "premium" ? "◆" : "◯"}
+          </span>
+          <div>
+            <div className="font-mono text-[10px] uppercase tracking-[0.25em] text-ink-mute">
+              plano ativo
+            </div>
+            <div className={`text-lg font-semibold ${tone.text}`}>{limits.label}</div>
+          </div>
+        </div>
+
+        <div className="flex flex-1 flex-wrap gap-4 sm:justify-end">
+          <MiniStat label="uso hoje" value={dailyText} />
+          <MiniStat
+            label="cooldown"
+            value={`${Math.floor(limits.cooldownMs / 60000)}m entre missões`}
+          />
+          <MiniStat
+            label="próxima"
+            value={cooldownText ?? (remaining > 0 ? "pronta" : "limite atingido")}
+            tone={cooldownText ? "amber" : remaining > 0 ? "mint" : "rose"}
+          />
+        </div>
+      </div>
+
+      {cooldownLeft > 0 && (
+        <div className="mt-3 h-1.5 overflow-hidden rounded-full bg-background/60">
+          <div
+            className="h-full rounded-full bg-gradient-to-r from-cyan via-mint to-amber transition-all"
+            style={{ width: `${100 - cooldownPct}%` }}
+          />
+        </div>
+      )}
+
+      {plan === "free" && (
+        <p className="mt-3 font-mono text-[11px] text-ink-mute">
+          Free: 3 missões/dia · 10min entre cada. Boost o servidor ou pegue o cargo Premium pra rodar sem limite diário e cooldown menor.
+        </p>
+      )}
+    </section>
+  );
+}
+
+function MiniStat({
+  label,
+  value,
+  tone,
+}: {
+  label: string;
+  value: string;
+  tone?: "mint" | "amber" | "rose";
+}) {
+  const c =
+    tone === "mint"
+      ? "text-mint"
+      : tone === "amber"
+        ? "text-amber"
+        : tone === "rose"
+          ? "text-rose"
+          : "text-ink";
+  return (
+    <div className="min-w-[110px]">
+      <div className="font-mono text-[10px] uppercase tracking-[0.25em] text-ink-mute">
+        {label}
+      </div>
+      <div className={`mt-0.5 font-mono text-sm ${c}`}>{value}</div>
+    </div>
+  );
+}
+

@@ -36,6 +36,18 @@ type Progress = { current: number; total: number };
 
 const CREDS_KEY = "discordhub.creds";
 const RUNS_KEY = "discordhub.runs";
+const PLAN_KEY = "discordhub.plan";
+const LAST_KEY = "discordhub.lastCompletedAt";
+
+function loadPlan(): Plan {
+  if (typeof window === "undefined") return "free";
+  const v = window.localStorage.getItem(PLAN_KEY);
+  return v === "premium" || v === "boost" ? v : "free";
+}
+function loadLastCompleted(): number {
+  if (typeof window === "undefined") return 0;
+  return Number(window.localStorage.getItem(LAST_KEY) ?? 0) || 0;
+}
 
 function loadCreds(): Credentials | null {
   if (typeof window === "undefined") return null;
@@ -57,6 +69,8 @@ function loadRuns(): RunRecord[] {
   }
 }
 
+export type Plan = "free" | "premium" | "boost";
+
 type State = {
   running: boolean;
   activeQuestId: string | null;
@@ -66,6 +80,8 @@ type State = {
   shouldStop: boolean;
   creds: Credentials | null;
   runs: RunRecord[];
+  plan: Plan;
+  lastCompletedAt: number;
   setQuests: (q: Quest[]) => void;
   setRunning: (r: boolean) => void;
   setActive: (id: string | null) => void;
@@ -76,6 +92,8 @@ type State = {
   resetStop: () => void;
   setCreds: (c: Credentials | null) => void;
   addRun: (r: RunRecord) => void;
+  setPlan: (p: Plan) => void;
+  markCompleted: () => void;
   hydrate: () => void;
 };
 
@@ -90,6 +108,8 @@ export const useQuestStore = create<State>((set, get) => ({
   shouldStop: false,
   creds: null,
   runs: [],
+  plan: "free",
+  lastCompletedAt: 0,
   setQuests: (quests) => set({ quests }),
   setRunning: (running) => set({ running }),
   setActive: (activeQuestId) => set({ activeQuestId, progress: null }),
@@ -115,5 +135,20 @@ export const useQuestStore = create<State>((set, get) => ({
       window.localStorage.setItem(RUNS_KEY, JSON.stringify(runs));
     }
   },
-  hydrate: () => set({ creds: loadCreds(), runs: loadRuns() }),
+  setPlan: (plan) => {
+    set({ plan });
+    if (typeof window !== "undefined") window.localStorage.setItem(PLAN_KEY, plan);
+  },
+  markCompleted: () => {
+    const t = Date.now();
+    set({ lastCompletedAt: t });
+    if (typeof window !== "undefined") window.localStorage.setItem(LAST_KEY, String(t));
+  },
+  hydrate: () =>
+    set({
+      creds: loadCreds(),
+      runs: loadRuns(),
+      plan: loadPlan(),
+      lastCompletedAt: loadLastCompleted(),
+    }),
 }));

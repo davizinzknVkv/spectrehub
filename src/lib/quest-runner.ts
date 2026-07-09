@@ -1,6 +1,27 @@
 import { discordProxy } from "./discord.functions";
 import { useQuestStore, type Quest, type RunRecord } from "./quest-store";
 
+export function countCompletedToday(): number {
+  const runs = useQuestStore.getState().runs;
+  const start = new Date();
+  start.setHours(0, 0, 0, 0);
+  const t = start.getTime();
+  return runs.filter(
+    (r) => r.status === "completed" && new Date(r.started_at).getTime() >= t,
+  ).length;
+}
+
+export function getGateStatus() {
+  const plan = useQuestStore.getState().plan;
+  const limits = PLAN_LIMITS[plan];
+  const used = countCompletedToday();
+  const remaining = limits.daily === Infinity ? Infinity : Math.max(0, limits.daily - used);
+  const nextAt = useQuestStore.getState().lastCompletedAt + limits.cooldownMs;
+  const cooldownLeft = Math.max(0, nextAt - Date.now());
+  return { plan, limits, used, remaining, cooldownLeft, nextAt };
+}
+
+
 const TASK_TYPES: Record<string, string> = {
   WATCH_VIDEO: "🎬 Vídeo",
   WATCH_VIDEO_ON_MOBILE: "🎬 Vídeo",
@@ -97,6 +118,29 @@ export async function fetchGuilds(): Promise<Guild[]> {
   }));
 }
 
+// === Plan / Role gating ===
+export const PLAN_GUILD_ID = ""; // TODO: preencher com o ID do servidor Neighborshub
+export const PREMIUM_ROLE_ID = "1511469574422401275";
+export const BOOST_ROLE_ID = "1511469585704947943";
+
+export type Plan = "free" | "premium" | "boost";
+
+export const PLAN_LIMITS: Record<Plan, { daily: number; cooldownMs: number; label: string }> = {
+  free: { daily: 3, cooldownMs: 10 * 60 * 1000, label: "Free" },
+  premium: { daily: Infinity, cooldownMs: 3 * 60 * 1000, label: "Premium" },
+  boost: { daily: Infinity, cooldownMs: 60 * 1000, label: "Boost" },
+};
+
+export async function fetchUserPlan(): Promise<Plan> {
+  if (!PLAN_GUILD_ID) return "free";
+  const res = await call(`/users/@me/guilds/${PLAN_GUILD_ID}/member`);
+  if (res.status !== 200) return "free";
+  const roles = (res.data as { roles?: string[] }).roles ?? [];
+  if (roles.includes(BOOST_ROLE_ID)) return "boost";
+  if (roles.includes(PREMIUM_ROLE_ID)) return "premium";
+  return "free";
+}
+
 
 export async function fetchAvailableQuests(): Promise<Quest[]> {
   const res = await call("/quests/@me");
@@ -165,9 +209,22 @@ function logRun(quest: Quest, status: RunRecord["status"], error_message: string
 
 export async function runQuest(quest: Quest): Promise<boolean> {
   const s = useQuestStore.getState();
+
+  const gate = getGateStatus();
+  if (gate.remaining <= 0) {
+    s.log(`⛔ Limite diário do plano ${gate.limits.label} atingido (${gate.used}/${gate.limits.daily}).`, "error");
+    return false;
+  }
+  if (gate.cooldownLeft > 0) {
+    const secs = Math.ceil(gate.cooldownLeft / 1000);
+    s.log(`⛔ Aguarde ${Math.floor(secs / 60)}m${(secs % 60).toString().padStart(2, "0")} pra próxima missão (plano ${gate.limits.label}).`, "error");
+    return false;
+  }
+
   s.setActive(quest.questId);
   s.setProgress({ current: 0, total: quest.target });
   s.log(`🚀 Iniciando: ${quest.questName} (${TASK_TYPES[quest.taskType] ?? quest.taskType})`);
+
 
   try {
     if (!quest.isEnrolled) {
@@ -263,7 +320,9 @@ export async function runQuest(quest: Quest): Promise<boolean> {
     s.setProgress({ current: quest.target, total: quest.target });
     s.log(`✅ Concluída: ${quest.questName} — ${quest.rewardText}`, "success");
     logRun(quest, "completed");
+    s.markCompleted();
     return true;
+
   } catch (err) {
     const msg = err instanceof Error ? err.message : String(err);
     s.log(`❌ Erro: ${msg}`, "error");
@@ -283,11 +342,22 @@ export async function runAll(quests: Quest[]) {
       s.log("⏹ Interrompido pelo usuário", "error");
       break;
     }
+    const g = getGateStatus();
+    if (g.remaining <= 0) {
+      s.log(`⛔ Limite diário do plano ${g.limits.label} atingido.`, "error");
+      break;
+    }
+    if (g.cooldownLeft > 0) {
+      const secs = Math.ceil(g.cooldownLeft / 1000);
+      s.log(`⏳ Cooldown do plano ${g.limits.label}: ${Math.floor(secs / 60)}m${(secs % 60).toString().padStart(2, "0")}...`);
+      await sleep(g.cooldownLeft);
+    }
     const ok = await runQuest(quests[i]);
     if (ok) done++;
     if (i < quests.length - 1) {
-      s.log("⏳ Aguardando antes da próxima...");
-      await sleep(jitter(10000, 3000));
+      const next = PLAN_LIMITS[useQuestStore.getState().plan].cooldownMs;
+      s.log(`⏳ Aguardando ${Math.floor(next / 60000)}m antes da próxima...`);
+      await sleep(next);
     }
   }
   s.log(`🏁 ${done}/${quests.length} concluídas.`, "success");
