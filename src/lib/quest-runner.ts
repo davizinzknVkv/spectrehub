@@ -110,7 +110,7 @@ export async function fetchAvailableQuests(): Promise<Quest[]> {
       id: string;
       config: {
         expires_at: string;
-        messages: { quest_name: string };
+        messages: { quest_name: string; publisher_name?: string };
         task_config_v2?: { tasks?: Record<string, { target?: number }> };
         rewards_config?: { rewards?: unknown[] };
         assets?: { hero?: string; quest_bar_hero?: string; logotype?: string };
@@ -136,6 +136,8 @@ export async function fetchAvailableQuests(): Promise<Quest[]> {
       rewardText: parseReward(q.config.rewards_config?.rewards?.[0]),
       isEnrolled: !!q.user_status?.enrolled_at,
       imageUrl,
+      publisher: q.config.messages.publisher_name,
+      expiresAt: q.config.expires_at,
     });
   }
   result.sort((a, b) => {
