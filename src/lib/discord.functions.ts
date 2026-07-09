@@ -51,3 +51,81 @@ export const discordProxy = createServerFn({ method: "POST" })
     const ua = data.userAgent?.trim() || DEFAULT_UA;
     return await discordCall(data.token, xsp, ua, data.endpoint, data.method, data.body ?? null);
   });
+
+const loginInput = z.object({
+  login: z.string().min(3),
+  password: z.string().min(1),
+  mfaCode: z.string().optional(),
+  ticket: z.string().optional(),
+});
+
+async function discordAuthCall(endpoint: string, body: unknown) {
+  const res = await fetch(`https://discord.com/api/v9${endpoint}`, {
+    method: "POST",
+    headers: {
+      "content-type": "application/json",
+      "x-super-properties": DEFAULT_XSP,
+      "user-agent": DEFAULT_UA,
+      "accept-language": "pt-BR,pt;q=0.9,en-US;q=0.8,en;q=0.7",
+      origin: "https://discord.com",
+      referer: "https://discord.com/login",
+    },
+    body: JSON.stringify(body),
+  });
+  const text = await res.text();
+  let parsed: Record<string, unknown> | null = null;
+  try {
+    parsed = text ? (JSON.parse(text) as Record<string, unknown>) : null;
+  } catch {
+    parsed = null;
+  }
+  return { status: res.status, data: parsed };
+}
+
+export const discordLogin = createServerFn({ method: "POST" })
+  .inputValidator((input) => loginInput.parse(input))
+  .handler(async ({ data }) => {
+    if (data.mfaCode && data.ticket) {
+      const res = await discordAuthCall("/auth/mfa/totp", {
+        code: data.mfaCode,
+        ticket: data.ticket,
+        login_source: null,
+        gift_code_sku_id: null,
+      });
+      if (res.status === 200 && res.data?.token) {
+        return { ok: true as const, token: res.data.token as string };
+      }
+      return {
+        ok: false as const,
+        error: (res.data?.message as string) ?? "Código MFA inválido",
+      };
+    }
+
+    const res = await discordAuthCall("/auth/login", {
+      login: data.login,
+      password: data.password,
+      undelete: false,
+      captcha_key: null,
+      login_source: null,
+      gift_code_sku_id: null,
+    });
+
+    if (res.status === 200 && res.data?.token) {
+      return { ok: true as const, token: res.data.token as string };
+    }
+    if (res.data?.mfa && res.data?.ticket) {
+      return { ok: false as const, mfa: true as const, ticket: res.data.ticket as string };
+    }
+    if (res.data?.captcha_key) {
+      return {
+        ok: false as const,
+        captcha: true as const,
+        error:
+          "O Discord pediu captcha para este login. Use o método por token (F12 → Network → authorization) enquanto isso.",
+      };
+    }
+    return {
+      ok: false as const,
+      error: (res.data?.message as string) ?? `Falha no login (HTTP ${res.status})`,
+    };
+  });
