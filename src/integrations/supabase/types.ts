@@ -14,7 +14,93 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      discord_accounts: {
+        Row: {
+          created_at: string
+          discord_global_name: string | null
+          discord_user_id: string | null
+          discord_username: string | null
+          id: string
+          last_orbs: number | null
+          last_synced_at: string | null
+          token_ciphertext: string
+          token_iv: string
+          updated_at: string
+          user_agent: string
+          user_id: string
+          x_super_properties: string
+        }
+        Insert: {
+          created_at?: string
+          discord_global_name?: string | null
+          discord_user_id?: string | null
+          discord_username?: string | null
+          id?: string
+          last_orbs?: number | null
+          last_synced_at?: string | null
+          token_ciphertext: string
+          token_iv: string
+          updated_at?: string
+          user_agent: string
+          user_id: string
+          x_super_properties: string
+        }
+        Update: {
+          created_at?: string
+          discord_global_name?: string | null
+          discord_user_id?: string | null
+          discord_username?: string | null
+          id?: string
+          last_orbs?: number | null
+          last_synced_at?: string | null
+          token_ciphertext?: string
+          token_iv?: string
+          updated_at?: string
+          user_agent?: string
+          user_id?: string
+          x_super_properties?: string
+        }
+        Relationships: []
+      }
+      quest_runs: {
+        Row: {
+          completed_at: string | null
+          error_message: string | null
+          id: string
+          quest_id: string
+          quest_name: string
+          reward_text: string | null
+          started_at: string
+          status: string
+          task_type: string
+          user_id: string
+        }
+        Insert: {
+          completed_at?: string | null
+          error_message?: string | null
+          id?: string
+          quest_id: string
+          quest_name: string
+          reward_text?: string | null
+          started_at?: string
+          status: string
+          task_type: string
+          user_id: string
+        }
+        Update: {
+          completed_at?: string | null
+          error_message?: string | null
+          id?: string
+          quest_id?: string
+          quest_name?: string
+          reward_text?: string | null
+          started_at?: string
+          status?: string
+          task_type?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
