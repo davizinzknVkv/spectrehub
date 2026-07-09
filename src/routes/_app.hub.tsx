@@ -848,3 +848,105 @@ function EmptyState({ onScan }: { onScan: () => void }) {
     </div>
   );
 }
+
+function PlanBanner({
+  plan,
+  limits,
+  usedToday,
+  remaining,
+  cooldownText,
+  cooldownLeft,
+}: {
+  plan: "free" | "premium" | "boost";
+  limits: { daily: number; cooldownMs: number; label: string };
+  usedToday: number;
+  remaining: number;
+  cooldownText: string | null;
+  cooldownLeft: number;
+}) {
+  const tone =
+    plan === "boost"
+      ? { border: "border-amber/40", bg: "bg-amber/10", text: "text-amber" }
+      : plan === "premium"
+        ? { border: "border-cyan/40", bg: "bg-cyan/10", text: "text-cyan" }
+        : { border: "border-line", bg: "bg-surface/60", text: "text-ink-dim" };
+
+  const dailyText = limits.daily === Infinity ? "ilimitado" : `${usedToday}/${limits.daily}`;
+  const cooldownPct = cooldownLeft > 0 ? Math.min(100, (cooldownLeft / limits.cooldownMs) * 100) : 0;
+
+  return (
+    <section className={`overflow-hidden rounded-2xl border ${tone.border} ${tone.bg} p-4 sm:p-5`}>
+      <div className="flex flex-wrap items-center gap-4">
+        <div className="flex items-center gap-3">
+          <span
+            className={`grid h-10 w-10 place-items-center rounded-lg border ${tone.border} font-mono text-sm font-bold ${tone.text}`}
+          >
+            {plan === "boost" ? "★" : plan === "premium" ? "◆" : "◯"}
+          </span>
+          <div>
+            <div className="font-mono text-[10px] uppercase tracking-[0.25em] text-ink-mute">
+              plano ativo
+            </div>
+            <div className={`text-lg font-semibold ${tone.text}`}>{limits.label}</div>
+          </div>
+        </div>
+
+        <div className="flex flex-1 flex-wrap gap-4 sm:justify-end">
+          <MiniStat label="uso hoje" value={dailyText} />
+          <MiniStat
+            label="cooldown"
+            value={`${Math.floor(limits.cooldownMs / 60000)}m entre missões`}
+          />
+          <MiniStat
+            label="próxima"
+            value={cooldownText ?? (remaining > 0 ? "pronta" : "limite atingido")}
+            tone={cooldownText ? "amber" : remaining > 0 ? "mint" : "rose"}
+          />
+        </div>
+      </div>
+
+      {cooldownLeft > 0 && (
+        <div className="mt-3 h-1.5 overflow-hidden rounded-full bg-background/60">
+          <div
+            className="h-full rounded-full bg-gradient-to-r from-cyan via-mint to-amber transition-all"
+            style={{ width: `${100 - cooldownPct}%` }}
+          />
+        </div>
+      )}
+
+      {plan === "free" && (
+        <p className="mt-3 font-mono text-[11px] text-ink-mute">
+          Free: 3 missões/dia · 10min entre cada. Boost o servidor ou pegue o cargo Premium pra rodar sem limite diário e cooldown menor.
+        </p>
+      )}
+    </section>
+  );
+}
+
+function MiniStat({
+  label,
+  value,
+  tone,
+}: {
+  label: string;
+  value: string;
+  tone?: "mint" | "amber" | "rose";
+}) {
+  const c =
+    tone === "mint"
+      ? "text-mint"
+      : tone === "amber"
+        ? "text-amber"
+        : tone === "rose"
+          ? "text-rose"
+          : "text-ink";
+  return (
+    <div className="min-w-[110px]">
+      <div className="font-mono text-[10px] uppercase tracking-[0.25em] text-ink-mute">
+        {label}
+      </div>
+      <div className={`mt-0.5 font-mono text-sm ${c}`}>{value}</div>
+    </div>
+  );
+}
+
