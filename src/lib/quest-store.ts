@@ -57,6 +57,8 @@ function loadRuns(): RunRecord[] {
   }
 }
 
+export type Plan = "free" | "premium" | "boost";
+
 type State = {
   running: boolean;
   activeQuestId: string | null;
@@ -66,6 +68,8 @@ type State = {
   shouldStop: boolean;
   creds: Credentials | null;
   runs: RunRecord[];
+  plan: Plan;
+  lastCompletedAt: number;
   setQuests: (q: Quest[]) => void;
   setRunning: (r: boolean) => void;
   setActive: (id: string | null) => void;
@@ -76,6 +80,8 @@ type State = {
   resetStop: () => void;
   setCreds: (c: Credentials | null) => void;
   addRun: (r: RunRecord) => void;
+  setPlan: (p: Plan) => void;
+  markCompleted: () => void;
   hydrate: () => void;
 };
 
