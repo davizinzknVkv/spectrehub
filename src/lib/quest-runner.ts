@@ -99,6 +99,7 @@ export async function fetchAvailableQuests(): Promise<Quest[]> {
         messages: { quest_name: string };
         task_config_v2?: { tasks?: Record<string, { target?: number }> };
         rewards_config?: { rewards?: unknown[] };
+        assets?: { hero?: string; quest_bar_hero?: string; logotype?: string };
       };
       user_status?: { completed_at?: string; enrolled_at?: string };
     };
@@ -107,6 +108,12 @@ export async function fetchAvailableQuests(): Promise<Quest[]> {
     const tasks = q.config.task_config_v2?.tasks ?? {};
     const best = getBestTask(tasks);
     if (!best) continue;
+    const asset = q.config.assets?.hero || q.config.assets?.quest_bar_hero || q.config.assets?.logotype;
+    const imageUrl = asset
+      ? asset.startsWith("http")
+        ? asset
+        : `https://cdn.discordapp.com/quests/${q.id}/${asset}`
+      : undefined;
     result.push({
       questId: q.id,
       questName: q.config.messages.quest_name,
@@ -114,6 +121,7 @@ export async function fetchAvailableQuests(): Promise<Quest[]> {
       target: best.taskData.target ?? 0,
       rewardText: parseReward(q.config.rewards_config?.rewards?.[0]),
       isEnrolled: !!q.user_status?.enrolled_at,
+      imageUrl,
     });
   }
   result.sort((a, b) => {

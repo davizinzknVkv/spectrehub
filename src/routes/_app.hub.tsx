@@ -36,9 +36,13 @@ function HubPage() {
   const creds = useQuestStore((s) => s.creds);
   const [quests, setQuests] = useState<Quest[]>([]);
   const [orbs, setOrbs] = useState<number | null>(null);
-  const [user, setUser] = useState<{ username?: string; global_name?: string; id?: string } | null>(
-    null,
-  );
+  const [user, setUser] = useState<{
+    username?: string;
+    global_name?: string;
+    id?: string;
+    avatar?: string | null;
+    discriminator?: string;
+  } | null>(null);
   const [loadingQuests, setLoadingQuests] = useState(false);
   const running = useQuestStore((s) => s.running);
   const activeId = useQuestStore((s) => s.activeQuestId);
@@ -56,9 +60,15 @@ function HubPage() {
   useEffect(() => {
     if (!creds) return;
     fetchUserInfo()
-      .then((u) => u && setUser(u as { username?: string; global_name?: string; id?: string }))
+      .then((u) => u && setUser(u as typeof user))
       .catch(() => {});
   }, [creds]);
+
+  const avatarUrl = user?.id
+    ? user.avatar
+      ? `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png?size=128`
+      : `https://cdn.discordapp.com/embed/avatars/${(BigInt(user.id) >> 22n) % 6n}.png`
+    : null;
 
   const loadQuests = async () => {
     setLoadingQuests(true);
@@ -105,20 +115,29 @@ function HubPage() {
     <div className="space-y-6">
       {/* Page header */}
       <div className="grid grid-cols-[minmax(0,1fr)_auto] items-end gap-4 sm:flex sm:flex-wrap sm:justify-between">
-        <div className="min-w-0">
-          <div className="font-mono text-[10px] uppercase tracking-[0.3em] text-cyan-dim">
-            $ hub --live
-          </div>
-          <h1 className="mt-2 truncate text-2xl font-semibold tracking-tight text-ink sm:text-3xl">
-            {user?.global_name || user?.username || "Console"}
-          </h1>
-          {user?.username && (
-            <div className="mt-1 font-mono text-xs text-ink-mute">
-              @{user.username}
-              {user.id && <span className="mx-2 opacity-40">·</span>}
-              {user.id && <span className="opacity-60">id {user.id.slice(0, 12)}…</span>}
-            </div>
+        <div className="flex min-w-0 items-center gap-4">
+          {avatarUrl && (
+            <img
+              src={avatarUrl}
+              alt={user?.username ?? "avatar"}
+              className="h-14 w-14 shrink-0 rounded-full border border-cyan/40 object-cover shadow-[0_0_0_2px_rgba(0,0,0,0.4),0_0_24px_-4px_var(--cyan)]"
+            />
           )}
+          <div className="min-w-0">
+            <div className="font-mono text-[10px] uppercase tracking-[0.3em] text-cyan-dim">
+              $ hub --live
+            </div>
+            <h1 className="mt-1 truncate text-2xl font-semibold tracking-tight text-ink sm:text-3xl">
+              {user?.global_name || user?.username || "Console"}
+            </h1>
+            {user?.username && (
+              <div className="mt-1 font-mono text-xs text-ink-mute">
+                @{user.username}
+                {user.id && <span className="mx-2 opacity-40">·</span>}
+                {user.id && <span className="opacity-60">id {user.id.slice(0, 12)}…</span>}
+              </div>
+            )}
+          </div>
         </div>
         <div className="flex shrink-0 flex-wrap gap-2">
           <button
@@ -351,8 +370,23 @@ function MissionRow({
     >
       <div className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-4 p-4 sm:p-5">
         <div className="flex min-w-0 items-start gap-4">
-          <div className="shrink-0 rounded-md border border-line bg-background/60 px-2.5 py-1.5 font-mono text-[11px] font-semibold text-ink-mute">
-            {index.toString().padStart(2, "0")}
+          <div className="relative shrink-0">
+            {quest.imageUrl ? (
+              <img
+                src={quest.imageUrl}
+                alt=""
+                loading="lazy"
+                onError={(e) => ((e.currentTarget.style.display = "none"))}
+                className="h-14 w-14 rounded-md border border-line object-cover sm:h-16 sm:w-16"
+              />
+            ) : (
+              <div className="grid h-14 w-14 place-items-center rounded-md border border-line bg-background/60 font-mono text-sm font-semibold text-ink-mute sm:h-16 sm:w-16">
+                {index.toString().padStart(2, "0")}
+              </div>
+            )}
+            <span className="absolute -left-1.5 -top-1.5 rounded border border-line bg-background px-1.5 py-0.5 font-mono text-[10px] font-semibold text-cyan">
+              {index.toString().padStart(2, "0")}
+            </span>
           </div>
           <div className="min-w-0">
             <div className="truncate text-[15px] font-semibold text-ink">{quest.questName}</div>
