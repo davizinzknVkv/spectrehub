@@ -108,6 +108,8 @@ export const useQuestStore = create<State>((set, get) => ({
   shouldStop: false,
   creds: null,
   runs: [],
+  plan: "free",
+  lastCompletedAt: 0,
   setQuests: (quests) => set({ quests }),
   setRunning: (running) => set({ running }),
   setActive: (activeQuestId) => set({ activeQuestId, progress: null }),
