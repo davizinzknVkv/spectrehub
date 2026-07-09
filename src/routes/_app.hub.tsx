@@ -115,20 +115,29 @@ function HubPage() {
     <div className="space-y-6">
       {/* Page header */}
       <div className="grid grid-cols-[minmax(0,1fr)_auto] items-end gap-4 sm:flex sm:flex-wrap sm:justify-between">
-        <div className="min-w-0">
-          <div className="font-mono text-[10px] uppercase tracking-[0.3em] text-cyan-dim">
-            $ hub --live
-          </div>
-          <h1 className="mt-2 truncate text-2xl font-semibold tracking-tight text-ink sm:text-3xl">
-            {user?.global_name || user?.username || "Console"}
-          </h1>
-          {user?.username && (
-            <div className="mt-1 font-mono text-xs text-ink-mute">
-              @{user.username}
-              {user.id && <span className="mx-2 opacity-40">·</span>}
-              {user.id && <span className="opacity-60">id {user.id.slice(0, 12)}…</span>}
-            </div>
+        <div className="flex min-w-0 items-center gap-4">
+          {avatarUrl && (
+            <img
+              src={avatarUrl}
+              alt={user?.username ?? "avatar"}
+              className="h-14 w-14 shrink-0 rounded-full border border-cyan/40 object-cover shadow-[0_0_0_2px_rgba(0,0,0,0.4),0_0_24px_-4px_var(--cyan)]"
+            />
           )}
+          <div className="min-w-0">
+            <div className="font-mono text-[10px] uppercase tracking-[0.3em] text-cyan-dim">
+              $ hub --live
+            </div>
+            <h1 className="mt-1 truncate text-2xl font-semibold tracking-tight text-ink sm:text-3xl">
+              {user?.global_name || user?.username || "Console"}
+            </h1>
+            {user?.username && (
+              <div className="mt-1 font-mono text-xs text-ink-mute">
+                @{user.username}
+                {user.id && <span className="mx-2 opacity-40">·</span>}
+                {user.id && <span className="opacity-60">id {user.id.slice(0, 12)}…</span>}
+              </div>
+            )}
+          </div>
         </div>
         <div className="flex shrink-0 flex-wrap gap-2">
           <button
