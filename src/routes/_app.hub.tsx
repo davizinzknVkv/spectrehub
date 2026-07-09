@@ -135,8 +135,6 @@ function HubPage() {
   }, [creds, setPlan]);
 
   const limits = PLAN_LIMITS[plan];
-  const todayStart = new Date();
-  todayStart.setHours(0, 0, 0, 0);
   // Memoized so the setInterval(1s) that ticks `now` doesn't re-filter/reduce runs each tick.
   const usedToday = useMemo(() => {
     const start = new Date();
