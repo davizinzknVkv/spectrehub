@@ -539,7 +539,7 @@ function HubPage() {
                 <span className="text-cyan">›</span> aguardando eventos…
               </div>
             ) : (
-              logs.map((l) => (
+              logs.slice(-100).map((l) => (
                 <div
                   key={l.id}
                   className={
