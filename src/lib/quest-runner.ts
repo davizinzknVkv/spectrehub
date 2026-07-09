@@ -97,6 +97,29 @@ export async function fetchGuilds(): Promise<Guild[]> {
   }));
 }
 
+// === Plan / Role gating ===
+export const PLAN_GUILD_ID = ""; // TODO: preencher com o ID do servidor Neighborshub
+export const PREMIUM_ROLE_ID = "1511469574422401275";
+export const BOOST_ROLE_ID = "1511469585704947943";
+
+export type Plan = "free" | "premium" | "boost";
+
+export const PLAN_LIMITS: Record<Plan, { daily: number; cooldownMs: number; label: string }> = {
+  free: { daily: 3, cooldownMs: 10 * 60 * 1000, label: "Free" },
+  premium: { daily: Infinity, cooldownMs: 3 * 60 * 1000, label: "Premium" },
+  boost: { daily: Infinity, cooldownMs: 60 * 1000, label: "Boost" },
+};
+
+export async function fetchUserPlan(): Promise<Plan> {
+  if (!PLAN_GUILD_ID) return "free";
+  const res = await call(`/users/@me/guilds/${PLAN_GUILD_ID}/member`);
+  if (res.status !== 200) return "free";
+  const roles = (res.data as { roles?: string[] }).roles ?? [];
+  if (roles.includes(BOOST_ROLE_ID)) return "boost";
+  if (roles.includes(PREMIUM_ROLE_ID)) return "premium";
+  return "free";
+}
+
 
 export async function fetchAvailableQuests(): Promise<Quest[]> {
   const res = await call("/quests/@me");
