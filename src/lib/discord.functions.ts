@@ -32,14 +32,8 @@ async function discordCall(
     headers,
     body: body ? JSON.stringify(body) : undefined,
   });
-  const text = await res.text();
-  let parsed: unknown = null;
-  try {
-    parsed = text ? JSON.parse(text) : null;
-  } catch {
-    parsed = text;
-  }
-  return { status: res.status, data: parsed };
+  const body_text = await res.text();
+  return { status: res.status, body: body_text };
 }
 
 export const saveDiscordAccount = createServerFn({ method: "POST" })
