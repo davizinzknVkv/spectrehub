@@ -242,10 +242,16 @@ function HubPage() {
         />
         <StatCard label="Missões" value={String(quests.length)} tone="mint" hint={`${orbQuests} com orbs`} />
         <StatCard
+          label="Servidores"
+          value={String(guilds.length)}
+          tone="mint"
+          hint="entrou"
+        />
+        <StatCard
           label="Idade da conta"
-          value={created ? formatAge(created) : "—"}
+          value={created ? String(Math.floor((Date.now() - created.getTime()) / 86400000)) : "—"}
           tone="amber"
-          hint={created ? created.toLocaleDateString("pt-BR") : "—"}
+          hint={created ? `dias desde criação · ${created.toLocaleDateString("pt-BR")}` : "—"}
         />
         <StatCard
           label="Tempo total"
