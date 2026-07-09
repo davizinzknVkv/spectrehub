@@ -13,6 +13,7 @@ import { Route as AppRouteImport } from './routes/_app'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AppSettingsRouteImport } from './routes/_app.settings'
 import { Route as AppHubRouteImport } from './routes/_app.hub'
+import { Route as AppHistoryRouteImport } from './routes/_app.history'
 
 const AppRoute = AppRouteImport.update({
   id: '/_app',
@@ -33,14 +34,21 @@ const AppHubRoute = AppHubRouteImport.update({
   path: '/hub',
   getParentRoute: () => AppRoute,
 } as any)
+const AppHistoryRoute = AppHistoryRouteImport.update({
+  id: '/history',
+  path: '/history',
+  getParentRoute: () => AppRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/history': typeof AppHistoryRoute
   '/hub': typeof AppHubRoute
   '/settings': typeof AppSettingsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/history': typeof AppHistoryRoute
   '/hub': typeof AppHubRoute
   '/settings': typeof AppSettingsRoute
 }
@@ -48,15 +56,22 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/_app': typeof AppRouteWithChildren
+  '/_app/history': typeof AppHistoryRoute
   '/_app/hub': typeof AppHubRoute
   '/_app/settings': typeof AppSettingsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/hub' | '/settings'
+  fullPaths: '/' | '/history' | '/hub' | '/settings'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/hub' | '/settings'
-  id: '__root__' | '/' | '/_app' | '/_app/hub' | '/_app/settings'
+  to: '/' | '/history' | '/hub' | '/settings'
+  id:
+    | '__root__'
+    | '/'
+    | '/_app'
+    | '/_app/history'
+    | '/_app/hub'
+    | '/_app/settings'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -94,15 +109,24 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppHubRouteImport
       parentRoute: typeof AppRoute
     }
+    '/_app/history': {
+      id: '/_app/history'
+      path: '/history'
+      fullPath: '/history'
+      preLoaderRoute: typeof AppHistoryRouteImport
+      parentRoute: typeof AppRoute
+    }
   }
 }
 
 interface AppRouteChildren {
+  AppHistoryRoute: typeof AppHistoryRoute
   AppHubRoute: typeof AppHubRoute
   AppSettingsRoute: typeof AppSettingsRoute
 }
 
 const AppRouteChildren: AppRouteChildren = {
+  AppHistoryRoute: AppHistoryRoute,
   AppHubRoute: AppHubRoute,
   AppSettingsRoute: AppSettingsRoute,
 }
@@ -116,3 +140,13 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
