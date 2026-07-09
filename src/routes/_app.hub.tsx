@@ -269,6 +269,10 @@ function HubPage() {
             <img
               src={avatarUrl}
               alt={user?.username ?? "avatar"}
+              width={80}
+              height={80}
+              decoding="async"
+              fetchPriority="high"
               className="h-20 w-20 shrink-0 rounded-full border-4 border-surface object-cover"
             />
           )}
