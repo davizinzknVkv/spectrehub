@@ -308,6 +308,59 @@ function HubPage() {
         </section>
       )}
 
+      {/* Servers */}
+      {guilds.length > 0 && (
+        <section className="rounded-xl border border-line bg-surface/50 p-4 sm:p-5">
+          <div className="mb-3 flex items-center justify-between gap-2">
+            <div className="flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.25em] text-ink-mute">
+              <span className="text-cyan">◆</span> servidores
+              <span className="text-ink-mute">· {guilds.length}</span>
+            </div>
+          </div>
+          <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+            {guilds.map((g) => {
+              const iconUrl = g.icon
+                ? `https://cdn.discordapp.com/icons/${g.id}/${g.icon}.png?size=64`
+                : null;
+              const initials = g.name
+                .split(" ")
+                .map((w) => w[0])
+                .join("")
+                .slice(0, 2)
+                .toUpperCase();
+              return (
+                <div
+                  key={g.id}
+                  className="flex items-center gap-3 rounded-lg border border-line/70 bg-background/40 p-2.5"
+                  title={g.name}
+                >
+                  {iconUrl ? (
+                    <img
+                      src={iconUrl}
+                      alt=""
+                      loading="lazy"
+                      className="h-9 w-9 shrink-0 rounded-md border border-line object-cover"
+                    />
+                  ) : (
+                    <div className="grid h-9 w-9 shrink-0 place-items-center rounded-md border border-line bg-surface font-mono text-[11px] font-semibold text-cyan">
+                      {initials || "?"}
+                    </div>
+                  )}
+                  <div className="min-w-0 flex-1">
+                    <div className="truncate text-sm text-ink">{g.name}</div>
+                    <div className="font-mono text-[10px] uppercase tracking-widest text-ink-mute">
+                      {g.owner ? "owner" : "membro"}
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </section>
+      )}
+
+
+
 
       {/* Mission grid + Log panel */}
       <div className="grid gap-6 lg:grid-cols-[1fr_360px]">
