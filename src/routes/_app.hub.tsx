@@ -213,13 +213,19 @@ function HubPage() {
       </div>
 
       {/* Stat grid */}
-      <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
         <StatCard label="Orbs" value={(orbs ?? 0).toLocaleString("pt-BR")} tone="cyan" hint="saldo atual" />
         <StatCard label="Missões" value={String(quests.length)} tone="mint" hint={`${orbQuests} com orbs`} />
         <StatCard
+          label="Idade da conta"
+          value={created ? formatAge(created) : "—"}
+          tone="amber"
+          hint={created ? created.toLocaleDateString("pt-BR") : "—"}
+        />
+        <StatCard
           label="Tempo total"
           value={quests.length ? formatDuration(totalTarget) : "—"}
-          tone="amber"
+          tone="mute"
           hint="se rodar tudo"
         />
         <StatCard
@@ -229,6 +235,48 @@ function HubPage() {
           hint="runs salvas"
         />
       </div>
+
+      {/* Account panel */}
+      {user && (
+        <section className="rounded-xl border border-line bg-surface/50 p-4 sm:p-5">
+          <div className="mb-3 flex items-center justify-between gap-2">
+            <div className="flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.25em] text-ink-mute">
+              <span className="text-cyan">◆</span> conta
+            </div>
+            {user.id && (
+              <button
+                onClick={copyId}
+                className="rounded border border-line px-2 py-0.5 font-mono text-[10px] uppercase tracking-widest text-ink-mute hover:text-cyan"
+              >
+                copiar id
+              </button>
+            )}
+          </div>
+          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+            <InfoField label="Email" value={user.email ?? "—"} badge={user.verified ? "verificado" : undefined} badgeTone="mint" />
+            <InfoField label="Telefone" value={user.phone || "—"} />
+            <InfoField
+              label="Nitro"
+              value={PREMIUM_LABEL[user.premium_type ?? 0] ?? "—"}
+              badgeTone={user.premium_type ? "cyan" : undefined}
+            />
+            <InfoField
+              label="2FA"
+              value={user.mfa_enabled ? "ativado" : "desativado"}
+              badgeTone={user.mfa_enabled ? "mint" : "amber"}
+            />
+            <InfoField label="Locale" value={user.locale ?? "—"} />
+            <InfoField label="NSFW" value={user.nsfw_allowed ? "permitido" : "bloqueado"} />
+            <InfoField label="Flags" value={String(user.flags ?? 0)} />
+            <InfoField
+              label="Criada em"
+              value={created ? created.toLocaleDateString("pt-BR") : "—"}
+              hint={created ? `há ${formatAge(created)}` : undefined}
+            />
+          </div>
+        </section>
+      )}
+
 
       {/* Mission grid + Log panel */}
       <div className="grid gap-6 lg:grid-cols-[1fr_360px]">
