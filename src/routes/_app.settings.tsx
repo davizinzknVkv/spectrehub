@@ -15,6 +15,7 @@ function SettingsPage() {
 
   const [token, setToken] = useState("");
   const [saving, setSaving] = useState(false);
+  const [show, setShow] = useState(false);
 
   useEffect(() => {
     if (creds) setToken(creds.token);
@@ -43,56 +44,81 @@ function SettingsPage() {
   };
 
   return (
-    <div className="max-w-2xl space-y-6">
+    <div className="mx-auto max-w-2xl space-y-6">
       <div>
-        <h1 className="text-2xl font-bold">Token do Discord</h1>
-        <p className="mt-1 text-sm text-slate-400">
-          Cole seu token abaixo. Ele fica salvo apenas no seu navegador (localStorage) — nada é
-          enviado para nenhum servidor além do próprio Discord (via proxy CORS).
+        <div className="font-mono text-[10px] uppercase tracking-[0.3em] text-cyan-dim">
+          $ auth --set-token
+        </div>
+        <h1 className="mt-2 text-2xl font-semibold tracking-tight sm:text-3xl">
+          Token do Discord
+        </h1>
+        <p className="mt-2 max-w-lg text-sm leading-relaxed text-ink-dim">
+          Cole seu token abaixo. Fica salvo apenas no seu navegador (localStorage); só é enviado
+          para o Discord (via proxy CORS deste site).
         </p>
       </div>
 
       {creds && (
-        <div className="rounded-xl border border-emerald-500/30 bg-emerald-500/[0.05] p-4">
-          <div className="flex items-center justify-between">
-            <div className="text-sm text-emerald-300">✓ Token salvo neste navegador</div>
-            <button
-              onClick={disconnect}
-              className="rounded-md border border-red-500/30 bg-red-500/10 px-3 py-1.5 text-xs text-red-300 hover:bg-red-500/20"
-            >
-              Remover
-            </button>
+        <div className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-3 rounded-xl border border-mint/30 bg-mint/[0.06] px-4 py-3 sm:flex sm:justify-between">
+          <div className="min-w-0 font-mono text-[11px] uppercase tracking-widest text-mint">
+            <span className="pulse-dot inline-block">●</span>
+            <span className="ml-2">token ativo neste navegador</span>
           </div>
+          <button
+            onClick={disconnect}
+            className="shrink-0 rounded-md border border-rose/40 bg-rose/10 px-3 py-1.5 font-mono text-[10px] font-semibold uppercase tracking-widest text-rose hover:bg-rose/20"
+          >
+            ✕ remover
+          </button>
         </div>
       )}
 
-      <form onSubmit={save} className="space-y-4 rounded-xl border border-white/10 bg-white/[0.03] p-6">
+      <form
+        onSubmit={save}
+        className="space-y-5 rounded-xl border border-line bg-surface/60 p-6 scanline"
+      >
         <div>
-          <label className="text-sm font-medium">Token do Discord</label>
-          <p className="mt-1 text-xs text-slate-500">
-            DevTools (F12) → Network → qualquer request → header <code>authorization</code>.
+          <div className="flex items-center justify-between">
+            <label className="font-mono text-[11px] uppercase tracking-widest text-ink-dim">
+              authorization
+            </label>
+            <button
+              type="button"
+              onClick={() => setShow((v) => !v)}
+              className="font-mono text-[10px] uppercase tracking-widest text-ink-mute hover:text-cyan"
+            >
+              {show ? "ocultar" : "mostrar"}
+            </button>
+          </div>
+          <p className="mt-1 text-xs text-ink-mute">
+            DevTools (F12) → Network → qualquer request → header{" "}
+            <code className="rounded bg-background/60 px-1 py-0.5 font-mono text-[11px] text-cyan">
+              authorization
+            </code>
+            .
           </p>
           <input
-            type="password"
+            type={show ? "text" : "password"}
             required
             value={token}
             onChange={(e) => setToken(e.target.value)}
-            placeholder="MTIzNDU2..."
-            className="mt-2 w-full rounded-md border border-white/10 bg-[#0f1218] px-3 py-2 text-sm font-mono focus:border-[#5865F2] focus:outline-none"
+            placeholder="MTIzNDU2Nzg5MDEyMzQ1Njc4.XxXxXx.…"
+            className="mt-3 block w-full rounded-md border border-line bg-background/70 px-3 py-2.5 font-mono text-sm text-ink placeholder:text-ink-mute focus:border-cyan focus:outline-none focus:ring-2 focus:ring-cyan/40"
           />
         </div>
+
         <button
           type="submit"
           disabled={saving || !token}
-          className="rounded-md bg-[#5865F2] px-4 py-2 text-sm font-semibold hover:bg-[#4752c4] disabled:opacity-50"
+          className="inline-flex items-center gap-2 rounded-md bg-cyan px-5 py-2.5 font-mono text-xs font-semibold uppercase tracking-widest text-primary-foreground transition hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-40"
         >
-          {saving ? "Validando..." : "Salvar e validar"}
+          {saving ? "validando…" : "→ salvar & validar"}
         </button>
       </form>
 
-      <div className="rounded-md border border-yellow-500/20 bg-yellow-500/[0.05] p-4 text-xs text-yellow-200/80">
-        ⚠️ Usar automação com token pessoal viola os Termos do Discord e pode causar banimento —
-        use por sua conta e risco.
+      <div className="rounded-lg border border-amber/25 bg-amber/[0.05] p-4 font-mono text-[11px] leading-relaxed text-amber/90">
+        ⚠ usar automação com token pessoal viola os Termos do Discord e pode causar banimento — use
+        por sua conta e risco.
       </div>
     </div>
   );
