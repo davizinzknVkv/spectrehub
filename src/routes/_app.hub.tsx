@@ -456,7 +456,14 @@ function HubPage() {
               quest={q}
               active={activeId === q.questId}
               progress={activeId === q.questId ? progress : null}
-              disabled={running}
+              disabled={running || gateBlocked}
+              gateHint={
+                remaining <= 0
+                  ? `Limite diário ${limits.label}`
+                  : cooldownText
+                    ? `Cooldown ${cooldownText}`
+                    : undefined
+              }
               onExec={() => setCaptchaFor(q)}
             />
           ))}
