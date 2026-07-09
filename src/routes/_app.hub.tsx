@@ -228,6 +228,12 @@ function HubPage() {
           tone="amber"
           hint="total do histórico"
         />
+        <StatCard
+          label="Orbs usadas"
+          value={Math.max(0, totalOrbsEarned - (orbs ?? 0)).toLocaleString("pt-BR")}
+          tone="cyan"
+          hint="gastas na loja"
+        />
         <StatCard label="Missões" value={String(quests.length)} tone="mint" hint={`${orbQuests} com orbs`} />
         <StatCard
           label="Idade da conta"
