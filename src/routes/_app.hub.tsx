@@ -376,7 +376,7 @@ function HubPage() {
 
 
       {/* Missions section */}
-      <section className="min-w-0 space-y-4">
+      <section id="missoes" className="min-w-0 space-y-4 scroll-mt-20">
         <div className="flex flex-wrap items-end justify-between gap-3">
           <div>
             <h2 className="text-xl font-semibold tracking-tight text-ink sm:text-2xl">Missões</h2>
@@ -384,12 +384,22 @@ function HubPage() {
               Quests disponíveis do Discord. Complete para ganhar recompensas.
             </p>
           </div>
-          {quests.length > 0 && (
-            <span className="font-mono text-[11px] uppercase tracking-widest text-ink-mute">
-              {quests.length} disponíveis
-            </span>
-          )}
+          <div className="flex items-center gap-2">
+            {quests.length > 0 && (
+              <span className="font-mono text-[11px] uppercase tracking-widest text-ink-mute">
+                {quests.length} disponíveis
+              </span>
+            )}
+            <button
+              onClick={() => setCaptchaAll(true)}
+              disabled={running || quests.length === 0}
+              className="rounded-md border border-mint/40 bg-mint/10 px-3 py-2 font-mono text-[11px] font-semibold uppercase tracking-widest text-mint transition hover:bg-mint/20 disabled:cursor-not-allowed disabled:opacity-40"
+            >
+              ▶ run all
+            </button>
+          </div>
         </div>
+
 
         {quests.length === 0 && !loadingQuests && <EmptyState onScan={loadQuests} />}
         {loadingQuests && quests.length === 0 && (
