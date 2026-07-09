@@ -1,6 +1,27 @@
 import { discordProxy } from "./discord.functions";
 import { useQuestStore, type Quest, type RunRecord } from "./quest-store";
 
+export function countCompletedToday(): number {
+  const runs = useQuestStore.getState().runs;
+  const start = new Date();
+  start.setHours(0, 0, 0, 0);
+  const t = start.getTime();
+  return runs.filter(
+    (r) => r.status === "completed" && new Date(r.started_at).getTime() >= t,
+  ).length;
+}
+
+export function getGateStatus() {
+  const plan = useQuestStore.getState().plan;
+  const limits = PLAN_LIMITS[plan];
+  const used = countCompletedToday();
+  const remaining = limits.daily === Infinity ? Infinity : Math.max(0, limits.daily - used);
+  const nextAt = useQuestStore.getState().lastCompletedAt + limits.cooldownMs;
+  const cooldownLeft = Math.max(0, nextAt - Date.now());
+  return { plan, limits, used, remaining, cooldownLeft, nextAt };
+}
+
+
 const TASK_TYPES: Record<string, string> = {
   WATCH_VIDEO: "🎬 Vídeo",
   WATCH_VIDEO_ON_MOBILE: "🎬 Vídeo",
