@@ -397,6 +397,45 @@ function SectionHeader({ title, right }: { title: string; right?: React.ReactNod
   );
 }
 
+function InfoField({
+  label,
+  value,
+  hint,
+  badge,
+  badgeTone,
+}: {
+  label: string;
+  value: string;
+  hint?: string;
+  badge?: string;
+  badgeTone?: "cyan" | "mint" | "amber";
+}) {
+  const tone =
+    badgeTone === "mint"
+      ? "border-mint/30 text-mint"
+      : badgeTone === "amber"
+        ? "border-amber/30 text-amber"
+        : "border-cyan/30 text-cyan";
+  return (
+    <div className="rounded-lg border border-line/70 bg-background/40 p-3">
+      <div className="flex items-center justify-between gap-2">
+        <div className="font-mono text-[10px] uppercase tracking-[0.25em] text-ink-mute">
+          {label}
+        </div>
+        {badge && (
+          <span className={`rounded border px-1.5 py-0.5 font-mono text-[9px] uppercase tracking-widest ${tone}`}>
+            {badge}
+          </span>
+        )}
+      </div>
+      <div className="mt-1.5 truncate text-sm text-ink" title={value}>
+        {value}
+      </div>
+      {hint && <div className="mt-0.5 font-mono text-[10px] text-ink-mute">{hint}</div>}
+    </div>
+  );
+}
+
 function StatCard({
   label,
   value,
