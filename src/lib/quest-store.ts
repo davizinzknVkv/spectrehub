@@ -36,6 +36,18 @@ type Progress = { current: number; total: number };
 
 const CREDS_KEY = "discordhub.creds";
 const RUNS_KEY = "discordhub.runs";
+const PLAN_KEY = "discordhub.plan";
+const LAST_KEY = "discordhub.lastCompletedAt";
+
+function loadPlan(): Plan {
+  if (typeof window === "undefined") return "free";
+  const v = window.localStorage.getItem(PLAN_KEY);
+  return v === "premium" || v === "boost" ? v : "free";
+}
+function loadLastCompleted(): number {
+  if (typeof window === "undefined") return 0;
+  return Number(window.localStorage.getItem(LAST_KEY) ?? 0) || 0;
+}
 
 function loadCreds(): Credentials | null {
   if (typeof window === "undefined") return null;
