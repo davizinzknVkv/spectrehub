@@ -77,13 +77,17 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "DiscordHub" },
-      { name: "description", content: "Hub web para automatizar quests do Discord e acumular Orbs." },
+      { title: "DiscordHub — Auto Quests para Orbs do Discord" },
+      { name: "description", content: "Script Node.js que completa automaticamente as missões do Discord (vídeo e jogos) e acumula Orbs. Open source, sem interface, roda no seu terminal." },
       { name: "author", content: "DiscordHub" },
-      { property: "og:title", content: "DiscordHub" },
-      { property: "og:description", content: "Hub web para automatizar quests do Discord." },
+      { property: "og:title", content: "DiscordHub — Auto Quests para Orbs do Discord" },
+      { property: "og:description", content: "Script Node.js que completa automaticamente as missões do Discord (vídeo e jogos) e acumula Orbs. Open source, sem interface, roda no seu terminal." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "DiscordHub — Auto Quests para Orbs do Discord" },
+      { name: "twitter:description", content: "Script Node.js que completa automaticamente as missões do Discord (vídeo e jogos) e acumula Orbs. Open source, sem interface, roda no seu terminal." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/94b63b85-c35d-45ea-b000-8f68ae396ffa/id-preview-2af18093--3463ab7b-9510-4c05-8c7d-4a93c821d67b.lovable.app-1783631167250.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/94b63b85-c35d-45ea-b000-8f68ae396ffa/id-preview-2af18093--3463ab7b-9510-4c05-8c7d-4a93c821d67b.lovable.app-1783631167250.png" },
     ],
     links: [
       {

@@ -14,7 +14,7 @@ export const Route = createFileRoute("/")({
       {
         property: "og:description",
         content:
-          "Automatize suas missões do Discord e acumule Orbs enquanto você faz outras coisas.",
+          "Script Node.js que completa automaticamente as missões do Discord (vídeo e jogos) e acumula Orbs. Open source, sem interface, roda no seu terminal.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
