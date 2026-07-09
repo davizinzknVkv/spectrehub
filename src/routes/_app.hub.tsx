@@ -421,6 +421,9 @@ function HubPage() {
                       src={iconUrl}
                       alt=""
                       loading="lazy"
+                      decoding="async"
+                      width={36}
+                      height={36}
                       className="h-9 w-9 shrink-0 rounded-md border border-line object-cover"
                     />
                   ) : (
