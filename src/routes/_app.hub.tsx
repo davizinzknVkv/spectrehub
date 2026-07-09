@@ -17,13 +17,6 @@ export const Route = createFileRoute("/_app/hub")({
   component: HubPage,
 });
 
-const TASK_LABEL: Record<string, { label: string; icon: string; tone: string }> = {
-  WATCH_VIDEO: { label: "vídeo", icon: "▶", tone: "text-cyan" },
-  WATCH_VIDEO_ON_MOBILE: { label: "vídeo", icon: "▶", tone: "text-cyan" },
-  PLAY_ON_DESKTOP: { label: "desktop", icon: "◆", tone: "text-mint" },
-  PLAY_ON_XBOX: { label: "xbox", icon: "◆", tone: "text-mint" },
-  PLAY_ON_PLAYSTATION: { label: "ps", icon: "◆", tone: "text-mint" },
-};
 
 function formatDuration(seconds: number) {
   if (seconds >= 60) {
