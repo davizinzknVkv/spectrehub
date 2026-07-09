@@ -808,16 +808,20 @@ function CaptchaModal({
 
   // Turnstile widget bootstrap
   const turnstileRef = useRef<HTMLDivElement>(null);
+  const renderedRef = useRef(false);
+  const onSolvedRef = useRef(onSolved);
+  useEffect(() => { onSolvedRef.current = onSolved; }, [onSolved]);
   useEffect(() => {
-    if (!useTurnstile || !turnstileRef.current) return;
+    if (!useTurnstile) return;
     const SCRIPT_ID = "cf-turnstile-script";
     const render = () => {
-      const ts = (window as unknown as { turnstile?: { render: (el: HTMLElement, o: Record<string, unknown>) => void } }).turnstile;
-      if (!ts || !turnstileRef.current) return;
+      const ts = (window as unknown as { turnstile?: { render: (el: HTMLElement, o: Record<string, unknown>) => string } }).turnstile;
+      if (!ts || !turnstileRef.current || renderedRef.current) return;
+      renderedRef.current = true;
       ts.render(turnstileRef.current, {
         sitekey: siteKey,
         theme: "dark",
-        callback: () => onSolved(),
+        callback: () => onSolvedRef.current(),
         "error-callback": () => setError(true),
       });
     };
@@ -829,7 +833,7 @@ function CaptchaModal({
     s.defer = true;
     s.onload = render;
     document.head.appendChild(s);
-  }, [useTurnstile, siteKey, onSolved]);
+  }, [useTurnstile, siteKey]);
 
   const submit = () => {
     if (parseInt(value, 10) === challenge.a + challenge.b) onSolved();
