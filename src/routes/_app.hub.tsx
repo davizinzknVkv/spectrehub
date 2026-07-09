@@ -710,6 +710,7 @@ function MissionCard({
             src={quest.imageUrl}
             alt=""
             loading="lazy"
+            decoding="async"
             onError={(e) => (e.currentTarget.style.opacity = "0")}
             className="h-full w-full object-cover transition duration-500 group-hover:scale-[1.03]"
           />
