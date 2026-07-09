@@ -7,7 +7,7 @@ import {
   fetchOrbs,
   fetchUserInfo,
   fetchUserPlan,
-  getGateStatus,
+  
   PLAN_LIMITS,
   runAll,
   runQuest,
