@@ -36,9 +36,13 @@ function HubPage() {
   const creds = useQuestStore((s) => s.creds);
   const [quests, setQuests] = useState<Quest[]>([]);
   const [orbs, setOrbs] = useState<number | null>(null);
-  const [user, setUser] = useState<{ username?: string; global_name?: string; id?: string } | null>(
-    null,
-  );
+  const [user, setUser] = useState<{
+    username?: string;
+    global_name?: string;
+    id?: string;
+    avatar?: string | null;
+    discriminator?: string;
+  } | null>(null);
   const [loadingQuests, setLoadingQuests] = useState(false);
   const running = useQuestStore((s) => s.running);
   const activeId = useQuestStore((s) => s.activeQuestId);
