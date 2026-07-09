@@ -206,14 +206,20 @@ function HubPage() {
     );
   }
 
-  const totalTarget = quests.reduce((sum, q) => sum + q.target, 0);
-  const orbQuests = quests.filter((q) => q.rewardText.includes("Orbs")).length;
-  const totalOrbsEarned = runs
-    .filter((r) => r.status === "completed" && r.reward_text?.includes("Orbs"))
-    .reduce((sum, r) => {
-      const m = r.reward_text?.match(/([\d.,]+)\s*Orbs/i);
-      return sum + (m ? parseInt(m[1].replace(/[.,]/g, ""), 10) || 0 : 0);
-    }, 0);
+  const { totalTarget, orbQuests } = useMemo(() => ({
+    totalTarget: quests.reduce((sum, q) => sum + q.target, 0),
+    orbQuests: quests.filter((q) => q.rewardText.includes("Orbs")).length,
+  }), [quests]);
+  const totalOrbsEarned = useMemo(
+    () =>
+      runs
+        .filter((r) => r.status === "completed" && r.reward_text?.includes("Orbs"))
+        .reduce((sum, r) => {
+          const m = r.reward_text?.match(/([\d.,]+)\s*Orbs/i);
+          return sum + (m ? parseInt(m[1].replace(/[.,]/g, ""), 10) || 0 : 0);
+        }, 0),
+    [runs],
+  );
 
   const bannerUrl = user?.id && user.banner
     ? `https://cdn.discordapp.com/banners/${user.id}/${user.banner}.${user.banner.startsWith("a_") ? "gif" : "png"}?size=1024`
