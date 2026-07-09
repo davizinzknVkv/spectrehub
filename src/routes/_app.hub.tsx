@@ -189,7 +189,6 @@ function HubPage() {
 
   const totalTarget = quests.reduce((sum, q) => sum + q.target, 0);
   const orbQuests = quests.filter((q) => q.rewardText.includes("Orbs")).length;
-  const runs = useQuestStore.getState().runs;
   const totalOrbsEarned = runs
     .filter((r) => r.status === "completed" && r.reward_text?.includes("Orbs"))
     .reduce((sum, r) => {
