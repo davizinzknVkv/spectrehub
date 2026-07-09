@@ -32,6 +32,34 @@ function formatDuration(seconds: number) {
   return `${seconds}s`;
 }
 
+const DISCORD_EPOCH = 1420070400000n;
+function snowflakeDate(id: string): Date | null {
+  try {
+    return new Date(Number((BigInt(id) >> 22n) + DISCORD_EPOCH));
+  } catch {
+    return null;
+  }
+}
+
+function formatAge(date: Date) {
+  const now = Date.now();
+  const diff = now - date.getTime();
+  const days = Math.floor(diff / 86400000);
+  const years = Math.floor(days / 365);
+  const months = Math.floor((days % 365) / 30);
+  if (years > 0) return `${years}a ${months}m`;
+  if (months > 0) return `${months}m ${days % 30}d`;
+  return `${days}d`;
+}
+
+const PREMIUM_LABEL: Record<number, string> = {
+  0: "sem nitro",
+  1: "nitro classic",
+  2: "nitro",
+  3: "nitro basic",
+};
+
+
 function HubPage() {
   const creds = useQuestStore((s) => s.creds);
   const [quests, setQuests] = useState<Quest[]>([]);
