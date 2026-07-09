@@ -209,9 +209,22 @@ function logRun(quest: Quest, status: RunRecord["status"], error_message: string
 
 export async function runQuest(quest: Quest): Promise<boolean> {
   const s = useQuestStore.getState();
+
+  const gate = getGateStatus();
+  if (gate.remaining <= 0) {
+    s.log(`⛔ Limite diário do plano ${gate.limits.label} atingido (${gate.used}/${gate.limits.daily}).`, "error");
+    return false;
+  }
+  if (gate.cooldownLeft > 0) {
+    const secs = Math.ceil(gate.cooldownLeft / 1000);
+    s.log(`⛔ Aguarde ${Math.floor(secs / 60)}m${(secs % 60).toString().padStart(2, "0")} pra próxima missão (plano ${gate.limits.label}).`, "error");
+    return false;
+  }
+
   s.setActive(quest.questId);
   s.setProgress({ current: 0, total: quest.target });
   s.log(`🚀 Iniciando: ${quest.questName} (${TASK_TYPES[quest.taskType] ?? quest.taskType})`);
+
 
   try {
     if (!quest.isEnrolled) {
