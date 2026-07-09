@@ -10,7 +10,10 @@ export type Quest = {
   rewardText: string;
   isEnrolled: boolean;
   imageUrl?: string;
+  publisher?: string;
+  expiresAt?: string;
 };
+
 
 export type Credentials = {
   token: string;

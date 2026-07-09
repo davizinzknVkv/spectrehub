@@ -17,13 +17,6 @@ export const Route = createFileRoute("/_app/hub")({
   component: HubPage,
 });
 
-const TASK_LABEL: Record<string, { label: string; icon: string; tone: string }> = {
-  WATCH_VIDEO: { label: "vídeo", icon: "▶", tone: "text-cyan" },
-  WATCH_VIDEO_ON_MOBILE: { label: "vídeo", icon: "▶", tone: "text-cyan" },
-  PLAY_ON_DESKTOP: { label: "desktop", icon: "◆", tone: "text-mint" },
-  PLAY_ON_XBOX: { label: "xbox", icon: "◆", tone: "text-mint" },
-  PLAY_ON_PLAYSTATION: { label: "ps", icon: "◆", tone: "text-mint" },
-};
 
 function formatDuration(seconds: number) {
   if (seconds >= 60) {
@@ -67,6 +60,8 @@ function HubPage() {
   const [quests, setQuests] = useState<Quest[]>([]);
   const [orbs, setOrbs] = useState<number | null>(null);
   const [guilds, setGuilds] = useState<Guild[]>([]);
+  const [captchaFor, setCaptchaFor] = useState<Quest | null>(null);
+  const [captchaAll, setCaptchaAll] = useState(false);
   const [user, setUser] = useState<{
     username?: string;
     global_name?: string;
@@ -208,7 +203,7 @@ function HubPage() {
             {loadingQuests ? "sondando…" : "→ scan"}
           </button>
           <button
-            onClick={() => runAll(quests)}
+            onClick={() => setCaptchaAll(true)}
             disabled={running || quests.length === 0}
             className="inline-flex items-center gap-2 rounded-md border border-mint/40 bg-mint/10 px-4 py-2.5 font-mono text-xs font-semibold uppercase tracking-widest text-mint transition hover:bg-mint/20 disabled:cursor-not-allowed disabled:opacity-40"
           >
@@ -362,124 +357,135 @@ function HubPage() {
 
 
 
-      {/* Mission grid + Log panel */}
-      <div className="grid gap-6 lg:grid-cols-[1fr_360px]">
-        {/* Missions */}
-        <section className="min-w-0 space-y-3">
-          <SectionHeader
-            title="fila de missões"
-            right={
-              quests.length > 0 ? (
-                <span className="font-mono text-[11px] text-ink-mute">
-                  {quests.length} pendente(s)
-                </span>
-              ) : null
-            }
-          />
-
-          {quests.length === 0 && !loadingQuests && (
-            <EmptyState onScan={loadQuests} />
-          )}
-
-          {loadingQuests && quests.length === 0 && (
-            <div className="rounded-lg border border-line bg-surface/40 p-8 text-center font-mono text-xs text-ink-mute">
-              <span className="pulse-dot inline-block">▮</span> sondando o discord…
-            </div>
-          )}
-
-          <div className="space-y-2.5">
-            {quests.map((q, i) => (
-              <MissionRow
-                key={q.questId}
-                quest={q}
-                index={i + 1}
-                active={activeId === q.questId}
-                progress={activeId === q.questId ? progress : null}
-                disabled={running}
-              />
-            ))}
+      {/* Missions section */}
+      <section className="min-w-0 space-y-4">
+        <div className="flex flex-wrap items-end justify-between gap-3">
+          <div>
+            <h2 className="text-xl font-semibold tracking-tight text-ink sm:text-2xl">Missões</h2>
+            <p className="mt-1 text-sm text-ink-dim">
+              Quests disponíveis do Discord. Complete para ganhar recompensas.
+            </p>
           </div>
-        </section>
+          {quests.length > 0 && (
+            <span className="font-mono text-[11px] uppercase tracking-widest text-ink-mute">
+              {quests.length} disponíveis
+            </span>
+          )}
+        </div>
 
-        {/* Terminal log */}
-        <aside className="lg:sticky lg:top-20 lg:self-start">
-          <div className="overflow-hidden rounded-xl border border-line bg-surface/70 scanline">
-            <div className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-3 border-b border-line/70 bg-surface px-4 py-2.5">
-              <div className="flex min-w-0 items-center gap-2 font-mono text-[11px] uppercase tracking-widest text-ink-mute">
-                <span className="flex gap-1">
-                  <span className="h-2 w-2 rounded-full bg-rose/70" />
-                  <span className="h-2 w-2 rounded-full bg-amber/70" />
-                  <span className="h-2 w-2 rounded-full bg-mint/70" />
-                </span>
-                <span className="ml-1 truncate">neighborshub — log</span>
-              </div>
-              <div className="flex shrink-0 items-center gap-2">
+        {quests.length === 0 && !loadingQuests && <EmptyState onScan={loadQuests} />}
+        {loadingQuests && quests.length === 0 && (
+          <div className="rounded-xl border border-line bg-surface/40 p-10 text-center font-mono text-xs text-ink-mute">
+            <span className="pulse-dot inline-block">▮</span> sondando o discord…
+          </div>
+        )}
+
+        <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+          {quests.map((q) => (
+            <MissionCard
+              key={q.questId}
+              quest={q}
+              active={activeId === q.questId}
+              progress={activeId === q.questId ? progress : null}
+              disabled={running}
+              onExec={() => setCaptchaFor(q)}
+            />
+          ))}
+        </div>
+      </section>
+
+      {/* Terminal log full width below */}
+      <section>
+        <div className="overflow-hidden rounded-xl border border-line bg-surface/70 scanline">
+          <div className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-3 border-b border-line/70 bg-surface px-4 py-2.5">
+            <div className="flex min-w-0 items-center gap-2 font-mono text-[11px] uppercase tracking-widest text-ink-mute">
+              <span className="flex gap-1">
+                <span className="h-2 w-2 rounded-full bg-rose/70" />
+                <span className="h-2 w-2 rounded-full bg-amber/70" />
+                <span className="h-2 w-2 rounded-full bg-mint/70" />
+              </span>
+              <span className="ml-1 truncate">neighborshub — log</span>
+            </div>
+            <div className="flex shrink-0 items-center gap-2">
+              <span
+                className={`inline-flex items-center gap-1.5 font-mono text-[10px] uppercase tracking-widest ${
+                  running ? "text-mint" : "text-ink-mute"
+                }`}
+              >
                 <span
-                  className={`inline-flex items-center gap-1.5 font-mono text-[10px] uppercase tracking-widest ${
-                    running ? "text-mint" : "text-ink-mute"
-                  }`}
-                >
-                  <span
-                    className={`h-1.5 w-1.5 rounded-full ${running ? "bg-mint pulse-dot" : "bg-ink-mute"}`}
-                  />
-                  {running ? "live" : "idle"}
-                </span>
-                <button
-                  onClick={clearLogs}
-                  className="rounded border border-line px-2 py-0.5 font-mono text-[10px] uppercase tracking-widest text-ink-mute hover:text-ink"
-                >
-                  clear
-                </button>
+                  className={`h-1.5 w-1.5 rounded-full ${running ? "bg-mint pulse-dot" : "bg-ink-mute"}`}
+                />
+                {running ? "live" : "idle"}
+              </span>
+              <button
+                onClick={clearLogs}
+                className="rounded border border-line px-2 py-0.5 font-mono text-[10px] uppercase tracking-widest text-ink-mute hover:text-ink"
+              >
+                clear
+              </button>
+            </div>
+          </div>
+          <div className="max-h-[360px] min-h-[200px] overflow-y-auto p-4 font-mono text-[12px] leading-6">
+            {logs.length === 0 ? (
+              <div className="text-ink-mute">
+                <span className="text-cyan">›</span> aguardando eventos…
               </div>
-            </div>
-            <div className="max-h-[420px] min-h-[280px] overflow-y-auto p-4 font-mono text-[12px] leading-6">
-              {logs.length === 0 ? (
-                <div className="text-ink-mute">
-                  <span className="text-cyan">›</span> aguardando eventos…
+            ) : (
+              logs.map((l) => (
+                <div
+                  key={l.id}
+                  className={
+                    l.level === "error"
+                      ? "text-rose"
+                      : l.level === "success"
+                        ? "text-mint"
+                        : "text-ink-dim"
+                  }
+                >
+                  <span className="mr-2 text-ink-mute">
+                    {new Date(l.ts).toLocaleTimeString("pt-BR", { hour12: false })}
+                  </span>
+                  {l.text}
                 </div>
-              ) : (
-                logs.map((l) => (
-                  <div
-                    key={l.id}
-                    className={
-                      l.level === "error"
-                        ? "text-rose"
-                        : l.level === "success"
-                          ? "text-mint"
-                          : "text-ink-dim"
-                    }
-                  >
-                    <span className="mr-2 text-ink-mute">
-                      {new Date(l.ts).toLocaleTimeString("pt-BR", { hour12: false })}
-                    </span>
-                    {l.text}
-                  </div>
-                ))
-              )}
-              <div ref={logEnd} />
-            </div>
+              ))
+            )}
+            <div ref={logEnd} />
           </div>
+        </div>
+      </section>
 
-          <div className="mt-3 rounded-lg border border-amber/25 bg-amber/[0.05] p-3 font-mono text-[11px] leading-relaxed text-amber/90">
-            ⚠ mantenha esta aba aberta durante a execução. Fechando o navegador, o loop para.
-          </div>
-        </aside>
-      </div>
+      {captchaFor && (
+        <CaptchaModal
+          quest={captchaFor}
+          onCancel={() => setCaptchaFor(null)}
+          onSolved={() => {
+            const q = captchaFor;
+            setCaptchaFor(null);
+            useQuestStore.getState().resetStop();
+            useQuestStore.getState().setRunning(true);
+            runQuest(q).finally(() => {
+              useQuestStore.getState().setRunning(false);
+              useQuestStore.getState().setActive(null);
+            });
+          }}
+        />
+      )}
+
+      {captchaAll && (
+        <CaptchaModal
+          label={`Executar ${quests.length} missões`}
+          onCancel={() => setCaptchaAll(false)}
+          onSolved={() => {
+            setCaptchaAll(false);
+            runAll(quests);
+          }}
+        />
+      )}
     </div>
   );
 }
 
-function SectionHeader({ title, right }: { title: string; right?: React.ReactNode }) {
-  return (
-    <div className="flex items-center justify-between gap-3">
-      <div className="flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.25em] text-ink-mute">
-        <span className="text-cyan">◆</span>
-        {title}
-      </div>
-      {right}
-    </div>
-  );
-}
+
 
 function InfoField({
   label,
@@ -561,115 +567,189 @@ function StatCard({
   );
 }
 
-function MissionRow({
+function MissionCard({
   quest,
-  index,
   active,
   progress,
   disabled,
+  onExec,
 }: {
   quest: Quest;
-  index: number;
   active: boolean;
   progress: { current: number; total: number } | null;
   disabled: boolean;
+  onExec: () => void;
 }) {
   const pct = active && progress ? Math.min(100, Math.round((progress.current / progress.total) * 100)) : 0;
-  const meta = TASK_LABEL[quest.taskType] ?? { label: quest.taskType.toLowerCase(), icon: "◇", tone: "text-ink-dim" };
   const isOrbs = quest.rewardText.includes("Orbs");
+  const expires = quest.expiresAt
+    ? new Date(quest.expiresAt).toLocaleDateString("pt-BR")
+    : null;
 
   return (
     <article
-      className={`group relative overflow-hidden rounded-xl border transition ${
+      className={`group relative flex flex-col overflow-hidden rounded-2xl border bg-surface/60 backdrop-blur transition ${
         active
-          ? "border-cyan/60 bg-cyan/[0.06] glow-cyan"
-          : "border-line bg-surface/50 hover:border-cyan/30 hover:bg-surface/70"
+          ? "border-cyan/60 glow-cyan"
+          : "border-line hover:border-cyan/40 hover:bg-surface/80"
       }`}
     >
-      <div className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-4 p-4 sm:p-5">
-        <div className="flex min-w-0 items-start gap-4">
-          <div className="relative shrink-0">
-            {quest.imageUrl ? (
-              <img
-                src={quest.imageUrl}
-                alt=""
-                loading="lazy"
-                onError={(e) => ((e.currentTarget.style.display = "none"))}
-                className="h-14 w-14 rounded-md border border-line object-cover sm:h-16 sm:w-16"
-              />
-            ) : (
-              <div className="grid h-14 w-14 place-items-center rounded-md border border-line bg-background/60 font-mono text-sm font-semibold text-ink-mute sm:h-16 sm:w-16">
-                {index.toString().padStart(2, "0")}
-              </div>
-            )}
-            <span className="absolute -left-1.5 -top-1.5 rounded border border-line bg-background px-1.5 py-0.5 font-mono text-[10px] font-semibold text-cyan">
-              {index.toString().padStart(2, "0")}
-            </span>
+      <div className="relative aspect-[16/9] w-full overflow-hidden bg-background">
+        {quest.imageUrl ? (
+          <img
+            src={quest.imageUrl}
+            alt=""
+            loading="lazy"
+            onError={(e) => (e.currentTarget.style.opacity = "0")}
+            className="h-full w-full object-cover transition duration-500 group-hover:scale-[1.03]"
+          />
+        ) : (
+          <div className="grid h-full w-full place-items-center font-mono text-xs text-ink-mute">
+            sem imagem
           </div>
-          <div className="min-w-0">
-            <div className="truncate text-[15px] font-semibold text-ink">{quest.questName}</div>
-            <div className="mt-1.5 flex flex-wrap items-center gap-x-3 gap-y-1 font-mono text-[11px] uppercase tracking-widest">
-              <span className={`inline-flex items-center gap-1.5 ${meta.tone}`}>
-                <span>{meta.icon}</span>
-                {meta.label}
-              </span>
-              <span className="text-ink-mute">
-                <span className="text-ink-dim">{formatDuration(quest.target)}</span>
-              </span>
-              <span
-                className={
-                  isOrbs
-                    ? "inline-flex items-center gap-1.5 text-amber"
-                    : "inline-flex items-center gap-1.5 text-ink-dim"
-                }
-              >
-                <span>◈</span>
-                <span className="normal-case tracking-normal">{quest.rewardText}</span>
-              </span>
-              {quest.isEnrolled && (
-                <span className="rounded border border-mint/30 px-1.5 py-0.5 text-[10px] text-mint">
-                  enrolled
-                </span>
-              )}
+        )}
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background/70 via-transparent" />
+        <span
+          className={`absolute right-3 top-3 rounded-full px-2.5 py-0.5 font-mono text-[10px] font-semibold uppercase tracking-widest ${
+            quest.isEnrolled
+              ? "bg-mint/90 text-background"
+              : "bg-cyan/90 text-background"
+          }`}
+        >
+          {quest.isEnrolled ? "aceita" : "disponível"}
+        </span>
+      </div>
+
+      <div className="flex flex-1 flex-col gap-3 p-4">
+        <div className="min-w-0">
+          <h3 className="truncate text-base font-semibold text-ink">{quest.questName}</h3>
+          {quest.publisher && (
+            <p className="mt-0.5 truncate text-xs text-ink-dim">{quest.publisher}</p>
+          )}
+        </div>
+
+        <div className="flex flex-wrap items-center gap-2 font-mono text-[10px] uppercase tracking-widest text-ink-mute">
+          {expires && <span>Expira: {expires}</span>}
+          <span className="opacity-40">·</span>
+          <span>{formatDuration(quest.target)}</span>
+        </div>
+
+        <div
+          className={`inline-flex w-fit items-center gap-2 rounded-md border px-2.5 py-1 text-xs ${
+            isOrbs
+              ? "border-amber/30 bg-amber/10 text-amber"
+              : "border-line bg-background/40 text-ink-dim"
+          }`}
+        >
+          <span>◈</span>
+          {quest.rewardText}
+        </div>
+
+        {active && progress && (
+          <div>
+            <div className="flex items-center justify-between font-mono text-[10px] uppercase tracking-widest text-ink-mute">
+              <span>{progress.current}/{progress.total}</span>
+              <span className="text-cyan">{pct}%</span>
+            </div>
+            <div className="mt-1 h-1.5 overflow-hidden rounded-full bg-background">
+              <div
+                className="h-full rounded-full bg-gradient-to-r from-cyan via-mint to-amber transition-all"
+                style={{ width: `${pct}%` }}
+              />
             </div>
           </div>
-        </div>
-        <div className="flex shrink-0 items-center gap-2">
-          <button
-            onClick={() => {
-              useQuestStore.getState().resetStop();
-              useQuestStore.getState().setRunning(true);
-              runQuest(quest).finally(() => {
-                useQuestStore.getState().setRunning(false);
-                useQuestStore.getState().setActive(null);
-              });
-            }}
-            disabled={disabled}
-            className="rounded-md border border-cyan/50 bg-cyan/10 px-3 py-2 font-mono text-[11px] font-semibold uppercase tracking-widest text-cyan transition hover:bg-cyan/20 disabled:cursor-not-allowed disabled:opacity-30"
-          >
-            ▶ exec
-          </button>
-        </div>
+        )}
+
+        <button
+          onClick={onExec}
+          disabled={disabled}
+          className="mt-auto rounded-md border border-line bg-background/60 px-3 py-2 text-sm font-medium text-ink transition hover:border-cyan/50 hover:text-cyan disabled:cursor-not-allowed disabled:opacity-30"
+        >
+          Completar
+        </button>
       </div>
-      {active && progress && (
-        <div className="border-t border-line/60 bg-background/40 px-5 py-3">
-          <div className="flex items-center justify-between font-mono text-[10px] uppercase tracking-widest text-ink-mute">
-            <span>
-              <span className="text-cyan">progress</span> · {progress.current}/{progress.total}
-            </span>
-            <span className="text-cyan">{pct}%</span>
-          </div>
-          <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-background">
-            <div
-              className="h-full rounded-full bg-gradient-to-r from-cyan via-mint to-amber transition-all"
-              style={{ width: `${pct}%` }}
-            />
-          </div>
-        </div>
-      )}
     </article>
   );
 }
+
+function CaptchaModal({
+  quest,
+  label,
+  onSolved,
+  onCancel,
+}: {
+  quest?: Quest;
+  label?: string;
+  onSolved: () => void;
+  onCancel: () => void;
+}) {
+  const [challenge] = useState(() => ({
+    a: Math.floor(Math.random() * 9) + 1,
+    b: Math.floor(Math.random() * 9) + 1,
+  }));
+  const [value, setValue] = useState("");
+  const [error, setError] = useState(false);
+
+  const submit = () => {
+    if (parseInt(value, 10) === challenge.a + challenge.b) {
+      onSolved();
+    } else {
+      setError(true);
+      setValue("");
+    }
+  };
+
+  return (
+    <div className="fixed inset-0 z-50 grid place-items-center bg-background/80 p-4 backdrop-blur-sm">
+      <div className="w-full max-w-sm rounded-2xl border border-cyan/30 bg-surface p-6 shadow-2xl">
+        <div className="font-mono text-[10px] uppercase tracking-[0.3em] text-cyan-dim">
+          $ verify --human
+        </div>
+        <h3 className="mt-2 text-lg font-semibold text-ink">Confirme que é humano</h3>
+        <p className="mt-1 text-sm text-ink-dim">
+          {label ?? quest?.questName ?? "Antes de executar, resolva o desafio."}
+        </p>
+
+        <div className="mt-5 grid grid-cols-[1fr_auto_1fr_auto_1fr] items-center gap-2 rounded-lg border border-line bg-background/60 p-3 font-mono text-xl text-ink">
+          <span className="text-center">{challenge.a}</span>
+          <span className="text-cyan">+</span>
+          <span className="text-center">{challenge.b}</span>
+          <span className="text-cyan">=</span>
+          <input
+            autoFocus
+            inputMode="numeric"
+            value={value}
+            onChange={(e) => {
+              setError(false);
+              setValue(e.target.value.replace(/\D/g, "").slice(0, 3));
+            }}
+            onKeyDown={(e) => e.key === "Enter" && submit()}
+            className="w-full rounded border border-line bg-background px-2 py-1 text-center text-ink outline-none focus:border-cyan"
+          />
+        </div>
+        {error && (
+          <p className="mt-2 font-mono text-[11px] text-rose">✗ resposta incorreta, tente de novo</p>
+        )}
+
+        <div className="mt-5 flex gap-2">
+          <button
+            onClick={onCancel}
+            className="flex-1 rounded-md border border-line px-3 py-2 font-mono text-xs uppercase tracking-widest text-ink-dim hover:text-ink"
+          >
+            cancelar
+          </button>
+          <button
+            onClick={submit}
+            className="flex-1 rounded-md bg-cyan px-3 py-2 font-mono text-xs font-semibold uppercase tracking-widest text-primary-foreground hover:brightness-110"
+          >
+            confirmar
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 
 function EmptyState({ onScan }: { onScan: () => void }) {
   return (
