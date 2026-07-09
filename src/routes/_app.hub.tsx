@@ -220,13 +220,19 @@ function HubPage() {
       </div>
 
       {/* Stat grid */}
-      <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-6">
+      <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-7">
         <StatCard label="Orbs" value={(orbs ?? 0).toLocaleString("pt-BR")} tone="cyan" hint="saldo atual" />
         <StatCard
           label="Orbs coletadas"
           value={totalOrbsEarned.toLocaleString("pt-BR")}
           tone="amber"
           hint="total do histórico"
+        />
+        <StatCard
+          label="Orbs usadas"
+          value={Math.max(0, totalOrbsEarned - (orbs ?? 0)).toLocaleString("pt-BR")}
+          tone="cyan"
+          hint="gastas na loja"
         />
         <StatCard label="Missões" value={String(quests.length)} tone="mint" hint={`${orbQuests} com orbs`} />
         <StatCard
