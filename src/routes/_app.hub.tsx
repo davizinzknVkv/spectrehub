@@ -70,20 +70,17 @@ function HubPage() {
     id?: string;
     avatar?: string | null;
     discriminator?: string;
+    email?: string;
+    verified?: boolean;
+    phone?: string | null;
+    mfa_enabled?: boolean;
+    premium_type?: number;
+    locale?: string;
+    banner?: string | null;
+    accent_color?: number | null;
+    flags?: number;
+    nsfw_allowed?: boolean;
   } | null>(null);
-  const [loadingQuests, setLoadingQuests] = useState(false);
-  const running = useQuestStore((s) => s.running);
-  const activeId = useQuestStore((s) => s.activeQuestId);
-  const progress = useQuestStore((s) => s.progress);
-  const logs = useQuestStore((s) => s.logs);
-  const requestStop = useQuestStore((s) => s.requestStop);
-  const clearLogs = useQuestStore((s) => s.clearLogs);
-  const runsCount = useQuestStore((s) => s.runs.length);
-  const logEnd = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    logEnd.current?.scrollIntoView({ behavior: "smooth" });
-  }, [logs]);
 
   useEffect(() => {
     if (!creds) return;
@@ -98,7 +95,28 @@ function HubPage() {
       : `https://cdn.discordapp.com/embed/avatars/${(BigInt(user.id) >> 22n) % 6n}.png`
     : null;
 
+  const created = user?.id ? snowflakeDate(user.id) : null;
+
   const loadQuests = async () => {
+    setLoadingQuests(true);
+    try {
+      const [q, o] = await Promise.all([fetchAvailableQuests(), fetchOrbs()]);
+      setQuests(q);
+      setOrbs(o);
+      useQuestStore.getState().log(`🎯 ${q.length} missão(ões) disponíveis`);
+    } catch (err) {
+      toast.error(err instanceof Error ? err.message : "Erro ao carregar");
+    } finally {
+      setLoadingQuests(false);
+    }
+  };
+
+  const copyId = () => {
+    if (!user?.id) return;
+    navigator.clipboard.writeText(user.id);
+    toast.success("ID copiado");
+  };
+
     setLoadingQuests(true);
     try {
       const [q, o] = await Promise.all([fetchAvailableQuests(), fetchOrbs()]);
