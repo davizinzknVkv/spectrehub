@@ -46,7 +46,7 @@ function AppLayout() {
               </div>
               <div className="min-w-0">
                 <div className="truncate text-sm font-semibold tracking-tight text-ink">
-                  discord<span className="text-cyan">hub</span>
+                  neighbors<span className="text-cyan">hub</span>
                 </div>
                 <div className="font-mono text-[10px] uppercase tracking-[0.2em] text-ink-mute">
                   v1.0 · terminal
@@ -155,7 +155,7 @@ function TopBar() {
     <div className="sticky top-0 z-10 border-b border-line/60 bg-background/70 backdrop-blur">
       <div className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-4 px-4 py-3 sm:flex sm:px-8">
         <div className="min-w-0 font-mono text-[11px] uppercase tracking-[0.2em] text-ink-mute">
-          <span className="text-cyan">~/discordhub</span>
+          <span className="text-cyan">~/neighborshub</span>
           <span className="mx-2 opacity-40">/</span>
           <span className="text-ink">{current?.label.toLowerCase() ?? "home"}</span>
         </div>

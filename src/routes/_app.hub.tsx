@@ -11,7 +11,7 @@ import {
 import { useQuestStore, type Quest } from "@/lib/quest-store";
 
 export const Route = createFileRoute("/_app/hub")({
-  head: () => ({ meta: [{ title: "Hub — DiscordHub" }] }),
+  head: () => ({ meta: [{ title: "Hub — Neighborshub" }] }),
   component: HubPage,
 });
 
@@ -346,7 +346,7 @@ function HubPage() {
                   <span className="h-2 w-2 rounded-full bg-amber/70" />
                   <span className="h-2 w-2 rounded-full bg-mint/70" />
                 </span>
-                <span className="ml-1 truncate">discordhub — log</span>
+                <span className="ml-1 truncate">neighborshub — log</span>
               </div>
               <div className="flex shrink-0 items-center gap-2">
                 <span
