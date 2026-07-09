@@ -24,9 +24,17 @@ const NAV_GROUPS = [
     items: [
       { to: "/hub", label: "Missões", icon: Target, hash: "missoes" },
       { to: "/history", label: "Histórico", icon: History },
-      { to: "/settings", label: "Token", icon: KeyRound },
+      { to: "/settings", label: "Login", icon: KeyRound },
     ],
   },
+] as const;
+
+// Mobile bottom-nav (4 essentials)
+const MOBILE_NAV = [
+  { to: "/hub", label: "Dashboard", icon: LayoutDashboard },
+  { to: "/hub", label: "Missões", icon: Target, hash: "missoes" },
+  { to: "/history", label: "Histórico", icon: History },
+  { to: "/settings", label: "Login", icon: KeyRound },
 ] as const;
 
 function AppLayout() {
@@ -44,8 +52,8 @@ function AppLayout() {
       <div aria-hidden className="pointer-events-none fixed inset-0 -z-10 grid-bg opacity-25" />
 
       <div className="mx-auto grid min-h-screen w-full max-w-[1500px] grid-cols-1 lg:grid-cols-[240px_1fr]">
-        {/* Sidebar */}
-        <aside className="border-b border-line/60 bg-surface/50 backdrop-blur lg:sticky lg:top-0 lg:h-screen lg:border-b-0 lg:border-r">
+        {/* Sidebar (desktop only) */}
+        <aside className="hidden border-r border-line/60 bg-surface/50 backdrop-blur lg:sticky lg:top-0 lg:block lg:h-screen">
           <div className="flex h-full flex-col">
             <Link to="/" className="flex items-center gap-2.5 px-5 py-5">
               <div className="grid h-9 w-9 place-items-center rounded-lg border border-cyan/40 bg-cyan/10 font-mono text-sm font-bold text-cyan">
@@ -114,26 +122,76 @@ function AppLayout() {
         {/* Main */}
         <main className="min-w-0">
           <TopBar />
-          <div className="px-4 py-6 sm:px-8 sm:py-8">
+          <div className="px-4 pb-24 pt-5 sm:px-6 sm:pt-6 lg:px-8 lg:pb-8 lg:pt-8">
             <Outlet />
           </div>
         </main>
       </div>
+
+      {/* Mobile bottom nav */}
+      <nav
+        className="fixed inset-x-0 bottom-0 z-30 border-t border-line/60 bg-surface/95 backdrop-blur lg:hidden"
+        style={{ paddingBottom: "env(safe-area-inset-bottom)" }}
+      >
+        <div className="mx-auto grid max-w-[600px] grid-cols-4">
+          {MOBILE_NAV.map((item) => {
+            const active =
+              pathname === item.to && !("hash" in item && item.hash);
+            const Icon = item.icon;
+            return (
+              <Link
+                key={`${item.to}-${item.label}`}
+                to={item.to}
+                hash={"hash" in item ? item.hash : undefined}
+                className={`flex flex-col items-center gap-1 px-2 py-2.5 text-[10px] font-medium transition ${
+                  active ? "text-cyan" : "text-ink-mute hover:text-ink"
+                }`}
+              >
+                <Icon className="h-5 w-5" />
+                <span className="truncate">{item.label}</span>
+              </Link>
+            );
+          })}
+        </div>
+      </nav>
     </div>
   );
 }
 
 function TopBar() {
   const creds = useQuestStore((s) => s.creds);
+  const setCreds = useQuestStore((s) => s.setCreds);
   return (
-    <div className="sticky top-0 z-10 border-b border-line/60 bg-background/70 backdrop-blur">
-      <div className="flex items-center justify-end gap-3 px-4 py-3 sm:px-8">
-        <span className="hidden font-mono text-[11px] uppercase tracking-widest text-ink-mute sm:inline">
-          {creds ? "conectado" : "desconectado"}
-        </span>
-        <span
-          className={`h-2 w-2 rounded-full ${creds ? "bg-mint pulse-dot" : "bg-amber"}`}
-        />
+    <div className="sticky top-0 z-10 border-b border-line/60 bg-background/80 backdrop-blur">
+      <div className="flex items-center justify-between gap-3 px-4 py-3 sm:px-6 lg:px-8">
+        {/* Mobile brand */}
+        <Link to="/" className="flex items-center gap-2 lg:hidden">
+          <div className="grid h-8 w-8 place-items-center rounded-lg border border-cyan/40 bg-cyan/10 font-mono text-xs font-bold text-cyan">
+            N
+          </div>
+          <span className="text-sm font-semibold tracking-tight text-ink">
+            Neighbors<span className="text-cyan">hub</span>
+          </span>
+        </Link>
+        <div className="hidden lg:block" />
+
+        <div className="flex items-center gap-3">
+          <span className="hidden font-mono text-[11px] uppercase tracking-widest text-ink-mute sm:inline">
+            {creds ? "conectado" : "desconectado"}
+          </span>
+          <span
+            className={`h-2 w-2 rounded-full ${creds ? "bg-mint pulse-dot" : "bg-amber"}`}
+          />
+          {creds && (
+            <button
+              onClick={() => setCreds(null)}
+              className="rounded-md border border-line px-2 py-1 font-mono text-[10px] uppercase tracking-widest text-ink-dim hover:text-rose lg:hidden"
+              aria-label="Sair"
+            >
+              sair
+            </button>
+          )}
+        </div>
       </div>
     </div>
   );

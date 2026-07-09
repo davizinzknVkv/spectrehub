@@ -635,7 +635,7 @@ function StatCard({
       <div className="font-mono text-[10px] uppercase tracking-[0.25em] text-ink-mute">
         {label}
       </div>
-      <div className={`mt-2 font-mono text-3xl font-semibold tabular-nums ${accent}`}>
+      <div className={`mt-2 truncate font-mono text-2xl font-semibold tabular-nums sm:text-3xl ${accent}`}>
         {value}
       </div>
       <div className="mt-1 text-xs text-ink-mute">{hint}</div>
