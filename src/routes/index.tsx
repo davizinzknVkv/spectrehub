@@ -55,7 +55,7 @@ const PLANS = [
   },
   {
     name: "Lifetime",
-    price: "R$ 99",
+    price: "R$ 39,90",
     period: "pagamento único",
     tone: "border-amber-400/40 bg-amber-400/[0.06]",
     accent: "text-amber-200",
