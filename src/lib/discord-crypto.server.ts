@@ -44,7 +44,7 @@ export async function decryptToken(ciphertext: string, ivB64: string): Promise<s
   const iv = b64decode(ivB64);
   const ct = b64decode(ciphertext);
   const pt = await crypto.subtle.decrypt(
-    { name: "AES-GCM", iv },
+    { name: "AES-GCM", iv: iv as unknown as ArrayBuffer },
     key,
     ct as unknown as ArrayBuffer,
   );
