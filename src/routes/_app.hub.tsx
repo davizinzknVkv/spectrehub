@@ -98,7 +98,8 @@ function HubPage() {
   const logEnd = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    logEnd.current?.scrollIntoView({ behavior: "smooth" });
+    // "auto" avoids smooth-scroll animation thrash while logs stream in
+    logEnd.current?.scrollIntoView({ behavior: "auto", block: "end" });
   }, [logs]);
 
   useEffect(() => {
