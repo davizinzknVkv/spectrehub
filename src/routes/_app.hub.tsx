@@ -137,9 +137,15 @@ function HubPage() {
   const limits = PLAN_LIMITS[plan];
   const todayStart = new Date();
   todayStart.setHours(0, 0, 0, 0);
-  const usedToday = runs.filter(
-    (r) => r.status === "completed" && new Date(r.started_at).getTime() >= todayStart.getTime(),
-  ).length;
+  // Memoized so the setInterval(1s) that ticks `now` doesn't re-filter/reduce runs each tick.
+  const usedToday = useMemo(() => {
+    const start = new Date();
+    start.setHours(0, 0, 0, 0);
+    const t = start.getTime();
+    return runs.filter(
+      (r) => r.status === "completed" && new Date(r.started_at).getTime() >= t,
+    ).length;
+  }, [runs]);
   const remaining = limits.daily === Infinity ? Infinity : Math.max(0, limits.daily - usedToday);
   const cooldownLeft = Math.max(0, lastCompletedAt + limits.cooldownMs - now);
   const gateBlocked = remaining <= 0 || cooldownLeft > 0;
