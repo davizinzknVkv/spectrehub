@@ -648,12 +648,14 @@ function MissionCard({
   active,
   progress,
   disabled,
+  gateHint,
   onExec,
 }: {
   quest: Quest;
   active: boolean;
   progress: { current: number; total: number } | null;
   disabled: boolean;
+  gateHint?: string;
   onExec: () => void;
 }) {
   const pct = active && progress ? Math.min(100, Math.round((progress.current / progress.total) * 100)) : 0;
