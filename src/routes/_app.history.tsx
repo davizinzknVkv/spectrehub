@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useQuestStore } from "@/lib/quest-store";
 
 export const Route = createFileRoute("/_app/history")({
-  head: () => ({ meta: [{ title: "Histórico — DiscordHub" }] }),
+  head: () => ({ meta: [{ title: "Histórico — Neighborshub" }] }),
   component: HistoryPage,
 });
 

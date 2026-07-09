@@ -5,7 +5,7 @@ import { useQuestStore } from "@/lib/quest-store";
 import { fetchUserInfo } from "@/lib/quest-runner";
 
 export const Route = createFileRoute("/_app/settings")({
-  head: () => ({ meta: [{ title: "Token — DiscordHub" }] }),
+  head: () => ({ meta: [{ title: "Token — Neighborshub" }] }),
   component: SettingsPage,
 });
 

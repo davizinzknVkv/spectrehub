@@ -84,6 +84,20 @@ export async function fetchOrbs(): Promise<number | null> {
   return (res.data as { balance?: number }).balance ?? 0;
 }
 
+export type Guild = { id: string; name: string; icon: string | null; owner: boolean };
+
+export async function fetchGuilds(): Promise<Guild[]> {
+  const res = await call("/users/@me/guilds");
+  if (res.status !== 200 || !Array.isArray(res.data)) return [];
+  return (res.data as Guild[]).map((g) => ({
+    id: g.id,
+    name: g.name,
+    icon: g.icon,
+    owner: !!g.owner,
+  }));
+}
+
+
 export async function fetchAvailableQuests(): Promise<Quest[]> {
   const res = await call("/quests/@me");
   if (res.status !== 200) return [];

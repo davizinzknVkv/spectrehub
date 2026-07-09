@@ -3,15 +3,17 @@ import { useEffect, useRef, useState } from "react";
 import { toast } from "sonner";
 import {
   fetchAvailableQuests,
+  fetchGuilds,
   fetchOrbs,
   fetchUserInfo,
   runAll,
   runQuest,
+  type Guild,
 } from "@/lib/quest-runner";
 import { useQuestStore, type Quest } from "@/lib/quest-store";
 
 export const Route = createFileRoute("/_app/hub")({
-  head: () => ({ meta: [{ title: "Hub — DiscordHub" }] }),
+  head: () => ({ meta: [{ title: "Hub — Neighborshub" }] }),
   component: HubPage,
 });
 
@@ -64,6 +66,7 @@ function HubPage() {
   const creds = useQuestStore((s) => s.creds);
   const [quests, setQuests] = useState<Quest[]>([]);
   const [orbs, setOrbs] = useState<number | null>(null);
+  const [guilds, setGuilds] = useState<Guild[]>([]);
   const [user, setUser] = useState<{
     username?: string;
     global_name?: string;
@@ -99,6 +102,9 @@ function HubPage() {
     if (!creds) return;
     fetchUserInfo()
       .then((u) => u && setUser(u as typeof user))
+      .catch(() => {});
+    fetchGuilds()
+      .then(setGuilds)
       .catch(() => {});
   }, [creds]);
 
@@ -220,7 +226,7 @@ function HubPage() {
       </div>
 
       {/* Stat grid */}
-      <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-7">
+      <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-8">
         <StatCard label="Orbs" value={(orbs ?? 0).toLocaleString("pt-BR")} tone="cyan" hint="saldo atual" />
         <StatCard
           label="Orbs coletadas"
@@ -236,10 +242,16 @@ function HubPage() {
         />
         <StatCard label="Missões" value={String(quests.length)} tone="mint" hint={`${orbQuests} com orbs`} />
         <StatCard
+          label="Servidores"
+          value={String(guilds.length)}
+          tone="mint"
+          hint="entrou"
+        />
+        <StatCard
           label="Idade da conta"
-          value={created ? formatAge(created) : "—"}
+          value={created ? String(Math.floor((Date.now() - created.getTime()) / 86400000)) : "—"}
           tone="amber"
-          hint={created ? created.toLocaleDateString("pt-BR") : "—"}
+          hint={created ? `dias desde criação · ${created.toLocaleDateString("pt-BR")}` : "—"}
         />
         <StatCard
           label="Tempo total"
@@ -296,6 +308,59 @@ function HubPage() {
         </section>
       )}
 
+      {/* Servers */}
+      {guilds.length > 0 && (
+        <section className="rounded-xl border border-line bg-surface/50 p-4 sm:p-5">
+          <div className="mb-3 flex items-center justify-between gap-2">
+            <div className="flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.25em] text-ink-mute">
+              <span className="text-cyan">◆</span> servidores
+              <span className="text-ink-mute">· {guilds.length}</span>
+            </div>
+          </div>
+          <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+            {guilds.map((g) => {
+              const iconUrl = g.icon
+                ? `https://cdn.discordapp.com/icons/${g.id}/${g.icon}.png?size=64`
+                : null;
+              const initials = g.name
+                .split(" ")
+                .map((w) => w[0])
+                .join("")
+                .slice(0, 2)
+                .toUpperCase();
+              return (
+                <div
+                  key={g.id}
+                  className="flex items-center gap-3 rounded-lg border border-line/70 bg-background/40 p-2.5"
+                  title={g.name}
+                >
+                  {iconUrl ? (
+                    <img
+                      src={iconUrl}
+                      alt=""
+                      loading="lazy"
+                      className="h-9 w-9 shrink-0 rounded-md border border-line object-cover"
+                    />
+                  ) : (
+                    <div className="grid h-9 w-9 shrink-0 place-items-center rounded-md border border-line bg-surface font-mono text-[11px] font-semibold text-cyan">
+                      {initials || "?"}
+                    </div>
+                  )}
+                  <div className="min-w-0 flex-1">
+                    <div className="truncate text-sm text-ink">{g.name}</div>
+                    <div className="font-mono text-[10px] uppercase tracking-widest text-ink-mute">
+                      {g.owner ? "owner" : "membro"}
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </section>
+      )}
+
+
+
 
       {/* Mission grid + Log panel */}
       <div className="grid gap-6 lg:grid-cols-[1fr_360px]">
@@ -346,7 +411,7 @@ function HubPage() {
                   <span className="h-2 w-2 rounded-full bg-amber/70" />
                   <span className="h-2 w-2 rounded-full bg-mint/70" />
                 </span>
-                <span className="ml-1 truncate">discordhub — log</span>
+                <span className="ml-1 truncate">neighborshub — log</span>
               </div>
               <div className="flex shrink-0 items-center gap-2">
                 <span

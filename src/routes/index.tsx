@@ -4,13 +4,13 @@ import { useState } from "react";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "DiscordHub — Auto Quests para Orbs do Discord" },
+      { title: "Neighborshub — Auto Quests para Orbs do Discord" },
       {
         name: "description",
         content:
           "Script Node.js que completa automaticamente as missões do Discord (vídeo e jogos) e acumula Orbs. Open source, sem interface, roda no seu terminal.",
       },
-      { property: "og:title", content: "DiscordHub — Auto Quests para Orbs do Discord" },
+      { property: "og:title", content: "Neighborshub — Auto Quests para Orbs do Discord" },
       {
         property: "og:description",
         content:
@@ -129,7 +129,7 @@ function Index() {
             <span className="h-3 w-3 rounded-full bg-red-500/80" />
             <span className="h-3 w-3 rounded-full bg-yellow-500/80" />
             <span className="h-3 w-3 rounded-full bg-emerald-500/80" />
-            <span className="ml-3 text-xs text-slate-500">node discordhub.js</span>
+            <span className="ml-3 text-xs text-slate-500">node neighborshub.js</span>
           </div>
           <pre className="overflow-x-auto p-5 font-mono text-[13px] leading-6 text-slate-300">
 {`🔍 Validando token...
@@ -235,7 +235,7 @@ function Index() {
               n: "04",
               title: "Execute",
               body: "Rode o script e deixe rolar:",
-              code: "node discordhub.js",
+              code: "node neighborshub.js",
             },
           ].map((s) => (
             <div
@@ -278,7 +278,7 @@ function Index() {
 
         <div className="mt-6 overflow-hidden rounded-xl border border-white/10 bg-[#0f1218]">
           <div className="flex items-center justify-between border-b border-white/5 px-4 py-3 text-xs text-slate-500">
-            <span className="font-mono">discordhub.js</span>
+            <span className="font-mono">neighborshub.js</span>
             <span>JavaScript · ~300 linhas</span>
           </div>
           <pre className="max-h-[420px] overflow-auto p-5 font-mono text-[13px] leading-6 text-slate-300">
@@ -316,7 +316,7 @@ function Index() {
 
       <footer className="border-t border-white/5 py-10 text-center text-sm text-slate-500">
         <div className="mx-auto max-w-6xl px-6">
-          DiscordHub · Feito com Node.js e um bom motivo pra farmar Orbs.
+          Neighborshub · Feito com Node.js e um bom motivo pra farmar Orbs.
         </div>
       </footer>
     </div>
