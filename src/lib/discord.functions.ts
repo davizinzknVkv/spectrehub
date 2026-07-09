@@ -135,7 +135,7 @@ export const discordProxy = createServerFn({ method: "POST" })
     );
     // Cache orbs if this was the balance endpoint
     if (data.endpoint === "/users/@me/virtual-currency/balance" && result.status === 200) {
-      const balance = (result.data as { balance?: number })?.balance;
+      const balance = (JSON.parse(result.body) as { balance?: number })?.balance;
       if (typeof balance === "number") {
         await context.supabase
           .from("discord_accounts")
