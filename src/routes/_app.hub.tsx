@@ -114,9 +114,23 @@ function HubPage() {
     fetchGuilds()
       .then(setGuilds)
       .catch(() => {});
-    fetchUserPlan()
-      .then(setPlan)
-      .catch(() => {});
+    const refreshPlan = () => {
+      fetchUserPlan()
+        .then((p) => {
+          const prev = useQuestStore.getState().plan;
+          setPlan(p);
+          if (prev !== "free" && p === "free") {
+            toast.error(`Seu plano ${prev === "boost" ? "Boost" : "Premium"} expirou (cargo removido no Discord).`);
+            useQuestStore.getState().log(`⚠️ Cargo ${prev} não encontrado — voltando ao plano Free.`, "error");
+          } else if (prev === "free" && p !== "free") {
+            toast.success(`Plano ${p === "boost" ? "Boost" : "Premium"} ativado!`);
+          }
+        })
+        .catch(() => {});
+    };
+    refreshPlan();
+    const id = setInterval(refreshPlan, 60_000);
+    return () => clearInterval(id);
   }, [creds, setPlan]);
 
   const limits = PLAN_LIMITS[plan];
