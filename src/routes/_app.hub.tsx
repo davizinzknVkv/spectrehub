@@ -741,9 +741,10 @@ function MissionCard({
         <button
           onClick={onExec}
           disabled={disabled}
+          title={gateHint}
           className="mt-auto rounded-md border border-line bg-background/60 px-3 py-2 text-sm font-medium text-ink transition hover:border-cyan/50 hover:text-cyan disabled:cursor-not-allowed disabled:opacity-30"
         >
-          Completar
+          {gateHint ?? "Completar"}
         </button>
       </div>
     </article>
