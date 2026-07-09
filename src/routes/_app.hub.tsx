@@ -60,9 +60,15 @@ function HubPage() {
   useEffect(() => {
     if (!creds) return;
     fetchUserInfo()
-      .then((u) => u && setUser(u as { username?: string; global_name?: string; id?: string }))
+      .then((u) => u && setUser(u as typeof user))
       .catch(() => {});
   }, [creds]);
+
+  const avatarUrl = user?.id
+    ? user.avatar
+      ? `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png?size=128`
+      : `https://cdn.discordapp.com/embed/avatars/${(BigInt(user.id) >> 22n) % 6n}.png`
+    : null;
 
   const loadQuests = async () => {
     setLoadingQuests(true);
