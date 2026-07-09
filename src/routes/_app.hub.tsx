@@ -795,6 +795,10 @@ function CaptchaModal({
   onSolved: () => void;
   onCancel: () => void;
 }) {
+  const siteKey = import.meta.env.VITE_TURNSTILE_SITE_KEY as string | undefined;
+  const useTurnstile = Boolean(siteKey);
+
+  // Math fallback (used when Turnstile key isn't configured)
   const [challenge] = useState(() => ({
     a: Math.floor(Math.random() * 9) + 1,
     b: Math.floor(Math.random() * 9) + 1,
@@ -802,13 +806,34 @@ function CaptchaModal({
   const [value, setValue] = useState("");
   const [error, setError] = useState(false);
 
+  // Turnstile widget bootstrap
+  const turnstileRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    if (!useTurnstile || !turnstileRef.current) return;
+    const SCRIPT_ID = "cf-turnstile-script";
+    const render = () => {
+      const ts = (window as unknown as { turnstile?: { render: (el: HTMLElement, o: Record<string, unknown>) => void } }).turnstile;
+      if (!ts || !turnstileRef.current) return;
+      ts.render(turnstileRef.current, {
+        sitekey: siteKey,
+        theme: "dark",
+        callback: () => onSolved(),
+        "error-callback": () => setError(true),
+      });
+    };
+    if (document.getElementById(SCRIPT_ID)) { render(); return; }
+    const s = document.createElement("script");
+    s.id = SCRIPT_ID;
+    s.src = "https://challenges.cloudflare.com/turnstile/v0/api.js";
+    s.async = true;
+    s.defer = true;
+    s.onload = render;
+    document.head.appendChild(s);
+  }, [useTurnstile, siteKey, onSolved]);
+
   const submit = () => {
-    if (parseInt(value, 10) === challenge.a + challenge.b) {
-      onSolved();
-    } else {
-      setError(true);
-      setValue("");
-    }
+    if (parseInt(value, 10) === challenge.a + challenge.b) onSolved();
+    else { setError(true); setValue(""); }
   };
 
   return (
@@ -822,25 +847,30 @@ function CaptchaModal({
           {label ?? quest?.questName ?? "Antes de executar, resolva o desafio."}
         </p>
 
-        <div className="mt-5 grid grid-cols-[1fr_auto_1fr_auto_1fr] items-center gap-2 rounded-lg border border-line bg-background/60 p-3 font-mono text-xl text-ink">
-          <span className="text-center">{challenge.a}</span>
-          <span className="text-cyan">+</span>
-          <span className="text-center">{challenge.b}</span>
-          <span className="text-cyan">=</span>
-          <input
-            autoFocus
-            inputMode="numeric"
-            value={value}
-            onChange={(e) => {
-              setError(false);
-              setValue(e.target.value.replace(/\D/g, "").slice(0, 3));
-            }}
-            onKeyDown={(e) => e.key === "Enter" && submit()}
-            className="w-full rounded border border-line bg-background px-2 py-1 text-center text-ink outline-none focus:border-cyan"
-          />
-        </div>
+        {useTurnstile ? (
+          <div className="mt-5 grid place-items-center rounded-lg border border-line bg-background/60 p-4 min-h-[80px]">
+            <div ref={turnstileRef} />
+          </div>
+        ) : (
+          <div className="mt-5 grid grid-cols-[1fr_auto_1fr_auto_1fr] items-center gap-2 rounded-lg border border-line bg-background/60 p-3 font-mono text-xl text-ink">
+            <span className="text-center">{challenge.a}</span>
+            <span className="text-cyan">+</span>
+            <span className="text-center">{challenge.b}</span>
+            <span className="text-cyan">=</span>
+            <input
+              autoFocus
+              inputMode="numeric"
+              value={value}
+              onChange={(e) => { setError(false); setValue(e.target.value.replace(/\D/g, "").slice(0, 3)); }}
+              onKeyDown={(e) => e.key === "Enter" && submit()}
+              className="w-full rounded border border-line bg-background px-2 py-1 text-center text-ink outline-none focus:border-cyan"
+            />
+          </div>
+        )}
         {error && (
-          <p className="mt-2 font-mono text-[11px] text-rose">✗ resposta incorreta, tente de novo</p>
+          <p className="mt-2 font-mono text-[11px] text-rose">
+            {useTurnstile ? "✗ verificação falhou, tente novamente" : "✗ resposta incorreta, tente de novo"}
+          </p>
         )}
 
         <div className="mt-5 flex gap-2">
@@ -850,12 +880,14 @@ function CaptchaModal({
           >
             cancelar
           </button>
-          <button
-            onClick={submit}
-            className="flex-1 rounded-md bg-cyan px-3 py-2 font-mono text-xs font-semibold uppercase tracking-widest text-primary-foreground hover:brightness-110"
-          >
-            confirmar
-          </button>
+          {!useTurnstile && (
+            <button
+              onClick={submit}
+              className="flex-1 rounded-md bg-cyan px-3 py-2 font-mono text-xs font-semibold uppercase tracking-widest text-primary-foreground hover:brightness-110"
+            >
+              confirmar
+            </button>
+          )}
         </div>
       </div>
     </div>
