@@ -486,17 +486,6 @@ function HubPage() {
 }
 
 
-function SectionHeader({ title, right }: { title: string; right?: React.ReactNode }) {
-  return (
-    <div className="flex items-center justify-between gap-3">
-      <div className="flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.25em] text-ink-mute">
-        <span className="text-cyan">◆</span>
-        {title}
-      </div>
-      {right}
-    </div>
-  );
-}
 
 function InfoField({
   label,
