@@ -81,6 +81,19 @@ function HubPage() {
     flags?: number;
     nsfw_allowed?: boolean;
   } | null>(null);
+  const [loadingQuests, setLoadingQuests] = useState(false);
+  const running = useQuestStore((s) => s.running);
+  const activeId = useQuestStore((s) => s.activeQuestId);
+  const progress = useQuestStore((s) => s.progress);
+  const logs = useQuestStore((s) => s.logs);
+  const requestStop = useQuestStore((s) => s.requestStop);
+  const clearLogs = useQuestStore((s) => s.clearLogs);
+  const runsCount = useQuestStore((s) => s.runs.length);
+  const logEnd = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    logEnd.current?.scrollIntoView({ behavior: "smooth" });
+  }, [logs]);
 
   useEffect(() => {
     if (!creds) return;
@@ -117,18 +130,6 @@ function HubPage() {
     toast.success("ID copiado");
   };
 
-    setLoadingQuests(true);
-    try {
-      const [q, o] = await Promise.all([fetchAvailableQuests(), fetchOrbs()]);
-      setQuests(q);
-      setOrbs(o);
-      useQuestStore.getState().log(`🎯 ${q.length} missão(ões) disponíveis`);
-    } catch (err) {
-      toast.error(err instanceof Error ? err.message : "Erro ao carregar");
-    } finally {
-      setLoadingQuests(false);
-    }
-  };
 
   if (!creds) {
     return (
