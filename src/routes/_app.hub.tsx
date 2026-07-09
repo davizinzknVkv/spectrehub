@@ -157,6 +157,13 @@ function HubPage() {
 
   const totalTarget = quests.reduce((sum, q) => sum + q.target, 0);
   const orbQuests = quests.filter((q) => q.rewardText.includes("Orbs")).length;
+  const runs = useQuestStore.getState().runs;
+  const totalOrbsEarned = runs
+    .filter((r) => r.status === "completed" && r.reward_text?.includes("Orbs"))
+    .reduce((sum, r) => {
+      const m = r.reward_text?.match(/([\d.,]+)\s*Orbs/i);
+      return sum + (m ? parseInt(m[1].replace(/[.,]/g, ""), 10) || 0 : 0);
+    }, 0);
 
   return (
     <div className="space-y-6">
