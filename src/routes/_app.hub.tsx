@@ -210,7 +210,7 @@ function HubPage() {
             {loadingQuests ? "sondando…" : "→ scan"}
           </button>
           <button
-            onClick={() => runAll(quests)}
+            onClick={() => setCaptchaAll(true)}
             disabled={running || quests.length === 0}
             className="inline-flex items-center gap-2 rounded-md border border-mint/40 bg-mint/10 px-4 py-2.5 font-mono text-xs font-semibold uppercase tracking-widest text-mint transition hover:bg-mint/20 disabled:cursor-not-allowed disabled:opacity-40"
           >
