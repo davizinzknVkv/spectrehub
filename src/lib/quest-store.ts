@@ -135,5 +135,20 @@ export const useQuestStore = create<State>((set, get) => ({
       window.localStorage.setItem(RUNS_KEY, JSON.stringify(runs));
     }
   },
-  hydrate: () => set({ creds: loadCreds(), runs: loadRuns() }),
+  setPlan: (plan) => {
+    set({ plan });
+    if (typeof window !== "undefined") window.localStorage.setItem(PLAN_KEY, plan);
+  },
+  markCompleted: () => {
+    const t = Date.now();
+    set({ lastCompletedAt: t });
+    if (typeof window !== "undefined") window.localStorage.setItem(LAST_KEY, String(t));
+  },
+  hydrate: () =>
+    set({
+      creds: loadCreds(),
+      runs: loadRuns(),
+      plan: loadPlan(),
+      lastCompletedAt: loadLastCompleted(),
+    }),
 }));
