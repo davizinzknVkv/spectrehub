@@ -100,7 +100,7 @@ function AppLayout() {
                 Suporte Discord
               </a>
               <button
-                onClick={() => creds && clearCreds()}
+                onClick={() => creds && setCreds(null)}
                 disabled={!creds}
                 className="flex w-full items-center gap-3 rounded-lg px-3 py-2 text-sm text-ink-dim hover:bg-surface hover:text-ink disabled:opacity-40"
               >
