@@ -370,8 +370,23 @@ function MissionRow({
     >
       <div className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-4 p-4 sm:p-5">
         <div className="flex min-w-0 items-start gap-4">
-          <div className="shrink-0 rounded-md border border-line bg-background/60 px-2.5 py-1.5 font-mono text-[11px] font-semibold text-ink-mute">
-            {index.toString().padStart(2, "0")}
+          <div className="relative shrink-0">
+            {quest.imageUrl ? (
+              <img
+                src={quest.imageUrl}
+                alt=""
+                loading="lazy"
+                onError={(e) => ((e.currentTarget.style.display = "none"))}
+                className="h-14 w-14 rounded-md border border-line object-cover sm:h-16 sm:w-16"
+              />
+            ) : (
+              <div className="grid h-14 w-14 place-items-center rounded-md border border-line bg-background/60 font-mono text-sm font-semibold text-ink-mute sm:h-16 sm:w-16">
+                {index.toString().padStart(2, "0")}
+              </div>
+            )}
+            <span className="absolute -left-1.5 -top-1.5 rounded border border-line bg-background px-1.5 py-0.5 font-mono text-[10px] font-semibold text-cyan">
+              {index.toString().padStart(2, "0")}
+            </span>
           </div>
           <div className="min-w-0">
             <div className="truncate text-[15px] font-semibold text-ink">{quest.questName}</div>
