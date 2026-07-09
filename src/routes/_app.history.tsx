@@ -6,60 +6,97 @@ export const Route = createFileRoute("/_app/history")({
   component: HistoryPage,
 });
 
+const STATUS_STYLES: Record<string, string> = {
+  completed: "border-mint/40 bg-mint/10 text-mint",
+  failed: "border-rose/40 bg-rose/10 text-rose",
+  skipped: "border-amber/40 bg-amber/10 text-amber",
+};
+
 function HistoryPage() {
   const runs = useQuestStore((s) => s.runs);
+  const done = runs.filter((r) => r.status === "completed").length;
+  const failed = runs.filter((r) => r.status === "failed").length;
+  const skipped = runs.filter((r) => r.status === "skipped").length;
 
   return (
-    <div className="space-y-4">
-      <h1 className="text-2xl font-bold">Histórico</h1>
-      <p className="text-sm text-slate-400">
-        Salvo apenas neste navegador. Limpar o localStorage apaga o histórico.
-      </p>
-      <div className="overflow-hidden rounded-xl border border-white/10">
-        <table className="w-full text-sm">
-          <thead className="bg-white/[0.03] text-left text-xs uppercase tracking-wider text-slate-500">
-            <tr>
-              <th className="px-4 py-3">Missão</th>
-              <th className="px-4 py-3">Tipo</th>
-              <th className="px-4 py-3">Recompensa</th>
-              <th className="px-4 py-3">Status</th>
-              <th className="px-4 py-3">Quando</th>
-            </tr>
-          </thead>
-          <tbody className="divide-y divide-white/5">
-            {runs.map((r) => (
-              <tr key={r.id}>
-                <td className="px-4 py-3">{r.quest_name}</td>
-                <td className="px-4 py-3 text-slate-400">{r.task_type}</td>
-                <td className="px-4 py-3 text-slate-400">{r.reward_text ?? "—"}</td>
-                <td className="px-4 py-3">
-                  <span
-                    className={
-                      r.status === "completed"
-                        ? "rounded bg-emerald-500/10 px-2 py-0.5 text-xs text-emerald-300"
-                        : r.status === "failed"
-                          ? "rounded bg-red-500/10 px-2 py-0.5 text-xs text-red-300"
-                          : "rounded bg-yellow-500/10 px-2 py-0.5 text-xs text-yellow-300"
-                    }
-                  >
-                    {r.status}
-                  </span>
-                </td>
-                <td className="px-4 py-3 text-xs text-slate-500">
-                  {new Date(r.started_at).toLocaleString("pt-BR")}
-                </td>
-              </tr>
-            ))}
-            {runs.length === 0 && (
-              <tr>
-                <td colSpan={5} className="px-4 py-8 text-center text-sm text-slate-500">
-                  Nenhuma execução registrada ainda.
-                </td>
-              </tr>
-            )}
-          </tbody>
-        </table>
+    <div className="space-y-6">
+      <div>
+        <div className="font-mono text-[10px] uppercase tracking-[0.3em] text-cyan-dim">
+          $ history --tail 200
+        </div>
+        <h1 className="mt-2 text-2xl font-semibold tracking-tight sm:text-3xl">
+          Histórico local
+        </h1>
+        <p className="mt-2 max-w-lg text-sm text-ink-dim">
+          Salvo apenas neste navegador. Limpar o localStorage apaga o registro.
+        </p>
       </div>
+
+      <div className="grid gap-3 sm:grid-cols-4">
+        <Stat label="Total" value={runs.length} tone="text-ink" />
+        <Stat label="Concluídas" value={done} tone="text-mint" />
+        <Stat label="Falhas" value={failed} tone="text-rose" />
+        <Stat label="Puladas" value={skipped} tone="text-amber" />
+      </div>
+
+      <div className="overflow-hidden rounded-xl border border-line bg-surface/60">
+        <div className="hidden grid-cols-[minmax(0,1fr)_120px_1fr_120px_160px] gap-4 border-b border-line/60 px-5 py-3 font-mono text-[10px] uppercase tracking-widest text-ink-mute md:grid">
+          <div>missão</div>
+          <div>tipo</div>
+          <div>recompensa</div>
+          <div>status</div>
+          <div className="text-right">quando</div>
+        </div>
+        <ul className="divide-y divide-line/40">
+          {runs.map((r) => (
+            <li
+              key={r.id}
+              className="grid grid-cols-1 gap-2 px-5 py-4 md:grid-cols-[minmax(0,1fr)_120px_1fr_120px_160px] md:items-center md:gap-4"
+            >
+              <div className="min-w-0">
+                <div className="truncate text-sm font-medium text-ink">{r.quest_name}</div>
+                {r.error_message && (
+                  <div className="mt-1 truncate font-mono text-[11px] text-rose/80">
+                    {r.error_message}
+                  </div>
+                )}
+              </div>
+              <div className="font-mono text-[11px] uppercase tracking-widest text-ink-mute">
+                {r.task_type.replace(/^(PLAY|WATCH)_?/i, "").toLowerCase() || r.task_type.toLowerCase()}
+              </div>
+              <div className="text-sm text-ink-dim">{r.reward_text ?? "—"}</div>
+              <div>
+                <span
+                  className={`inline-flex rounded border px-2 py-0.5 font-mono text-[10px] uppercase tracking-widest ${
+                    STATUS_STYLES[r.status] ?? "border-line text-ink-mute"
+                  }`}
+                >
+                  {r.status}
+                </span>
+              </div>
+              <div className="font-mono text-[11px] text-ink-mute md:text-right">
+                {new Date(r.started_at).toLocaleString("pt-BR")}
+              </div>
+            </li>
+          ))}
+          {runs.length === 0 && (
+            <li className="p-10 text-center font-mono text-xs text-ink-mute">
+              <span className="text-cyan">›</span> nenhuma execução registrada ainda
+            </li>
+          )}
+        </ul>
+      </div>
+    </div>
+  );
+}
+
+function Stat({ label, value, tone }: { label: string; value: number; tone: string }) {
+  return (
+    <div className="rounded-xl border border-line bg-surface/60 p-4">
+      <div className="font-mono text-[10px] uppercase tracking-[0.25em] text-ink-mute">
+        {label}
+      </div>
+      <div className={`mt-2 font-mono text-3xl font-semibold tabular-nums ${tone}`}>{value}</div>
     </div>
   );
 }
