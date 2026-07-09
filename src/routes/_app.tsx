@@ -32,7 +32,7 @@ const NAV_GROUPS = [
 function AppLayout() {
   const hydrate = useQuestStore((s) => s.hydrate);
   const creds = useQuestStore((s) => s.creds);
-  const clearCreds = useQuestStore((s) => s.clearCreds);
+  const setCreds = useQuestStore((s) => s.setCreds);
   const pathname = useRouterState({ select: (r) => r.location.pathname });
 
   useEffect(() => {
