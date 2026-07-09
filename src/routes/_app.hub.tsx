@@ -157,6 +157,13 @@ function HubPage() {
 
   const totalTarget = quests.reduce((sum, q) => sum + q.target, 0);
   const orbQuests = quests.filter((q) => q.rewardText.includes("Orbs")).length;
+  const runs = useQuestStore.getState().runs;
+  const totalOrbsEarned = runs
+    .filter((r) => r.status === "completed" && r.reward_text?.includes("Orbs"))
+    .reduce((sum, r) => {
+      const m = r.reward_text?.match(/([\d.,]+)\s*Orbs/i);
+      return sum + (m ? parseInt(m[1].replace(/[.,]/g, ""), 10) || 0 : 0);
+    }, 0);
 
   return (
     <div className="space-y-6">
@@ -213,8 +220,14 @@ function HubPage() {
       </div>
 
       {/* Stat grid */}
-      <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
+      <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-6">
         <StatCard label="Orbs" value={(orbs ?? 0).toLocaleString("pt-BR")} tone="cyan" hint="saldo atual" />
+        <StatCard
+          label="Orbs coletadas"
+          value={totalOrbsEarned.toLocaleString("pt-BR")}
+          tone="amber"
+          hint="total do histórico"
+        />
         <StatCard label="Missões" value={String(quests.length)} tone="mint" hint={`${orbQuests} com orbs`} />
         <StatCard
           label="Idade da conta"
