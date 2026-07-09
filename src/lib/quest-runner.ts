@@ -342,11 +342,22 @@ export async function runAll(quests: Quest[]) {
       s.log("⏹ Interrompido pelo usuário", "error");
       break;
     }
+    const g = getGateStatus();
+    if (g.remaining <= 0) {
+      s.log(`⛔ Limite diário do plano ${g.limits.label} atingido.`, "error");
+      break;
+    }
+    if (g.cooldownLeft > 0) {
+      const secs = Math.ceil(g.cooldownLeft / 1000);
+      s.log(`⏳ Cooldown do plano ${g.limits.label}: ${Math.floor(secs / 60)}m${(secs % 60).toString().padStart(2, "0")}...`);
+      await sleep(g.cooldownLeft);
+    }
     const ok = await runQuest(quests[i]);
     if (ok) done++;
     if (i < quests.length - 1) {
-      s.log("⏳ Aguardando antes da próxima...");
-      await sleep(jitter(10000, 3000));
+      const next = PLAN_LIMITS[useQuestStore.getState().plan].cooldownMs;
+      s.log(`⏳ Aguardando ${Math.floor(next / 60000)}m antes da próxima...`);
+      await sleep(next);
     }
   }
   s.log(`🏁 ${done}/${quests.length} concluídas.`, "success");
