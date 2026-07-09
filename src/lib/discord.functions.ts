@@ -54,7 +54,7 @@ export const saveDiscordAccount = createServerFn({ method: "POST" })
     if (me.status !== 200) {
       throw new Error(`Token inválido (status ${me.status})`);
     }
-    const user = me.data as {
+    const user = JSON.parse(me.body) as {
       id: string;
       username: string;
       global_name?: string | null;
