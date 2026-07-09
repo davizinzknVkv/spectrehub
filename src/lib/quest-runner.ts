@@ -320,7 +320,9 @@ export async function runQuest(quest: Quest): Promise<boolean> {
     s.setProgress({ current: quest.target, total: quest.target });
     s.log(`✅ Concluída: ${quest.questName} — ${quest.rewardText}`, "success");
     logRun(quest, "completed");
+    s.markCompleted();
     return true;
+
   } catch (err) {
     const msg = err instanceof Error ? err.message : String(err);
     s.log(`❌ Erro: ${msg}`, "error");
