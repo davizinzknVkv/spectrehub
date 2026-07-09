@@ -166,53 +166,33 @@ function HubPage() {
       return sum + (m ? parseInt(m[1].replace(/[.,]/g, ""), 10) || 0 : 0);
     }, 0);
 
+  const bannerUrl = user?.id && user.banner
+    ? `https://cdn.discordapp.com/banners/${user.id}/${user.banner}.${user.banner.startsWith("a_") ? "gif" : "png"}?size=1024`
+    : null;
+  const accentBg = user?.accent_color
+    ? `#${user.accent_color.toString(16).padStart(6, "0")}`
+    : "linear-gradient(135deg, color-mix(in oklab, var(--cyan) 40%, transparent), color-mix(in oklab, var(--surface-2) 90%, transparent))";
+
   return (
-    <div className="space-y-6">
-      {/* Page header */}
-      <div className="grid grid-cols-[minmax(0,1fr)_auto] items-end gap-4 sm:flex sm:flex-wrap sm:justify-between">
-        <div className="flex min-w-0 items-center gap-4">
-          {avatarUrl && (
-            <img
-              src={avatarUrl}
-              alt={user?.username ?? "avatar"}
-              className="h-14 w-14 shrink-0 rounded-full border border-cyan/40 object-cover shadow-[0_0_0_2px_rgba(0,0,0,0.4),0_0_24px_-4px_var(--cyan)]"
-            />
-          )}
-          <div className="min-w-0">
-            <div className="font-mono text-[10px] uppercase tracking-[0.3em] text-cyan-dim">
-              $ hub --live
-            </div>
-            <h1 className="mt-1 truncate text-2xl font-semibold tracking-tight text-ink sm:text-3xl">
-              {user?.global_name || user?.username || "Console"}
-            </h1>
-            {user?.username && (
-              <div className="mt-1 font-mono text-xs text-ink-mute">
-                @{user.username}
-                {user.id && <span className="mx-2 opacity-40">·</span>}
-                {user.id && <span className="opacity-60">id {user.id.slice(0, 12)}…</span>}
-              </div>
-            )}
-          </div>
+    <div className="space-y-8">
+      {/* Header */}
+      <div className="flex flex-wrap items-end justify-between gap-3">
+        <div>
+          <h1 className="text-2xl font-semibold tracking-tight text-ink sm:text-3xl">Dashboard</h1>
+          <p className="mt-1 text-sm text-ink-dim">Visão geral da sua conta e estatísticas.</p>
         </div>
-        <div className="flex shrink-0 flex-wrap gap-2">
+        <div className="flex flex-wrap gap-2">
           <button
             onClick={loadQuests}
             disabled={loadingQuests || running}
-            className="inline-flex items-center gap-2 rounded-md bg-cyan px-4 py-2.5 font-mono text-xs font-semibold uppercase tracking-widest text-primary-foreground transition hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-40"
+            className="rounded-md bg-cyan px-4 py-2 font-mono text-xs font-semibold uppercase tracking-widest text-primary-foreground transition hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-40"
           >
-            {loadingQuests ? "sondando…" : "→ scan"}
-          </button>
-          <button
-            onClick={() => setCaptchaAll(true)}
-            disabled={running || quests.length === 0}
-            className="inline-flex items-center gap-2 rounded-md border border-mint/40 bg-mint/10 px-4 py-2.5 font-mono text-xs font-semibold uppercase tracking-widest text-mint transition hover:bg-mint/20 disabled:cursor-not-allowed disabled:opacity-40"
-          >
-            ▶ run all ({quests.length})
+            {loadingQuests ? "sondando…" : "→ scan missões"}
           </button>
           {running && (
             <button
               onClick={requestStop}
-              className="inline-flex items-center gap-2 rounded-md border border-rose/40 bg-rose/10 px-4 py-2.5 font-mono text-xs font-semibold uppercase tracking-widest text-rose transition hover:bg-rose/20"
+              className="rounded-md border border-rose/40 bg-rose/10 px-4 py-2 font-mono text-xs font-semibold uppercase tracking-widest text-rose hover:bg-rose/20"
             >
               ■ stop
             </button>
@@ -220,8 +200,64 @@ function HubPage() {
         </div>
       </div>
 
+      {/* Hero profile card */}
+      <section className="overflow-hidden rounded-2xl border border-line bg-surface/60">
+        <div
+          className="relative h-48 w-full sm:h-56"
+          style={bannerUrl ? { backgroundImage: `url(${bannerUrl})`, backgroundSize: "cover", backgroundPosition: "center" } : { background: accentBg }}
+        >
+          {!bannerUrl && <div className="absolute inset-0 grid-bg opacity-30" />}
+          <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-surface/95 to-transparent" />
+        </div>
+        <div className="flex flex-wrap items-end gap-4 px-5 pb-5 pt-0 -mt-10 sm:px-6">
+          {avatarUrl && (
+            <img
+              src={avatarUrl}
+              alt={user?.username ?? "avatar"}
+              className="h-20 w-20 shrink-0 rounded-full border-4 border-surface object-cover"
+            />
+          )}
+          <div className="min-w-0 flex-1">
+            <div className="flex items-center gap-2">
+              <h2 className="truncate text-xl font-semibold text-ink sm:text-2xl">
+                {user?.global_name || user?.username || "—"}
+              </h2>
+              {user?.mfa_enabled && (
+                <span className="rounded border border-mint/40 px-1.5 py-0.5 font-mono text-[9px] uppercase tracking-widest text-mint">2fa</span>
+              )}
+              {user?.premium_type ? (
+                <span className="rounded border border-cyan/40 px-1.5 py-0.5 font-mono text-[9px] uppercase tracking-widest text-cyan">nitro</span>
+              ) : null}
+            </div>
+            <div className="mt-0.5 font-mono text-xs text-ink-mute">
+              {user?.username && <>@{user.username}</>}
+              {running && <span className="ml-2 text-mint">· executando missão…</span>}
+              {!running && <span className="ml-2 text-ink-mute">· nenhuma atividade detectada</span>}
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Stat grid */}
-      <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-8">
+      <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+        <StatCard
+          label="Usuário"
+          value={user?.global_name || user?.username || "—"}
+          tone="cyan"
+          hint={user?.id ? `id: ${user.id}` : "—"}
+        />
+        <StatCard label="Servidores" value={String(guilds.length)} tone="mint" hint="entrou" />
+        <StatCard label="Missões" value={String(quests.length)} tone="amber" hint={`${orbQuests} com orbs`} />
+        <StatCard
+          label="Idade da conta"
+          value={created ? String(Math.floor((Date.now() - created.getTime()) / 86400000)) : "—"}
+          tone="cyan"
+          hint={created ? `dias desde criação · ${created.toLocaleDateString("pt-BR")}` : "—"}
+        />
+      </div>
+
+      {/* Secondary stats */}
+      <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
         <StatCard label="Orbs" value={(orbs ?? 0).toLocaleString("pt-BR")} tone="cyan" hint="saldo atual" />
         <StatCard
           label="Orbs coletadas"
@@ -232,35 +268,17 @@ function HubPage() {
         <StatCard
           label="Orbs usadas"
           value={Math.max(0, totalOrbsEarned - (orbs ?? 0)).toLocaleString("pt-BR")}
-          tone="cyan"
-          hint="gastas na loja"
-        />
-        <StatCard label="Missões" value={String(quests.length)} tone="mint" hint={`${orbQuests} com orbs`} />
-        <StatCard
-          label="Servidores"
-          value={String(guilds.length)}
           tone="mint"
-          hint="entrou"
-        />
-        <StatCard
-          label="Idade da conta"
-          value={created ? String(Math.floor((Date.now() - created.getTime()) / 86400000)) : "—"}
-          tone="amber"
-          hint={created ? `dias desde criação · ${created.toLocaleDateString("pt-BR")}` : "—"}
-        />
-        <StatCard
-          label="Tempo total"
-          value={quests.length ? formatDuration(totalTarget) : "—"}
-          tone="mute"
-          hint="se rodar tudo"
+          hint="gastas na loja"
         />
         <StatCard
           label="Histórico"
           value={String(runsCount)}
           tone="mute"
-          hint="runs salvas"
+          hint={`${quests.length ? formatDuration(totalTarget) : "0s"} se rodar tudo`}
         />
       </div>
+
 
       {/* Account panel */}
       {user && (
@@ -358,7 +376,7 @@ function HubPage() {
 
 
       {/* Missions section */}
-      <section className="min-w-0 space-y-4">
+      <section id="missoes" className="min-w-0 space-y-4 scroll-mt-20">
         <div className="flex flex-wrap items-end justify-between gap-3">
           <div>
             <h2 className="text-xl font-semibold tracking-tight text-ink sm:text-2xl">Missões</h2>
@@ -366,12 +384,22 @@ function HubPage() {
               Quests disponíveis do Discord. Complete para ganhar recompensas.
             </p>
           </div>
-          {quests.length > 0 && (
-            <span className="font-mono text-[11px] uppercase tracking-widest text-ink-mute">
-              {quests.length} disponíveis
-            </span>
-          )}
+          <div className="flex items-center gap-2">
+            {quests.length > 0 && (
+              <span className="font-mono text-[11px] uppercase tracking-widest text-ink-mute">
+                {quests.length} disponíveis
+              </span>
+            )}
+            <button
+              onClick={() => setCaptchaAll(true)}
+              disabled={running || quests.length === 0}
+              className="rounded-md border border-mint/40 bg-mint/10 px-3 py-2 font-mono text-[11px] font-semibold uppercase tracking-widest text-mint transition hover:bg-mint/20 disabled:cursor-not-allowed disabled:opacity-40"
+            >
+              ▶ run all
+            </button>
+          </div>
         </div>
+
 
         {quests.length === 0 && !loadingQuests && <EmptyState onScan={loadQuests} />}
         {loadingQuests && quests.length === 0 && (
