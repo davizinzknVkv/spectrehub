@@ -34,7 +34,7 @@ export async function encryptToken(plain: string): Promise<{ ciphertext: string;
   const iv = crypto.getRandomValues(new Uint8Array(12));
   const enc = new TextEncoder().encode(plain);
   const ct = new Uint8Array(
-    await crypto.subtle.encrypt({ name: "AES-GCM", iv }, key, enc as unknown as ArrayBuffer),
+    await crypto.subtle.encrypt({ name: "AES-GCM", iv: iv as unknown as ArrayBuffer }, key, enc as unknown as ArrayBuffer),
   );
   return { ciphertext: b64encode(ct), iv: b64encode(iv) };
 }
