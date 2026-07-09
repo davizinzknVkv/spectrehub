@@ -362,112 +362,123 @@ function HubPage() {
 
 
 
-      {/* Mission grid + Log panel */}
-      <div className="grid gap-6 lg:grid-cols-[1fr_360px]">
-        {/* Missions */}
-        <section className="min-w-0 space-y-3">
-          <SectionHeader
-            title="fila de missões"
-            right={
-              quests.length > 0 ? (
-                <span className="font-mono text-[11px] text-ink-mute">
-                  {quests.length} pendente(s)
-                </span>
-              ) : null
-            }
-          />
-
-          {quests.length === 0 && !loadingQuests && (
-            <EmptyState onScan={loadQuests} />
-          )}
-
-          {loadingQuests && quests.length === 0 && (
-            <div className="rounded-lg border border-line bg-surface/40 p-8 text-center font-mono text-xs text-ink-mute">
-              <span className="pulse-dot inline-block">▮</span> sondando o discord…
-            </div>
-          )}
-
-          <div className="space-y-2.5">
-            {quests.map((q, i) => (
-              <MissionRow
-                key={q.questId}
-                quest={q}
-                index={i + 1}
-                active={activeId === q.questId}
-                progress={activeId === q.questId ? progress : null}
-                disabled={running}
-              />
-            ))}
+      {/* Missions section */}
+      <section className="min-w-0 space-y-4">
+        <div className="flex flex-wrap items-end justify-between gap-3">
+          <div>
+            <h2 className="text-xl font-semibold tracking-tight text-ink sm:text-2xl">Missões</h2>
+            <p className="mt-1 text-sm text-ink-dim">
+              Quests disponíveis do Discord. Complete para ganhar recompensas.
+            </p>
           </div>
-        </section>
+          {quests.length > 0 && (
+            <span className="font-mono text-[11px] uppercase tracking-widest text-ink-mute">
+              {quests.length} disponíveis
+            </span>
+          )}
+        </div>
 
-        {/* Terminal log */}
-        <aside className="lg:sticky lg:top-20 lg:self-start">
-          <div className="overflow-hidden rounded-xl border border-line bg-surface/70 scanline">
-            <div className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-3 border-b border-line/70 bg-surface px-4 py-2.5">
-              <div className="flex min-w-0 items-center gap-2 font-mono text-[11px] uppercase tracking-widest text-ink-mute">
-                <span className="flex gap-1">
-                  <span className="h-2 w-2 rounded-full bg-rose/70" />
-                  <span className="h-2 w-2 rounded-full bg-amber/70" />
-                  <span className="h-2 w-2 rounded-full bg-mint/70" />
-                </span>
-                <span className="ml-1 truncate">neighborshub — log</span>
-              </div>
-              <div className="flex shrink-0 items-center gap-2">
+        {quests.length === 0 && !loadingQuests && <EmptyState onScan={loadQuests} />}
+        {loadingQuests && quests.length === 0 && (
+          <div className="rounded-xl border border-line bg-surface/40 p-10 text-center font-mono text-xs text-ink-mute">
+            <span className="pulse-dot inline-block">▮</span> sondando o discord…
+          </div>
+        )}
+
+        <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+          {quests.map((q) => (
+            <MissionCard
+              key={q.questId}
+              quest={q}
+              active={activeId === q.questId}
+              progress={activeId === q.questId ? progress : null}
+              disabled={running}
+              onExec={() => setCaptchaFor(q)}
+            />
+          ))}
+        </div>
+      </section>
+
+      {/* Terminal log full width below */}
+      <section>
+        <div className="overflow-hidden rounded-xl border border-line bg-surface/70 scanline">
+          <div className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-3 border-b border-line/70 bg-surface px-4 py-2.5">
+            <div className="flex min-w-0 items-center gap-2 font-mono text-[11px] uppercase tracking-widest text-ink-mute">
+              <span className="flex gap-1">
+                <span className="h-2 w-2 rounded-full bg-rose/70" />
+                <span className="h-2 w-2 rounded-full bg-amber/70" />
+                <span className="h-2 w-2 rounded-full bg-mint/70" />
+              </span>
+              <span className="ml-1 truncate">neighborshub — log</span>
+            </div>
+            <div className="flex shrink-0 items-center gap-2">
+              <span
+                className={`inline-flex items-center gap-1.5 font-mono text-[10px] uppercase tracking-widest ${
+                  running ? "text-mint" : "text-ink-mute"
+                }`}
+              >
                 <span
-                  className={`inline-flex items-center gap-1.5 font-mono text-[10px] uppercase tracking-widest ${
-                    running ? "text-mint" : "text-ink-mute"
-                  }`}
-                >
-                  <span
-                    className={`h-1.5 w-1.5 rounded-full ${running ? "bg-mint pulse-dot" : "bg-ink-mute"}`}
-                  />
-                  {running ? "live" : "idle"}
-                </span>
-                <button
-                  onClick={clearLogs}
-                  className="rounded border border-line px-2 py-0.5 font-mono text-[10px] uppercase tracking-widest text-ink-mute hover:text-ink"
-                >
-                  clear
-                </button>
+                  className={`h-1.5 w-1.5 rounded-full ${running ? "bg-mint pulse-dot" : "bg-ink-mute"}`}
+                />
+                {running ? "live" : "idle"}
+              </span>
+              <button
+                onClick={clearLogs}
+                className="rounded border border-line px-2 py-0.5 font-mono text-[10px] uppercase tracking-widest text-ink-mute hover:text-ink"
+              >
+                clear
+              </button>
+            </div>
+          </div>
+          <div className="max-h-[360px] min-h-[200px] overflow-y-auto p-4 font-mono text-[12px] leading-6">
+            {logs.length === 0 ? (
+              <div className="text-ink-mute">
+                <span className="text-cyan">›</span> aguardando eventos…
               </div>
-            </div>
-            <div className="max-h-[420px] min-h-[280px] overflow-y-auto p-4 font-mono text-[12px] leading-6">
-              {logs.length === 0 ? (
-                <div className="text-ink-mute">
-                  <span className="text-cyan">›</span> aguardando eventos…
+            ) : (
+              logs.map((l) => (
+                <div
+                  key={l.id}
+                  className={
+                    l.level === "error"
+                      ? "text-rose"
+                      : l.level === "success"
+                        ? "text-mint"
+                        : "text-ink-dim"
+                  }
+                >
+                  <span className="mr-2 text-ink-mute">
+                    {new Date(l.ts).toLocaleTimeString("pt-BR", { hour12: false })}
+                  </span>
+                  {l.text}
                 </div>
-              ) : (
-                logs.map((l) => (
-                  <div
-                    key={l.id}
-                    className={
-                      l.level === "error"
-                        ? "text-rose"
-                        : l.level === "success"
-                          ? "text-mint"
-                          : "text-ink-dim"
-                    }
-                  >
-                    <span className="mr-2 text-ink-mute">
-                      {new Date(l.ts).toLocaleTimeString("pt-BR", { hour12: false })}
-                    </span>
-                    {l.text}
-                  </div>
-                ))
-              )}
-              <div ref={logEnd} />
-            </div>
+              ))
+            )}
+            <div ref={logEnd} />
           </div>
+        </div>
+      </section>
 
-          <div className="mt-3 rounded-lg border border-amber/25 bg-amber/[0.05] p-3 font-mono text-[11px] leading-relaxed text-amber/90">
-            ⚠ mantenha esta aba aberta durante a execução. Fechando o navegador, o loop para.
-          </div>
-        </aside>
-      </div>
+      {captchaFor && (
+        <CaptchaModal
+          quest={captchaFor}
+          onCancel={() => setCaptchaFor(null)}
+          onSolved={() => {
+            const q = captchaFor;
+            setCaptchaFor(null);
+            useQuestStore.getState().resetStop();
+            useQuestStore.getState().setRunning(true);
+            runQuest(q).finally(() => {
+              useQuestStore.getState().setRunning(false);
+              useQuestStore.getState().setActive(null);
+            });
+          }}
+        />
+      )}
     </div>
   );
 }
+
 
 function SectionHeader({ title, right }: { title: string; right?: React.ReactNode }) {
   return (
