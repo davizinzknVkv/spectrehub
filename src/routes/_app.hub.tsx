@@ -32,6 +32,34 @@ function formatDuration(seconds: number) {
   return `${seconds}s`;
 }
 
+const DISCORD_EPOCH = 1420070400000n;
+function snowflakeDate(id: string): Date | null {
+  try {
+    return new Date(Number((BigInt(id) >> 22n) + DISCORD_EPOCH));
+  } catch {
+    return null;
+  }
+}
+
+function formatAge(date: Date) {
+  const now = Date.now();
+  const diff = now - date.getTime();
+  const days = Math.floor(diff / 86400000);
+  const years = Math.floor(days / 365);
+  const months = Math.floor((days % 365) / 30);
+  if (years > 0) return `${years}a ${months}m`;
+  if (months > 0) return `${months}m ${days % 30}d`;
+  return `${days}d`;
+}
+
+const PREMIUM_LABEL: Record<number, string> = {
+  0: "sem nitro",
+  1: "nitro classic",
+  2: "nitro",
+  3: "nitro basic",
+};
+
+
 function HubPage() {
   const creds = useQuestStore((s) => s.creds);
   const [quests, setQuests] = useState<Quest[]>([]);
@@ -42,6 +70,16 @@ function HubPage() {
     id?: string;
     avatar?: string | null;
     discriminator?: string;
+    email?: string;
+    verified?: boolean;
+    phone?: string | null;
+    mfa_enabled?: boolean;
+    premium_type?: number;
+    locale?: string;
+    banner?: string | null;
+    accent_color?: number | null;
+    flags?: number;
+    nsfw_allowed?: boolean;
   } | null>(null);
   const [loadingQuests, setLoadingQuests] = useState(false);
   const running = useQuestStore((s) => s.running);
@@ -70,6 +108,8 @@ function HubPage() {
       : `https://cdn.discordapp.com/embed/avatars/${(BigInt(user.id) >> 22n) % 6n}.png`
     : null;
 
+  const created = user?.id ? snowflakeDate(user.id) : null;
+
   const loadQuests = async () => {
     setLoadingQuests(true);
     try {
@@ -83,6 +123,13 @@ function HubPage() {
       setLoadingQuests(false);
     }
   };
+
+  const copyId = () => {
+    if (!user?.id) return;
+    navigator.clipboard.writeText(user.id);
+    toast.success("ID copiado");
+  };
+
 
   if (!creds) {
     return (
@@ -166,13 +213,19 @@ function HubPage() {
       </div>
 
       {/* Stat grid */}
-      <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
         <StatCard label="Orbs" value={(orbs ?? 0).toLocaleString("pt-BR")} tone="cyan" hint="saldo atual" />
         <StatCard label="Missões" value={String(quests.length)} tone="mint" hint={`${orbQuests} com orbs`} />
         <StatCard
+          label="Idade da conta"
+          value={created ? formatAge(created) : "—"}
+          tone="amber"
+          hint={created ? created.toLocaleDateString("pt-BR") : "—"}
+        />
+        <StatCard
           label="Tempo total"
           value={quests.length ? formatDuration(totalTarget) : "—"}
-          tone="amber"
+          tone="mute"
           hint="se rodar tudo"
         />
         <StatCard
@@ -182,6 +235,48 @@ function HubPage() {
           hint="runs salvas"
         />
       </div>
+
+      {/* Account panel */}
+      {user && (
+        <section className="rounded-xl border border-line bg-surface/50 p-4 sm:p-5">
+          <div className="mb-3 flex items-center justify-between gap-2">
+            <div className="flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.25em] text-ink-mute">
+              <span className="text-cyan">◆</span> conta
+            </div>
+            {user.id && (
+              <button
+                onClick={copyId}
+                className="rounded border border-line px-2 py-0.5 font-mono text-[10px] uppercase tracking-widest text-ink-mute hover:text-cyan"
+              >
+                copiar id
+              </button>
+            )}
+          </div>
+          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+            <InfoField label="Email" value={user.email ?? "—"} badge={user.verified ? "verificado" : undefined} badgeTone="mint" />
+            <InfoField label="Telefone" value={user.phone || "—"} />
+            <InfoField
+              label="Nitro"
+              value={PREMIUM_LABEL[user.premium_type ?? 0] ?? "—"}
+              badgeTone={user.premium_type ? "cyan" : undefined}
+            />
+            <InfoField
+              label="2FA"
+              value={user.mfa_enabled ? "ativado" : "desativado"}
+              badgeTone={user.mfa_enabled ? "mint" : "amber"}
+            />
+            <InfoField label="Locale" value={user.locale ?? "—"} />
+            <InfoField label="NSFW" value={user.nsfw_allowed ? "permitido" : "bloqueado"} />
+            <InfoField label="Flags" value={String(user.flags ?? 0)} />
+            <InfoField
+              label="Criada em"
+              value={created ? created.toLocaleDateString("pt-BR") : "—"}
+              hint={created ? `há ${formatAge(created)}` : undefined}
+            />
+          </div>
+        </section>
+      )}
+
 
       {/* Mission grid + Log panel */}
       <div className="grid gap-6 lg:grid-cols-[1fr_360px]">
@@ -298,6 +393,45 @@ function SectionHeader({ title, right }: { title: string; right?: React.ReactNod
         {title}
       </div>
       {right}
+    </div>
+  );
+}
+
+function InfoField({
+  label,
+  value,
+  hint,
+  badge,
+  badgeTone,
+}: {
+  label: string;
+  value: string;
+  hint?: string;
+  badge?: string;
+  badgeTone?: "cyan" | "mint" | "amber";
+}) {
+  const tone =
+    badgeTone === "mint"
+      ? "border-mint/30 text-mint"
+      : badgeTone === "amber"
+        ? "border-amber/30 text-amber"
+        : "border-cyan/30 text-cyan";
+  return (
+    <div className="rounded-lg border border-line/70 bg-background/40 p-3">
+      <div className="flex items-center justify-between gap-2">
+        <div className="font-mono text-[10px] uppercase tracking-[0.25em] text-ink-mute">
+          {label}
+        </div>
+        {badge && (
+          <span className={`rounded border px-1.5 py-0.5 font-mono text-[9px] uppercase tracking-widest ${tone}`}>
+            {badge}
+          </span>
+        )}
+      </div>
+      <div className="mt-1.5 truncate text-sm text-ink" title={value}>
+        {value}
+      </div>
+      {hint && <div className="mt-0.5 font-mono text-[10px] text-ink-mute">{hint}</div>}
     </div>
   );
 }
