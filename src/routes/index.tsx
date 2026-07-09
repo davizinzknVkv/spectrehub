@@ -79,9 +79,14 @@ function Index() {
         <nav className="hidden gap-6 text-sm text-slate-400 md:flex">
           <a href="#features" className="hover:text-white">Recursos</a>
           <a href="#como-usar" className="hover:text-white">Como usar</a>
-          <a href="#codigo" className="hover:text-white">Código</a>
           <a href="#aviso" className="hover:text-white">Aviso</a>
         </nav>
+        <a
+          href="/hub"
+          className="rounded-md bg-[#5865F2] px-4 py-2 text-sm font-semibold text-white hover:bg-[#4752c4]"
+        >
+          Abrir Hub
+        </a>
       </header>
 
       {/* Hero */}
@@ -104,16 +109,16 @@ function Index() {
           </p>
           <div className="mt-8 flex flex-wrap justify-center gap-3">
             <a
-              href="#como-usar"
+              href="/hub"
               className="rounded-lg bg-[#5865F2] px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-indigo-500/30 transition hover:bg-[#4752c4]"
             >
-              Começar agora
+              Abrir o Hub
             </a>
             <a
-              href="#codigo"
+              href="#como-usar"
               className="rounded-lg border border-white/10 bg-white/5 px-5 py-3 text-sm font-semibold text-white transition hover:bg-white/10"
             >
-              Ver o código
+              Como funciona
             </a>
           </div>
         </div>
