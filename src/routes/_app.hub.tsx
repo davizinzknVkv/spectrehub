@@ -432,7 +432,8 @@ function HubPage() {
             )}
             <button
               onClick={() => setCaptchaAll(true)}
-              disabled={running || quests.length === 0}
+              disabled={running || quests.length === 0 || remaining <= 0}
+              title={remaining <= 0 ? `Limite diário do plano ${limits.label} atingido` : undefined}
               className="rounded-md border border-mint/40 bg-mint/10 px-3 py-2 font-mono text-[11px] font-semibold uppercase tracking-widest text-mint transition hover:bg-mint/20 disabled:cursor-not-allowed disabled:opacity-40"
             >
               ▶ run all
