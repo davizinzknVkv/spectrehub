@@ -47,7 +47,14 @@ function getBestTask(tasks: Record<string, { target?: number }>) {
 }
 
 async function call(endpoint: string, method: "GET" | "POST" = "GET", body?: unknown) {
-  return await discordProxy({ data: { endpoint, method, body } });
+  const res = await discordProxy({ data: { endpoint, method, body } });
+  let parsed: unknown = null;
+  try {
+    parsed = res.body ? JSON.parse(res.body) : null;
+  } catch {
+    parsed = res.body;
+  }
+  return { status: res.status, data: parsed };
 }
 
 export async function fetchUserInfo() {
