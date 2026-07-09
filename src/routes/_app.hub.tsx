@@ -83,18 +83,28 @@ function HubPage() {
     nsfw_allowed?: boolean;
   } | null>(null);
   const [loadingQuests, setLoadingQuests] = useState(false);
+  const [now, setNow] = useState(Date.now());
   const running = useQuestStore((s) => s.running);
   const activeId = useQuestStore((s) => s.activeQuestId);
   const progress = useQuestStore((s) => s.progress);
   const logs = useQuestStore((s) => s.logs);
+  const plan = useQuestStore((s) => s.plan);
+  const lastCompletedAt = useQuestStore((s) => s.lastCompletedAt);
+  const runs = useQuestStore((s) => s.runs);
+  const setPlan = useQuestStore((s) => s.setPlan);
   const requestStop = useQuestStore((s) => s.requestStop);
   const clearLogs = useQuestStore((s) => s.clearLogs);
-  const runsCount = useQuestStore((s) => s.runs.length);
+  const runsCount = runs.length;
   const logEnd = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     logEnd.current?.scrollIntoView({ behavior: "smooth" });
   }, [logs]);
+
+  useEffect(() => {
+    const id = setInterval(() => setNow(Date.now()), 1000);
+    return () => clearInterval(id);
+  }, []);
 
   useEffect(() => {
     if (!creds) return;
@@ -104,7 +114,25 @@ function HubPage() {
     fetchGuilds()
       .then(setGuilds)
       .catch(() => {});
-  }, [creds]);
+    fetchUserPlan()
+      .then(setPlan)
+      .catch(() => {});
+  }, [creds, setPlan]);
+
+  const limits = PLAN_LIMITS[plan];
+  const todayStart = new Date();
+  todayStart.setHours(0, 0, 0, 0);
+  const usedToday = runs.filter(
+    (r) => r.status === "completed" && new Date(r.started_at).getTime() >= todayStart.getTime(),
+  ).length;
+  const remaining = limits.daily === Infinity ? Infinity : Math.max(0, limits.daily - usedToday);
+  const cooldownLeft = Math.max(0, lastCompletedAt + limits.cooldownMs - now);
+  const gateBlocked = remaining <= 0 || cooldownLeft > 0;
+  const cooldownSecs = Math.ceil(cooldownLeft / 1000);
+  const cooldownText = cooldownLeft > 0
+    ? `${Math.floor(cooldownSecs / 60)}m${(cooldownSecs % 60).toString().padStart(2, "0")}s`
+    : null;
+
 
   const avatarUrl = user?.id
     ? user.avatar
