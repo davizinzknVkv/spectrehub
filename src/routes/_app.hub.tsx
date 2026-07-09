@@ -477,6 +477,17 @@ function HubPage() {
           }}
         />
       )}
+
+      {captchaAll && (
+        <CaptchaModal
+          label={`Executar ${quests.length} missões`}
+          onCancel={() => setCaptchaAll(false)}
+          onSolved={() => {
+            setCaptchaAll(false);
+            runAll(quests);
+          }}
+        />
+      )}
     </div>
   );
 }
