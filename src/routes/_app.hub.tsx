@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { toast } from "sonner";
 import {
   fetchAvailableQuests,
@@ -98,7 +98,8 @@ function HubPage() {
   const logEnd = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    logEnd.current?.scrollIntoView({ behavior: "smooth" });
+    // "auto" avoids smooth-scroll animation thrash while logs stream in
+    logEnd.current?.scrollIntoView({ behavior: "auto", block: "end" });
   }, [logs]);
 
   useEffect(() => {
@@ -134,11 +135,15 @@ function HubPage() {
   }, [creds, setPlan]);
 
   const limits = PLAN_LIMITS[plan];
-  const todayStart = new Date();
-  todayStart.setHours(0, 0, 0, 0);
-  const usedToday = runs.filter(
-    (r) => r.status === "completed" && new Date(r.started_at).getTime() >= todayStart.getTime(),
-  ).length;
+  // Memoized so the setInterval(1s) that ticks `now` doesn't re-filter/reduce runs each tick.
+  const usedToday = useMemo(() => {
+    const start = new Date();
+    start.setHours(0, 0, 0, 0);
+    const t = start.getTime();
+    return runs.filter(
+      (r) => r.status === "completed" && new Date(r.started_at).getTime() >= t,
+    ).length;
+  }, [runs]);
   const remaining = limits.daily === Infinity ? Infinity : Math.max(0, limits.daily - usedToday);
   const cooldownLeft = Math.max(0, lastCompletedAt + limits.cooldownMs - now);
   const gateBlocked = remaining <= 0 || cooldownLeft > 0;
@@ -201,14 +206,20 @@ function HubPage() {
     );
   }
 
-  const totalTarget = quests.reduce((sum, q) => sum + q.target, 0);
-  const orbQuests = quests.filter((q) => q.rewardText.includes("Orbs")).length;
-  const totalOrbsEarned = runs
-    .filter((r) => r.status === "completed" && r.reward_text?.includes("Orbs"))
-    .reduce((sum, r) => {
-      const m = r.reward_text?.match(/([\d.,]+)\s*Orbs/i);
-      return sum + (m ? parseInt(m[1].replace(/[.,]/g, ""), 10) || 0 : 0);
-    }, 0);
+  const { totalTarget, orbQuests } = useMemo(() => ({
+    totalTarget: quests.reduce((sum, q) => sum + q.target, 0),
+    orbQuests: quests.filter((q) => q.rewardText.includes("Orbs")).length,
+  }), [quests]);
+  const totalOrbsEarned = useMemo(
+    () =>
+      runs
+        .filter((r) => r.status === "completed" && r.reward_text?.includes("Orbs"))
+        .reduce((sum, r) => {
+          const m = r.reward_text?.match(/([\d.,]+)\s*Orbs/i);
+          return sum + (m ? parseInt(m[1].replace(/[.,]/g, ""), 10) || 0 : 0);
+        }, 0),
+    [runs],
+  );
 
   const bannerUrl = user?.id && user.banner
     ? `https://cdn.discordapp.com/banners/${user.id}/${user.banner}.${user.banner.startsWith("a_") ? "gif" : "png"}?size=1024`
@@ -258,6 +269,10 @@ function HubPage() {
             <img
               src={avatarUrl}
               alt={user?.username ?? "avatar"}
+              width={80}
+              height={80}
+              decoding="async"
+              fetchPriority="high"
               className="h-20 w-20 shrink-0 rounded-full border-4 border-surface object-cover"
             />
           )}
@@ -406,6 +421,9 @@ function HubPage() {
                       src={iconUrl}
                       alt=""
                       loading="lazy"
+                      decoding="async"
+                      width={36}
+                      height={36}
                       className="h-9 w-9 shrink-0 rounded-md border border-line object-cover"
                     />
                   ) : (
@@ -521,7 +539,7 @@ function HubPage() {
                 <span className="text-cyan">›</span> aguardando eventos…
               </div>
             ) : (
-              logs.map((l) => (
+              logs.slice(-100).map((l) => (
                 <div
                   key={l.id}
                   className={
@@ -692,6 +710,7 @@ function MissionCard({
             src={quest.imageUrl}
             alt=""
             loading="lazy"
+            decoding="async"
             onError={(e) => (e.currentTarget.style.opacity = "0")}
             className="h-full w-full object-cover transition duration-500 group-hover:scale-[1.03]"
           />
