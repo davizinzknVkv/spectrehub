@@ -40,7 +40,7 @@ const PLANS = [
   },
   {
     name: "Premium",
-    price: "R$ 15",
+    price: "R$ 9,90",
     period: "30 dias",
     tone: "border-[#5865F2]/50 bg-[#5865F2]/[0.08]",
     accent: "text-[#a5b4fc]",
