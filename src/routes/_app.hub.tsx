@@ -103,6 +103,9 @@ function HubPage() {
     fetchUserInfo()
       .then((u) => u && setUser(u as typeof user))
       .catch(() => {});
+    fetchGuilds()
+      .then(setGuilds)
+      .catch(() => {});
   }, [creds]);
 
   const avatarUrl = user?.id
