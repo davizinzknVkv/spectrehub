@@ -170,11 +170,10 @@ export async function fetchAvailableQuests(): Promise<Quest[]> {
     const best = getBestTask(tasks);
     if (!best) continue;
     const asset = q.config.assets?.hero || q.config.assets?.quest_bar_hero || q.config.assets?.logotype;
-    const hasExt = asset ? /\.(png|jpg|jpeg|webp|gif)$/i.test(asset) : false;
     const imageUrl = asset
       ? asset.startsWith("http")
-        ? asset
-        : `https://cdn.discordapp.com/quests/${q.id}/${asset}${hasExt ? "" : ".png"}`
+        ? `/api/public/discord-image?u=${encodeURIComponent(asset)}`
+        : `/api/public/discord-image?q=${encodeURIComponent(q.id)}&a=${encodeURIComponent(asset)}`
       : undefined;
     // 🔎 intercept: log raw assets + resolved URL to inspect Discord's payload
     console.groupCollapsed(
