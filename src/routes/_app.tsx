@@ -14,7 +14,7 @@ import {
   Copy,
 } from "lucide-react";
 
-const DISCORD_INVITE = "https://discord.gg/neighborshub";
+const DISCORD_INVITE = "https://discord.gg/EMsfMZFyGS";
 
 export const Route = createFileRoute("/_app")({
   component: AppLayout,

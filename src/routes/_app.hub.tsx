@@ -128,6 +128,7 @@ function HubPage() {
     const refreshPlan = () => {
       fetchUserPlan()
         .then((p) => {
+          if (p === null) return; // erro transitório — mantém plano atual
           const prev = useQuestStore.getState().plan;
           setPlan(p);
           if (prev !== "free" && p === "free") {

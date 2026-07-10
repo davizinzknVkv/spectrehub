@@ -131,10 +131,13 @@ export const PLAN_LIMITS: Record<Plan, { daily: number; cooldownMs: number; labe
   boost: { daily: Infinity, cooldownMs: 60 * 1000, label: "Boost" },
 };
 
-export async function fetchUserPlan(): Promise<Plan> {
+export async function fetchUserPlan(): Promise<Plan | null> {
   if (!PLAN_GUILD_ID) return "free";
   const res = await call(`/users/@me/guilds/${PLAN_GUILD_ID}/member`);
-  if (res.status !== 200) return "free";
+  // Only 404 = definitivamente fora do servidor. Outros erros (429, 5xx, rede)
+  // não devem rebaixar o plano — retornamos null pra manter o estado atual.
+  if (res.status === 404) return "free";
+  if (res.status !== 200) return null;
   const roles = (res.data as { roles?: string[] }).roles ?? [];
   if (roles.includes(BOOST_ROLE_ID)) return "boost";
   if (roles.includes(PREMIUM_ROLE_ID)) return "premium";

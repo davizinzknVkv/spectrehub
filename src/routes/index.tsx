@@ -272,8 +272,19 @@ function Index() {
       </section>
 
       <footer className="border-t border-white/5 py-10 text-center text-sm text-slate-500">
-        <div className="mx-auto max-w-6xl px-6">
-          Neighborshub · Auto Quests do Discord.
+        <div className="mx-auto max-w-6xl space-y-2 px-6">
+          <div>Neighborshub · Auto Quests do Discord.</div>
+          <div>
+            Desenvolvido por{" "}
+            <a
+              href="https://www.instagram.com/davizinzkn/"
+              target="_blank"
+              rel="noreferrer"
+              className="font-semibold text-[#a78bfa] hover:text-white"
+            >
+              davizinzknTheGod
+            </a>
+          </div>
         </div>
       </footer>
     </div>
