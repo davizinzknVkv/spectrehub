@@ -50,7 +50,7 @@ export const discordProxy = createServerFn({ method: "POST" })
   .inputValidator((input) => proxyInput.parse(input))
   .handler(async ({ data }) => {
     const ip = clientIp(getRequest());
-    const rl = rateLimit(`proxy:${ip}`, 60, 60_000);
+    const rl = rateLimit(`proxy:${ip}`, 600, 60_000);
     if (!rl.ok) {
       return {
         status: 429,
