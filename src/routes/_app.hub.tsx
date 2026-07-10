@@ -57,6 +57,22 @@ const PREMIUM_LABEL: Record<number, string> = {
   3: "nitro basic",
 };
 
+// Discord public user flags → badge label
+const USER_BADGES: Array<{ bit: number; label: string; tone: "cyan" | "purple" | "mint" | "amber" }> = [
+  { bit: 1 << 0, label: "STAFF", tone: "cyan" },
+  { bit: 1 << 1, label: "PARTNER", tone: "purple" },
+  { bit: 1 << 2, label: "HYPESQUAD EVENTS", tone: "purple" },
+  { bit: 1 << 3, label: "BUG HUNTER", tone: "mint" },
+  { bit: 1 << 6, label: "BRAVERY", tone: "amber" },
+  { bit: 1 << 7, label: "BRILLIANCE", tone: "purple" },
+  { bit: 1 << 8, label: "BALANCE", tone: "cyan" },
+  { bit: 1 << 9, label: "EARLY SUPPORTER", tone: "purple" },
+  { bit: 1 << 14, label: "BUG HUNTER 2", tone: "mint" },
+  { bit: 1 << 17, label: "EARLY DEV", tone: "cyan" },
+  { bit: 1 << 18, label: "MOD ALUMNI", tone: "mint" },
+  { bit: 1 << 22, label: "ACTIVE DEV", tone: "mint" },
+];
+
 
 function HubPage() {
   const creds = useQuestStore((s) => s.creds);
