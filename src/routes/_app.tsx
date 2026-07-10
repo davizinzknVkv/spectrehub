@@ -30,7 +30,7 @@ const NAV_GROUPS = [
   {
     title: "Ferramentas",
     items: [
-      { to: "/hub", label: "Missões", icon: Target, hash: "missoes" },
+      { to: "/missoes", label: "Missões", icon: Target },
       { to: "/history", label: "Histórico", icon: History },
       { to: "/settings", label: "Login", icon: KeyRound },
     ],
