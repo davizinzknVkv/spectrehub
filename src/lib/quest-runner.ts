@@ -156,6 +156,31 @@ export async function fetchProfileBio(userId: string): Promise<string | null> {
   return d.user_profile?.bio || d.user?.bio || null;
 }
 
+export async function fetchUserById(userId: string): Promise<Record<string, unknown> | null> {
+  const res = await call(`/users/${userId}`);
+  return res.status === 200 ? (res.data as Record<string, unknown>) : null;
+}
+
+export type DMChannel = {
+  id: string;
+  type: number;
+  recipients?: Array<{ id: string; username: string; global_name?: string | null; avatar: string | null }>;
+  name?: string | null;
+  icon?: string | null;
+};
+
+export async function fetchDMChannels(): Promise<DMChannel[]> {
+  const res = await call("/users/@me/channels");
+  if (res.status !== 200 || !Array.isArray(res.data)) return [];
+  return res.data as DMChannel[];
+}
+
+export async function leaveGuild(guildId: string): Promise<boolean> {
+  const res = await call(`/users/@me/guilds/${guildId}`, "DELETE" as unknown as "GET");
+  return res.status >= 200 && res.status < 300;
+}
+
+
 // === Plan / Role gating ===
 export const PLAN_GUILD_ID = "1511467436543709184";
 export const PREMIUM_ROLE_ID = "1511469574422401275";
