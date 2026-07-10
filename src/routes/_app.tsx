@@ -33,6 +33,12 @@ const NAV_GROUPS = [
       { to: "/settings", label: "Login", icon: KeyRound },
     ],
   },
+  {
+    title: "Utilitários",
+    items: [
+      { action: "clone", label: "Clonar Servidores", icon: Copy },
+    ],
+  },
 ] as const;
 
 function AppLayout() {
