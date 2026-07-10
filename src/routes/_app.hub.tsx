@@ -552,6 +552,7 @@ function HubPage() {
           </div>
         </div>
       </section>
+      )}
 
       {captchaFor && (
         <CaptchaModal
