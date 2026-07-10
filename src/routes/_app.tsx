@@ -153,19 +153,11 @@ function SidebarBody({
             <div className="flex flex-col gap-0.5">
               {group.items.map((item) => {
                 const Icon = item.icon;
-                const active = pathname === item.to && !("hash" in item && item.hash);
+                const active = pathname === item.to;
                 return (
                   <Link
                     key={`${item.to}-${item.label}`}
                     to={item.to}
-                    hash={"hash" in item ? item.hash : undefined}
-                    hashScrollIntoView={"hash" in item && item.hash ? { behavior: "smooth", block: "start" } : undefined}
-                    onClick={() => {
-                      if ("hash" in item && item.hash && pathname === item.to) {
-                        const el = document.getElementById(item.hash);
-                        if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
-                      }
-                    }}
                     className={`flex items-center gap-3 rounded-lg px-3 py-2 text-sm transition ${
                       active
                         ? "bg-gradient-to-r from-cyan/10 to-purple/10 text-ink border border-purple/30"
