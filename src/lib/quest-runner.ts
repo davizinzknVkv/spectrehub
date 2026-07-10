@@ -173,7 +173,7 @@ export async function fetchAvailableQuests(): Promise<Quest[]> {
     const imageUrl = asset
       ? asset.startsWith("http")
         ? asset
-        : `https://cdn.discordapp.com/quests/${q.id}/${asset}`
+        : `https://cdn.discordapp.com/quests/${q.id}/${asset}${/\.(png|jpg|jpeg|webp|gif)$/i.test(asset) ? "" : ".png"}?size=1024`
       : undefined;
     result.push({
       questId: q.id,
