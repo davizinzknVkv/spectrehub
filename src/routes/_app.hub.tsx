@@ -811,7 +811,19 @@ function MissionCard({
             alt=""
             loading="lazy"
             decoding="async"
-            onError={(e) => (e.currentTarget.style.opacity = "0")}
+            onError={(e) => {
+              const img = e.currentTarget;
+              const tried = img.dataset.tried ?? "0";
+              if (tried === "0" && quest.imageUrl) {
+                img.dataset.tried = "1";
+                img.src = quest.imageUrl.replace("/quests/", "/assets/quests/");
+              } else if (tried === "1" && quest.imageUrl) {
+                img.dataset.tried = "2";
+                img.src = quest.imageUrl.replace(/\.png$/, ".jpg");
+              } else {
+                img.style.opacity = "0";
+              }
+            }}
             className="h-full w-full object-cover transition duration-500 group-hover:scale-[1.03]"
           />
         ) : (
