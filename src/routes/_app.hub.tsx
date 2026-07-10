@@ -473,6 +473,9 @@ function HubPage() {
 
       <QuickActions />
 
+      <DonorsCard />
+
+
 
       <WelcomeModal />
     </div>
