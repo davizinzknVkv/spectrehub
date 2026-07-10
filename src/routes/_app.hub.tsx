@@ -297,33 +297,32 @@ function HubPage() {
             {user?.username && (
               <div className="mt-0.5 truncate font-mono text-xs text-ink-mute">@{user.username}</div>
             )}
-            {/* Insígnias (Discord flags) */}
+            {/* Insígnias (Discord flags) — só ícones para caber muitas */}
             {user?.flags ? (
-              <div className="mt-2 flex flex-wrap items-center gap-1.5">
+              <div className="mt-2 flex flex-wrap items-center gap-1">
                 {USER_BADGES.filter((b) => (user.flags ?? 0) & b.bit).map((b) => {
-                  const tone =
+                  const ring =
                     b.tone === "cyan"
-                      ? "border-cyan/40 text-cyan"
+                      ? "border-cyan/40"
                       : b.tone === "purple"
-                        ? "border-purple/40 text-purple"
+                        ? "border-purple/40"
                         : b.tone === "mint"
-                          ? "border-mint/40 text-mint"
-                          : "border-amber/40 text-amber";
+                          ? "border-mint/40"
+                          : "border-amber/40";
                   return (
                     <span
                       key={b.label}
                       title={b.label}
-                      className={`inline-flex items-center gap-1.5 rounded-md border bg-background/40 px-1.5 py-0.5 font-mono text-[9px] uppercase tracking-widest ${tone}`}
+                      className={`inline-grid h-6 w-6 shrink-0 place-items-center rounded-md border bg-background/40 ${ring}`}
                     >
                       <img
                         src={`https://cdn.discordapp.com/badge-icons/${b.icon}.png`}
-                        alt=""
+                        alt={b.label}
                         width={14}
                         height={14}
                         loading="lazy"
                         className="h-3.5 w-3.5"
                       />
-                      {b.label}
                     </span>
                   );
                 })}
