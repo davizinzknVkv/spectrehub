@@ -119,7 +119,7 @@ export async function fetchGuilds(): Promise<Guild[]> {
 }
 
 // === Plan / Role gating ===
-export const PLAN_GUILD_ID = ""; // TODO: preencher com o ID do servidor Neighborshub
+export const PLAN_GUILD_ID = "1511467436543709184";
 export const PREMIUM_ROLE_ID = "1511469574422401275";
 export const BOOST_ROLE_ID = "1511469585704947943";
 
