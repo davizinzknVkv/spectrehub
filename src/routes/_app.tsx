@@ -40,6 +40,7 @@ const NAV_GROUPS = [
     items: [
       { to: "/clone", label: "Clonar Discord", icon: Copy },
       { to: "/spotify", label: "Gerador Spotify", icon: Music },
+      { to: "/fake", label: "Foto Fake", icon: ImageIcon },
     ],
   },
 ] as const;
