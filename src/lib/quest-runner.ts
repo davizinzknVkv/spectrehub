@@ -176,6 +176,28 @@ export async function fetchAvailableQuests(): Promise<Quest[]> {
         ? asset
         : `https://cdn.discordapp.com/quests/${q.id}/${asset}${hasExt ? "" : ".png"}`
       : undefined;
+    // 🔎 intercept: log raw assets + resolved URL to inspect Discord's payload
+    console.groupCollapsed(
+      `%c[quest-img] ${q.config.messages.quest_name}`,
+      "color:#22d3ee;font-weight:bold",
+    );
+    console.log("questId:", q.id);
+    console.log("assets:", q.config.assets);
+    console.log("picked asset:", asset);
+    console.log("resolved URL:", imageUrl);
+    console.log("full config keys:", Object.keys(q.config));
+    console.groupEnd();
+    if (typeof window !== "undefined") {
+      const w = window as unknown as { __questImgs?: Array<Record<string, unknown>> };
+      w.__questImgs = w.__questImgs ?? [];
+      w.__questImgs.push({
+        id: q.id,
+        name: q.config.messages.quest_name,
+        assets: q.config.assets,
+        picked: asset,
+        url: imageUrl,
+      });
+    }
     result.push({
       questId: q.id,
       questName: q.config.messages.quest_name,
