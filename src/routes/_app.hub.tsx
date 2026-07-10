@@ -809,7 +809,7 @@ function WelcomeModal() {
       tag: "$ apoie",
       title: <>Ajude o projeto a continuar <span className="text-mint">gratuito</span></>,
       body: <>Servidores, domínio e desenvolvimento saem do bolso. Qualquer valor conta muito.</>,
-      href: "https://livepix.gg/davizinzkn",
+      href: "https://livepix.gg/davizinzkngg",
       action: "💖 doar via LivePix",
       tone: "mint",
     },
@@ -1390,7 +1390,7 @@ function DonorsCard() {
           </p>
         </div>
         <a
-          href="https://livepix.gg/davizinzkn"
+          href="https://livepix.gg/davizinzkngg"
           target="_blank"
           rel="noreferrer"
           className="rounded-lg border border-white/15 bg-white/5 px-3 py-1.5 text-xs font-medium text-white/80 transition hover:bg-white/10"
