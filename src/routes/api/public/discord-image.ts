@@ -11,15 +11,14 @@ export const Route = createFileRoute("/api/public/discord-image")({
         const raw = url.searchParams.get("u");
 
         const candidates: string[] = [];
-        if (raw) candidates.push(raw);
         if (questId && asset) {
           const clean = asset.replace(/^\/+/, "");
           const hasExt = /\.(png|jpe?g|webp|gif)$/i.test(clean);
-          candidates.push(
-            `https://cdn.discordapp.com/quests/${questId}/${clean}${hasExt ? "" : ".png"}?size=1024`,
-            `https://cdn.discordapp.com/assets/quests/${questId}/${clean}${hasExt ? "" : ".png"}`,
-            `https://cdn.discordapp.com/quests/${questId}/hero/${clean}${hasExt ? "" : ".png"}`,
-          );
+          const file = hasExt ? clean : `${clean}.png`;
+          candidates.push(`https://cdn.discordapp.com/quests/${questId}/${file}?size=1024`);
+        }
+        if (raw && /^https:\/\/cdn\.discordapp\.com\/quests\//.test(raw)) {
+          candidates.push(raw);
         }
 
         for (const target of candidates) {
