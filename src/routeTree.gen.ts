@@ -14,6 +14,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AppSettingsRouteImport } from './routes/_app.settings'
 import { Route as AppHubRouteImport } from './routes/_app.hub'
 import { Route as AppHistoryRouteImport } from './routes/_app.history'
+import { Route as AppCloneRouteImport } from './routes/_app.clone'
 
 const AppRoute = AppRouteImport.update({
   id: '/_app',
@@ -39,15 +40,22 @@ const AppHistoryRoute = AppHistoryRouteImport.update({
   path: '/history',
   getParentRoute: () => AppRoute,
 } as any)
+const AppCloneRoute = AppCloneRouteImport.update({
+  id: '/clone',
+  path: '/clone',
+  getParentRoute: () => AppRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/clone': typeof AppCloneRoute
   '/history': typeof AppHistoryRoute
   '/hub': typeof AppHubRoute
   '/settings': typeof AppSettingsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/clone': typeof AppCloneRoute
   '/history': typeof AppHistoryRoute
   '/hub': typeof AppHubRoute
   '/settings': typeof AppSettingsRoute
@@ -56,19 +64,21 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/_app': typeof AppRouteWithChildren
+  '/_app/clone': typeof AppCloneRoute
   '/_app/history': typeof AppHistoryRoute
   '/_app/hub': typeof AppHubRoute
   '/_app/settings': typeof AppSettingsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/history' | '/hub' | '/settings'
+  fullPaths: '/' | '/clone' | '/history' | '/hub' | '/settings'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/history' | '/hub' | '/settings'
+  to: '/' | '/clone' | '/history' | '/hub' | '/settings'
   id:
     | '__root__'
     | '/'
     | '/_app'
+    | '/_app/clone'
     | '/_app/history'
     | '/_app/hub'
     | '/_app/settings'
@@ -116,16 +126,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppHistoryRouteImport
       parentRoute: typeof AppRoute
     }
+    '/_app/clone': {
+      id: '/_app/clone'
+      path: '/clone'
+      fullPath: '/clone'
+      preLoaderRoute: typeof AppCloneRouteImport
+      parentRoute: typeof AppRoute
+    }
   }
 }
 
 interface AppRouteChildren {
+  AppCloneRoute: typeof AppCloneRoute
   AppHistoryRoute: typeof AppHistoryRoute
   AppHubRoute: typeof AppHubRoute
   AppSettingsRoute: typeof AppSettingsRoute
 }
 
 const AppRouteChildren: AppRouteChildren = {
+  AppCloneRoute: AppCloneRoute,
   AppHistoryRoute: AppHistoryRoute,
   AppHubRoute: AppHubRoute,
   AppSettingsRoute: AppSettingsRoute,

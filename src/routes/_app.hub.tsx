@@ -51,21 +51,25 @@ function formatAge(date: Date) {
 }
 
 
-// Discord public user flags → badge label
-const USER_BADGES: Array<{ bit: number; label: string; tone: "cyan" | "purple" | "mint" | "amber" }> = [
-  { bit: 1 << 0, label: "STAFF", tone: "cyan" },
-  { bit: 1 << 1, label: "PARTNER", tone: "purple" },
-  { bit: 1 << 2, label: "HYPESQUAD EVENTS", tone: "purple" },
-  { bit: 1 << 3, label: "BUG HUNTER", tone: "mint" },
-  { bit: 1 << 6, label: "BRAVERY", tone: "amber" },
-  { bit: 1 << 7, label: "BRILLIANCE", tone: "purple" },
-  { bit: 1 << 8, label: "BALANCE", tone: "cyan" },
-  { bit: 1 << 9, label: "EARLY SUPPORTER", tone: "purple" },
-  { bit: 1 << 14, label: "BUG HUNTER 2", tone: "mint" },
-  { bit: 1 << 17, label: "EARLY DEV", tone: "cyan" },
-  { bit: 1 << 18, label: "MOD ALUMNI", tone: "mint" },
-  { bit: 1 << 22, label: "ACTIVE DEV", tone: "mint" },
+// Discord public user flags → badge label + official icon hash
+// Icons served from https://cdn.discordapp.com/badge-icons/{hash}.png
+const USER_BADGES: Array<{ bit: number; label: string; tone: "cyan" | "purple" | "mint" | "amber"; icon: string }> = [
+  { bit: 1 << 0, label: "STAFF", tone: "cyan", icon: "5e74e9b61934fc1f67c65515d1f7e60d" },
+  { bit: 1 << 1, label: "PARTNER", tone: "purple", icon: "3f9748e53446a137a052f3454e2de41e" },
+  { bit: 1 << 2, label: "HYPESQUAD EVENTS", tone: "purple", icon: "bf01d1073931f921909045f3a39fd264" },
+  { bit: 1 << 3, label: "BUG HUNTER", tone: "mint", icon: "2717692c7dca7289b35297368a940dd0" },
+  { bit: 1 << 6, label: "BRAVERY", tone: "amber", icon: "8a88d63823d8a71cd5e390baa45efa02" },
+  { bit: 1 << 7, label: "BRILLIANCE", tone: "purple", icon: "011940fd013da3f7fb926e4a1cd2e618" },
+  { bit: 1 << 8, label: "BALANCE", tone: "cyan", icon: "3aa41de486fa12454c3761e8e223442e" },
+  { bit: 1 << 9, label: "EARLY SUPPORTER", tone: "purple", icon: "7060786766c9c840eb3019e725d2b358" },
+  { bit: 1 << 14, label: "BUG HUNTER 2", tone: "mint", icon: "848f79194d4be5ff5f81505cbd0ce1e6" },
+  { bit: 1 << 17, label: "EARLY DEV", tone: "cyan", icon: "6df5892e0f35b051f8b61eace34f4967" },
+  { bit: 1 << 18, label: "MOD ALUMNI", tone: "mint", icon: "fee1624003e2fee35cb398e125dc479b" },
+  { bit: 1 << 22, label: "ACTIVE DEV", tone: "mint", icon: "6bdc42827a38498929a4920da12695d9" },
 ];
+
+const LOG_ALLOWED_ID = "1217795750407442473";
+const WELCOME_KEY = "nh:welcome-dismissed";
 
 
 function HubPage() {
@@ -322,7 +326,7 @@ function HubPage() {
             )}
             {/* Insígnias (Discord flags) */}
             {user?.flags ? (
-              <div className="mt-2 flex flex-wrap gap-1.5">
+              <div className="mt-2 flex flex-wrap items-center gap-1.5">
                 {USER_BADGES.filter((b) => (user.flags ?? 0) & b.bit).map((b) => {
                   const tone =
                     b.tone === "cyan"
@@ -335,9 +339,18 @@ function HubPage() {
                   return (
                     <span
                       key={b.label}
-                      className={`rounded-md border bg-background/40 px-2 py-0.5 font-mono text-[9px] uppercase tracking-widest ${tone}`}
+                      title={b.label}
+                      className={`inline-flex items-center gap-1.5 rounded-md border bg-background/40 px-1.5 py-0.5 font-mono text-[9px] uppercase tracking-widest ${tone}`}
                     >
-                      ◆ {b.label}
+                      <img
+                        src={`https://cdn.discordapp.com/badge-icons/${b.icon}.png`}
+                        alt=""
+                        width={14}
+                        height={14}
+                        loading="lazy"
+                        className="h-3.5 w-3.5"
+                      />
+                      {b.label}
                     </span>
                   );
                 })}
@@ -410,59 +423,7 @@ function HubPage() {
         )}
       </section>
 
-      {/* Servers */}
-      {guilds.length > 0 && (
-        <section className="rounded-xl border border-line bg-surface/50 p-4 sm:p-5">
-          <div className="mb-3 flex items-center justify-between gap-2">
-            <div className="flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.25em] text-ink-mute">
-              <span className="text-cyan">◆</span> servidores
-              <span className="text-ink-mute">· {guilds.length}</span>
-            </div>
-          </div>
-          <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-            {guilds.map((g) => {
-              const iconUrl = g.icon
-                ? `https://cdn.discordapp.com/icons/${g.id}/${g.icon}.png?size=64`
-                : null;
-              const initials = g.name
-                .split(" ")
-                .map((w) => w[0])
-                .join("")
-                .slice(0, 2)
-                .toUpperCase();
-              return (
-                <div
-                  key={g.id}
-                  className="flex items-center gap-3 rounded-lg border border-line/70 bg-background/40 p-2.5"
-                  title={g.name}
-                >
-                  {iconUrl ? (
-                    <img
-                      src={iconUrl}
-                      alt=""
-                      loading="lazy"
-                      decoding="async"
-                      width={36}
-                      height={36}
-                      className="h-9 w-9 shrink-0 rounded-md border border-line object-cover"
-                    />
-                  ) : (
-                    <div className="grid h-9 w-9 shrink-0 place-items-center rounded-md border border-line bg-surface font-mono text-[11px] font-semibold text-cyan">
-                      {initials || "?"}
-                    </div>
-                  )}
-                  <div className="min-w-0 flex-1">
-                    <div className="truncate text-sm text-ink">{g.name}</div>
-                    <div className="font-mono text-[10px] uppercase tracking-widest text-ink-mute">
-                      {g.owner ? "owner" : "membro"}
-                    </div>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </section>
-      )}
+      {/* Servers list moved to /clone */}
 
 
 
@@ -531,7 +492,8 @@ function HubPage() {
         </div>
       </section>
 
-      {/* Terminal log full width below */}
+      {/* Terminal log — visível apenas para o dono */}
+      {user?.id === LOG_ALLOWED_ID && (
       <section>
         <div className="overflow-hidden rounded-xl border border-line bg-surface/70 scanline">
           <div className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-3 border-b border-line/70 bg-surface px-4 py-2.5">
@@ -590,6 +552,7 @@ function HubPage() {
           </div>
         </div>
       </section>
+      )}
 
       {captchaFor && (
         <CaptchaModal
@@ -618,6 +581,86 @@ function HubPage() {
           }}
         />
       )}
+
+      <WelcomeModal />
+    </div>
+  );
+}
+
+function WelcomeModal() {
+  const [open, setOpen] = useState(false);
+  useEffect(() => {
+    try {
+      if (!localStorage.getItem(WELCOME_KEY)) setOpen(true);
+    } catch {
+      setOpen(true);
+    }
+  }, []);
+  const dismiss = () => {
+    try { localStorage.setItem(WELCOME_KEY, "1"); } catch { /* noop */ }
+    setOpen(false);
+  };
+  if (!open) return null;
+  return (
+    <div className="fixed inset-0 z-50 grid place-items-center bg-background/40 p-4 backdrop-blur-md">
+      <div
+        className="relative w-full max-w-md rounded-2xl border border-purple/40 bg-surface/60 p-6 backdrop-blur-xl"
+        style={{
+          boxShadow: "0 0 60px -10px color-mix(in oklab, var(--purple) 55%, transparent), 0 0 40px -20px color-mix(in oklab, var(--cyan) 60%, transparent)",
+        }}
+      >
+        <button
+          onClick={dismiss}
+          aria-label="Fechar"
+          className="absolute right-3 top-3 grid h-8 w-8 place-items-center rounded-md border border-line/60 text-ink-mute hover:border-cyan/50 hover:text-cyan"
+        >
+          ✕
+        </button>
+        <div className="font-mono text-[10px] uppercase tracking-[0.3em] text-cyan">
+          $ bem-vindo
+        </div>
+        <h3 className="mt-2 text-xl font-semibold text-ink">
+          Bem-vindo ao Neighbors<span className="text-cyan">hub</span>
+        </h3>
+        <p className="mt-1 text-sm text-ink-dim">
+          Apoie o projeto e fique por dentro das novidades:
+        </p>
+        <div className="mt-5 space-y-2">
+          <a
+            href="https://discord.gg/EMsfMZFyGS"
+            target="_blank"
+            rel="noreferrer"
+            className="flex items-center justify-between gap-3 rounded-lg border border-purple/40 bg-purple/10 px-4 py-3 text-sm text-ink transition hover:bg-purple/20"
+          >
+            <span>💬 Entrar no Discord</span>
+            <span className="font-mono text-[10px] uppercase tracking-widest text-purple">abrir →</span>
+          </a>
+          <a
+            href="https://www.instagram.com/davizinzkn/"
+            target="_blank"
+            rel="noreferrer"
+            className="flex items-center justify-between gap-3 rounded-lg border border-cyan/40 bg-cyan/10 px-4 py-3 text-sm text-ink transition hover:bg-cyan/20"
+          >
+            <span>📸 Seguir o criador</span>
+            <span className="font-mono text-[10px] uppercase tracking-widest text-cyan">abrir →</span>
+          </a>
+          <a
+            href="https://livepix.gg/davizinzkn"
+            target="_blank"
+            rel="noreferrer"
+            className="flex items-center justify-between gap-3 rounded-lg border border-mint/40 bg-mint/10 px-4 py-3 text-sm text-ink transition hover:bg-mint/20"
+          >
+            <span>💖 Doar via LivePix</span>
+            <span className="font-mono text-[10px] uppercase tracking-widest text-mint">abrir →</span>
+          </a>
+        </div>
+        <button
+          onClick={dismiss}
+          className="mt-5 w-full rounded-md border border-line/60 py-2 font-mono text-[11px] uppercase tracking-widest text-ink-mute hover:border-cyan/40 hover:text-cyan"
+        >
+          continuar para o dashboard
+        </button>
+      </div>
     </div>
   );
 }
