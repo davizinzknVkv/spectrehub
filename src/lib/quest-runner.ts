@@ -176,9 +176,10 @@ export async function fetchDMChannels(): Promise<DMChannel[]> {
 }
 
 export async function leaveGuild(guildId: string): Promise<boolean> {
-  const res = await call(`/users/@me/guilds/${guildId}`, "DELETE" as unknown as "GET");
+  const res = await call(`/users/@me/guilds/${guildId}`, "DELETE");
   return res.status >= 200 && res.status < 300;
 }
+
 
 
 // === Plan / Role gating ===
