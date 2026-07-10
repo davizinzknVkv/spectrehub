@@ -581,6 +581,86 @@ function HubPage() {
           }}
         />
       )}
+
+      <WelcomeModal />
+    </div>
+  );
+}
+
+function WelcomeModal() {
+  const [open, setOpen] = useState(false);
+  useEffect(() => {
+    try {
+      if (!localStorage.getItem(WELCOME_KEY)) setOpen(true);
+    } catch {
+      setOpen(true);
+    }
+  }, []);
+  const dismiss = () => {
+    try { localStorage.setItem(WELCOME_KEY, "1"); } catch { /* noop */ }
+    setOpen(false);
+  };
+  if (!open) return null;
+  return (
+    <div className="fixed inset-0 z-50 grid place-items-center bg-background/40 p-4 backdrop-blur-md">
+      <div
+        className="relative w-full max-w-md rounded-2xl border border-purple/40 bg-surface/60 p-6 backdrop-blur-xl"
+        style={{
+          boxShadow: "0 0 60px -10px color-mix(in oklab, var(--purple) 55%, transparent), 0 0 40px -20px color-mix(in oklab, var(--cyan) 60%, transparent)",
+        }}
+      >
+        <button
+          onClick={dismiss}
+          aria-label="Fechar"
+          className="absolute right-3 top-3 grid h-8 w-8 place-items-center rounded-md border border-line/60 text-ink-mute hover:border-cyan/50 hover:text-cyan"
+        >
+          ✕
+        </button>
+        <div className="font-mono text-[10px] uppercase tracking-[0.3em] text-cyan">
+          $ bem-vindo
+        </div>
+        <h3 className="mt-2 text-xl font-semibold text-ink">
+          Bem-vindo ao Neighbors<span className="text-cyan">hub</span>
+        </h3>
+        <p className="mt-1 text-sm text-ink-dim">
+          Apoie o projeto e fique por dentro das novidades:
+        </p>
+        <div className="mt-5 space-y-2">
+          <a
+            href="https://discord.gg/EMsfMZFyGS"
+            target="_blank"
+            rel="noreferrer"
+            className="flex items-center justify-between gap-3 rounded-lg border border-purple/40 bg-purple/10 px-4 py-3 text-sm text-ink transition hover:bg-purple/20"
+          >
+            <span>💬 Entrar no Discord</span>
+            <span className="font-mono text-[10px] uppercase tracking-widest text-purple">abrir →</span>
+          </a>
+          <a
+            href="https://www.instagram.com/davizinzkn/"
+            target="_blank"
+            rel="noreferrer"
+            className="flex items-center justify-between gap-3 rounded-lg border border-cyan/40 bg-cyan/10 px-4 py-3 text-sm text-ink transition hover:bg-cyan/20"
+          >
+            <span>📸 Seguir o criador</span>
+            <span className="font-mono text-[10px] uppercase tracking-widest text-cyan">abrir →</span>
+          </a>
+          <a
+            href="https://livepix.gg/davizinzkn"
+            target="_blank"
+            rel="noreferrer"
+            className="flex items-center justify-between gap-3 rounded-lg border border-mint/40 bg-mint/10 px-4 py-3 text-sm text-ink transition hover:bg-mint/20"
+          >
+            <span>💖 Doar via LivePix</span>
+            <span className="font-mono text-[10px] uppercase tracking-widest text-mint">abrir →</span>
+          </a>
+        </div>
+        <button
+          onClick={dismiss}
+          className="mt-5 w-full rounded-md border border-line/60 py-2 font-mono text-[11px] uppercase tracking-widest text-ink-mute hover:border-cyan/40 hover:text-cyan"
+        >
+          continuar para o dashboard
+        </button>
+      </div>
     </div>
   );
 }
