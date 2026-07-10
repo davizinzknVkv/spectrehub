@@ -49,6 +49,16 @@ const proxyInput = z.object({
 export const discordProxy = createServerFn({ method: "POST" })
   .inputValidator((input) => proxyInput.parse(input))
   .handler(async ({ data }) => {
+    const ip = clientIp(getRequest());
+    const rl = rateLimit(`proxy:${ip}`, 60, 60_000);
+    if (!rl.ok) {
+      return {
+        status: 429,
+        body: JSON.stringify({
+          message: `Muitas requisições. Aguarde ${Math.ceil(rl.retryAfterMs / 1000)}s.`,
+        }),
+      };
+    }
     const xsp = data.xSuperProperties?.trim() || DEFAULT_XSP;
     const ua = data.userAgent?.trim() || DEFAULT_UA;
     return await discordCall(data.token, xsp, ua, data.endpoint, data.method, data.body ?? null);
