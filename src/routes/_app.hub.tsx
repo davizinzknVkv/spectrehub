@@ -1417,9 +1417,10 @@ function DonorsCard() {
           <iframe
             src="https://widget.livepix.gg/embed/2002a30e-85b8-48d8-8f74-6e1e7f57b39e"
             title="Doações LivePix"
-            className="h-[180px] w-full rounded-lg border-0 bg-transparent"
+            className="h-[360px] w-full rounded-lg border-0 bg-transparent"
             loading="lazy"
           />
+
         </div>
       </div>
       {DONORS.length > 0 && (
