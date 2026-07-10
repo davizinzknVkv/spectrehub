@@ -1422,11 +1422,12 @@ function DonorsCard() {
           </div>
           <iframe
             key={donationsNonce}
-            src={`https://widget.livepix.gg/embed/2002a30e-85b8-48d8-8f74-6e1e7f57b39e?t=${donationsNonce}`}
+            src={`https://widget.livepix.gg/embed/567da913-a34b-4517-8b00-2be51f004bf6?t=${donationsNonce}`}
             title="Doações LivePix"
             className="h-[360px] w-full rounded-lg border-0 bg-transparent"
             loading="lazy"
           />
+
 
 
         </div>
