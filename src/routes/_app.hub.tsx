@@ -473,6 +473,9 @@ function HubPage() {
 
       <QuickActions />
 
+      <DonorsCard />
+
+
 
       <WelcomeModal />
     </div>
@@ -1356,6 +1359,74 @@ export function MiniStat({
         {label}
       </div>
       <div className={`mt-0.5 font-mono text-sm ${c}`}>{value}</div>
+    </div>
+  );
+}
+
+
+type Donor = { name: string; amount: string; tier: "boost" | "premium" | "apoiador"; note?: string };
+
+const DONORS: Donor[] = [
+  { name: "Kaio", amount: "R$ 50", tier: "boost", note: "Boost lifetime" },
+  { name: "Lucas M.", amount: "R$ 25", tier: "premium", note: "Premium 30d" },
+  { name: "Anônimo", amount: "R$ 15", tier: "apoiador" },
+  { name: "Marina", amount: "R$ 10", tier: "apoiador", note: "Obrigado! 💜" },
+];
+
+function DonorsCard() {
+  const tierStyle = (t: Donor["tier"]) =>
+    t === "boost"
+      ? "bg-fuchsia-500/15 text-fuchsia-300 border-fuchsia-400/30"
+      : t === "premium"
+        ? "bg-amber-500/15 text-amber-300 border-amber-400/30"
+        : "bg-mint/15 text-mint border-mint/30";
+  const tierLabel = (t: Donor["tier"]) =>
+    t === "boost" ? "Boost" : t === "premium" ? "Premium" : "Apoiador";
+
+  return (
+    <div className="mt-6 rounded-2xl border border-white/10 bg-black/30 p-5 backdrop-blur">
+      <div className="flex items-center justify-between gap-3">
+        <div>
+          <h3 className="flex items-center gap-2 text-lg font-semibold text-white">
+            💜 Doadores
+          </h3>
+          <p className="mt-0.5 text-xs text-white/60">
+            Quem mantém o Neighborshub online. Muito obrigado!
+          </p>
+        </div>
+        <a
+          href="https://discord.gg/neighborshub"
+          target="_blank"
+          rel="noreferrer"
+          className="rounded-lg border border-white/15 bg-white/5 px-3 py-1.5 text-xs font-medium text-white/80 transition hover:bg-white/10"
+        >
+          Apoiar
+        </a>
+      </div>
+      <ul className="mt-4 grid gap-2 sm:grid-cols-2">
+        {DONORS.map((d, i) => (
+          <li
+            key={i}
+            className="flex items-center justify-between gap-3 rounded-xl border border-white/10 bg-white/[0.03] px-3 py-2.5"
+          >
+            <div className="flex items-center gap-3 min-w-0">
+              <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-fuchsia-500/40 to-indigo-500/40 text-sm font-bold text-white">
+                {d.name.charAt(0).toUpperCase()}
+              </div>
+              <div className="min-w-0">
+                <div className="truncate text-sm font-medium text-white">{d.name}</div>
+                {d.note && <div className="truncate text-[11px] text-white/50">{d.note}</div>}
+              </div>
+            </div>
+            <div className="flex shrink-0 flex-col items-end gap-1">
+              <span className="font-mono text-xs text-white/80">{d.amount}</span>
+              <span className={`rounded-md border px-1.5 py-0.5 text-[10px] font-medium ${tierStyle(d.tier)}`}>
+                {tierLabel(d.tier)}
+              </span>
+            </div>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }
