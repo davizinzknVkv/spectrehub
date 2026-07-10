@@ -635,33 +635,48 @@ function InfoField({
   hint,
   badge,
   badgeTone,
+  sensitive,
 }: {
   label: string;
   value: string;
   hint?: string;
   badge?: string;
   badgeTone?: "cyan" | "mint" | "amber";
+  sensitive?: boolean;
 }) {
+  const [revealed, setRevealed] = useState(false);
   const tone =
     badgeTone === "mint"
       ? "border-mint/30 text-mint"
       : badgeTone === "amber"
         ? "border-amber/30 text-amber"
         : "border-cyan/30 text-cyan";
+  const hidden = sensitive && !revealed && value !== "—";
+  const shown = hidden ? "•".repeat(Math.min(value.length, 14)) : value;
   return (
     <div className="rounded-lg border border-line/70 bg-background/40 p-3">
       <div className="flex items-center justify-between gap-2">
         <div className="font-mono text-[10px] uppercase tracking-[0.25em] text-ink-mute">
           {label}
         </div>
-        {badge && (
-          <span className={`rounded border px-1.5 py-0.5 font-mono text-[9px] uppercase tracking-widest ${tone}`}>
-            {badge}
-          </span>
-        )}
+        <div className="flex items-center gap-1.5">
+          {badge && (
+            <span className={`rounded border px-1.5 py-0.5 font-mono text-[9px] uppercase tracking-widest ${tone}`}>
+              {badge}
+            </span>
+          )}
+          {sensitive && value !== "—" && (
+            <button
+              onClick={() => setRevealed((v) => !v)}
+              className="rounded border border-line/70 px-1.5 py-0.5 font-mono text-[9px] uppercase tracking-widest text-ink-mute hover:border-cyan/40 hover:text-cyan"
+            >
+              {revealed ? "ocultar" : "mostrar"}
+            </button>
+          )}
+        </div>
       </div>
-      <div className="mt-1.5 truncate text-sm text-ink" title={value}>
-        {value}
+      <div className="mt-1.5 truncate text-sm text-ink" title={revealed ? value : undefined}>
+        {shown}
       </div>
       {hint && <div className="mt-0.5 font-mono text-[10px] text-ink-mute">{hint}</div>}
     </div>
