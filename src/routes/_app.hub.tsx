@@ -1369,6 +1369,12 @@ type Donor = { name: string; amount: string; tier: "boost" | "premium" | "apoiad
 const DONORS: Donor[] = [];
 
 function DonorsCard() {
+  const [donationsNonce, setDonationsNonce] = useState(0);
+  useEffect(() => {
+    const id = setInterval(() => setDonationsNonce((n) => n + 1), 10000);
+    return () => clearInterval(id);
+  }, []);
+
   const tierStyle = (t: Donor["tier"]) =>
     t === "boost"
       ? "bg-fuchsia-500/15 text-fuchsia-300 border-fuchsia-400/30"
@@ -1415,11 +1421,13 @@ function DonorsCard() {
             Últimas doações
           </div>
           <iframe
-            src="https://widget.livepix.gg/embed/2002a30e-85b8-48d8-8f74-6e1e7f57b39e"
+            key={donationsNonce}
+            src={`https://widget.livepix.gg/embed/2002a30e-85b8-48d8-8f74-6e1e7f57b39e?t=${donationsNonce}`}
             title="Doações LivePix"
             className="h-[360px] w-full rounded-lg border-0 bg-transparent"
             loading="lazy"
           />
+
 
         </div>
       </div>
