@@ -229,6 +229,22 @@ function HubPage() {
         className="overflow-hidden rounded-2xl border border-purple/25 bg-surface/60 backdrop-blur"
         style={{ boxShadow: "0 0 40px -18px color-mix(in oklab, var(--purple) 55%, transparent)" }}
       >
+        {loadError && (
+          <div className="flex flex-wrap items-center justify-between gap-3 border-b border-rose/30 bg-rose/10 px-4 py-3 text-sm text-rose sm:px-6">
+            <div>
+              <span className="mr-2 font-mono text-[10px] uppercase tracking-[0.25em] text-rose/80">
+                ⚠ perfil
+              </span>
+              {loadError}
+            </div>
+            <Link
+              to="/settings"
+              className="rounded border border-rose/40 bg-rose/10 px-2 py-1 font-mono text-[10px] uppercase tracking-widest text-rose hover:bg-rose/20"
+            >
+              revisar token
+            </Link>
+          </div>
+        )}
         {/* Banner */}
         <div
           className="relative h-24 w-full sm:h-32"
