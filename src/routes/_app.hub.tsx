@@ -3,7 +3,6 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { toast } from "sonner";
 import {
   fetchAvailableQuests,
-  fetchGuilds,
   fetchOrbs,
   fetchUserInfo,
   fetchUserPlan,
@@ -11,7 +10,6 @@ import {
   PLAN_LIMITS,
   runAll,
   runQuest,
-  type Guild,
 } from "@/lib/quest-runner";
 import { useQuestStore, type Quest } from "@/lib/quest-store";
 
