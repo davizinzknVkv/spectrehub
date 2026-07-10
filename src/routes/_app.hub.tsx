@@ -811,9 +811,20 @@ function MissionCard({
             alt=""
             loading="lazy"
             decoding="async"
+            onLoad={(e) =>
+              console.log(
+                `%c[quest-img ✓] ${quest.questName}`,
+                "color:#4ade80",
+                e.currentTarget.src,
+              )
+            }
             onError={(e) => {
               const img = e.currentTarget;
               const tried = img.dataset.tried ?? "0";
+              console.warn(
+                `[quest-img ✗] ${quest.questName} attempt=${tried} failed:`,
+                img.src,
+              );
               if (tried === "0" && quest.imageUrl) {
                 img.dataset.tried = "1";
                 img.src = quest.imageUrl.replace("/quests/", "/assets/quests/");
@@ -821,6 +832,7 @@ function MissionCard({
                 img.dataset.tried = "2";
                 img.src = quest.imageUrl.replace(/\.png$/, ".jpg");
               } else {
+                console.error(`[quest-img ✗✗] gave up on ${quest.questName}`);
                 img.style.opacity = "0";
               }
             }}
