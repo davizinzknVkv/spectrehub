@@ -1398,14 +1398,31 @@ function DonorsCard() {
           Apoiar
         </a>
       </div>
-      {DONORS.length === 0 ? (
-        <div className="mt-4 rounded-xl border border-dashed border-white/10 bg-white/[0.02] px-4 py-6 text-center">
-          <div className="text-sm text-white/70">Ainda não há doadores por aqui.</div>
-          <div className="mt-1 text-xs text-white/50">
-            Seu nome aparece aqui automaticamente após confirmarmos sua doação via Pix.
+      <div className="mt-4 grid gap-4 lg:grid-cols-2">
+        <div className="rounded-xl border border-white/10 bg-white/[0.02] p-3">
+          <div className="mb-2 font-mono text-[10px] uppercase tracking-[0.25em] text-white/50">
+            Meta
           </div>
+          <iframe
+            src="https://widget.livepix.gg/embed/a54bd0f8-2254-4afe-92e0-8422aa984ff1"
+            title="Meta LivePix"
+            className="h-[180px] w-full rounded-lg border-0 bg-transparent"
+            loading="lazy"
+          />
         </div>
-      ) : (
+        <div className="rounded-xl border border-white/10 bg-white/[0.02] p-3">
+          <div className="mb-2 font-mono text-[10px] uppercase tracking-[0.25em] text-white/50">
+            Últimas doações
+          </div>
+          <iframe
+            src="https://widget.livepix.gg/embed/2002a30e-85b8-48d8-8f74-6e1e7f57b39e"
+            title="Doações LivePix"
+            className="h-[180px] w-full rounded-lg border-0 bg-transparent"
+            loading="lazy"
+          />
+        </div>
+      </div>
+      {DONORS.length > 0 && (
         <ul className="mt-4 grid gap-2 sm:grid-cols-2">
           {DONORS.map((d, i) => (
             <li
@@ -1431,6 +1448,7 @@ function DonorsCard() {
           ))}
         </ul>
       )}
+
     </div>
   );
 }
