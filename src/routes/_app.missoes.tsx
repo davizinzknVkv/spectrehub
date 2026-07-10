@@ -60,7 +60,7 @@ function MissoesPage() {
         .catch(() => {});
     };
     refresh();
-    const id = setInterval(refresh, 5000);
+    const id = setInterval(refresh, 30_000);
     return () => clearInterval(id);
   }, [creds, setPlan]);
 
