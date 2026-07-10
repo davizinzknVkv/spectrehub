@@ -166,22 +166,6 @@ function SidebarBody({
                   </Link>
                 );
               })}
-                return (
-                  <Link
-                    key={`${item.to}-${item.label}`}
-                    to={item.to}
-                    hash={"hash" in item ? item.hash : undefined}
-                    className={`flex items-center gap-3 rounded-lg px-3 py-2 text-sm transition ${
-                      active
-                        ? "bg-gradient-to-r from-cyan/10 to-purple/10 text-ink border border-purple/30"
-                        : "text-ink-dim hover:bg-surface hover:text-ink border border-transparent"
-                    }`}
-                  >
-                    <Icon className={`h-4 w-4 ${active ? "text-cyan" : "text-purple/70"}`} />
-                    <span>{item.label}</span>
-                  </Link>
-                );
-              })}
             </div>
 
           </div>
