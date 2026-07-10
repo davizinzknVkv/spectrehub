@@ -239,42 +239,45 @@ function HubPage() {
     : "linear-gradient(135deg, color-mix(in oklab, var(--cyan) 40%, transparent), color-mix(in oklab, var(--surface-2) 90%, transparent))";
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-6 sm:space-y-8">
       {/* Header */}
-      <div className="flex flex-wrap items-end justify-between gap-3">
-        <div>
-          <h1 className="text-2xl font-semibold tracking-tight text-ink sm:text-3xl">Dashboard</h1>
+      <div className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-3">
+        <div className="min-w-0">
+          <h1 className="truncate text-2xl font-semibold tracking-tight text-ink sm:text-3xl">
+            Dashboard
+          </h1>
           <p className="mt-1 text-sm text-ink-dim">Visão geral da sua conta e estatísticas.</p>
         </div>
-        <div className="flex flex-wrap gap-2">
+        {running && (
           <button
-            onClick={loadQuests}
-            disabled={loadingQuests || running}
-            className="rounded-md bg-cyan px-4 py-2 font-mono text-xs font-semibold uppercase tracking-widest text-primary-foreground transition hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-40"
+            onClick={requestStop}
+            className="shrink-0 rounded-md border border-rose/40 bg-rose/10 px-3 py-2 font-mono text-[11px] font-semibold uppercase tracking-widest text-rose hover:bg-rose/20 sm:px-4"
           >
-            {loadingQuests ? "sondando…" : "→ scan missões"}
+            ■ stop
           </button>
-          {running && (
-            <button
-              onClick={requestStop}
-              className="rounded-md border border-rose/40 bg-rose/10 px-4 py-2 font-mono text-xs font-semibold uppercase tracking-widest text-rose hover:bg-rose/20"
-            >
-              ■ stop
-            </button>
-          )}
-        </div>
+        )}
       </div>
 
-      {/* Hero profile card */}
-      <section className="overflow-hidden rounded-2xl border border-line bg-surface/60">
+      {/* Unified profile + stats + account */}
+      <section
+        className="overflow-hidden rounded-2xl border border-purple/25 bg-surface/60 backdrop-blur"
+        style={{ boxShadow: "0 0 40px -18px color-mix(in oklab, var(--purple) 55%, transparent)" }}
+      >
+        {/* Banner */}
         <div
-          className="relative h-28 w-full sm:h-32"
-          style={bannerUrl ? { backgroundImage: `url(${bannerUrl})`, backgroundSize: "cover", backgroundPosition: "center" } : { background: accentBg }}
+          className="relative h-24 w-full sm:h-32"
+          style={
+            bannerUrl
+              ? { backgroundImage: `url(${bannerUrl})`, backgroundSize: "cover", backgroundPosition: "center" }
+              : { background: accentBg }
+          }
         >
           {!bannerUrl && <div className="absolute inset-0 grid-bg opacity-30" />}
-          <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-surface/95 to-transparent" />
+          <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-surface via-surface/70 to-transparent" />
         </div>
-        <div className="flex flex-wrap items-center gap-4 px-5 pb-5 -mt-8 sm:px-6">
+
+        {/* Identity row */}
+        <div className="grid grid-cols-[auto_minmax(0,1fr)] items-end gap-3 px-4 pb-4 -mt-10 sm:grid-cols-[auto_minmax(0,1fr)_auto] sm:gap-4 sm:px-6 sm:pb-5">
           {avatarUrl && (
             <img
               src={avatarUrl}
@@ -283,122 +286,101 @@ function HubPage() {
               height={80}
               decoding="async"
               fetchPriority="high"
-              className="h-20 w-20 shrink-0 rounded-full border-4 border-surface object-cover"
+              className="h-16 w-16 shrink-0 rounded-full border-4 border-surface object-cover sm:h-20 sm:w-20"
+              style={{ boxShadow: "0 0 24px -4px color-mix(in oklab, var(--purple) 60%, transparent)" }}
             />
           )}
-          <div className="min-w-0 flex-1 pt-8">
+          <div className="min-w-0 pt-2 sm:pt-10">
             <div className="flex flex-wrap items-center gap-2">
-              <h2 className="truncate text-xl font-semibold text-ink sm:text-2xl">
+              <h2 className="truncate text-lg font-semibold text-ink sm:text-2xl">
                 {user?.global_name || user?.username || "—"}
               </h2>
               {user?.mfa_enabled && (
-                <span className="rounded border border-mint/40 px-1.5 py-0.5 font-mono text-[9px] uppercase tracking-widest text-mint">2fa</span>
+                <span className="rounded border border-mint/40 px-1.5 py-0.5 font-mono text-[9px] uppercase tracking-widest text-mint">
+                  2fa
+                </span>
               )}
               {user?.premium_type ? (
-                <span className="rounded border border-cyan/40 px-1.5 py-0.5 font-mono text-[9px] uppercase tracking-widest text-cyan">nitro</span>
+                <span className="rounded border border-purple/50 px-1.5 py-0.5 font-mono text-[9px] uppercase tracking-widest text-purple">
+                  nitro
+                </span>
               ) : null}
             </div>
-            <div className="mt-0.5 font-mono text-xs text-ink-mute">
+            <div className="mt-0.5 truncate font-mono text-xs text-ink-mute">
               {user?.username && <>@{user.username}</>}
               {running && <span className="ml-2 text-mint">· executando missão…</span>}
               {!running && <span className="ml-2 text-ink-mute">· nenhuma atividade detectada</span>}
             </div>
           </div>
+          {user?.id && (
+            <button
+              onClick={copyId}
+              className="col-span-2 justify-self-start rounded border border-purple/40 bg-purple/10 px-2 py-1 font-mono text-[10px] uppercase tracking-widest text-purple hover:bg-purple/20 sm:col-span-1 sm:justify-self-end"
+            >
+              copiar id
+            </button>
+          )}
         </div>
-      </section>
 
-      {/* Stat grid */}
-      <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-        <StatCard
-          label="Usuário"
-          value={user?.global_name || user?.username || "—"}
-          tone="cyan"
-          hint={user?.id ? `id: ${user.id}` : "—"}
-        />
-        <StatCard label="Servidores" value={String(guilds.length)} tone="mint" hint="entrou" />
-        <StatCard label="Missões" value={String(quests.length)} tone="amber" hint={`${orbQuests} com orbs`} />
-        <StatCard
-          label="Idade da conta"
-          value={created ? String(Math.floor((Date.now() - created.getTime()) / 86400000)) : "—"}
-          tone="cyan"
-          hint={created ? `dias desde criação · ${created.toLocaleDateString("pt-BR")}` : "—"}
-        />
-      </div>
+        {/* Stat grid (primary) */}
+        <div className="grid gap-2 border-t border-line/60 px-4 py-4 sm:grid-cols-2 sm:gap-3 sm:px-6 lg:grid-cols-4">
+          <StatCard
+            label="Usuário"
+            value={user?.global_name || user?.username || "—"}
+            tone="cyan"
+            hint={user?.id ? `id: ${user.id}` : "—"}
+          />
+          <StatCard label="Servidores" value={String(guilds.length)} tone="purple" hint="entrou" />
+          <StatCard
+            label="Missões"
+            value={String(quests.length)}
+            tone="cyan"
+            hint={`${orbQuests} com orbs`}
+          />
+          <StatCard
+            label="Idade da conta"
+            value={created ? String(Math.floor((Date.now() - created.getTime()) / 86400000)) : "—"}
+            tone="purple"
+            hint={created ? `dias · ${created.toLocaleDateString("pt-BR")}` : "—"}
+          />
+        </div>
 
-      {/* Plan banner */}
-      <PlanBanner
-        plan={plan}
-        limits={limits}
-        usedToday={usedToday}
-        remaining={remaining}
-        cooldownText={cooldownText}
-        cooldownLeft={cooldownLeft}
-      />
-
-      {/* Secondary stats */}
-      <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-        <StatCard label="Orbs" value={(orbs ?? 0).toLocaleString("pt-BR")} tone="cyan" hint="saldo atual" />
-        <StatCard
-          label="Orbs coletadas"
-          value={totalOrbsEarned.toLocaleString("pt-BR")}
-          tone="amber"
-          hint="total do histórico"
-        />
-        <StatCard
-          label="Orbs usadas"
-          value={Math.max(0, totalOrbsEarned - (orbs ?? 0)).toLocaleString("pt-BR")}
-          tone="mint"
-          hint="gastas na loja"
-        />
-        <StatCard
-          label="Histórico"
-          value={String(runsCount)}
-          tone="mute"
-          hint={`${quests.length ? formatDuration(totalTarget) : "0s"} se rodar tudo`}
-        />
-      </div>
-
-
-      {/* Account panel */}
-      {user && (
-        <section className="rounded-xl border border-line bg-surface/50 p-4 sm:p-5">
-          <div className="mb-3 flex items-center justify-between gap-2">
-            <div className="flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.25em] text-ink-mute">
-              <span className="text-cyan">◆</span> conta
+        {/* Account details */}
+        {user && (
+          <div className="border-t border-line/60 px-4 py-4 sm:px-6">
+            <div className="mb-3 flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.25em] text-ink-mute">
+              <span className="text-purple">◆</span> detalhes da conta
             </div>
-            {user.id && (
-              <button
-                onClick={copyId}
-                className="rounded border border-line px-2 py-0.5 font-mono text-[10px] uppercase tracking-widest text-ink-mute hover:text-cyan"
-              >
-                copiar id
-              </button>
-            )}
+            <div className="grid gap-2 sm:grid-cols-2 sm:gap-3 lg:grid-cols-4">
+              <InfoField
+                label="Email"
+                value={user.email ?? "—"}
+                badge={user.verified ? "verificado" : undefined}
+                badgeTone="mint"
+              />
+              <InfoField label="Telefone" value={user.phone || "—"} />
+              <InfoField
+                label="Nitro"
+                value={PREMIUM_LABEL[user.premium_type ?? 0] ?? "—"}
+                badgeTone={user.premium_type ? "cyan" : undefined}
+              />
+              <InfoField
+                label="2FA"
+                value={user.mfa_enabled ? "ativado" : "desativado"}
+                badgeTone={user.mfa_enabled ? "mint" : "amber"}
+              />
+              <InfoField label="Locale" value={user.locale ?? "—"} />
+              <InfoField label="NSFW" value={user.nsfw_allowed ? "permitido" : "bloqueado"} />
+              <InfoField label="Flags" value={String(user.flags ?? 0)} />
+              <InfoField
+                label="Criada em"
+                value={created ? created.toLocaleDateString("pt-BR") : "—"}
+                hint={created ? `há ${formatAge(created)}` : undefined}
+              />
+            </div>
           </div>
-          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-            <InfoField label="Email" value={user.email ?? "—"} badge={user.verified ? "verificado" : undefined} badgeTone="mint" />
-            <InfoField label="Telefone" value={user.phone || "—"} />
-            <InfoField
-              label="Nitro"
-              value={PREMIUM_LABEL[user.premium_type ?? 0] ?? "—"}
-              badgeTone={user.premium_type ? "cyan" : undefined}
-            />
-            <InfoField
-              label="2FA"
-              value={user.mfa_enabled ? "ativado" : "desativado"}
-              badgeTone={user.mfa_enabled ? "mint" : "amber"}
-            />
-            <InfoField label="Locale" value={user.locale ?? "—"} />
-            <InfoField label="NSFW" value={user.nsfw_allowed ? "permitido" : "bloqueado"} />
-            <InfoField label="Flags" value={String(user.flags ?? 0)} />
-            <InfoField
-              label="Criada em"
-              value={created ? created.toLocaleDateString("pt-BR") : "—"}
-              hint={created ? `há ${formatAge(created)}` : undefined}
-            />
-          </div>
-        </section>
-      )}
+        )}
+      </section>
 
       {/* Servers */}
       {guilds.length > 0 && (
@@ -459,24 +441,33 @@ function HubPage() {
 
       {/* Missions section */}
       <section id="missoes" className="min-w-0 space-y-4 scroll-mt-20">
-        <div className="flex flex-wrap items-end justify-between gap-3">
-          <div>
+        <div className="grid grid-cols-1 gap-3 sm:grid-cols-[minmax(0,1fr)_auto] sm:items-end">
+          <div className="min-w-0">
             <h2 className="text-xl font-semibold tracking-tight text-ink sm:text-2xl">Missões</h2>
             <p className="mt-1 text-sm text-ink-dim">
               Quests disponíveis do Discord. Complete para ganhar recompensas.
             </p>
           </div>
-          <div className="flex items-center gap-2">
+          <div className="flex flex-wrap items-center gap-2 sm:justify-end">
             {quests.length > 0 && (
               <span className="font-mono text-[11px] uppercase tracking-widest text-ink-mute">
                 {quests.length} disponíveis
               </span>
             )}
             <button
+              onClick={loadQuests}
+              disabled={loadingQuests || running}
+              className="rounded-md border border-cyan/50 bg-gradient-to-r from-cyan/15 to-purple/15 px-3 py-2 font-mono text-[11px] font-semibold uppercase tracking-widest text-cyan transition hover:from-cyan/25 hover:to-purple/25 disabled:cursor-not-allowed disabled:opacity-40"
+              style={{ boxShadow: "0 0 16px -6px color-mix(in oklab, var(--cyan) 60%, transparent)" }}
+            >
+              {loadingQuests ? "sondando…" : "→ scan missões"}
+            </button>
+            <button
               onClick={() => setCaptchaAll(true)}
               disabled={running || quests.length === 0 || remaining <= 0}
               title={remaining <= 0 ? `Limite diário do plano ${limits.label} atingido` : undefined}
-              className="rounded-md border border-mint/40 bg-mint/10 px-3 py-2 font-mono text-[11px] font-semibold uppercase tracking-widest text-mint transition hover:bg-mint/20 disabled:cursor-not-allowed disabled:opacity-40"
+              className="rounded-md border border-purple/50 bg-purple/15 px-3 py-2 font-mono text-[11px] font-semibold uppercase tracking-widest text-purple transition hover:bg-purple/25 disabled:cursor-not-allowed disabled:opacity-40"
+              style={{ boxShadow: "0 0 16px -6px color-mix(in oklab, var(--purple) 60%, transparent)" }}
             >
               ▶ run all
             </button>
@@ -653,34 +644,47 @@ function StatCard({
   label: string;
   value: string;
   hint: string;
-  tone: "cyan" | "mint" | "amber" | "mute";
+  tone: "cyan" | "purple" | "mint" | "amber" | "mute";
 }) {
   const accent =
     tone === "cyan"
       ? "text-cyan"
-      : tone === "mint"
-        ? "text-mint"
-        : tone === "amber"
-          ? "text-amber"
-          : "text-ink";
-  const glow =
-    tone === "mute"
-      ? ""
-      : "before:absolute before:inset-x-0 before:top-0 before:h-px before:bg-gradient-to-r before:from-transparent before:to-transparent before:opacity-70";
+      : tone === "purple"
+        ? "text-purple"
+        : tone === "mint"
+          ? "text-mint"
+          : tone === "amber"
+            ? "text-amber"
+            : "text-ink";
+  const border =
+    tone === "cyan"
+      ? "border-cyan/40"
+      : tone === "purple"
+        ? "border-purple/40"
+        : tone === "mint"
+          ? "border-mint/40"
+          : tone === "amber"
+            ? "border-amber/40"
+            : "border-line";
   return (
     <div
-      className={`relative overflow-hidden rounded-xl border border-line bg-surface/60 p-4 backdrop-blur ${glow}`}
+      className={`relative overflow-hidden rounded-xl border ${border} bg-surface/60 p-3 backdrop-blur sm:p-4`}
       style={{
-        boxShadow: "inset 0 1px 0 color-mix(in oklab, var(--cyan) 6%, transparent)",
+        boxShadow:
+          tone === "purple"
+            ? "inset 0 1px 0 color-mix(in oklab, var(--purple) 18%, transparent), 0 0 22px -14px color-mix(in oklab, var(--purple) 65%, transparent)"
+            : tone === "cyan"
+              ? "inset 0 1px 0 color-mix(in oklab, var(--cyan) 18%, transparent), 0 0 22px -14px color-mix(in oklab, var(--cyan) 60%, transparent)"
+              : "inset 0 1px 0 color-mix(in oklab, var(--cyan) 6%, transparent)",
       }}
     >
       <div className="font-mono text-[10px] uppercase tracking-[0.25em] text-ink-mute">
         {label}
       </div>
-      <div className={`mt-2 truncate font-mono text-2xl font-semibold tabular-nums sm:text-3xl ${accent}`}>
+      <div className={`mt-2 truncate font-mono text-xl font-semibold tabular-nums sm:text-2xl lg:text-3xl ${accent}`}>
         {value}
       </div>
-      <div className="mt-1 text-xs text-ink-mute">{hint}</div>
+      <div className="mt-1 truncate text-xs text-ink-mute">{hint}</div>
     </div>
   );
 }
