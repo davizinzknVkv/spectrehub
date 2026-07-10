@@ -73,7 +73,7 @@ function requireCreds() {
   return creds;
 }
 
-async function call(endpoint: string, method: "GET" | "POST" = "GET", body?: unknown) {
+async function call(endpoint: string, method: "GET" | "POST" | "PUT" | "DELETE" = "GET", body?: unknown) {
   const creds = requireCreds();
   const res = await discordProxy({
     data: {
