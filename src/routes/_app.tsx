@@ -203,6 +203,25 @@ function SidebarBody({
 function TopBar({ onOpenMenu }: { onOpenMenu: () => void }) {
   const creds = useQuestStore((s) => s.creds);
   const setCreds = useQuestStore((s) => s.setCreds);
+  const [me, setMe] = useState<{ id?: string; username?: string; global_name?: string; avatar?: string | null } | null>(null);
+
+  useEffect(() => {
+    if (!creds) { setMe(null); return; }
+    let cancelled = false;
+    import("@/lib/quest-runner").then(({ fetchUserInfo }) =>
+      fetchUserInfo().then((u) => {
+        if (!cancelled && u) setMe(u as typeof me);
+      }).catch(() => {}),
+    );
+    return () => { cancelled = true; };
+  }, [creds]);
+
+  const avatarUrl = me?.id
+    ? me.avatar
+      ? `https://cdn.discordapp.com/avatars/${me.id}/${me.avatar}.png?size=64`
+      : `https://cdn.discordapp.com/embed/avatars/${(BigInt(me.id) >> 22n) % 6n}.png`
+    : null;
+
   return (
     <div className="sticky top-0 z-10 border-b border-line/60 bg-background/80 backdrop-blur">
       <div className="flex items-center justify-between gap-3 px-4 py-3 sm:px-6 lg:px-8">
@@ -229,12 +248,39 @@ function TopBar({ onOpenMenu }: { onOpenMenu: () => void }) {
         </div>
 
         <div className="flex items-center gap-3">
-          <span className="hidden font-mono text-[11px] uppercase tracking-widest text-ink-mute sm:inline">
-            {creds ? "conectado" : "desconectado"}
-          </span>
           <span
             className={`h-2 w-2 rounded-full ${creds ? "bg-mint pulse-dot" : "bg-amber"}`}
+            title={creds ? "conectado" : "desconectado"}
           />
+          {creds && me ? (
+            <Link
+              to="/hub"
+              className="flex items-center gap-2.5 rounded-full border border-cyan/40 bg-gradient-to-r from-cyan/10 to-purple/10 py-1 pl-1 pr-3 transition hover:border-cyan/70"
+              style={{ boxShadow: "0 0 14px -6px color-mix(in oklab, var(--cyan) 60%, transparent)" }}
+            >
+              {avatarUrl && (
+                <img
+                  src={avatarUrl}
+                  alt=""
+                  width={28}
+                  height={28}
+                  className="h-7 w-7 rounded-full border border-surface object-cover"
+                />
+              )}
+              <div className="hidden min-w-0 flex-col leading-tight sm:flex">
+                <span className="truncate text-xs font-semibold text-ink">
+                  {me.global_name || me.username}
+                </span>
+                <span className="truncate font-mono text-[10px] text-ink-mute">
+                  @{me.username}
+                </span>
+              </div>
+            </Link>
+          ) : (
+            <span className="hidden font-mono text-[11px] uppercase tracking-widest text-ink-mute sm:inline">
+              {creds ? "conectado" : "desconectado"}
+            </span>
+          )}
           {creds && (
             <button
               onClick={() => setCreds(null)}
