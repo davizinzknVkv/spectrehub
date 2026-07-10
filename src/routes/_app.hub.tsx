@@ -735,6 +735,7 @@ function QuickActions() {
 }
 
 
+type Step = "intro" | "discord" | "instagram" | "donate" | null;
 
 function WelcomeModal() {
   const [step, setStep] = useState<Step>(null);
