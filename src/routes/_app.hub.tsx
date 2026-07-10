@@ -149,7 +149,6 @@ function HubPage() {
   }, [creds, setPlan]);
 
   const limits = PLAN_LIMITS[plan];
-  // Memoized so the setInterval(1s) that ticks `now` doesn't re-filter/reduce runs each tick.
   const usedToday = useMemo(() => {
     const start = new Date();
     start.setHours(0, 0, 0, 0);
@@ -159,7 +158,19 @@ function HubPage() {
     ).length;
   }, [runs]);
   const remaining = limits.daily === Infinity ? Infinity : Math.max(0, limits.daily - usedToday);
-  const cooldownLeft = Math.max(0, lastCompletedAt + limits.cooldownMs - now);
+  const cooldownEnd = lastCompletedAt + limits.cooldownMs;
+  // `now` só tica quando estamos em cooldown — evita re-render de 1s no hub inteiro.
+  const [now, setNow] = useState(Date.now);
+  useEffect(() => {
+    if (cooldownEnd <= Date.now()) return;
+    const id = setInterval(() => {
+      const t = Date.now();
+      setNow(t);
+      if (t >= cooldownEnd) clearInterval(id);
+    }, 1000);
+    return () => clearInterval(id);
+  }, [cooldownEnd]);
+  const cooldownLeft = Math.max(0, cooldownEnd - now);
   const gateBlocked = remaining <= 0 || cooldownLeft > 0;
   const cooldownSecs = Math.ceil(cooldownLeft / 1000);
   const cooldownText = cooldownLeft > 0
