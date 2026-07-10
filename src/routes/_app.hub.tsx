@@ -103,8 +103,23 @@ function HubPage() {
   useEffect(() => {
     if (!creds) return;
     fetchUserInfo()
-      .then((u) => u && setUser(u as typeof user))
+      .then((u) => {
+        if (!u) return;
+        setUser(u as typeof user);
+        const uid = (u as { id?: string }).id;
+        const uBio = (u as { bio?: string }).bio;
+        if (uBio) setStats((s) => ({ ...s, bio: uBio }));
+        if (uid) {
+          fetchProfileBio(uid).then((b) => b && setStats((s) => ({ ...s, bio: b }))).catch(() => {});
+        }
+      })
       .catch(() => {});
+
+    fetchGuilds().then((g) => setStats((s) => ({ ...s, guilds: g.length }))).catch(() => {});
+    fetchRelationshipsCount()
+      .then((r) => r && setStats((s) => ({ ...s, friends: r.friends })))
+      .catch(() => {});
+    fetchDMsCount().then((n) => n !== null && setStats((s) => ({ ...s, dms: n }))).catch(() => {});
 
     const refreshPlan = () => {
       fetchUserPlan()
