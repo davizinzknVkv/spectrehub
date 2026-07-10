@@ -1,7 +1,15 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { memo, useEffect, useMemo, useRef, useState } from "react";
 import { toast } from "sonner";
-import { fetchUserInfo, fetchUserPlan, PLAN_LIMITS } from "@/lib/quest-runner";
+import {
+  fetchUserInfo,
+  fetchUserPlan,
+  fetchGuilds,
+  fetchRelationshipsCount,
+  fetchDMsCount,
+  fetchProfileBio,
+  PLAN_LIMITS,
+} from "@/lib/quest-runner";
 import { useQuestStore, type Quest } from "@/lib/quest-store";
 
 export const Route = createFileRoute("/_app/hub")({
