@@ -1390,7 +1390,7 @@ function DonorsCard() {
           </p>
         </div>
         <a
-          href="https://discord.gg/neighborshub"
+          href="https://livepix.gg/davizinzkn"
           target="_blank"
           rel="noreferrer"
           className="rounded-lg border border-white/15 bg-white/5 px-3 py-1.5 text-xs font-medium text-white/80 transition hover:bg-white/10"
