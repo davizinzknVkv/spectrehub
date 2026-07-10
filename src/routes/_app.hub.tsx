@@ -773,9 +773,9 @@ const StatCard = memo(function StatCard({
       <div className="mt-1 truncate text-xs text-ink-mute">{hint}</div>
     </div>
   );
-}
+});
 
-function MissionCard({
+const MissionCard = memo(function MissionCard({
   quest,
   active,
   progress,
