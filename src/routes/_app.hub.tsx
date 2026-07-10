@@ -635,34 +635,47 @@ function StatCard({
   label: string;
   value: string;
   hint: string;
-  tone: "cyan" | "mint" | "amber" | "mute";
+  tone: "cyan" | "purple" | "mint" | "amber" | "mute";
 }) {
   const accent =
     tone === "cyan"
       ? "text-cyan"
-      : tone === "mint"
-        ? "text-mint"
-        : tone === "amber"
-          ? "text-amber"
-          : "text-ink";
-  const glow =
-    tone === "mute"
-      ? ""
-      : "before:absolute before:inset-x-0 before:top-0 before:h-px before:bg-gradient-to-r before:from-transparent before:to-transparent before:opacity-70";
+      : tone === "purple"
+        ? "text-purple"
+        : tone === "mint"
+          ? "text-mint"
+          : tone === "amber"
+            ? "text-amber"
+            : "text-ink";
+  const border =
+    tone === "cyan"
+      ? "border-cyan/40"
+      : tone === "purple"
+        ? "border-purple/40"
+        : tone === "mint"
+          ? "border-mint/40"
+          : tone === "amber"
+            ? "border-amber/40"
+            : "border-line";
   return (
     <div
-      className={`relative overflow-hidden rounded-xl border border-line bg-surface/60 p-4 backdrop-blur ${glow}`}
+      className={`relative overflow-hidden rounded-xl border ${border} bg-surface/60 p-3 backdrop-blur sm:p-4`}
       style={{
-        boxShadow: "inset 0 1px 0 color-mix(in oklab, var(--cyan) 6%, transparent)",
+        boxShadow:
+          tone === "purple"
+            ? "inset 0 1px 0 color-mix(in oklab, var(--purple) 18%, transparent), 0 0 22px -14px color-mix(in oklab, var(--purple) 65%, transparent)"
+            : tone === "cyan"
+              ? "inset 0 1px 0 color-mix(in oklab, var(--cyan) 18%, transparent), 0 0 22px -14px color-mix(in oklab, var(--cyan) 60%, transparent)"
+              : "inset 0 1px 0 color-mix(in oklab, var(--cyan) 6%, transparent)",
       }}
     >
       <div className="font-mono text-[10px] uppercase tracking-[0.25em] text-ink-mute">
         {label}
       </div>
-      <div className={`mt-2 truncate font-mono text-2xl font-semibold tabular-nums sm:text-3xl ${accent}`}>
+      <div className={`mt-2 truncate font-mono text-xl font-semibold tabular-nums sm:text-2xl lg:text-3xl ${accent}`}>
         {value}
       </div>
-      <div className="mt-1 text-xs text-ink-mute">{hint}</div>
+      <div className="mt-1 truncate text-xs text-ink-mute">{hint}</div>
     </div>
   );
 }
