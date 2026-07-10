@@ -441,24 +441,33 @@ function HubPage() {
 
       {/* Missions section */}
       <section id="missoes" className="min-w-0 space-y-4 scroll-mt-20">
-        <div className="flex flex-wrap items-end justify-between gap-3">
-          <div>
+        <div className="grid grid-cols-1 gap-3 sm:grid-cols-[minmax(0,1fr)_auto] sm:items-end">
+          <div className="min-w-0">
             <h2 className="text-xl font-semibold tracking-tight text-ink sm:text-2xl">Missões</h2>
             <p className="mt-1 text-sm text-ink-dim">
               Quests disponíveis do Discord. Complete para ganhar recompensas.
             </p>
           </div>
-          <div className="flex items-center gap-2">
+          <div className="flex flex-wrap items-center gap-2 sm:justify-end">
             {quests.length > 0 && (
               <span className="font-mono text-[11px] uppercase tracking-widest text-ink-mute">
                 {quests.length} disponíveis
               </span>
             )}
             <button
+              onClick={loadQuests}
+              disabled={loadingQuests || running}
+              className="rounded-md border border-cyan/50 bg-gradient-to-r from-cyan/15 to-purple/15 px-3 py-2 font-mono text-[11px] font-semibold uppercase tracking-widest text-cyan transition hover:from-cyan/25 hover:to-purple/25 disabled:cursor-not-allowed disabled:opacity-40"
+              style={{ boxShadow: "0 0 16px -6px color-mix(in oklab, var(--cyan) 60%, transparent)" }}
+            >
+              {loadingQuests ? "sondando…" : "→ scan missões"}
+            </button>
+            <button
               onClick={() => setCaptchaAll(true)}
               disabled={running || quests.length === 0 || remaining <= 0}
               title={remaining <= 0 ? `Limite diário do plano ${limits.label} atingido` : undefined}
-              className="rounded-md border border-mint/40 bg-mint/10 px-3 py-2 font-mono text-[11px] font-semibold uppercase tracking-widest text-mint transition hover:bg-mint/20 disabled:cursor-not-allowed disabled:opacity-40"
+              className="rounded-md border border-purple/50 bg-purple/15 px-3 py-2 font-mono text-[11px] font-semibold uppercase tracking-widest text-purple transition hover:bg-purple/25 disabled:cursor-not-allowed disabled:opacity-40"
+              style={{ boxShadow: "0 0 16px -6px color-mix(in oklab, var(--purple) 60%, transparent)" }}
             >
               ▶ run all
             </button>
