@@ -136,7 +136,7 @@ function SidebarBody({
           <div className="truncate text-sm font-semibold tracking-tight text-ink">
             Neighbors<span className="text-cyan">hub</span>
           </div>
-          <div className="font-mono text-[9px] uppercase tracking-[0.25em] text-purple">neon · v2</div>
+          <div className="font-mono text-[9px] uppercase tracking-[0.25em] text-purple">neon</div>
         </div>
       </Link>
 
