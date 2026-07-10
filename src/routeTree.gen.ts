@@ -16,6 +16,7 @@ import { Route as AppSettingsRouteImport } from './routes/_app.settings'
 import { Route as AppMissoesRouteImport } from './routes/_app.missoes'
 import { Route as AppHubRouteImport } from './routes/_app.hub'
 import { Route as AppHistoryRouteImport } from './routes/_app.history'
+import { Route as AppFarmsRouteImport } from './routes/_app.farms'
 import { Route as AppFakeRouteImport } from './routes/_app.fake'
 import { Route as AppCloneRouteImport } from './routes/_app.clone'
 import { Route as ApiPublicDiscordImageRouteImport } from './routes/api/public/discord-image'
@@ -54,6 +55,11 @@ const AppHistoryRoute = AppHistoryRouteImport.update({
   path: '/history',
   getParentRoute: () => AppRoute,
 } as any)
+const AppFarmsRoute = AppFarmsRouteImport.update({
+  id: '/farms',
+  path: '/farms',
+  getParentRoute: () => AppRoute,
+} as any)
 const AppFakeRoute = AppFakeRouteImport.update({
   id: '/fake',
   path: '/fake',
@@ -74,6 +80,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/clone': typeof AppCloneRoute
   '/fake': typeof AppFakeRoute
+  '/farms': typeof AppFarmsRoute
   '/history': typeof AppHistoryRoute
   '/hub': typeof AppHubRoute
   '/missoes': typeof AppMissoesRoute
@@ -85,6 +92,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/clone': typeof AppCloneRoute
   '/fake': typeof AppFakeRoute
+  '/farms': typeof AppFarmsRoute
   '/history': typeof AppHistoryRoute
   '/hub': typeof AppHubRoute
   '/missoes': typeof AppMissoesRoute
@@ -98,6 +106,7 @@ export interface FileRoutesById {
   '/_app': typeof AppRouteWithChildren
   '/_app/clone': typeof AppCloneRoute
   '/_app/fake': typeof AppFakeRoute
+  '/_app/farms': typeof AppFarmsRoute
   '/_app/history': typeof AppHistoryRoute
   '/_app/hub': typeof AppHubRoute
   '/_app/missoes': typeof AppMissoesRoute
@@ -111,6 +120,7 @@ export interface FileRouteTypes {
     | '/'
     | '/clone'
     | '/fake'
+    | '/farms'
     | '/history'
     | '/hub'
     | '/missoes'
@@ -122,6 +132,7 @@ export interface FileRouteTypes {
     | '/'
     | '/clone'
     | '/fake'
+    | '/farms'
     | '/history'
     | '/hub'
     | '/missoes'
@@ -134,6 +145,7 @@ export interface FileRouteTypes {
     | '/_app'
     | '/_app/clone'
     | '/_app/fake'
+    | '/_app/farms'
     | '/_app/history'
     | '/_app/hub'
     | '/_app/missoes'
@@ -199,6 +211,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppHistoryRouteImport
       parentRoute: typeof AppRoute
     }
+    '/_app/farms': {
+      id: '/_app/farms'
+      path: '/farms'
+      fullPath: '/farms'
+      preLoaderRoute: typeof AppFarmsRouteImport
+      parentRoute: typeof AppRoute
+    }
     '/_app/fake': {
       id: '/_app/fake'
       path: '/fake'
@@ -226,6 +245,7 @@ declare module '@tanstack/react-router' {
 interface AppRouteChildren {
   AppCloneRoute: typeof AppCloneRoute
   AppFakeRoute: typeof AppFakeRoute
+  AppFarmsRoute: typeof AppFarmsRoute
   AppHistoryRoute: typeof AppHistoryRoute
   AppHubRoute: typeof AppHubRoute
   AppMissoesRoute: typeof AppMissoesRoute
@@ -236,6 +256,7 @@ interface AppRouteChildren {
 const AppRouteChildren: AppRouteChildren = {
   AppCloneRoute: AppCloneRoute,
   AppFakeRoute: AppFakeRoute,
+  AppFarmsRoute: AppFarmsRoute,
   AppHistoryRoute: AppHistoryRoute,
   AppHubRoute: AppHubRoute,
   AppMissoesRoute: AppMissoesRoute,
@@ -253,13 +274,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}

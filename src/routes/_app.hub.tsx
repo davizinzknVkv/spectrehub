@@ -224,6 +224,10 @@ function HubPage() {
         )}
       </div>
 
+      {/* Avisos / Notificações */}
+      <NotificationsCard />
+
+
       {/* Unified profile + stats + account */}
       <section
         className="overflow-hidden rounded-2xl border border-purple/25 bg-surface/60 backdrop-blur"
