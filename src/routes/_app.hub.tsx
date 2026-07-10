@@ -1,7 +1,15 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { memo, useEffect, useMemo, useRef, useState } from "react";
 import { toast } from "sonner";
-import { fetchUserInfo, fetchUserPlan, PLAN_LIMITS } from "@/lib/quest-runner";
+import {
+  fetchUserInfo,
+  fetchUserPlan,
+  fetchGuilds,
+  fetchRelationshipsCount,
+  fetchDMsCount,
+  fetchProfileBio,
+  PLAN_LIMITS,
+} from "@/lib/quest-runner";
 import { useQuestStore, type Quest } from "@/lib/quest-store";
 
 export const Route = createFileRoute("/_app/hub")({
@@ -79,6 +87,12 @@ function HubPage() {
     flags?: number;
     nsfw_allowed?: boolean;
   } | null>(null);
+  const [stats, setStats] = useState<{
+    guilds: number | null;
+    friends: number | null;
+    dms: number | null;
+    bio: string | null;
+  }>({ guilds: null, friends: null, dms: null, bio: null });
   const running = useQuestStore((s) => s.running);
   const plan = useQuestStore((s) => s.plan);
   const runs = useQuestStore((s) => s.runs);
@@ -89,8 +103,23 @@ function HubPage() {
   useEffect(() => {
     if (!creds) return;
     fetchUserInfo()
-      .then((u) => u && setUser(u as typeof user))
+      .then((u) => {
+        if (!u) return;
+        setUser(u as typeof user);
+        const uid = (u as { id?: string }).id;
+        const uBio = (u as { bio?: string }).bio;
+        if (uBio) setStats((s) => ({ ...s, bio: uBio }));
+        if (uid) {
+          fetchProfileBio(uid).then((b) => b && setStats((s) => ({ ...s, bio: b }))).catch(() => {});
+        }
+      })
       .catch(() => {});
+
+    fetchGuilds().then((g) => setStats((s) => ({ ...s, guilds: g.length }))).catch(() => {});
+    fetchRelationshipsCount()
+      .then((r) => r && setStats((s) => ({ ...s, friends: r.friends })))
+      .catch(() => {});
+    fetchDMsCount().then((n) => n !== null && setStats((s) => ({ ...s, dms: n }))).catch(() => {});
 
     const refreshPlan = () => {
       fetchUserPlan()
@@ -269,22 +298,54 @@ function HubPage() {
             ) : null}
           </div>
           {user?.id && (
-            <button
-              onClick={copyId}
-              className="shrink-0 self-start rounded border border-purple/40 bg-purple/10 px-2 py-1 font-mono text-[10px] uppercase tracking-widest text-purple hover:bg-purple/20 sm:self-end"
-            >
-              copiar id
-            </button>
+            <div className="flex shrink-0 flex-wrap gap-2 self-start sm:flex-col sm:self-end">
+              <button
+                onClick={copyId}
+                className="rounded border border-purple/40 bg-purple/10 px-2 py-1 font-mono text-[10px] uppercase tracking-widest text-purple hover:bg-purple/20"
+              >
+                copiar id
+              </button>
+              <a
+                href={`https://discord.com/users/${user.id}`}
+                target="_blank"
+                rel="noreferrer"
+                className="rounded border border-cyan/40 bg-cyan/10 px-2 py-1 text-center font-mono text-[10px] uppercase tracking-widest text-cyan hover:bg-cyan/20"
+              >
+                abrir perfil
+              </a>
+            </div>
           )}
         </div>
+
+        {/* Bio */}
+        {stats.bio && (
+          <div className="border-t border-line/60 px-4 py-4 sm:px-6">
+            <div className="mb-2 font-mono text-[10px] uppercase tracking-[0.3em] text-ink-mute">
+              <span className="text-cyan">◆</span> bio
+            </div>
+            <p className="whitespace-pre-wrap text-sm leading-relaxed text-ink-dim">{stats.bio}</p>
+          </div>
+        )}
 
         {/* Stat grid (primary) */}
         <div className="grid gap-2 border-t border-line/60 px-4 py-4 sm:grid-cols-2 sm:gap-3 sm:px-6 lg:grid-cols-3">
           <StatCard
-            label="Usuário"
-            value={user?.global_name || user?.username || "—"}
+            label="Servidores"
+            value={stats.guilds === null ? "…" : String(stats.guilds)}
             tone="cyan"
-            hint={user?.id ? `id: ${user.id}` : "—"}
+            hint="guilds do usuário"
+          />
+          <StatCard
+            label="Amigos"
+            value={stats.friends === null ? "…" : String(stats.friends)}
+            tone="mint"
+            hint="relacionamentos ativos"
+          />
+          <StatCard
+            label="DMs"
+            value={stats.dms === null ? "…" : String(stats.dms)}
+            tone="purple"
+            hint="conversas abertas"
           />
           <StatCard
             label="Missões"
@@ -297,6 +358,12 @@ function HubPage() {
             value={created ? String(Math.floor((Date.now() - created.getTime()) / 86400000)) : "—"}
             tone="purple"
             hint={created ? `dias · ${created.toLocaleDateString("pt-BR")}` : "—"}
+          />
+          <StatCard
+            label="Plano"
+            value={limits.label}
+            tone={plan === "boost" ? "mint" : plan === "premium" ? "purple" : "cyan"}
+            hint={plan === "free" ? `${limits.daily}/dia · cd ${limits.cooldownMs / 60000}m` : "sem limites"}
           />
         </div>
 

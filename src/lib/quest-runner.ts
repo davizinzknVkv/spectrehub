@@ -118,6 +118,29 @@ export async function fetchGuilds(): Promise<Guild[]> {
   }));
 }
 
+export async function fetchRelationshipsCount(): Promise<{ total: number; friends: number } | null> {
+  const res = await call("/users/@me/relationships");
+  if (res.status !== 200 || !Array.isArray(res.data)) return null;
+  const list = res.data as Array<{ type: number }>;
+  return {
+    total: list.length,
+    friends: list.filter((r) => r.type === 1).length,
+  };
+}
+
+export async function fetchDMsCount(): Promise<number | null> {
+  const res = await call("/users/@me/channels");
+  if (res.status !== 200 || !Array.isArray(res.data)) return null;
+  return (res.data as unknown[]).length;
+}
+
+export async function fetchProfileBio(userId: string): Promise<string | null> {
+  const res = await call(`/users/${userId}/profile?with_mutual_guilds=false`);
+  if (res.status !== 200) return null;
+  const d = res.data as { user_profile?: { bio?: string }; user?: { bio?: string } };
+  return d.user_profile?.bio || d.user?.bio || null;
+}
+
 // === Plan / Role gating ===
 export const PLAN_GUILD_ID = "1511467436543709184";
 export const PREMIUM_ROLE_ID = "1511469574422401275";
