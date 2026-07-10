@@ -20,7 +20,9 @@
 
 @theme inline {
   --font-sans:
-    "Geist", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    "DM Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-display:
+    "Space Grotesk", "DM Sans", ui-sans-serif, system-ui, sans-serif;
   --font-mono:
     "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, "Cascadia Mono", monospace;
 
@@ -74,21 +76,21 @@
 :root {
   --radius: 0.75rem;
 
-  /* Neon cyber palette — cyan × purple on dark */
-  --void: oklch(0.15 0.03 275);
-  --surface: oklch(0.21 0.04 275);
-  --surface-2: oklch(0.26 0.05 278);
-  --line: oklch(0.78 0.18 290 / 0.18);
-  --cyan: oklch(0.85 0.17 200);
-  --cyan-dim: oklch(0.6 0.15 205);
-  --purple: oklch(0.72 0.24 300);
-  --purple-dim: oklch(0.55 0.2 300);
-  --mint: oklch(0.82 0.17 165);
-  --amber: oklch(0.82 0.17 85);
+  /* Azul profundo × ciano × roxo-ciano */
+  --void: oklch(0.14 0.05 260);
+  --surface: oklch(0.19 0.06 262);
+  --surface-2: oklch(0.24 0.07 265);
+  --line: oklch(0.75 0.16 250 / 0.2);
+  --cyan: oklch(0.86 0.16 210);
+  --cyan-dim: oklch(0.62 0.14 215);
+  --purple: oklch(0.7 0.22 285);
+  --purple-dim: oklch(0.54 0.18 285);
+  --mint: oklch(0.82 0.17 175);
+  --amber: oklch(0.83 0.16 88);
   --rose: oklch(0.7 0.2 25);
-  --ink: oklch(0.97 0.01 220);
-  --ink-dim: oklch(0.78 0.02 240);
-  --ink-mute: oklch(0.58 0.04 270);
+  --ink: oklch(0.98 0.01 240);
+  --ink-dim: oklch(0.8 0.03 245);
+  --ink-mute: oklch(0.6 0.05 260);
 
   --background: var(--void);
   --foreground: var(--ink);
@@ -126,6 +128,11 @@
       "ss01" on,
       "cv11" on;
     -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3 {
+    font-family: var(--font-display);
+    letter-spacing: -0.015em;
   }
 
   code,
