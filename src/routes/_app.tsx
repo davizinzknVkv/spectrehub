@@ -1,5 +1,6 @@
 import { createFileRoute, Outlet, Link, useRouterState } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
+import { toast } from "sonner";
 import { useQuestStore } from "@/lib/quest-store";
 import {
   LayoutDashboard,
@@ -10,7 +11,10 @@ import {
   LogOut,
   Menu,
   X,
+  Copy,
 } from "lucide-react";
+
+const DISCORD_INVITE = "https://discord.gg/neighborshub";
 
 export const Route = createFileRoute("/_app")({
   component: AppLayout,
