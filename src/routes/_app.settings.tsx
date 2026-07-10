@@ -4,6 +4,8 @@ import { toast } from "sonner";
 import { useQuestStore } from "@/lib/quest-store";
 import { fetchUserInfo } from "@/lib/quest-runner";
 import { discordLogin } from "@/lib/discord.functions";
+import { verifyTurnstile } from "@/lib/turnstile.functions";
+import { Turnstile } from "@/components/Turnstile";
 
 export const Route = createFileRoute("/_app/settings")({
   head: () => ({ meta: [{ title: "Login — Neighborshub" }] }),
