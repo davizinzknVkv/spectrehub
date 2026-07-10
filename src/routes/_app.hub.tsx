@@ -87,6 +87,7 @@ function HubPage() {
     flags?: number;
     nsfw_allowed?: boolean;
   } | null>(null);
+  const [loadError, setLoadError] = useState<string | null>(null);
   const [stats, setStats] = useState<{
     guilds: number | null;
     friends: number | null;
@@ -102,9 +103,15 @@ function HubPage() {
 
   useEffect(() => {
     if (!creds) return;
-    fetchUserInfo()
-      .then((u) => {
-        if (!u) return;
+    setLoadError(null);
+    fetchUserInfoDetailed()
+      .then((r) => {
+        if (!r.ok) {
+          setLoadError(r.message);
+          toast.error(r.message);
+          return;
+        }
+        const u = r.data;
         setUser(u as typeof user);
         const uid = (u as { id?: string }).id;
         const uBio = (u as { bio?: string }).bio;
@@ -113,7 +120,11 @@ function HubPage() {
           fetchProfileBio(uid).then((b) => b && setStats((s) => ({ ...s, bio: b }))).catch(() => {});
         }
       })
-      .catch(() => {});
+      .catch((e) => {
+        const msg = e instanceof Error ? e.message : "Erro de rede ao carregar perfil";
+        setLoadError(msg);
+        toast.error(msg);
+      });
 
     fetchGuilds().then((g) => setStats((s) => ({ ...s, guilds: g.length }))).catch(() => {});
     fetchRelationshipsCount()
