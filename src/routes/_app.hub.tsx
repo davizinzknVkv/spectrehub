@@ -587,79 +587,149 @@ function HubPage() {
   );
 }
 
+type Step = "intro" | "discord" | "instagram" | "donate" | null;
+
 function WelcomeModal() {
-  const [open, setOpen] = useState(false);
+  const [step, setStep] = useState<Step>(null);
   useEffect(() => {
     try {
-      if (!localStorage.getItem(WELCOME_KEY)) setOpen(true);
+      if (!localStorage.getItem(WELCOME_KEY)) setStep("intro");
     } catch {
-      setOpen(true);
+      setStep("intro");
     }
   }, []);
-  const dismiss = () => {
+  const finish = () => {
     try { localStorage.setItem(WELCOME_KEY, "1"); } catch { /* noop */ }
-    setOpen(false);
+    setStep(null);
   };
-  if (!open) return null;
+  if (!step) return null;
+
+  const next: Record<Exclude<Step, null>, Step> = {
+    intro: "discord",
+    discord: "instagram",
+    instagram: "donate",
+    donate: null,
+  };
+  const advance = () => {
+    const n = next[step];
+    if (n === null) finish();
+    else setStep(n);
+  };
+
+  const content: Record<Exclude<Step, null>, {
+    tag: string;
+    title: React.ReactNode;
+    body: React.ReactNode;
+    href?: string;
+    action: string;
+    tone: "cyan" | "purple" | "mint";
+  }> = {
+    intro: {
+      tag: "$ bem-vindo",
+      title: <>O que é o Neighbors<span className="text-cyan">hub</span>?</>,
+      body: (
+        <>
+          Automatize suas <span className="text-cyan">Discord Quests</span> em segundo
+          plano — assista vídeos e "jogue" sem esforço, ganhando{" "}
+          <span className="text-mint">Orbs</span> e recompensas exclusivas.
+          Totalmente client-side, seu token nunca sai criptografado do seu navegador.
+        </>
+      ),
+      action: "começar tour →",
+      tone: "cyan",
+    },
+    discord: {
+      tag: "$ comunidade",
+      title: <>Entre no nosso <span className="text-purple">Discord</span></>,
+      body: <>Suporte, avisos de atualização e canal exclusivo pra membros Premium e Boost.</>,
+      href: "https://discord.gg/EMsfMZFyGS",
+      action: "💬 abrir Discord",
+      tone: "purple",
+    },
+    instagram: {
+      tag: "$ criador",
+      title: <>Siga no <span className="text-cyan">Instagram</span></>,
+      body: <>Bastidores do projeto, novidades e outras coisas feitas pelo criador.</>,
+      href: "https://www.instagram.com/davizinzkn/",
+      action: "📸 abrir Instagram",
+      tone: "cyan",
+    },
+    donate: {
+      tag: "$ apoie",
+      title: <>Ajude o projeto a continuar <span className="text-mint">gratuito</span></>,
+      body: <>Servidores, domínio e desenvolvimento saem do bolso. Qualquer valor conta muito.</>,
+      href: "https://livepix.gg/davizinzkn",
+      action: "💖 doar via LivePix",
+      tone: "mint",
+    },
+  };
+
+  const c = content[step];
+  const toneBorder = { cyan: "border-cyan/40", purple: "border-purple/40", mint: "border-mint/40" }[c.tone];
+  const toneBg = { cyan: "bg-cyan/10 hover:bg-cyan/20", purple: "bg-purple/10 hover:bg-purple/20", mint: "bg-mint/10 hover:bg-mint/20" }[c.tone];
+  const toneText = { cyan: "text-cyan", purple: "text-purple", mint: "text-mint" }[c.tone];
+
+  const stepOrder: Exclude<Step, null>[] = ["intro", "discord", "instagram", "donate"];
+  const stepIdx = stepOrder.indexOf(step);
+
   return (
     <div className="fixed inset-0 z-50 grid place-items-center bg-background/40 p-4 backdrop-blur-md">
       <div
-        className="relative w-full max-w-md rounded-2xl border border-purple/40 bg-surface/60 p-6 backdrop-blur-xl"
+        className={`relative w-full max-w-md rounded-2xl border ${toneBorder} bg-surface/70 p-6 backdrop-blur-xl`}
         style={{
           boxShadow: "0 0 60px -10px color-mix(in oklab, var(--purple) 55%, transparent), 0 0 40px -20px color-mix(in oklab, var(--cyan) 60%, transparent)",
         }}
       >
         <button
-          onClick={dismiss}
+          onClick={finish}
           aria-label="Fechar"
           className="absolute right-3 top-3 grid h-8 w-8 place-items-center rounded-md border border-line/60 text-ink-mute hover:border-cyan/50 hover:text-cyan"
         >
           ✕
         </button>
-        <div className="font-mono text-[10px] uppercase tracking-[0.3em] text-cyan">
-          $ bem-vindo
+        <div className={`font-mono text-[10px] uppercase tracking-[0.3em] ${toneText}`}>
+          {c.tag}
         </div>
-        <h3 className="mt-2 text-xl font-semibold text-ink">
-          Bem-vindo ao Neighbors<span className="text-cyan">hub</span>
-        </h3>
-        <p className="mt-1 text-sm text-ink-dim">
-          Apoie o projeto e fique por dentro das novidades:
-        </p>
-        <div className="mt-5 space-y-2">
-          <a
-            href="https://discord.gg/EMsfMZFyGS"
-            target="_blank"
-            rel="noreferrer"
-            className="flex items-center justify-between gap-3 rounded-lg border border-purple/40 bg-purple/10 px-4 py-3 text-sm text-ink transition hover:bg-purple/20"
+        <h3 className="mt-2 text-xl font-semibold text-ink">{c.title}</h3>
+        <p className="mt-2 text-sm leading-relaxed text-ink-dim">{c.body}</p>
+
+        <div className="mt-5 flex flex-col gap-2">
+          {c.href ? (
+            <a
+              href={c.href}
+              target="_blank"
+              rel="noreferrer"
+              onClick={() => setTimeout(advance, 300)}
+              className={`flex items-center justify-center gap-2 rounded-lg border ${toneBorder} ${toneBg} px-4 py-3 text-sm font-medium text-ink transition`}
+            >
+              {c.action}
+            </a>
+          ) : (
+            <button
+              onClick={advance}
+              className={`rounded-lg border ${toneBorder} ${toneBg} px-4 py-3 text-sm font-medium text-ink transition`}
+            >
+              {c.action}
+            </button>
+          )}
+          <button
+            onClick={advance}
+            className="font-mono text-[10px] uppercase tracking-widest text-ink-mute hover:text-cyan"
           >
-            <span>💬 Entrar no Discord</span>
-            <span className="font-mono text-[10px] uppercase tracking-widest text-purple">abrir →</span>
-          </a>
-          <a
-            href="https://www.instagram.com/davizinzkn/"
-            target="_blank"
-            rel="noreferrer"
-            className="flex items-center justify-between gap-3 rounded-lg border border-cyan/40 bg-cyan/10 px-4 py-3 text-sm text-ink transition hover:bg-cyan/20"
-          >
-            <span>📸 Seguir o criador</span>
-            <span className="font-mono text-[10px] uppercase tracking-widest text-cyan">abrir →</span>
-          </a>
-          <a
-            href="https://livepix.gg/davizinzkn"
-            target="_blank"
-            rel="noreferrer"
-            className="flex items-center justify-between gap-3 rounded-lg border border-mint/40 bg-mint/10 px-4 py-3 text-sm text-ink transition hover:bg-mint/20"
-          >
-            <span>💖 Doar via LivePix</span>
-            <span className="font-mono text-[10px] uppercase tracking-widest text-mint">abrir →</span>
-          </a>
+            {stepIdx === stepOrder.length - 1 ? "concluir" : "pular →"}
+          </button>
         </div>
-        <button
-          onClick={dismiss}
-          className="mt-5 w-full rounded-md border border-line/60 py-2 font-mono text-[11px] uppercase tracking-widest text-ink-mute hover:border-cyan/40 hover:text-cyan"
-        >
-          continuar para o dashboard
-        </button>
+
+        <div className="mt-5 flex justify-center gap-1.5">
+          {stepOrder.map((s, i) => (
+            <span
+              key={s}
+              className={`h-1.5 rounded-full transition-all ${
+                i === stepIdx ? "w-6 bg-cyan" : "w-1.5 bg-line"
+              }`}
+            />
+          ))}
+        </div>
       </div>
     </div>
   );

@@ -30,6 +30,14 @@ export function Turnstile({
 }) {
   const ref = useRef<HTMLDivElement>(null);
   const idRef = useRef<string | null>(null);
+  // Keep callbacks in refs so parent re-renders don't tear down the widget
+  // (which is what caused the "captcha keeps reloading" behavior).
+  const verifyRef = useRef(onVerify);
+  const expireRef = useRef(onExpire);
+  useEffect(() => {
+    verifyRef.current = onVerify;
+    expireRef.current = onExpire;
+  }, [onVerify, onExpire]);
 
   useEffect(() => {
     if (!SITE_KEY || !ref.current) return;
@@ -44,9 +52,9 @@ export function Turnstile({
       idRef.current = window.turnstile.render(ref.current!, {
         sitekey: SITE_KEY,
         theme: "dark",
-        callback: (token) => onVerify(token),
-        "expired-callback": () => onExpire?.(),
-        "error-callback": () => onExpire?.(),
+        callback: (token) => verifyRef.current(token),
+        "expired-callback": () => expireRef.current?.(),
+        "error-callback": () => expireRef.current?.(),
       });
     };
     tryRender();
@@ -61,7 +69,9 @@ export function Turnstile({
         idRef.current = null;
       }
     };
-  }, [onVerify, onExpire]);
+    // Intentionally empty: widget must mount exactly once.
+     
+  }, []);
 
   if (!SITE_KEY) {
     return (

@@ -1,5 +1,7 @@
 import { createServerFn } from "@tanstack/react-start";
+import { getRequest } from "@tanstack/react-start/server";
 import { z } from "zod";
+import { rateLimit, clientIp } from "./rate-limit.server";
 
 const DEFAULT_XSP =
   "eyJvcyI6IldpbmRvd3MiLCJicm93c2VyIjoiQ2hyb21lIiwiZGV2aWNlIjoiIiwic3lzdGVtX2xvY2FsZSI6InB0LUJSIiwiaGFzX2NsaWVudF9tb2RzIjpmYWxzZSwiYnJvd3Nlcl91c2VyX2FnZW50IjoiTW96aWxsYS81LjAgKFdpbmRvd3MgTlQgMTAuMDsgV2luNjQ7IHg2NCkgQXBwbGVXZWJLaXQvNTM3LjM2IChLSFRNTCwgbGlrZSBHZWNrbykgQ2hyb21lLzEyMC4wLjAuMCBTYWZhcmkvNTM3LjM2IiwiYnJvd3Nlcl92ZXJzaW9uIjoiMTIwLjAuMC4wIiwib3NfdmVyc2lvbiI6IjEwIiwicmVmZXJyZXIiOiIiLCJyZWZlcnJpbmdfZG9tYWluIjoiIiwicmVsZWFzZV9jaGFubmVsIjoic3RhYmxlIiwiY2xpZW50X2J1aWxkX251bWJlciI6OTk5OTk5LCJjbGllbnRfZXZlbnRfc291cmNlIjpudWxsfQ==";
@@ -47,6 +49,16 @@ const proxyInput = z.object({
 export const discordProxy = createServerFn({ method: "POST" })
   .inputValidator((input) => proxyInput.parse(input))
   .handler(async ({ data }) => {
+    const ip = clientIp(getRequest());
+    const rl = rateLimit(`proxy:${ip}`, 60, 60_000);
+    if (!rl.ok) {
+      return {
+        status: 429,
+        body: JSON.stringify({
+          message: `Muitas requisições. Aguarde ${Math.ceil(rl.retryAfterMs / 1000)}s.`,
+        }),
+      };
+    }
     const xsp = data.xSuperProperties?.trim() || DEFAULT_XSP;
     const ua = data.userAgent?.trim() || DEFAULT_UA;
     return await discordCall(data.token, xsp, ua, data.endpoint, data.method, data.body ?? null);
@@ -85,6 +97,14 @@ async function discordAuthCall(endpoint: string, body: unknown) {
 export const discordLogin = createServerFn({ method: "POST" })
   .inputValidator((input) => loginInput.parse(input))
   .handler(async ({ data }) => {
+    const ip = clientIp(getRequest());
+    const rl = rateLimit(`login:${ip}`, 5, 60_000);
+    if (!rl.ok) {
+      return {
+        ok: false as const,
+        error: `Muitas tentativas de login. Aguarde ${Math.ceil(rl.retryAfterMs / 1000)}s.`,
+      };
+    }
     if (data.mfaCode && data.ticket) {
       const res = await discordAuthCall("/auth/mfa/totp", {
         code: data.mfaCode,
