@@ -894,7 +894,7 @@ const MissionCard = memo(function MissionCard({
       </div>
     </article>
   );
-}
+});
 
 function CaptchaModal({
   quest,
