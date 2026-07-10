@@ -94,7 +94,6 @@ function HubPage() {
     nsfw_allowed?: boolean;
   } | null>(null);
   const [loadingQuests, setLoadingQuests] = useState(false);
-  const [now, setNow] = useState(Date.now());
   const running = useQuestStore((s) => s.running);
   const activeId = useQuestStore((s) => s.activeQuestId);
   const progress = useQuestStore((s) => s.progress);
@@ -112,11 +111,6 @@ function HubPage() {
     // "auto" avoids smooth-scroll animation thrash while logs stream in
     logEnd.current?.scrollIntoView({ behavior: "auto", block: "end" });
   }, [logs]);
-
-  useEffect(() => {
-    const id = setInterval(() => setNow(Date.now()), 1000);
-    return () => clearInterval(id);
-  }, []);
 
   useEffect(() => {
     if (!creds) return;
