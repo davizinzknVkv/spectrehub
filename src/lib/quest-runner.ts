@@ -99,6 +99,21 @@ export async function fetchUserInfo() {
   return res.status === 200 ? (res.data as Record<string, unknown>) : null;
 }
 
+export async function fetchUserInfoDetailed(): Promise<
+  { ok: true; data: Record<string, unknown> } | { ok: false; status: number; message: string }
+> {
+  const res = await call("/users/@me");
+  if (res.status === 200) return { ok: true, data: res.data as Record<string, unknown> };
+  const msg =
+    (res.data as { message?: string } | null)?.message ??
+    (res.status === 401
+      ? "Token inválido ou expirado"
+      : res.status === 429
+        ? "Muitas requisições — aguarde alguns segundos"
+        : `Falha ao carregar perfil (HTTP ${res.status})`);
+  return { ok: false, status: res.status, message: msg };
+}
+
 export async function fetchOrbs(): Promise<number | null> {
   const res = await call("/users/@me/virtual-currency/balance");
   if (res.status !== 200) return null;

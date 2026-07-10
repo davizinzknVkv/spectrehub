@@ -2,7 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { memo, useEffect, useMemo, useRef, useState } from "react";
 import { toast } from "sonner";
 import {
-  fetchUserInfo,
+  fetchUserInfoDetailed,
   fetchUserPlan,
   fetchGuilds,
   fetchRelationshipsCount,
@@ -87,6 +87,7 @@ function HubPage() {
     flags?: number;
     nsfw_allowed?: boolean;
   } | null>(null);
+  const [loadError, setLoadError] = useState<string | null>(null);
   const [stats, setStats] = useState<{
     guilds: number | null;
     friends: number | null;
@@ -102,9 +103,15 @@ function HubPage() {
 
   useEffect(() => {
     if (!creds) return;
-    fetchUserInfo()
-      .then((u) => {
-        if (!u) return;
+    setLoadError(null);
+    fetchUserInfoDetailed()
+      .then((r) => {
+        if (!r.ok) {
+          setLoadError(r.message);
+          toast.error(r.message);
+          return;
+        }
+        const u = r.data;
         setUser(u as typeof user);
         const uid = (u as { id?: string }).id;
         const uBio = (u as { bio?: string }).bio;
@@ -113,7 +120,11 @@ function HubPage() {
           fetchProfileBio(uid).then((b) => b && setStats((s) => ({ ...s, bio: b }))).catch(() => {});
         }
       })
-      .catch(() => {});
+      .catch((e) => {
+        const msg = e instanceof Error ? e.message : "Erro de rede ao carregar perfil";
+        setLoadError(msg);
+        toast.error(msg);
+      });
 
     fetchGuilds().then((g) => setStats((s) => ({ ...s, guilds: g.length }))).catch(() => {});
     fetchRelationshipsCount()
@@ -218,6 +229,22 @@ function HubPage() {
         className="overflow-hidden rounded-2xl border border-purple/25 bg-surface/60 backdrop-blur"
         style={{ boxShadow: "0 0 40px -18px color-mix(in oklab, var(--purple) 55%, transparent)" }}
       >
+        {loadError && (
+          <div className="flex flex-wrap items-center justify-between gap-3 border-b border-rose/30 bg-rose/10 px-4 py-3 text-sm text-rose sm:px-6">
+            <div>
+              <span className="mr-2 font-mono text-[10px] uppercase tracking-[0.25em] text-rose/80">
+                ⚠ perfil
+              </span>
+              {loadError}
+            </div>
+            <Link
+              to="/settings"
+              className="rounded border border-rose/40 bg-rose/10 px-2 py-1 font-mono text-[10px] uppercase tracking-widest text-rose hover:bg-rose/20"
+            >
+              revisar token
+            </Link>
+          </div>
+        )}
         {/* Banner */}
         <div
           className="relative h-24 w-full sm:h-32"
