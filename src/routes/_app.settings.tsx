@@ -174,11 +174,26 @@ function EmailLoginForm({ onLogged }: { onLogged: () => void }) {
   const [mfaTicket, setMfaTicket] = useState<string | null>(null);
   const [mfaCode, setMfaCode] = useState("");
   const [loading, setLoading] = useState(false);
+  const [captchaToken, setCaptchaToken] = useState<string | null>(null);
 
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!mfaTicket && !captchaToken) {
+      toast.error("Complete o captcha antes de entrar");
+      return;
+    }
     setLoading(true);
     try {
+      if (!mfaTicket && captchaToken) {
+        const cap = await verifyTurnstile({ data: { token: captchaToken } });
+        if (!cap.ok) {
+          toast.error(cap.error);
+          setCaptchaToken(null);
+          window.turnstile?.reset();
+          setLoading(false);
+          return;
+        }
+      }
       const res = await discordLogin({
         data: mfaTicket
           ? { login, password, mfaCode, ticket: mfaTicket }
