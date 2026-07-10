@@ -75,7 +75,7 @@ function AppLayout() {
         }}
       />
 
-      <div className="mx-auto grid min-h-screen w-full max-w-[1500px] grid-cols-1 lg:grid-cols-[240px_1fr]">
+      <div className="grid min-h-screen w-full grid-cols-1 lg:grid-cols-[240px_1fr]">
         {/* Desktop sidebar */}
         <aside className="hidden border-r border-line/60 bg-surface/50 backdrop-blur lg:sticky lg:top-0 lg:block lg:h-screen">
           <SidebarBody pathname={pathname} creds={creds} setCreds={setCreds} />
