@@ -394,13 +394,9 @@ function HubPage() {
                 value={user.email ?? "—"}
                 badge={user.verified ? "verificado" : undefined}
                 badgeTone="mint"
+                sensitive
               />
-              <InfoField label="Telefone" value={user.phone || "—"} />
-              <InfoField
-                label="Nitro"
-                value={PREMIUM_LABEL[user.premium_type ?? 0] ?? "—"}
-                badgeTone={user.premium_type ? "cyan" : undefined}
-              />
+              <InfoField label="Telefone" value={user.phone || "—"} sensitive />
               <InfoField
                 label="2FA"
                 value={user.mfa_enabled ? "ativado" : "desativado"}
