@@ -128,6 +128,10 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
+      <div className="aurora-bg" aria-hidden="true">
+        <div className="grid-overlay" />
+        <div className="noise-overlay" />
+      </div>
       {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
       <Outlet />
     </QueryClientProvider>
