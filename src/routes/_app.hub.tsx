@@ -1369,6 +1369,12 @@ type Donor = { name: string; amount: string; tier: "boost" | "premium" | "apoiad
 const DONORS: Donor[] = [];
 
 function DonorsCard() {
+  const [donationsNonce, setDonationsNonce] = useState(0);
+  useEffect(() => {
+    const id = setInterval(() => setDonationsNonce((n) => n + 1), 10000);
+    return () => clearInterval(id);
+  }, []);
+
   const tierStyle = (t: Donor["tier"]) =>
     t === "boost"
       ? "bg-fuchsia-500/15 text-fuchsia-300 border-fuchsia-400/30"
