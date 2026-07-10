@@ -292,7 +292,7 @@ function HubPage() {
         </div>
 
         {/* Identity row */}
-        <div className="flex flex-col gap-4 px-4 pb-5 -mt-10 sm:flex-row sm:items-end sm:gap-5 sm:px-6">
+        <div className="flex flex-col gap-4 px-4 pb-5 pt-4 sm:flex-row sm:items-start sm:gap-5 sm:px-6">
           {avatarUrl && (
             <img
               src={avatarUrl}
@@ -301,7 +301,7 @@ function HubPage() {
               height={96}
               decoding="async"
               fetchPriority="high"
-              className="h-20 w-20 shrink-0 rounded-full border-4 border-surface object-cover sm:h-24 sm:w-24"
+              className="-mt-14 h-20 w-20 shrink-0 rounded-full border-4 border-surface object-cover sm:-mt-16 sm:h-24 sm:w-24"
               style={{ boxShadow: "0 0 24px -4px color-mix(in oklab, var(--purple) 60%, transparent)" }}
             />
           )}
