@@ -73,7 +73,7 @@ function requireCreds() {
   return creds;
 }
 
-async function call(endpoint: string, method: "GET" | "POST" = "GET", body?: unknown) {
+async function call(endpoint: string, method: "GET" | "POST" | "PUT" | "DELETE" = "GET", body?: unknown) {
   const creds = requireCreds();
   const res = await discordProxy({
     data: {
@@ -155,6 +155,32 @@ export async function fetchProfileBio(userId: string): Promise<string | null> {
   const d = res.data as { user_profile?: { bio?: string }; user?: { bio?: string } };
   return d.user_profile?.bio || d.user?.bio || null;
 }
+
+export async function fetchUserById(userId: string): Promise<Record<string, unknown> | null> {
+  const res = await call(`/users/${userId}`);
+  return res.status === 200 ? (res.data as Record<string, unknown>) : null;
+}
+
+export type DMChannel = {
+  id: string;
+  type: number;
+  recipients?: Array<{ id: string; username: string; global_name?: string | null; avatar: string | null }>;
+  name?: string | null;
+  icon?: string | null;
+};
+
+export async function fetchDMChannels(): Promise<DMChannel[]> {
+  const res = await call("/users/@me/channels");
+  if (res.status !== 200 || !Array.isArray(res.data)) return [];
+  return res.data as DMChannel[];
+}
+
+export async function leaveGuild(guildId: string): Promise<boolean> {
+  const res = await call(`/users/@me/guilds/${guildId}`, "DELETE");
+  return res.status >= 200 && res.status < 300;
+}
+
+
 
 // === Plan / Role gating ===
 export const PLAN_GUILD_ID = "1511467436543709184";
