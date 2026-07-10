@@ -1421,11 +1421,13 @@ function DonorsCard() {
             Últimas doações
           </div>
           <iframe
-            src="https://widget.livepix.gg/embed/2002a30e-85b8-48d8-8f74-6e1e7f57b39e"
+            key={donationsNonce}
+            src={`https://widget.livepix.gg/embed/2002a30e-85b8-48d8-8f74-6e1e7f57b39e?t=${donationsNonce}`}
             title="Doações LivePix"
             className="h-[360px] w-full rounded-lg border-0 bg-transparent"
             loading="lazy"
           />
+
 
         </div>
       </div>
