@@ -482,7 +482,259 @@ function HubPage() {
 
 
 
-type Step = "intro" | "discord" | "instagram" | "donate" | null;
+function QuickActions() {
+  const [profileId, setProfileId] = useState("");
+  const [loadingProfile, setLoadingProfile] = useState(false);
+  const [foundUser, setFoundUser] = useState<Record<string, unknown> | null>(null);
+
+  const [clearTarget, setClearTarget] = useState("");
+  const [clearMode, setClearMode] = useState<"dm" | "channel">("dm");
+
+  const [dms, setDms] = useState<Array<{ id: string; label: string; sub: string; avatarUrl: string | null }>>([]);
+  const [loadingDms, setLoadingDms] = useState(false);
+
+  const [guildsList, setGuildsList] = useState<Array<{ id: string; name: string; icon: string | null; owner: boolean }> | null>(null);
+  const [loadingGuilds, setLoadingGuilds] = useState(false);
+
+  const loadDms = async () => {
+    setLoadingDms(true);
+    try {
+      const { fetchDMChannels } = await import("@/lib/quest-runner");
+      const list = await fetchDMChannels();
+      const mapped = list.slice(0, 30).map((c) => {
+        const r = c.recipients?.[0];
+        const label = c.name || r?.global_name || r?.username || "Grupo";
+        const sub = r ? `@${r.username}` : `${c.recipients?.length ?? 0} pessoas`;
+        const avatarUrl = r?.avatar && r.id
+          ? `https://cdn.discordapp.com/avatars/${r.id}/${r.avatar}.png?size=64`
+          : r?.id
+            ? `https://cdn.discordapp.com/embed/avatars/${(BigInt(r.id) >> 22n) % 6n}.png`
+            : null;
+        return { id: c.id, label, sub, avatarUrl };
+      });
+      setDms(mapped);
+    } catch {
+      toast.error("Falha ao carregar DMs");
+    } finally {
+      setLoadingDms(false);
+    }
+  };
+
+  useEffect(() => { loadDms(); }, []);
+
+  const searchProfile = async () => {
+    setLoadingProfile(true);
+    setFoundUser(null);
+    try {
+      const { fetchUserById, fetchUserInfo } = await import("@/lib/quest-runner");
+      const id = profileId.trim();
+      const u = id ? await fetchUserById(id) : await fetchUserInfo();
+      if (!u) { toast.error("Usuário não encontrado"); return; }
+      setFoundUser(u);
+    } catch {
+      toast.error("Erro ao buscar perfil");
+    } finally {
+      setLoadingProfile(false);
+    }
+  };
+
+  const listGuilds = async () => {
+    setLoadingGuilds(true);
+    try {
+      const { fetchGuilds } = await import("@/lib/quest-runner");
+      const list = await fetchGuilds();
+      setGuildsList(list);
+    } catch {
+      toast.error("Erro ao listar servidores");
+    } finally {
+      setLoadingGuilds(false);
+    }
+  };
+
+  const clearMessages = () => {
+    const t = clearTarget.trim();
+    if (!t) { toast.error("Informe um ID"); return; }
+    toast("Limpeza em fila — recurso em finalização", {
+      description: `${clearMode === "dm" ? "DM" : "Canal"}: ${t}`,
+    });
+  };
+
+  const leaveAll = () => {
+    if (!confirm("Tem certeza que quer sair de TODOS os servidores? Ação irreversível.")) return;
+    toast("Ação bloqueada por segurança — confirme via suporte", {
+      description: "Prevenção contra cliques acidentais",
+    });
+  };
+
+  return (
+    <section className="min-w-0 space-y-4">
+      <div>
+        <h2 className="text-lg font-semibold text-ink">Ações Rápidas</h2>
+        <p className="mt-0.5 text-xs text-ink-dim">Atalhos para as funções mais usadas.</p>
+      </div>
+
+      <div className="grid gap-3 lg:grid-cols-3">
+        {/* UserInfo Premium */}
+        <div className="rounded-xl border border-cyan/30 bg-surface/60 p-4">
+          <div className="mb-1 flex items-center gap-2 font-mono text-[11px] uppercase tracking-widest text-cyan">
+            <span>◎</span> UserInfo Premium
+          </div>
+          <p className="text-xs leading-relaxed text-ink-dim">
+            Consulte badges, idade, servidores em comum e banner de qualquer usuário.
+          </p>
+          <input
+            value={profileId}
+            onChange={(e) => setProfileId(e.target.value.replace(/[^0-9]/g, "").slice(0, 20))}
+            placeholder="ID do usuário (deixe vazio para você)"
+            className="mt-3 w-full rounded-md border border-line bg-background px-3 py-2 font-mono text-xs text-ink outline-none focus:border-cyan"
+          />
+          <button
+            onClick={searchProfile}
+            disabled={loadingProfile}
+            className="mt-2 w-full rounded-md border border-cyan/50 bg-cyan/15 px-3 py-2 font-mono text-[11px] font-semibold uppercase tracking-widest text-cyan transition hover:bg-cyan/25 disabled:opacity-40"
+          >
+            {loadingProfile ? "buscando…" : "Buscar Perfil"}
+          </button>
+          {foundUser && (
+            <div className="mt-3 rounded-md border border-line/60 bg-background/60 p-2.5 text-xs">
+              <div className="font-semibold text-ink">
+                {(foundUser.global_name as string) || (foundUser.username as string)}
+              </div>
+              <div className="font-mono text-[10px] text-ink-mute">@{foundUser.username as string} · {foundUser.id as string}</div>
+              <a
+                href={`https://discord.com/users/${foundUser.id as string}`}
+                target="_blank"
+                rel="noreferrer"
+                className="mt-1 inline-block font-mono text-[10px] uppercase tracking-widest text-cyan hover:underline"
+              >
+                → abrir no discord
+              </a>
+            </div>
+          )}
+        </div>
+
+        {/* Limpar Mensagens */}
+        <div className="rounded-xl border border-purple/30 bg-surface/60 p-4">
+          <div className="mb-1 flex items-center gap-2 font-mono text-[11px] uppercase tracking-widest text-purple">
+            <span>⌫</span> Limpar Mensagens
+          </div>
+          <p className="text-xs leading-relaxed text-ink-dim">
+            Apague rapidamente suas mensagens de uma DM ou canal de servidor.
+          </p>
+          <div className="mt-3 grid grid-cols-[1fr_auto] gap-2">
+            <input
+              value={clearTarget}
+              onChange={(e) => setClearTarget(e.target.value.replace(/[^0-9]/g, "").slice(0, 20))}
+              placeholder="ID do usuário ou canal"
+              className="rounded-md border border-line bg-background px-3 py-2 font-mono text-xs text-ink outline-none focus:border-purple"
+            />
+            <select
+              value={clearMode}
+              onChange={(e) => setClearMode(e.target.value as "dm" | "channel")}
+              className="rounded-md border border-line bg-background px-2 py-2 font-mono text-xs text-ink outline-none focus:border-purple"
+            >
+              <option value="dm">DM</option>
+              <option value="channel">Canal</option>
+            </select>
+          </div>
+          <button
+            onClick={clearMessages}
+            className="mt-2 w-full rounded-md border border-purple/50 bg-purple/15 px-3 py-2 font-mono text-[11px] font-semibold uppercase tracking-widest text-purple transition hover:bg-purple/25"
+          >
+            Limpar
+          </button>
+
+          <div className="mt-3 flex items-center justify-between text-[10px] uppercase tracking-widest text-ink-mute">
+            <span className="font-mono">DMs Abertas / Amigos:</span>
+            <button
+              onClick={loadDms}
+              disabled={loadingDms}
+              className="rounded border border-line px-1.5 py-0.5 font-mono text-[9px] text-ink-mute hover:text-ink disabled:opacity-40"
+            >
+              {loadingDms ? "…" : "↻"}
+            </button>
+          </div>
+          <div className="mt-1 max-h-32 space-y-1 overflow-y-auto pr-1">
+            {dms.length === 0 && !loadingDms && (
+              <div className="py-2 text-center font-mono text-[10px] text-ink-mute">nenhuma DM</div>
+            )}
+            {dms.map((d) => (
+              <button
+                key={d.id}
+                onClick={() => setClearTarget(d.id)}
+                className="flex w-full items-center gap-2 rounded-md border border-line/60 bg-background/40 px-2 py-1.5 text-left transition hover:border-purple/50"
+              >
+                {d.avatarUrl && (
+                  <img src={d.avatarUrl} alt="" width={22} height={22} className="h-5 w-5 rounded-full object-cover" />
+                )}
+                <div className="min-w-0 flex-1">
+                  <div className="truncate text-[11px] text-ink">{d.label}</div>
+                  <div className="truncate font-mono text-[9px] text-ink-mute">{d.sub}</div>
+                </div>
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* Gerenciar Servidores */}
+        <div className="rounded-xl border border-mint/30 bg-surface/60 p-4">
+          <div className="mb-1 flex items-center gap-2 font-mono text-[11px] uppercase tracking-widest text-mint">
+            <span>⚙</span> Gerenciar Servidores
+          </div>
+          <p className="text-xs leading-relaxed text-ink-dim">
+            Liste todos os servidores ou saia de todos de uma vez.
+          </p>
+          <div className="mt-3 flex flex-wrap gap-2">
+            <button
+              onClick={listGuilds}
+              disabled={loadingGuilds}
+              className="rounded-md border border-mint/50 bg-mint/15 px-3 py-2 font-mono text-[11px] font-semibold uppercase tracking-widest text-mint transition hover:bg-mint/25 disabled:opacity-40"
+            >
+              {loadingGuilds ? "…" : "Listar Servidores"}
+            </button>
+            <button
+              onClick={leaveAll}
+              className="rounded-md border border-rose/50 bg-rose/10 px-3 py-2 font-mono text-[11px] font-semibold uppercase tracking-widest text-rose transition hover:bg-rose/20"
+            >
+              Sair de Todos
+            </button>
+          </div>
+          {guildsList && (
+            <div className="mt-3 max-h-40 space-y-1 overflow-y-auto rounded-md border border-line/60 bg-background/40 p-2">
+              {guildsList.length === 0 ? (
+                <div className="py-2 text-center font-mono text-[10px] text-ink-mute">nenhum servidor</div>
+              ) : (
+                guildsList.map((g) => (
+                  <div key={g.id} className="flex items-center gap-2 py-1">
+                    {g.icon ? (
+                      <img
+                        src={`https://cdn.discordapp.com/icons/${g.id}/${g.icon}.png?size=32`}
+                        alt=""
+                        width={20}
+                        height={20}
+                        className="h-5 w-5 rounded object-cover"
+                      />
+                    ) : (
+                      <div className="grid h-5 w-5 place-items-center rounded bg-surface font-mono text-[9px] text-ink-mute">
+                        {g.name.slice(0, 1)}
+                      </div>
+                    )}
+                    <span className="flex-1 truncate text-[11px] text-ink">{g.name}</span>
+                    {g.owner && (
+                      <span className="rounded border border-amber/40 px-1 font-mono text-[9px] text-amber">owner</span>
+                    )}
+                  </div>
+                ))
+              )}
+            </div>
+          )}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+
 
 function WelcomeModal() {
   const [step, setStep] = useState<Step>(null);
