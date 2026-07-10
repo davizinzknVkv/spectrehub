@@ -925,6 +925,17 @@ export function CaptchaModal({
           {label ?? quest?.questName ?? "Antes de executar, resolva o desafio."}
         </p>
 
+        <div className="mt-4 rounded-lg border border-amber/40 bg-amber/10 p-3">
+          <div className="font-mono text-[10px] uppercase tracking-[0.25em] text-amber">
+            ⚠ aviso de risco
+          </div>
+          <p className="mt-1 text-[12px] leading-relaxed text-ink-dim">
+            Automatizar missões {label ? "em lote (run all) aumenta o risco de detecção e " : ""}
+            viola os Termos de Serviço do Discord e pode resultar em{" "}
+            <span className="text-rose">suspensão ou banimento</span> da sua conta. Use por sua conta e risco.
+          </p>
+        </div>
+
         {useTurnstile ? (
           <div className="mt-5 grid place-items-center rounded-lg border border-line bg-background/60 p-4 min-h-[80px]">
             <div ref={turnstileRef} />
