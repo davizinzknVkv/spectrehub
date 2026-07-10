@@ -50,12 +50,6 @@ function formatAge(date: Date) {
   return `${days}d`;
 }
 
-const PREMIUM_LABEL: Record<number, string> = {
-  0: "sem nitro",
-  1: "nitro classic",
-  2: "nitro",
-  3: "nitro basic",
-};
 
 // Discord public user flags → badge label
 const USER_BADGES: Array<{ bit: number; label: string; tone: "cyan" | "purple" | "mint" | "amber" }> = [
