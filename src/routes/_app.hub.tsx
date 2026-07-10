@@ -3,7 +3,6 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { toast } from "sonner";
 import {
   fetchAvailableQuests,
-  fetchGuilds,
   fetchOrbs,
   fetchUserInfo,
   fetchUserPlan,
@@ -11,7 +10,6 @@ import {
   PLAN_LIMITS,
   runAll,
   runQuest,
-  type Guild,
 } from "@/lib/quest-runner";
 import { useQuestStore, type Quest } from "@/lib/quest-store";
 
@@ -76,7 +74,6 @@ function HubPage() {
   const creds = useQuestStore((s) => s.creds);
   const [quests, setQuests] = useState<Quest[]>([]);
   const [orbs, setOrbs] = useState<number | null>(null);
-  const [guilds, setGuilds] = useState<Guild[]>([]);
   const [captchaFor, setCaptchaFor] = useState<Quest | null>(null);
   const [captchaAll, setCaptchaAll] = useState(false);
   const [user, setUser] = useState<{
@@ -126,9 +123,7 @@ function HubPage() {
     fetchUserInfo()
       .then((u) => u && setUser(u as typeof user))
       .catch(() => {});
-    fetchGuilds()
-      .then(setGuilds)
-      .catch(() => {});
+    
     const refreshPlan = () => {
       fetchUserPlan()
         .then((p) => {
@@ -368,14 +363,13 @@ function HubPage() {
         </div>
 
         {/* Stat grid (primary) */}
-        <div className="grid gap-2 border-t border-line/60 px-4 py-4 sm:grid-cols-2 sm:gap-3 sm:px-6 lg:grid-cols-4">
+        <div className="grid gap-2 border-t border-line/60 px-4 py-4 sm:grid-cols-2 sm:gap-3 sm:px-6 lg:grid-cols-3">
           <StatCard
             label="Usuário"
             value={user?.global_name || user?.username || "—"}
             tone="cyan"
             hint={user?.id ? `id: ${user.id}` : "—"}
           />
-          <StatCard label="Servidores" value={String(guilds.length)} tone="purple" hint="entrou" />
           <StatCard
             label="Missões"
             value={String(quests.length)}

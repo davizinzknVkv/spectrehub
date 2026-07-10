@@ -15,6 +15,7 @@ import { Route as AppSpotifyRouteImport } from './routes/_app.spotify'
 import { Route as AppSettingsRouteImport } from './routes/_app.settings'
 import { Route as AppHubRouteImport } from './routes/_app.hub'
 import { Route as AppHistoryRouteImport } from './routes/_app.history'
+import { Route as AppFakeRouteImport } from './routes/_app.fake'
 import { Route as AppCloneRouteImport } from './routes/_app.clone'
 
 const AppRoute = AppRouteImport.update({
@@ -46,6 +47,11 @@ const AppHistoryRoute = AppHistoryRouteImport.update({
   path: '/history',
   getParentRoute: () => AppRoute,
 } as any)
+const AppFakeRoute = AppFakeRouteImport.update({
+  id: '/fake',
+  path: '/fake',
+  getParentRoute: () => AppRoute,
+} as any)
 const AppCloneRoute = AppCloneRouteImport.update({
   id: '/clone',
   path: '/clone',
@@ -55,6 +61,7 @@ const AppCloneRoute = AppCloneRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/clone': typeof AppCloneRoute
+  '/fake': typeof AppFakeRoute
   '/history': typeof AppHistoryRoute
   '/hub': typeof AppHubRoute
   '/settings': typeof AppSettingsRoute
@@ -63,6 +70,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/clone': typeof AppCloneRoute
+  '/fake': typeof AppFakeRoute
   '/history': typeof AppHistoryRoute
   '/hub': typeof AppHubRoute
   '/settings': typeof AppSettingsRoute
@@ -73,6 +81,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/_app': typeof AppRouteWithChildren
   '/_app/clone': typeof AppCloneRoute
+  '/_app/fake': typeof AppFakeRoute
   '/_app/history': typeof AppHistoryRoute
   '/_app/hub': typeof AppHubRoute
   '/_app/settings': typeof AppSettingsRoute
@@ -80,14 +89,22 @@ export interface FileRoutesById {
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/clone' | '/history' | '/hub' | '/settings' | '/spotify'
+  fullPaths:
+    | '/'
+    | '/clone'
+    | '/fake'
+    | '/history'
+    | '/hub'
+    | '/settings'
+    | '/spotify'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/clone' | '/history' | '/hub' | '/settings' | '/spotify'
+  to: '/' | '/clone' | '/fake' | '/history' | '/hub' | '/settings' | '/spotify'
   id:
     | '__root__'
     | '/'
     | '/_app'
     | '/_app/clone'
+    | '/_app/fake'
     | '/_app/history'
     | '/_app/hub'
     | '/_app/settings'
@@ -143,6 +160,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppHistoryRouteImport
       parentRoute: typeof AppRoute
     }
+    '/_app/fake': {
+      id: '/_app/fake'
+      path: '/fake'
+      fullPath: '/fake'
+      preLoaderRoute: typeof AppFakeRouteImport
+      parentRoute: typeof AppRoute
+    }
     '/_app/clone': {
       id: '/_app/clone'
       path: '/clone'
@@ -155,6 +179,7 @@ declare module '@tanstack/react-router' {
 
 interface AppRouteChildren {
   AppCloneRoute: typeof AppCloneRoute
+  AppFakeRoute: typeof AppFakeRoute
   AppHistoryRoute: typeof AppHistoryRoute
   AppHubRoute: typeof AppHubRoute
   AppSettingsRoute: typeof AppSettingsRoute
@@ -163,6 +188,7 @@ interface AppRouteChildren {
 
 const AppRouteChildren: AppRouteChildren = {
   AppCloneRoute: AppCloneRoute,
+  AppFakeRoute: AppFakeRoute,
   AppHistoryRoute: AppHistoryRoute,
   AppHubRoute: AppHubRoute,
   AppSettingsRoute: AppSettingsRoute,

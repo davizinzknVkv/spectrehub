@@ -13,6 +13,7 @@ import {
   X,
   Copy,
   Music,
+  ImageIcon,
 } from "lucide-react";
 
 const DISCORD_INVITE = "https://discord.gg/EMsfMZFyGS";
@@ -39,6 +40,7 @@ const NAV_GROUPS = [
     items: [
       { to: "/clone", label: "Clonar Discord", icon: Copy },
       { to: "/spotify", label: "Gerador Spotify", icon: Music },
+      { to: "/fake", label: "Foto Fake", icon: ImageIcon },
     ],
   },
 ] as const;
