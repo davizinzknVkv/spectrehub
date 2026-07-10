@@ -721,7 +721,7 @@ function InfoField({
   );
 }
 
-function StatCard({
+const StatCard = memo(function StatCard({
   label,
   value,
   hint,
