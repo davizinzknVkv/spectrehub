@@ -149,22 +149,23 @@ function SidebarBody({
             <div className="flex flex-col gap-0.5">
               {group.items.map((item) => {
                 const Icon = item.icon;
-                const iconClass = "h-4 w-4 text-purple/70";
-                const baseClass =
-                  "flex items-center gap-3 rounded-lg px-3 py-2 text-sm transition text-ink-dim hover:bg-surface hover:text-ink border border-transparent w-full text-left";
-                if ("action" in item) {
-                  return (
-                    <button
-                      key={item.label}
-                      onClick={() => toast.info("Clonagem de servidores em breve 🚀")}
-                      className={baseClass}
-                    >
-                      <Icon className={iconClass} />
-                      <span>{item.label}</span>
-                    </button>
-                  );
-                }
                 const active = pathname === item.to && !("hash" in item && item.hash);
+                return (
+                  <Link
+                    key={`${item.to}-${item.label}`}
+                    to={item.to}
+                    hash={"hash" in item ? item.hash : undefined}
+                    className={`flex items-center gap-3 rounded-lg px-3 py-2 text-sm transition ${
+                      active
+                        ? "bg-gradient-to-r from-cyan/10 to-purple/10 text-ink border border-purple/30"
+                        : "text-ink-dim hover:bg-surface hover:text-ink border border-transparent"
+                    }`}
+                  >
+                    <Icon className={`h-4 w-4 ${active ? "text-cyan" : "text-purple/70"}`} />
+                    <span>{item.label}</span>
+                  </Link>
+                );
+              })}
                 return (
                   <Link
                     key={`${item.to}-${item.label}`}
