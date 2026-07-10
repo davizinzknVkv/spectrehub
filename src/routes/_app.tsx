@@ -13,6 +13,7 @@ import {
   X,
   Copy,
   Music,
+  ImageIcon,
 } from "lucide-react";
 
 const DISCORD_INVITE = "https://discord.gg/EMsfMZFyGS";
