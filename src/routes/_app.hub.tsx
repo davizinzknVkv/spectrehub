@@ -471,6 +471,9 @@ function HubPage() {
         </Link>
       </div>
 
+      <QuickActions />
+
+
       <WelcomeModal />
     </div>
   );
