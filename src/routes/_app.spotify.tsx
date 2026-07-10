@@ -19,6 +19,7 @@ export const Route = createFileRoute("/_app/spotify")({
 });
 
 const BASE_URL = "https://www.spotify.com/br-pt/premium/";
+const DISCORD_INVITE = "https://discord.gg/EMsfMZFyGS";
 
 const PRESETS = [
   { label: "Instagram", source: "instagram", medium: "social" },
@@ -158,22 +159,23 @@ function SpotifyGenPage() {
           {link}
         </div>
         <div className="flex flex-wrap gap-2">
-          <button
-            onClick={copy}
-            className="inline-flex items-center gap-2 rounded-md bg-[#1DB954] px-4 py-2 font-mono text-[11px] font-semibold uppercase tracking-widest text-black transition hover:brightness-110"
-          >
-            <Copy className="h-3.5 w-3.5" />
-            copiar
-          </button>
           <a
-            href={link}
+            href={DISCORD_INVITE}
             target="_blank"
             rel="noreferrer"
-            className="inline-flex items-center gap-2 rounded-md border border-line bg-surface/60 px-4 py-2 font-mono text-[11px] font-semibold uppercase tracking-widest text-ink-dim hover:border-[#1DB954]/50 hover:text-[#1DB954]"
+            onClick={() => toast.success("Redirecionando pro Discord…")}
+            className="inline-flex items-center gap-2 rounded-md bg-[#1DB954] px-4 py-2 font-mono text-[11px] font-semibold uppercase tracking-widest text-black transition hover:brightness-110"
           >
             <ExternalLink className="h-3.5 w-3.5" />
-            abrir
+            comprar no discord
           </a>
+          <button
+            onClick={copy}
+            className="inline-flex items-center gap-2 rounded-md border border-line bg-surface/60 px-4 py-2 font-mono text-[11px] font-semibold uppercase tracking-widest text-ink-dim hover:border-[#1DB954]/50 hover:text-[#1DB954]"
+          >
+            <Copy className="h-3.5 w-3.5" />
+            copiar link
+          </button>
         </div>
       </div>
 
