@@ -130,8 +130,18 @@ function HubPage() {
         .catch(() => {});
     };
     refreshPlan();
-    const id = setInterval(refreshPlan, 60_000);
-    return () => clearInterval(id);
+    const id = setInterval(refreshPlan, 5_000);
+    const onFocus = () => refreshPlan();
+    const onVisible = () => {
+      if (document.visibilityState === "visible") refreshPlan();
+    };
+    window.addEventListener("focus", onFocus);
+    document.addEventListener("visibilitychange", onVisible);
+    return () => {
+      clearInterval(id);
+      window.removeEventListener("focus", onFocus);
+      document.removeEventListener("visibilitychange", onVisible);
+    };
   }, [creds, setPlan]);
 
   const limits = PLAN_LIMITS[plan];
