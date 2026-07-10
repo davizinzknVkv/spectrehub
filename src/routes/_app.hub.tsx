@@ -301,7 +301,7 @@ function HubPage() {
               height={96}
               decoding="async"
               fetchPriority="high"
-              className="-mt-14 h-20 w-20 shrink-0 rounded-full border-4 border-surface object-cover sm:-mt-16 sm:h-24 sm:w-24"
+              className="h-20 w-20 shrink-0 rounded-full border-4 border-surface object-cover sm:h-24 sm:w-24"
               style={{ boxShadow: "0 0 24px -4px color-mix(in oklab, var(--purple) 60%, transparent)" }}
             />
           )}
