@@ -19,7 +19,7 @@ export const Route = createFileRoute("/_app/hub")({
 });
 
 
-function formatDuration(seconds: number) {
+export function formatDuration(seconds: number) {
   if (seconds >= 60) {
     const m = Math.floor(seconds / 60);
     const s = seconds % 60;
@@ -845,7 +845,7 @@ const StatCard = memo(function StatCard({
   );
 });
 
-const MissionCard = memo(function MissionCard({
+export const MissionCard = memo(function MissionCard({
   quest,
   active,
   progress,
@@ -966,7 +966,7 @@ const MissionCard = memo(function MissionCard({
   );
 });
 
-function CaptchaModal({
+export function CaptchaModal({
   quest,
   label,
   onSolved,
@@ -1081,7 +1081,7 @@ function CaptchaModal({
 }
 
 
-function EmptyState({ onScan }: { onScan: () => void }) {
+export function EmptyState({ onScan }: { onScan: () => void }) {
   return (
     <div className="grid place-items-center rounded-xl border border-dashed border-line bg-surface/30 p-10 text-center">
       <div className="font-mono text-[10px] uppercase tracking-[0.3em] text-cyan-dim">
@@ -1100,7 +1100,7 @@ function EmptyState({ onScan }: { onScan: () => void }) {
   );
 }
 
-function PlanBanner({
+export function PlanBanner({
   plan,
   limits,
   usedToday,
@@ -1174,7 +1174,7 @@ function PlanBanner({
   );
 }
 
-function MiniStat({
+export function MiniStat({
   label,
   value,
   tone,
