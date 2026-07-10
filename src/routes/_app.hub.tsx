@@ -293,22 +293,22 @@ function HubPage() {
         </div>
 
         {/* Identity row */}
-        <div className="grid grid-cols-[auto_minmax(0,1fr)] items-end gap-3 px-4 pb-4 -mt-10 sm:grid-cols-[auto_minmax(0,1fr)_auto] sm:gap-4 sm:px-6 sm:pb-5">
+        <div className="flex flex-col gap-4 px-4 pb-5 -mt-10 sm:flex-row sm:items-end sm:gap-5 sm:px-6">
           {avatarUrl && (
             <img
               src={avatarUrl}
               alt={user?.username ?? "avatar"}
-              width={80}
-              height={80}
+              width={96}
+              height={96}
               decoding="async"
               fetchPriority="high"
-              className="h-16 w-16 shrink-0 rounded-full border-4 border-surface object-cover sm:h-20 sm:w-20"
+              className="h-20 w-20 shrink-0 rounded-full border-4 border-surface object-cover sm:h-24 sm:w-24"
               style={{ boxShadow: "0 0 24px -4px color-mix(in oklab, var(--purple) 60%, transparent)" }}
             />
           )}
-          <div className="min-w-0 pt-2 sm:pt-10">
+          <div className="min-w-0 flex-1">
             <div className="flex flex-wrap items-center gap-2">
-              <h2 className="truncate text-lg font-semibold text-ink sm:text-2xl">
+              <h2 className="truncate text-xl font-semibold text-ink sm:text-2xl">
                 {user?.global_name || user?.username || "—"}
               </h2>
               {user?.mfa_enabled && (
@@ -322,16 +322,37 @@ function HubPage() {
                 </span>
               ) : null}
             </div>
-            <div className="mt-0.5 truncate font-mono text-xs text-ink-mute">
-              {user?.username && <>@{user.username}</>}
-              {running && <span className="ml-2 text-mint">· executando missão…</span>}
-              {!running && <span className="ml-2 text-ink-mute">· nenhuma atividade detectada</span>}
-            </div>
+            {user?.username && (
+              <div className="mt-0.5 truncate font-mono text-xs text-ink-mute">@{user.username}</div>
+            )}
+            {/* Insígnias (Discord flags) */}
+            {user?.flags ? (
+              <div className="mt-2 flex flex-wrap gap-1.5">
+                {USER_BADGES.filter((b) => (user.flags ?? 0) & b.bit).map((b) => {
+                  const tone =
+                    b.tone === "cyan"
+                      ? "border-cyan/40 text-cyan"
+                      : b.tone === "purple"
+                        ? "border-purple/40 text-purple"
+                        : b.tone === "mint"
+                          ? "border-mint/40 text-mint"
+                          : "border-amber/40 text-amber";
+                  return (
+                    <span
+                      key={b.label}
+                      className={`rounded-md border bg-background/40 px-2 py-0.5 font-mono text-[9px] uppercase tracking-widest ${tone}`}
+                    >
+                      ◆ {b.label}
+                    </span>
+                  );
+                })}
+              </div>
+            ) : null}
           </div>
           {user?.id && (
             <button
               onClick={copyId}
-              className="col-span-2 justify-self-start rounded border border-purple/40 bg-purple/10 px-2 py-1 font-mono text-[10px] uppercase tracking-widest text-purple hover:bg-purple/20 sm:col-span-1 sm:justify-self-end"
+              className="shrink-0 self-start rounded border border-purple/40 bg-purple/10 px-2 py-1 font-mono text-[10px] uppercase tracking-widest text-purple hover:bg-purple/20 sm:self-end"
             >
               copiar id
             </button>
