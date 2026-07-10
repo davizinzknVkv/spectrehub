@@ -1,8 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { memo, useEffect, useMemo, useState } from "react";
+import { memo, useEffect, useMemo, useRef, useState } from "react";
 import { toast } from "sonner";
 import { fetchUserInfo, fetchUserPlan, PLAN_LIMITS } from "@/lib/quest-runner";
-import { useQuestStore } from "@/lib/quest-store";
+import { useQuestStore, type Quest } from "@/lib/quest-store";
 
 export const Route = createFileRoute("/_app/hub")({
   head: () => ({ meta: [{ title: "Hub — Neighborshub" }] }),
