@@ -87,6 +87,12 @@ function HubPage() {
     flags?: number;
     nsfw_allowed?: boolean;
   } | null>(null);
+  const [stats, setStats] = useState<{
+    guilds: number | null;
+    friends: number | null;
+    dms: number | null;
+    bio: string | null;
+  }>({ guilds: null, friends: null, dms: null, bio: null });
   const running = useQuestStore((s) => s.running);
   const plan = useQuestStore((s) => s.plan);
   const runs = useQuestStore((s) => s.runs);
