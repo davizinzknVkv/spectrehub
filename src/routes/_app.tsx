@@ -189,7 +189,7 @@ function SidebarBody({
 
       <div className="mt-auto space-y-1 border-t border-line/60 p-3">
         <a
-          href="https://discord.gg/lovable-dev"
+          href={DISCORD_INVITE}
           target="_blank"
           rel="noreferrer"
           className="flex items-center gap-3 rounded-lg px-3 py-2 text-sm text-ink-dim hover:bg-surface hover:text-ink"
