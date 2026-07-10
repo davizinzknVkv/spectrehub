@@ -19,6 +19,7 @@ export const Route = createFileRoute("/_app/spotify")({
 });
 
 const BASE_URL = "https://www.spotify.com/br-pt/premium/";
+const DISCORD_INVITE = "https://discord.gg/EMsfMZFyGS";
 
 const PRESETS = [
   { label: "Instagram", source: "instagram", medium: "social" },
