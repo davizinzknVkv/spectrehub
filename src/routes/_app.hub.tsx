@@ -976,26 +976,29 @@ const StatCard = memo(function StatCard({
             : "border-line";
   return (
     <div
-      className={`relative overflow-hidden rounded-xl border ${border} bg-surface/60 p-3 backdrop-blur sm:p-4`}
+      className={`card-hover group relative overflow-hidden rounded-2xl border ${border} bg-surface/50 p-4 backdrop-blur-md sm:p-5`}
       style={{
         boxShadow:
           tone === "purple"
-            ? "inset 0 1px 0 color-mix(in oklab, var(--purple) 18%, transparent), 0 0 22px -14px color-mix(in oklab, var(--purple) 65%, transparent)"
+            ? "inset 0 1px 0 color-mix(in oklab, var(--purple) 18%, transparent), 0 0 30px -18px color-mix(in oklab, var(--purple) 70%, transparent)"
             : tone === "cyan"
-              ? "inset 0 1px 0 color-mix(in oklab, var(--cyan) 18%, transparent), 0 0 22px -14px color-mix(in oklab, var(--cyan) 60%, transparent)"
-              : "inset 0 1px 0 color-mix(in oklab, var(--cyan) 6%, transparent)",
+              ? "inset 0 1px 0 color-mix(in oklab, var(--cyan) 18%, transparent), 0 0 30px -18px color-mix(in oklab, var(--cyan) 65%, transparent)"
+              : tone === "mint"
+                ? "inset 0 1px 0 color-mix(in oklab, var(--mint) 15%, transparent), 0 0 30px -18px color-mix(in oklab, var(--mint) 55%, transparent)"
+                : "inset 0 1px 0 color-mix(in oklab, var(--cyan) 6%, transparent)",
       }}
     >
-      <div className="font-mono text-[10px] uppercase tracking-[0.25em] text-ink-mute">
+      <div className="font-mono text-[10px] font-semibold uppercase tracking-[0.28em] text-ink-mute">
         {label}
       </div>
-      <div className={`mt-2 truncate font-mono text-xl font-semibold tabular-nums sm:text-2xl lg:text-3xl ${accent}`}>
+      <div className={`mt-3 truncate font-mono text-2xl font-bold tabular-nums sm:text-3xl lg:text-4xl ${accent}`}>
         {value}
       </div>
-      <div className="mt-1 truncate text-xs text-ink-mute">{hint}</div>
+      <div className="mt-1.5 truncate text-xs text-ink-mute">{hint}</div>
     </div>
   );
 });
+
 
 export const MissionCard = memo(function MissionCard({
   quest,
