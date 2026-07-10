@@ -123,9 +123,7 @@ function HubPage() {
     fetchUserInfo()
       .then((u) => u && setUser(u as typeof user))
       .catch(() => {});
-    fetchGuilds()
-      .then(setGuilds)
-      .catch(() => {});
+    
     const refreshPlan = () => {
       fetchUserPlan()
         .then((p) => {
