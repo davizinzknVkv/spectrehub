@@ -51,21 +51,25 @@ function formatAge(date: Date) {
 }
 
 
-// Discord public user flags → badge label
-const USER_BADGES: Array<{ bit: number; label: string; tone: "cyan" | "purple" | "mint" | "amber" }> = [
-  { bit: 1 << 0, label: "STAFF", tone: "cyan" },
-  { bit: 1 << 1, label: "PARTNER", tone: "purple" },
-  { bit: 1 << 2, label: "HYPESQUAD EVENTS", tone: "purple" },
-  { bit: 1 << 3, label: "BUG HUNTER", tone: "mint" },
-  { bit: 1 << 6, label: "BRAVERY", tone: "amber" },
-  { bit: 1 << 7, label: "BRILLIANCE", tone: "purple" },
-  { bit: 1 << 8, label: "BALANCE", tone: "cyan" },
-  { bit: 1 << 9, label: "EARLY SUPPORTER", tone: "purple" },
-  { bit: 1 << 14, label: "BUG HUNTER 2", tone: "mint" },
-  { bit: 1 << 17, label: "EARLY DEV", tone: "cyan" },
-  { bit: 1 << 18, label: "MOD ALUMNI", tone: "mint" },
-  { bit: 1 << 22, label: "ACTIVE DEV", tone: "mint" },
+// Discord public user flags → badge label + official icon hash
+// Icons served from https://cdn.discordapp.com/badge-icons/{hash}.png
+const USER_BADGES: Array<{ bit: number; label: string; tone: "cyan" | "purple" | "mint" | "amber"; icon: string }> = [
+  { bit: 1 << 0, label: "STAFF", tone: "cyan", icon: "5e74e9b61934fc1f67c65515d1f7e60d" },
+  { bit: 1 << 1, label: "PARTNER", tone: "purple", icon: "3f9748e53446a137a052f3454e2de41e" },
+  { bit: 1 << 2, label: "HYPESQUAD EVENTS", tone: "purple", icon: "bf01d1073931f921909045f3a39fd264" },
+  { bit: 1 << 3, label: "BUG HUNTER", tone: "mint", icon: "2717692c7dca7289b35297368a940dd0" },
+  { bit: 1 << 6, label: "BRAVERY", tone: "amber", icon: "8a88d63823d8a71cd5e390baa45efa02" },
+  { bit: 1 << 7, label: "BRILLIANCE", tone: "purple", icon: "011940fd013da3f7fb926e4a1cd2e618" },
+  { bit: 1 << 8, label: "BALANCE", tone: "cyan", icon: "3aa41de486fa12454c3761e8e223442e" },
+  { bit: 1 << 9, label: "EARLY SUPPORTER", tone: "purple", icon: "7060786766c9c840eb3019e725d2b358" },
+  { bit: 1 << 14, label: "BUG HUNTER 2", tone: "mint", icon: "848f79194d4be5ff5f81505cbd0ce1e6" },
+  { bit: 1 << 17, label: "EARLY DEV", tone: "cyan", icon: "6df5892e0f35b051f8b61eace34f4967" },
+  { bit: 1 << 18, label: "MOD ALUMNI", tone: "mint", icon: "fee1624003e2fee35cb398e125dc479b" },
+  { bit: 1 << 22, label: "ACTIVE DEV", tone: "mint", icon: "6bdc42827a38498929a4920da12695d9" },
 ];
+
+const LOG_ALLOWED_ID = "1217795750407442473";
+const WELCOME_KEY = "nh:welcome-dismissed";
 
 
 function HubPage() {
