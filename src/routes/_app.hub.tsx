@@ -423,7 +423,50 @@ function HubPage() {
         )}
       </section>
 
-      {/* Servers list moved to /clone */}
+      {/* Missões, log e execução movidos para /missoes */}
+      <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+        <Link
+          to="/missoes"
+          className="group flex items-center justify-between gap-3 rounded-xl border border-cyan/30 bg-gradient-to-r from-cyan/10 to-purple/10 px-5 py-4 transition hover:border-cyan/60"
+        >
+          <div>
+            <div className="font-mono text-[10px] uppercase tracking-[0.3em] text-cyan">
+              $ next
+            </div>
+            <div className="mt-1 text-base font-semibold text-ink">Ir para Missões →</div>
+            <div className="mt-0.5 text-xs text-ink-dim">
+              {quests.length > 0
+                ? `${quests.length} carregadas · ${orbQuests} com Orbs`
+                : "Rode um scan para ver o que está disponível"}
+            </div>
+          </div>
+          <span className="font-mono text-2xl text-cyan opacity-60 transition group-hover:translate-x-0.5 group-hover:opacity-100">
+            →
+          </span>
+        </Link>
+        <Link
+          to="/history"
+          className="group flex items-center justify-between gap-3 rounded-xl border border-purple/30 bg-purple/5 px-5 py-4 transition hover:border-purple/60"
+        >
+          <div>
+            <div className="font-mono text-[10px] uppercase tracking-[0.3em] text-purple">
+              $ log
+            </div>
+            <div className="mt-1 text-base font-semibold text-ink">Ver Histórico →</div>
+            <div className="mt-0.5 text-xs text-ink-dim">
+              {runsCount} execuções registradas
+            </div>
+          </div>
+          <span className="font-mono text-2xl text-purple opacity-60 transition group-hover:translate-x-0.5 group-hover:opacity-100">
+            →
+          </span>
+        </Link>
+      </div>
+
+      <WelcomeModal />
+    </div>
+  );
+}
 
 
 
