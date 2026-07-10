@@ -4,6 +4,8 @@ import { toast } from "sonner";
 import { useQuestStore } from "@/lib/quest-store";
 import { fetchUserInfo } from "@/lib/quest-runner";
 import { discordLogin } from "@/lib/discord.functions";
+import { verifyTurnstile } from "@/lib/turnstile.functions";
+import { Turnstile } from "@/components/Turnstile";
 
 export const Route = createFileRoute("/_app/settings")({
   head: () => ({ meta: [{ title: "Login — Neighborshub" }] }),
@@ -172,11 +174,26 @@ function EmailLoginForm({ onLogged }: { onLogged: () => void }) {
   const [mfaTicket, setMfaTicket] = useState<string | null>(null);
   const [mfaCode, setMfaCode] = useState("");
   const [loading, setLoading] = useState(false);
+  const [captchaToken, setCaptchaToken] = useState<string | null>(null);
 
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!mfaTicket && !captchaToken) {
+      toast.error("Complete o captcha antes de entrar");
+      return;
+    }
     setLoading(true);
     try {
+      if (!mfaTicket && captchaToken) {
+        const cap = await verifyTurnstile({ data: { token: captchaToken } });
+        if (!cap.ok) {
+          toast.error(cap.error);
+          setCaptchaToken(null);
+          window.turnstile?.reset();
+          setLoading(false);
+          return;
+        }
+      }
       const res = await discordLogin({
         data: mfaTicket
           ? { login, password, mfaCode, ticket: mfaTicket }
@@ -281,9 +298,19 @@ function EmailLoginForm({ onLogged }: { onLogged: () => void }) {
         </div>
       )}
 
+      {!mfaTicket && (
+        <Turnstile
+          onVerify={(t) => setCaptchaToken(t)}
+          onExpire={() => setCaptchaToken(null)}
+        />
+      )}
+
       <button
         type="submit"
-        disabled={loading || (mfaTicket ? mfaCode.length < 6 : !login || !password)}
+        disabled={
+          loading ||
+          (mfaTicket ? mfaCode.length < 6 : !login || !password || !captchaToken)
+        }
         className="inline-flex w-full items-center justify-center gap-2 rounded-md bg-cyan px-5 py-3 font-mono text-xs font-semibold uppercase tracking-widest text-primary-foreground transition hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-40"
       >
         {loading ? "entrando…" : mfaTicket ? "→ confirmar 2fa" : "→ entrar"}
