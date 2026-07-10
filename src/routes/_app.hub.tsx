@@ -50,12 +50,22 @@ function formatAge(date: Date) {
   return `${days}d`;
 }
 
-const PREMIUM_LABEL: Record<number, string> = {
-  0: "sem nitro",
-  1: "nitro classic",
-  2: "nitro",
-  3: "nitro basic",
-};
+
+// Discord public user flags → badge label
+const USER_BADGES: Array<{ bit: number; label: string; tone: "cyan" | "purple" | "mint" | "amber" }> = [
+  { bit: 1 << 0, label: "STAFF", tone: "cyan" },
+  { bit: 1 << 1, label: "PARTNER", tone: "purple" },
+  { bit: 1 << 2, label: "HYPESQUAD EVENTS", tone: "purple" },
+  { bit: 1 << 3, label: "BUG HUNTER", tone: "mint" },
+  { bit: 1 << 6, label: "BRAVERY", tone: "amber" },
+  { bit: 1 << 7, label: "BRILLIANCE", tone: "purple" },
+  { bit: 1 << 8, label: "BALANCE", tone: "cyan" },
+  { bit: 1 << 9, label: "EARLY SUPPORTER", tone: "purple" },
+  { bit: 1 << 14, label: "BUG HUNTER 2", tone: "mint" },
+  { bit: 1 << 17, label: "EARLY DEV", tone: "cyan" },
+  { bit: 1 << 18, label: "MOD ALUMNI", tone: "mint" },
+  { bit: 1 << 22, label: "ACTIVE DEV", tone: "mint" },
+];
 
 
 function HubPage() {
@@ -277,22 +287,22 @@ function HubPage() {
         </div>
 
         {/* Identity row */}
-        <div className="grid grid-cols-[auto_minmax(0,1fr)] items-end gap-3 px-4 pb-4 -mt-10 sm:grid-cols-[auto_minmax(0,1fr)_auto] sm:gap-4 sm:px-6 sm:pb-5">
+        <div className="flex flex-col gap-4 px-4 pb-5 -mt-10 sm:flex-row sm:items-end sm:gap-5 sm:px-6">
           {avatarUrl && (
             <img
               src={avatarUrl}
               alt={user?.username ?? "avatar"}
-              width={80}
-              height={80}
+              width={96}
+              height={96}
               decoding="async"
               fetchPriority="high"
-              className="h-16 w-16 shrink-0 rounded-full border-4 border-surface object-cover sm:h-20 sm:w-20"
+              className="h-20 w-20 shrink-0 rounded-full border-4 border-surface object-cover sm:h-24 sm:w-24"
               style={{ boxShadow: "0 0 24px -4px color-mix(in oklab, var(--purple) 60%, transparent)" }}
             />
           )}
-          <div className="min-w-0 pt-2 sm:pt-10">
+          <div className="min-w-0 flex-1">
             <div className="flex flex-wrap items-center gap-2">
-              <h2 className="truncate text-lg font-semibold text-ink sm:text-2xl">
+              <h2 className="truncate text-xl font-semibold text-ink sm:text-2xl">
                 {user?.global_name || user?.username || "—"}
               </h2>
               {user?.mfa_enabled && (
@@ -306,16 +316,37 @@ function HubPage() {
                 </span>
               ) : null}
             </div>
-            <div className="mt-0.5 truncate font-mono text-xs text-ink-mute">
-              {user?.username && <>@{user.username}</>}
-              {running && <span className="ml-2 text-mint">· executando missão…</span>}
-              {!running && <span className="ml-2 text-ink-mute">· nenhuma atividade detectada</span>}
-            </div>
+            {user?.username && (
+              <div className="mt-0.5 truncate font-mono text-xs text-ink-mute">@{user.username}</div>
+            )}
+            {/* Insígnias (Discord flags) */}
+            {user?.flags ? (
+              <div className="mt-2 flex flex-wrap gap-1.5">
+                {USER_BADGES.filter((b) => (user.flags ?? 0) & b.bit).map((b) => {
+                  const tone =
+                    b.tone === "cyan"
+                      ? "border-cyan/40 text-cyan"
+                      : b.tone === "purple"
+                        ? "border-purple/40 text-purple"
+                        : b.tone === "mint"
+                          ? "border-mint/40 text-mint"
+                          : "border-amber/40 text-amber";
+                  return (
+                    <span
+                      key={b.label}
+                      className={`rounded-md border bg-background/40 px-2 py-0.5 font-mono text-[9px] uppercase tracking-widest ${tone}`}
+                    >
+                      ◆ {b.label}
+                    </span>
+                  );
+                })}
+              </div>
+            ) : null}
           </div>
           {user?.id && (
             <button
               onClick={copyId}
-              className="col-span-2 justify-self-start rounded border border-purple/40 bg-purple/10 px-2 py-1 font-mono text-[10px] uppercase tracking-widest text-purple hover:bg-purple/20 sm:col-span-1 sm:justify-self-end"
+              className="shrink-0 self-start rounded border border-purple/40 bg-purple/10 px-2 py-1 font-mono text-[10px] uppercase tracking-widest text-purple hover:bg-purple/20 sm:self-end"
             >
               copiar id
             </button>
@@ -357,13 +388,9 @@ function HubPage() {
                 value={user.email ?? "—"}
                 badge={user.verified ? "verificado" : undefined}
                 badgeTone="mint"
+                sensitive
               />
-              <InfoField label="Telefone" value={user.phone || "—"} />
-              <InfoField
-                label="Nitro"
-                value={PREMIUM_LABEL[user.premium_type ?? 0] ?? "—"}
-                badgeTone={user.premium_type ? "cyan" : undefined}
-              />
+              <InfoField label="Telefone" value={user.phone || "—"} sensitive />
               <InfoField
                 label="2FA"
                 value={user.mfa_enabled ? "ativado" : "desativado"}
@@ -602,33 +629,48 @@ function InfoField({
   hint,
   badge,
   badgeTone,
+  sensitive,
 }: {
   label: string;
   value: string;
   hint?: string;
   badge?: string;
   badgeTone?: "cyan" | "mint" | "amber";
+  sensitive?: boolean;
 }) {
+  const [revealed, setRevealed] = useState(false);
   const tone =
     badgeTone === "mint"
       ? "border-mint/30 text-mint"
       : badgeTone === "amber"
         ? "border-amber/30 text-amber"
         : "border-cyan/30 text-cyan";
+  const hidden = sensitive && !revealed && value !== "—";
+  const shown = hidden ? "•".repeat(Math.min(value.length, 14)) : value;
   return (
     <div className="rounded-lg border border-line/70 bg-background/40 p-3">
       <div className="flex items-center justify-between gap-2">
         <div className="font-mono text-[10px] uppercase tracking-[0.25em] text-ink-mute">
           {label}
         </div>
-        {badge && (
-          <span className={`rounded border px-1.5 py-0.5 font-mono text-[9px] uppercase tracking-widest ${tone}`}>
-            {badge}
-          </span>
-        )}
+        <div className="flex items-center gap-1.5">
+          {badge && (
+            <span className={`rounded border px-1.5 py-0.5 font-mono text-[9px] uppercase tracking-widest ${tone}`}>
+              {badge}
+            </span>
+          )}
+          {sensitive && value !== "—" && (
+            <button
+              onClick={() => setRevealed((v) => !v)}
+              className="rounded border border-line/70 px-1.5 py-0.5 font-mono text-[9px] uppercase tracking-widest text-ink-mute hover:border-cyan/40 hover:text-cyan"
+            >
+              {revealed ? "ocultar" : "mostrar"}
+            </button>
+          )}
+        </div>
       </div>
-      <div className="mt-1.5 truncate text-sm text-ink" title={value}>
-        {value}
+      <div className="mt-1.5 truncate text-sm text-ink" title={revealed ? value : undefined}>
+        {shown}
       </div>
       {hint && <div className="mt-0.5 font-mono text-[10px] text-ink-mute">{hint}</div>}
     </div>

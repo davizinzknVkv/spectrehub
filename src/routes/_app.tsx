@@ -1,5 +1,6 @@
 import { createFileRoute, Outlet, Link, useRouterState } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
+import { toast } from "sonner";
 import { useQuestStore } from "@/lib/quest-store";
 import {
   LayoutDashboard,
@@ -10,7 +11,10 @@ import {
   LogOut,
   Menu,
   X,
+  Copy,
 } from "lucide-react";
+
+const DISCORD_INVITE = "https://discord.gg/neighborshub";
 
 export const Route = createFileRoute("/_app")({
   component: AppLayout,
@@ -27,6 +31,12 @@ const NAV_GROUPS = [
       { to: "/hub", label: "Missões", icon: Target, hash: "missoes" },
       { to: "/history", label: "Histórico", icon: History },
       { to: "/settings", label: "Login", icon: KeyRound },
+    ],
+  },
+  {
+    title: "Utilitários",
+    items: [
+      { action: "clone", label: "Clonar Servidores", icon: Copy },
     ],
   },
 ] as const;
@@ -126,7 +136,7 @@ function SidebarBody({
           <div className="truncate text-sm font-semibold tracking-tight text-ink">
             Neighbors<span className="text-cyan">hub</span>
           </div>
-          <div className="font-mono text-[9px] uppercase tracking-[0.25em] text-purple">neon · v2</div>
+          <div className="font-mono text-[9px] uppercase tracking-[0.25em] text-purple">neon</div>
         </div>
       </Link>
 
@@ -138,8 +148,23 @@ function SidebarBody({
             </div>
             <div className="flex flex-col gap-0.5">
               {group.items.map((item) => {
-                const active = pathname === item.to && !("hash" in item && item.hash);
                 const Icon = item.icon;
+                const iconClass = "h-4 w-4 text-purple/70";
+                const baseClass =
+                  "flex items-center gap-3 rounded-lg px-3 py-2 text-sm transition text-ink-dim hover:bg-surface hover:text-ink border border-transparent w-full text-left";
+                if ("action" in item) {
+                  return (
+                    <button
+                      key={item.label}
+                      onClick={() => toast.info("Clonagem de servidores em breve 🚀")}
+                      className={baseClass}
+                    >
+                      <Icon className={iconClass} />
+                      <span>{item.label}</span>
+                    </button>
+                  );
+                }
+                const active = pathname === item.to && !("hash" in item && item.hash);
                 return (
                   <Link
                     key={`${item.to}-${item.label}`}
@@ -157,13 +182,14 @@ function SidebarBody({
                 );
               })}
             </div>
+
           </div>
         ))}
       </nav>
 
       <div className="mt-auto space-y-1 border-t border-line/60 p-3">
         <a
-          href="https://discord.gg/lovable-dev"
+          href={DISCORD_INVITE}
           target="_blank"
           rel="noreferrer"
           className="flex items-center gap-3 rounded-lg px-3 py-2 text-sm text-ink-dim hover:bg-surface hover:text-ink"
