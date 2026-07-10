@@ -326,7 +326,7 @@ function HubPage() {
             )}
             {/* Insígnias (Discord flags) */}
             {user?.flags ? (
-              <div className="mt-2 flex flex-wrap gap-1.5">
+              <div className="mt-2 flex flex-wrap items-center gap-1.5">
                 {USER_BADGES.filter((b) => (user.flags ?? 0) & b.bit).map((b) => {
                   const tone =
                     b.tone === "cyan"
@@ -339,9 +339,18 @@ function HubPage() {
                   return (
                     <span
                       key={b.label}
-                      className={`rounded-md border bg-background/40 px-2 py-0.5 font-mono text-[9px] uppercase tracking-widest ${tone}`}
+                      title={b.label}
+                      className={`inline-flex items-center gap-1.5 rounded-md border bg-background/40 px-1.5 py-0.5 font-mono text-[9px] uppercase tracking-widest ${tone}`}
                     >
-                      ◆ {b.label}
+                      <img
+                        src={`https://cdn.discordapp.com/badge-icons/${b.icon}.png`}
+                        alt=""
+                        width={14}
+                        height={14}
+                        loading="lazy"
+                        className="h-3.5 w-3.5"
+                      />
+                      {b.label}
                     </span>
                   );
                 })}
