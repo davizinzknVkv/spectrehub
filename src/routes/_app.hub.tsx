@@ -2,7 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { memo, useEffect, useMemo, useRef, useState } from "react";
 import { toast } from "sonner";
 import {
-  fetchUserInfo,
+  fetchUserInfoDetailed,
   fetchUserPlan,
   fetchGuilds,
   fetchRelationshipsCount,
