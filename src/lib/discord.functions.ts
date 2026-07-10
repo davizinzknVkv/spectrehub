@@ -87,6 +87,14 @@ async function discordAuthCall(endpoint: string, body: unknown) {
 export const discordLogin = createServerFn({ method: "POST" })
   .inputValidator((input) => loginInput.parse(input))
   .handler(async ({ data }) => {
+    const ip = clientIp(getRequest());
+    const rl = rateLimit(`login:${ip}`, 5, 60_000);
+    if (!rl.ok) {
+      return {
+        ok: false as const,
+        error: `Muitas tentativas de login. Aguarde ${Math.ceil(rl.retryAfterMs / 1000)}s.`,
+      };
+    }
     if (data.mfaCode && data.ticket) {
       const res = await discordAuthCall("/auth/mfa/totp", {
         code: data.mfaCode,
