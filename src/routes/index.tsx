@@ -13,7 +13,7 @@ export const Route = createFileRoute("/")({
       {
         property: "og:description",
         content:
-          "Automatize missões do Discord no navegador. Planos Free, Premium e Boost.",
+          "Complete missões do Discord automaticamente e acumule Orbs. Planos Free, Premium (30 dias ou lifetime) e Boost.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
