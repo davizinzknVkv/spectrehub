@@ -13,6 +13,11 @@ export function rateLimit(
   const b = buckets.get(key);
   if (!b || b.resetAt <= now) {
     buckets.set(key, { count: 1, resetAt: now + windowMs });
+    // Opportunistic cleanup: sweep expired keys on writes so memory stays bounded
+    // without relying on setInterval (unsupported in Cloudflare Workers).
+    if (buckets.size > 500) {
+      for (const [k, v] of buckets) if (v.resetAt <= now) buckets.delete(k);
+    }
     return { ok: true };
   }
   if (b.count >= limit) return { ok: false, retryAfterMs: b.resetAt - now };
@@ -29,9 +34,3 @@ export function clientIp(request: Request): string {
     "unknown"
   );
 }
-
-// Opportunistic cleanup to bound memory.
-setInterval(() => {
-  const now = Date.now();
-  for (const [k, v] of buckets) if (v.resetAt <= now) buckets.delete(k);
-}, 60_000).unref?.();
