@@ -1,17 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { memo, useEffect, useMemo, useRef, useState } from "react";
+import { memo, useEffect, useMemo, useState } from "react";
 import { toast } from "sonner";
-import {
-  fetchAvailableQuests,
-  fetchOrbs,
-  fetchUserInfo,
-  fetchUserPlan,
-  
-  PLAN_LIMITS,
-  runAll,
-  runQuest,
-} from "@/lib/quest-runner";
-import { useQuestStore, type Quest } from "@/lib/quest-store";
+import { fetchUserInfo, fetchUserPlan, PLAN_LIMITS } from "@/lib/quest-runner";
+import { useQuestStore } from "@/lib/quest-store";
 
 export const Route = createFileRoute("/_app/hub")({
   head: () => ({ meta: [{ title: "Hub — Neighborshub" }] }),
@@ -50,7 +41,6 @@ function formatAge(date: Date) {
 
 
 // Discord public user flags → badge label + official icon hash
-// Icons served from https://cdn.discordapp.com/badge-icons/{hash}.png
 const USER_BADGES: Array<{ bit: number; label: string; tone: "cyan" | "purple" | "mint" | "amber"; icon: string }> = [
   { bit: 1 << 0, label: "STAFF", tone: "cyan", icon: "5e74e9b61934fc1f67c65515d1f7e60d" },
   { bit: 1 << 1, label: "PARTNER", tone: "purple", icon: "3f9748e53446a137a052f3454e2de41e" },
@@ -66,16 +56,12 @@ const USER_BADGES: Array<{ bit: number; label: string; tone: "cyan" | "purple" |
   { bit: 1 << 22, label: "ACTIVE DEV", tone: "mint", icon: "6bdc42827a38498929a4920da12695d9" },
 ];
 
-const LOG_ALLOWED_ID = "1217795750407442473";
 const WELCOME_KEY = "nh:welcome-dismissed";
 
 
 function HubPage() {
   const creds = useQuestStore((s) => s.creds);
-  const [quests, setQuests] = useState<Quest[]>([]);
-  const [orbs, setOrbs] = useState<number | null>(null);
-  const [captchaFor, setCaptchaFor] = useState<Quest | null>(null);
-  const [captchaAll, setCaptchaAll] = useState(false);
+  const quests = useQuestStore((s) => s.quests);
   const [user, setUser] = useState<{
     username?: string;
     global_name?: string;
@@ -93,40 +79,27 @@ function HubPage() {
     flags?: number;
     nsfw_allowed?: boolean;
   } | null>(null);
-  const [loadingQuests, setLoadingQuests] = useState(false);
   const running = useQuestStore((s) => s.running);
-  const activeId = useQuestStore((s) => s.activeQuestId);
-  const progress = useQuestStore((s) => s.progress);
-  const logs = useQuestStore((s) => s.logs);
   const plan = useQuestStore((s) => s.plan);
-  const lastCompletedAt = useQuestStore((s) => s.lastCompletedAt);
   const runs = useQuestStore((s) => s.runs);
   const setPlan = useQuestStore((s) => s.setPlan);
   const requestStop = useQuestStore((s) => s.requestStop);
-  const clearLogs = useQuestStore((s) => s.clearLogs);
   const runsCount = runs.length;
-  const logEnd = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    // "auto" avoids smooth-scroll animation thrash while logs stream in
-    logEnd.current?.scrollIntoView({ behavior: "auto", block: "end" });
-  }, [logs]);
 
   useEffect(() => {
     if (!creds) return;
     fetchUserInfo()
       .then((u) => u && setUser(u as typeof user))
       .catch(() => {});
-    
+
     const refreshPlan = () => {
       fetchUserPlan()
         .then((p) => {
-          if (p === null) return; // erro transitório — mantém plano atual
+          if (p === null) return;
           const prev = useQuestStore.getState().plan;
           setPlan(p);
           if (prev !== "free" && p === "free") {
-            toast.error(`Seu plano ${prev === "boost" ? "Boost" : "Premium"} expirou (cargo removido no Discord).`);
-            useQuestStore.getState().log(`⚠️ Cargo ${prev} não encontrado — voltando ao plano Free.`, "error");
+            toast.error(`Seu plano ${prev === "boost" ? "Boost" : "Premium"} expirou.`);
           } else if (prev === "free" && p !== "free") {
             toast.success(`Plano ${p === "boost" ? "Boost" : "Premium"} ativado!`);
           }
@@ -134,49 +107,11 @@ function HubPage() {
         .catch(() => {});
     };
     refreshPlan();
-    const id = setInterval(refreshPlan, 5_000);
-    const onFocus = () => refreshPlan();
-    const onVisible = () => {
-      if (document.visibilityState === "visible") refreshPlan();
-    };
-    window.addEventListener("focus", onFocus);
-    document.addEventListener("visibilitychange", onVisible);
-    return () => {
-      clearInterval(id);
-      window.removeEventListener("focus", onFocus);
-      document.removeEventListener("visibilitychange", onVisible);
-    };
+    const id = setInterval(refreshPlan, 30_000);
+    return () => clearInterval(id);
   }, [creds, setPlan]);
 
   const limits = PLAN_LIMITS[plan];
-  const usedToday = useMemo(() => {
-    const start = new Date();
-    start.setHours(0, 0, 0, 0);
-    const t = start.getTime();
-    return runs.filter(
-      (r) => r.status === "completed" && new Date(r.started_at).getTime() >= t,
-    ).length;
-  }, [runs]);
-  const remaining = limits.daily === Infinity ? Infinity : Math.max(0, limits.daily - usedToday);
-  const cooldownEnd = lastCompletedAt + limits.cooldownMs;
-  // `now` só tica quando estamos em cooldown — evita re-render de 1s no hub inteiro.
-  const [now, setNow] = useState(Date.now);
-  useEffect(() => {
-    if (cooldownEnd <= Date.now()) return;
-    const id = setInterval(() => {
-      const t = Date.now();
-      setNow(t);
-      if (t >= cooldownEnd) clearInterval(id);
-    }, 1000);
-    return () => clearInterval(id);
-  }, [cooldownEnd]);
-  const cooldownLeft = Math.max(0, cooldownEnd - now);
-  const gateBlocked = remaining <= 0 || cooldownLeft > 0;
-  const cooldownSecs = Math.ceil(cooldownLeft / 1000);
-  const cooldownText = cooldownLeft > 0
-    ? `${Math.floor(cooldownSecs / 60)}m${(cooldownSecs % 60).toString().padStart(2, "0")}s`
-    : null;
-
 
   const avatarUrl = user?.id
     ? user.avatar
@@ -186,40 +121,15 @@ function HubPage() {
 
   const created = user?.id ? snowflakeDate(user.id) : null;
 
-  const loadQuests = async () => {
-    setLoadingQuests(true);
-    try {
-      const [q, o] = await Promise.all([fetchAvailableQuests(), fetchOrbs()]);
-      setQuests(q);
-      setOrbs(o);
-      useQuestStore.getState().log(`🎯 ${q.length} missão(ões) disponíveis`);
-    } catch (err) {
-      toast.error(err instanceof Error ? err.message : "Erro ao carregar");
-    } finally {
-      setLoadingQuests(false);
-    }
-  };
-
   const copyId = () => {
     if (!user?.id) return;
     navigator.clipboard.writeText(user.id);
     toast.success("ID copiado");
   };
 
-
-  const { totalTarget, orbQuests } = useMemo(() => ({
-    totalTarget: quests.reduce((sum, q) => sum + q.target, 0),
-    orbQuests: quests.filter((q) => q.rewardText.includes("Orbs")).length,
-  }), [quests]);
-  const totalOrbsEarned = useMemo(
-    () =>
-      runs
-        .filter((r) => r.status === "completed" && r.reward_text?.includes("Orbs"))
-        .reduce((sum, r) => {
-          const m = r.reward_text?.match(/([\d.,]+)\s*Orbs/i);
-          return sum + (m ? parseInt(m[1].replace(/[.,]/g, ""), 10) || 0 : 0);
-        }, 0),
-    [runs],
+  const orbQuests = useMemo(
+    () => quests.filter((q) => q.rewardText.includes("Orbs")).length,
+    [quests],
   );
 
   const bannerUrl = user?.id && user.banner
