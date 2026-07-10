@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as AppRouteImport } from './routes/_app'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AppSpotifyRouteImport } from './routes/_app.spotify'
 import { Route as AppSettingsRouteImport } from './routes/_app.settings'
 import { Route as AppHubRouteImport } from './routes/_app.hub'
 import { Route as AppHistoryRouteImport } from './routes/_app.history'
@@ -24,6 +25,11 @@ const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
+} as any)
+const AppSpotifyRoute = AppSpotifyRouteImport.update({
+  id: '/spotify',
+  path: '/spotify',
+  getParentRoute: () => AppRoute,
 } as any)
 const AppSettingsRoute = AppSettingsRouteImport.update({
   id: '/settings',
@@ -52,6 +58,7 @@ export interface FileRoutesByFullPath {
   '/history': typeof AppHistoryRoute
   '/hub': typeof AppHubRoute
   '/settings': typeof AppSettingsRoute
+  '/spotify': typeof AppSpotifyRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -59,6 +66,7 @@ export interface FileRoutesByTo {
   '/history': typeof AppHistoryRoute
   '/hub': typeof AppHubRoute
   '/settings': typeof AppSettingsRoute
+  '/spotify': typeof AppSpotifyRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -68,12 +76,13 @@ export interface FileRoutesById {
   '/_app/history': typeof AppHistoryRoute
   '/_app/hub': typeof AppHubRoute
   '/_app/settings': typeof AppSettingsRoute
+  '/_app/spotify': typeof AppSpotifyRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/clone' | '/history' | '/hub' | '/settings'
+  fullPaths: '/' | '/clone' | '/history' | '/hub' | '/settings' | '/spotify'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/clone' | '/history' | '/hub' | '/settings'
+  to: '/' | '/clone' | '/history' | '/hub' | '/settings' | '/spotify'
   id:
     | '__root__'
     | '/'
@@ -82,6 +91,7 @@ export interface FileRouteTypes {
     | '/_app/history'
     | '/_app/hub'
     | '/_app/settings'
+    | '/_app/spotify'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -104,6 +114,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/_app/spotify': {
+      id: '/_app/spotify'
+      path: '/spotify'
+      fullPath: '/spotify'
+      preLoaderRoute: typeof AppSpotifyRouteImport
+      parentRoute: typeof AppRoute
     }
     '/_app/settings': {
       id: '/_app/settings'
@@ -141,6 +158,7 @@ interface AppRouteChildren {
   AppHistoryRoute: typeof AppHistoryRoute
   AppHubRoute: typeof AppHubRoute
   AppSettingsRoute: typeof AppSettingsRoute
+  AppSpotifyRoute: typeof AppSpotifyRoute
 }
 
 const AppRouteChildren: AppRouteChildren = {
@@ -148,6 +166,7 @@ const AppRouteChildren: AppRouteChildren = {
   AppHistoryRoute: AppHistoryRoute,
   AppHubRoute: AppHubRoute,
   AppSettingsRoute: AppSettingsRoute,
+  AppSpotifyRoute: AppSpotifyRoute,
 }
 
 const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)
@@ -159,13 +178,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}

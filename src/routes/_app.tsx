@@ -12,6 +12,7 @@ import {
   Menu,
   X,
   Copy,
+  Music,
 } from "lucide-react";
 
 const DISCORD_INVITE = "https://discord.gg/EMsfMZFyGS";
