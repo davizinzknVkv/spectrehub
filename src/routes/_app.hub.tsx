@@ -368,14 +368,13 @@ function HubPage() {
         </div>
 
         {/* Stat grid (primary) */}
-        <div className="grid gap-2 border-t border-line/60 px-4 py-4 sm:grid-cols-2 sm:gap-3 sm:px-6 lg:grid-cols-4">
+        <div className="grid gap-2 border-t border-line/60 px-4 py-4 sm:grid-cols-2 sm:gap-3 sm:px-6 lg:grid-cols-3">
           <StatCard
             label="Usuário"
             value={user?.global_name || user?.username || "—"}
             tone="cyan"
             hint={user?.id ? `id: ${user.id}` : "—"}
           />
-          <StatCard label="Servidores" value={String(guilds.length)} tone="purple" hint="entrou" />
           <StatCard
             label="Missões"
             value={String(quests.length)}
