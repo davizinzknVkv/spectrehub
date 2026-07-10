@@ -130,6 +130,11 @@
     -webkit-font-smoothing: antialiased;
   }
 
+  h1, h2, h3 {
+    font-family: var(--font-display);
+    letter-spacing: -0.015em;
+  }
+
   code,
   pre,
   kbd,
