@@ -13,6 +13,7 @@ import { Route as AppRouteImport } from './routes/_app'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AppSpotifyRouteImport } from './routes/_app.spotify'
 import { Route as AppSettingsRouteImport } from './routes/_app.settings'
+import { Route as AppMissoesRouteImport } from './routes/_app.missoes'
 import { Route as AppHubRouteImport } from './routes/_app.hub'
 import { Route as AppHistoryRouteImport } from './routes/_app.history'
 import { Route as AppFakeRouteImport } from './routes/_app.fake'
@@ -36,6 +37,11 @@ const AppSpotifyRoute = AppSpotifyRouteImport.update({
 const AppSettingsRoute = AppSettingsRouteImport.update({
   id: '/settings',
   path: '/settings',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppMissoesRoute = AppMissoesRouteImport.update({
+  id: '/missoes',
+  path: '/missoes',
   getParentRoute: () => AppRoute,
 } as any)
 const AppHubRoute = AppHubRouteImport.update({
@@ -70,6 +76,7 @@ export interface FileRoutesByFullPath {
   '/fake': typeof AppFakeRoute
   '/history': typeof AppHistoryRoute
   '/hub': typeof AppHubRoute
+  '/missoes': typeof AppMissoesRoute
   '/settings': typeof AppSettingsRoute
   '/spotify': typeof AppSpotifyRoute
   '/api/public/discord-image': typeof ApiPublicDiscordImageRoute
@@ -80,6 +87,7 @@ export interface FileRoutesByTo {
   '/fake': typeof AppFakeRoute
   '/history': typeof AppHistoryRoute
   '/hub': typeof AppHubRoute
+  '/missoes': typeof AppMissoesRoute
   '/settings': typeof AppSettingsRoute
   '/spotify': typeof AppSpotifyRoute
   '/api/public/discord-image': typeof ApiPublicDiscordImageRoute
@@ -92,6 +100,7 @@ export interface FileRoutesById {
   '/_app/fake': typeof AppFakeRoute
   '/_app/history': typeof AppHistoryRoute
   '/_app/hub': typeof AppHubRoute
+  '/_app/missoes': typeof AppMissoesRoute
   '/_app/settings': typeof AppSettingsRoute
   '/_app/spotify': typeof AppSpotifyRoute
   '/api/public/discord-image': typeof ApiPublicDiscordImageRoute
@@ -104,6 +113,7 @@ export interface FileRouteTypes {
     | '/fake'
     | '/history'
     | '/hub'
+    | '/missoes'
     | '/settings'
     | '/spotify'
     | '/api/public/discord-image'
@@ -114,6 +124,7 @@ export interface FileRouteTypes {
     | '/fake'
     | '/history'
     | '/hub'
+    | '/missoes'
     | '/settings'
     | '/spotify'
     | '/api/public/discord-image'
@@ -125,6 +136,7 @@ export interface FileRouteTypes {
     | '/_app/fake'
     | '/_app/history'
     | '/_app/hub'
+    | '/_app/missoes'
     | '/_app/settings'
     | '/_app/spotify'
     | '/api/public/discord-image'
@@ -164,6 +176,13 @@ declare module '@tanstack/react-router' {
       path: '/settings'
       fullPath: '/settings'
       preLoaderRoute: typeof AppSettingsRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/missoes': {
+      id: '/_app/missoes'
+      path: '/missoes'
+      fullPath: '/missoes'
+      preLoaderRoute: typeof AppMissoesRouteImport
       parentRoute: typeof AppRoute
     }
     '/_app/hub': {
@@ -209,6 +228,7 @@ interface AppRouteChildren {
   AppFakeRoute: typeof AppFakeRoute
   AppHistoryRoute: typeof AppHistoryRoute
   AppHubRoute: typeof AppHubRoute
+  AppMissoesRoute: typeof AppMissoesRoute
   AppSettingsRoute: typeof AppSettingsRoute
   AppSpotifyRoute: typeof AppSpotifyRoute
 }
@@ -218,6 +238,7 @@ const AppRouteChildren: AppRouteChildren = {
   AppFakeRoute: AppFakeRoute,
   AppHistoryRoute: AppHistoryRoute,
   AppHubRoute: AppHubRoute,
+  AppMissoesRoute: AppMissoesRoute,
   AppSettingsRoute: AppSettingsRoute,
   AppSpotifyRoute: AppSpotifyRoute,
 }

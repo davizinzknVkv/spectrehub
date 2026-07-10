@@ -77,12 +77,14 @@ type State = {
   progress: Progress | null;
   logs: LogEntry[];
   quests: Quest[];
+  loadingQuests: boolean;
   shouldStop: boolean;
   creds: Credentials | null;
   runs: RunRecord[];
   plan: Plan;
   lastCompletedAt: number;
   setQuests: (q: Quest[]) => void;
+  setLoadingQuests: (v: boolean) => void;
   setRunning: (r: boolean) => void;
   setActive: (id: string | null) => void;
   setProgress: (p: Progress | null) => void;
@@ -105,12 +107,14 @@ export const useQuestStore = create<State>((set, get) => ({
   progress: null,
   logs: [],
   quests: [],
+  loadingQuests: false,
   shouldStop: false,
   creds: null,
   runs: [],
   plan: "free",
   lastCompletedAt: 0,
   setQuests: (quests) => set({ quests }),
+  setLoadingQuests: (loadingQuests) => set({ loadingQuests }),
   setRunning: (running) => set({ running }),
   setActive: (activeQuestId) => set({ activeQuestId, progress: null }),
   setProgress: (progress) => set({ progress }),
