@@ -77,12 +77,14 @@ type State = {
   progress: Progress | null;
   logs: LogEntry[];
   quests: Quest[];
+  loadingQuests: boolean;
   shouldStop: boolean;
   creds: Credentials | null;
   runs: RunRecord[];
   plan: Plan;
   lastCompletedAt: number;
   setQuests: (q: Quest[]) => void;
+  setLoadingQuests: (v: boolean) => void;
   setRunning: (r: boolean) => void;
   setActive: (id: string | null) => void;
   setProgress: (p: Progress | null) => void;
