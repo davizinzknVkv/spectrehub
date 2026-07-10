@@ -258,13 +258,13 @@ function HubPage() {
       {/* Hero profile card */}
       <section className="overflow-hidden rounded-2xl border border-line bg-surface/60">
         <div
-          className="relative h-48 w-full sm:h-56"
+          className="relative h-28 w-full sm:h-32"
           style={bannerUrl ? { backgroundImage: `url(${bannerUrl})`, backgroundSize: "cover", backgroundPosition: "center" } : { background: accentBg }}
         >
           {!bannerUrl && <div className="absolute inset-0 grid-bg opacity-30" />}
-          <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-surface/95 to-transparent" />
+          <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-surface/95 to-transparent" />
         </div>
-        <div className="flex flex-wrap items-end gap-4 px-5 pb-5 pt-0 -mt-10 sm:px-6">
+        <div className="flex flex-wrap items-center gap-4 px-5 pb-5 -mt-8 sm:px-6">
           {avatarUrl && (
             <img
               src={avatarUrl}
@@ -276,8 +276,8 @@ function HubPage() {
               className="h-20 w-20 shrink-0 rounded-full border-4 border-surface object-cover"
             />
           )}
-          <div className="min-w-0 flex-1">
-            <div className="flex items-center gap-2">
+          <div className="min-w-0 flex-1 pt-8">
+            <div className="flex flex-wrap items-center gap-2">
               <h2 className="truncate text-xl font-semibold text-ink sm:text-2xl">
                 {user?.global_name || user?.username || "—"}
               </h2>
