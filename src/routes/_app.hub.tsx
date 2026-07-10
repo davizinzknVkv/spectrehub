@@ -202,6 +202,28 @@ function HubPage() {
   };
 
 
+  const { totalTarget, orbQuests } = useMemo(() => ({
+    totalTarget: quests.reduce((sum, q) => sum + q.target, 0),
+    orbQuests: quests.filter((q) => q.rewardText.includes("Orbs")).length,
+  }), [quests]);
+  const totalOrbsEarned = useMemo(
+    () =>
+      runs
+        .filter((r) => r.status === "completed" && r.reward_text?.includes("Orbs"))
+        .reduce((sum, r) => {
+          const m = r.reward_text?.match(/([\d.,]+)\s*Orbs/i);
+          return sum + (m ? parseInt(m[1].replace(/[.,]/g, ""), 10) || 0 : 0);
+        }, 0),
+    [runs],
+  );
+
+  const bannerUrl = user?.id && user.banner
+    ? `https://cdn.discordapp.com/banners/${user.id}/${user.banner}.${user.banner.startsWith("a_") ? "gif" : "png"}?size=1024`
+    : null;
+  const accentBg = user?.accent_color
+    ? `#${user.accent_color.toString(16).padStart(6, "0")}`
+    : "linear-gradient(135deg, color-mix(in oklab, var(--cyan) 40%, transparent), color-mix(in oklab, var(--surface-2) 90%, transparent))";
+
   if (!creds) {
     return (
       <div className="mx-auto max-w-2xl">
@@ -226,27 +248,6 @@ function HubPage() {
     );
   }
 
-  const { totalTarget, orbQuests } = useMemo(() => ({
-    totalTarget: quests.reduce((sum, q) => sum + q.target, 0),
-    orbQuests: quests.filter((q) => q.rewardText.includes("Orbs")).length,
-  }), [quests]);
-  const totalOrbsEarned = useMemo(
-    () =>
-      runs
-        .filter((r) => r.status === "completed" && r.reward_text?.includes("Orbs"))
-        .reduce((sum, r) => {
-          const m = r.reward_text?.match(/([\d.,]+)\s*Orbs/i);
-          return sum + (m ? parseInt(m[1].replace(/[.,]/g, ""), 10) || 0 : 0);
-        }, 0),
-    [runs],
-  );
-
-  const bannerUrl = user?.id && user.banner
-    ? `https://cdn.discordapp.com/banners/${user.id}/${user.banner}.${user.banner.startsWith("a_") ? "gif" : "png"}?size=1024`
-    : null;
-  const accentBg = user?.accent_color
-    ? `#${user.accent_color.toString(16).padStart(6, "0")}`
-    : "linear-gradient(135deg, color-mix(in oklab, var(--cyan) 40%, transparent), color-mix(in oklab, var(--surface-2) 90%, transparent))";
 
   return (
     <div className="space-y-6 sm:space-y-8">
