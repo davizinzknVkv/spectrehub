@@ -198,3 +198,6 @@
   animation: marquee-x 22s linear infinite;
 }
 
+#lovable-badge {
+  display: none !important;
+}
