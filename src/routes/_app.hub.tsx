@@ -252,7 +252,7 @@ function HubPage() {
         )}
         {/* Banner */}
         <div
-          className="relative h-24 w-full sm:h-32"
+          className="relative h-28 w-full sm:h-40"
           style={
             bannerUrl
               ? { backgroundImage: `url(${bannerUrl})`, backgroundSize: "cover", backgroundPosition: "center" }
@@ -260,8 +260,9 @@ function HubPage() {
           }
         >
           {!bannerUrl && <div className="absolute inset-0 grid-bg opacity-30" />}
-          <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-surface via-surface/70 to-transparent" />
+          <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-surface via-surface/70 to-transparent" />
         </div>
+
 
         {/* Identity row */}
         <div className="flex flex-col gap-4 px-4 pb-5 pt-4 sm:flex-row sm:items-start sm:gap-5 sm:px-6">
