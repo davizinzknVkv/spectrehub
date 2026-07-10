@@ -14,6 +14,7 @@ import {
   Copy,
   Music,
   ImageIcon,
+  Tractor,
 } from "lucide-react";
 
 const DISCORD_INVITE = "https://discord.gg/EMsfMZFyGS";
@@ -31,6 +32,7 @@ const NAV_GROUPS = [
     title: "Ferramentas",
     items: [
       { to: "/missoes", label: "Missões", icon: Target },
+      { to: "/farms", label: "Farms", icon: Tractor },
       { to: "/history", label: "Histórico", icon: History },
       { to: "/settings", label: "Login", icon: KeyRound },
     ],

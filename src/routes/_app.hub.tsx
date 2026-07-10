@@ -224,6 +224,10 @@ function HubPage() {
         )}
       </div>
 
+      {/* Avisos / Notificações */}
+      <NotificationsCard />
+
+
       {/* Unified profile + stats + account */}
       <section
         className="overflow-hidden rounded-2xl border border-purple/25 bg-surface/60 backdrop-blur"
@@ -1089,3 +1093,98 @@ export function MiniStat({
   );
 }
 
+
+function NotificationsCard() {
+  const runs = useQuestStore((s) => s.runs);
+  const logs = useQuestStore((s) => s.logs);
+  const plan = useQuestStore((s) => s.plan);
+  const lastCompletedAt = useQuestStore((s) => s.lastCompletedAt);
+  const limits = PLAN_LIMITS[plan];
+
+  const [now, setNow] = useState(() => Date.now());
+  useEffect(() => {
+    const id = setInterval(() => setNow(Date.now()), 1000);
+    return () => clearInterval(id);
+  }, []);
+
+  const cdLeft = Math.max(0, lastCompletedAt + limits.cooldownMs - now);
+  const lastError = logs.slice().reverse().find((l) => l.level === "error");
+  const lastCompleted = runs.find((r) => r.status === "completed");
+
+  const items: Array<{
+    tone: "mint" | "cyan" | "amber" | "rose";
+    title: string;
+    body: string;
+  }> = [];
+
+  if (cdLeft > 0) {
+    const s = Math.ceil(cdLeft / 1000);
+    const m = Math.floor(s / 60);
+    items.push({
+      tone: "amber",
+      title: "Cooldown ativo",
+      body: `Próxima farm em ${m}m${(s % 60).toString().padStart(2, "0")}s (plano ${limits.label}).`,
+    });
+  } else if (lastCompletedAt > 0) {
+    items.push({
+      tone: "mint",
+      title: "Pronto pra rodar",
+      body: "Cooldown zerado — pode iniciar a próxima missão.",
+    });
+  }
+
+  if (lastCompleted) {
+    items.push({
+      tone: "cyan",
+      title: "Última recompensa",
+      body: `${lastCompleted.quest_name} · ${lastCompleted.reward_text ?? "—"}`,
+    });
+  }
+
+  if (lastError) {
+    items.push({
+      tone: "rose",
+      title: "Último erro",
+      body: lastError.text,
+    });
+  }
+
+  if (items.length === 0) {
+    items.push({
+      tone: "cyan",
+      title: "Tudo tranquilo",
+      body: "Nenhum aviso no momento. Bora farmar!",
+    });
+  }
+
+  return (
+    <section
+      className="rounded-2xl border border-purple/25 bg-surface/60 p-4 sm:p-5 backdrop-blur"
+      style={{ boxShadow: "0 0 30px -20px color-mix(in oklab, var(--purple) 55%, transparent)" }}
+    >
+      <div className="mb-3 flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.3em] text-ink-mute">
+        <span className="text-cyan">◆</span> avisos
+      </div>
+      <ul className="grid gap-2 sm:grid-cols-2">
+        {items.map((it, i) => {
+          const tone =
+            it.tone === "mint"
+              ? "border-mint/30 bg-mint/5 text-mint"
+              : it.tone === "cyan"
+                ? "border-cyan/30 bg-cyan/5 text-cyan"
+                : it.tone === "amber"
+                  ? "border-amber/30 bg-amber/5 text-amber"
+                  : "border-rose/30 bg-rose/5 text-rose";
+          return (
+            <li key={i} className={`rounded-lg border px-3 py-2 ${tone}`}>
+              <div className="font-mono text-[10px] uppercase tracking-widest opacity-90">
+                {it.title}
+              </div>
+              <div className="mt-0.5 text-sm text-ink">{it.body}</div>
+            </li>
+          );
+        })}
+      </ul>
+    </section>
+  );
+}
