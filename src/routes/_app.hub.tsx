@@ -1366,12 +1366,7 @@ export function MiniStat({
 
 type Donor = { name: string; amount: string; tier: "boost" | "premium" | "apoiador"; note?: string };
 
-const DONORS: Donor[] = [
-  { name: "Kaio", amount: "R$ 50", tier: "boost", note: "Boost lifetime" },
-  { name: "Lucas M.", amount: "R$ 25", tier: "premium", note: "Premium 30d" },
-  { name: "Anônimo", amount: "R$ 15", tier: "apoiador" },
-  { name: "Marina", amount: "R$ 10", tier: "apoiador", note: "Obrigado! 💜" },
-];
+const DONORS: Donor[] = [];
 
 function DonorsCard() {
   const tierStyle = (t: Donor["tier"]) =>
