@@ -230,9 +230,10 @@ function HubPage() {
 
       {/* Unified profile + stats + account */}
       <section
-        className="overflow-hidden rounded-2xl border border-purple/25 bg-surface/60 backdrop-blur"
-        style={{ boxShadow: "0 0 40px -18px color-mix(in oklab, var(--purple) 55%, transparent)" }}
+        className="overflow-hidden rounded-3xl border border-line bg-surface/40 backdrop-blur-xl"
+        style={{ boxShadow: "0 30px 80px -40px color-mix(in oklab, var(--purple) 55%, transparent), inset 0 1px 0 color-mix(in oklab, white 4%, transparent)" }}
       >
+
         {loadError && (
           <div className="flex flex-wrap items-center justify-between gap-3 border-b border-rose/30 bg-rose/10 px-4 py-3 text-sm text-rose sm:px-6">
             <div>
@@ -251,7 +252,7 @@ function HubPage() {
         )}
         {/* Banner */}
         <div
-          className="relative h-24 w-full sm:h-32"
+          className="relative h-28 w-full sm:h-40"
           style={
             bannerUrl
               ? { backgroundImage: `url(${bannerUrl})`, backgroundSize: "cover", backgroundPosition: "center" }
@@ -259,8 +260,9 @@ function HubPage() {
           }
         >
           {!bannerUrl && <div className="absolute inset-0 grid-bg opacity-30" />}
-          <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-surface via-surface/70 to-transparent" />
+          <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-surface via-surface/70 to-transparent" />
         </div>
+
 
         {/* Identity row */}
         <div className="flex flex-col gap-4 px-4 pb-5 pt-4 sm:flex-row sm:items-start sm:gap-5 sm:px-6">
@@ -432,44 +434,45 @@ function HubPage() {
       </section>
 
       {/* Missões, log e execução movidos para /missoes */}
-      <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         <Link
           to="/missoes"
-          className="group flex items-center justify-between gap-3 rounded-xl border border-cyan/30 bg-gradient-to-r from-cyan/10 to-purple/10 px-5 py-4 transition hover:border-cyan/60"
+          className="card-hover group flex items-center justify-between gap-3 rounded-2xl border border-line bg-gradient-to-br from-cyan/[0.08] via-surface/40 to-purple/[0.08] px-6 py-5 backdrop-blur-md"
         >
-          <div>
-            <div className="font-mono text-[10px] uppercase tracking-[0.3em] text-cyan">
+          <div className="min-w-0">
+            <div className="font-mono text-[10px] font-semibold uppercase tracking-[0.3em] text-cyan">
               $ next
             </div>
-            <div className="mt-1 text-base font-semibold text-ink">Ir para Missões →</div>
-            <div className="mt-0.5 text-xs text-ink-dim">
+            <div className="mt-1.5 text-lg font-semibold tracking-tight text-ink">Ir para Missões</div>
+            <div className="mt-1 truncate text-xs text-ink-dim">
               {quests.length > 0
                 ? `${quests.length} carregadas · ${orbQuests} com Orbs`
                 : "Rode um scan para ver o que está disponível"}
             </div>
           </div>
-          <span className="font-mono text-2xl text-cyan opacity-60 transition group-hover:translate-x-0.5 group-hover:opacity-100">
+          <span className="font-mono text-2xl text-cyan opacity-60 transition group-hover:translate-x-1 group-hover:opacity-100">
             →
           </span>
         </Link>
         <Link
           to="/history"
-          className="group flex items-center justify-between gap-3 rounded-xl border border-purple/30 bg-purple/5 px-5 py-4 transition hover:border-purple/60"
+          className="card-hover group flex items-center justify-between gap-3 rounded-2xl border border-line bg-gradient-to-br from-purple/[0.08] via-surface/40 to-cyan/[0.05] px-6 py-5 backdrop-blur-md"
         >
-          <div>
-            <div className="font-mono text-[10px] uppercase tracking-[0.3em] text-purple">
+          <div className="min-w-0">
+            <div className="font-mono text-[10px] font-semibold uppercase tracking-[0.3em] text-purple">
               $ log
             </div>
-            <div className="mt-1 text-base font-semibold text-ink">Ver Histórico →</div>
-            <div className="mt-0.5 text-xs text-ink-dim">
+            <div className="mt-1.5 text-lg font-semibold tracking-tight text-ink">Ver Histórico</div>
+            <div className="mt-1 truncate text-xs text-ink-dim">
               {runsCount} execuções registradas
             </div>
           </div>
-          <span className="font-mono text-2xl text-purple opacity-60 transition group-hover:translate-x-0.5 group-hover:opacity-100">
+          <span className="font-mono text-2xl text-purple opacity-60 transition group-hover:translate-x-1 group-hover:opacity-100">
             →
           </span>
         </Link>
       </div>
+
 
       <QuickActions />
 
@@ -975,26 +978,29 @@ const StatCard = memo(function StatCard({
             : "border-line";
   return (
     <div
-      className={`relative overflow-hidden rounded-xl border ${border} bg-surface/60 p-3 backdrop-blur sm:p-4`}
+      className={`card-hover group relative overflow-hidden rounded-2xl border ${border} bg-surface/50 p-4 backdrop-blur-md sm:p-5`}
       style={{
         boxShadow:
           tone === "purple"
-            ? "inset 0 1px 0 color-mix(in oklab, var(--purple) 18%, transparent), 0 0 22px -14px color-mix(in oklab, var(--purple) 65%, transparent)"
+            ? "inset 0 1px 0 color-mix(in oklab, var(--purple) 18%, transparent), 0 0 30px -18px color-mix(in oklab, var(--purple) 70%, transparent)"
             : tone === "cyan"
-              ? "inset 0 1px 0 color-mix(in oklab, var(--cyan) 18%, transparent), 0 0 22px -14px color-mix(in oklab, var(--cyan) 60%, transparent)"
-              : "inset 0 1px 0 color-mix(in oklab, var(--cyan) 6%, transparent)",
+              ? "inset 0 1px 0 color-mix(in oklab, var(--cyan) 18%, transparent), 0 0 30px -18px color-mix(in oklab, var(--cyan) 65%, transparent)"
+              : tone === "mint"
+                ? "inset 0 1px 0 color-mix(in oklab, var(--mint) 15%, transparent), 0 0 30px -18px color-mix(in oklab, var(--mint) 55%, transparent)"
+                : "inset 0 1px 0 color-mix(in oklab, var(--cyan) 6%, transparent)",
       }}
     >
-      <div className="font-mono text-[10px] uppercase tracking-[0.25em] text-ink-mute">
+      <div className="font-mono text-[10px] font-semibold uppercase tracking-[0.28em] text-ink-mute">
         {label}
       </div>
-      <div className={`mt-2 truncate font-mono text-xl font-semibold tabular-nums sm:text-2xl lg:text-3xl ${accent}`}>
+      <div className={`mt-3 truncate font-mono text-2xl font-bold tabular-nums sm:text-3xl lg:text-4xl ${accent}`}>
         {value}
       </div>
-      <div className="mt-1 truncate text-xs text-ink-mute">{hint}</div>
+      <div className="mt-1.5 truncate text-xs text-ink-mute">{hint}</div>
     </div>
   );
 });
+
 
 export const MissionCard = memo(function MissionCard({
   quest,

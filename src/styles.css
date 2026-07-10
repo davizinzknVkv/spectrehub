@@ -74,23 +74,23 @@
 
 
 :root {
-  --radius: 0.75rem;
+  --radius: 1rem;
 
-  /* Azul profundo × ciano × roxo-ciano */
-  --void: oklch(0.14 0.05 260);
-  --surface: oklch(0.19 0.06 262);
-  --surface-2: oklch(0.24 0.07 265);
-  --line: oklch(0.75 0.16 250 / 0.2);
+  /* Neon Glass — deeper surfaces, subtler lines */
+  --void: oklch(0.11 0.02 265);
+  --surface: oklch(0.16 0.025 265);
+  --surface-2: oklch(0.21 0.035 265);
+  --line: oklch(1 0 0 / 0.06);
   --cyan: oklch(0.86 0.16 210);
   --cyan-dim: oklch(0.62 0.14 215);
-  --purple: oklch(0.7 0.22 285);
-  --purple-dim: oklch(0.54 0.18 285);
+  --purple: oklch(0.72 0.22 290);
+  --purple-dim: oklch(0.54 0.18 290);
   --mint: oklch(0.82 0.17 175);
   --amber: oklch(0.83 0.16 88);
   --rose: oklch(0.7 0.2 25);
   --ink: oklch(0.98 0.01 240);
-  --ink-dim: oklch(0.8 0.03 245);
-  --ink-mute: oklch(0.6 0.05 260);
+  --ink-dim: oklch(0.78 0.02 245);
+  --ink-mute: oklch(0.55 0.03 260);
 
   --background: var(--void);
   --foreground: var(--ink);
@@ -112,6 +112,7 @@
   --input: var(--surface-2);
   --ring: var(--cyan);
 }
+
 
 
 .dark {
