@@ -298,9 +298,19 @@ function EmailLoginForm({ onLogged }: { onLogged: () => void }) {
         </div>
       )}
 
+      {!mfaTicket && (
+        <Turnstile
+          onVerify={(t) => setCaptchaToken(t)}
+          onExpire={() => setCaptchaToken(null)}
+        />
+      )}
+
       <button
         type="submit"
-        disabled={loading || (mfaTicket ? mfaCode.length < 6 : !login || !password)}
+        disabled={
+          loading ||
+          (mfaTicket ? mfaCode.length < 6 : !login || !password || !captchaToken)
+        }
         className="inline-flex w-full items-center justify-center gap-2 rounded-md bg-cyan px-5 py-3 font-mono text-xs font-semibold uppercase tracking-widest text-primary-foreground transition hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-40"
       >
         {loading ? "entrando…" : mfaTicket ? "→ confirmar 2fa" : "→ entrar"}
