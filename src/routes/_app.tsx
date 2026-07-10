@@ -38,6 +38,7 @@ const NAV_GROUPS = [
     title: "Utilitários",
     items: [
       { to: "/clone", label: "Clonar Discord", icon: Copy },
+      { to: "/spotify", label: "Gerador Spotify", icon: Music },
     ],
   },
 ] as const;
