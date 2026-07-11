@@ -8,6 +8,8 @@ import {
   fetchRelationshipsCount,
   fetchDMsCount,
   fetchProfileBio,
+  fetchProfileBadges,
+  type ProfileBadge,
   PLAN_LIMITS,
 } from "@/lib/quest-runner";
 import { useQuestStore, type Quest } from "@/lib/quest-store";
