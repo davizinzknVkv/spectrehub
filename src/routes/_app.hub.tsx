@@ -100,6 +100,7 @@ function HubPage() {
     dms: number | null;
     bio: string | null;
   }>({ guilds: null, friends: null, dms: null, bio: null });
+  const [profileBadges, setProfileBadges] = useState<ProfileBadge[]>([]);
   const running = useQuestStore((s) => s.running);
   const plan = useQuestStore((s) => s.plan);
   const runs = useQuestStore((s) => s.runs);
