@@ -305,36 +305,59 @@ function HubPage() {
             {user?.username && (
               <div className="mt-0.5 truncate font-mono text-xs text-ink-mute">@{user.username}</div>
             )}
-            {/* Insígnias (Discord flags) — só ícones inline */}
-            {user?.flags ? (
-              <TooltipProvider delayDuration={100}>
-                <div className="mt-2 flex flex-wrap items-center gap-1.5">
-                  {USER_BADGES.filter((b) => (user.flags ?? 0) & b.bit).map((b) => (
-                    <Tooltip key={b.label}>
-                      <TooltipTrigger asChild>
-                        <button
-                          type="button"
-                          aria-label={b.label}
-                          className="shrink-0 rounded transition-transform hover:scale-110 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan/60"
-                        >
-                          <img
-                            src={`https://cdn.discordapp.com/badge-icons/${b.icon}.png`}
-                            alt={b.label}
-                            width={20}
-                            height={20}
-                            loading="lazy"
-                            className="h-5 w-5"
-                          />
-                        </button>
-                      </TooltipTrigger>
-                      <TooltipContent side="top" className="font-mono text-[11px]">
-                        {b.label}
-                      </TooltipContent>
-                    </Tooltip>
-                  ))}
-                </div>
-              </TooltipProvider>
-            ) : null}
+            {/* Insígnias — combina flags + badges do perfil (Nitro, Boost, Quests, etc.) */}
+            {(() => {
+              const flagBadges = USER_BADGES
+                .filter((b) => (user?.flags ?? 0) & b.bit)
+                .map((b) => ({
+                  key: `flag:${b.label}`,
+                  label: b.label,
+                  src: `https://cdn.discordapp.com/badge-icons/${b.icon}.png`,
+                }));
+              const apiBadges = profileBadges.map((b) => ({
+                key: `api:${b.id}`,
+                label: b.description,
+                src: `https://cdn.discordapp.com/badge-icons/${b.icon}.png`,
+              }));
+              const seen = new Set<string>();
+              const all = [...apiBadges, ...flagBadges].filter((b) => {
+                const k = b.src;
+                if (seen.has(k)) return false;
+                seen.add(k);
+                return true;
+              });
+              if (all.length === 0) return null;
+              return (
+                <TooltipProvider delayDuration={100}>
+                  <div className="mt-2 flex flex-wrap items-center gap-1.5">
+                    {all.map((b) => (
+                      <Tooltip key={b.key}>
+                        <TooltipTrigger asChild>
+                          <button
+                            type="button"
+                            aria-label={b.label}
+                            className="shrink-0 rounded transition-transform hover:scale-110 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan/60"
+                          >
+                            <img
+                              src={b.src}
+                              alt={b.label}
+                              width={20}
+                              height={20}
+                              loading="lazy"
+                              className="h-5 w-5"
+                            />
+                          </button>
+                        </TooltipTrigger>
+                        <TooltipContent side="top" className="font-mono text-[11px]">
+                          {b.label}
+                        </TooltipContent>
+                      </Tooltip>
+                    ))}
+                  </div>
+                </TooltipProvider>
+              );
+            })()}
+
 
 
           </div>
