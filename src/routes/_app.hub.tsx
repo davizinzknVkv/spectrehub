@@ -125,6 +125,7 @@ function HubPage() {
         if (uBio) setStats((s) => ({ ...s, bio: uBio }));
         if (uid) {
           fetchProfileBio(uid).then((b) => b && setStats((s) => ({ ...s, bio: b }))).catch(() => {});
+          fetchProfileBadges(uid).then(setProfileBadges).catch(() => {});
         }
       })
       .catch((e) => {
