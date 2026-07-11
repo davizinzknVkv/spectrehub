@@ -11,6 +11,8 @@ import {
   PLAN_LIMITS,
 } from "@/lib/quest-runner";
 import { useQuestStore, type Quest } from "@/lib/quest-store";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
+
 
 export const Route = createFileRoute("/_app/hub")({
   head: () => ({ meta: [{ title: "Hub — Neighborshub" }] }),
