@@ -64,6 +64,8 @@ const USER_BADGES: Array<{ bit: number; label: string; tone: "cyan" | "purple" |
   { bit: 1 << 17, label: "EARLY DEV", tone: "cyan", icon: "6df5892e0f35b051f8b61eace34f4967" },
   { bit: 1 << 18, label: "MOD ALUMNI", tone: "mint", icon: "fee1624003e2fee35cb398e125dc479b" },
   { bit: 1 << 22, label: "ACTIVE DEV", tone: "mint", icon: "6bdc42827a38498929a4920da12695d9" },
+  { bit: 1 << 23, label: "LEGACY USERNAME", tone: "purple", icon: "6de6d34650760ba5551a79732e98ed60" },
+
 ];
 
 const WELCOME_KEY = "nh:welcome-dismissed";
