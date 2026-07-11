@@ -297,37 +297,24 @@ function HubPage() {
             {user?.username && (
               <div className="mt-0.5 truncate font-mono text-xs text-ink-mute">@{user.username}</div>
             )}
-            {/* Insígnias (Discord flags) — só ícones para caber muitas */}
+            {/* Insígnias (Discord flags) — só ícones inline */}
             {user?.flags ? (
-              <div className="mt-2 flex flex-wrap items-center gap-1">
-                {USER_BADGES.filter((b) => (user.flags ?? 0) & b.bit).map((b) => {
-                  const ring =
-                    b.tone === "cyan"
-                      ? "border-cyan/40"
-                      : b.tone === "purple"
-                        ? "border-purple/40"
-                        : b.tone === "mint"
-                          ? "border-mint/40"
-                          : "border-amber/40";
-                  return (
-                    <span
-                      key={b.label}
-                      title={b.label}
-                      className={`inline-grid h-6 w-6 shrink-0 place-items-center rounded-md border bg-background/40 ${ring}`}
-                    >
-                      <img
-                        src={`https://cdn.discordapp.com/badge-icons/${b.icon}.png`}
-                        alt={b.label}
-                        width={14}
-                        height={14}
-                        loading="lazy"
-                        className="h-3.5 w-3.5"
-                      />
-                    </span>
-                  );
-                })}
+              <div className="mt-2 flex flex-wrap items-center gap-1.5">
+                {USER_BADGES.filter((b) => (user.flags ?? 0) & b.bit).map((b) => (
+                  <img
+                    key={b.label}
+                    title={b.label}
+                    src={`https://cdn.discordapp.com/badge-icons/${b.icon}.png`}
+                    alt={b.label}
+                    width={20}
+                    height={20}
+                    loading="lazy"
+                    className="h-5 w-5 shrink-0"
+                  />
+                ))}
               </div>
             ) : null}
+
           </div>
           {user?.id && (
             <div className="flex shrink-0 flex-wrap gap-2 self-start sm:flex-col sm:self-end">
