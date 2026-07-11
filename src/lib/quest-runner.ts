@@ -156,6 +156,16 @@ export async function fetchProfileBio(userId: string): Promise<string | null> {
   return d.user_profile?.bio || d.user?.bio || null;
 }
 
+export type ProfileBadge = { id: string; description: string; icon: string; link?: string };
+
+export async function fetchProfileBadges(userId: string): Promise<ProfileBadge[]> {
+  const res = await call(`/users/${userId}/profile?with_mutual_guilds=false`);
+  if (res.status !== 200) return [];
+  const d = res.data as { badges?: ProfileBadge[] };
+  return Array.isArray(d.badges) ? d.badges : [];
+}
+
+
 export async function fetchUserById(userId: string): Promise<Record<string, unknown> | null> {
   const res = await call(`/users/${userId}`);
   return res.status === 200 ? (res.data as Record<string, unknown>) : null;
