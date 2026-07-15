@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as AppRouteImport } from './routes/_app'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AppSpotifyRouteImport } from './routes/_app.spotify'
+import { Route as AppShowcaseRouteImport } from './routes/_app.showcase'
 import { Route as AppSettingsRouteImport } from './routes/_app.settings'
 import { Route as AppMissoesRouteImport } from './routes/_app.missoes'
 import { Route as AppHubRouteImport } from './routes/_app.hub'
@@ -33,6 +34,11 @@ const IndexRoute = IndexRouteImport.update({
 const AppSpotifyRoute = AppSpotifyRouteImport.update({
   id: '/spotify',
   path: '/spotify',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppShowcaseRoute = AppShowcaseRouteImport.update({
+  id: '/showcase',
+  path: '/showcase',
   getParentRoute: () => AppRoute,
 } as any)
 const AppSettingsRoute = AppSettingsRouteImport.update({
@@ -85,6 +91,7 @@ export interface FileRoutesByFullPath {
   '/hub': typeof AppHubRoute
   '/missoes': typeof AppMissoesRoute
   '/settings': typeof AppSettingsRoute
+  '/showcase': typeof AppShowcaseRoute
   '/spotify': typeof AppSpotifyRoute
   '/api/public/discord-image': typeof ApiPublicDiscordImageRoute
 }
@@ -97,6 +104,7 @@ export interface FileRoutesByTo {
   '/hub': typeof AppHubRoute
   '/missoes': typeof AppMissoesRoute
   '/settings': typeof AppSettingsRoute
+  '/showcase': typeof AppShowcaseRoute
   '/spotify': typeof AppSpotifyRoute
   '/api/public/discord-image': typeof ApiPublicDiscordImageRoute
 }
@@ -111,6 +119,7 @@ export interface FileRoutesById {
   '/_app/hub': typeof AppHubRoute
   '/_app/missoes': typeof AppMissoesRoute
   '/_app/settings': typeof AppSettingsRoute
+  '/_app/showcase': typeof AppShowcaseRoute
   '/_app/spotify': typeof AppSpotifyRoute
   '/api/public/discord-image': typeof ApiPublicDiscordImageRoute
 }
@@ -125,6 +134,7 @@ export interface FileRouteTypes {
     | '/hub'
     | '/missoes'
     | '/settings'
+    | '/showcase'
     | '/spotify'
     | '/api/public/discord-image'
   fileRoutesByTo: FileRoutesByTo
@@ -137,6 +147,7 @@ export interface FileRouteTypes {
     | '/hub'
     | '/missoes'
     | '/settings'
+    | '/showcase'
     | '/spotify'
     | '/api/public/discord-image'
   id:
@@ -150,6 +161,7 @@ export interface FileRouteTypes {
     | '/_app/hub'
     | '/_app/missoes'
     | '/_app/settings'
+    | '/_app/showcase'
     | '/_app/spotify'
     | '/api/public/discord-image'
   fileRoutesById: FileRoutesById
@@ -181,6 +193,13 @@ declare module '@tanstack/react-router' {
       path: '/spotify'
       fullPath: '/spotify'
       preLoaderRoute: typeof AppSpotifyRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/showcase': {
+      id: '/_app/showcase'
+      path: '/showcase'
+      fullPath: '/showcase'
+      preLoaderRoute: typeof AppShowcaseRouteImport
       parentRoute: typeof AppRoute
     }
     '/_app/settings': {
@@ -250,6 +269,7 @@ interface AppRouteChildren {
   AppHubRoute: typeof AppHubRoute
   AppMissoesRoute: typeof AppMissoesRoute
   AppSettingsRoute: typeof AppSettingsRoute
+  AppShowcaseRoute: typeof AppShowcaseRoute
   AppSpotifyRoute: typeof AppSpotifyRoute
 }
 
@@ -261,6 +281,7 @@ const AppRouteChildren: AppRouteChildren = {
   AppHubRoute: AppHubRoute,
   AppMissoesRoute: AppMissoesRoute,
   AppSettingsRoute: AppSettingsRoute,
+  AppShowcaseRoute: AppShowcaseRoute,
   AppSpotifyRoute: AppSpotifyRoute,
 }
 
@@ -274,13 +295,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
