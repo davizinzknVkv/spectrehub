@@ -15,6 +15,7 @@ import {
   Music,
   ImageIcon,
   Tractor,
+  Gift,
 } from "lucide-react";
 
 const DISCORD_INVITE = "https://discord.gg/EMsfMZFyGS";

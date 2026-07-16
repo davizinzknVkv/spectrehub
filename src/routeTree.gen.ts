@@ -14,6 +14,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AppSpotifyRouteImport } from './routes/_app.spotify'
 import { Route as AppShowcaseRouteImport } from './routes/_app.showcase'
 import { Route as AppSettingsRouteImport } from './routes/_app.settings'
+import { Route as AppResgatarRouteImport } from './routes/_app.resgatar'
 import { Route as AppMissoesRouteImport } from './routes/_app.missoes'
 import { Route as AppHubRouteImport } from './routes/_app.hub'
 import { Route as AppHistoryRouteImport } from './routes/_app.history'
@@ -44,6 +45,11 @@ const AppShowcaseRoute = AppShowcaseRouteImport.update({
 const AppSettingsRoute = AppSettingsRouteImport.update({
   id: '/settings',
   path: '/settings',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppResgatarRoute = AppResgatarRouteImport.update({
+  id: '/resgatar',
+  path: '/resgatar',
   getParentRoute: () => AppRoute,
 } as any)
 const AppMissoesRoute = AppMissoesRouteImport.update({
@@ -90,6 +96,7 @@ export interface FileRoutesByFullPath {
   '/history': typeof AppHistoryRoute
   '/hub': typeof AppHubRoute
   '/missoes': typeof AppMissoesRoute
+  '/resgatar': typeof AppResgatarRoute
   '/settings': typeof AppSettingsRoute
   '/showcase': typeof AppShowcaseRoute
   '/spotify': typeof AppSpotifyRoute
@@ -103,6 +110,7 @@ export interface FileRoutesByTo {
   '/history': typeof AppHistoryRoute
   '/hub': typeof AppHubRoute
   '/missoes': typeof AppMissoesRoute
+  '/resgatar': typeof AppResgatarRoute
   '/settings': typeof AppSettingsRoute
   '/showcase': typeof AppShowcaseRoute
   '/spotify': typeof AppSpotifyRoute
@@ -118,6 +126,7 @@ export interface FileRoutesById {
   '/_app/history': typeof AppHistoryRoute
   '/_app/hub': typeof AppHubRoute
   '/_app/missoes': typeof AppMissoesRoute
+  '/_app/resgatar': typeof AppResgatarRoute
   '/_app/settings': typeof AppSettingsRoute
   '/_app/showcase': typeof AppShowcaseRoute
   '/_app/spotify': typeof AppSpotifyRoute
@@ -133,6 +142,7 @@ export interface FileRouteTypes {
     | '/history'
     | '/hub'
     | '/missoes'
+    | '/resgatar'
     | '/settings'
     | '/showcase'
     | '/spotify'
@@ -146,6 +156,7 @@ export interface FileRouteTypes {
     | '/history'
     | '/hub'
     | '/missoes'
+    | '/resgatar'
     | '/settings'
     | '/showcase'
     | '/spotify'
@@ -160,6 +171,7 @@ export interface FileRouteTypes {
     | '/_app/history'
     | '/_app/hub'
     | '/_app/missoes'
+    | '/_app/resgatar'
     | '/_app/settings'
     | '/_app/showcase'
     | '/_app/spotify'
@@ -207,6 +219,13 @@ declare module '@tanstack/react-router' {
       path: '/settings'
       fullPath: '/settings'
       preLoaderRoute: typeof AppSettingsRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/resgatar': {
+      id: '/_app/resgatar'
+      path: '/resgatar'
+      fullPath: '/resgatar'
+      preLoaderRoute: typeof AppResgatarRouteImport
       parentRoute: typeof AppRoute
     }
     '/_app/missoes': {
@@ -268,6 +287,7 @@ interface AppRouteChildren {
   AppHistoryRoute: typeof AppHistoryRoute
   AppHubRoute: typeof AppHubRoute
   AppMissoesRoute: typeof AppMissoesRoute
+  AppResgatarRoute: typeof AppResgatarRoute
   AppSettingsRoute: typeof AppSettingsRoute
   AppShowcaseRoute: typeof AppShowcaseRoute
   AppSpotifyRoute: typeof AppSpotifyRoute
@@ -280,6 +300,7 @@ const AppRouteChildren: AppRouteChildren = {
   AppHistoryRoute: AppHistoryRoute,
   AppHubRoute: AppHubRoute,
   AppMissoesRoute: AppMissoesRoute,
+  AppResgatarRoute: AppResgatarRoute,
   AppSettingsRoute: AppSettingsRoute,
   AppShowcaseRoute: AppShowcaseRoute,
   AppSpotifyRoute: AppSpotifyRoute,
@@ -295,13 +316,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
