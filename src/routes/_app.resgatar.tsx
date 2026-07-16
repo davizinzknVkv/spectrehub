@@ -66,6 +66,7 @@ function RedeemPage() {
   const [loading, setLoading] = useState(false);
   const [busyId, setBusyId] = useState<string | null>(null);
   const [msg, setMsg] = useState<{ tone: "ok" | "err"; text: string } | null>(null);
+  const [confirmItem, setConfirmItem] = useState<Item | null>(null);
 
   const loadOrbs = async () => {
     if (!creds) return;
@@ -78,11 +79,12 @@ function RedeemPage() {
     }
   };
 
-  const handlePurchase = async (it: Item) => {
-    if (!it.skuId || !creds) return;
-    if (!confirm(`Confirmar compra de "${it.name}" por ${it.price.toLocaleString("pt-BR")} Orbs?`)) return;
+  const confirmPurchase = async () => {
+    const it = confirmItem;
+    if (!it || !it.skuId || !creds) return;
     setBusyId(it.id);
     setMsg(null);
+    setConfirmItem(null);
     try {
       const r = await purchaseWithOrbs(it.skuId);
       if (r.ok) {
