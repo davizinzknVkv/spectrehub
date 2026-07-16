@@ -369,47 +369,67 @@ function Index() {
       <PlansShowcase />
 
 
-      {/* Como funciona */}
+      {/* Por que Neighborshub — 2x2 feature grid */}
       <section id="como-funciona" className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20">
-        <h2 className="text-3xl font-bold tracking-tight md:text-4xl">Como funciona</h2>
-        <p className="mt-3 max-w-2xl text-slate-400">Três passos.</p>
+        <div className="max-w-2xl">
+          <div className="inline-flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.3em] text-[#a5b4fc]">
+            <span className="h-3 w-0.5 bg-[#5865F2]" /> por que neighborshub
+          </div>
+          <h2 className="mt-3 text-3xl font-bold tracking-tight md:text-5xl">
+            Feito por quem vive Discord cheio.
+          </h2>
+          <p className="mt-3 text-sm text-slate-400">
+            Cada sistema nasce de quem joga, farma e aguenta o tranco junto com você.
+          </p>
+        </div>
 
-        <div className="mt-10 grid gap-6 md:grid-cols-3">
+        <div className="relative mt-10 grid gap-4 md:grid-cols-2">
+          <div
+            aria-hidden
+            className="pointer-events-none absolute right-8 top-6 select-none font-black text-white/[0.03] text-[120px] leading-none"
+          >
+            0.00
+          </div>
           {[
             {
-              n: "01",
-              title: "Entre no hub",
-              body: "Cole seu token do Discord (fica só no seu navegador) ou faça login com email e senha.",
               icon: Zap,
+              title: "Performance real",
+              body: "0.00ms de impacto. Roda em background sem travar seu Discord nem seu PC.",
             },
             {
-              n: "02",
-              title: "Escolha um plano",
-              body: "Free pra testar. Premium ou Lifetime pra remover o limite diário. Boost pro cooldown mínimo.",
-              icon: InfinityIcon,
+              icon: Code2,
+              title: "Código limpo",
+              body: "Tudo revisado antes de chegar no seu navegador. Zero gambiarra, zero conflito.",
             },
             {
-              n: "03",
-              title: "Deixe rodar",
-              body: "O hub detecta seu cargo em tempo real, executa as quests disponíveis e mostra o progresso.",
-              icon: Timer,
+              icon: Plug,
+              title: "Standalone",
+              body: "Compatível com qualquer cargo, plano ou servidor. Você entra e já está rodando.",
             },
-          ].map((s) => {
-            const Icon = s.icon;
+            {
+              icon: MessageSquare,
+              title: "Suporte de gente",
+              body: "Resposta rápida, direto com quem desenvolveu. Aqui ninguém fica na mão.",
+            },
+          ].map((f) => {
+            const Icon = f.icon;
             return (
-              <div key={s.n} className="rounded-xl border border-white/10 bg-white/[0.03] p-6">
-                <div className="flex items-center gap-3">
-                  <span className="grid h-8 w-8 place-items-center rounded-md bg-[#5865F2]/20 text-[#a5b4fc]">
-                    <Icon className="h-4 w-4" />
-                  </span>
-                  <h3 className="text-lg font-semibold">{s.title}</h3>
-                </div>
-                <p className="mt-3 text-sm text-slate-400">{s.body}</p>
+              <div
+                key={f.title}
+                className="relative rounded-2xl border border-white/10 bg-white/[0.02] p-6 backdrop-blur-md transition hover:border-white/20 hover:bg-white/[0.04]"
+              >
+                <Icon className="h-5 w-5 text-[#5865F2]" />
+                <h3 className="mt-8 text-lg font-bold text-white">{f.title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-slate-400">{f.body}</p>
               </div>
             );
           })}
         </div>
       </section>
+
+      {/* Cadastro Free */}
+      <FreeSignup />
+
 
       {/* Aviso */}
       <section id="aviso" className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20">
