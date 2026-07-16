@@ -157,7 +157,7 @@ function Index() {
           </nav>
           <Link
             to="/hub"
-            className="rounded-full bg-white/95 px-4 py-2 text-xs font-semibold text-[#0b0d12] transition hover:bg-white sm:text-sm"
+            className="rounded-full bg-[#5865F2] px-4 py-2 text-xs font-semibold text-white shadow-lg shadow-indigo-500/30 transition hover:bg-[#4752c4] sm:text-sm"
           >
             Abrir Hub
           </Link>
@@ -189,7 +189,7 @@ function Index() {
                 href="https://discord.com"
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex items-center gap-2 rounded-md border border-white/15 bg-white/[0.03] px-6 py-3 text-xs font-bold uppercase tracking-widest text-white backdrop-blur transition hover:bg-white/10"
+                className="inline-flex items-center gap-2 rounded-md border border-[#5865F2]/40 bg-[#5865F2]/10 px-6 py-3 text-xs font-bold uppercase tracking-widest text-white backdrop-blur transition hover:border-[#5865F2]/70 hover:bg-[#5865F2]/20"
               >
                 Entrar no Discord
               </a>
@@ -987,7 +987,7 @@ function FreeSignup() {
               </label>
               <button
                 type="submit"
-                className="w-full rounded-md bg-emerald-500 px-4 py-2.5 text-xs font-bold uppercase tracking-widest text-black transition hover:bg-emerald-400"
+                className="w-full rounded-md bg-[#5865F2] px-4 py-2.5 text-xs font-bold uppercase tracking-widest text-white transition hover:bg-[#4752c4]"
               >
                 Gerar meu código Free
               </button>
