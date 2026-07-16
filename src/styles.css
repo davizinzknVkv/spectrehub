@@ -116,6 +116,18 @@
   --border: var(--line);
   --input: var(--surface-2);
   --ring: var(--cyan);
+
+  /* Unified glass tokens — reuse everywhere for consistent frosted look */
+  --glass-bg: color-mix(in oklab, var(--surface) 40%, transparent);
+  --glass-bg-strong: color-mix(in oklab, var(--surface) 65%, transparent);
+  --glass-border: color-mix(in oklab, var(--blurple) 22%, transparent);
+  --glass-border-soft: color-mix(in oklab, #ffffff 8%, transparent);
+  --glass-shadow:
+    0 1px 0 color-mix(in oklab, #ffffff 6%, transparent) inset,
+    0 10px 40px -12px color-mix(in oklab, var(--blurple) 45%, transparent),
+    0 30px 80px -30px color-mix(in oklab, #000 90%, transparent);
+  --glass-blur: 18px;
+  --glass-radius: 1rem;
 }
 
 
@@ -320,9 +332,38 @@
 }
 
 @utility glass {
-  background: color-mix(in oklab, var(--surface) 55%, transparent);
-  backdrop-filter: blur(14px) saturate(140%);
-  border: 1px solid color-mix(in oklab, var(--cyan) 15%, transparent);
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur)) saturate(140%);
+  border: 1px solid var(--glass-border-soft);
+}
+
+@utility glass-panel {
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur)) saturate(150%);
+  border: 1px solid var(--glass-border-soft);
+  border-radius: var(--glass-radius);
+  box-shadow: var(--glass-shadow);
+}
+
+@utility glass-panel-strong {
+  background: var(--glass-bg-strong);
+  backdrop-filter: blur(calc(var(--glass-blur) + 6px)) saturate(160%);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--glass-radius);
+  box-shadow: var(--glass-shadow);
+}
+
+@utility glass-frame {
+  padding: 1rem;
+  background:
+    linear-gradient(135deg,
+      color-mix(in oklab, var(--blurple) 18%, transparent),
+      color-mix(in oklab, var(--purple-dim) 12%, transparent) 60%,
+      transparent);
+  border: 1px solid var(--glass-border);
+  border-radius: calc(var(--glass-radius) + 4px);
+  backdrop-filter: blur(var(--glass-blur)) saturate(150%);
+  box-shadow: var(--glass-shadow);
 }
 
 @utility card-hover {

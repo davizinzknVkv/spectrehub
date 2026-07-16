@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import { Zap, CheckCircle2, Instagram, Send, Sparkles, Timer, Infinity as InfinityIcon, ArrowRight, Code2, Plug, MessageSquare, Copy, Check } from "lucide-react";
+import nghcLogo from "@/assets/nghc-logo.png.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -131,9 +132,12 @@ function Index() {
       <header className="sticky top-4 z-50 mx-auto w-full max-w-5xl px-3 sm:top-6 sm:px-6">
         <div className="flex items-center justify-between gap-3 rounded-full border border-white/10 bg-[#0b0d12]/40 py-2 pl-4 pr-2 shadow-xl shadow-black/40 backdrop-blur-2xl">
           <Link to="/" className="flex items-center gap-2">
-            <div className="grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-gradient-to-br from-[#5865F2] to-[#a78bfa] font-black text-white shadow-lg shadow-indigo-500/30">
-              N
-            </div>
+            <img
+              src={nghcLogo.url}
+              alt="NGHC"
+              className="h-9 w-9 shrink-0 rounded-lg object-contain"
+              style={{ filter: "drop-shadow(0 0 10px color-mix(in oklab, var(--blurple) 60%, transparent))" }}
+            />
             <span className="text-sm font-semibold tracking-tight sm:text-base">
               Neighbors<span className="text-[#a5b4fc]">hub</span>
             </span>
@@ -212,9 +216,12 @@ function Index() {
               }}
             />
             <div className="text-center">
-              <div className="text-[92px] font-black leading-none tracking-tighter text-white sm:text-[140px] md:text-[180px]">
-                N<span className="text-[#5865F2]">H</span>
-              </div>
+              <img
+                src={nghcLogo.url}
+                alt="NGHC"
+                className="mx-auto h-40 w-40 object-contain sm:h-56 sm:w-56 md:h-72 md:w-72 float-soft"
+                style={{ filter: "drop-shadow(0 20px 60px color-mix(in oklab, var(--blurple) 55%, transparent))" }}
+              />
               <div className="mt-3 font-mono text-[10px] uppercase tracking-[0.4em] text-slate-500">
                 neighborshub
               </div>
@@ -465,9 +472,12 @@ function Index() {
           <div className="grid gap-10 md:grid-cols-[1.4fr_1fr]">
             <div>
               <Link to="/" className="flex items-center gap-2">
-                <div className="grid h-9 w-9 place-items-center rounded-lg bg-gradient-to-br from-[#5865F2] to-[#a78bfa] font-black text-white shadow-lg shadow-indigo-500/30">
-                  N
-                </div>
+                <img
+                  src={nghcLogo.url}
+                  alt="NGHC"
+                  className="h-10 w-10 object-contain"
+                  style={{ filter: "drop-shadow(0 0 12px color-mix(in oklab, var(--blurple) 55%, transparent))" }}
+                />
                 <span className="text-lg font-semibold tracking-tight">
                   Neighbors<span className="text-[#a5b4fc]">hub</span>
                 </span>
@@ -604,6 +614,42 @@ function MembersSection() {
               <span className="whitespace-nowrap text-sm font-semibold text-white">{m.name}</span>
             </div>
           ))}
+        </div>
+      </div>
+
+      <div className="mx-auto mt-10 max-w-6xl px-4 sm:px-6">
+        <div className="grid gap-6 md:grid-cols-[1fr_auto] md:items-center">
+          <div className="glass-panel p-6 md:p-8">
+            <div className="inline-flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.3em] text-[#a5b4fc]">
+              <span className="h-3 w-0.5 bg-[#5865F2]" /> ao vivo
+            </div>
+            <h3 className="mt-3 text-2xl font-bold tracking-tight md:text-3xl">
+              Servidor oficial no Discord
+            </h3>
+            <p className="mt-2 max-w-md text-sm text-slate-400">
+              Widget conectado direto à guilda. Entra, farma missão e conversa com quem já tá dentro.
+            </p>
+            <a
+              href={GUILD_INVITE}
+              target="_blank"
+              rel="noreferrer"
+              className="mt-5 inline-flex items-center gap-2 rounded-md bg-[#5865F2] px-4 py-2.5 text-xs font-bold uppercase tracking-widest text-white transition hover:bg-[#4752c4]"
+            >
+              Entrar no servidor <ArrowRight className="h-3.5 w-3.5" />
+            </a>
+          </div>
+          <div className="glass-frame mx-auto w-full max-w-[380px]">
+            <iframe
+              src="https://discord.com/widget?id=1511467436543709184&theme=dark"
+              width={350}
+              height={500}
+              title="Discord widget"
+              allowTransparency
+              frameBorder={0}
+              sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"
+              className="mx-auto block h-[500px] w-full max-w-[350px] rounded-xl"
+            />
+          </div>
         </div>
       </div>
 
@@ -775,7 +821,7 @@ function FreeSignup() {
 
   return (
     <section id="free" className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20">
-      <div className="grid gap-6 rounded-2xl border border-white/10 bg-white/[0.02] p-6 backdrop-blur-xl md:grid-cols-[1.1fr_1fr] md:p-10">
+      <div className="glass-panel-strong grid gap-6 p-6 md:grid-cols-[1.1fr_1fr] md:p-10">
         <div>
           <div className="inline-flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.3em] text-emerald-300">
             <span className="h-3 w-0.5 bg-emerald-400" /> cadastro free
@@ -799,7 +845,7 @@ function FreeSignup() {
           </ol>
         </div>
 
-        <div className="rounded-xl border border-white/10 bg-[#0b0d12]/60 p-5 backdrop-blur">
+        <div className="glass-panel p-5">
           {!code ? (
             <form onSubmit={generate} className="space-y-4">
               <label className="block">
