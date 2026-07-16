@@ -128,7 +128,7 @@ function Index() {
 
       {/* Floating pill nav */}
       <header className="sticky top-4 z-50 mx-auto w-full max-w-5xl px-3 sm:top-6 sm:px-6">
-        <div className="flex items-center justify-between gap-3 rounded-full border border-white/10 bg-[#0b0d12]/80 py-2 pl-4 pr-2 shadow-xl shadow-black/40 backdrop-blur-xl">
+        <div className="flex items-center justify-between gap-3 rounded-full border border-white/10 bg-[#0b0d12]/40 py-2 pl-4 pr-2 shadow-xl shadow-black/40 backdrop-blur-2xl">
           <Link to="/" className="flex items-center gap-2">
             <div className="grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-gradient-to-br from-[#5865F2] to-[#a78bfa] font-black text-white shadow-lg shadow-indigo-500/30">
               N
