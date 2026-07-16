@@ -88,10 +88,12 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: "Neighborshub — Auto Quests do Discord" },
       { name: "twitter:description", content: "Complete missões do Discord automaticamente e acumule Orbs. Planos Free, Premium (30 dias ou lifetime) e Boost." },
-      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/94b63b85-c35d-45ea-b000-8f68ae396ffa/id-preview-2af18093--3463ab7b-9510-4c05-8c7d-4a93c821d67b.lovable.app-1783631167250.png" },
-      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/94b63b85-c35d-45ea-b000-8f68ae396ffa/id-preview-2af18093--3463ab7b-9510-4c05-8c7d-4a93c821d67b.lovable.app-1783631167250.png" },
+      { property: "og:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/79e7fe18-9b3f-4c86-9466-b1659b463691" },
+      { name: "twitter:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/79e7fe18-9b3f-4c86-9466-b1659b463691" },
     ],
-    scripts: [],
+    scripts: [
+      { src: "https://challenges.cloudflare.com/turnstile/v0/api.js", async: true, defer: true },
+    ],
     links: [
       { rel: "stylesheet", href: appCss },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
