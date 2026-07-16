@@ -688,7 +688,11 @@ function Index() {
               >
                 davizinzknTheGod
               </a>
+              <span className="mx-2 text-slate-700">·</span>
+              Código-fonte fornecido por{" "}
+              <span className="font-semibold text-[#a5b4fc]">isnouu</span>
             </div>
+
           </div>
         </div>
       </footer>
