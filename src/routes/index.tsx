@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import { Zap, CheckCircle2, Instagram, Send, Sparkles, Timer, Infinity as InfinityIcon, ArrowRight, Code2, Plug, MessageSquare, Copy, Check } from "lucide-react";
+import nghcLogo from "@/assets/nghc-logo.png.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
