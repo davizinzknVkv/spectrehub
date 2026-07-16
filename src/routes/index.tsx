@@ -157,7 +157,7 @@ function Index() {
           </nav>
           <Link
             to="/hub"
-            className="rounded-full bg-white/95 px-4 py-2 text-xs font-semibold text-[#0b0d12] transition hover:bg-white sm:text-sm"
+            className="rounded-full bg-[#5865F2] px-4 py-2 text-xs font-semibold text-white shadow-lg shadow-indigo-500/30 transition hover:bg-[#4752c4] sm:text-sm"
           >
             Abrir Hub
           </Link>
