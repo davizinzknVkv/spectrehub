@@ -30,7 +30,7 @@ const PLANS = [
     price: "R$ 0",
     period: "sempre",
     tone: "border-white/10 bg-white/[0.03]",
-    accent: "text-slate-300",
+    accent: "text-[#a5b4fc]",
     cta: "Começar grátis",
     highlight: false,
     features: [
@@ -59,8 +59,8 @@ const PLANS = [
     name: "Lifetime",
     price: "R$ 39,90",
     period: "pagamento único",
-    tone: "border-amber-400/40 bg-amber-400/[0.06]",
-    accent: "text-amber-200",
+    tone: "border-[#5865F2]/40 bg-[#5865F2]/[0.05]",
+    accent: "text-[#a5b4fc]",
     cta: "Comprar lifetime",
     highlight: false,
     features: [
@@ -74,8 +74,8 @@ const PLANS = [
     name: "Boost",
     price: "Grátis",
     period: "boost o servidor",
-    tone: "border-pink-500/40 bg-pink-500/[0.06]",
-    accent: "text-pink-200",
+    tone: "border-[#5865F2]/40 bg-[#5865F2]/[0.05]",
+    accent: "text-[#a5b4fc]",
     cta: "Boost o servidor",
     highlight: false,
     features: [
@@ -86,6 +86,7 @@ const PLANS = [
     ],
   },
 ];
+
 
 // Membros “destaque” do servidor — usa avatares gerados por hash (dicebear)
 const MEMBERS = [
