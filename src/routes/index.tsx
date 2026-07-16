@@ -515,6 +515,27 @@ function MembersSection() {
   const ref = useRef<HTMLDivElement>(null);
   const cursorRef = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
+  const [live, setLive] = useState<Array<{ id: string; name: string; avatar: string | null; status: string }> | null>(null);
+  const [presence, setPresence] = useState<number | null>(null);
+
+  useEffect(() => {
+    fetch("https://discord.com/api/guilds/1511467436543709184/widget.json")
+      .then((r) => (r.ok ? r.json() : null))
+      .then((j) => {
+        if (!j || !Array.isArray(j.members)) return;
+        setPresence(typeof j.presence_count === "number" ? j.presence_count : null);
+        setLive(
+          j.members.map((m: { id: string; username: string; avatar_url: string | null; status: string }) => ({
+            id: m.id,
+            name: m.username,
+            avatar: m.avatar_url,
+            status: m.status,
+          })),
+        );
+      })
+      .catch(() => {});
+  }, []);
+
 
   useEffect(() => {
     const el = ref.current;
