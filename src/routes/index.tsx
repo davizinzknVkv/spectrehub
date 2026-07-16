@@ -339,7 +339,8 @@ function Index() {
             `}</style>
           </div>
         </div>
-        </div>
+
+
 
         {/* Stats row */}
         <div className="mt-20 grid grid-cols-3 gap-0 border-y border-white/10">
