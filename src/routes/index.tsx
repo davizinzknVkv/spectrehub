@@ -561,13 +561,15 @@ function MembersSection() {
     <section id="membros" className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20">
       <div className="max-w-2xl">
         <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 font-mono text-[10px] uppercase tracking-[0.3em] text-slate-400 backdrop-blur">
-          membros
+          membros {presence !== null && <span className="text-emerald-400">· {presence} online</span>}
         </div>
         <h2 className="mt-4 text-3xl font-bold tracking-tight md:text-4xl">
           Quem já está no servidor
         </h2>
         <p className="mt-3 text-sm text-slate-400">
-          Os membros que mais bombam no hub já confiam na gente todo dia.
+          {live
+            ? "Membros online agora, puxados direto do Discord."
+            : "Ative o Widget do Servidor no Discord pra listar os membros ao vivo. Enquanto isso, alguns destaques:"}
         </p>
       </div>
 
@@ -583,13 +585,28 @@ function MembersSection() {
           <span className="block h-1.5 w-1.5 -rotate-45 rounded-sm bg-[#a5b4fc]" />
         </div>
 
-        {MEMBERS.map((m) => (
+        {(live ?? MEMBERS.map((m) => ({ id: m.seed, name: m.name, avatar: null as string | null, status: "online" }))).map((m) => (
           <div
-            key={m.seed}
+            key={m.id}
             className="group flex items-center gap-3 rounded-xl border border-white/5 bg-white/[0.02] p-3 backdrop-blur-md transition hover:border-white/20 hover:bg-white/[0.05]"
           >
-            <div className={`grid h-10 w-10 shrink-0 place-items-center overflow-hidden rounded-lg border border-white/10 bg-gradient-to-br ${m.tone}`}>
-              <Avatar seed={m.seed} />
+            <div className="relative grid h-10 w-10 shrink-0 place-items-center overflow-hidden rounded-lg border border-white/10 bg-white/5">
+              {m.avatar ? (
+                <img src={m.avatar} alt="" className="h-full w-full object-cover" loading="lazy" />
+              ) : (
+                <Avatar seed={m.id} />
+              )}
+              <span
+                className={`absolute -bottom-0.5 -right-0.5 h-2.5 w-2.5 rounded-full border-2 border-[#0b0d12] ${
+                  m.status === "online"
+                    ? "bg-emerald-400"
+                    : m.status === "idle"
+                      ? "bg-amber-400"
+                      : m.status === "dnd"
+                        ? "bg-red-500"
+                        : "bg-slate-500"
+                }`}
+              />
             </div>
             <span className="truncate text-[11px] font-bold uppercase tracking-wider text-slate-200">
               {m.name}
@@ -600,6 +617,7 @@ function MembersSection() {
     </section>
   );
 }
+
 
 function PlansShowcase() {
   const [active, setActive] = useState(1);
