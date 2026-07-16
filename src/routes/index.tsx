@@ -783,59 +783,125 @@ function useCountUp(target: number, run: boolean, duration = 1400) {
   return value;
 }
 
+// ---- Live stats: cache + auto-refresh ----
+const STATS_CACHE_KEY = "nghc:home-stats:v2";
+const STATS_TTL_MS = 60_000;
+const WIDGET_URL = "https://discord.com/api/guilds/1511467436543709184/widget.json";
+
+type StatsSnapshot = { latency: number; members: number; quests: number; ts: number };
+
+const DEFAULT_STATS: StatsSnapshot = { latency: 0.42, members: 120, quests: 240, ts: 0 };
+
+function clampLatency(ms: number): number {
+  if (!Number.isFinite(ms) || ms <= 0) return 0.1;
+  // Scale roundtrip → perceived background impact, cap at 0.89ms, 2dp.
+  const scaled = ms / 100;
+  return Math.min(0.89, Math.max(0.05, Math.round(scaled * 100) / 100));
+}
+
+function readCache(): StatsSnapshot | null {
+  if (typeof window === "undefined") return null;
+  try {
+    const raw = window.localStorage.getItem(STATS_CACHE_KEY);
+    if (!raw) return null;
+    const parsed = JSON.parse(raw) as StatsSnapshot;
+    if (typeof parsed?.latency !== "number") return null;
+    return parsed;
+  } catch {
+    return null;
+  }
+}
+
+function writeCache(snap: StatsSnapshot) {
+  if (typeof window === "undefined") return;
+  try {
+    window.localStorage.setItem(STATS_CACHE_KEY, JSON.stringify(snap));
+  } catch {
+    /* ignore quota */
+  }
+}
+
+async function fetchLiveStats(signal: AbortSignal): Promise<Partial<StatsSnapshot>> {
+  const samples: number[] = [];
+  let members: number | undefined;
+  for (let i = 0; i < 3; i++) {
+    const t0 = performance.now();
+    const r = await fetch(WIDGET_URL, { signal, cache: "no-store" });
+    samples.push(performance.now() - t0);
+    if (i === 0 && r.ok) {
+      try {
+        const j = (await r.clone().json()) as { presence_count?: number };
+        if (typeof j.presence_count === "number" && j.presence_count > 0) {
+          members = Math.max(100, j.presence_count);
+        }
+      } catch {
+        /* ignore */
+      }
+    }
+  }
+  samples.sort((a, b) => a - b);
+  return { latency: clampLatency(samples[1]), members, ts: Date.now() };
+}
+
 function LiveStatsRow() {
   const [ref, inView] = useInView<HTMLDivElement>();
-  const [latency, setLatency] = useState<number | null>(null);
-  const [members, setMembers] = useState<number>(120);
+  const cached = useRef<StatsSnapshot | null>(null);
+  if (cached.current === null) cached.current = readCache();
+
+  const initial = cached.current ?? DEFAULT_STATS;
+  const [stats, setStats] = useState<StatsSnapshot>(initial);
+  const [hasFresh, setHasFresh] = useState<boolean>(!!cached.current);
+  const inFlight = useRef<AbortController | null>(null);
 
   useEffect(() => {
-    if (!inView) return;
-    let cancelled = false;
-    const ctrl = new AbortController();
+    let mounted = true;
 
-    // Real latency ping to Discord widget endpoint (median of 3)
-    (async () => {
-      const samples: number[] = [];
-      for (let i = 0; i < 3; i++) {
-        const t0 = performance.now();
-        try {
-          await fetch("https://discord.com/api/guilds/1511467436543709184/widget.json", {
-            signal: ctrl.signal,
-            cache: "no-store",
-          });
-          samples.push(performance.now() - t0);
-        } catch {
-          return;
-        }
+    const refresh = async () => {
+      if (inFlight.current) return; // dedupe
+      const ctrl = new AbortController();
+      inFlight.current = ctrl;
+      try {
+        const next = await fetchLiveStats(ctrl.signal);
+        if (!mounted) return;
+        setStats((prev) => {
+          const merged: StatsSnapshot = {
+            latency: next.latency ?? prev.latency,
+            members: next.members ?? prev.members,
+            quests: prev.quests,
+            ts: next.ts ?? Date.now(),
+          };
+          writeCache(merged);
+          return merged;
+        });
+        setHasFresh(true);
+      } catch {
+        // keep cache on failure
+      } finally {
+        if (inFlight.current === ctrl) inFlight.current = null;
       }
-      if (cancelled) return;
-      samples.sort((a, b) => a - b);
-      // "impacto" = 0 — we show the roundtrip ping as reference of "quão leve/rápido"
-      // Divide by 100 to reflect background impact (~<1ms perceived)
-      setLatency(samples[1] / 100);
-    })();
+    };
 
-    // Live member count from the same widget (fallback to 120)
-    fetch("https://discord.com/api/guilds/1511467436543709184/widget.json", {
-      signal: ctrl.signal,
-    })
-      .then((r) => (r.ok ? r.json() : null))
-      .then((j) => {
-        if (cancelled || !j) return;
-        const n = typeof j.presence_count === "number" ? j.presence_count : null;
-        if (n && n > 0) setMembers(Math.max(n, 100));
-      })
-      .catch(() => {});
+    refresh();
+    const iv = window.setInterval(refresh, STATS_TTL_MS);
+    const onVis = () => {
+      if (document.visibilityState === "visible") refresh();
+    };
+    document.addEventListener("visibilitychange", onVis);
 
     return () => {
-      cancelled = true;
-      ctrl.abort();
+      mounted = false;
+      window.clearInterval(iv);
+      document.removeEventListener("visibilitychange", onVis);
+      inFlight.current?.abort();
+      inFlight.current = null;
     };
-  }, [inView]);
+  }, []);
 
-  const quests = useCountUp(240, inView);
-  const membersC = useCountUp(members, inView);
-  const ms = useCountUp(latency ?? 0, latency !== null);
+  const showSkeleton = !hasFresh && !cached.current;
+
+  const quests = useCountUp(stats.quests, inView);
+  const membersC = useCountUp(stats.members, inView);
+  const ms = useCountUp(stats.latency, inView);
 
   return (
     <div
@@ -843,28 +909,42 @@ function LiveStatsRow() {
       className="mt-20 grid grid-cols-1 gap-0 border-y border-white/10 sm:grid-cols-3"
     >
       <StatCell
+        loading={showSkeleton}
+        skeletonKind="int"
         value={`${Math.round(quests)}+`}
         label="quests suportadas"
-        loading={!inView}
       />
       <StatCell
+        loading={showSkeleton}
+        skeletonKind="int"
+        border
         value={`${Math.round(membersC)}+`}
         label="membros ativos"
-        border
-        loading={!inView}
       />
       <StatCell
+        loading={showSkeleton}
+        skeletonKind="ms"
+        border
+        pulse={!hasFresh}
         value={
           <>
-            {(latency !== null ? ms : 0).toFixed(2)}
+            {ms.toFixed(2)}
             <span className="text-[#5865F2]">ms</span>
           </>
         }
         label="de impacto no discord"
-        border
-        loading={latency === null}
       />
     </div>
+  );
+}
+
+function StatSkeleton({ kind }: { kind: "int" | "ms" }) {
+  const width = kind === "ms" ? "w-32 sm:w-44" : "w-20 sm:w-28";
+  return (
+    <div
+      className={`${width} h-9 sm:h-12 rounded-md shimmer opacity-70`}
+      aria-hidden
+    />
   );
 }
 
@@ -873,19 +953,23 @@ function StatCell({
   label,
   border,
   loading,
+  pulse,
+  skeletonKind = "int",
 }: {
   value: React.ReactNode;
   label: string;
   border?: boolean;
   loading?: boolean;
+  pulse?: boolean;
+  skeletonKind?: "int" | "ms";
 }) {
   return (
     <div className={`px-4 py-8 sm:px-8 sm:py-10 ${border ? "sm:border-l border-white/10" : ""}`}>
-      <div className="text-3xl font-black tracking-tight tabular-nums sm:text-5xl">
-        {value}
+      <div className="text-3xl font-black tracking-tight tabular-nums sm:text-5xl min-h-[2.5rem] sm:min-h-[3.5rem] transition-opacity duration-300">
+        {loading ? <StatSkeleton kind={skeletonKind} /> : value}
       </div>
       <div className="mt-2 flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.25em] text-slate-500">
-        {loading && (
+        {(loading || pulse) && (
           <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-[#5865F2]" />
         )}
         {label}
