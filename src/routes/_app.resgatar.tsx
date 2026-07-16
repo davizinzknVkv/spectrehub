@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { useQuestStore } from "@/lib/quest-store";
 import { fetchOrbs, purchaseWithOrbs } from "@/lib/quest-runner";
-import { Gift, Coins, ExternalLink, Sparkles, Palette, Crown, Ticket, Loader2 } from "lucide-react";
+import { Gift, Coins, ExternalLink, Sparkles, Palette, Crown, Ticket, Loader2, X, ShieldCheck } from "lucide-react";
 
 export const Route = createFileRoute("/_app/resgatar")({
   head: () => ({ meta: [{ title: "Resgatar Orbs — Neighborshub" }] }),
