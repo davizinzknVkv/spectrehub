@@ -1,8 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { useQuestStore } from "@/lib/quest-store";
-import { fetchOrbs } from "@/lib/quest-runner";
-import { Gift, Coins, ExternalLink, Sparkles, Palette, Crown, Ticket } from "lucide-react";
+import { fetchOrbs, purchaseWithOrbs } from "@/lib/quest-runner";
+import { Gift, Coins, ExternalLink, Sparkles, Palette, Crown, Ticket, Loader2 } from "lucide-react";
 
 export const Route = createFileRoute("/_app/resgatar")({
   head: () => ({ meta: [{ title: "Resgatar Orbs — Neighborshub" }] }),
@@ -17,17 +17,19 @@ type Item = {
   icon: React.ComponentType<{ className?: string }>;
   tone: "cyan" | "purple" | "amber" | "mint";
   url: string;
+  skuId?: string;
 };
 
 const ITEMS: Item[] = [
   {
-    id: "nitro-1m",
-    name: "1 mês de Nitro",
-    desc: "Recompensa oficial da loja de Orbs quando disponível.",
-    price: 3500,
+    id: "nitro-3d",
+    name: "Crédito Nitro (3 dias)",
+    desc: "Compra oficial via loja de Orbs do Discord.",
+    price: 1400,
     icon: Crown,
     tone: "purple",
-    url: "https://discord.com/shop",
+    url: "https://discord.com/shop?tab=orbs",
+    skuId: "1298745361602449479",
   },
   {
     id: "deco-avatar",
@@ -36,7 +38,7 @@ const ITEMS: Item[] = [
     price: 1500,
     icon: Sparkles,
     tone: "cyan",
-    url: "https://discord.com/shop",
+    url: "https://discord.com/shop?tab=orbs",
   },
   {
     id: "profile-effect",
@@ -45,7 +47,7 @@ const ITEMS: Item[] = [
     price: 1200,
     icon: Palette,
     tone: "mint",
-    url: "https://discord.com/shop",
+    url: "https://discord.com/shop?tab=orbs",
   },
   {
     id: "boost-ticket",
@@ -54,7 +56,7 @@ const ITEMS: Item[] = [
     price: 800,
     icon: Ticket,
     tone: "amber",
-    url: "https://discord.com/shop",
+    url: "https://discord.com/shop?tab=orbs",
   },
 ];
 
@@ -62,6 +64,8 @@ function RedeemPage() {
   const creds = useQuestStore((s) => s.creds);
   const [orbs, setOrbs] = useState<number | null>(null);
   const [loading, setLoading] = useState(false);
+  const [busyId, setBusyId] = useState<string | null>(null);
+  const [msg, setMsg] = useState<{ tone: "ok" | "err"; text: string } | null>(null);
 
   const loadOrbs = async () => {
     if (!creds) return;
@@ -71,6 +75,24 @@ function RedeemPage() {
       setOrbs(b);
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handlePurchase = async (it: Item) => {
+    if (!it.skuId || !creds) return;
+    if (!confirm(`Confirmar compra de "${it.name}" por ${it.price.toLocaleString("pt-BR")} Orbs?`)) return;
+    setBusyId(it.id);
+    setMsg(null);
+    try {
+      const r = await purchaseWithOrbs(it.skuId);
+      if (r.ok) {
+        setMsg({ tone: "ok", text: `✅ Compra concluída: ${it.name}` });
+        await loadOrbs();
+      } else {
+        setMsg({ tone: "err", text: `❌ ${r.message}` });
+      }
+    } finally {
+      setBusyId(null);
     }
   };
 
@@ -125,6 +147,18 @@ function RedeemPage() {
         </div>
       )}
 
+      {msg && (
+        <div
+          className={`rounded-xl border p-4 text-sm ${
+            msg.tone === "ok"
+              ? "border-mint/40 bg-mint/5 text-mint"
+              : "border-red-500/40 bg-red-500/5 text-red-400"
+          }`}
+        >
+          {msg.text}
+        </div>
+      )}
+
       {/* Items */}
       <section className="grid gap-4 sm:grid-cols-2 lg:grid-cols-2">
         {ITEMS.map((it) => {
@@ -176,18 +210,34 @@ function RedeemPage() {
                       ? "disponível"
                       : `faltam ${(it.price - (orbs ?? 0)).toLocaleString("pt-BR")}`}
                 </span>
-                <a
-                  href={it.url}
-                  target="_blank"
-                  rel="noreferrer"
-                  className={`inline-flex items-center gap-1.5 rounded-md border px-3 py-1.5 font-mono text-[11px] uppercase tracking-widest transition ${
-                    canAfford
-                      ? "border-cyan/50 bg-cyan/10 text-cyan hover:bg-cyan/20"
-                      : "border-line text-ink-dim hover:border-purple/40 hover:text-purple"
-                  }`}
-                >
-                  resgatar <ExternalLink className="h-3 w-3" />
-                </a>
+                {it.skuId ? (
+                  <button
+                    onClick={() => handlePurchase(it)}
+                    disabled={!creds || !canAfford || busyId === it.id}
+                    className={`inline-flex items-center gap-1.5 rounded-md border px-3 py-1.5 font-mono text-[11px] uppercase tracking-widest transition disabled:cursor-not-allowed disabled:opacity-40 ${
+                      canAfford
+                        ? "border-mint/50 bg-mint/10 text-mint hover:bg-mint/20"
+                        : "border-line text-ink-dim"
+                    }`}
+                  >
+                    {busyId === it.id ? (
+                      <>
+                        <Loader2 className="h-3 w-3 animate-spin" /> comprando...
+                      </>
+                    ) : (
+                      <>comprar c/ orbs</>
+                    )}
+                  </button>
+                ) : (
+                  <a
+                    href={it.url}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex items-center gap-1.5 rounded-md border border-line px-3 py-1.5 font-mono text-[11px] uppercase tracking-widest text-ink-dim hover:border-purple/40 hover:text-purple"
+                  >
+                    ver na loja <ExternalLink className="h-3 w-3" />
+                  </a>
+                )}
               </div>
             </div>
           );
