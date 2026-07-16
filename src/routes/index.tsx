@@ -343,31 +343,8 @@ function Index() {
 
 
         {/* Stats row */}
-        <div className="mt-20 grid grid-cols-3 gap-0 border-y border-white/10">
-          {[
-            { n: "200+", l: "quests suportadas" },
-            { n: "100+", l: "membros ativos" },
-            { n: "0.00ms", l: "de impacto no discord", accent: true },
-          ].map((s, i) => (
-            <div
-              key={s.l}
-              className={`px-4 py-8 sm:px-8 sm:py-10 ${i > 0 ? "border-l border-white/10" : ""}`}
-            >
-              <div className="text-3xl font-black tracking-tight sm:text-5xl">
-                {s.accent ? (
-                  <>
-                    0.00<span className="text-[#5865F2]">ms</span>
-                  </>
-                ) : (
-                  s.n
-                )}
-              </div>
-              <div className="mt-2 font-mono text-[10px] uppercase tracking-[0.25em] text-slate-500">
-                {s.l}
-              </div>
-            </div>
-          ))}
-        </div>
+        <LiveStatsRow />
+
       </section>
 
 
