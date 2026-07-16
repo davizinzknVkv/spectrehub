@@ -549,30 +549,76 @@ function Index() {
 
       {/* Aviso */}
       <section id="aviso" className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20">
-        <div className="rounded-xl border border-yellow-500/20 bg-yellow-500/[0.05] p-6 md:p-8">
-          <div className="flex items-start gap-4">
-            <div className="text-2xl">⚠️</div>
-            <div>
-              <h3 className="text-lg font-semibold text-yellow-300">
-                Uso por sua conta e risco
+        <div className="relative overflow-hidden rounded-2xl border border-[#5865F2]/25 bg-gradient-to-br from-[#5865F2]/[0.08] via-[#0b0d12]/60 to-[#0b0d12]/40 p-6 shadow-2xl shadow-indigo-500/10 backdrop-blur-xl md:p-10">
+          <div
+            aria-hidden
+            className="pointer-events-none absolute -top-24 -right-24 h-64 w-64 rounded-full bg-[#5865F2]/20 blur-3xl"
+          />
+          <div
+            aria-hidden
+            className="pointer-events-none absolute -bottom-32 -left-20 h-72 w-72 rounded-full bg-[#5865F2]/10 blur-3xl"
+          />
+
+          <div className="relative flex flex-col gap-6 md:flex-row md:items-start">
+            <div
+              className="grid h-14 w-14 shrink-0 place-items-center rounded-2xl border border-[#5865F2]/40 bg-[#5865F2]/15 text-2xl"
+              style={{ boxShadow: "0 0 30px -6px rgba(88,101,242,0.55)" }}
+            >
+              ⚠️
+            </div>
+
+            <div className="flex-1">
+              <div className="inline-flex items-center gap-2 rounded-full border border-[#5865F2]/30 bg-[#5865F2]/10 px-3 py-1 font-mono text-[10px] uppercase tracking-[0.3em] text-[#a5b4fc]">
+                <span className="h-1.5 w-1.5 rounded-full bg-[#a5b4fc]" />
+                Aviso
+              </div>
+
+              <h3 className="mt-3 text-2xl font-bold tracking-tight text-white sm:text-3xl">
+                Leia antes de usar o Neighborshub
               </h3>
-              <p className="mt-2 text-sm leading-relaxed text-slate-300">
+              <p className="mt-3 max-w-2xl text-sm leading-relaxed text-slate-300 sm:text-base">
                 Automatizar a API do Discord com o token da sua conta pessoal viola os{" "}
                 <a
                   href="https://discord.com/terms"
                   target="_blank"
                   rel="noreferrer"
-                  className="underline decoration-yellow-400/50 hover:text-white"
+                  className="font-medium text-[#a5b4fc] underline decoration-[#5865F2]/60 underline-offset-2 transition hover:text-white"
                 >
                   Termos de Serviço do Discord
                 </a>{" "}
                 (self-bots) e pode resultar em suspensão da conta. Este projeto é
-                educacional. Nunca compartilhe seu token com terceiros.
+                educacional — você é o único responsável pelo uso.
               </p>
+
+              <ul className="mt-6 grid gap-3 sm:grid-cols-2">
+                {[
+                  { t: "Sem garantias", d: "Uso oferecido como está, sem qualquer promessa de resultado." },
+                  { t: "Token = sua responsabilidade", d: "Nunca compartilhe seu token com terceiros ou serviços desconhecidos." },
+                  { t: "Não afiliado ao Discord", d: "Projeto independente, sem qualquer vínculo oficial." },
+                  { t: "Uso educacional", d: "Feito para estudo e automação pessoal — use com bom senso." },
+                ].map((item) => (
+                  <li
+                    key={item.t}
+                    className="flex items-start gap-3 rounded-xl border border-white/5 bg-white/[0.02] p-3 backdrop-blur"
+                  >
+                    <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[#5865F2]" />
+                    <div>
+                      <div className="text-xs font-semibold uppercase tracking-wider text-white">
+                        {item.t}
+                      </div>
+                      <div className="mt-0.5 text-xs leading-relaxed text-slate-400">
+                        {item.d}
+                      </div>
+                    </div>
+                  </li>
+                ))}
+              </ul>
             </div>
           </div>
         </div>
       </section>
+
+
 
       {/* Footer — like image 4 */}
       <footer className="border-t border-white/5 bg-black/30">
