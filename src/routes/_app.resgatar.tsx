@@ -1,8 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { useQuestStore } from "@/lib/quest-store";
-import { fetchOrbs } from "@/lib/quest-runner";
-import { Gift, Coins, ExternalLink, Sparkles, Palette, Crown, Ticket } from "lucide-react";
+import { fetchOrbs, purchaseWithOrbs } from "@/lib/quest-runner";
+import { Gift, Coins, ExternalLink, Sparkles, Palette, Crown, Ticket, Loader2 } from "lucide-react";
 
 export const Route = createFileRoute("/_app/resgatar")({
   head: () => ({ meta: [{ title: "Resgatar Orbs — Neighborshub" }] }),
@@ -17,17 +17,19 @@ type Item = {
   icon: React.ComponentType<{ className?: string }>;
   tone: "cyan" | "purple" | "amber" | "mint";
   url: string;
+  skuId?: string;
 };
 
 const ITEMS: Item[] = [
   {
-    id: "nitro-1m",
-    name: "1 mês de Nitro",
-    desc: "Recompensa oficial da loja de Orbs quando disponível.",
-    price: 3500,
+    id: "nitro-3d",
+    name: "Crédito Nitro (3 dias)",
+    desc: "Compra oficial via loja de Orbs do Discord.",
+    price: 1400,
     icon: Crown,
     tone: "purple",
-    url: "https://discord.com/shop",
+    url: "https://discord.com/shop?tab=orbs",
+    skuId: "1298745361602449479",
   },
   {
     id: "deco-avatar",
@@ -36,7 +38,7 @@ const ITEMS: Item[] = [
     price: 1500,
     icon: Sparkles,
     tone: "cyan",
-    url: "https://discord.com/shop",
+    url: "https://discord.com/shop?tab=orbs",
   },
   {
     id: "profile-effect",
@@ -45,7 +47,7 @@ const ITEMS: Item[] = [
     price: 1200,
     icon: Palette,
     tone: "mint",
-    url: "https://discord.com/shop",
+    url: "https://discord.com/shop?tab=orbs",
   },
   {
     id: "boost-ticket",
@@ -54,7 +56,7 @@ const ITEMS: Item[] = [
     price: 800,
     icon: Ticket,
     tone: "amber",
-    url: "https://discord.com/shop",
+    url: "https://discord.com/shop?tab=orbs",
   },
 ];
 
