@@ -554,7 +554,8 @@ function MembersSection() {
   const [presence, setPresence] = useState<number | null>(null);
 
   useEffect(() => {
-    fetch("https://discord.com/api/guilds/1511467436543709184/widget.json")
+    const ctrl = new AbortController();
+    fetch("https://discord.com/api/guilds/1511467436543709184/widget.json", { signal: ctrl.signal })
       .then((r) => (r.ok ? r.json() : null))
       .then((j) => {
         if (!j || !Array.isArray(j.members)) return;
@@ -569,6 +570,7 @@ function MembersSection() {
         );
       })
       .catch(() => {});
+    return () => ctrl.abort();
   }, []);
 
   const list = live ?? MEMBERS.map((m) => ({ id: m.seed, name: m.name, avatar: null as string | null, status: "online" }));
