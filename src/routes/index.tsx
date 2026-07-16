@@ -152,39 +152,108 @@ function Index() {
         </div>
       </header>
 
-      {/* Hero */}
-      <section className="mx-auto max-w-6xl px-4 pt-10 pb-16 sm:px-6 sm:pt-16 sm:pb-24">
-        <div className="mx-auto max-w-3xl text-center">
-          <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-slate-300">
-            <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 shadow-[0_0_10px_#34d399]" />
-            Auto Quests · Detecção de plano em tempo real
+      {/* Hero — split style */}
+      <section className="mx-auto max-w-6xl px-4 pt-12 sm:px-6 sm:pt-20">
+        <div className="grid items-center gap-10 md:grid-cols-[1.1fr_1fr]">
+          <div>
+            <h1 className="text-5xl font-black leading-[1.05] tracking-tight sm:text-6xl md:text-7xl">
+              Complete missões pra
+              <br />
+              <span className="text-[#5865F2]">dominar o Discord.</span>
+            </h1>
+            <p className="mt-5 max-w-md text-sm leading-relaxed text-slate-400 sm:text-base">
+              Auto-quests em segundo plano, detecção de plano em tempo real e farm de Orbs sem
+              esforço. O Neighborshub roda o pesado — você só coleta.
+            </p>
+
+            <div className="mt-8 flex flex-wrap gap-3">
+              <Link
+                to="/hub"
+                className="inline-flex items-center gap-2 rounded-md bg-[#5865F2] px-6 py-3 text-xs font-bold uppercase tracking-widest text-white shadow-lg shadow-indigo-500/30 transition hover:bg-[#4752c4]"
+              >
+                Abrir o Hub <ArrowRight className="h-3.5 w-3.5" />
+              </Link>
+              <a
+                href="https://discord.com"
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-2 rounded-md border border-white/15 bg-white/[0.03] px-6 py-3 text-xs font-bold uppercase tracking-widest text-white backdrop-blur transition hover:bg-white/10"
+              >
+                Entrar no Discord
+              </a>
+            </div>
+
+            <div className="mt-8 flex items-center gap-3">
+              <div className="flex -space-x-2">
+                {MEMBERS.slice(0, 5).map((m) => (
+                  <div
+                    key={m.seed}
+                    className="grid h-7 w-7 place-items-center overflow-hidden rounded-full border-2 border-[#0b0d12] bg-white/10"
+                  >
+                    <Avatar seed={m.seed} />
+                  </div>
+                ))}
+              </div>
+              <div className="font-mono text-[10px] uppercase tracking-[0.25em] text-slate-500">
+                Já rodando em mais de 100 servidores
+              </div>
+            </div>
           </div>
-          <h1 className="mt-6 text-4xl font-bold tracking-tight sm:text-5xl md:text-7xl">
-            Complete missões do Discord
-            <br />
-            <span className="bg-gradient-to-r from-[#5865F2] via-[#a78bfa] to-[#ec4899] bg-clip-text text-transparent">
-              e acumule Orbs no automático.
-            </span>
-          </h1>
-          <p className="mt-5 text-base text-slate-400 sm:mt-6 sm:text-lg md:text-xl">
-            Faça login com seu Discord, escolha um plano e deixe o hub farmar quests de vídeo e jogo pra você.
-          </p>
-          <div className="mt-8 flex flex-wrap justify-center gap-3">
-            <Link
-              to="/hub"
-              className="rounded-lg bg-[#5865F2] px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-indigo-500/30 transition hover:bg-[#4752c4]"
-            >
-              Abrir o Hub
-            </Link>
-            <a
-              href="#planos"
-              className="rounded-lg border border-white/10 bg-white/5 px-5 py-3 text-sm font-semibold text-white transition hover:bg-white/10"
-            >
-              Ver planos
-            </a>
+
+          {/* Big logo mark */}
+          <div className="relative flex items-center justify-center">
+            <div
+              aria-hidden
+              className="pointer-events-none absolute inset-0 -z-10"
+              style={{
+                background:
+                  "radial-gradient(400px 300px at 50% 50%, rgba(88,101,242,0.35), transparent 65%)",
+              }}
+            />
+            <div className="text-center">
+              <div className="text-[92px] font-black leading-none tracking-tighter text-white sm:text-[140px] md:text-[180px]">
+                N<span className="text-[#5865F2]">H</span>
+              </div>
+              <div className="mt-3 font-mono text-[10px] uppercase tracking-[0.4em] text-slate-500">
+                neighborshub
+              </div>
+            </div>
+            <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 rotate-45">
+              <div className="grid h-6 w-6 place-items-center border border-[#5865F2]/60">
+                <span className="block h-1.5 w-1.5 rounded-sm bg-[#5865F2]" />
+              </div>
+            </div>
           </div>
         </div>
+
+        {/* Stats row */}
+        <div className="mt-20 grid grid-cols-3 gap-0 border-y border-white/10">
+          {[
+            { n: "200+", l: "quests suportadas" },
+            { n: "100+", l: "membros ativos" },
+            { n: "0.00ms", l: "de impacto no discord", accent: true },
+          ].map((s, i) => (
+            <div
+              key={s.l}
+              className={`px-4 py-8 sm:px-8 sm:py-10 ${i > 0 ? "border-l border-white/10" : ""}`}
+            >
+              <div className="text-3xl font-black tracking-tight sm:text-5xl">
+                {s.accent ? (
+                  <>
+                    0.00<span className="text-[#5865F2]">ms</span>
+                  </>
+                ) : (
+                  s.n
+                )}
+              </div>
+              <div className="mt-2 font-mono text-[10px] uppercase tracking-[0.25em] text-slate-500">
+                {s.l}
+              </div>
+            </div>
+          ))}
+        </div>
       </section>
+
 
       {/* Missões — split section like image 1 */}
       <section id="missoes" className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20">
@@ -446,6 +515,27 @@ function MembersSection() {
   const ref = useRef<HTMLDivElement>(null);
   const cursorRef = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
+  const [live, setLive] = useState<Array<{ id: string; name: string; avatar: string | null; status: string }> | null>(null);
+  const [presence, setPresence] = useState<number | null>(null);
+
+  useEffect(() => {
+    fetch("https://discord.com/api/guilds/1511467436543709184/widget.json")
+      .then((r) => (r.ok ? r.json() : null))
+      .then((j) => {
+        if (!j || !Array.isArray(j.members)) return;
+        setPresence(typeof j.presence_count === "number" ? j.presence_count : null);
+        setLive(
+          j.members.map((m: { id: string; username: string; avatar_url: string | null; status: string }) => ({
+            id: m.id,
+            name: m.username,
+            avatar: m.avatar_url,
+            status: m.status,
+          })),
+        );
+      })
+      .catch(() => {});
+  }, []);
+
 
   useEffect(() => {
     const el = ref.current;
@@ -471,13 +561,15 @@ function MembersSection() {
     <section id="membros" className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20">
       <div className="max-w-2xl">
         <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 font-mono text-[10px] uppercase tracking-[0.3em] text-slate-400 backdrop-blur">
-          membros
+          membros {presence !== null && <span className="text-emerald-400">· {presence} online</span>}
         </div>
         <h2 className="mt-4 text-3xl font-bold tracking-tight md:text-4xl">
           Quem já está no servidor
         </h2>
         <p className="mt-3 text-sm text-slate-400">
-          Os membros que mais bombam no hub já confiam na gente todo dia.
+          {live
+            ? "Membros online agora, puxados direto do Discord."
+            : "Ative o Widget do Servidor no Discord pra listar os membros ao vivo. Enquanto isso, alguns destaques:"}
         </p>
       </div>
 
@@ -493,13 +585,28 @@ function MembersSection() {
           <span className="block h-1.5 w-1.5 -rotate-45 rounded-sm bg-[#a5b4fc]" />
         </div>
 
-        {MEMBERS.map((m) => (
+        {(live ?? MEMBERS.map((m) => ({ id: m.seed, name: m.name, avatar: null as string | null, status: "online" }))).map((m) => (
           <div
-            key={m.seed}
+            key={m.id}
             className="group flex items-center gap-3 rounded-xl border border-white/5 bg-white/[0.02] p-3 backdrop-blur-md transition hover:border-white/20 hover:bg-white/[0.05]"
           >
-            <div className={`grid h-10 w-10 shrink-0 place-items-center overflow-hidden rounded-lg border border-white/10 bg-gradient-to-br ${m.tone}`}>
-              <Avatar seed={m.seed} />
+            <div className="relative grid h-10 w-10 shrink-0 place-items-center overflow-hidden rounded-lg border border-white/10 bg-white/5">
+              {m.avatar ? (
+                <img src={m.avatar} alt="" className="h-full w-full object-cover" loading="lazy" />
+              ) : (
+                <Avatar seed={m.id} />
+              )}
+              <span
+                className={`absolute -bottom-0.5 -right-0.5 h-2.5 w-2.5 rounded-full border-2 border-[#0b0d12] ${
+                  m.status === "online"
+                    ? "bg-emerald-400"
+                    : m.status === "idle"
+                      ? "bg-amber-400"
+                      : m.status === "dnd"
+                        ? "bg-red-500"
+                        : "bg-slate-500"
+                }`}
+              />
             </div>
             <span className="truncate text-[11px] font-bold uppercase tracking-wider text-slate-200">
               {m.name}
@@ -510,6 +617,7 @@ function MembersSection() {
     </section>
   );
 }
+
 
 function PlansShowcase() {
   const [active, setActive] = useState(1);
