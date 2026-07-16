@@ -533,9 +533,6 @@ function Index() {
 }
 
 function MembersSection() {
-  const ref = useRef<HTMLDivElement>(null);
-  const cursorRef = useRef<HTMLDivElement>(null);
-  const [visible, setVisible] = useState(false);
   const [live, setLive] = useState<Array<{ id: string; name: string; avatar: string | null; status: string }> | null>(null);
   const [presence, setPresence] = useState<number | null>(null);
 
@@ -557,87 +554,69 @@ function MembersSection() {
       .catch(() => {});
   }, []);
 
-
-  useEffect(() => {
-    const el = ref.current;
-    const cur = cursorRef.current;
-    if (!el || !cur) return;
-    const onMove = (e: MouseEvent) => {
-      const rect = el.getBoundingClientRect();
-      cur.style.transform = `translate3d(${e.clientX - rect.left - 14}px, ${e.clientY - rect.top - 14}px, 0) rotate(45deg)`;
-    };
-    const onEnter = () => setVisible(true);
-    const onLeave = () => setVisible(false);
-    el.addEventListener("mousemove", onMove);
-    el.addEventListener("mouseenter", onEnter);
-    el.addEventListener("mouseleave", onLeave);
-    return () => {
-      el.removeEventListener("mousemove", onMove);
-      el.removeEventListener("mouseenter", onEnter);
-      el.removeEventListener("mouseleave", onLeave);
-    };
-  }, []);
+  const list = live ?? MEMBERS.map((m) => ({ id: m.seed, name: m.name, avatar: null as string | null, status: "online" }));
+  const loop = [...list, ...list];
 
   return (
-    <section id="membros" className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20">
-      <div className="max-w-2xl">
-        <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 font-mono text-[10px] uppercase tracking-[0.3em] text-slate-400 backdrop-blur">
-          membros {presence !== null && <span className="text-emerald-400">· {presence} online</span>}
-        </div>
-        <h2 className="mt-4 text-3xl font-bold tracking-tight md:text-4xl">
-          Quem já está no servidor
-        </h2>
-        <p className="mt-3 text-sm text-slate-400">
-          {live
-            ? "Membros online agora, puxados direto do Discord."
-            : "Ative o Widget do Servidor no Discord pra listar os membros ao vivo. Enquanto isso, alguns destaques:"}
-        </p>
-      </div>
-
-      <div
-        ref={ref}
-        className="relative mt-10 grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6"
-      >
-        <div
-          ref={cursorRef}
-          aria-hidden
-          className={`pointer-events-none absolute left-0 top-0 z-20 grid h-7 w-7 place-items-center rounded-md border border-[#5865F2] bg-[#5865F2]/20 shadow-[0_0_20px_rgba(88,101,242,0.6)] transition-opacity duration-150 ${visible ? "opacity-100" : "opacity-0"}`}
-        >
-          <span className="block h-1.5 w-1.5 -rotate-45 rounded-sm bg-[#a5b4fc]" />
-        </div>
-
-        {(live ?? MEMBERS.map((m) => ({ id: m.seed, name: m.name, avatar: null as string | null, status: "online" }))).map((m) => (
-          <div
-            key={m.id}
-            className="group flex items-center gap-3 rounded-xl border border-white/5 bg-white/[0.02] p-3 backdrop-blur-md transition hover:border-white/20 hover:bg-white/[0.05]"
-          >
-            <div className="relative grid h-10 w-10 shrink-0 place-items-center overflow-hidden rounded-lg border border-white/10 bg-white/5">
-              {m.avatar ? (
-                <img src={m.avatar} alt="" className="h-full w-full object-cover" loading="lazy" />
-              ) : (
-                <Avatar seed={m.id} />
-              )}
-              <span
-                className={`absolute -bottom-0.5 -right-0.5 h-2.5 w-2.5 rounded-full border-2 border-[#0b0d12] ${
-                  m.status === "online"
-                    ? "bg-emerald-400"
-                    : m.status === "idle"
-                      ? "bg-amber-400"
-                      : m.status === "dnd"
-                        ? "bg-red-500"
-                        : "bg-slate-500"
-                }`}
-              />
-            </div>
-            <span className="truncate text-[11px] font-bold uppercase tracking-wider text-slate-200">
-              {m.name}
-            </span>
+    <section id="membros" className="py-16 sm:py-20">
+      <div className="mx-auto max-w-6xl px-4 sm:px-6">
+        <div className="max-w-2xl">
+          <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 font-mono text-[10px] uppercase tracking-[0.3em] text-slate-400 backdrop-blur">
+            membros {presence !== null && <span className="text-[#a5b4fc]">· {presence} online</span>}
           </div>
-        ))}
+          <h2 className="mt-4 text-3xl font-bold tracking-tight md:text-4xl">
+            Quem já está no servidor
+          </h2>
+          <p className="mt-3 text-sm text-slate-400">
+            {live ? "Membros online agora, direto do Discord." : "Alguns destaques da comunidade."}
+          </p>
+        </div>
       </div>
+
+      <div className="relative mt-10 overflow-hidden">
+        <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-24 bg-gradient-to-r from-[#0b0d12] to-transparent" />
+        <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-24 bg-gradient-to-l from-[#0b0d12] to-transparent" />
+
+        <div className="flex gap-3 animate-[marquee_50s_linear_infinite] hover:[animation-play-state:paused]">
+          {loop.map((m, i) => (
+            <div
+              key={`${m.id}-${i}`}
+              className="flex shrink-0 items-center gap-3 rounded-full border border-white/10 bg-white/[0.03] py-1.5 pl-1.5 pr-5 backdrop-blur-md"
+            >
+              <div className="relative grid h-9 w-9 shrink-0 place-items-center overflow-hidden rounded-full border border-white/10 bg-white/5">
+                {m.avatar ? (
+                  <img src={m.avatar} alt="" className="h-full w-full object-cover" loading="lazy" />
+                ) : (
+                  <Avatar seed={m.id} />
+                )}
+                <span
+                  className={`absolute -bottom-0.5 -right-0.5 h-2.5 w-2.5 rounded-full border-2 border-[#0b0d12] ${
+                    m.status === "online"
+                      ? "bg-[#5865F2]"
+                      : m.status === "idle"
+                        ? "bg-[#a5b4fc]"
+                        : m.status === "dnd"
+                          ? "bg-[#4752c4]"
+                          : "bg-slate-500"
+                  }`}
+                />
+              </div>
+              <span className="whitespace-nowrap text-sm font-semibold text-white">{m.name}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <style>{`
+        @keyframes marquee {
+          0% { transform: translateX(0); }
+          100% { transform: translateX(-50%); }
+        }
+      `}</style>
     </section>
   );
 }
+
 
 
 function PlansShowcase() {
