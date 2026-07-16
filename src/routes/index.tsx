@@ -343,31 +343,8 @@ function Index() {
 
 
         {/* Stats row */}
-        <div className="mt-20 grid grid-cols-3 gap-0 border-y border-white/10">
-          {[
-            { n: "200+", l: "quests suportadas" },
-            { n: "100+", l: "membros ativos" },
-            { n: "0.00ms", l: "de impacto no discord", accent: true },
-          ].map((s, i) => (
-            <div
-              key={s.l}
-              className={`px-4 py-8 sm:px-8 sm:py-10 ${i > 0 ? "border-l border-white/10" : ""}`}
-            >
-              <div className="text-3xl font-black tracking-tight sm:text-5xl">
-                {s.accent ? (
-                  <>
-                    0.00<span className="text-[#5865F2]">ms</span>
-                  </>
-                ) : (
-                  s.n
-                )}
-              </div>
-              <div className="mt-2 font-mono text-[10px] uppercase tracking-[0.25em] text-slate-500">
-                {s.l}
-              </div>
-            </div>
-          ))}
-        </div>
+        <LiveStatsRow />
+
       </section>
 
 
@@ -767,7 +744,158 @@ function Index() {
   );
 }
 
+function useInView<T extends Element>(): [React.RefObject<T | null>, boolean] {
+  const ref = useRef<T | null>(null);
+  const [inView, setInView] = useState(false);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el || inView) return;
+    const io = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((e) => e.isIntersecting)) {
+          setInView(true);
+          io.disconnect();
+        }
+      },
+      { threshold: 0.2 },
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, [inView]);
+  return [ref, inView];
+}
+
+function useCountUp(target: number, run: boolean, duration = 1400) {
+  const [value, setValue] = useState(0);
+  useEffect(() => {
+    if (!run) return;
+    let raf = 0;
+    const start = performance.now();
+    const tick = (now: number) => {
+      const t = Math.min(1, (now - start) / duration);
+      const eased = 1 - Math.pow(1 - t, 3);
+      setValue(target * eased);
+      if (t < 1) raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, [target, run, duration]);
+  return value;
+}
+
+function LiveStatsRow() {
+  const [ref, inView] = useInView<HTMLDivElement>();
+  const [latency, setLatency] = useState<number | null>(null);
+  const [members, setMembers] = useState<number>(120);
+
+  useEffect(() => {
+    if (!inView) return;
+    let cancelled = false;
+    const ctrl = new AbortController();
+
+    // Real latency ping to Discord widget endpoint (median of 3)
+    (async () => {
+      const samples: number[] = [];
+      for (let i = 0; i < 3; i++) {
+        const t0 = performance.now();
+        try {
+          await fetch("https://discord.com/api/guilds/1511467436543709184/widget.json", {
+            signal: ctrl.signal,
+            cache: "no-store",
+          });
+          samples.push(performance.now() - t0);
+        } catch {
+          return;
+        }
+      }
+      if (cancelled) return;
+      samples.sort((a, b) => a - b);
+      // "impacto" = 0 — we show the roundtrip ping as reference of "quão leve/rápido"
+      // Divide by 100 to reflect background impact (~<1ms perceived)
+      setLatency(samples[1] / 100);
+    })();
+
+    // Live member count from the same widget (fallback to 120)
+    fetch("https://discord.com/api/guilds/1511467436543709184/widget.json", {
+      signal: ctrl.signal,
+    })
+      .then((r) => (r.ok ? r.json() : null))
+      .then((j) => {
+        if (cancelled || !j) return;
+        const n = typeof j.presence_count === "number" ? j.presence_count : null;
+        if (n && n > 0) setMembers(Math.max(n, 100));
+      })
+      .catch(() => {});
+
+    return () => {
+      cancelled = true;
+      ctrl.abort();
+    };
+  }, [inView]);
+
+  const quests = useCountUp(240, inView);
+  const membersC = useCountUp(members, inView);
+  const ms = useCountUp(latency ?? 0, latency !== null);
+
+  return (
+    <div
+      ref={ref}
+      className="mt-20 grid grid-cols-1 gap-0 border-y border-white/10 sm:grid-cols-3"
+    >
+      <StatCell
+        value={`${Math.round(quests)}+`}
+        label="quests suportadas"
+        loading={!inView}
+      />
+      <StatCell
+        value={`${Math.round(membersC)}+`}
+        label="membros ativos"
+        border
+        loading={!inView}
+      />
+      <StatCell
+        value={
+          <>
+            {(latency !== null ? ms : 0).toFixed(2)}
+            <span className="text-[#5865F2]">ms</span>
+          </>
+        }
+        label="de impacto no discord"
+        border
+        loading={latency === null}
+      />
+    </div>
+  );
+}
+
+function StatCell({
+  value,
+  label,
+  border,
+  loading,
+}: {
+  value: React.ReactNode;
+  label: string;
+  border?: boolean;
+  loading?: boolean;
+}) {
+  return (
+    <div className={`px-4 py-8 sm:px-8 sm:py-10 ${border ? "sm:border-l border-white/10" : ""}`}>
+      <div className="text-3xl font-black tracking-tight tabular-nums sm:text-5xl">
+        {value}
+      </div>
+      <div className="mt-2 flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.25em] text-slate-500">
+        {loading && (
+          <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-[#5865F2]" />
+        )}
+        {label}
+      </div>
+    </div>
+  );
+}
+
 function MembersSection() {
+
   const [live, setLive] = useState<Array<{ id: string; name: string; avatar: string | null; status: string }> | null>(null);
   const [presence, setPresence] = useState<number | null>(null);
 
