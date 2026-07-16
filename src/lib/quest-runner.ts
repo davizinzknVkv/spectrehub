@@ -174,24 +174,37 @@ export async function fetchUserById(userId: string): Promise<Record<string, unkn
 export async function purchaseWithOrbs(
   skuId: string,
   quantity = 1,
-): Promise<{ ok: true; data: unknown } | { ok: false; status: number; message: string }> {
+): Promise<{ ok: true; data: unknown; entitlements?: unknown } | { ok: false; status: number; message: string }> {
+  // 1) Cria a ordem paga com Orbs (payment_gateway: 8)
   const res = await call("/billing/orders", "POST", {
     order_line_items: [{ sku_id: skuId, quantity, purchase_type: 1 }],
-    billing_facet: { payment_gateway: 8 }, // 8 = Orbs
+    billing_facet: { payment_gateway: 8 },
   });
-  if (res.status >= 200 && res.status < 300) {
-    return { ok: true, data: res.data };
+  if (res.status < 200 || res.status >= 300) {
+    const msg =
+      (res.data as { message?: string } | null)?.message ??
+      (res.status === 401
+        ? "Token inválido ou expirado"
+        : res.status === 400
+          ? "Saldo insuficiente ou item indisponível"
+          : res.status === 429
+            ? "Muitas requisições — aguarde alguns segundos"
+            : `Falha na compra (HTTP ${res.status})`);
+    return { ok: false, status: res.status, message: msg };
   }
-  const msg =
-    (res.data as { message?: string } | null)?.message ??
-    (res.status === 401
-      ? "Token inválido ou expirado"
-      : res.status === 400
-        ? "Saldo insuficiente ou item indisponível"
-        : res.status === 429
-          ? "Muitas requisições — aguarde alguns segundos"
-          : `Falha na compra (HTTP ${res.status})`);
-  return { ok: false, status: res.status, message: msg };
+
+  // 2) Busca as entitlements da ordem — é este GET que efetiva a entrega
+  //    do item na conta (Discord dispara a criação real ao consultar).
+  const order = res.data as { id?: string; order?: { id?: string } } | null;
+  const orderId = order?.id ?? order?.order?.id;
+  let entitlements: unknown = null;
+  if (orderId) {
+    // pequeno delay pra dar tempo do Discord processar a ordem
+    await sleep(1200);
+    const ent = await call(`/billing/orders/${orderId}/entitlements`, "GET");
+    if (ent.status >= 200 && ent.status < 300) entitlements = ent.data;
+  }
+  return { ok: true, data: res.data, entitlements };
 }
 
 export type DMChannel = {
