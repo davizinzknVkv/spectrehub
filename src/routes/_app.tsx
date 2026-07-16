@@ -35,6 +35,7 @@ const NAV_GROUPS = [
       { to: "/missoes", label: "Missões", icon: Target },
       { to: "/farms", label: "Farms", icon: Tractor },
       { to: "/history", label: "Histórico", icon: History },
+      { to: "/resgatar", label: "Resgatar Orbs", icon: Gift },
       { to: "/settings", label: "Login", icon: KeyRound },
     ],
   },
