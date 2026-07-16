@@ -116,6 +116,18 @@
   --border: var(--line);
   --input: var(--surface-2);
   --ring: var(--cyan);
+
+  /* Unified glass tokens — reuse everywhere for consistent frosted look */
+  --glass-bg: color-mix(in oklab, var(--surface) 40%, transparent);
+  --glass-bg-strong: color-mix(in oklab, var(--surface) 65%, transparent);
+  --glass-border: color-mix(in oklab, var(--blurple) 22%, transparent);
+  --glass-border-soft: color-mix(in oklab, #ffffff 8%, transparent);
+  --glass-shadow:
+    0 1px 0 color-mix(in oklab, #ffffff 6%, transparent) inset,
+    0 10px 40px -12px color-mix(in oklab, var(--blurple) 45%, transparent),
+    0 30px 80px -30px color-mix(in oklab, #000 90%, transparent);
+  --glass-blur: 18px;
+  --glass-radius: 1rem;
 }
 
 
