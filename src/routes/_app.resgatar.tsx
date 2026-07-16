@@ -64,6 +64,8 @@ function RedeemPage() {
   const creds = useQuestStore((s) => s.creds);
   const [orbs, setOrbs] = useState<number | null>(null);
   const [loading, setLoading] = useState(false);
+  const [busyId, setBusyId] = useState<string | null>(null);
+  const [msg, setMsg] = useState<{ tone: "ok" | "err"; text: string } | null>(null);
 
   const loadOrbs = async () => {
     if (!creds) return;
@@ -73,6 +75,24 @@ function RedeemPage() {
       setOrbs(b);
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handlePurchase = async (it: Item) => {
+    if (!it.skuId || !creds) return;
+    if (!confirm(`Confirmar compra de "${it.name}" por ${it.price.toLocaleString("pt-BR")} Orbs?`)) return;
+    setBusyId(it.id);
+    setMsg(null);
+    try {
+      const r = await purchaseWithOrbs(it.skuId);
+      if (r.ok) {
+        setMsg({ tone: "ok", text: `✅ Compra concluída: ${it.name}` });
+        await loadOrbs();
+      } else {
+        setMsg({ tone: "err", text: `❌ ${r.message}` });
+      }
+    } finally {
+      setBusyId(null);
     }
   };
 
