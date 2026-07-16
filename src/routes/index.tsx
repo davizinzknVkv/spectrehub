@@ -222,12 +222,82 @@ function Index() {
                   "radial-gradient(400px 300px at 50% 50%, rgba(88,101,242,0.35), transparent 65%)",
               }}
             />
-            <div className="text-center">
+
+            {/* Orbit rings + spark particles */}
+            <div aria-hidden className="pointer-events-none absolute inset-0 grid place-items-center">
+              <div
+                className="h-[110%] w-[110%] rounded-full border border-[#a78bfa]/15"
+                style={{ animation: "spin-slow 28s linear infinite" }}
+              />
+              <div
+                className="absolute h-[85%] w-[85%] rounded-full border border-[#5865F2]/20"
+                style={{ animation: "spin-slow 22s linear infinite reverse" }}
+              />
+              {[0, 1, 2, 3, 4].map((i) => (
+                <span
+                  key={i}
+                  className="absolute h-1 w-1 rounded-full bg-[#c4b5fd]"
+                  style={{
+                    boxShadow: "0 0 12px 2px #a78bfa",
+                    top: `${20 + i * 12}%`,
+                    left: `${15 + i * 15}%`,
+                    animation: `spark-float ${3 + i * 0.6}s ease-in-out ${i * 0.4}s infinite`,
+                  }}
+                />
+              ))}
+            </div>
+
+            <div className="relative text-center">
+              {/* Purple lightning bolt striking the logo */}
+              <svg
+                aria-hidden
+                viewBox="0 0 100 200"
+                className="pointer-events-none absolute -top-16 left-1/2 -z-[1] h-56 w-28 -translate-x-1/2 sm:h-72 sm:w-36 md:-top-24 md:h-96 md:w-48"
+                style={{ animation: "lightning-flash 3.2s ease-in-out infinite" }}
+              >
+                <defs>
+                  <linearGradient id="bolt-grad" x1="50%" y1="0%" x2="50%" y2="100%">
+                    <stop offset="0%" stopColor="#ffffff" />
+                    <stop offset="35%" stopColor="#c4b5fd" />
+                    <stop offset="100%" stopColor="#5865F2" />
+                  </linearGradient>
+                  <filter id="bolt-glow" x="-60%" y="-20%" width="220%" height="140%">
+                    <feGaussianBlur stdDeviation="4" result="blur" />
+                    <feMerge>
+                      <feMergeNode in="blur" />
+                      <feMergeNode in="SourceGraphic" />
+                    </feMerge>
+                  </filter>
+                </defs>
+                <path
+                  d="M62 4 L28 96 L48 96 L34 168 L74 74 L52 74 L66 4 Z"
+                  fill="url(#bolt-grad)"
+                  filter="url(#bolt-glow)"
+                  stroke="#e9d5ff"
+                  strokeWidth="0.8"
+                />
+              </svg>
+
+              {/* Impact flash where the bolt hits */}
+              <div
+                aria-hidden
+                className="pointer-events-none absolute left-1/2 top-6 h-16 w-16 -translate-x-1/2 rounded-full sm:top-10 sm:h-24 sm:w-24 md:h-32 md:w-32"
+                style={{
+                  background:
+                    "radial-gradient(circle, rgba(196,181,253,0.85), rgba(139,92,246,0.35) 45%, transparent 70%)",
+                  filter: "blur(6px)",
+                  animation: "impact-pulse 3.2s ease-in-out infinite",
+                }}
+              />
+
               <img
                 src={nghcLogo.url}
                 alt="NGHC"
-                className="mx-auto h-40 w-40 object-contain sm:h-56 sm:w-56 md:h-72 md:w-72 float-soft"
-                style={{ filter: "drop-shadow(0 20px 60px color-mix(in oklab, var(--blurple) 55%, transparent))" }}
+                className="relative mx-auto h-40 w-40 object-contain sm:h-56 sm:w-56 md:h-72 md:w-72 float-soft"
+                style={{
+                  filter:
+                    "drop-shadow(0 0 30px rgba(167,139,250,0.55)) drop-shadow(0 20px 60px color-mix(in oklab, var(--blurple) 55%, transparent))",
+                }}
               />
               <div className="mt-3 font-mono text-[10px] uppercase tracking-[0.4em] text-slate-500">
                 neighborshub
@@ -238,8 +308,39 @@ function Index() {
                 <span className="block h-1.5 w-1.5 rounded-sm bg-[#5865F2]" />
               </div>
             </div>
+
+            <style>{`
+              @keyframes lightning-flash {
+                0%, 100% { opacity: 0; transform: translate(-50%, -12px) scale(0.9); }
+                6%       { opacity: 1; transform: translate(-50%, 0) scale(1.05); }
+                10%      { opacity: 0.35; }
+                14%      { opacity: 1; transform: translate(-50%, 2px) scale(1); }
+                22%      { opacity: 0; }
+                92%      { opacity: 0; }
+              }
+              @keyframes impact-pulse {
+                0%, 100% { opacity: 0; transform: translate(-50%, 0) scale(0.6); }
+                8%       { opacity: 1; transform: translate(-50%, 0) scale(1.15); }
+                20%      { opacity: 0; transform: translate(-50%, 0) scale(1.4); }
+              }
+              @keyframes spin-slow {
+                to { transform: rotate(360deg); }
+              }
+              @keyframes spark-float {
+                0%, 100% { transform: translate(0, 0); opacity: 0.4; }
+                50%      { transform: translate(6px, -8px); opacity: 1; }
+              }
+              @media (prefers-reduced-motion: reduce) {
+                svg[viewBox="0 0 100 200"],
+                [style*="impact-pulse"],
+                [style*="spin-slow"],
+                [style*="spark-float"] { animation: none !important; }
+              }
+            `}</style>
           </div>
         </div>
+
+
 
         {/* Stats row */}
         <div className="mt-20 grid grid-cols-3 gap-0 border-y border-white/10">
