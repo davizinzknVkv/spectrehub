@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { useQuestStore } from "@/lib/quest-store";
 import { fetchOrbs, purchaseWithOrbs } from "@/lib/quest-runner";
-import { Gift, Coins, ExternalLink, Sparkles, Palette, Crown, Ticket, Loader2 } from "lucide-react";
+import { Gift, Coins, ExternalLink, Sparkles, Palette, Crown, Ticket, Loader2, X, ShieldCheck } from "lucide-react";
 
 export const Route = createFileRoute("/_app/resgatar")({
   head: () => ({ meta: [{ title: "Resgatar Orbs — Neighborshub" }] }),
@@ -66,6 +66,7 @@ function RedeemPage() {
   const [loading, setLoading] = useState(false);
   const [busyId, setBusyId] = useState<string | null>(null);
   const [msg, setMsg] = useState<{ tone: "ok" | "err"; text: string } | null>(null);
+  const [confirmItem, setConfirmItem] = useState<Item | null>(null);
 
   const loadOrbs = async () => {
     if (!creds) return;
@@ -78,11 +79,12 @@ function RedeemPage() {
     }
   };
 
-  const handlePurchase = async (it: Item) => {
-    if (!it.skuId || !creds) return;
-    if (!confirm(`Confirmar compra de "${it.name}" por ${it.price.toLocaleString("pt-BR")} Orbs?`)) return;
+  const confirmPurchase = async () => {
+    const it = confirmItem;
+    if (!it || !it.skuId || !creds) return;
     setBusyId(it.id);
     setMsg(null);
+    setConfirmItem(null);
     try {
       const r = await purchaseWithOrbs(it.skuId);
       if (r.ok) {
@@ -212,7 +214,7 @@ function RedeemPage() {
                 </span>
                 {it.skuId ? (
                   <button
-                    onClick={() => handlePurchase(it)}
+                    onClick={() => setConfirmItem(it)}
                     disabled={!creds || !canAfford || busyId === it.id}
                     className={`inline-flex items-center gap-1.5 rounded-md border px-3 py-1.5 font-mono text-[11px] uppercase tracking-widest transition disabled:cursor-not-allowed disabled:opacity-40 ${
                       canAfford
@@ -245,8 +247,111 @@ function RedeemPage() {
       </section>
 
       <p className="text-center font-mono text-[10px] uppercase tracking-widest text-ink-mute">
-        › o resgate acontece na loja oficial do discord
+        › resgate direto pela api oficial do discord
       </p>
+
+      {confirmItem && (
+        <div
+          className="fixed inset-0 z-50 grid place-items-center bg-background/80 p-4 backdrop-blur-sm animate-in fade-in duration-150"
+          onClick={() => setConfirmItem(null)}
+        >
+          <div
+            onClick={(e) => e.stopPropagation()}
+            className="relative w-full max-w-md overflow-hidden rounded-2xl border border-line bg-surface shadow-2xl animate-in zoom-in-95 duration-200"
+          >
+            <button
+              onClick={() => setConfirmItem(null)}
+              className="absolute right-3 top-3 rounded-md p-1.5 text-ink-mute transition hover:bg-background/60 hover:text-ink"
+              aria-label="Fechar"
+            >
+              <X className="h-4 w-4" />
+            </button>
+
+            {(() => {
+              const tone = confirmItem.tone;
+              const grad =
+                tone === "cyan"
+                  ? "from-cyan/25 via-cyan/10"
+                  : tone === "purple"
+                    ? "from-purple/25 via-purple/10"
+                    : tone === "amber"
+                      ? "from-amber/25 via-amber/10"
+                      : "from-mint/25 via-mint/10";
+              const text =
+                tone === "cyan"
+                  ? "text-cyan"
+                  : tone === "purple"
+                    ? "text-purple"
+                    : tone === "amber"
+                      ? "text-amber"
+                      : "text-mint";
+              const Icon = confirmItem.icon;
+              const after = (orbs ?? 0) - confirmItem.price;
+              return (
+                <>
+                  <div className={`relative bg-gradient-to-br ${grad} to-transparent px-6 pb-6 pt-8`}>
+                    <div className="mx-auto grid h-20 w-20 place-items-center rounded-2xl border border-line bg-background/60 shadow-inner">
+                      <Icon className={`h-10 w-10 ${text}`} />
+                    </div>
+                    <h3 className="mt-4 text-center text-lg font-semibold text-ink">
+                      {confirmItem.name}
+                    </h3>
+                    <p className="mt-1 text-center text-xs text-ink-dim">{confirmItem.desc}</p>
+                  </div>
+
+                  <div className="space-y-3 border-t border-line px-6 py-5">
+                    <div className="flex items-center justify-between text-sm">
+                      <span className="text-ink-dim">Preço</span>
+                      <span className={`inline-flex items-center gap-1.5 font-mono font-semibold ${text}`}>
+                        <Coins className="h-4 w-4" />
+                        {confirmItem.price.toLocaleString("pt-BR")} Orbs
+                      </span>
+                    </div>
+                    <div className="flex items-center justify-between text-sm">
+                      <span className="text-ink-dim">Saldo atual</span>
+                      <span className="font-mono tabular-nums text-ink">
+                        {(orbs ?? 0).toLocaleString("pt-BR")}
+                      </span>
+                    </div>
+                    <div className="flex items-center justify-between border-t border-line pt-3 text-sm">
+                      <span className="text-ink-dim">Saldo após compra</span>
+                      <span
+                        className={`font-mono tabular-nums ${after < 0 ? "text-red-400" : "text-ink"}`}
+                      >
+                        {after.toLocaleString("pt-BR")}
+                      </span>
+                    </div>
+
+                    <div className="flex items-start gap-2 rounded-lg border border-line bg-background/40 p-3 text-[11px] text-ink-dim">
+                      <ShieldCheck className="mt-0.5 h-4 w-4 shrink-0 text-mint" />
+                      <span>
+                        A compra é feita direto na sua conta do Discord via API oficial. Não há como
+                        reverter depois de confirmada.
+                      </span>
+                    </div>
+                  </div>
+
+                  <div className="flex gap-2 border-t border-line bg-background/30 px-6 py-4">
+                    <button
+                      onClick={() => setConfirmItem(null)}
+                      className="flex-1 rounded-md border border-line px-4 py-2 font-mono text-[11px] uppercase tracking-widest text-ink-dim transition hover:border-ink-dim hover:text-ink"
+                    >
+                      cancelar
+                    </button>
+                    <button
+                      onClick={confirmPurchase}
+                      disabled={after < 0}
+                      className="flex-1 rounded-md border border-mint/50 bg-mint/15 px-4 py-2 font-mono text-[11px] uppercase tracking-widest text-mint transition hover:bg-mint/25 disabled:cursor-not-allowed disabled:opacity-40"
+                    >
+                      confirmar compra
+                    </button>
+                  </div>
+                </>
+              );
+            })()}
+          </div>
+        </div>
+      )}
     </div>
   );
 }
