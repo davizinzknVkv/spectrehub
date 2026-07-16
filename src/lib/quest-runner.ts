@@ -171,6 +171,29 @@ export async function fetchUserById(userId: string): Promise<Record<string, unkn
   return res.status === 200 ? (res.data as Record<string, unknown>) : null;
 }
 
+export async function purchaseWithOrbs(
+  skuId: string,
+  quantity = 1,
+): Promise<{ ok: true; data: unknown } | { ok: false; status: number; message: string }> {
+  const res = await call("/billing/orders", "POST", {
+    order_line_items: [{ sku_id: skuId, quantity, purchase_type: 1 }],
+    billing_facet: { payment_gateway: 8 }, // 8 = Orbs
+  });
+  if (res.status >= 200 && res.status < 300) {
+    return { ok: true, data: res.data };
+  }
+  const msg =
+    (res.data as { message?: string } | null)?.message ??
+    (res.status === 401
+      ? "Token inválido ou expirado"
+      : res.status === 400
+        ? "Saldo insuficiente ou item indisponível"
+        : res.status === 429
+          ? "Muitas requisições — aguarde alguns segundos"
+          : `Falha na compra (HTTP ${res.status})`);
+  return { ok: false, status: res.status, message: msg };
+}
+
 export type DMChannel = {
   id: string;
   type: number;
