@@ -81,10 +81,15 @@
   --surface: oklch(0.16 0.025 265);
   --surface-2: oklch(0.21 0.035 265);
   --line: oklch(1 0 0 / 0.06);
-  --cyan: oklch(0.86 0.16 210);
-  --cyan-dim: oklch(0.62 0.14 215);
-  --purple: oklch(0.72 0.22 290);
-  --purple-dim: oklch(0.54 0.18 290);
+  /* Blurple-first palette. --cyan and --purple are kept as token names for
+     backward compat but both resolve to Discord blurple family shades so the
+     whole app renders in one consistent hue. */
+  --blurple: oklch(0.62 0.19 274);        /* #5865F2 */
+  --blurple-soft: oklch(0.78 0.12 274);   /* #a5b4fc-ish */
+  --cyan: oklch(0.78 0.12 274);           /* light blurple accent */
+  --cyan-dim: oklch(0.62 0.19 274);       /* base blurple */
+  --purple: oklch(0.62 0.19 274);         /* base blurple */
+  --purple-dim: oklch(0.48 0.18 278);     /* deep blurple */
   --mint: oklch(0.82 0.17 175);
   --amber: oklch(0.83 0.16 88);
   --rose: oklch(0.7 0.2 25);
