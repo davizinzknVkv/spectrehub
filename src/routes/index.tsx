@@ -21,6 +21,13 @@ export const Route = createFileRoute("/")({
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
+    links: [
+      // Preload LCP — logo do hero — pra reduzir tempo de pintura.
+      { rel: "preload", as: "image", href: nghcLogo.url, fetchpriority: "high" },
+      // Antecipa handshake com o CDN do Discord (widget + avatares).
+      { rel: "preconnect", href: "https://discord.com" },
+      { rel: "preconnect", href: "https://cdn.discordapp.com", crossOrigin: "anonymous" },
+    ],
   }),
   component: Index,
 });
