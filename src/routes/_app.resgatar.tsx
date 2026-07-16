@@ -214,7 +214,7 @@ function RedeemPage() {
                 </span>
                 {it.skuId ? (
                   <button
-                    onClick={() => handlePurchase(it)}
+                    onClick={() => setConfirmItem(it)}
                     disabled={!creds || !canAfford || busyId === it.id}
                     className={`inline-flex items-center gap-1.5 rounded-md border px-3 py-1.5 font-mono text-[11px] uppercase tracking-widest transition disabled:cursor-not-allowed disabled:opacity-40 ${
                       canAfford
