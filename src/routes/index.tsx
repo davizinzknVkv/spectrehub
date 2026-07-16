@@ -293,98 +293,12 @@ function Index() {
         </div>
       </section>
 
-      {/* Membros — marquee like image 3 */}
-      <section id="membros" className="py-16 sm:py-20">
-        <div className="mx-auto max-w-6xl px-4 sm:px-6">
-          <div className="text-center font-mono text-[10px] uppercase tracking-[0.3em] text-slate-500">
-            desça a tela para ver mais
-          </div>
-          <h2 className="mt-3 text-center text-3xl font-bold tracking-tight md:text-4xl">
-            Membros da comunidade
-          </h2>
-        </div>
+      {/* Membros — grid cards + cursor diamante */}
+      <MembersSection />
 
-        <div className="relative mt-8 overflow-hidden">
-          {/* fade edges */}
-          <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-24 bg-gradient-to-r from-[#0b0d12] to-transparent" />
-          <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-24 bg-gradient-to-l from-[#0b0d12] to-transparent" />
+      {/* Planos — estilo "featured product" com tabs */}
+      <PlansShowcase />
 
-          <div className="flex gap-4 animate-[marquee_40s_linear_infinite]">
-            {[...MEMBERS, ...MEMBERS].map((m, i) => (
-              <div
-                key={`${m.seed}-${i}`}
-                className={`flex shrink-0 items-center gap-3 rounded-full border border-white/10 bg-gradient-to-r ${m.tone} py-1.5 pl-1.5 pr-5 backdrop-blur-sm`}
-              >
-                <div className="grid h-10 w-10 shrink-0 place-items-center overflow-hidden rounded-full border-2 border-white/20 bg-white/5">
-                  <Avatar seed={m.seed} />
-                </div>
-                <span className="whitespace-nowrap text-sm font-semibold text-white">{m.name}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <style>{`
-          @keyframes marquee {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
-          }
-        `}</style>
-      </section>
-
-      {/* Planos */}
-      <section id="planos" className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20">
-        <div className="max-w-2xl">
-          <h2 className="text-3xl font-bold tracking-tight md:text-4xl">Planos</h2>
-          <p className="mt-3 text-slate-400">
-            Detectamos seu cargo no Discord em tempo real. Se o Premium expirar (30 dias) ou você
-            perder o Boost, o hub volta pro Free automaticamente.
-          </p>
-        </div>
-
-        <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {PLANS.map((p) => (
-            <div
-              key={p.name}
-              className={`relative flex flex-col rounded-xl border p-6 transition ${p.tone} ${p.highlight ? "ring-1 ring-[#5865F2]/40" : ""}`}
-            >
-              {p.highlight && (
-                <span className="absolute -top-3 left-6 rounded-full bg-[#5865F2] px-2 py-0.5 text-[10px] font-bold uppercase tracking-widest text-white">
-                  popular
-                </span>
-              )}
-              <div className={`font-mono text-xs uppercase tracking-widest ${p.accent}`}>
-                {p.name}
-              </div>
-              <div className="mt-3 flex items-baseline gap-1.5">
-                <span className="text-3xl font-bold text-white">{p.price}</span>
-                <span className="text-xs text-slate-400">/ {p.period}</span>
-              </div>
-              <ul className="mt-5 space-y-2 text-sm text-slate-300">
-                {p.features.map((f) => (
-                  <li key={f} className="flex gap-2">
-                    <span className={p.accent}>✓</span>
-                    <span>{f}</span>
-                  </li>
-                ))}
-              </ul>
-              <Link
-                to="/hub"
-                className={`mt-6 rounded-lg border border-white/10 bg-white/5 px-4 py-2 text-center text-sm font-semibold transition hover:bg-white/10 ${p.highlight ? "bg-[#5865F2] text-white hover:bg-[#4752c4]" : "text-white"}`}
-              >
-                {p.cta}
-              </Link>
-            </div>
-          ))}
-        </div>
-
-        <div className="mt-6 rounded-xl border border-white/10 bg-white/[0.03] p-5 text-sm text-slate-400">
-          <span className="text-slate-200">Como funciona a expiração:</span> Premium mensal libera o
-          cargo no Discord por 30 dias — no dia 31, o bot remove o cargo e o hub detecta em até 1
-          minuto, voltando pro Free. Lifetime nunca é removido. Boost segue enquanto você mantiver
-          o servidor boostado.
-        </div>
-      </section>
 
       {/* Como funciona */}
       <section id="como-funciona" className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20">
