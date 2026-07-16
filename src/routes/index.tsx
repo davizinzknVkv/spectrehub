@@ -189,7 +189,7 @@ function Index() {
                 href="https://discord.com"
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex items-center gap-2 rounded-md border border-white/15 bg-white/[0.03] px-6 py-3 text-xs font-bold uppercase tracking-widest text-white backdrop-blur transition hover:bg-white/10"
+                className="inline-flex items-center gap-2 rounded-md border border-[#5865F2]/40 bg-[#5865F2]/10 px-6 py-3 text-xs font-bold uppercase tracking-widest text-white backdrop-blur transition hover:border-[#5865F2]/70 hover:bg-[#5865F2]/20"
               >
                 Entrar no Discord
               </a>
