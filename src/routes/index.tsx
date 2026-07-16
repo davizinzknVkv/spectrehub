@@ -200,7 +200,7 @@ function Index() {
                 ))}
               </div>
               <div className="font-mono text-[10px] uppercase tracking-[0.25em] text-slate-500">
-                Já rodando em mais de 100 servidores
+                Já existem mais de 100 usuários usando o NGHC
               </div>
             </div>
           </div>
