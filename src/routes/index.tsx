@@ -987,7 +987,7 @@ function FreeSignup() {
               </label>
               <button
                 type="submit"
-                className="w-full rounded-md bg-emerald-500 px-4 py-2.5 text-xs font-bold uppercase tracking-widest text-black transition hover:bg-emerald-400"
+                className="w-full rounded-md bg-[#5865F2] px-4 py-2.5 text-xs font-bold uppercase tracking-widest text-white transition hover:bg-[#4752c4]"
               >
                 Gerar meu código Free
               </button>
