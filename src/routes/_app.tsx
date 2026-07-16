@@ -220,7 +220,14 @@ function TopBar({ onOpenMenu }: { onOpenMenu: () => void }) {
     : null;
 
   return (
-    <div className="sticky top-0 z-10 border-b border-line/60 bg-background/80 backdrop-blur">
+    <div
+      className="sticky top-0 z-10 border-b border-[color:var(--glass-border)]"
+      style={{
+        background: "var(--glass-bg-strong)",
+        backdropFilter: "blur(var(--glass-blur)) saturate(150%)",
+      }}
+    >
+
       <div className="flex items-center justify-between gap-3 px-4 py-3 sm:px-6 lg:px-8">
         <div className="flex items-center gap-3">
           <button
