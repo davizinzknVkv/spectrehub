@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
-import { Zap, CheckCircle2, Instagram, Send, Sparkles, Timer, Infinity as InfinityIcon, ArrowRight } from "lucide-react";
+import { Zap, CheckCircle2, Instagram, Send, Sparkles, Timer, Infinity as InfinityIcon, ArrowRight, Code2, Plug, MessageSquare, Copy, Check } from "lucide-react";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -369,47 +369,67 @@ function Index() {
       <PlansShowcase />
 
 
-      {/* Como funciona */}
+      {/* Por que Neighborshub — 2x2 feature grid */}
       <section id="como-funciona" className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20">
-        <h2 className="text-3xl font-bold tracking-tight md:text-4xl">Como funciona</h2>
-        <p className="mt-3 max-w-2xl text-slate-400">Três passos.</p>
+        <div className="max-w-2xl">
+          <div className="inline-flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.3em] text-[#a5b4fc]">
+            <span className="h-3 w-0.5 bg-[#5865F2]" /> por que neighborshub
+          </div>
+          <h2 className="mt-3 text-3xl font-bold tracking-tight md:text-5xl">
+            Feito por quem vive Discord cheio.
+          </h2>
+          <p className="mt-3 text-sm text-slate-400">
+            Cada sistema nasce de quem joga, farma e aguenta o tranco junto com você.
+          </p>
+        </div>
 
-        <div className="mt-10 grid gap-6 md:grid-cols-3">
+        <div className="relative mt-10 grid gap-4 md:grid-cols-2">
+          <div
+            aria-hidden
+            className="pointer-events-none absolute right-8 top-6 select-none font-black text-white/[0.03] text-[120px] leading-none"
+          >
+            0.00
+          </div>
           {[
             {
-              n: "01",
-              title: "Entre no hub",
-              body: "Cole seu token do Discord (fica só no seu navegador) ou faça login com email e senha.",
               icon: Zap,
+              title: "Performance real",
+              body: "0.00ms de impacto. Roda em background sem travar seu Discord nem seu PC.",
             },
             {
-              n: "02",
-              title: "Escolha um plano",
-              body: "Free pra testar. Premium ou Lifetime pra remover o limite diário. Boost pro cooldown mínimo.",
-              icon: InfinityIcon,
+              icon: Code2,
+              title: "Código limpo",
+              body: "Tudo revisado antes de chegar no seu navegador. Zero gambiarra, zero conflito.",
             },
             {
-              n: "03",
-              title: "Deixe rodar",
-              body: "O hub detecta seu cargo em tempo real, executa as quests disponíveis e mostra o progresso.",
-              icon: Timer,
+              icon: Plug,
+              title: "Standalone",
+              body: "Compatível com qualquer cargo, plano ou servidor. Você entra e já está rodando.",
             },
-          ].map((s) => {
-            const Icon = s.icon;
+            {
+              icon: MessageSquare,
+              title: "Suporte de gente",
+              body: "Resposta rápida, direto com quem desenvolveu. Aqui ninguém fica na mão.",
+            },
+          ].map((f) => {
+            const Icon = f.icon;
             return (
-              <div key={s.n} className="rounded-xl border border-white/10 bg-white/[0.03] p-6">
-                <div className="flex items-center gap-3">
-                  <span className="grid h-8 w-8 place-items-center rounded-md bg-[#5865F2]/20 text-[#a5b4fc]">
-                    <Icon className="h-4 w-4" />
-                  </span>
-                  <h3 className="text-lg font-semibold">{s.title}</h3>
-                </div>
-                <p className="mt-3 text-sm text-slate-400">{s.body}</p>
+              <div
+                key={f.title}
+                className="relative rounded-2xl border border-white/10 bg-white/[0.02] p-6 backdrop-blur-md transition hover:border-white/20 hover:bg-white/[0.04]"
+              >
+                <Icon className="h-5 w-5 text-[#5865F2]" />
+                <h3 className="mt-8 text-lg font-bold text-white">{f.title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-slate-400">{f.body}</p>
               </div>
             );
           })}
         </div>
       </section>
+
+      {/* Cadastro Free */}
+      <FreeSignup />
+
 
       {/* Aviso */}
       <section id="aviso" className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20">
@@ -719,16 +739,173 @@ function PlansShowcase() {
                 ))}
               </ul>
             </div>
-            <Link
-              to="/hub"
-              className="inline-flex items-center justify-center gap-2 rounded-md bg-[#5865F2] px-5 py-3 text-xs font-bold uppercase tracking-widest text-white transition hover:bg-[#4752c4]"
-            >
-              {plan.cta} <ArrowRight className="h-3.5 w-3.5" />
-            </Link>
+            {plan.name === "Free" ? (
+              <a
+                href="#free"
+                className="inline-flex items-center justify-center gap-2 rounded-md bg-[#5865F2] px-5 py-3 text-xs font-bold uppercase tracking-widest text-white transition hover:bg-[#4752c4]"
+              >
+                Cadastrar no Free <ArrowRight className="h-3.5 w-3.5" />
+              </a>
+            ) : (
+              <Link
+                to="/hub"
+                className="inline-flex items-center justify-center gap-2 rounded-md bg-[#5865F2] px-5 py-3 text-xs font-bold uppercase tracking-widest text-white transition hover:bg-[#4752c4]"
+              >
+                {plan.cta} <ArrowRight className="h-3.5 w-3.5" />
+              </Link>
+            )}
           </div>
         </div>
       </div>
     </section>
   );
 }
+
+const GUILD_INVITE = "https://discord.com/channels/1511467436543709184";
+
+function FreeSignup() {
+  const [name, setName] = useState("");
+  const [discord, setDiscord] = useState("");
+  const [code, setCode] = useState<string | null>(null);
+  const [copied, setCopied] = useState(false);
+
+  function generate(e: React.FormEvent) {
+    e.preventDefault();
+    const clean = { name: name.trim().slice(0, 40), discord: discord.trim().slice(0, 40) };
+    if (!clean.name || !clean.discord) return;
+    const rand = Math.random().toString(36).slice(2, 8).toUpperCase();
+    const c = `FREE-${rand}`;
+    try {
+      localStorage.setItem(
+        "nh:free-signup",
+        JSON.stringify({ ...clean, code: c, at: new Date().toISOString() }),
+      );
+    } catch {}
+    setCode(c);
+  }
+
+  async function copy() {
+    if (!code) return;
+    try {
+      await navigator.clipboard.writeText(code);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 1500);
+    } catch {}
+  }
+
+  return (
+    <section id="free" className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20">
+      <div className="grid gap-6 rounded-2xl border border-white/10 bg-white/[0.02] p-6 backdrop-blur-xl md:grid-cols-[1.1fr_1fr] md:p-10">
+        <div>
+          <div className="inline-flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.3em] text-emerald-300">
+            <span className="h-3 w-0.5 bg-emerald-400" /> cadastro free
+          </div>
+          <h2 className="mt-3 text-3xl font-bold tracking-tight md:text-4xl">
+            Ganhe o cargo <span className="text-emerald-400">Free</span> em 1 minuto
+          </h2>
+          <ol className="mt-6 space-y-3 text-sm text-slate-300">
+            {[
+              "Preencha o formulário ao lado — geramos um código único pra você.",
+              "Entre no servidor e abra um ticket no canal de suporte.",
+              "Informe o código no ticket. A staff libera o cargo Free na hora.",
+            ].map((s, i) => (
+              <li key={s} className="flex gap-3">
+                <span className="grid h-6 w-6 shrink-0 place-items-center rounded-md bg-emerald-500/15 font-mono text-[11px] font-bold text-emerald-300">
+                  {i + 1}
+                </span>
+                <span>{s}</span>
+              </li>
+            ))}
+          </ol>
+        </div>
+
+        <div className="rounded-xl border border-white/10 bg-[#0b0d12]/60 p-5 backdrop-blur">
+          {!code ? (
+            <form onSubmit={generate} className="space-y-4">
+              <label className="block">
+                <span className="font-mono text-[10px] uppercase tracking-[0.25em] text-slate-500">
+                  Seu nome
+                </span>
+                <input
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  maxLength={40}
+                  required
+                  className="mt-1.5 w-full rounded-md border border-white/10 bg-white/[0.03] px-3 py-2 text-sm text-white outline-none placeholder:text-slate-600 focus:border-[#5865F2]"
+                  placeholder="Ex: davizinzkn"
+                />
+              </label>
+              <label className="block">
+                <span className="font-mono text-[10px] uppercase tracking-[0.25em] text-slate-500">
+                  Seu usuário do Discord
+                </span>
+                <input
+                  value={discord}
+                  onChange={(e) => setDiscord(e.target.value)}
+                  maxLength={40}
+                  required
+                  className="mt-1.5 w-full rounded-md border border-white/10 bg-white/[0.03] px-3 py-2 text-sm text-white outline-none placeholder:text-slate-600 focus:border-[#5865F2]"
+                  placeholder="@usuario"
+                />
+              </label>
+              <button
+                type="submit"
+                className="w-full rounded-md bg-emerald-500 px-4 py-2.5 text-xs font-bold uppercase tracking-widest text-black transition hover:bg-emerald-400"
+              >
+                Gerar meu código Free
+              </button>
+              <p className="text-[11px] leading-relaxed text-slate-500">
+                Ao cadastrar, você guarda o código no navegador e pode ir direto pro servidor abrir
+                o ticket.
+              </p>
+            </form>
+          ) : (
+            <div className="space-y-4">
+              <div>
+                <div className="font-mono text-[10px] uppercase tracking-[0.25em] text-slate-500">
+                  Seu código Free
+                </div>
+                <div className="mt-2 flex items-center gap-2 rounded-md border border-emerald-500/30 bg-emerald-500/10 p-3">
+                  <code className="flex-1 font-mono text-lg font-bold tracking-widest text-emerald-300">
+                    {code}
+                  </code>
+                  <button
+                    onClick={copy}
+                    className="grid h-8 w-8 place-items-center rounded-md border border-white/10 bg-white/5 text-slate-300 transition hover:bg-white/10"
+                    aria-label="Copiar código"
+                  >
+                    {copied ? <Check className="h-4 w-4 text-emerald-300" /> : <Copy className="h-4 w-4" />}
+                  </button>
+                </div>
+              </div>
+              <p className="text-xs leading-relaxed text-slate-400">
+                Abra um ticket no servidor e cole esse código na primeira mensagem. A staff libera o
+                cargo Free assim que confirmar.
+              </p>
+              <a
+                href={GUILD_INVITE}
+                target="_blank"
+                rel="noreferrer"
+                className="flex w-full items-center justify-center gap-2 rounded-md bg-[#5865F2] px-4 py-2.5 text-xs font-bold uppercase tracking-widest text-white transition hover:bg-[#4752c4]"
+              >
+                Ir pro servidor abrir ticket <ArrowRight className="h-3.5 w-3.5" />
+              </a>
+              <button
+                onClick={() => {
+                  setCode(null);
+                  setName("");
+                  setDiscord("");
+                }}
+                className="w-full text-center text-[11px] font-mono uppercase tracking-widest text-slate-500 transition hover:text-slate-300"
+              >
+                Gerar outro código
+              </button>
+            </div>
+          )}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 
