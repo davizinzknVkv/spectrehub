@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
-import { Zap, CheckCircle2, Instagram, Send, Sparkles, Timer, Infinity as InfinityIcon, ArrowRight, Code2, Plug, MessageSquare, Copy, Check } from "lucide-react";
+import { Zap, CheckCircle2, Instagram, Send, Sparkles, Timer, Infinity as InfinityIcon, ArrowRight, Code2, Plug, MessageSquare, Copy, Check, ShieldCheck, Users, Activity } from "lucide-react";
 import nghcLogo from "@/assets/nghc-logo.png.asset.json";
 
 export const Route = createFileRoute("/")({
@@ -480,9 +480,76 @@ function Index() {
 
       {/* Membros — grid cards + cursor diamante */}
       <MembersSection />
+      {/* Estatísticas em Tempo Real */}
+      <section id="stats" className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20">
+        <div className="text-center">
+          <div className="inline-flex items-center gap-2 rounded-full border border-[#5865F2]/30 bg-[#5865F2]/10 px-3 py-1 font-mono text-[10px] uppercase tracking-[0.3em] text-[#a5b4fc]">
+            <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-[#a5b4fc]" />
+            Ao vivo
+          </div>
+          <h2 className="mt-4 text-3xl font-bold tracking-tight text-white md:text-5xl">
+            Estatísticas em Tempo Real
+          </h2>
+          <p className="mt-3 text-sm text-slate-400 sm:text-base">
+            Dados atualizados da nossa API em tempo real
+          </p>
+        </div>
+
+        <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {[
+            {
+              icon: CheckCircle2,
+              value: "18.042",
+              label: "Licenças Criadas",
+              desc: "Número total de licenças válidas geradas para nossos clientes, garantindo autenticidade e suporte oficial para todos os produtos adquiridos.",
+            },
+            {
+              icon: ShieldCheck,
+              value: "150",
+              label: "Tentativas de Crack",
+              desc: "Tentativas de violação de segurança bloqueadas pelo nosso sistema de proteção avançado, garantindo a integridade dos nossos produtos.",
+            },
+            {
+              icon: Users,
+              value: "+100",
+              label: "Usuários Ativos",
+              desc: "Comunidade crescente de usuários farmando Orbs com o Neighborshub todos os dias, em servidores por todo o Brasil.",
+            },
+          ].map((s) => {
+            const Icon = s.icon;
+            return (
+              <div
+                key={s.label}
+                className="group relative overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-br from-[#131624]/80 to-[#0b0d12]/60 p-6 text-center backdrop-blur-xl transition hover:border-[#5865F2]/40 hover:shadow-[0_20px_60px_-20px_rgba(88,101,242,0.45)]"
+              >
+                <div
+                  aria-hidden
+                  className="pointer-events-none absolute inset-x-0 -top-24 mx-auto h-40 w-40 rounded-full bg-[#5865F2]/20 blur-3xl opacity-0 transition group-hover:opacity-100"
+                />
+                <div
+                  className="relative mx-auto grid h-14 w-14 place-items-center rounded-xl bg-[#5865F2] text-white shadow-lg shadow-indigo-500/40"
+                >
+                  <Icon className="h-6 w-6" />
+                </div>
+                <div className="relative mt-5 text-4xl font-black tracking-tight text-white sm:text-5xl">
+                  {s.value}
+                </div>
+                <div className="relative mt-1.5 text-sm font-semibold text-[#a5b4fc]">
+                  {s.label}
+                </div>
+                <p className="relative mt-3 text-xs leading-relaxed text-slate-400 sm:text-sm">
+                  {s.desc}
+                </p>
+              </div>
+            );
+          })}
+        </div>
+      </section>
 
       {/* Planos — estilo "featured product" com tabs */}
       <PlansShowcase />
+
+
 
 
       {/* Por que Neighborshub — 2x2 feature grid */}
