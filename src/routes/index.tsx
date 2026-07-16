@@ -472,9 +472,12 @@ function Index() {
           <div className="grid gap-10 md:grid-cols-[1.4fr_1fr]">
             <div>
               <Link to="/" className="flex items-center gap-2">
-                <div className="grid h-9 w-9 place-items-center rounded-lg bg-gradient-to-br from-[#5865F2] to-[#a78bfa] font-black text-white shadow-lg shadow-indigo-500/30">
-                  N
-                </div>
+                <img
+                  src={nghcLogo.url}
+                  alt="NGHC"
+                  className="h-10 w-10 object-contain"
+                  style={{ filter: "drop-shadow(0 0 12px color-mix(in oklab, var(--blurple) 55%, transparent))" }}
+                />
                 <span className="text-lg font-semibold tracking-tight">
                   Neighbors<span className="text-[#a5b4fc]">hub</span>
                 </span>
