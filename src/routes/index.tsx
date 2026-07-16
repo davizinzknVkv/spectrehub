@@ -216,9 +216,12 @@ function Index() {
               }}
             />
             <div className="text-center">
-              <div className="text-[92px] font-black leading-none tracking-tighter text-white sm:text-[140px] md:text-[180px]">
-                N<span className="text-[#5865F2]">H</span>
-              </div>
+              <img
+                src={nghcLogo.url}
+                alt="NGHC"
+                className="mx-auto h-40 w-40 object-contain sm:h-56 sm:w-56 md:h-72 md:w-72 float-soft"
+                style={{ filter: "drop-shadow(0 20px 60px color-mix(in oklab, var(--blurple) 55%, transparent))" }}
+              />
               <div className="mt-3 font-mono text-[10px] uppercase tracking-[0.4em] text-slate-500">
                 neighborshub
               </div>
