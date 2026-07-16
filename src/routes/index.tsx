@@ -821,7 +821,7 @@ function FreeSignup() {
 
   return (
     <section id="free" className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20">
-      <div className="grid gap-6 rounded-2xl border border-white/10 bg-white/[0.02] p-6 backdrop-blur-xl md:grid-cols-[1.1fr_1fr] md:p-10">
+      <div className="glass-panel-strong grid gap-6 p-6 md:grid-cols-[1.1fr_1fr] md:p-10">
         <div>
           <div className="inline-flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.3em] text-emerald-300">
             <span className="h-3 w-0.5 bg-emerald-400" /> cadastro free
