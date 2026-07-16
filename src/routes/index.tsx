@@ -21,6 +21,13 @@ export const Route = createFileRoute("/")({
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
+    links: [
+      // Preload LCP — logo do hero — pra reduzir tempo de pintura.
+      { rel: "preload", as: "image", href: nghcLogo.url, fetchpriority: "high" },
+      // Antecipa handshake com o CDN do Discord (widget + avatares).
+      { rel: "preconnect", href: "https://discord.com" },
+      { rel: "preconnect", href: "https://cdn.discordapp.com", crossOrigin: "anonymous" },
+    ],
   }),
   component: Index,
 });
@@ -547,7 +554,8 @@ function MembersSection() {
   const [presence, setPresence] = useState<number | null>(null);
 
   useEffect(() => {
-    fetch("https://discord.com/api/guilds/1511467436543709184/widget.json")
+    const ctrl = new AbortController();
+    fetch("https://discord.com/api/guilds/1511467436543709184/widget.json", { signal: ctrl.signal })
       .then((r) => (r.ok ? r.json() : null))
       .then((j) => {
         if (!j || !Array.isArray(j.members)) return;
@@ -562,6 +570,7 @@ function MembersSection() {
         );
       })
       .catch(() => {});
+    return () => ctrl.abort();
   }, []);
 
   const list = live ?? MEMBERS.map((m) => ({ id: m.seed, name: m.name, avatar: null as string | null, status: "online" }));
@@ -644,6 +653,7 @@ function MembersSection() {
               width={350}
               height={500}
               title="Discord widget"
+              loading="lazy"
               allowTransparency
               frameBorder={0}
               sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"
