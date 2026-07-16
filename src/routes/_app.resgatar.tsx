@@ -147,6 +147,18 @@ function RedeemPage() {
         </div>
       )}
 
+      {msg && (
+        <div
+          className={`rounded-xl border p-4 text-sm ${
+            msg.tone === "ok"
+              ? "border-mint/40 bg-mint/5 text-mint"
+              : "border-red-500/40 bg-red-500/5 text-red-400"
+          }`}
+        >
+          {msg.text}
+        </div>
+      )}
+
       {/* Items */}
       <section className="grid gap-4 sm:grid-cols-2 lg:grid-cols-2">
         {ITEMS.map((it) => {
