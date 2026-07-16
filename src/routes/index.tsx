@@ -762,7 +762,7 @@ function PlansShowcase() {
   );
 }
 
-const GUILD_INVITE = "https://discord.com/channels/1511467436543709184";
+const GUILD_INVITE = "https://discord.com/invite/fVeXNmmF";
 
 function FreeSignup() {
   const [name, setName] = useState("");
