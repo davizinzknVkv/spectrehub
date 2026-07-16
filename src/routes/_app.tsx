@@ -67,19 +67,14 @@ function AppLayout() {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <div aria-hidden className="pointer-events-none fixed inset-0 -z-10 grid-bg opacity-25" />
-      <div
-        aria-hidden
-        className="pointer-events-none fixed inset-0 -z-10"
-        style={{
-          background:
-            "radial-gradient(60% 40% at 20% 0%, color-mix(in oklab, var(--purple) 18%, transparent), transparent 70%), radial-gradient(50% 40% at 100% 100%, color-mix(in oklab, var(--cyan) 15%, transparent), transparent 70%)",
-        }}
-      />
+      <div aria-hidden className="aurora-bg">
+        <div className="grid-overlay" />
+        <div className="noise-overlay" />
+      </div>
 
       <div className="grid min-h-screen w-full grid-cols-1 lg:grid-cols-[240px_1fr]">
         {/* Desktop sidebar */}
-        <aside className="hidden border-r border-line/60 bg-surface/50 backdrop-blur lg:sticky lg:top-0 lg:block lg:h-screen">
+        <aside className="hidden border-r border-[color:var(--glass-border)] glass-panel !rounded-none lg:sticky lg:top-0 lg:block lg:h-screen">
           <SidebarBody pathname={pathname} creds={creds} setCreds={setCreds} />
         </aside>
 
@@ -92,9 +87,9 @@ function AppLayout() {
               aria-hidden
             />
             <aside
-              className="fixed inset-y-0 left-0 z-50 w-[260px] border-r border-purple/30 bg-surface/95 backdrop-blur lg:hidden"
-              style={{ boxShadow: "0 0 40px -8px color-mix(in oklab, var(--purple) 40%, transparent)" }}
+              className="fixed inset-y-0 left-0 z-50 w-[260px] glass-panel-strong !rounded-none lg:hidden"
             >
+
               <div className="flex items-center justify-between px-4 py-3 border-b border-line/60">
                 <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-ink-mute">menu</span>
                 <button
