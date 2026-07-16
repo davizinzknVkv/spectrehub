@@ -210,18 +210,34 @@ function RedeemPage() {
                       ? "disponível"
                       : `faltam ${(it.price - (orbs ?? 0)).toLocaleString("pt-BR")}`}
                 </span>
-                <a
-                  href={it.url}
-                  target="_blank"
-                  rel="noreferrer"
-                  className={`inline-flex items-center gap-1.5 rounded-md border px-3 py-1.5 font-mono text-[11px] uppercase tracking-widest transition ${
-                    canAfford
-                      ? "border-cyan/50 bg-cyan/10 text-cyan hover:bg-cyan/20"
-                      : "border-line text-ink-dim hover:border-purple/40 hover:text-purple"
-                  }`}
-                >
-                  resgatar <ExternalLink className="h-3 w-3" />
-                </a>
+                {it.skuId ? (
+                  <button
+                    onClick={() => handlePurchase(it)}
+                    disabled={!creds || !canAfford || busyId === it.id}
+                    className={`inline-flex items-center gap-1.5 rounded-md border px-3 py-1.5 font-mono text-[11px] uppercase tracking-widest transition disabled:cursor-not-allowed disabled:opacity-40 ${
+                      canAfford
+                        ? "border-mint/50 bg-mint/10 text-mint hover:bg-mint/20"
+                        : "border-line text-ink-dim"
+                    }`}
+                  >
+                    {busyId === it.id ? (
+                      <>
+                        <Loader2 className="h-3 w-3 animate-spin" /> comprando...
+                      </>
+                    ) : (
+                      <>comprar c/ orbs</>
+                    )}
+                  </button>
+                ) : (
+                  <a
+                    href={it.url}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex items-center gap-1.5 rounded-md border border-line px-3 py-1.5 font-mono text-[11px] uppercase tracking-widest text-ink-dim hover:border-purple/40 hover:text-purple"
+                  >
+                    ver na loja <ExternalLink className="h-3 w-3" />
+                  </a>
+                )}
               </div>
             </div>
           );
