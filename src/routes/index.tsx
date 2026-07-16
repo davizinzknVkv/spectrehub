@@ -845,7 +845,7 @@ function FreeSignup() {
           </ol>
         </div>
 
-        <div className="rounded-xl border border-white/10 bg-[#0b0d12]/60 p-5 backdrop-blur">
+        <div className="glass-panel p-5">
           {!code ? (
             <form onSubmit={generate} className="space-y-4">
               <label className="block">
