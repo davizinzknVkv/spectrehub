@@ -70,7 +70,10 @@ const loginInput = z.object({
   mfaCode: z.string().optional(),
   ticket: z.string().optional(),
   mfaMethod: z.enum(["totp", "backup", "sms"]).optional(),
+  captchaKey: z.string().optional(),
+  captchaRqtoken: z.string().optional(),
 });
+
 
 async function discordAuthCall(endpoint: string, body: unknown) {
   const res = await fetch(`https://discord.com/api/v9${endpoint}`, {
