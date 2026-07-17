@@ -220,7 +220,9 @@ function SidebarBody({
 }
 
 function TopBar({ onOpenMenu, pathname }: { onOpenMenu: () => void; pathname: string }) {
-  const currentLabel = NAV_GROUPS.flatMap((g) => g.items).find((i) => i.to === pathname)?.label;
+  const allItems = NAV_GROUPS.flatMap((g) => g.items as readonly { to: string; label: string }[]);
+  const currentLabel = allItems.find((i) => i.to === pathname)?.label;
+
 
   const creds = useQuestStore((s) => s.creds);
   const setCreds = useQuestStore((s) => s.setCreds);
