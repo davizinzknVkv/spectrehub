@@ -18,7 +18,7 @@ const input = z.object({
  * Usa o endpoint público não autenticado que a própria tela de cadastro consulta.
  */
 export const checkDiscordUsername = createServerFn({ method: "POST" })
-  .inputValidator((raw) => input.parse(raw))
+  .validator((raw) => input.parse(raw))
   .handler(async ({ data }) => {
     const ip = clientIp(getRequest());
     // 120 checks / 10s por IP — o próprio Discord segura o resto.
