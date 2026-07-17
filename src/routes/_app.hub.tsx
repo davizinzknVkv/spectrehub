@@ -435,23 +435,24 @@ function HubPage() {
 
   return (
     <div className="space-y-6 sm:space-y-8">
-      {/* Header */}
-      <div className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-3">
-        <div className="min-w-0">
-          <h1 className="truncate text-2xl font-semibold tracking-tight text-white sm:text-3xl">
-            Dashboard
-          </h1>
-          <p className="mt-1 text-sm text-slate-400">Visão geral da sua conta e estatísticas.</p>
-        </div>
-        {running && (
-          <button
-            onClick={requestStop}
-            className="shrink-0 rounded-md border border-rose-400/40 bg-rose-500/10 px-3 py-2 font-mono text-[11px] font-semibold uppercase tracking-widest text-rose-400 hover:bg-rose-500/20 sm:px-4"
-          >
-            ■ stop
-          </button>
-        )}
-      </div>
+      <PageHeader
+        eyebrow="account --overview"
+        icon={LayoutDashboard}
+        title="Dashboard"
+        highlight="pessoal"
+        description="Visão geral da sua conta e estatísticas."
+        actions={
+          running ? (
+            <button
+              onClick={requestStop}
+              className="shrink-0 rounded-md border border-rose-400/40 bg-rose-500/10 px-3 py-2 font-mono text-[11px] font-semibold uppercase tracking-widest text-rose-400 hover:bg-rose-500/20 sm:px-4"
+            >
+              ■ stop
+            </button>
+          ) : null
+        }
+      />
+
 
       {/* Avisos / Notificações */}
       <NotificationsCard />
