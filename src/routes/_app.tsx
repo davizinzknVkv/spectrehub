@@ -68,11 +68,15 @@ function AppLayout() {
   }, [pathname]);
 
   return (
-    <div className="min-h-screen bg-background text-foreground">
-      <div aria-hidden className="aurora-bg">
-        <div className="grid-overlay" />
-        <div className="noise-overlay" />
-      </div>
+    <div className="min-h-screen bg-[#0b0d12] text-slate-100 antialiased">
+      <div
+        aria-hidden
+        className="pointer-events-none fixed inset-0 -z-10 opacity-60"
+        style={{
+          backgroundImage:
+            "radial-gradient(1200px 600px at 15% -10%, rgba(88,101,242,0.18), transparent 60%), radial-gradient(900px 500px at 90% 10%, rgba(167,139,250,0.15), transparent 60%), radial-gradient(700px 500px at 50% 110%, rgba(88,101,242,0.12), transparent 60%)",
+        }}
+      />
 
       <div className="grid min-h-screen w-full grid-cols-1 lg:grid-cols-[240px_1fr]">
         {/* Desktop sidebar */}
@@ -84,7 +88,7 @@ function AppLayout() {
         {mobileOpen && (
           <>
             <div
-              className="fixed inset-0 z-40 bg-background/70 backdrop-blur-sm lg:hidden"
+              className="fixed inset-0 z-40 bg-[#0b0d12]/70 backdrop-blur-sm lg:hidden"
               onClick={() => setMobileOpen(false)}
               aria-hidden
             />
@@ -92,12 +96,12 @@ function AppLayout() {
               className="fixed inset-y-0 left-0 z-50 w-[260px] glass-panel-strong !rounded-none lg:hidden"
             >
 
-              <div className="flex items-center justify-between px-4 py-3 border-b border-line/60">
-                <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-ink-mute">menu</span>
+              <div className="flex items-center justify-between px-4 py-3 border-b border-white/10">
+                <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-slate-500">menu</span>
                 <button
                   onClick={() => setMobileOpen(false)}
                   aria-label="Fechar menu"
-                  className="rounded-md border border-line p-1.5 text-ink-dim hover:border-cyan/50 hover:text-cyan"
+                  className="rounded-md border border-white/10 p-1.5 text-slate-400 hover:border-[#5865F2]/50 hover:text-[#a5b4fc]"
                 >
                   <X className="h-4 w-4" />
                 </button>
@@ -132,23 +136,23 @@ function SidebarBody({
     <div className="flex h-full flex-col">
       <Link to="/" className="flex items-center gap-2.5 px-5 py-5">
         <div
-          className="grid h-9 w-9 place-items-center rounded-lg border border-cyan/50 bg-gradient-to-br from-cyan/15 to-purple/20 font-mono text-sm font-bold text-cyan"
+          className="grid h-9 w-9 place-items-center rounded-lg border border-[#5865F2]/50 bg-gradient-to-br from-[#5865F2]/15 to-[#a78bfa]/20 font-mono text-sm font-bold text-[#a5b4fc]"
           style={{ boxShadow: "0 0 18px -4px color-mix(in oklab, var(--purple) 55%, transparent)" }}
         >
           N
         </div>
         <div className="min-w-0">
-          <div className="truncate text-sm font-semibold tracking-tight text-ink">
-            Neighbors<span className="text-cyan">hub</span>
+          <div className="truncate text-sm font-semibold tracking-tight text-white">
+            Neighbors<span className="text-[#a5b4fc]">hub</span>
           </div>
-          <div className="font-mono text-[9px] uppercase tracking-[0.25em] text-purple">neon</div>
+          <div className="font-mono text-[9px] uppercase tracking-[0.25em] text-[#a78bfa]">neon</div>
         </div>
       </Link>
 
       <nav className="flex flex-col gap-5 px-3 pb-3 lg:flex-1">
         {NAV_GROUPS.map((group) => (
           <div key={group.title}>
-            <div className="px-3 pb-2 font-mono text-[10px] uppercase tracking-[0.25em] text-ink-mute">
+            <div className="px-3 pb-2 font-mono text-[10px] uppercase tracking-[0.25em] text-slate-500">
               {group.title}
             </div>
             <div className="flex flex-col gap-0.5">
@@ -161,11 +165,11 @@ function SidebarBody({
                     to={item.to}
                     className={`flex items-center gap-3 rounded-lg px-3 py-2 text-sm transition ${
                       active
-                        ? "bg-gradient-to-r from-cyan/10 to-purple/10 text-ink border border-purple/30"
-                        : "text-ink-dim hover:bg-surface hover:text-ink border border-transparent"
+                        ? "bg-gradient-to-r from-[#5865F2]/10 to-[#a78bfa]/10 text-white border border-[#a78bfa]/30"
+                        : "text-slate-400 hover:bg-white/5 hover:text-white border border-transparent"
                     }`}
                   >
-                    <Icon className={`h-4 w-4 ${active ? "text-cyan" : "text-purple/70"}`} />
+                    <Icon className={`h-4 w-4 ${active ? "text-[#a5b4fc]" : "text-[#a78bfa]/70"}`} />
                     <span>{item.label}</span>
                   </Link>
                 );
@@ -176,22 +180,22 @@ function SidebarBody({
         ))}
       </nav>
 
-      <div className="mt-auto space-y-1 border-t border-line/60 p-3">
+      <div className="mt-auto space-y-1 border-t border-white/10 p-3">
         <a
           href={DISCORD_INVITE}
           target="_blank"
           rel="noreferrer"
-          className="flex items-center gap-3 rounded-lg px-3 py-2 text-sm text-ink-dim hover:bg-surface hover:text-ink"
+          className="flex items-center gap-3 rounded-lg px-3 py-2 text-sm text-slate-400 hover:bg-white/5 hover:text-white"
         >
-          <LifeBuoy className="h-4 w-4 text-purple/70" />
+          <LifeBuoy className="h-4 w-4 text-[#a78bfa]/70" />
           Suporte Discord
         </a>
         <button
           onClick={() => creds && setCreds(null)}
           disabled={!creds}
-          className="flex w-full items-center gap-3 rounded-lg px-3 py-2 text-sm text-ink-dim hover:bg-surface hover:text-ink disabled:opacity-40"
+          className="flex w-full items-center gap-3 rounded-lg px-3 py-2 text-sm text-slate-400 hover:bg-white/5 hover:text-white disabled:opacity-40"
         >
-          <LogOut className="h-4 w-4 text-purple/70" />
+          <LogOut className="h-4 w-4 text-[#a78bfa]/70" />
           Sair da conta
         </button>
       </div>
@@ -235,19 +239,19 @@ function TopBar({ onOpenMenu }: { onOpenMenu: () => void }) {
           <button
             onClick={onOpenMenu}
             aria-label="Abrir menu"
-            className="grid h-9 w-9 place-items-center rounded-md border border-line text-ink-dim hover:border-cyan/50 hover:text-cyan lg:hidden"
+            className="grid h-9 w-9 place-items-center rounded-md border border-white/10 text-slate-400 hover:border-[#5865F2]/50 hover:text-[#a5b4fc] lg:hidden"
           >
             <Menu className="h-4 w-4" />
           </button>
           <Link to="/" className="flex items-center gap-2 lg:hidden">
             <div
-              className="grid h-8 w-8 place-items-center rounded-lg border border-cyan/50 bg-gradient-to-br from-cyan/15 to-purple/20 font-mono text-xs font-bold text-cyan"
+              className="grid h-8 w-8 place-items-center rounded-lg border border-[#5865F2]/50 bg-gradient-to-br from-[#5865F2]/15 to-[#a78bfa]/20 font-mono text-xs font-bold text-[#a5b4fc]"
               style={{ boxShadow: "0 0 14px -4px color-mix(in oklab, var(--purple) 55%, transparent)" }}
             >
               N
             </div>
-            <span className="text-sm font-semibold tracking-tight text-ink">
-              Neighbors<span className="text-cyan">hub</span>
+            <span className="text-sm font-semibold tracking-tight text-white">
+              Neighbors<span className="text-[#a5b4fc]">hub</span>
             </span>
           </Link>
           <div className="hidden lg:block" />
@@ -255,13 +259,13 @@ function TopBar({ onOpenMenu }: { onOpenMenu: () => void }) {
 
         <div className="flex items-center gap-3">
           <span
-            className={`h-2 w-2 rounded-full ${creds ? "bg-mint pulse-dot" : "bg-amber"}`}
+            className={`h-2 w-2 rounded-full ${creds ? "bg-emerald-500 pulse-dot" : "bg-amber-500"}`}
             title={creds ? "conectado" : "desconectado"}
           />
           {creds && me ? (
             <Link
               to="/hub"
-              className="flex items-center gap-2.5 rounded-full border border-cyan/40 bg-gradient-to-r from-cyan/10 to-purple/10 py-1 pl-1 pr-3 transition hover:border-cyan/70"
+              className="flex items-center gap-2.5 rounded-full border border-[#5865F2]/40 bg-gradient-to-r from-[#5865F2]/10 to-[#a78bfa]/10 py-1 pl-1 pr-3 transition hover:border-[#5865F2]/70"
               style={{ boxShadow: "0 0 14px -6px color-mix(in oklab, var(--cyan) 60%, transparent)" }}
             >
               {avatarUrl && (
@@ -274,23 +278,23 @@ function TopBar({ onOpenMenu }: { onOpenMenu: () => void }) {
                 />
               )}
               <div className="hidden min-w-0 flex-col leading-tight sm:flex">
-                <span className="truncate text-xs font-semibold text-ink">
+                <span className="truncate text-xs font-semibold text-white">
                   {me.global_name || me.username}
                 </span>
-                <span className="truncate font-mono text-[10px] text-ink-mute">
+                <span className="truncate font-mono text-[10px] text-slate-500">
                   @{me.username}
                 </span>
               </div>
             </Link>
           ) : (
-            <span className="hidden font-mono text-[11px] uppercase tracking-widest text-ink-mute sm:inline">
+            <span className="hidden font-mono text-[11px] uppercase tracking-widest text-slate-500 sm:inline">
               {creds ? "conectado" : "desconectado"}
             </span>
           )}
           {creds && (
             <button
               onClick={() => setCreds(null)}
-              className="rounded-md border border-line px-2 py-1 font-mono text-[10px] uppercase tracking-widest text-ink-dim hover:text-rose lg:hidden"
+              className="rounded-md border border-white/10 px-2 py-1 font-mono text-[10px] uppercase tracking-widest text-slate-400 hover:text-rose-400 lg:hidden"
               aria-label="Sair"
             >
               sair
