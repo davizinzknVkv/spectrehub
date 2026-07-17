@@ -13,22 +13,6 @@ type Props = {
 export function PageHeader({ eyebrow, title, highlight, description, icon: Icon, actions }: Props) {
   return (
     <header className="relative overflow-hidden rounded-2xl border border-white/[0.08] bg-white/[0.03] p-5 sm:p-6">
-      <div
-        aria-hidden
-        className="pointer-events-none absolute -right-24 -top-24 h-64 w-64 rounded-full opacity-40 blur-3xl"
-        style={{
-          background:
-            "radial-gradient(closest-side, rgba(167,139,250,0.35), transparent 70%)",
-        }}
-      />
-      <div
-        aria-hidden
-        className="pointer-events-none absolute -left-16 bottom-[-40%] h-56 w-56 rounded-full opacity-30 blur-3xl"
-        style={{
-          background:
-            "radial-gradient(closest-side, rgba(88,101,242,0.35), transparent 70%)",
-        }}
-      />
 
       <div className="relative flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
         <div className="min-w-0">
