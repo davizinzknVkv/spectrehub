@@ -278,7 +278,16 @@ function TopBar({ onOpenMenu, pathname }: { onOpenMenu: () => void; pathname: st
           <div className="hidden lg:block" />
         </div>
 
+        {currentLabel && (
+          <div className="hidden flex-1 justify-center md:flex">
+            <span className="font-mono text-[11px] uppercase tracking-[0.3em] text-slate-500">
+              {currentLabel}
+            </span>
+          </div>
+        )}
+
         <div className="flex items-center gap-3">
+
           <span
             className={`h-2 w-2 rounded-full ${creds ? "bg-emerald-500 pulse-dot" : "bg-amber-500"}`}
             title={creds ? "conectado" : "desconectado"}
