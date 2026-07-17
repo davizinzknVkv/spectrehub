@@ -78,7 +78,7 @@ function ClonePage() {
         </div>
       )}
 
-      <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+      <div className="card-grid-sm">
         {filtered.map((g) => {
           const iconUrl = g.icon
             ? `https://cdn.discordapp.com/icons/${g.id}/${g.icon}.png?size=64`

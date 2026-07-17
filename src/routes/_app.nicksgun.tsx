@@ -162,7 +162,7 @@ function NicksGunPage() {
 
       {/* Controles */}
       <div className="rounded-xl border border-white/10 bg-white/5 p-4 sm:p-6 backdrop-blur">
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="card-grid-sm">
           {/* Length */}
           <div>
             <label className="font-mono text-[10px] uppercase tracking-widest text-slate-500">
