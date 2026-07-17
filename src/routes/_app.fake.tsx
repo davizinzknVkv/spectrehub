@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import { toast } from "sonner";
 import { Download, ImagePlus, RefreshCw } from "lucide-react";
+import { PageHeader } from "@/components/PageHeader";
 
 export const Route = createFileRoute("/_app/fake")({
   head: () => ({ meta: [{ title: "Foto Fake — Neighborshub" }] }),
