@@ -172,14 +172,27 @@ function SidebarBody({
                   <Link
                     key={`${item.to}-${item.label}`}
                     to={item.to}
-                    className={`flex items-center gap-3 rounded-lg px-3 py-2 text-sm transition ${
+                    className={`group relative flex items-center gap-3 rounded-lg px-3 py-2 text-sm transition ${
                       active
-                        ? "bg-gradient-to-r from-[#5865F2]/10 to-[#a78bfa]/10 text-white border border-[#a78bfa]/30"
-                        : "text-slate-400 hover:bg-white/5 hover:text-white border border-transparent"
+                        ? "text-white"
+                        : "text-slate-400 hover:bg-white/[0.03] hover:text-slate-100"
                     }`}
                   >
-                    <Icon className={`h-4 w-4 ${active ? "text-[#a5b4fc]" : "text-[#a78bfa]/70"}`} />
-                    <span>{item.label}</span>
+                    {active && (
+                      <span
+                        aria-hidden
+                        className="absolute left-0 top-1/2 h-5 w-[2px] -translate-y-1/2 rounded-r-full bg-gradient-to-b from-[#5865F2] to-[#a78bfa]"
+                        style={{ boxShadow: "0 0 8px color-mix(in oklab, var(--purple) 70%, transparent)" }}
+                      />
+                    )}
+                    <Icon
+                      className={`h-4 w-4 shrink-0 transition ${
+                        active ? "text-[#a5b4fc]" : "text-slate-500 group-hover:text-[#a5b4fc]"
+                      }`}
+                    />
+                    <span className={active ? "font-medium tracking-tight" : "tracking-tight"}>
+                      {item.label}
+                    </span>
                   </Link>
                 );
               })}
@@ -189,24 +202,16 @@ function SidebarBody({
         ))}
       </nav>
 
-      <div className="mt-auto space-y-1 border-t border-white/10 p-3">
+      <div className="mt-auto border-t border-white/[0.06] p-3">
         <a
           href={DISCORD_INVITE}
           target="_blank"
           rel="noreferrer"
-          className="flex items-center gap-3 rounded-lg px-3 py-2 text-sm text-slate-400 hover:bg-white/5 hover:text-white"
+          className="flex items-center gap-3 rounded-lg px-3 py-2 text-sm text-slate-400 transition hover:bg-white/[0.03] hover:text-slate-100"
         >
-          <LifeBuoy className="h-4 w-4 text-[#a78bfa]/70" />
+          <LifeBuoy className="h-4 w-4 text-slate-500" />
           Suporte Discord
         </a>
-        <button
-          onClick={() => creds && setCreds(null)}
-          disabled={!creds}
-          className="flex w-full items-center gap-3 rounded-lg px-3 py-2 text-sm text-slate-400 hover:bg-white/5 hover:text-white disabled:opacity-40"
-        >
-          <LogOut className="h-4 w-4 text-[#a78bfa]/70" />
-          Sair da conta
-        </button>
       </div>
     </div>
   );
@@ -216,6 +221,7 @@ function TopBar({ onOpenMenu }: { onOpenMenu: () => void }) {
   const creds = useQuestStore((s) => s.creds);
   const setCreds = useQuestStore((s) => s.setCreds);
   const [me, setMe] = useState<{ id?: string; username?: string; global_name?: string; avatar?: string | null } | null>(null);
+
 
   useEffect(() => {
     if (!creds) { setMe(null); return; }
