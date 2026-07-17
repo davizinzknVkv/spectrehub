@@ -182,11 +182,7 @@ function RedeemPage() {
                 className="relative aspect-square w-full"
                 style={{ background: tileFor(it.skuId) }}
               >
-                <div className="absolute inset-0 grid place-items-center">
-                  <span className="font-mono text-2xl font-bold text-white/90 drop-shadow-md">
-                    {initialsOf(it.name)}
-                  </span>
-                </div>
+                <OrbImage sku={it.skuId} name={it.name} />
                 <Sparkles className="absolute right-1.5 top-1.5 h-3 w-3 text-white/60" />
                 {busy && (
                   <div className="absolute inset-0 grid place-items-center bg-background/70">
@@ -194,6 +190,7 @@ function RedeemPage() {
                   </div>
                 )}
               </div>
+
               <div className="flex-1 p-2.5">
                 <div className="line-clamp-2 text-xs font-medium text-ink" title={it.name}>
                   {it.name}
