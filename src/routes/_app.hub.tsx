@@ -190,19 +190,19 @@ function HubPage() {
   if (!creds) {
     return (
       <div className="mx-auto max-w-2xl">
-        <div className="relative overflow-hidden rounded-xl border border-amber/30 bg-surface/60 p-8">
+        <div className="relative overflow-hidden rounded-xl border border-amber-400/30 bg-white/5 p-8">
           <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-amber to-transparent" />
-          <div className="font-mono text-[10px] uppercase tracking-[0.3em] text-amber">
+          <div className="font-mono text-[10px] uppercase tracking-[0.3em] text-amber-300">
             $ status --token
           </div>
-          <h2 className="mt-3 text-2xl font-semibold text-ink">Nenhum token configurado</h2>
-          <p className="mt-2 max-w-md text-sm leading-relaxed text-ink-dim">
+          <h2 className="mt-3 text-2xl font-semibold text-white">Nenhum token configurado</h2>
+          <p className="mt-2 max-w-md text-sm leading-relaxed text-slate-400">
             Cole seu token do Discord para o hub começar a executar missões. Ele fica salvo apenas
             no seu navegador (localStorage).
           </p>
           <Link
             to="/settings"
-            className="mt-6 inline-flex items-center gap-2 rounded-md bg-cyan px-4 py-2.5 font-mono text-xs font-semibold uppercase tracking-widest text-primary-foreground transition hover:brightness-110"
+            className="mt-6 inline-flex items-center gap-2 rounded-md bg-[#5865F2] px-4 py-2.5 font-mono text-xs font-semibold uppercase tracking-widest text-primary-foreground transition hover:brightness-110"
           >
             → configurar token
           </Link>
@@ -217,15 +217,15 @@ function HubPage() {
       {/* Header */}
       <div className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-3">
         <div className="min-w-0">
-          <h1 className="truncate text-2xl font-semibold tracking-tight text-ink sm:text-3xl">
+          <h1 className="truncate text-2xl font-semibold tracking-tight text-white sm:text-3xl">
             Dashboard
           </h1>
-          <p className="mt-1 text-sm text-ink-dim">Visão geral da sua conta e estatísticas.</p>
+          <p className="mt-1 text-sm text-slate-400">Visão geral da sua conta e estatísticas.</p>
         </div>
         {running && (
           <button
             onClick={requestStop}
-            className="shrink-0 rounded-md border border-rose/40 bg-rose/10 px-3 py-2 font-mono text-[11px] font-semibold uppercase tracking-widest text-rose hover:bg-rose/20 sm:px-4"
+            className="shrink-0 rounded-md border border-rose-400/40 bg-rose-500/10 px-3 py-2 font-mono text-[11px] font-semibold uppercase tracking-widest text-rose-400 hover:bg-rose-500/20 sm:px-4"
           >
             ■ stop
           </button>
@@ -238,21 +238,21 @@ function HubPage() {
 
       {/* Unified profile + stats + account */}
       <section
-        className="overflow-hidden rounded-3xl border border-line bg-surface/40 backdrop-blur-xl"
+        className="overflow-hidden rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl"
         style={{ boxShadow: "0 30px 80px -40px color-mix(in oklab, var(--purple) 55%, transparent), inset 0 1px 0 color-mix(in oklab, white 4%, transparent)" }}
       >
 
         {loadError && (
-          <div className="flex flex-wrap items-center justify-between gap-3 border-b border-rose/30 bg-rose/10 px-4 py-3 text-sm text-rose sm:px-6">
+          <div className="flex flex-wrap items-center justify-between gap-3 border-b border-rose-400/30 bg-rose-500/10 px-4 py-3 text-sm text-rose-400 sm:px-6">
             <div>
-              <span className="mr-2 font-mono text-[10px] uppercase tracking-[0.25em] text-rose/80">
+              <span className="mr-2 font-mono text-[10px] uppercase tracking-[0.25em] text-rose-400/80">
                 ⚠ perfil
               </span>
               {loadError}
             </div>
             <Link
               to="/settings"
-              className="rounded border border-rose/40 bg-rose/10 px-2 py-1 font-mono text-[10px] uppercase tracking-widest text-rose hover:bg-rose/20"
+              className="rounded border border-rose-400/40 bg-rose-500/10 px-2 py-1 font-mono text-[10px] uppercase tracking-widest text-rose-400 hover:bg-rose-500/20"
             >
               revisar token
             </Link>
@@ -288,22 +288,22 @@ function HubPage() {
           )}
           <div className="min-w-0 flex-1">
             <div className="flex flex-wrap items-center gap-2">
-              <h2 className="truncate text-xl font-semibold text-ink sm:text-2xl">
+              <h2 className="truncate text-xl font-semibold text-white sm:text-2xl">
                 {user?.global_name || user?.username || "—"}
               </h2>
               {user?.mfa_enabled && (
-                <span className="rounded border border-mint/40 px-1.5 py-0.5 font-mono text-[9px] uppercase tracking-widest text-mint">
+                <span className="rounded border border-emerald-400/40 px-1.5 py-0.5 font-mono text-[9px] uppercase tracking-widest text-emerald-400">
                   2fa
                 </span>
               )}
               {user?.premium_type ? (
-                <span className="rounded border border-purple/50 px-1.5 py-0.5 font-mono text-[9px] uppercase tracking-widest text-purple">
+                <span className="rounded border border-[#a78bfa]/50 px-1.5 py-0.5 font-mono text-[9px] uppercase tracking-widest text-[#a78bfa]">
                   nitro
                 </span>
               ) : null}
             </div>
             {user?.username && (
-              <div className="mt-0.5 truncate font-mono text-xs text-ink-mute">@{user.username}</div>
+              <div className="mt-0.5 truncate font-mono text-xs text-slate-500">@{user.username}</div>
             )}
             {/* Insígnias — combina flags + badges do perfil (Nitro, Boost, Quests, etc.) */}
             {(() => {
@@ -336,7 +336,7 @@ function HubPage() {
                           <button
                             type="button"
                             aria-label={b.label}
-                            className="shrink-0 rounded transition-transform hover:scale-110 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan/60"
+                            className="shrink-0 rounded transition-transform hover:scale-110 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#5865F2]/60"
                           >
                             <img
                               src={b.src}
@@ -365,7 +365,7 @@ function HubPage() {
             <div className="flex shrink-0 flex-wrap gap-2 self-start sm:flex-col sm:self-end">
               <button
                 onClick={copyId}
-                className="rounded border border-purple/40 bg-purple/10 px-2 py-1 font-mono text-[10px] uppercase tracking-widest text-purple hover:bg-purple/20"
+                className="rounded border border-[#a78bfa]/40 bg-[#a78bfa]/10 px-2 py-1 font-mono text-[10px] uppercase tracking-widest text-[#a78bfa] hover:bg-[#a78bfa]/20"
               >
                 copiar id
               </button>
@@ -373,7 +373,7 @@ function HubPage() {
                 href={`https://discord.com/users/${user.id}`}
                 target="_blank"
                 rel="noreferrer"
-                className="rounded border border-cyan/40 bg-cyan/10 px-2 py-1 text-center font-mono text-[10px] uppercase tracking-widest text-cyan hover:bg-cyan/20"
+                className="rounded border border-[#5865F2]/40 bg-[#5865F2]/10 px-2 py-1 text-center font-mono text-[10px] uppercase tracking-widest text-[#a5b4fc] hover:bg-[#5865F2]/20"
               >
                 abrir perfil
               </a>
@@ -383,16 +383,16 @@ function HubPage() {
 
         {/* Bio */}
         {stats.bio && (
-          <div className="border-t border-line/60 px-4 py-4 sm:px-6">
-            <div className="mb-2 font-mono text-[10px] uppercase tracking-[0.3em] text-ink-mute">
-              <span className="text-cyan">◆</span> bio
+          <div className="border-t border-white/10 px-4 py-4 sm:px-6">
+            <div className="mb-2 font-mono text-[10px] uppercase tracking-[0.3em] text-slate-500">
+              <span className="text-[#a5b4fc]">◆</span> bio
             </div>
-            <p className="whitespace-pre-wrap text-sm leading-relaxed text-ink-dim">{stats.bio}</p>
+            <p className="whitespace-pre-wrap text-sm leading-relaxed text-slate-400">{stats.bio}</p>
           </div>
         )}
 
         {/* Stat grid (primary) */}
-        <div className="grid gap-2 border-t border-line/60 px-4 py-4 sm:grid-cols-2 sm:gap-3 sm:px-6 lg:grid-cols-3">
+        <div className="grid gap-2 border-t border-white/10 px-4 py-4 sm:grid-cols-2 sm:gap-3 sm:px-6 lg:grid-cols-3">
           <StatCard
             label="Servidores"
             value={stats.guilds === null ? "…" : String(stats.guilds)}
@@ -433,9 +433,9 @@ function HubPage() {
 
         {/* Account details */}
         {user && (
-          <div className="border-t border-line/60 px-4 py-4 sm:px-6">
-            <div className="mb-3 flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.25em] text-ink-mute">
-              <span className="text-purple">◆</span> detalhes da conta
+          <div className="border-t border-white/10 px-4 py-4 sm:px-6">
+            <div className="mb-3 flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.25em] text-slate-500">
+              <span className="text-[#a78bfa]">◆</span> detalhes da conta
             </div>
             <div className="grid gap-2 sm:grid-cols-2 sm:gap-3 lg:grid-cols-4">
               <InfoField
@@ -468,37 +468,37 @@ function HubPage() {
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         <Link
           to="/missoes"
-          className="card-hover group flex items-center justify-between gap-3 rounded-2xl border border-line bg-gradient-to-br from-cyan/[0.08] via-surface/40 to-purple/[0.08] px-6 py-5 backdrop-blur-md"
+          className="card-hover group flex items-center justify-between gap-3 rounded-2xl border border-white/10 bg-gradient-to-br from-[#5865F2]/[0.08] via-surface/40 to-[#a78bfa]/[0.08] px-6 py-5 backdrop-blur-md"
         >
           <div className="min-w-0">
-            <div className="font-mono text-[10px] font-semibold uppercase tracking-[0.3em] text-cyan">
+            <div className="font-mono text-[10px] font-semibold uppercase tracking-[0.3em] text-[#a5b4fc]">
               $ next
             </div>
-            <div className="mt-1.5 text-lg font-semibold tracking-tight text-ink">Ir para Missões</div>
-            <div className="mt-1 truncate text-xs text-ink-dim">
+            <div className="mt-1.5 text-lg font-semibold tracking-tight text-white">Ir para Missões</div>
+            <div className="mt-1 truncate text-xs text-slate-400">
               {quests.length > 0
                 ? `${quests.length} carregadas · ${orbQuests} com Orbs`
                 : "Rode um scan para ver o que está disponível"}
             </div>
           </div>
-          <span className="font-mono text-2xl text-cyan opacity-60 transition group-hover:translate-x-1 group-hover:opacity-100">
+          <span className="font-mono text-2xl text-[#a5b4fc] opacity-60 transition group-hover:translate-x-1 group-hover:opacity-100">
             →
           </span>
         </Link>
         <Link
           to="/history"
-          className="card-hover group flex items-center justify-between gap-3 rounded-2xl border border-line bg-gradient-to-br from-purple/[0.08] via-surface/40 to-cyan/[0.05] px-6 py-5 backdrop-blur-md"
+          className="card-hover group flex items-center justify-between gap-3 rounded-2xl border border-white/10 bg-gradient-to-br from-[#a78bfa]/[0.08] via-surface/40 to-[#5865F2]/[0.05] px-6 py-5 backdrop-blur-md"
         >
           <div className="min-w-0">
-            <div className="font-mono text-[10px] font-semibold uppercase tracking-[0.3em] text-purple">
+            <div className="font-mono text-[10px] font-semibold uppercase tracking-[0.3em] text-[#a78bfa]">
               $ log
             </div>
-            <div className="mt-1.5 text-lg font-semibold tracking-tight text-ink">Ver Histórico</div>
-            <div className="mt-1 truncate text-xs text-ink-dim">
+            <div className="mt-1.5 text-lg font-semibold tracking-tight text-white">Ver Histórico</div>
+            <div className="mt-1 truncate text-xs text-slate-400">
               {runsCount} execuções registradas
             </div>
           </div>
-          <span className="font-mono text-2xl text-purple opacity-60 transition group-hover:translate-x-1 group-hover:opacity-100">
+          <span className="font-mono text-2xl text-[#a78bfa] opacity-60 transition group-hover:translate-x-1 group-hover:opacity-100">
             →
           </span>
         </Link>
@@ -606,43 +606,43 @@ function QuickActions() {
   return (
     <section className="min-w-0 space-y-4">
       <div>
-        <h2 className="text-lg font-semibold text-ink">Ações Rápidas</h2>
-        <p className="mt-0.5 text-xs text-ink-dim">Atalhos para as funções mais usadas.</p>
+        <h2 className="text-lg font-semibold text-white">Ações Rápidas</h2>
+        <p className="mt-0.5 text-xs text-slate-400">Atalhos para as funções mais usadas.</p>
       </div>
 
       <div className="grid gap-3 lg:grid-cols-3">
         {/* UserInfo Premium */}
-        <div className="rounded-xl border border-cyan/30 bg-surface/60 p-4">
-          <div className="mb-1 flex items-center gap-2 font-mono text-[11px] uppercase tracking-widest text-cyan">
+        <div className="rounded-xl border border-[#5865F2]/30 bg-white/5 p-4">
+          <div className="mb-1 flex items-center gap-2 font-mono text-[11px] uppercase tracking-widest text-[#a5b4fc]">
             <span>◎</span> UserInfo Premium
           </div>
-          <p className="text-xs leading-relaxed text-ink-dim">
+          <p className="text-xs leading-relaxed text-slate-400">
             Consulte badges, idade, servidores em comum e banner de qualquer usuário.
           </p>
           <input
             value={profileId}
             onChange={(e) => setProfileId(e.target.value.replace(/[^0-9]/g, "").slice(0, 20))}
             placeholder="ID do usuário (deixe vazio para você)"
-            className="mt-3 w-full rounded-md border border-line bg-background px-3 py-2 font-mono text-xs text-ink outline-none focus:border-cyan"
+            className="mt-3 w-full rounded-md border border-white/10 bg-[#0b0d12] px-3 py-2 font-mono text-xs text-white outline-none focus:border-[#5865F2]"
           />
           <button
             onClick={searchProfile}
             disabled={loadingProfile}
-            className="mt-2 w-full rounded-md border border-cyan/50 bg-cyan/15 px-3 py-2 font-mono text-[11px] font-semibold uppercase tracking-widest text-cyan transition hover:bg-cyan/25 disabled:opacity-40"
+            className="mt-2 w-full rounded-md border border-[#5865F2]/50 bg-[#5865F2]/15 px-3 py-2 font-mono text-[11px] font-semibold uppercase tracking-widest text-[#a5b4fc] transition hover:bg-[#5865F2]/25 disabled:opacity-40"
           >
             {loadingProfile ? "buscando…" : "Buscar Perfil"}
           </button>
           {foundUser && (
-            <div className="mt-3 rounded-md border border-line/60 bg-background/60 p-2.5 text-xs">
-              <div className="font-semibold text-ink">
+            <div className="mt-3 rounded-md border border-white/10 bg-black/40 p-2.5 text-xs">
+              <div className="font-semibold text-white">
                 {(foundUser.global_name as string) || (foundUser.username as string)}
               </div>
-              <div className="font-mono text-[10px] text-ink-mute">@{foundUser.username as string} · {foundUser.id as string}</div>
+              <div className="font-mono text-[10px] text-slate-500">@{foundUser.username as string} · {foundUser.id as string}</div>
               <a
                 href={`https://discord.com/users/${foundUser.id as string}`}
                 target="_blank"
                 rel="noreferrer"
-                className="mt-1 inline-block font-mono text-[10px] uppercase tracking-widest text-cyan hover:underline"
+                className="mt-1 inline-block font-mono text-[10px] uppercase tracking-widest text-[#a5b4fc] hover:underline"
               >
                 → abrir no discord
               </a>
@@ -651,11 +651,11 @@ function QuickActions() {
         </div>
 
         {/* Limpar Mensagens */}
-        <div className="rounded-xl border border-purple/30 bg-surface/60 p-4">
-          <div className="mb-1 flex items-center gap-2 font-mono text-[11px] uppercase tracking-widest text-purple">
+        <div className="rounded-xl border border-[#a78bfa]/30 bg-white/5 p-4">
+          <div className="mb-1 flex items-center gap-2 font-mono text-[11px] uppercase tracking-widest text-[#a78bfa]">
             <span>⌫</span> Limpar Mensagens
           </div>
-          <p className="text-xs leading-relaxed text-ink-dim">
+          <p className="text-xs leading-relaxed text-slate-400">
             Apague rapidamente suas mensagens de uma DM ou canal de servidor.
           </p>
           <div className="mt-3 grid grid-cols-[1fr_auto] gap-2">
@@ -663,12 +663,12 @@ function QuickActions() {
               value={clearTarget}
               onChange={(e) => setClearTarget(e.target.value.replace(/[^0-9]/g, "").slice(0, 20))}
               placeholder="ID do usuário ou canal"
-              className="rounded-md border border-line bg-background px-3 py-2 font-mono text-xs text-ink outline-none focus:border-purple"
+              className="rounded-md border border-white/10 bg-[#0b0d12] px-3 py-2 font-mono text-xs text-white outline-none focus:border-[#a78bfa]"
             />
             <select
               value={clearMode}
               onChange={(e) => setClearMode(e.target.value as "dm" | "channel")}
-              className="rounded-md border border-line bg-background px-2 py-2 font-mono text-xs text-ink outline-none focus:border-purple"
+              className="rounded-md border border-white/10 bg-[#0b0d12] px-2 py-2 font-mono text-xs text-white outline-none focus:border-[#a78bfa]"
             >
               <option value="dm">DM</option>
               <option value="channel">Canal</option>
@@ -676,37 +676,37 @@ function QuickActions() {
           </div>
           <button
             onClick={clearMessages}
-            className="mt-2 w-full rounded-md border border-purple/50 bg-purple/15 px-3 py-2 font-mono text-[11px] font-semibold uppercase tracking-widest text-purple transition hover:bg-purple/25"
+            className="mt-2 w-full rounded-md border border-[#a78bfa]/50 bg-[#a78bfa]/15 px-3 py-2 font-mono text-[11px] font-semibold uppercase tracking-widest text-[#a78bfa] transition hover:bg-[#a78bfa]/25"
           >
             Limpar
           </button>
 
-          <div className="mt-3 flex items-center justify-between text-[10px] uppercase tracking-widest text-ink-mute">
+          <div className="mt-3 flex items-center justify-between text-[10px] uppercase tracking-widest text-slate-500">
             <span className="font-mono">DMs Abertas / Amigos:</span>
             <button
               onClick={loadDms}
               disabled={loadingDms}
-              className="rounded border border-line px-1.5 py-0.5 font-mono text-[9px] text-ink-mute hover:text-ink disabled:opacity-40"
+              className="rounded border border-white/10 px-1.5 py-0.5 font-mono text-[9px] text-slate-500 hover:text-white disabled:opacity-40"
             >
               {loadingDms ? "…" : "↻"}
             </button>
           </div>
           <div className="mt-1 max-h-32 space-y-1 overflow-y-auto pr-1">
             {dms.length === 0 && !loadingDms && (
-              <div className="py-2 text-center font-mono text-[10px] text-ink-mute">nenhuma DM</div>
+              <div className="py-2 text-center font-mono text-[10px] text-slate-500">nenhuma DM</div>
             )}
             {dms.map((d) => (
               <button
                 key={d.id}
                 onClick={() => setClearTarget(d.id)}
-                className="flex w-full items-center gap-2 rounded-md border border-line/60 bg-background/40 px-2 py-1.5 text-left transition hover:border-purple/50"
+                className="flex w-full items-center gap-2 rounded-md border border-white/10 bg-black/40 px-2 py-1.5 text-left transition hover:border-[#a78bfa]/50"
               >
                 {d.avatarUrl && (
                   <img src={d.avatarUrl} alt="" width={22} height={22} className="h-5 w-5 rounded-full object-cover" />
                 )}
                 <div className="min-w-0 flex-1">
-                  <div className="truncate text-[11px] text-ink">{d.label}</div>
-                  <div className="truncate font-mono text-[9px] text-ink-mute">{d.sub}</div>
+                  <div className="truncate text-[11px] text-white">{d.label}</div>
+                  <div className="truncate font-mono text-[9px] text-slate-500">{d.sub}</div>
                 </div>
               </button>
             ))}
@@ -714,32 +714,32 @@ function QuickActions() {
         </div>
 
         {/* Gerenciar Servidores */}
-        <div className="rounded-xl border border-mint/30 bg-surface/60 p-4">
-          <div className="mb-1 flex items-center gap-2 font-mono text-[11px] uppercase tracking-widest text-mint">
+        <div className="rounded-xl border border-emerald-400/30 bg-white/5 p-4">
+          <div className="mb-1 flex items-center gap-2 font-mono text-[11px] uppercase tracking-widest text-emerald-400">
             <span>⚙</span> Gerenciar Servidores
           </div>
-          <p className="text-xs leading-relaxed text-ink-dim">
+          <p className="text-xs leading-relaxed text-slate-400">
             Liste todos os servidores ou saia de todos de uma vez.
           </p>
           <div className="mt-3 flex flex-wrap gap-2">
             <button
               onClick={listGuilds}
               disabled={loadingGuilds}
-              className="rounded-md border border-mint/50 bg-mint/15 px-3 py-2 font-mono text-[11px] font-semibold uppercase tracking-widest text-mint transition hover:bg-mint/25 disabled:opacity-40"
+              className="rounded-md border border-emerald-400/50 bg-emerald-500/15 px-3 py-2 font-mono text-[11px] font-semibold uppercase tracking-widest text-emerald-400 transition hover:bg-emerald-500/25 disabled:opacity-40"
             >
               {loadingGuilds ? "…" : "Listar Servidores"}
             </button>
             <button
               onClick={leaveAll}
-              className="rounded-md border border-rose/50 bg-rose/10 px-3 py-2 font-mono text-[11px] font-semibold uppercase tracking-widest text-rose transition hover:bg-rose/20"
+              className="rounded-md border border-rose-400/50 bg-rose-500/10 px-3 py-2 font-mono text-[11px] font-semibold uppercase tracking-widest text-rose-400 transition hover:bg-rose-500/20"
             >
               Sair de Todos
             </button>
           </div>
           {guildsList && (
-            <div className="mt-3 max-h-40 space-y-1 overflow-y-auto rounded-md border border-line/60 bg-background/40 p-2">
+            <div className="mt-3 max-h-40 space-y-1 overflow-y-auto rounded-md border border-white/10 bg-black/40 p-2">
               {guildsList.length === 0 ? (
-                <div className="py-2 text-center font-mono text-[10px] text-ink-mute">nenhum servidor</div>
+                <div className="py-2 text-center font-mono text-[10px] text-slate-500">nenhum servidor</div>
               ) : (
                 guildsList.map((g) => (
                   <div key={g.id} className="flex items-center gap-2 py-1">
@@ -752,13 +752,13 @@ function QuickActions() {
                         className="h-5 w-5 rounded object-cover"
                       />
                     ) : (
-                      <div className="grid h-5 w-5 place-items-center rounded bg-surface font-mono text-[9px] text-ink-mute">
+                      <div className="grid h-5 w-5 place-items-center rounded bg-white/5 font-mono text-[9px] text-slate-500">
                         {g.name.slice(0, 1)}
                       </div>
                     )}
-                    <span className="flex-1 truncate text-[11px] text-ink">{g.name}</span>
+                    <span className="flex-1 truncate text-[11px] text-white">{g.name}</span>
                     {g.owner && (
-                      <span className="rounded border border-amber/40 px-1 font-mono text-[9px] text-amber">owner</span>
+                      <span className="rounded border border-amber-400/40 px-1 font-mono text-[9px] text-amber-300">owner</span>
                     )}
                   </div>
                 ))
@@ -811,12 +811,12 @@ function WelcomeModal() {
   }> = {
     intro: {
       tag: "$ bem-vindo",
-      title: <>O que é o Neighbors<span className="text-cyan">hub</span>?</>,
+      title: <>O que é o Neighbors<span className="text-[#a5b4fc]">hub</span>?</>,
       body: (
         <>
-          Automatize suas <span className="text-cyan">Discord Quests</span> em segundo
+          Automatize suas <span className="text-[#a5b4fc]">Discord Quests</span> em segundo
           plano — assista vídeos e "jogue" sem esforço, ganhando{" "}
-          <span className="text-mint">Orbs</span> e recompensas exclusivas.
+          <span className="text-emerald-400">Orbs</span> e recompensas exclusivas.
           Totalmente client-side, seu token nunca sai criptografado do seu navegador.
         </>
       ),
@@ -825,7 +825,7 @@ function WelcomeModal() {
     },
     discord: {
       tag: "$ comunidade",
-      title: <>Entre no nosso <span className="text-purple">Discord</span></>,
+      title: <>Entre no nosso <span className="text-[#a78bfa]">Discord</span></>,
       body: <>Suporte, avisos de atualização e canal exclusivo pra membros Premium e Boost.</>,
       href: "https://discord.gg/EMsfMZFyGS",
       action: "💬 abrir Discord",
@@ -833,7 +833,7 @@ function WelcomeModal() {
     },
     instagram: {
       tag: "$ criador",
-      title: <>Siga no <span className="text-cyan">Instagram</span></>,
+      title: <>Siga no <span className="text-[#a5b4fc]">Instagram</span></>,
       body: <>Bastidores do projeto, novidades e outras coisas feitas pelo criador.</>,
       href: "https://www.instagram.com/davizinzkn/",
       action: "📸 abrir Instagram",
@@ -841,7 +841,7 @@ function WelcomeModal() {
     },
     donate: {
       tag: "$ apoie",
-      title: <>Ajude o projeto a continuar <span className="text-mint">gratuito</span></>,
+      title: <>Ajude o projeto a continuar <span className="text-emerald-400">gratuito</span></>,
       body: <>Servidores, domínio e desenvolvimento saem do bolso. Qualquer valor conta muito.</>,
       href: "https://livepix.gg/davizinzkngg",
       action: "💖 doar via LivePix",
@@ -850,17 +850,17 @@ function WelcomeModal() {
   };
 
   const c = content[step];
-  const toneBorder = { cyan: "border-cyan/40", purple: "border-purple/40", mint: "border-mint/40" }[c.tone];
-  const toneBg = { cyan: "bg-cyan/10 hover:bg-cyan/20", purple: "bg-purple/10 hover:bg-purple/20", mint: "bg-mint/10 hover:bg-mint/20" }[c.tone];
-  const toneText = { cyan: "text-cyan", purple: "text-purple", mint: "text-mint" }[c.tone];
+  const toneBorder = { cyan: "border-[#5865F2]/40", purple: "border-[#a78bfa]/40", mint: "border-emerald-400/40" }[c.tone];
+  const toneBg = { cyan: "bg-[#5865F2]/10 hover:bg-[#5865F2]/20", purple: "bg-[#a78bfa]/10 hover:bg-[#a78bfa]/20", mint: "bg-emerald-500/10 hover:bg-emerald-500/20" }[c.tone];
+  const toneText = { cyan: "text-[#a5b4fc]", purple: "text-[#a78bfa]", mint: "text-emerald-400" }[c.tone];
 
   const stepOrder: Exclude<Step, null>[] = ["intro", "discord", "instagram", "donate"];
   const stepIdx = stepOrder.indexOf(step);
 
   return (
-    <div className="fixed inset-0 z-50 grid place-items-center bg-background/40 p-4 backdrop-blur-md">
+    <div className="fixed inset-0 z-50 grid place-items-center bg-black/40 p-4 backdrop-blur-md">
       <div
-        className={`relative w-full max-w-md rounded-2xl border ${toneBorder} bg-surface/70 p-6 backdrop-blur-xl`}
+        className={`relative w-full max-w-md rounded-2xl border ${toneBorder} bg-white/5 p-6 backdrop-blur-xl`}
         style={{
           boxShadow: "0 0 60px -10px color-mix(in oklab, var(--purple) 55%, transparent), 0 0 40px -20px color-mix(in oklab, var(--cyan) 60%, transparent)",
         }}
@@ -868,15 +868,15 @@ function WelcomeModal() {
         <button
           onClick={finish}
           aria-label="Fechar"
-          className="absolute right-3 top-3 grid h-8 w-8 place-items-center rounded-md border border-line/60 text-ink-mute hover:border-cyan/50 hover:text-cyan"
+          className="absolute right-3 top-3 grid h-8 w-8 place-items-center rounded-md border border-white/10 text-slate-500 hover:border-[#5865F2]/50 hover:text-[#a5b4fc]"
         >
           ✕
         </button>
         <div className={`font-mono text-[10px] uppercase tracking-[0.3em] ${toneText}`}>
           {c.tag}
         </div>
-        <h3 className="mt-2 text-xl font-semibold text-ink">{c.title}</h3>
-        <p className="mt-2 text-sm leading-relaxed text-ink-dim">{c.body}</p>
+        <h3 className="mt-2 text-xl font-semibold text-white">{c.title}</h3>
+        <p className="mt-2 text-sm leading-relaxed text-slate-400">{c.body}</p>
 
         <div className="mt-5 flex flex-col gap-2">
           {c.href ? (
@@ -885,21 +885,21 @@ function WelcomeModal() {
               target="_blank"
               rel="noreferrer"
               onClick={() => setTimeout(advance, 300)}
-              className={`flex items-center justify-center gap-2 rounded-lg border ${toneBorder} ${toneBg} px-4 py-3 text-sm font-medium text-ink transition`}
+              className={`flex items-center justify-center gap-2 rounded-lg border ${toneBorder} ${toneBg} px-4 py-3 text-sm font-medium text-white transition`}
             >
               {c.action}
             </a>
           ) : (
             <button
               onClick={advance}
-              className={`rounded-lg border ${toneBorder} ${toneBg} px-4 py-3 text-sm font-medium text-ink transition`}
+              className={`rounded-lg border ${toneBorder} ${toneBg} px-4 py-3 text-sm font-medium text-white transition`}
             >
               {c.action}
             </button>
           )}
           <button
             onClick={advance}
-            className="font-mono text-[10px] uppercase tracking-widest text-ink-mute hover:text-cyan"
+            className="font-mono text-[10px] uppercase tracking-widest text-slate-500 hover:text-[#a5b4fc]"
           >
             {stepIdx === stepOrder.length - 1 ? "concluir" : "pular →"}
           </button>
@@ -910,7 +910,7 @@ function WelcomeModal() {
             <span
               key={s}
               className={`h-1.5 rounded-full transition-all ${
-                i === stepIdx ? "w-6 bg-cyan" : "w-1.5 bg-line"
+                i === stepIdx ? "w-6 bg-[#5865F2]" : "w-1.5 bg-line"
               }`}
             />
           ))}
@@ -940,16 +940,16 @@ function InfoField({
   const [revealed, setRevealed] = useState(false);
   const tone =
     badgeTone === "mint"
-      ? "border-mint/30 text-mint"
+      ? "border-emerald-400/30 text-emerald-400"
       : badgeTone === "amber"
-        ? "border-amber/30 text-amber"
-        : "border-cyan/30 text-cyan";
+        ? "border-amber-400/30 text-amber-300"
+        : "border-[#5865F2]/30 text-[#a5b4fc]";
   const hidden = sensitive && !revealed && value !== "—";
   const shown = hidden ? "•".repeat(Math.min(value.length, 14)) : value;
   return (
-    <div className="rounded-lg border border-line/70 bg-background/40 p-3">
+    <div className="rounded-lg border border-white/10 bg-black/40 p-3">
       <div className="flex items-center justify-between gap-2">
-        <div className="font-mono text-[10px] uppercase tracking-[0.25em] text-ink-mute">
+        <div className="font-mono text-[10px] uppercase tracking-[0.25em] text-slate-500">
           {label}
         </div>
         <div className="flex items-center gap-1.5">
@@ -961,17 +961,17 @@ function InfoField({
           {sensitive && value !== "—" && (
             <button
               onClick={() => setRevealed((v) => !v)}
-              className="rounded border border-line/70 px-1.5 py-0.5 font-mono text-[9px] uppercase tracking-widest text-ink-mute hover:border-cyan/40 hover:text-cyan"
+              className="rounded border border-white/10 px-1.5 py-0.5 font-mono text-[9px] uppercase tracking-widest text-slate-500 hover:border-[#5865F2]/40 hover:text-[#a5b4fc]"
             >
               {revealed ? "ocultar" : "mostrar"}
             </button>
           )}
         </div>
       </div>
-      <div className="mt-1.5 truncate text-sm text-ink" title={revealed ? value : undefined}>
+      <div className="mt-1.5 truncate text-sm text-white" title={revealed ? value : undefined}>
         {shown}
       </div>
-      {hint && <div className="mt-0.5 font-mono text-[10px] text-ink-mute">{hint}</div>}
+      {hint && <div className="mt-0.5 font-mono text-[10px] text-slate-500">{hint}</div>}
     </div>
   );
 }
@@ -989,27 +989,27 @@ const StatCard = memo(function StatCard({
 }) {
   const accent =
     tone === "cyan"
-      ? "text-cyan"
+      ? "text-[#a5b4fc]"
       : tone === "purple"
-        ? "text-purple"
+        ? "text-[#a78bfa]"
         : tone === "mint"
-          ? "text-mint"
+          ? "text-emerald-400"
           : tone === "amber"
-            ? "text-amber"
-            : "text-ink";
+            ? "text-amber-300"
+            : "text-white";
   const border =
     tone === "cyan"
-      ? "border-cyan/40"
+      ? "border-[#5865F2]/40"
       : tone === "purple"
-        ? "border-purple/40"
+        ? "border-[#a78bfa]/40"
         : tone === "mint"
-          ? "border-mint/40"
+          ? "border-emerald-400/40"
           : tone === "amber"
-            ? "border-amber/40"
-            : "border-line";
+            ? "border-amber-400/40"
+            : "border-white/10";
   return (
     <div
-      className={`card-hover group relative overflow-hidden rounded-2xl border ${border} bg-surface/50 p-4 backdrop-blur-md sm:p-5`}
+      className={`card-hover group relative overflow-hidden rounded-2xl border ${border} bg-white/5 p-4 backdrop-blur-md sm:p-5`}
       style={{
         boxShadow:
           tone === "purple"
@@ -1021,13 +1021,13 @@ const StatCard = memo(function StatCard({
                 : "inset 0 1px 0 color-mix(in oklab, var(--cyan) 6%, transparent)",
       }}
     >
-      <div className="font-mono text-[10px] font-semibold uppercase tracking-[0.28em] text-ink-mute">
+      <div className="font-mono text-[10px] font-semibold uppercase tracking-[0.28em] text-slate-500">
         {label}
       </div>
       <div className={`mt-3 truncate font-mono text-2xl font-bold tabular-nums sm:text-3xl lg:text-4xl ${accent}`}>
         {value}
       </div>
-      <div className="mt-1.5 truncate text-xs text-ink-mute">{hint}</div>
+      <div className="mt-1.5 truncate text-xs text-slate-500">{hint}</div>
     </div>
   );
 });
@@ -1056,13 +1056,13 @@ export const MissionCard = memo(function MissionCard({
 
   return (
     <article
-      className={`group relative flex flex-col overflow-hidden rounded-2xl border bg-surface/60 backdrop-blur transition ${
+      className={`group relative flex flex-col overflow-hidden rounded-2xl border bg-white/5 backdrop-blur transition ${
         active
-          ? "border-cyan/60 glow-cyan"
-          : "border-line hover:border-cyan/40 hover:bg-surface/80"
+          ? "border-[#5865F2]/60 glow-cyan"
+          : "border-white/10 hover:border-[#5865F2]/40 hover:bg-white/5"
       }`}
     >
-      <div className="relative aspect-[16/9] w-full overflow-hidden bg-background">
+      <div className="relative aspect-[16/9] w-full overflow-hidden bg-[#0b0d12]">
         {quest.imageUrl ? (
           <img
             src={quest.imageUrl}
@@ -1085,7 +1085,7 @@ export const MissionCard = memo(function MissionCard({
             className="h-full w-full object-cover transition duration-500 group-hover:scale-[1.03]"
           />
         ) : (
-          <div className="grid h-full w-full place-items-center font-mono text-xs text-ink-mute">
+          <div className="grid h-full w-full place-items-center font-mono text-xs text-slate-500">
             sem imagem
           </div>
         )}
@@ -1093,8 +1093,8 @@ export const MissionCard = memo(function MissionCard({
         <span
           className={`absolute right-3 top-3 rounded-full px-2.5 py-0.5 font-mono text-[10px] font-semibold uppercase tracking-widest ${
             quest.isEnrolled
-              ? "bg-mint/90 text-background"
-              : "bg-cyan/90 text-background"
+              ? "bg-emerald-500/90 text-background"
+              : "bg-[#5865F2]/90 text-background"
           }`}
         >
           {quest.isEnrolled ? "aceita" : "disponível"}
@@ -1103,13 +1103,13 @@ export const MissionCard = memo(function MissionCard({
 
       <div className="flex flex-1 flex-col gap-3 p-4">
         <div className="min-w-0">
-          <h3 className="truncate text-base font-semibold text-ink">{quest.questName}</h3>
+          <h3 className="truncate text-base font-semibold text-white">{quest.questName}</h3>
           {quest.publisher && (
-            <p className="mt-0.5 truncate text-xs text-ink-dim">{quest.publisher}</p>
+            <p className="mt-0.5 truncate text-xs text-slate-400">{quest.publisher}</p>
           )}
         </div>
 
-        <div className="flex flex-wrap items-center gap-2 font-mono text-[10px] uppercase tracking-widest text-ink-mute">
+        <div className="flex flex-wrap items-center gap-2 font-mono text-[10px] uppercase tracking-widest text-slate-500">
           {expires && <span>Expira: {expires}</span>}
           <span className="opacity-40">·</span>
           <span>{formatDuration(quest.target)}</span>
@@ -1118,8 +1118,8 @@ export const MissionCard = memo(function MissionCard({
         <div
           className={`inline-flex w-fit items-center gap-2 rounded-md border px-2.5 py-1 text-xs ${
             isOrbs
-              ? "border-amber/30 bg-amber/10 text-amber"
-              : "border-line bg-background/40 text-ink-dim"
+              ? "border-amber-400/30 bg-amber-500-500/10 text-amber-300"
+              : "border-white/10 bg-black/40 text-slate-400"
           }`}
         >
           <span>◈</span>
@@ -1128,13 +1128,13 @@ export const MissionCard = memo(function MissionCard({
 
         {active && progress && (
           <div>
-            <div className="flex items-center justify-between font-mono text-[10px] uppercase tracking-widest text-ink-mute">
+            <div className="flex items-center justify-between font-mono text-[10px] uppercase tracking-widest text-slate-500">
               <span>{progress.current}/{progress.total}</span>
-              <span className="text-cyan">{pct}%</span>
+              <span className="text-[#a5b4fc]">{pct}%</span>
             </div>
-            <div className="mt-1 h-1.5 overflow-hidden rounded-full bg-background">
+            <div className="mt-1 h-1.5 overflow-hidden rounded-full bg-[#0b0d12]">
               <div
-                className="h-full rounded-full bg-gradient-to-r from-cyan via-mint to-amber transition-all"
+                className="h-full rounded-full bg-gradient-to-r from-[#5865F2] via-emerald-400 to-amber-400 transition-all"
                 style={{ width: `${pct}%` }}
               />
             </div>
@@ -1145,7 +1145,7 @@ export const MissionCard = memo(function MissionCard({
           onClick={onExec}
           disabled={disabled}
           title={gateHint}
-          className="mt-auto rounded-md border border-line bg-background/60 px-3 py-2 text-sm font-medium text-ink transition hover:border-cyan/50 hover:text-cyan disabled:cursor-not-allowed disabled:opacity-30"
+          className="mt-auto rounded-md border border-white/10 bg-black/40 px-3 py-2 text-sm font-medium text-white transition hover:border-[#5865F2]/50 hover:text-[#a5b4fc] disabled:cursor-not-allowed disabled:opacity-30"
         >
           {gateHint ?? "Completar"}
         </button>
@@ -1211,49 +1211,49 @@ export function CaptchaModal({
   };
 
   return (
-    <div className="fixed inset-0 z-50 grid place-items-center bg-background/80 p-4 backdrop-blur-sm">
-      <div className="w-full max-w-sm rounded-2xl border border-cyan/30 bg-surface p-6 shadow-2xl">
-        <div className="font-mono text-[10px] uppercase tracking-[0.3em] text-cyan-dim">
+    <div className="fixed inset-0 z-50 grid place-items-center bg-black/40 p-4 backdrop-blur-sm">
+      <div className="w-full max-w-sm rounded-2xl border border-[#5865F2]/30 bg-white/5 p-6 shadow-2xl">
+        <div className="font-mono text-[10px] uppercase tracking-[0.3em] text-slate-400">
           $ verify --human
         </div>
-        <h3 className="mt-2 text-lg font-semibold text-ink">Confirme que é humano</h3>
-        <p className="mt-1 text-sm text-ink-dim">
+        <h3 className="mt-2 text-lg font-semibold text-white">Confirme que é humano</h3>
+        <p className="mt-1 text-sm text-slate-400">
           {label ?? quest?.questName ?? "Antes de executar, resolva o desafio."}
         </p>
 
-        <div className="mt-4 rounded-lg border border-amber/40 bg-amber/10 p-3">
-          <div className="font-mono text-[10px] uppercase tracking-[0.25em] text-amber">
+        <div className="mt-4 rounded-lg border border-amber-400/40 bg-amber-500-500/10 p-3">
+          <div className="font-mono text-[10px] uppercase tracking-[0.25em] text-amber-300">
             ⚠ aviso de risco
           </div>
-          <p className="mt-1 text-[12px] leading-relaxed text-ink-dim">
+          <p className="mt-1 text-[12px] leading-relaxed text-slate-400">
             Automatizar missões {label ? "em lote (run all) aumenta o risco de detecção e " : ""}
             viola os Termos de Serviço do Discord e pode resultar em{" "}
-            <span className="text-rose">suspensão ou banimento</span> da sua conta. Use por sua conta e risco.
+            <span className="text-rose-400">suspensão ou banimento</span> da sua conta. Use por sua conta e risco.
           </p>
         </div>
 
         {useTurnstile ? (
-          <div className="mt-5 grid place-items-center rounded-lg border border-line bg-background/60 p-4 min-h-[80px]">
+          <div className="mt-5 grid place-items-center rounded-lg border border-white/10 bg-black/40 p-4 min-h-[80px]">
             <div ref={turnstileRef} />
           </div>
         ) : (
-          <div className="mt-5 grid grid-cols-[1fr_auto_1fr_auto_1fr] items-center gap-2 rounded-lg border border-line bg-background/60 p-3 font-mono text-xl text-ink">
+          <div className="mt-5 grid grid-cols-[1fr_auto_1fr_auto_1fr] items-center gap-2 rounded-lg border border-white/10 bg-black/40 p-3 font-mono text-xl text-white">
             <span className="text-center">{challenge.a}</span>
-            <span className="text-cyan">+</span>
+            <span className="text-[#a5b4fc]">+</span>
             <span className="text-center">{challenge.b}</span>
-            <span className="text-cyan">=</span>
+            <span className="text-[#a5b4fc]">=</span>
             <input
               autoFocus
               inputMode="numeric"
               value={value}
               onChange={(e) => { setError(false); setValue(e.target.value.replace(/\D/g, "").slice(0, 3)); }}
               onKeyDown={(e) => e.key === "Enter" && submit()}
-              className="w-full rounded border border-line bg-background px-2 py-1 text-center text-ink outline-none focus:border-cyan"
+              className="w-full rounded border border-white/10 bg-[#0b0d12] px-2 py-1 text-center text-white outline-none focus:border-[#5865F2]"
             />
           </div>
         )}
         {error && (
-          <p className="mt-2 font-mono text-[11px] text-rose">
+          <p className="mt-2 font-mono text-[11px] text-rose-400">
             {useTurnstile ? "✗ verificação falhou, tente novamente" : "✗ resposta incorreta, tente de novo"}
           </p>
         )}
@@ -1261,14 +1261,14 @@ export function CaptchaModal({
         <div className="mt-5 flex gap-2">
           <button
             onClick={onCancel}
-            className="flex-1 rounded-md border border-line px-3 py-2 font-mono text-xs uppercase tracking-widest text-ink-dim hover:text-ink"
+            className="flex-1 rounded-md border border-white/10 px-3 py-2 font-mono text-xs uppercase tracking-widest text-slate-400 hover:text-white"
           >
             cancelar
           </button>
           {!useTurnstile && (
             <button
               onClick={submit}
-              className="flex-1 rounded-md bg-cyan px-3 py-2 font-mono text-xs font-semibold uppercase tracking-widest text-primary-foreground hover:brightness-110"
+              className="flex-1 rounded-md bg-[#5865F2] px-3 py-2 font-mono text-xs font-semibold uppercase tracking-widest text-primary-foreground hover:brightness-110"
             >
               confirmar
             </button>
@@ -1282,16 +1282,16 @@ export function CaptchaModal({
 
 export function EmptyState({ onScan }: { onScan: () => void }) {
   return (
-    <div className="grid place-items-center rounded-xl border border-dashed border-line bg-surface/30 p-10 text-center">
-      <div className="font-mono text-[10px] uppercase tracking-[0.3em] text-cyan-dim">
+    <div className="grid place-items-center rounded-xl border border-dashed border-white/10 bg-white/5 p-10 text-center">
+      <div className="font-mono text-[10px] uppercase tracking-[0.3em] text-slate-400">
         $ scan --available
       </div>
-      <p className="mt-3 max-w-sm text-sm text-ink-dim">
+      <p className="mt-3 max-w-sm text-sm text-slate-400">
         Nenhuma missão carregada. Rode um scan pra ver o que o Discord tem disponível agora.
       </p>
       <button
         onClick={onScan}
-        className="mt-5 rounded-md border border-cyan/40 bg-cyan/10 px-4 py-2 font-mono text-[11px] font-semibold uppercase tracking-widest text-cyan hover:bg-cyan/20"
+        className="mt-5 rounded-md border border-[#5865F2]/40 bg-[#5865F2]/10 px-4 py-2 font-mono text-[11px] font-semibold uppercase tracking-widest text-[#a5b4fc] hover:bg-[#5865F2]/20"
       >
         → sondar missões
       </button>
@@ -1316,10 +1316,10 @@ export function PlanBanner({
 }) {
   const tone =
     plan === "boost"
-      ? { border: "border-amber/40", bg: "bg-amber/10", text: "text-amber" }
+      ? { border: "border-amber-400/40", bg: "bg-amber-500-500/10", text: "text-amber-300" }
       : plan === "premium"
-        ? { border: "border-cyan/40", bg: "bg-cyan/10", text: "text-cyan" }
-        : { border: "border-line", bg: "bg-surface/60", text: "text-ink-dim" };
+        ? { border: "border-[#5865F2]/40", bg: "bg-[#5865F2]/10", text: "text-[#a5b4fc]" }
+        : { border: "border-white/10", bg: "bg-white/5", text: "text-slate-400" };
 
   const dailyText = limits.daily === Infinity ? "ilimitado" : `${usedToday}/${limits.daily}`;
   const cooldownPct = cooldownLeft > 0 ? Math.min(100, (cooldownLeft / limits.cooldownMs) * 100) : 0;
@@ -1334,7 +1334,7 @@ export function PlanBanner({
             {plan === "boost" ? "★" : plan === "premium" ? "◆" : "◯"}
           </span>
           <div>
-            <div className="font-mono text-[10px] uppercase tracking-[0.25em] text-ink-mute">
+            <div className="font-mono text-[10px] uppercase tracking-[0.25em] text-slate-500">
               plano ativo
             </div>
             <div className={`text-lg font-semibold ${tone.text}`}>{limits.label}</div>
@@ -1356,16 +1356,16 @@ export function PlanBanner({
       </div>
 
       {cooldownLeft > 0 && (
-        <div className="mt-3 h-1.5 overflow-hidden rounded-full bg-background/60">
+        <div className="mt-3 h-1.5 overflow-hidden rounded-full bg-black/40">
           <div
-            className="h-full rounded-full bg-gradient-to-r from-cyan via-mint to-amber transition-all"
+            className="h-full rounded-full bg-gradient-to-r from-[#5865F2] via-emerald-400 to-amber-400 transition-all"
             style={{ width: `${100 - cooldownPct}%` }}
           />
         </div>
       )}
 
       {plan === "free" && (
-        <p className="mt-3 font-mono text-[11px] text-ink-mute">
+        <p className="mt-3 font-mono text-[11px] text-slate-500">
           Free: 3 missões/dia · 10min entre cada. Boost o servidor ou pegue o cargo Premium pra rodar sem limite diário e cooldown menor.
         </p>
       )}
@@ -1384,15 +1384,15 @@ export function MiniStat({
 }) {
   const c =
     tone === "mint"
-      ? "text-mint"
+      ? "text-emerald-400"
       : tone === "amber"
-        ? "text-amber"
+        ? "text-amber-300"
         : tone === "rose"
-          ? "text-rose"
-          : "text-ink";
+          ? "text-rose-400"
+          : "text-white";
   return (
     <div className="min-w-[110px]">
-      <div className="font-mono text-[10px] uppercase tracking-[0.25em] text-ink-mute">
+      <div className="font-mono text-[10px] uppercase tracking-[0.25em] text-slate-500">
         {label}
       </div>
       <div className={`mt-0.5 font-mono text-sm ${c}`}>{value}</div>
@@ -1416,8 +1416,8 @@ function DonorsCard() {
     t === "boost"
       ? "bg-fuchsia-500/15 text-fuchsia-300 border-fuchsia-400/30"
       : t === "premium"
-        ? "bg-amber-500/15 text-amber-300 border-amber-400/30"
-        : "bg-mint/15 text-mint border-mint/30";
+        ? "bg-amber-500-500/15 text-amber-300-300 border-amber-400/30"
+        : "bg-emerald-500/15 text-emerald-400 border-emerald-400/30";
   const tierLabel = (t: Donor["tier"]) =>
     t === "boost" ? "Boost" : t === "premium" ? "Premium" : "Apoiador";
 
@@ -1566,28 +1566,28 @@ function NotificationsCard() {
 
   return (
     <section
-      className="rounded-2xl border border-purple/25 bg-surface/60 p-4 sm:p-5 backdrop-blur"
+      className="rounded-2xl border border-[#a78bfa]/25 bg-white/5 p-4 sm:p-5 backdrop-blur"
       style={{ boxShadow: "0 0 30px -20px color-mix(in oklab, var(--purple) 55%, transparent)" }}
     >
-      <div className="mb-3 flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.3em] text-ink-mute">
-        <span className="text-cyan">◆</span> avisos
+      <div className="mb-3 flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.3em] text-slate-500">
+        <span className="text-[#a5b4fc]">◆</span> avisos
       </div>
       <ul className="grid gap-2 sm:grid-cols-2">
         {items.map((it, i) => {
           const tone =
             it.tone === "mint"
-              ? "border-mint/30 bg-mint/5 text-mint"
+              ? "border-emerald-400/30 bg-emerald-500/5 text-emerald-400"
               : it.tone === "cyan"
-                ? "border-cyan/30 bg-cyan/5 text-cyan"
+                ? "border-[#5865F2]/30 bg-[#5865F2]/5 text-[#a5b4fc]"
                 : it.tone === "amber"
-                  ? "border-amber/30 bg-amber/5 text-amber"
-                  : "border-rose/30 bg-rose/5 text-rose";
+                  ? "border-amber-400/30 bg-amber-500-500/5 text-amber-300"
+                  : "border-rose-400/30 bg-rose-500/5 text-rose-400";
           return (
             <li key={i} className={`rounded-lg border px-3 py-2 ${tone}`}>
               <div className="font-mono text-[10px] uppercase tracking-widest opacity-90">
                 {it.title}
               </div>
-              <div className="mt-0.5 text-sm text-ink">{it.body}</div>
+              <div className="mt-0.5 text-sm text-white">{it.body}</div>
             </li>
           );
         })}
