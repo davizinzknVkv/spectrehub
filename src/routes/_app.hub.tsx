@@ -434,7 +434,7 @@ function HubPage() {
 
 
   return (
-    <div className="space-y-6 sm:space-y-8">
+    <div className="page-stack">
       <PageHeader
         eyebrow="account --overview"
         icon={LayoutDashboard}

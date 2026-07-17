@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useMemo, useState } from "react";
 import { useQuestStore } from "@/lib/quest-store";
 import { PageHeader } from "@/components/PageHeader";
+import { Section } from "@/components/Section";
 import { PLAN_LIMITS, getGateStatus } from "@/lib/quest-runner";
 import {
   Tractor,
@@ -96,7 +97,7 @@ function FarmsPage() {
   const activeMs = running && activeStart ? now - activeStart : 0;
 
   return (
-    <div className="space-y-6 sm:space-y-8">
+    <div className="page-stack">
       <PageHeader
         eyebrow="farms --dashboard"
         icon={Tractor}
@@ -106,86 +107,90 @@ function FarmsPage() {
       />
 
 
-      {/* Status live */}
-      <section className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-        <BigStat
-          icon={<Activity className="h-4 w-4" />}
-          label="Status"
-          value={running ? "Executando" : "Ocioso"}
-          tone={running ? "mint" : "ink-mute"}
-          sub={running && activeQuestId ? `#${activeQuestId.slice(-6)}` : "—"}
-        />
-        <BigStat
-          icon={<Clock className="h-4 w-4" />}
-          label="Tempo ativo"
-          value={running ? fmtDuration(activeMs) : "—"}
-          tone="cyan"
-          sub={running ? "farm em curso" : "sem farm ativa"}
-        />
-        <BigStat
-          icon={<Timer className="h-4 w-4" />}
-          label="Tempo restante"
-          value={remainingCd > 0 ? fmtDuration(remainingCd) : "livre"}
-          tone={remainingCd > 0 ? "amber" : "mint"}
-          sub={`cooldown ${limits.label}`}
-        />
-        <BigStat
-          icon={<CheckCircle2 className="h-4 w-4" />}
-          label="Missões hoje"
-          value={
-            limits.daily === Infinity
-              ? `${stats.todayDone}`
-              : `${stats.todayDone}/${limits.daily}`
-          }
-          tone="purple"
-          sub={`${gate.remaining === Infinity ? "∞" : gate.remaining} restantes`}
-        />
-      </section>
+      <Section eyebrow="status --live" title="Status ao vivo">
+        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+          <BigStat
+            icon={<Activity className="h-4 w-4" />}
+            label="Status"
+            value={running ? "Executando" : "Ocioso"}
+            tone={running ? "mint" : "ink-mute"}
+            sub={running && activeQuestId ? `#${activeQuestId.slice(-6)}` : "—"}
+          />
+          <BigStat
+            icon={<Clock className="h-4 w-4" />}
+            label="Tempo ativo"
+            value={running ? fmtDuration(activeMs) : "—"}
+            tone="cyan"
+            sub={running ? "farm em curso" : "sem farm ativa"}
+          />
+          <BigStat
+            icon={<Timer className="h-4 w-4" />}
+            label="Tempo restante"
+            value={remainingCd > 0 ? fmtDuration(remainingCd) : "livre"}
+            tone={remainingCd > 0 ? "amber" : "mint"}
+            sub={`cooldown ${limits.label}`}
+          />
+          <BigStat
+            icon={<CheckCircle2 className="h-4 w-4" />}
+            label="Missões hoje"
+            value={
+              limits.daily === Infinity
+                ? `${stats.todayDone}`
+                : `${stats.todayDone}/${limits.daily}`
+            }
+            tone="purple"
+            sub={`${gate.remaining === Infinity ? "∞" : gate.remaining} restantes`}
+          />
+        </div>
+      </Section>
 
-      {/* Progress da run ativa */}
       {running && progress && (
-        <section className="rounded-xl border border-cyan/30 bg-surface/60 p-4 sm:p-5">
-          <div className="flex items-center justify-between text-xs text-ink-dim">
-            <span className="font-mono uppercase tracking-widest text-cyan">progresso</span>
-            <span className="font-mono tabular-nums">
-              {progress.current}/{progress.total}
-            </span>
+        <Section eyebrow="run --progress" title="Progresso da run">
+          <div className="card-surface">
+            <div className="flex items-center justify-between text-xs text-ink-dim">
+              <span className="font-mono uppercase tracking-widest text-cyan">progresso</span>
+              <span className="font-mono tabular-nums">
+                {progress.current}/{progress.total}
+              </span>
+            </div>
+            <div className="mt-2 h-2 overflow-hidden rounded-full bg-background/60">
+              <div
+                className="h-full bg-gradient-to-r from-cyan via-purple to-mint transition-all"
+                style={{
+                  width: `${Math.min(100, (progress.current / Math.max(1, progress.total)) * 100)}%`,
+                }}
+              />
+            </div>
           </div>
-          <div className="mt-2 h-2 overflow-hidden rounded-full bg-background/60">
-            <div
-              className="h-full bg-gradient-to-r from-cyan via-purple to-mint transition-all"
-              style={{
-                width: `${Math.min(100, (progress.current / Math.max(1, progress.total)) * 100)}%`,
-              }}
-            />
-          </div>
-        </section>
+        </Section>
       )}
 
-      {/* Ganhos */}
-      <section className="grid gap-3 sm:grid-cols-3">
-        <EarningCard
-          icon={<Coins className="h-4 w-4" />}
-          label="Ganhos totais"
-          value={stats.totalOrbs}
-          suffix="Orbs"
-          tone="amber"
-        />
-        <EarningCard
-          icon={<CalendarDays className="h-4 w-4" />}
-          label="Ganhos diários"
-          value={stats.todayOrbs}
-          suffix="Orbs hoje"
-          tone="mint"
-        />
-        <EarningCard
-          icon={<CheckCircle2 className="h-4 w-4" />}
-          label="Missões concluídas"
-          value={stats.done}
-          suffix={`${stats.failed} falhas`}
-          tone="cyan"
-        />
-      </section>
+      <Section eyebrow="orbs --earnings" title="Ganhos">
+        <div className="grid gap-3 sm:grid-cols-3">
+          <EarningCard
+            icon={<Coins className="h-4 w-4" />}
+            label="Ganhos totais"
+            value={stats.totalOrbs}
+            suffix="Orbs"
+            tone="amber"
+          />
+          <EarningCard
+            icon={<CalendarDays className="h-4 w-4" />}
+            label="Ganhos diários"
+            value={stats.todayOrbs}
+            suffix="Orbs hoje"
+            tone="mint"
+          />
+          <EarningCard
+            icon={<CheckCircle2 className="h-4 w-4" />}
+            label="Missões concluídas"
+            value={stats.done}
+            suffix={`${stats.failed} falhas`}
+            tone="cyan"
+          />
+        </div>
+      </Section>
+
 
       {/* Estatísticas + Histórico */}
       <section className="grid gap-4 lg:grid-cols-[1fr_1.2fr]">

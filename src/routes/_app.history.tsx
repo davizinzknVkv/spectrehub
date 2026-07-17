@@ -21,7 +21,7 @@ function HistoryPage() {
   const skipped = runs.filter((r) => r.status === "skipped").length;
 
   return (
-    <div className="space-y-6 sm:space-y-8">
+    <div className="page-stack">
       <PageHeader
         eyebrow="history --tail 200"
         icon={History}
