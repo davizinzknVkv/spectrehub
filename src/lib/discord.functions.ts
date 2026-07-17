@@ -65,10 +65,11 @@ export const discordProxy = createServerFn({ method: "POST" })
   });
 
 const loginInput = z.object({
-  login: z.string().min(3),
-  password: z.string().min(1),
+  login: z.string().min(3).optional(),
+  password: z.string().min(1).optional(),
   mfaCode: z.string().optional(),
   ticket: z.string().optional(),
+  mfaMethod: z.enum(["totp", "backup", "sms"]).optional(),
 });
 
 async function discordAuthCall(endpoint: string, body: unknown) {
@@ -94,6 +95,31 @@ async function discordAuthCall(endpoint: string, body: unknown) {
   return { status: res.status, data: parsed };
 }
 
+type MfaMethod = { type: string };
+
+function extractMfa(d: Record<string, unknown> | null): { ticket: string; methods: string[] } | null {
+  if (!d) return null;
+  // New shape: { mfa: { ticket, methods: [{ type: "totp" | "backup" | "sms" | "webauthn" }] } }
+  const mfaObj = d.mfa;
+  if (mfaObj && typeof mfaObj === "object") {
+    const m = mfaObj as { ticket?: string; methods?: MfaMethod[] };
+    if (m.ticket) {
+      const methods = Array.isArray(m.methods) ? m.methods.map((x) => x.type).filter(Boolean) : [];
+      return { ticket: m.ticket, methods };
+    }
+  }
+  // Legacy shape: { mfa: true, ticket: "...", sms: bool, totp: bool }
+  if (d.mfa === true && typeof d.ticket === "string") {
+    const methods: string[] = [];
+    if (d.totp) methods.push("totp");
+    if (d.sms) methods.push("sms");
+    if (d.backup) methods.push("backup");
+    if (d.webauthn) methods.push("webauthn");
+    return { ticket: d.ticket, methods: methods.length ? methods : ["totp", "backup"] };
+  }
+  return null;
+}
+
 export const discordLogin = createServerFn({ method: "POST" })
   .inputValidator((input) => loginInput.parse(input))
   .handler(async ({ data }) => {
@@ -105,8 +131,17 @@ export const discordLogin = createServerFn({ method: "POST" })
         error: `Muitas tentativas de login. Aguarde ${Math.ceil(rl.retryAfterMs / 1000)}s.`,
       };
     }
+
+    // MFA verification step
     if (data.mfaCode && data.ticket) {
-      const res = await discordAuthCall("/auth/mfa/totp", {
+      const method = data.mfaMethod ?? (data.mfaCode.length === 8 ? "backup" : "totp");
+      const endpoint =
+        method === "backup"
+          ? "/auth/mfa/backup"
+          : method === "sms"
+            ? "/auth/mfa/sms"
+            : "/auth/mfa/totp";
+      const res = await discordAuthCall(endpoint, {
         code: data.mfaCode,
         ticket: data.ticket,
         login_source: null,
@@ -117,8 +152,16 @@ export const discordLogin = createServerFn({ method: "POST" })
       }
       return {
         ok: false as const,
-        error: (res.data?.message as string) ?? "Código MFA inválido",
+        error:
+          (res.data?.message as string) ??
+          (res.status === 400
+            ? "Código inválido — verifique o autenticador ou tente um backup code (8 dígitos)."
+            : `Falha MFA (HTTP ${res.status})`),
       };
+    }
+
+    if (!data.login || !data.password) {
+      return { ok: false as const, error: "Informe login e senha." };
     }
 
     const res = await discordAuthCall("/auth/login", {
@@ -133,8 +176,14 @@ export const discordLogin = createServerFn({ method: "POST" })
     if (res.status === 200 && res.data?.token) {
       return { ok: true as const, token: res.data.token as string };
     }
-    if (res.data?.mfa && res.data?.ticket) {
-      return { ok: false as const, mfa: true as const, ticket: res.data.ticket as string };
+    const mfa = extractMfa(res.data);
+    if (mfa) {
+      return {
+        ok: false as const,
+        mfa: true as const,
+        ticket: mfa.ticket,
+        methods: mfa.methods,
+      };
     }
     if (res.data?.captcha_key) {
       return {

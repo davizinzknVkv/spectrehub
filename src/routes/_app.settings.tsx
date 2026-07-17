@@ -172,9 +172,14 @@ function EmailLoginForm({ onLogged }: { onLogged: () => void }) {
   const [password, setPassword] = useState("");
   const [showPw, setShowPw] = useState(false);
   const [mfaTicket, setMfaTicket] = useState<string | null>(null);
+  const [mfaMethods, setMfaMethods] = useState<string[]>([]);
+  const [mfaMethod, setMfaMethod] = useState<"totp" | "backup" | "sms">("totp");
   const [mfaCode, setMfaCode] = useState("");
   const [loading, setLoading] = useState(false);
   const [captchaToken, setCaptchaToken] = useState<string | null>(null);
+
+  const codeMaxLen = mfaMethod === "backup" ? 8 : 6;
+  const codeMinLen = mfaMethod === "backup" ? 8 : 6;
 
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -196,7 +201,7 @@ function EmailLoginForm({ onLogged }: { onLogged: () => void }) {
       }
       const res = await discordLogin({
         data: mfaTicket
-          ? { login, password, mfaCode, ticket: mfaTicket }
+          ? { mfaCode, ticket: mfaTicket, mfaMethod }
           : { login, password },
       });
       if (res.ok) {
@@ -207,13 +212,22 @@ function EmailLoginForm({ onLogged }: { onLogged: () => void }) {
         );
         setPassword("");
         setMfaTicket(null);
+        setMfaMethods([]);
         setMfaCode("");
         onLogged();
         return;
       }
       if ("mfa" in res && res.mfa && res.ticket) {
         setMfaTicket(res.ticket);
-        toast.message("Código de 2 fatores necessário");
+        const methods = (res as { methods?: string[] }).methods ?? ["totp"];
+        const usable = methods.filter((m) => m === "totp" || m === "backup" || m === "sms");
+        setMfaMethods(usable.length ? usable : ["totp"]);
+        setMfaMethod(
+          (usable.includes("totp") ? "totp" : (usable[0] as "totp" | "backup" | "sms")) ?? "totp",
+        );
+        toast.message("Autenticação de 2 fatores necessária", {
+          description: "Digite o código do seu app autenticador ou um backup code.",
+        });
         return;
       }
       toast.error(res.error ?? "Falha no login");
@@ -227,12 +241,12 @@ function EmailLoginForm({ onLogged }: { onLogged: () => void }) {
   return (
     <form
       onSubmit={submit}
-      className="space-y-4 rounded-xl border border-line bg-surface/60 p-4 scanline sm:p-6"
+      className="space-y-4 rounded-xl border border-white/10 bg-white/5 p-4 scanline sm:p-6"
     >
       {!mfaTicket ? (
         <>
           <div>
-            <label className="font-mono text-[11px] uppercase tracking-widest text-ink-dim">
+            <label className="font-mono text-[11px] uppercase tracking-widest text-slate-400">
               email ou telefone
             </label>
             <input
@@ -243,18 +257,18 @@ function EmailLoginForm({ onLogged }: { onLogged: () => void }) {
               value={login}
               onChange={(e) => setLogin(e.target.value)}
               placeholder="voce@exemplo.com"
-              className="mt-2 block w-full rounded-md border border-line bg-background/70 px-3 py-3 text-base text-ink placeholder:text-ink-mute focus:border-cyan focus:outline-none focus:ring-2 focus:ring-cyan/40 sm:text-sm"
+              className="mt-2 block w-full rounded-md border border-white/10 bg-black/40 px-3 py-3 text-base text-white placeholder:text-slate-500 focus:border-[#5865F2] focus:outline-none focus:ring-2 focus:ring-[#5865F2]/40 sm:text-sm"
             />
           </div>
           <div>
             <div className="flex items-center justify-between gap-2">
-              <label className="font-mono text-[11px] uppercase tracking-widest text-ink-dim">
+              <label className="font-mono text-[11px] uppercase tracking-widest text-slate-400">
                 senha
               </label>
               <button
                 type="button"
                 onClick={() => setShowPw((v) => !v)}
-                className="font-mono text-[10px] uppercase tracking-widest text-ink-mute hover:text-cyan"
+                className="font-mono text-[10px] uppercase tracking-widest text-slate-500 hover:text-[#a5b4fc]"
               >
                 {showPw ? "ocultar" : "mostrar"}
               </button>
@@ -266,34 +280,87 @@ function EmailLoginForm({ onLogged }: { onLogged: () => void }) {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="••••••••"
-              className="mt-2 block w-full rounded-md border border-line bg-background/70 px-3 py-3 text-base text-ink placeholder:text-ink-mute focus:border-cyan focus:outline-none focus:ring-2 focus:ring-cyan/40 sm:text-sm"
+              className="mt-2 block w-full rounded-md border border-white/10 bg-black/40 px-3 py-3 text-base text-white placeholder:text-slate-500 focus:border-[#5865F2] focus:outline-none focus:ring-2 focus:ring-[#5865F2]/40 sm:text-sm"
             />
           </div>
         </>
       ) : (
-        <div>
-          <label className="font-mono text-[11px] uppercase tracking-widest text-ink-dim">
-            código 2FA (autenticador)
-          </label>
-          <input
-            type="text"
-            required
-            inputMode="numeric"
-            autoComplete="one-time-code"
-            value={mfaCode}
-            onChange={(e) => setMfaCode(e.target.value.replace(/\D/g, "").slice(0, 8))}
-            placeholder="000000"
-            className="mt-2 block w-full rounded-md border border-line bg-background/70 px-3 py-3 text-center font-mono text-lg tracking-widest text-ink placeholder:text-ink-mute focus:border-cyan focus:outline-none focus:ring-2 focus:ring-cyan/40"
-          />
+        <div className="space-y-3">
+          <div>
+            <div className="font-mono text-[10px] uppercase tracking-[0.3em] text-[#a5b4fc]">
+              ◆ verificação 2fa
+            </div>
+            <p className="mt-1 text-xs text-slate-400">
+              Sua conta tem 2FA ativada. Escolha o método e digite o código para concluir o login.
+            </p>
+          </div>
+
+          {mfaMethods.length > 1 && (
+            <div className="flex flex-wrap gap-1.5 rounded-lg border border-white/10 bg-black/40 p-1">
+              {mfaMethods.map((m) => {
+                const label =
+                  m === "totp" ? "🔐 App autenticador" : m === "backup" ? "🎫 Backup code" : "📱 SMS";
+                const active = mfaMethod === m;
+                return (
+                  <button
+                    key={m}
+                    type="button"
+                    onClick={() => {
+                      setMfaMethod(m as "totp" | "backup" | "sms");
+                      setMfaCode("");
+                    }}
+                    className={`flex-1 rounded-md px-3 py-1.5 font-mono text-[10px] font-semibold uppercase tracking-widest transition ${
+                      active
+                        ? "bg-[#5865F2] text-white"
+                        : "text-slate-400 hover:text-white"
+                    }`}
+                  >
+                    {label}
+                  </button>
+                );
+              })}
+            </div>
+          )}
+
+          <div>
+            <label className="font-mono text-[11px] uppercase tracking-widest text-slate-400">
+              {mfaMethod === "backup"
+                ? "backup code (8 dígitos ou alfanumérico)"
+                : mfaMethod === "sms"
+                  ? "código enviado por sms"
+                  : "código do app autenticador (6 dígitos)"}
+            </label>
+            <input
+              type="text"
+              required
+              inputMode={mfaMethod === "backup" ? "text" : "numeric"}
+              autoComplete="one-time-code"
+              autoFocus
+              value={mfaCode}
+              maxLength={mfaMethod === "backup" ? 12 : 8}
+              onChange={(e) => {
+                const raw = e.target.value;
+                const cleaned =
+                  mfaMethod === "backup"
+                    ? raw.replace(/[^a-zA-Z0-9-]/g, "").slice(0, 12)
+                    : raw.replace(/\D/g, "").slice(0, 8);
+                setMfaCode(cleaned);
+              }}
+              placeholder={mfaMethod === "backup" ? "xxxxxxxx" : "000000"}
+              className="mt-2 block w-full rounded-md border border-white/10 bg-black/40 px-3 py-3 text-center font-mono text-lg tracking-widest text-white placeholder:text-slate-500 focus:border-[#5865F2] focus:outline-none focus:ring-2 focus:ring-[#5865F2]/40"
+            />
+          </div>
+
           <button
             type="button"
             onClick={() => {
               setMfaTicket(null);
+              setMfaMethods([]);
               setMfaCode("");
             }}
-            className="mt-2 font-mono text-[10px] uppercase tracking-widest text-ink-mute hover:text-cyan"
+            className="font-mono text-[10px] uppercase tracking-widest text-slate-500 hover:text-[#a5b4fc]"
           >
-            ← voltar
+            ← voltar para email/senha
           </button>
         </div>
       )}
@@ -309,15 +376,24 @@ function EmailLoginForm({ onLogged }: { onLogged: () => void }) {
         type="submit"
         disabled={
           loading ||
-          (mfaTicket ? mfaCode.length < 6 : !login || !password || !captchaToken)
+          (mfaTicket
+            ? mfaCode.replace(/[^a-zA-Z0-9]/g, "").length < codeMinLen ||
+              mfaCode.replace(/[^a-zA-Z0-9]/g, "").length > codeMaxLen + 4
+            : !login || !password || !captchaToken)
         }
-        className="inline-flex w-full items-center justify-center gap-2 rounded-md bg-cyan px-5 py-3 font-mono text-xs font-semibold uppercase tracking-widest text-primary-foreground transition hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-40"
+        className="inline-flex w-full items-center justify-center gap-2 rounded-md bg-[#5865F2] px-5 py-3 font-mono text-xs font-semibold uppercase tracking-widest text-white transition hover:bg-[#4752c4] disabled:cursor-not-allowed disabled:opacity-40"
       >
-        {loading ? "entrando…" : mfaTicket ? "→ confirmar 2fa" : "→ entrar"}
+        {loading
+          ? "entrando…"
+          : mfaTicket
+            ? mfaMethod === "backup"
+              ? "→ usar backup code"
+              : "→ confirmar 2fa"
+            : "→ entrar"}
       </button>
 
-      <p className="font-mono text-[10px] leading-relaxed text-ink-mute">
-        Se o Discord pedir captcha, use a aba <span className="text-cyan">Token</span> como
+      <p className="font-mono text-[10px] leading-relaxed text-slate-500">
+        Se o Discord pedir captcha, use a aba <span className="text-[#a5b4fc]">Token</span> como
         alternativa.
       </p>
     </form>
