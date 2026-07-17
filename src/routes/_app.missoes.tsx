@@ -206,7 +206,7 @@ function MissoesPage() {
           </div>
         )}
 
-        <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+        <div className="card-grid-lg">
           {quests.map((q) => (
             <MissionCard
               key={q.questId}

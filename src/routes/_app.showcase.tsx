@@ -74,7 +74,7 @@ function ShowcasePage() {
           </div>
         </div>
 
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="card-grid">
           {CARDS.map(({ icon: Icon, title, desc, tone }) => (
             <article
               key={title}

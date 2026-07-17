@@ -108,7 +108,7 @@ function FarmsPage() {
 
 
       <Section eyebrow="status --live" title="Status ao vivo">
-        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="card-grid-sm">
           <BigStat
             icon={<Activity className="h-4 w-4" />}
             label="Status"
@@ -166,7 +166,7 @@ function FarmsPage() {
       )}
 
       <Section eyebrow="orbs --earnings" title="Ganhos">
-        <div className="grid gap-3 sm:grid-cols-3">
+        <div className="card-grid">
           <EarningCard
             icon={<Coins className="h-4 w-4" />}
             label="Ganhos totais"

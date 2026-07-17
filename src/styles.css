@@ -395,6 +395,10 @@
 }
 
 @utility card-surface {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  height: 100%;
   background: color-mix(in oklab, white 3%, transparent);
   border: 1px solid color-mix(in oklab, white 8%, transparent);
   border-radius: 1rem;
@@ -403,6 +407,35 @@
 @media (min-width: 640px) {
   .card-surface { padding: 1.5rem; }
 }
+
+/* Responsive card grids: mobile-first, auto-fit with minmax.
+   Cards stretch to equal height so rows stay aligned. */
+@utility card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr));
+  gap: 1rem;
+  align-items: stretch;
+}
+@media (min-width: 768px) { .card-grid { gap: 1.25rem; } }
+@media (min-width: 1024px) { .card-grid { gap: 1.5rem; } }
+
+@utility card-grid-sm {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 200px), 1fr));
+  gap: 0.75rem;
+  align-items: stretch;
+}
+@media (min-width: 768px) { .card-grid-sm { gap: 1rem; } }
+
+@utility card-grid-lg {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr));
+  gap: 1rem;
+  align-items: stretch;
+}
+@media (min-width: 768px) { .card-grid-lg { gap: 1.5rem; } }
+@media (min-width: 1024px) { .card-grid-lg { gap: 1.75rem; } }
+
 
 @utility card-surface-strong {
   background: color-mix(in oklab, white 5%, transparent);

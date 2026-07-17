@@ -30,7 +30,7 @@ function HistoryPage() {
         description="Salvo apenas neste navegador. Limpar o localStorage apaga o registro."
       />
 
-      <div className="grid gap-3 sm:grid-cols-4">
+      <div className="card-grid-sm">
 
         <Stat label="Total" value={runs.length} tone="text-ink" />
         <Stat label="Concluídas" value={done} tone="text-mint" />
