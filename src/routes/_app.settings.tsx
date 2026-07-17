@@ -6,6 +6,8 @@ import { fetchUserInfo } from "@/lib/quest-runner";
 import { discordLogin } from "@/lib/discord.functions";
 import { verifyTurnstile } from "@/lib/turnstile.functions";
 import { Turnstile } from "@/components/Turnstile";
+import { Hcaptcha } from "@/components/Hcaptcha";
+
 
 export const Route = createFileRoute("/_app/settings")({
   head: () => ({ meta: [{ title: "Login — Neighborshub" }] }),
@@ -177,6 +179,12 @@ function EmailLoginForm({ onLogged }: { onLogged: () => void }) {
   const [mfaCode, setMfaCode] = useState("");
   const [loading, setLoading] = useState(false);
   const [captchaToken, setCaptchaToken] = useState<string | null>(null);
+  const [discordCaptcha, setDiscordCaptcha] = useState<{
+    sitekey: string;
+    rqdata?: string;
+    rqtoken?: string;
+  } | null>(null);
+  const [discordCaptchaToken, setDiscordCaptchaToken] = useState<string | null>(null);
 
   const codeMaxLen = mfaMethod === "backup" ? 8 : 6;
   const codeMinLen = mfaMethod === "backup" ? 8 : 6;
@@ -185,6 +193,10 @@ function EmailLoginForm({ onLogged }: { onLogged: () => void }) {
     e.preventDefault();
     if (!mfaTicket && !captchaToken) {
       toast.error("Complete o captcha antes de entrar");
+      return;
+    }
+    if (!mfaTicket && discordCaptcha && !discordCaptchaToken) {
+      toast.error("Resolva o captcha do Discord");
       return;
     }
     setLoading(true);
@@ -202,7 +214,12 @@ function EmailLoginForm({ onLogged }: { onLogged: () => void }) {
       const res = await discordLogin({
         data: mfaTicket
           ? { mfaCode, ticket: mfaTicket, mfaMethod }
-          : { login, password },
+          : {
+              login,
+              password,
+              captchaKey: discordCaptchaToken ?? undefined,
+              captchaRqtoken: discordCaptcha?.rqtoken,
+            },
       });
       if (res.ok) {
         setCreds({ token: res.token });
@@ -214,6 +231,8 @@ function EmailLoginForm({ onLogged }: { onLogged: () => void }) {
         setMfaTicket(null);
         setMfaMethods([]);
         setMfaCode("");
+        setDiscordCaptcha(null);
+        setDiscordCaptchaToken(null);
         onLogged();
         return;
       }
@@ -225,8 +244,18 @@ function EmailLoginForm({ onLogged }: { onLogged: () => void }) {
         setMfaMethod(
           (usable.includes("totp") ? "totp" : (usable[0] as "totp" | "backup" | "sms")) ?? "totp",
         );
+        setDiscordCaptcha(null);
+        setDiscordCaptchaToken(null);
         toast.message("Autenticação de 2 fatores necessária", {
           description: "Digite o código do seu app autenticador ou um backup code.",
+        });
+        return;
+      }
+      if ("captcha" in res && res.captcha && res.sitekey) {
+        setDiscordCaptcha({ sitekey: res.sitekey, rqdata: res.rqdata, rqtoken: res.rqtoken });
+        setDiscordCaptchaToken(null);
+        toast.message("Captcha do Discord necessário", {
+          description: "Resolva o desafio abaixo e clique em entrar novamente.",
         });
         return;
       }
@@ -237,6 +266,7 @@ function EmailLoginForm({ onLogged }: { onLogged: () => void }) {
       setLoading(false);
     }
   };
+
 
   return (
     <form
@@ -372,6 +402,20 @@ function EmailLoginForm({ onLogged }: { onLogged: () => void }) {
         />
       )}
 
+      {!mfaTicket && discordCaptcha && (
+        <div className="space-y-2 rounded-lg border border-[#5865F2]/30 bg-[#5865F2]/5 p-3">
+          <div className="font-mono text-[10px] uppercase tracking-[0.3em] text-[#a5b4fc]">
+            ◆ captcha do discord
+          </div>
+          <Hcaptcha
+            sitekey={discordCaptcha.sitekey}
+            rqdata={discordCaptcha.rqdata}
+            onVerify={(t) => setDiscordCaptchaToken(t)}
+            onExpire={() => setDiscordCaptchaToken(null)}
+          />
+        </div>
+      )}
+
       <button
         type="submit"
         disabled={
@@ -379,7 +423,10 @@ function EmailLoginForm({ onLogged }: { onLogged: () => void }) {
           (mfaTicket
             ? mfaCode.replace(/[^a-zA-Z0-9]/g, "").length < codeMinLen ||
               mfaCode.replace(/[^a-zA-Z0-9]/g, "").length > codeMaxLen + 4
-            : !login || !password || !captchaToken)
+            : !login ||
+              !password ||
+              !captchaToken ||
+              (discordCaptcha ? !discordCaptchaToken : false))
         }
         className="inline-flex w-full items-center justify-center gap-2 rounded-md bg-[#5865F2] px-5 py-3 font-mono text-xs font-semibold uppercase tracking-widest text-white transition hover:bg-[#4752c4] disabled:cursor-not-allowed disabled:opacity-40"
       >
@@ -393,9 +440,10 @@ function EmailLoginForm({ onLogged }: { onLogged: () => void }) {
       </button>
 
       <p className="font-mono text-[10px] leading-relaxed text-slate-500">
-        Se o Discord pedir captcha, use a aba <span className="text-[#a5b4fc]">Token</span> como
-        alternativa.
+        Se o Discord pedir captcha, resolva o desafio acima. Como alternativa,
+        use a aba <span className="text-[#a5b4fc]">Token</span>.
       </p>
+
     </form>
   );
 }

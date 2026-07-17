@@ -70,7 +70,10 @@ const loginInput = z.object({
   mfaCode: z.string().optional(),
   ticket: z.string().optional(),
   mfaMethod: z.enum(["totp", "backup", "sms"]).optional(),
+  captchaKey: z.string().optional(),
+  captchaRqtoken: z.string().optional(),
 });
+
 
 async function discordAuthCall(endpoint: string, body: unknown) {
   const res = await fetch(`https://discord.com/api/v9${endpoint}`, {
@@ -164,14 +167,17 @@ export const discordLogin = createServerFn({ method: "POST" })
       return { ok: false as const, error: "Informe login e senha." };
     }
 
-    const res = await discordAuthCall("/auth/login", {
+    const loginBody: Record<string, unknown> = {
       login: data.login,
       password: data.password,
       undelete: false,
-      captcha_key: null,
+      captcha_key: data.captchaKey ?? null,
       login_source: null,
       gift_code_sku_id: null,
-    });
+    };
+    if (data.captchaRqtoken) loginBody.captcha_rqtoken = data.captchaRqtoken;
+
+    const res = await discordAuthCall("/auth/login", loginBody);
 
     if (res.status === 200 && res.data?.token) {
       return { ok: true as const, token: res.data.token as string };
@@ -185,14 +191,24 @@ export const discordLogin = createServerFn({ method: "POST" })
         methods: mfa.methods,
       };
     }
-    if (res.data?.captcha_key) {
+    if (res.data?.captcha_key || res.data?.captcha_sitekey) {
+      const sitekey = (res.data.captcha_sitekey as string | undefined) ?? "";
+      const service = (res.data.captcha_service as string | undefined) ?? "hcaptcha";
+      const rqtoken = (res.data.captcha_rqtoken as string | undefined) ?? undefined;
+      const rqdata = (res.data.captcha_rqdata as string | undefined) ?? undefined;
       return {
         ok: false as const,
         captcha: true as const,
-        error:
-          "O Discord pediu captcha para este login. Use o método por token (F12 → Network → authorization) enquanto isso.",
+        sitekey,
+        service,
+        rqtoken,
+        rqdata,
+        error: sitekey
+          ? "O Discord pediu captcha. Resolva o desafio abaixo para continuar."
+          : "O Discord pediu captcha mas não devolveu sitekey. Use o método por token.",
       };
     }
+
     return {
       ok: false as const,
       error: (res.data?.message as string) ?? `Falha no login (HTTP ${res.status})`,
