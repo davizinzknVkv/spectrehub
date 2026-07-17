@@ -55,7 +55,7 @@ function SettingsPage() {
   };
 
   return (
-    <div className="page-stack mx-auto w-full max-w-2xl">
+    <div className="page-stack">
       <PageHeader
         eyebrow="auth --login"
         icon={KeyRound}

@@ -104,7 +104,7 @@ function FakePage() {
   };
 
   return (
-    <div className="page-stack mx-auto max-w-5xl">
+    <div className="page-stack">
       <PageHeader
         eyebrow="utilitário"
         icon={ImagePlus}
