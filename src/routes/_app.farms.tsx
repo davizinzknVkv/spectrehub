@@ -96,7 +96,7 @@ function FarmsPage() {
   const activeMs = running && activeStart ? now - activeStart : 0;
 
   return (
-    <div className="space-y-6 sm:space-y-8">
+    <div className="page-stack">
       <PageHeader
         eyebrow="farms --dashboard"
         icon={Tractor}

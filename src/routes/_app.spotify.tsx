@@ -60,7 +60,7 @@ function SpotifyGenPage() {
 
   if (!isVip) {
     return (
-      <div className="mx-auto max-w-2xl space-y-6 sm:space-y-8">
+      <div className="page-stack mx-auto max-w-2xl">
         <PageHeader
           eyebrow="access --check"
           icon={Music}
@@ -103,7 +103,7 @@ function SpotifyGenPage() {
   }
 
   return (
-    <div className="mx-auto max-w-3xl space-y-6 sm:space-y-8">
+    <div className="page-stack mx-auto max-w-3xl">
       <PageHeader
         eyebrow="spotify --gen premium"
         icon={Music}

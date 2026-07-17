@@ -144,7 +144,7 @@ function NicksGunPage() {
   const progress = total > 0 ? (checked / total) * 100 : 0;
 
   return (
-    <div className="space-y-6 sm:space-y-8">
+    <div className="page-stack">
       <PageHeader
         eyebrow="username sniper"
         icon={Crosshair}
