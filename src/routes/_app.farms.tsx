@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useMemo, useState } from "react";
 import { useQuestStore } from "@/lib/quest-store";
 import { PageHeader } from "@/components/PageHeader";
+import { Section } from "@/components/Section";
 import { PLAN_LIMITS, getGateStatus } from "@/lib/quest-runner";
 import {
   Tractor,
