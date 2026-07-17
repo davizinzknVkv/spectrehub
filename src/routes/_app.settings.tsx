@@ -6,6 +6,8 @@ import { fetchUserInfo } from "@/lib/quest-runner";
 import { discordLogin } from "@/lib/discord.functions";
 import { verifyTurnstile } from "@/lib/turnstile.functions";
 import { Turnstile } from "@/components/Turnstile";
+import { Hcaptcha } from "@/components/Hcaptcha";
+
 
 export const Route = createFileRoute("/_app/settings")({
   head: () => ({ meta: [{ title: "Login — Neighborshub" }] }),
