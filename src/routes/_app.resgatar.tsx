@@ -297,3 +297,51 @@ function RedeemPage() {
     </div>
   );
 }
+
+// Lazy-loads the shop item image when the tile scrolls into view.
+// Falls back to initials on top of the gradient tile.
+function OrbImage({ sku, name }: { sku: string; name: string }) {
+  const [url, setUrl] = useState<string | null | undefined>(() => getCachedShopImage(sku));
+  const [visible, setVisible] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (url !== undefined) return; // already known (hit or miss)
+    const el = ref.current;
+    if (!el) return;
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const e of entries) if (e.isIntersecting) { setVisible(true); io.disconnect(); }
+      },
+      { rootMargin: "200px" },
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, [url]);
+
+  useEffect(() => {
+    if (!visible || url !== undefined) return;
+    let cancel = false;
+    getShopImage(sku).then((u) => { if (!cancel) setUrl(u); });
+    return () => { cancel = true; };
+  }, [visible, sku, url]);
+
+  return (
+    <div ref={ref} className="absolute inset-0 grid place-items-center">
+      {url ? (
+        <img
+          src={url}
+          alt={name}
+          loading="lazy"
+          className="h-full w-full object-contain p-2 drop-shadow-md"
+          onError={() => setUrl(null)}
+        />
+      ) : (
+        <span className="font-mono text-2xl font-bold text-white/90 drop-shadow-md">
+          {initialsOf(name)}
+        </span>
+      )}
+    </div>
+  );
+}
+
