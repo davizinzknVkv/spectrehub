@@ -122,12 +122,13 @@ function AppLayout() {
 
         {/* Main */}
         <main className="min-w-0">
-          <TopBar onOpenMenu={() => setMobileOpen(true)} />
+          <TopBar onOpenMenu={() => setMobileOpen(true)} pathname={pathname} />
           <div className="mx-auto w-full max-w-6xl px-4 pb-10 pt-5 sm:px-6 sm:pt-6 lg:px-8 lg:pb-8 lg:pt-8">
             <Outlet />
           </div>
 
         </main>
+
       </div>
     </div>
   );
@@ -159,7 +160,7 @@ function SidebarBody({
         </div>
       </Link>
 
-      <nav className="flex flex-col gap-5 px-3 pb-3 lg:flex-1">
+      <nav className="flex flex-col gap-2 px-3 pb-3 lg:flex-1">
         {NAV_GROUPS.map((group) => (
           <div key={group.title}>
             <div className="px-3 pb-2 font-mono text-[10px] uppercase tracking-[0.25em] text-slate-500">
@@ -218,7 +219,11 @@ function SidebarBody({
   );
 }
 
-function TopBar({ onOpenMenu }: { onOpenMenu: () => void }) {
+function TopBar({ onOpenMenu, pathname }: { onOpenMenu: () => void; pathname: string }) {
+  const allItems = NAV_GROUPS.flatMap((g) => g.items as readonly { to: string; label: string }[]);
+  const currentLabel = allItems.find((i) => i.to === pathname)?.label;
+
+
   const creds = useQuestStore((s) => s.creds);
   const setCreds = useQuestStore((s) => s.setCreds);
   const [me, setMe] = useState<{ id?: string; username?: string; global_name?: string; avatar?: string | null } | null>(null);
@@ -273,7 +278,16 @@ function TopBar({ onOpenMenu }: { onOpenMenu: () => void }) {
           <div className="hidden lg:block" />
         </div>
 
+        {currentLabel && (
+          <div className="hidden flex-1 justify-center md:flex">
+            <span className="font-mono text-[11px] uppercase tracking-[0.3em] text-slate-500">
+              {currentLabel}
+            </span>
+          </div>
+        )}
+
         <div className="flex items-center gap-3">
+
           <span
             className={`h-2 w-2 rounded-full ${creds ? "bg-emerald-500 pulse-dot" : "bg-amber-500"}`}
             title={creds ? "conectado" : "desconectado"}
