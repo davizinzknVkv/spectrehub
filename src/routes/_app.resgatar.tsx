@@ -1,8 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useQuestStore } from "@/lib/quest-store";
 import { fetchOrbs, purchaseWithOrbs } from "@/lib/quest-runner";
 import { SHOP_ITEMS, type ShopItem } from "@/lib/shop-catalog";
+import { getShopImage, getCachedShopImage } from "@/lib/shop-images";
 import { Gift, Coins, Search, Loader2, X, ShieldCheck, Sparkles } from "lucide-react";
 import { PageHeader } from "@/components/PageHeader";
 
