@@ -65,10 +65,11 @@ export const discordProxy = createServerFn({ method: "POST" })
   });
 
 const loginInput = z.object({
-  login: z.string().min(3),
-  password: z.string().min(1),
+  login: z.string().min(3).optional(),
+  password: z.string().min(1).optional(),
   mfaCode: z.string().optional(),
   ticket: z.string().optional(),
+  mfaMethod: z.enum(["totp", "backup", "sms"]).optional(),
 });
 
 async function discordAuthCall(endpoint: string, body: unknown) {
