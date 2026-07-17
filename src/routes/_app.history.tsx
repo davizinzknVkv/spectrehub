@@ -1,5 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useQuestStore } from "@/lib/quest-store";
+import { PageHeader } from "@/components/PageHeader";
+import { History } from "lucide-react";
 
 export const Route = createFileRoute("/_app/history")({
   head: () => ({ meta: [{ title: "Histórico — Neighborshub" }] }),
