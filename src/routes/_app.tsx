@@ -16,6 +16,7 @@ import {
   ImageIcon,
   Tractor,
   Gift,
+  Crosshair,
 } from "lucide-react";
 
 const DISCORD_INVITE = "https://discord.gg/EMsfMZFyGS";
