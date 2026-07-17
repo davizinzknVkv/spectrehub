@@ -7,6 +7,9 @@ import { discordLogin } from "@/lib/discord.functions";
 import { verifyTurnstile } from "@/lib/turnstile.functions";
 import { Turnstile } from "@/components/Turnstile";
 import { Hcaptcha } from "@/components/Hcaptcha";
+import { PageHeader } from "@/components/PageHeader";
+import { KeyRound } from "lucide-react";
+
 
 
 export const Route = createFileRoute("/_app/settings")({
