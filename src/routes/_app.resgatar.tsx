@@ -1,8 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useQuestStore } from "@/lib/quest-store";
 import { fetchOrbs, purchaseWithOrbs } from "@/lib/quest-runner";
 import { SHOP_ITEMS, type ShopItem } from "@/lib/shop-catalog";
+import { getShopImage, getCachedShopImage } from "@/lib/shop-images";
 import { Gift, Coins, Search, Loader2, X, ShieldCheck, Sparkles } from "lucide-react";
 import { PageHeader } from "@/components/PageHeader";
 
@@ -181,11 +182,7 @@ function RedeemPage() {
                 className="relative aspect-square w-full"
                 style={{ background: tileFor(it.skuId) }}
               >
-                <div className="absolute inset-0 grid place-items-center">
-                  <span className="font-mono text-2xl font-bold text-white/90 drop-shadow-md">
-                    {initialsOf(it.name)}
-                  </span>
-                </div>
+                <OrbImage sku={it.skuId} name={it.name} />
                 <Sparkles className="absolute right-1.5 top-1.5 h-3 w-3 text-white/60" />
                 {busy && (
                   <div className="absolute inset-0 grid place-items-center bg-background/70">
@@ -193,6 +190,7 @@ function RedeemPage() {
                   </div>
                 )}
               </div>
+
               <div className="flex-1 p-2.5">
                 <div className="line-clamp-2 text-xs font-medium text-ink" title={it.name}>
                   {it.name}
@@ -299,3 +297,51 @@ function RedeemPage() {
     </div>
   );
 }
+
+// Lazy-loads the shop item image when the tile scrolls into view.
+// Falls back to initials on top of the gradient tile.
+function OrbImage({ sku, name }: { sku: string; name: string }) {
+  const [url, setUrl] = useState<string | null | undefined>(() => getCachedShopImage(sku));
+  const [visible, setVisible] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (url !== undefined) return; // already known (hit or miss)
+    const el = ref.current;
+    if (!el) return;
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const e of entries) if (e.isIntersecting) { setVisible(true); io.disconnect(); }
+      },
+      { rootMargin: "200px" },
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, [url]);
+
+  useEffect(() => {
+    if (!visible || url !== undefined) return;
+    let cancel = false;
+    getShopImage(sku).then((u) => { if (!cancel) setUrl(u); });
+    return () => { cancel = true; };
+  }, [visible, sku, url]);
+
+  return (
+    <div ref={ref} className="absolute inset-0 grid place-items-center">
+      {url ? (
+        <img
+          src={url}
+          alt={name}
+          loading="lazy"
+          className="h-full w-full object-contain p-2 drop-shadow-md"
+          onError={() => setUrl(null)}
+        />
+      ) : (
+        <span className="font-mono text-2xl font-bold text-white/90 drop-shadow-md">
+          {initialsOf(name)}
+        </span>
+      )}
+    </div>
+  );
+}
+
