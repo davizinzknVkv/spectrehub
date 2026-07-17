@@ -9,6 +9,8 @@ import {
   runQuest,
 } from "@/lib/quest-runner";
 import { useQuestStore, type Quest } from "@/lib/quest-store";
+import { PageHeader } from "@/components/PageHeader";
+import { Target } from "lucide-react";
 import {
   CaptchaModal,
   EmptyState,
