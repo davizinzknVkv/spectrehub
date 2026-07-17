@@ -4,6 +4,7 @@ import { useQuestStore } from "@/lib/quest-store";
 import { fetchOrbs, purchaseWithOrbs } from "@/lib/quest-runner";
 import { SHOP_ITEMS, type ShopItem } from "@/lib/shop-catalog";
 import { Gift, Coins, Search, Loader2, X, ShieldCheck, Sparkles } from "lucide-react";
+import { PageHeader } from "@/components/PageHeader";
 
 export const Route = createFileRoute("/_app/resgatar")({
   head: () => ({ meta: [{ title: "Resgatar Orbs — Neighborshub" }] }),
