@@ -100,18 +100,14 @@ function RedeemPage() {
 
   return (
     <div className="space-y-6 sm:space-y-8">
-      <header>
-        <div className="font-mono text-[10px] uppercase tracking-[0.3em] text-cyan-dim">
-          $ shop --redeem
-        </div>
-        <h1 className="mt-2 flex items-center gap-2 text-2xl font-semibold tracking-tight sm:text-3xl">
-          <Gift className="h-6 w-6 text-cyan" />
-          Resgatar Orbs
-        </h1>
-        <p className="mt-1 text-sm text-ink-dim">
-          Catálogo com {SHOP_ITEMS.length} itens da loja oficial. Compra direto via API do Discord.
-        </p>
-      </header>
+      <PageHeader
+        eyebrow="shop --redeem"
+        icon={Gift}
+        title="Resgatar"
+        highlight="Orbs"
+        description={`Catálogo com ${SHOP_ITEMS.length} itens da loja oficial. Compra direto via API do Discord.`}
+      />
+
 
       {/* Saldo */}
       <section className="flex flex-wrap items-center justify-between gap-4 rounded-xl border border-amber/30 bg-gradient-to-br from-amber/15 to-transparent p-5">
