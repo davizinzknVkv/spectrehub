@@ -47,7 +47,7 @@ const proxyInput = z.object({
 });
 
 export const discordProxy = createServerFn({ method: "POST" })
-  .inputValidator((input) => proxyInput.parse(input))
+  .validator((input) => proxyInput.parse(input))
   .handler(async ({ data }) => {
     const ip = clientIp(getRequest());
     const rl = rateLimit(`proxy:${ip}`, 600, 60_000);
@@ -124,7 +124,7 @@ function extractMfa(d: Record<string, unknown> | null): { ticket: string; method
 }
 
 export const discordLogin = createServerFn({ method: "POST" })
-  .inputValidator((input) => loginInput.parse(input))
+  .validator((input) => loginInput.parse(input))
   .handler(async ({ data }) => {
     const ip = clientIp(getRequest());
     const rl = rateLimit(`login:${ip}`, 5, 60_000);
