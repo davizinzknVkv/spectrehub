@@ -159,7 +159,7 @@ function SidebarBody({
         </div>
       </Link>
 
-      <nav className="flex flex-col gap-5 px-3 pb-3 lg:flex-1">
+      <nav className="flex flex-col gap-2 px-3 pb-3 lg:flex-1">
         {NAV_GROUPS.map((group) => (
           <div key={group.title}>
             <div className="px-3 pb-2 font-mono text-[10px] uppercase tracking-[0.25em] text-slate-500">
