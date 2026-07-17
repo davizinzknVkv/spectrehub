@@ -43,6 +43,7 @@ const NAV_GROUPS = [
   {
     title: "Utilitários",
     items: [
+      { to: "/nicksgun", label: "Nicks-Gun", icon: Crosshair },
       { to: "/clone", label: "Clonar Discord", icon: Copy },
       { to: "/spotify", label: "Gerador Spotify", icon: Music },
       { to: "/fake", label: "Foto Fake", icon: ImageIcon },
