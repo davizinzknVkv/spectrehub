@@ -48,14 +48,14 @@ function ClonePage() {
 
   return (
     <div className="space-y-6">
-      <div>
-        <h1 className="text-2xl font-semibold tracking-tight text-ink sm:text-3xl">
-          Clonar <span className="text-cyan">Discord</span>
-        </h1>
-        <p className="mt-1 text-sm text-ink-dim">
-          Selecione um servidor para clonar canais, cargos e categorias.
-        </p>
-      </div>
+      <PageHeader
+        eyebrow="discord --clone"
+        icon={Copy}
+        title="Clonar"
+        highlight="Discord"
+        description="Selecione um servidor para clonar canais, cargos e categorias."
+      />
+
 
       <div className="grid grid-cols-1 gap-3 sm:grid-cols-[1fr_auto] sm:items-center">
         <div className="relative">
