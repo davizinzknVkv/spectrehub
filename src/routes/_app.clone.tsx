@@ -4,6 +4,7 @@ import { toast } from "sonner";
 import { fetchGuilds, type Guild } from "@/lib/quest-runner";
 import { useQuestStore } from "@/lib/quest-store";
 import { Copy, Search } from "lucide-react";
+import { PageHeader } from "@/components/PageHeader";
 
 export const Route = createFileRoute("/_app/clone")({
   head: () => ({ meta: [{ title: "Clonar Discord — Neighborshub" }] }),
