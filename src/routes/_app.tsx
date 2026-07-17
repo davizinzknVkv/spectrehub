@@ -3,6 +3,14 @@ import { useEffect, useState } from "react";
 
 import { useQuestStore } from "@/lib/quest-store";
 import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import {
   LayoutDashboard,
   Target,
   History,
@@ -17,6 +25,7 @@ import {
   Tractor,
   Gift,
   Crosshair,
+  UserRound,
 } from "lucide-react";
 
 const DISCORD_INVITE = "https://discord.gg/EMsfMZFyGS";
