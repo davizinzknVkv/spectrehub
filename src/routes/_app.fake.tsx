@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import { toast } from "sonner";
 import { Download, ImagePlus, RefreshCw } from "lucide-react";
+import { PageHeader } from "@/components/PageHeader";
 
 export const Route = createFileRoute("/_app/fake")({
   head: () => ({ meta: [{ title: "Foto Fake — Neighborshub" }] }),
@@ -104,17 +105,14 @@ function FakePage() {
 
   return (
     <div className="mx-auto flex max-w-5xl flex-col gap-6">
-      <header className="flex flex-col gap-1">
-        <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-purple">
-          utilitário
-        </span>
-        <h1 className="text-2xl font-semibold tracking-tight text-ink sm:text-3xl">
-          Criador de foto <span className="text-cyan">fake</span>
-        </h1>
-        <p className="text-sm text-ink-dim">
-          Monta um print estilo mensagem do Discord — só troll, use com juízo.
-        </p>
-      </header>
+      <PageHeader
+        eyebrow="utilitário"
+        icon={ImagePlus}
+        title="Criador de foto"
+        highlight="fake"
+        description="Monta um print estilo mensagem do Discord — só troll, use com juízo."
+      />
+
 
       <div className="grid gap-6 lg:grid-cols-[1fr_1.2fr]">
         {/* Form */}

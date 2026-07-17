@@ -3,6 +3,7 @@ import { useMemo, useState } from "react";
 import { toast } from "sonner";
 import { Copy, ExternalLink, Music, Lock, Sparkles } from "lucide-react";
 import { useQuestStore } from "@/lib/quest-store";
+import { PageHeader } from "@/components/PageHeader";
 
 export const Route = createFileRoute("/_app/spotify")({
   head: () => ({
@@ -104,20 +105,14 @@ function SpotifyGenPage() {
 
   return (
     <div className="mx-auto max-w-3xl space-y-6">
-      <div>
-        <div className="font-mono text-[10px] uppercase tracking-[0.3em] text-[#1DB954]">
-          $ spotify --gen premium.trimestral
-        </div>
-        <h1 className="mt-2 flex items-center gap-3 text-2xl font-semibold tracking-tight text-ink sm:text-3xl">
-          <Music className="h-6 w-6 text-[#1DB954]" />
-          Gerador <span className="text-[#1DB954]">Spotify Premium</span>
-        </h1>
-        <p className="mt-2 text-sm text-ink-dim">
-          Personalize os parâmetros UTM e gere um link de{" "}
-          <span className="text-ink">Spotify Premium Trimestral</span> para
-          divulgação.
-        </p>
-      </div>
+      <PageHeader
+        eyebrow="spotify --gen premium"
+        icon={Music}
+        title="Gerador"
+        highlight="Spotify Premium"
+        description="Personalize os parâmetros UTM e gere um link de Spotify Premium Trimestral para divulgação."
+      />
+
 
       <div className="flex flex-wrap gap-2">
         {PRESETS.map((p) => (

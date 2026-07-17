@@ -1,5 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useQuestStore } from "@/lib/quest-store";
+import { PageHeader } from "@/components/PageHeader";
+import { History } from "lucide-react";
 
 export const Route = createFileRoute("/_app/history")({
   head: () => ({ meta: [{ title: "Histórico — Neighborshub" }] }),
@@ -20,19 +22,16 @@ function HistoryPage() {
 
   return (
     <div className="space-y-6">
-      <div>
-        <div className="font-mono text-[10px] uppercase tracking-[0.3em] text-cyan-dim">
-          $ history --tail 200
-        </div>
-        <h1 className="mt-2 text-2xl font-semibold tracking-tight sm:text-3xl">
-          Histórico local
-        </h1>
-        <p className="mt-2 max-w-lg text-sm text-ink-dim">
-          Salvo apenas neste navegador. Limpar o localStorage apaga o registro.
-        </p>
-      </div>
+      <PageHeader
+        eyebrow="history --tail 200"
+        icon={History}
+        title="Histórico"
+        highlight="local"
+        description="Salvo apenas neste navegador. Limpar o localStorage apaga o registro."
+      />
 
       <div className="grid gap-3 sm:grid-cols-4">
+
         <Stat label="Total" value={runs.length} tone="text-ink" />
         <Stat label="Concluídas" value={done} tone="text-mint" />
         <Stat label="Falhas" value={failed} tone="text-rose" />
