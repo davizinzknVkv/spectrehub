@@ -377,6 +377,65 @@
     0 20px 60px -20px color-mix(in oklab, var(--purple) 60%, transparent);
 }
 
+/* ── Shared page primitives ─────────────────────────────────────────── */
+
+@utility page-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+@media (min-width: 640px) {
+  .page-stack { gap: 2rem; }
+}
+
+@utility section-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+@utility card-surface {
+  background: color-mix(in oklab, white 3%, transparent);
+  border: 1px solid color-mix(in oklab, white 8%, transparent);
+  border-radius: 1rem;
+  padding: 1.25rem;
+}
+@media (min-width: 640px) {
+  .card-surface { padding: 1.5rem; }
+}
+
+@utility card-surface-strong {
+  background: color-mix(in oklab, white 5%, transparent);
+  border: 1px solid color-mix(in oklab, white 10%, transparent);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  box-shadow: 0 20px 60px -30px color-mix(in oklab, var(--purple) 45%, transparent);
+}
+
+@utility section-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: color-mix(in oklab, white 45%, transparent);
+}
+
+@utility section-title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: white;
+}
+@media (min-width: 640px) {
+  .section-title { font-size: 1.25rem; }
+}
+
+@utility section-sub {
+  font-size: 0.875rem;
+  color: color-mix(in oklab, white 60%, transparent);
+}
+
+
 @media (prefers-reduced-motion: reduce) {
   .aurora-bg::before,
   .aurora-bg::after,
