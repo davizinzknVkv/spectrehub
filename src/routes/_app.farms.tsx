@@ -96,18 +96,14 @@ function FarmsPage() {
 
   return (
     <div className="space-y-6 sm:space-y-8">
-      <header>
-        <div className="font-mono text-[10px] uppercase tracking-[0.3em] text-cyan-dim">
-          $ farms --dashboard
-        </div>
-        <h1 className="mt-2 flex items-center gap-2 text-2xl font-semibold tracking-tight sm:text-3xl">
-          <Tractor className="h-6 w-6 text-cyan" />
-          Farms
-        </h1>
-        <p className="mt-1 text-sm text-ink-dim">
-          Painel dedicado das suas farms de missões. Dados locais deste navegador.
-        </p>
-      </header>
+      <PageHeader
+        eyebrow="farms --dashboard"
+        icon={Tractor}
+        title="Farms"
+        highlight="ativas"
+        description="Painel dedicado das suas farms de missões. Dados locais deste navegador."
+      />
+
 
       {/* Status live */}
       <section className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
