@@ -3,6 +3,7 @@ import { useMemo, useState } from "react";
 import { toast } from "sonner";
 import { Copy, ExternalLink, Music, Lock, Sparkles } from "lucide-react";
 import { useQuestStore } from "@/lib/quest-store";
+import { PageHeader } from "@/components/PageHeader";
 
 export const Route = createFileRoute("/_app/spotify")({
   head: () => ({
