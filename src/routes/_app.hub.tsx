@@ -1,5 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { memo, useEffect, useMemo, useRef, useState } from "react";
+import nghcLogo from "@/assets/nghc-logo.png.asset.json";
+import { ArrowRight, Sparkles, Zap, Gift } from "lucide-react";
+
 import { toast } from "sonner";
 import {
   fetchUserInfoDetailed,
@@ -189,27 +192,244 @@ function HubPage() {
 
   if (!creds) {
     return (
-      <div className="mx-auto max-w-2xl">
-        <div className="relative overflow-hidden rounded-xl border border-amber-400/30 bg-white/5 p-8">
-          <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-amber to-transparent" />
-          <div className="font-mono text-[10px] uppercase tracking-[0.3em] text-amber-300">
-            $ status --token
+      <div className="space-y-14 sm:space-y-20">
+        {/* Hero — mesmo estilo da home */}
+        <section className="pt-2">
+          <div className="grid items-center gap-10 md:grid-cols-[1.1fr_1fr]">
+            <div>
+              <div className="inline-flex items-center gap-2 rounded-full border border-[#5865F2]/30 bg-[#5865F2]/10 px-3 py-1 font-mono text-[10px] uppercase tracking-widest text-[#a5b4fc]">
+                <Sparkles className="h-3 w-3" /> bem-vindo ao hub
+              </div>
+              <h1 className="mt-4 text-5xl font-black leading-[1.05] tracking-tight sm:text-6xl md:text-7xl">
+                Conecte seu Discord
+                <br />
+                <span className="text-[#5865F2]">e comece a farmar.</span>
+              </h1>
+              <p className="mt-5 max-w-md text-sm leading-relaxed text-slate-400 sm:text-base">
+                Cole seu token ou faça login por email — o Neighborshub roda as missões em segundo
+                plano e você só coleta os Orbs. Fica tudo salvo no seu navegador.
+              </p>
+
+              <div className="mt-8 flex flex-wrap gap-3">
+                <Link
+                  to="/settings"
+                  className="inline-flex items-center gap-2 rounded-md bg-[#5865F2] px-6 py-3 font-mono text-xs font-bold uppercase tracking-widest text-white shadow-lg shadow-indigo-500/30 transition hover:bg-[#4752c4]"
+                >
+                  Configurar token <ArrowRight className="h-3.5 w-3.5" />
+                </Link>
+                <Link
+                  to="/settings"
+                  className="inline-flex items-center gap-2 rounded-md border border-[#5865F2]/40 bg-[#5865F2]/10 px-6 py-3 font-mono text-xs font-bold uppercase tracking-widest text-white backdrop-blur transition hover:border-[#5865F2]/70 hover:bg-[#5865F2]/20"
+                >
+                  Login por email
+                </Link>
+              </div>
+
+              <div className="mt-8 font-mono text-[10px] uppercase tracking-[0.25em] text-slate-500">
+                ◆ o token fica só no seu navegador (localStorage)
+              </div>
+            </div>
+
+            {/* Logo mark com órbitas + raio, igual à home */}
+            <div className="relative flex items-center justify-center">
+              <div
+                aria-hidden
+                className="pointer-events-none absolute inset-0 -z-10"
+                style={{
+                  background:
+                    "radial-gradient(400px 300px at 50% 50%, rgba(88,101,242,0.35), transparent 65%)",
+                }}
+              />
+              <div
+                aria-hidden
+                className="pointer-events-none absolute inset-0 grid place-items-center"
+              >
+                <div
+                  className="h-[110%] w-[110%] rounded-full border border-[#a78bfa]/15"
+                  style={{ animation: "hub-spin-slow 28s linear infinite" }}
+                />
+                <div
+                  className="absolute h-[85%] w-[85%] rounded-full border border-[#5865F2]/20"
+                  style={{ animation: "hub-spin-slow 22s linear infinite reverse" }}
+                />
+                {[0, 1, 2, 3, 4].map((i) => (
+                  <span
+                    key={i}
+                    className="absolute h-1 w-1 rounded-full bg-[#c4b5fd]"
+                    style={{
+                      boxShadow: "0 0 12px 2px #a78bfa",
+                      top: `${20 + i * 12}%`,
+                      left: `${15 + i * 15}%`,
+                      animation: `hub-spark ${3 + i * 0.6}s ease-in-out ${i * 0.4}s infinite`,
+                    }}
+                  />
+                ))}
+              </div>
+
+              <div className="relative text-center">
+                <svg
+                  aria-hidden
+                  viewBox="0 0 100 200"
+                  className="pointer-events-none absolute -top-16 left-1/2 -z-[1] h-56 w-28 -translate-x-1/2 sm:h-72 sm:w-36 md:-top-24 md:h-96 md:w-48"
+                  style={{ animation: "hub-bolt 3.2s ease-in-out infinite" }}
+                >
+                  <defs>
+                    <linearGradient id="hub-bolt-grad" x1="50%" y1="0%" x2="50%" y2="100%">
+                      <stop offset="0%" stopColor="#ffffff" />
+                      <stop offset="35%" stopColor="#c4b5fd" />
+                      <stop offset="100%" stopColor="#5865F2" />
+                    </linearGradient>
+                  </defs>
+                  <path
+                    d="M62 4 L28 96 L48 96 L34 168 L74 74 L52 74 L66 4 Z"
+                    fill="url(#hub-bolt-grad)"
+                    stroke="#e9d5ff"
+                    strokeWidth="0.8"
+                  />
+                </svg>
+                <div
+                  aria-hidden
+                  className="pointer-events-none absolute left-1/2 top-6 h-16 w-16 -translate-x-1/2 rounded-full sm:top-10 sm:h-24 sm:w-24 md:h-32 md:w-32"
+                  style={{
+                    background:
+                      "radial-gradient(circle, rgba(196,181,253,0.85), rgba(139,92,246,0.35) 45%, transparent 70%)",
+                    filter: "blur(6px)",
+                    animation: "hub-impact 3.2s ease-in-out infinite",
+                  }}
+                />
+                <img
+                  src={nghcLogo.url}
+                  alt="NGHC"
+                  className="relative mx-auto h-40 w-40 object-contain sm:h-56 sm:w-56 md:h-72 md:w-72"
+                  style={{
+                    filter:
+                      "drop-shadow(0 0 30px rgba(167,139,250,0.55)) drop-shadow(0 20px 60px rgba(88,101,242,0.55))",
+                  }}
+                />
+                <div className="mt-3 font-mono text-[10px] uppercase tracking-[0.4em] text-slate-500">
+                  neighborshub
+                </div>
+              </div>
+
+              <style>{`
+                @keyframes hub-bolt {
+                  0%, 100% { opacity: 0; transform: translate(-50%, -12px) scale(0.9); }
+                  6%       { opacity: 1; transform: translate(-50%, 0) scale(1.05); }
+                  10%      { opacity: 0.35; }
+                  14%      { opacity: 1; transform: translate(-50%, 2px) scale(1); }
+                  22%      { opacity: 0; }
+                  92%      { opacity: 0; }
+                }
+                @keyframes hub-impact {
+                  0%, 100% { opacity: 0; transform: translate(-50%, 0) scale(0.6); }
+                  8%       { opacity: 1; transform: translate(-50%, 0) scale(1.15); }
+                  20%      { opacity: 0; transform: translate(-50%, 0) scale(1.4); }
+                }
+                @keyframes hub-spin-slow { to { transform: rotate(360deg); } }
+                @keyframes hub-spark {
+                  0%, 100% { transform: translate(0, 0); opacity: 0.4; }
+                  50%      { transform: translate(6px, -8px); opacity: 1; }
+                }
+                @media (prefers-reduced-motion: reduce) {
+                  svg[viewBox="0 0 100 200"],
+                  [style*="hub-impact"],
+                  [style*="hub-spin-slow"],
+                  [style*="hub-spark"] { animation: none !important; }
+                }
+              `}</style>
+            </div>
           </div>
-          <h2 className="mt-3 text-2xl font-semibold text-white">Nenhum token configurado</h2>
-          <p className="mt-2 max-w-md text-sm leading-relaxed text-slate-400">
-            Cole seu token do Discord para o hub começar a executar missões. Ele fica salvo apenas
-            no seu navegador (localStorage).
-          </p>
-          <Link
-            to="/settings"
-            className="mt-6 inline-flex items-center gap-2 rounded-md bg-[#5865F2] px-4 py-2.5 font-mono text-xs font-semibold uppercase tracking-widest text-primary-foreground transition hover:brightness-110"
-          >
-            → configurar token
-          </Link>
-        </div>
+
+          {/* Stat row estilo home */}
+          <div className="mt-14 grid gap-6 border-y border-white/10 py-8 sm:grid-cols-3">
+            {[
+              { value: "240+", label: "quests suportadas" },
+              { value: "100+", label: "membros ativos" },
+              { value: "0.18ms", label: "latência média" },
+            ].map((s) => (
+              <div key={s.label} className="px-2">
+                <div className="text-4xl font-black tracking-tight text-white sm:text-5xl">
+                  {s.value.includes("ms") ? (
+                    <>
+                      {s.value.replace("ms", "")}
+                      <span className="text-[#5865F2]">ms</span>
+                    </>
+                  ) : (
+                    s.value
+                  )}
+                </div>
+                <div className="mt-2 font-mono text-[10px] uppercase tracking-[0.25em] text-slate-500">
+                  {s.label}
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Status --token: aviso destacado igual à home */}
+        <section>
+          <div className="inline-flex items-center gap-2 rounded-full border border-amber-400/30 bg-amber-400/10 px-3 py-1 font-mono text-[10px] uppercase tracking-widest text-amber-300">
+            <Zap className="h-3 w-3" /> status --token
+          </div>
+          <div className="mt-4 grid gap-8 md:grid-cols-[1.1fr_1fr] md:items-center">
+            <div>
+              <h2 className="text-4xl font-bold leading-tight tracking-tight sm:text-5xl">
+                Nenhum token <span className="text-[#5865F2]">configurado</span>
+              </h2>
+              <p className="mt-4 max-w-md text-sm leading-relaxed text-slate-400">
+                Para o hub começar a executar missões, precisamos do seu token do Discord. Ele fica
+                salvo <span className="text-white">apenas no seu navegador</span> — nunca sai
+                daqui.
+              </p>
+              <Link
+                to="/settings"
+                className="mt-6 inline-flex items-center gap-2 rounded-md bg-[#5865F2] px-6 py-3 font-mono text-xs font-bold uppercase tracking-widest text-white shadow-lg shadow-indigo-500/30 transition hover:bg-[#4752c4]"
+              >
+                → configurar agora
+              </Link>
+            </div>
+            <div className="grid gap-3">
+              {[
+                {
+                  icon: Sparkles,
+                  title: "Detecção automática",
+                  desc: "Lista todas as quests ativas do seu Discord.",
+                },
+                {
+                  icon: Zap,
+                  title: "Execução em fila",
+                  desc: "Run all respeita cooldowns e roda uma atrás da outra.",
+                },
+                {
+                  icon: Gift,
+                  title: "Farm de Orbs",
+                  desc: "Barra por missão, log e histórico persistido.",
+                },
+              ].map((f) => {
+                const Icon = f.icon;
+                return (
+                  <div
+                    key={f.title}
+                    className="flex items-start gap-3 rounded-xl border border-white/10 bg-white/5 p-4 backdrop-blur transition hover:border-[#5865F2]/40"
+                  >
+                    <div className="grid h-9 w-9 shrink-0 place-items-center rounded-lg border border-[#5865F2]/30 bg-[#5865F2]/10 text-[#a5b4fc]">
+                      <Icon className="h-4 w-4" />
+                    </div>
+                    <div className="min-w-0">
+                      <div className="text-sm font-semibold text-white">{f.title}</div>
+                      <div className="mt-0.5 text-xs text-slate-400">{f.desc}</div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </section>
       </div>
     );
   }
+
+
 
 
   return (
