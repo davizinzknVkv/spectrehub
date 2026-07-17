@@ -2,7 +2,7 @@
 // Uses the authenticated discord proxy through quest-runner's `call`-equivalent
 // by piggybacking on the already-imported functions in quest-runner.ts.
 
-import { discordProxy } from "@/lib/discord-proxy.functions";
+import { discordProxy } from "@/lib/discord.functions";
 import { useQuestStore } from "@/lib/quest-store";
 
 const CACHE_KEY = "nhc.shop.images.v1";
