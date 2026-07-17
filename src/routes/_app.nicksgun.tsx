@@ -3,6 +3,7 @@ import { useCallback, useMemo, useRef, useState } from "react";
 import { toast } from "sonner";
 import { Copy, Crosshair, Loader2, Play, Square, ExternalLink, Trash2 } from "lucide-react";
 import { checkDiscordUsername } from "@/lib/nicks.functions";
+import { PageHeader } from "@/components/PageHeader";
 
 export const Route = createFileRoute("/_app/nicksgun")({
   head: () => ({ meta: [{ title: "Nicks-Gun — Neighborshub" }] }),
