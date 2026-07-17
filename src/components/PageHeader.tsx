@@ -12,7 +12,7 @@ type Props = {
 
 export function PageHeader({ eyebrow, title, highlight, description, icon: Icon, actions }: Props) {
   return (
-    <header className="relative overflow-hidden rounded-2xl border border-white/[0.06] bg-gradient-to-br from-white/[0.04] to-white/[0.01] p-5 sm:p-7">
+    <header className="relative overflow-hidden rounded-2xl border border-white/[0.08] bg-white/[0.03] p-5 sm:p-6">
       <div
         aria-hidden
         className="pointer-events-none absolute -right-24 -top-24 h-64 w-64 rounded-full opacity-40 blur-3xl"
