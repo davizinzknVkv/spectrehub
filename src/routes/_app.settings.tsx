@@ -53,18 +53,14 @@ function SettingsPage() {
 
   return (
     <div className="mx-auto w-full max-w-2xl space-y-6">
-      <div>
-        <div className="font-mono text-[10px] uppercase tracking-[0.3em] text-cyan-dim">
-          $ auth --login
-        </div>
-        <h1 className="mt-2 text-2xl font-semibold tracking-tight sm:text-3xl">
-          Entrar na sua conta
-        </h1>
-        <p className="mt-2 max-w-lg text-sm leading-relaxed text-ink-dim">
-          Escolha como quer logar. Fica salvo apenas no seu navegador (localStorage) e só é enviado
-          para o Discord via proxy deste site.
-        </p>
-      </div>
+      <PageHeader
+        eyebrow="auth --login"
+        icon={KeyRound}
+        title="Entrar na sua"
+        highlight="conta"
+        description="Escolha como quer logar. Fica salvo apenas no seu navegador (localStorage) e só é enviado para o Discord via proxy deste site."
+      />
+
 
       {creds && (
         <div className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-3 rounded-xl border border-mint/30 bg-mint/[0.06] px-3 py-3 sm:px-4">
