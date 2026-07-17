@@ -402,6 +402,20 @@ function EmailLoginForm({ onLogged }: { onLogged: () => void }) {
         />
       )}
 
+      {!mfaTicket && discordCaptcha && (
+        <div className="space-y-2 rounded-lg border border-[#5865F2]/30 bg-[#5865F2]/5 p-3">
+          <div className="font-mono text-[10px] uppercase tracking-[0.3em] text-[#a5b4fc]">
+            ◆ captcha do discord
+          </div>
+          <Hcaptcha
+            sitekey={discordCaptcha.sitekey}
+            rqdata={discordCaptcha.rqdata}
+            onVerify={(t) => setDiscordCaptchaToken(t)}
+            onExpire={() => setDiscordCaptchaToken(null)}
+          />
+        </div>
+      )}
+
       <button
         type="submit"
         disabled={
@@ -409,7 +423,10 @@ function EmailLoginForm({ onLogged }: { onLogged: () => void }) {
           (mfaTicket
             ? mfaCode.replace(/[^a-zA-Z0-9]/g, "").length < codeMinLen ||
               mfaCode.replace(/[^a-zA-Z0-9]/g, "").length > codeMaxLen + 4
-            : !login || !password || !captchaToken)
+            : !login ||
+              !password ||
+              !captchaToken ||
+              (discordCaptcha ? !discordCaptchaToken : false))
         }
         className="inline-flex w-full items-center justify-center gap-2 rounded-md bg-[#5865F2] px-5 py-3 font-mono text-xs font-semibold uppercase tracking-widest text-white transition hover:bg-[#4752c4] disabled:cursor-not-allowed disabled:opacity-40"
       >
@@ -423,9 +440,10 @@ function EmailLoginForm({ onLogged }: { onLogged: () => void }) {
       </button>
 
       <p className="font-mono text-[10px] leading-relaxed text-slate-500">
-        Se o Discord pedir captcha, use a aba <span className="text-[#a5b4fc]">Token</span> como
-        alternativa.
+        Se o Discord pedir captcha, resolva o desafio acima. Como alternativa,
+        use a aba <span className="text-[#a5b4fc]">Token</span>.
       </p>
+
     </form>
   );
 }
