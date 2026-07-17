@@ -42,7 +42,7 @@ const proxyInput = z.object({
   xSuperProperties: z.string().optional(),
   userAgent: z.string().optional(),
   endpoint: z.string().startsWith("/"),
-  method: z.enum(["GET", "POST", "PUT", "DELETE"]).default("GET"),
+  method: z.enum(["GET", "POST", "PUT", "DELETE", "PATCH"]).default("GET"),
   body: z.unknown().optional(),
 });
 

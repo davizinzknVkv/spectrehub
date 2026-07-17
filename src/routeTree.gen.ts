@@ -15,6 +15,7 @@ import { Route as AppSpotifyRouteImport } from './routes/_app.spotify'
 import { Route as AppShowcaseRouteImport } from './routes/_app.showcase'
 import { Route as AppSettingsRouteImport } from './routes/_app.settings'
 import { Route as AppResgatarRouteImport } from './routes/_app.resgatar'
+import { Route as AppNicksgunRouteImport } from './routes/_app.nicksgun'
 import { Route as AppMissoesRouteImport } from './routes/_app.missoes'
 import { Route as AppHubRouteImport } from './routes/_app.hub'
 import { Route as AppHistoryRouteImport } from './routes/_app.history'
@@ -50,6 +51,11 @@ const AppSettingsRoute = AppSettingsRouteImport.update({
 const AppResgatarRoute = AppResgatarRouteImport.update({
   id: '/resgatar',
   path: '/resgatar',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppNicksgunRoute = AppNicksgunRouteImport.update({
+  id: '/nicksgun',
+  path: '/nicksgun',
   getParentRoute: () => AppRoute,
 } as any)
 const AppMissoesRoute = AppMissoesRouteImport.update({
@@ -96,6 +102,7 @@ export interface FileRoutesByFullPath {
   '/history': typeof AppHistoryRoute
   '/hub': typeof AppHubRoute
   '/missoes': typeof AppMissoesRoute
+  '/nicksgun': typeof AppNicksgunRoute
   '/resgatar': typeof AppResgatarRoute
   '/settings': typeof AppSettingsRoute
   '/showcase': typeof AppShowcaseRoute
@@ -110,6 +117,7 @@ export interface FileRoutesByTo {
   '/history': typeof AppHistoryRoute
   '/hub': typeof AppHubRoute
   '/missoes': typeof AppMissoesRoute
+  '/nicksgun': typeof AppNicksgunRoute
   '/resgatar': typeof AppResgatarRoute
   '/settings': typeof AppSettingsRoute
   '/showcase': typeof AppShowcaseRoute
@@ -126,6 +134,7 @@ export interface FileRoutesById {
   '/_app/history': typeof AppHistoryRoute
   '/_app/hub': typeof AppHubRoute
   '/_app/missoes': typeof AppMissoesRoute
+  '/_app/nicksgun': typeof AppNicksgunRoute
   '/_app/resgatar': typeof AppResgatarRoute
   '/_app/settings': typeof AppSettingsRoute
   '/_app/showcase': typeof AppShowcaseRoute
@@ -142,6 +151,7 @@ export interface FileRouteTypes {
     | '/history'
     | '/hub'
     | '/missoes'
+    | '/nicksgun'
     | '/resgatar'
     | '/settings'
     | '/showcase'
@@ -156,6 +166,7 @@ export interface FileRouteTypes {
     | '/history'
     | '/hub'
     | '/missoes'
+    | '/nicksgun'
     | '/resgatar'
     | '/settings'
     | '/showcase'
@@ -171,6 +182,7 @@ export interface FileRouteTypes {
     | '/_app/history'
     | '/_app/hub'
     | '/_app/missoes'
+    | '/_app/nicksgun'
     | '/_app/resgatar'
     | '/_app/settings'
     | '/_app/showcase'
@@ -226,6 +238,13 @@ declare module '@tanstack/react-router' {
       path: '/resgatar'
       fullPath: '/resgatar'
       preLoaderRoute: typeof AppResgatarRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/nicksgun': {
+      id: '/_app/nicksgun'
+      path: '/nicksgun'
+      fullPath: '/nicksgun'
+      preLoaderRoute: typeof AppNicksgunRouteImport
       parentRoute: typeof AppRoute
     }
     '/_app/missoes': {
@@ -287,6 +306,7 @@ interface AppRouteChildren {
   AppHistoryRoute: typeof AppHistoryRoute
   AppHubRoute: typeof AppHubRoute
   AppMissoesRoute: typeof AppMissoesRoute
+  AppNicksgunRoute: typeof AppNicksgunRoute
   AppResgatarRoute: typeof AppResgatarRoute
   AppSettingsRoute: typeof AppSettingsRoute
   AppShowcaseRoute: typeof AppShowcaseRoute
@@ -300,6 +320,7 @@ const AppRouteChildren: AppRouteChildren = {
   AppHistoryRoute: AppHistoryRoute,
   AppHubRoute: AppHubRoute,
   AppMissoesRoute: AppMissoesRoute,
+  AppNicksgunRoute: AppNicksgunRoute,
   AppResgatarRoute: AppResgatarRoute,
   AppSettingsRoute: AppSettingsRoute,
   AppShowcaseRoute: AppShowcaseRoute,

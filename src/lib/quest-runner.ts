@@ -73,7 +73,7 @@ function requireCreds() {
   return creds;
 }
 
-async function call(endpoint: string, method: "GET" | "POST" | "PUT" | "DELETE" = "GET", body?: unknown) {
+async function call(endpoint: string, method: "GET" | "POST" | "PUT" | "DELETE" | "PATCH" = "GET", body?: unknown) {
   const creds = requireCreds();
   const res = await discordProxy({
     data: {
@@ -499,4 +499,61 @@ export async function runAll(quests: Quest[]) {
   s.setActive(null);
   s.setProgress(null);
   s.setRunning(false);
+}
+
+// ============================================================
+// Nicks-Gun: guild members search + nickname change
+// ============================================================
+
+export type GuildMember = {
+  user: {
+    id: string;
+    username: string;
+    global_name?: string | null;
+    discriminator?: string;
+    avatar?: string | null;
+  };
+  nick: string | null;
+};
+
+export async function searchGuildMembers(
+  guildId: string,
+  query = "",
+  limit = 100,
+): Promise<GuildMember[]> {
+  const q = encodeURIComponent(query);
+  const res = await call(
+    `/guilds/${guildId}/members/search?query=${q}&limit=${Math.min(limit, 1000)}`,
+  );
+  if (res.status !== 200 || !Array.isArray(res.data)) return [];
+  return res.data as GuildMember[];
+}
+
+export async function listGuildMembers(
+  guildId: string,
+  after = "0",
+  limit = 1000,
+): Promise<GuildMember[]> {
+  const res = await call(
+    `/guilds/${guildId}/members?limit=${limit}&after=${after}`,
+  );
+  if (res.status !== 200 || !Array.isArray(res.data)) return [];
+  return res.data as GuildMember[];
+}
+
+export async function changeMemberNick(
+  guildId: string,
+  userId: string,
+  nick: string,
+): Promise<{ ok: true } | { ok: false; status: number; message: string }> {
+  const res = await call(`/guilds/${guildId}/members/${userId}`, "PATCH", { nick });
+  if (res.status >= 200 && res.status < 300) return { ok: true };
+  const msg =
+    (res.data as { message?: string } | null)?.message ??
+    (res.status === 403
+      ? "Sem permissão para alterar este nick"
+      : res.status === 401
+        ? "Token inválido"
+        : `Falha (HTTP ${res.status})`);
+  return { ok: false, status: res.status, message: msg };
 }

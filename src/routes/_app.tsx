@@ -16,6 +16,7 @@ import {
   ImageIcon,
   Tractor,
   Gift,
+  Crosshair,
 } from "lucide-react";
 
 const DISCORD_INVITE = "https://discord.gg/EMsfMZFyGS";
@@ -42,6 +43,7 @@ const NAV_GROUPS = [
   {
     title: "Utilitários",
     items: [
+      { to: "/nicksgun", label: "Nicks-Gun", icon: Crosshair },
       { to: "/clone", label: "Clonar Discord", icon: Copy },
       { to: "/spotify", label: "Gerador Spotify", icon: Music },
       { to: "/fake", label: "Foto Fake", icon: ImageIcon },
