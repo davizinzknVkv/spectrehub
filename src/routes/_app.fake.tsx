@@ -104,7 +104,7 @@ function FakePage() {
   };
 
   return (
-    <div className="mx-auto flex max-w-5xl flex-col gap-6">
+    <div className="mx-auto flex max-w-5xl flex-col gap-6 sm:gap-8">
       <PageHeader
         eyebrow="utilitário"
         icon={ImagePlus}

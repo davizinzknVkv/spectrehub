@@ -103,7 +103,7 @@ function SpotifyGenPage() {
   }
 
   return (
-    <div className="mx-auto max-w-3xl space-y-6">
+    <div className="mx-auto max-w-3xl space-y-6 sm:space-y-8">
       <PageHeader
         eyebrow="spotify --gen premium"
         icon={Music}
