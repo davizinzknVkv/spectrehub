@@ -179,6 +179,12 @@ function EmailLoginForm({ onLogged }: { onLogged: () => void }) {
   const [mfaCode, setMfaCode] = useState("");
   const [loading, setLoading] = useState(false);
   const [captchaToken, setCaptchaToken] = useState<string | null>(null);
+  const [discordCaptcha, setDiscordCaptcha] = useState<{
+    sitekey: string;
+    rqdata?: string;
+    rqtoken?: string;
+  } | null>(null);
+  const [discordCaptchaToken, setDiscordCaptchaToken] = useState<string | null>(null);
 
   const codeMaxLen = mfaMethod === "backup" ? 8 : 6;
   const codeMinLen = mfaMethod === "backup" ? 8 : 6;
@@ -187,6 +193,10 @@ function EmailLoginForm({ onLogged }: { onLogged: () => void }) {
     e.preventDefault();
     if (!mfaTicket && !captchaToken) {
       toast.error("Complete o captcha antes de entrar");
+      return;
+    }
+    if (!mfaTicket && discordCaptcha && !discordCaptchaToken) {
+      toast.error("Resolva o captcha do Discord");
       return;
     }
     setLoading(true);
@@ -204,7 +214,12 @@ function EmailLoginForm({ onLogged }: { onLogged: () => void }) {
       const res = await discordLogin({
         data: mfaTicket
           ? { mfaCode, ticket: mfaTicket, mfaMethod }
-          : { login, password },
+          : {
+              login,
+              password,
+              captchaKey: discordCaptchaToken ?? undefined,
+              captchaRqtoken: discordCaptcha?.rqtoken,
+            },
       });
       if (res.ok) {
         setCreds({ token: res.token });
@@ -216,6 +231,8 @@ function EmailLoginForm({ onLogged }: { onLogged: () => void }) {
         setMfaTicket(null);
         setMfaMethods([]);
         setMfaCode("");
+        setDiscordCaptcha(null);
+        setDiscordCaptchaToken(null);
         onLogged();
         return;
       }
@@ -227,8 +244,18 @@ function EmailLoginForm({ onLogged }: { onLogged: () => void }) {
         setMfaMethod(
           (usable.includes("totp") ? "totp" : (usable[0] as "totp" | "backup" | "sms")) ?? "totp",
         );
+        setDiscordCaptcha(null);
+        setDiscordCaptchaToken(null);
         toast.message("Autenticação de 2 fatores necessária", {
           description: "Digite o código do seu app autenticador ou um backup code.",
+        });
+        return;
+      }
+      if ("captcha" in res && res.captcha && res.sitekey) {
+        setDiscordCaptcha({ sitekey: res.sitekey, rqdata: res.rqdata, rqtoken: res.rqtoken });
+        setDiscordCaptchaToken(null);
+        toast.message("Captcha do Discord necessário", {
+          description: "Resolva o desafio abaixo e clique em entrar novamente.",
         });
         return;
       }
@@ -239,6 +266,7 @@ function EmailLoginForm({ onLogged }: { onLogged: () => void }) {
       setLoading(false);
     }
   };
+
 
   return (
     <form
