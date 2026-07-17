@@ -219,7 +219,9 @@ function SidebarBody({
   );
 }
 
-function TopBar({ onOpenMenu }: { onOpenMenu: () => void }) {
+function TopBar({ onOpenMenu, pathname }: { onOpenMenu: () => void; pathname: string }) {
+  const currentLabel = NAV_GROUPS.flatMap((g) => g.items).find((i) => i.to === pathname)?.label;
+
   const creds = useQuestStore((s) => s.creds);
   const setCreds = useQuestStore((s) => s.setCreds);
   const [me, setMe] = useState<{ id?: string; username?: string; global_name?: string; avatar?: string | null } | null>(null);
