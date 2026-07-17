@@ -141,8 +141,6 @@ function MissoesPage() {
 
   return (
     <div className="space-y-6 sm:space-y-8">
-      {/* Header */}
-      <div className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-3">
       <PageHeader
         eyebrow="quests --list"
         icon={Target}
