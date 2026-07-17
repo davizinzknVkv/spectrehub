@@ -55,7 +55,7 @@ function SettingsPage() {
   };
 
   return (
-    <div className="mx-auto w-full max-w-2xl space-y-6">
+    <div className="mx-auto w-full max-w-2xl space-y-6 sm:space-y-8">
       <PageHeader
         eyebrow="auth --login"
         icon={KeyRound}

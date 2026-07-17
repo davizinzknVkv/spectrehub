@@ -60,16 +60,15 @@ function SpotifyGenPage() {
 
   if (!isVip) {
     return (
-      <div className="mx-auto max-w-2xl space-y-6">
-        <div>
-          <div className="font-mono text-[10px] uppercase tracking-[0.3em] text-amber">
-            $ access --check
-          </div>
-          <h1 className="mt-2 flex items-center gap-3 text-2xl font-semibold tracking-tight text-ink sm:text-3xl">
-            <Music className="h-6 w-6 text-[#1DB954]" />
-            Gerador <span className="text-[#1DB954]">Spotify</span>
-          </h1>
-        </div>
+      <div className="mx-auto max-w-2xl space-y-6 sm:space-y-8">
+        <PageHeader
+          eyebrow="access --check"
+          icon={Music}
+          title="Gerador"
+          highlight="Spotify"
+          description="O gerador Spotify Premium é exclusivo para membros VIP."
+        />
+
 
         <div className="relative overflow-hidden rounded-xl border border-amber/30 bg-surface/60 p-8">
           <div
@@ -104,7 +103,7 @@ function SpotifyGenPage() {
   }
 
   return (
-    <div className="mx-auto max-w-3xl space-y-6">
+    <div className="mx-auto max-w-3xl space-y-6 sm:space-y-8">
       <PageHeader
         eyebrow="spotify --gen premium"
         icon={Music}
