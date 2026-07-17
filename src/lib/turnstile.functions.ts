@@ -6,7 +6,7 @@ import { rateLimit, clientIp } from "./rate-limit.server";
 const input = z.object({ token: z.string().min(10) });
 
 export const verifyTurnstile = createServerFn({ method: "POST" })
-  .inputValidator((data) => input.parse(data))
+  .validator((data) => input.parse(data))
   .handler(async ({ data }) => {
     const ip = clientIp(getRequest());
     const rl = rateLimit(`captcha:${ip}`, 20, 60_000);
