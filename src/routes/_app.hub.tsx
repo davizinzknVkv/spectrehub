@@ -1,7 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { memo, useEffect, useMemo, useRef, useState } from "react";
 import nghcLogo from "@/assets/nghc-logo.png.asset.json";
-import { ArrowRight, Sparkles, Zap, Gift } from "lucide-react";
+import { ArrowRight, Sparkles, Zap, Gift, LayoutDashboard } from "lucide-react";
+import { PageHeader } from "@/components/PageHeader";
 
 import { toast } from "sonner";
 import {
