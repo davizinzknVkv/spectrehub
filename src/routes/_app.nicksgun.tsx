@@ -145,27 +145,20 @@ function NicksGunPage() {
 
   return (
     <div className="space-y-6 sm:space-y-8">
-      {/* Header estilo home */}
-      <div className="flex items-start gap-4">
-        <div
-          className="grid h-12 w-12 place-items-center rounded-xl border border-[#5865F2]/50 bg-gradient-to-br from-[#5865F2]/15 to-[#a78bfa]/20 text-[#a5b4fc]"
-          style={{ boxShadow: "0 0 22px -6px rgba(88,101,242,0.7)" }}
-        >
-          <Crosshair className="h-6 w-6" />
-        </div>
-        <div>
-          <div className="inline-flex items-center gap-2 rounded-full border border-[#5865F2]/30 bg-[#5865F2]/10 px-3 py-1 font-mono text-[10px] uppercase tracking-widest text-[#a5b4fc]">
-            username sniper
-          </div>
-          <h1 className="mt-2 text-3xl font-black tracking-tight text-white sm:text-4xl">
-            Nicks-<span className="text-[#5865F2]">Gun</span>
-          </h1>
-          <p className="mt-1 max-w-xl text-sm text-slate-400">
-            Encontre usernames globais do Discord de <span className="text-white">2 ou 3 letras</span>{" "}
-            que estão <span className="text-emerald-400">disponíveis</span> para registrar.
-          </p>
-        </div>
-      </div>
+      <PageHeader
+        eyebrow="username sniper"
+        icon={Crosshair}
+        title="Nicks-"
+        highlight="Gun"
+        description={
+          <>
+            Encontre usernames globais do Discord de{" "}
+            <span className="text-white">2 ou 3 letras</span> que estão{" "}
+            <span className="text-emerald-400">disponíveis</span> para registrar.
+          </>
+        }
+      />
+
 
       {/* Controles */}
       <div className="rounded-xl border border-white/10 bg-white/5 p-4 sm:p-6 backdrop-blur">
