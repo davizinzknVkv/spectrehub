@@ -143,23 +143,24 @@ function MissoesPage() {
     <div className="space-y-6 sm:space-y-8">
       {/* Header */}
       <div className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-3">
-        <div className="min-w-0">
-          <h1 className="truncate text-2xl font-semibold tracking-tight text-ink sm:text-3xl">
-            Missões
-          </h1>
-          <p className="mt-1 text-sm text-ink-dim">
-            Quests disponíveis do Discord. Complete para ganhar recompensas.
-          </p>
-        </div>
-        {running && (
-          <button
-            onClick={requestStop}
-            className="shrink-0 rounded-md border border-rose/40 bg-rose/10 px-3 py-2 font-mono text-[11px] font-semibold uppercase tracking-widest text-rose hover:bg-rose/20 sm:px-4"
-          >
-            ■ stop
-          </button>
-        )}
-      </div>
+      <PageHeader
+        eyebrow="quests --list"
+        icon={Target}
+        title="Missões"
+        highlight="disponíveis"
+        description="Quests disponíveis do Discord. Complete para ganhar recompensas."
+        actions={
+          running ? (
+            <button
+              onClick={requestStop}
+              className="shrink-0 rounded-md border border-rose/40 bg-rose/10 px-3 py-2 font-mono text-[11px] font-semibold uppercase tracking-widest text-rose hover:bg-rose/20 sm:px-4"
+            >
+              ■ stop
+            </button>
+          ) : null
+        }
+      />
+
 
       <PlanBanner
         plan={plan}
