@@ -357,8 +357,7 @@ function TopBar({ onOpenMenu }: { onOpenMenu: () => void }) {
             </span>
           )}
 
-            </button>
-          )}
+
         </div>
       </div>
     </div>
