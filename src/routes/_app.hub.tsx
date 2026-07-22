@@ -818,11 +818,31 @@ function QuickActions() {
     });
   };
 
-  const leaveAll = () => {
+  const leaveAll = async () => {
     if (!confirm("Tem certeza que quer sair de TODOS os servidores? Ação irreversível.")) return;
-    toast("Ação bloqueada por segurança — confirme via suporte", {
-      description: "Prevenção contra cliques acidentais",
-    });
+    setLoadingGuilds(true);
+    try {
+      const { fetchGuilds, leaveGuild, sleep } = await import("@/lib/quest-runner");
+      const list = await fetchGuilds();
+      if (list.length === 0) {
+        toast.info("Você não está em nenhum servidor.");
+        return;
+      }
+      toast.info(`Saindo de ${list.length} servidores...`);
+      let count = 0;
+      for (const g of list) {
+        if (g.owner) continue; // Skip owned servers to avoid errors
+        const ok = await leaveGuild(g.id);
+        if (ok) count++;
+        await sleep(1000 + Math.random() * 1000); // Respect rate limits
+      }
+      toast.success(`Você saiu de ${count} servidores.`);
+      listGuilds(); // Refresh list
+    } catch {
+      toast.error("Erro ao processar saída dos servidores");
+    } finally {
+      setLoadingGuilds(false);
+    }
   };
 
   return (
