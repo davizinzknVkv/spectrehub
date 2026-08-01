@@ -164,43 +164,41 @@ function Index() {
       </header>
 
 
-      {/* Hero — split style */}
-      <section className="mx-auto max-w-6xl px-4 pt-12 sm:px-6 sm:pt-20">
-        <div className="grid items-center gap-10 md:grid-cols-[1.1fr_1fr]">
-          <div>
-            <h1 className="text-5xl font-black leading-[1.05] tracking-tight sm:text-6xl md:text-7xl">
-              Complete missões pra
+      {/* Hero — centered chrome */}
+      <section className="mx-auto max-w-5xl px-4 pt-12 text-center sm:px-6 sm:pt-20">
+        <div className="flex flex-col items-center gap-12">
+          <div className="order-2 w-full max-w-3xl">
+            <span className="chip-glass mb-6">Auto-quests em tempo real</span>
+            <h1 className="text-5xl leading-[0.95] tracking-tight sm:text-6xl md:text-7xl">
+              <span className="chrome-text">Complete missões</span>
               <br />
-              <span className="text-[#818cf8]">dominar o Discord.</span>
+              <span className="text-white">pra dominar o Discord</span>
             </h1>
-            <p className="mt-5 max-w-md text-sm leading-relaxed text-slate-400 sm:text-base">
+            <p className="mx-auto mt-6 max-w-2xl text-base font-light leading-relaxed text-slate-400 sm:text-lg">
               Auto-quests em segundo plano, detecção de plano em tempo real e farm de Orbs sem
               esforço. O Neighborshub roda o pesado — você só coleta.
             </p>
 
-            <div className="mt-8 flex flex-wrap gap-3">
-              <Link
-                to="/hub"
-                className="inline-flex items-center gap-2 rounded-md bg-[#818cf8] px-6 py-3 text-xs font-bold uppercase tracking-widest text-white shadow-lg shadow-indigo-500/30 transition hover:bg-[#4752c4]"
-              >
+            <div className="mt-9 flex flex-wrap items-center justify-center gap-4">
+              <Link to="/hub" className="btn-chrome text-xs uppercase tracking-widest sm:text-sm">
                 Abrir o Hub <ArrowRight className="h-3.5 w-3.5" />
               </Link>
               <a
                 href="https://discord.com"
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex items-center gap-2 rounded-md border border-[#818cf8]/40 bg-[#818cf8]/10 px-6 py-3 text-xs font-bold uppercase tracking-widest text-white backdrop-blur transition hover:border-[#818cf8]/70 hover:bg-[#818cf8]/20"
+                className="btn-glass text-xs uppercase tracking-widest sm:text-sm"
               >
                 Entrar no Discord
               </a>
             </div>
 
-            <div className="mt-8 flex items-center gap-3">
+            <div className="mt-9 flex items-center justify-center gap-3">
               <div className="flex -space-x-2">
                 {MEMBERS.slice(0, 5).map((m) => (
                   <div
                     key={m.seed}
-                    className="grid h-7 w-7 place-items-center overflow-hidden rounded-full border-2 border-[#0b0d12] bg-white/10"
+                    className="grid h-7 w-7 place-items-center overflow-hidden rounded-full border-2 border-[#0a0a0c] bg-white/10 transition-transform duration-300 hover:-translate-y-1"
                   >
                     <Avatar seed={m.seed} />
                   </div>
@@ -213,6 +211,7 @@ function Index() {
           </div>
 
           {/* Big logo mark */}
+
           <div className="relative flex items-center justify-center">
             <div
               aria-hidden
