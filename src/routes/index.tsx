@@ -1084,7 +1084,6 @@ function MembersSection() {
               height={500}
               title="Discord widget"
               loading="lazy"
-              allowtransparency=""
               frameBorder={0}
               sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"
               className="mx-auto block h-[500px] w-full max-w-[350px] rounded-xl"
