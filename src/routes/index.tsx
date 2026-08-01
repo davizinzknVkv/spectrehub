@@ -846,15 +846,24 @@ async function fetchLiveStats(signal: AbortSignal): Promise<Partial<StatsSnapsho
 function LiveStatsRow() {
   const [ref, inView] = useInView<HTMLDivElement>();
   const cached = useRef<StatsSnapshot | null>(null);
-  if (cached.current === null) cached.current = readCache();
 
-  const initial = cached.current ?? DEFAULT_STATS;
-  const [stats, setStats] = useState<StatsSnapshot>(initial);
-  const [hasFresh, setHasFresh] = useState<boolean>(!!cached.current);
+  const [stats, setStats] = useState<StatsSnapshot>(DEFAULT_STATS);
+  const [hasFresh, setHasFresh] = useState(false);
   const inFlight = useRef<AbortController | null>(null);
+
+  // Cache só é lido depois da hidratação pra não divergir do HTML do servidor.
+  useEffect(() => {
+    const snap = readCache();
+    if (snap) {
+      cached.current = snap;
+      setStats(snap);
+      setHasFresh(true);
+    }
+  }, []);
 
   useEffect(() => {
     let mounted = true;
+
 
     const refresh = async () => {
       if (inFlight.current) return; // dedupe
