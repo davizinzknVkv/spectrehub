@@ -176,7 +176,7 @@ function NicksGunPage() {
                   onClick={() => setLength(n as 2 | 3)}
                   className={`flex-1 rounded-md py-1.5 font-mono text-xs font-bold uppercase tracking-widest transition ${
                     length === n
-                      ? "bg-[#5865F2] text-white"
+                      ? "bg-[#818cf8] text-white"
                       : "text-slate-400 hover:text-white"
                   } disabled:opacity-50`}
                 >
@@ -195,7 +195,7 @@ function NicksGunPage() {
               disabled={running}
               value={charset}
               onChange={(e) => setCharset(e.target.value as Charset)}
-              className="mt-2 w-full rounded-lg border border-white/10 bg-black/40 px-3 py-2 text-sm text-white outline-none focus:border-[#5865F2] disabled:opacity-50"
+              className="mt-2 w-full rounded-lg border border-white/10 bg-black/40 px-3 py-2 text-sm text-white outline-none focus:border-[#818cf8] disabled:opacity-50"
             >
               <option value="letters">apenas a-z</option>
               <option value="alnum">a-z + 0-9</option>
@@ -214,7 +214,7 @@ function NicksGunPage() {
               onChange={(e) => setStartsWith(e.target.value.toLowerCase().replace(/[^a-z0-9_.]/g, ""))}
               maxLength={length}
               placeholder="ex: a"
-              className="mt-2 w-full rounded-lg border border-white/10 bg-black/40 px-3 py-2 font-mono text-sm text-white outline-none focus:border-[#5865F2] disabled:opacity-50"
+              className="mt-2 w-full rounded-lg border border-white/10 bg-black/40 px-3 py-2 font-mono text-sm text-white outline-none focus:border-[#818cf8] disabled:opacity-50"
             />
           </div>
 
@@ -227,7 +227,7 @@ function NicksGunPage() {
               disabled={running}
               value={concurrency}
               onChange={(e) => setConcurrency(Number(e.target.value))}
-              className="mt-2 w-full rounded-lg border border-white/10 bg-black/40 px-3 py-2 text-sm text-white outline-none focus:border-[#5865F2] disabled:opacity-50"
+              className="mt-2 w-full rounded-lg border border-white/10 bg-black/40 px-3 py-2 text-sm text-white outline-none focus:border-[#818cf8] disabled:opacity-50"
             >
               <option value={1}>1x (lenta)</option>
               <option value={2}>2x</option>
@@ -242,7 +242,7 @@ function NicksGunPage() {
           {!running ? (
             <button
               onClick={start}
-              className="inline-flex items-center gap-2 rounded-md bg-[#5865F2] px-5 py-2.5 font-mono text-xs font-bold uppercase tracking-widest text-white shadow-lg shadow-indigo-500/30 transition hover:bg-[#4752c4]"
+              className="inline-flex items-center gap-2 rounded-md bg-[#818cf8] px-5 py-2.5 font-mono text-xs font-bold uppercase tracking-widest text-white shadow-lg shadow-indigo-500/30 transition hover:bg-[#4752c4]"
             >
               <Play className="h-3.5 w-3.5" /> iniciar varredura
             </button>
@@ -278,13 +278,13 @@ function NicksGunPage() {
             <div className="font-mono text-xs text-slate-400">
               {checked.toLocaleString("pt-BR")} / {total.toLocaleString("pt-BR")}
               {running && current && (
-                <span className="ml-3 text-[#a5b4fc]">testando: {current}</span>
+                <span className="ml-3 text-[#c4b5fd]">testando: {current}</span>
               )}
             </div>
           </div>
           <div className="mt-3 h-1.5 overflow-hidden rounded-full bg-white/5">
             <div
-              className="h-full bg-gradient-to-r from-[#5865F2] to-[#a78bfa] transition-[width]"
+              className="h-full bg-gradient-to-r from-[#818cf8] to-[#a78bfa] transition-[width]"
               style={{ width: `${progress}%` }}
             />
           </div>
@@ -308,13 +308,13 @@ function NicksGunPage() {
         <div className="rounded-xl border border-dashed border-white/10 bg-white/5 p-10 text-center">
           {running ? (
             <div className="flex flex-col items-center gap-2 text-slate-400">
-              <Loader2 className="h-5 w-5 animate-spin text-[#a5b4fc]" />
+              <Loader2 className="h-5 w-5 animate-spin text-[#c4b5fd]" />
               <span className="text-sm">Escaneando... nomes disponíveis vão aparecer aqui.</span>
             </div>
           ) : (
             <div className="text-sm text-slate-500">
               Configure os filtros acima e clique em{" "}
-              <span className="text-[#a5b4fc]">iniciar varredura</span>.
+              <span className="text-[#c4b5fd]">iniciar varredura</span>.
             </div>
           )}
         </div>
@@ -342,7 +342,7 @@ function NicksGunPage() {
                 href="https://discord.com/register"
                 target="_blank"
                 rel="noreferrer"
-                className="rounded-md p-1.5 text-slate-400 hover:bg-white/5 hover:text-[#a5b4fc]"
+                className="rounded-md p-1.5 text-slate-400 hover:bg-white/5 hover:text-[#c4b5fd]"
                 title="Registrar no Discord"
               >
                 <ExternalLink className="h-3.5 w-3.5" />

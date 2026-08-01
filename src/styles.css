@@ -20,9 +20,9 @@
 
 @theme inline {
   --font-sans:
-    "DM Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    "Hind", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   --font-display:
-    "Space Grotesk", "DM Sans", ui-sans-serif, system-ui, sans-serif;
+    "Archivo Black", "Hind", ui-sans-serif, system-ui, sans-serif;
   --font-mono:
     "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, "Cascadia Mono", monospace;
 
@@ -76,26 +76,25 @@
 :root {
   --radius: 1rem;
 
-  /* Neon Glass — deeper surfaces, subtler lines */
-  --void: oklch(0.11 0.02 265);
-  --surface: oklch(0.16 0.025 265);
-  --surface-2: oklch(0.21 0.035 265);
-  --line: oklch(1 0 0 / 0.06);
-  /* Blurple-first palette. --cyan and --purple are kept as token names for
-     backward compat but both resolve to Discord blurple family shades so the
-     whole app renders in one consistent hue. */
-  --blurple: oklch(0.62 0.19 274);        /* #5865F2 */
-  --blurple-soft: oklch(0.78 0.12 274);   /* #a5b4fc-ish */
-  --cyan: oklch(0.78 0.12 274);           /* light blurple accent */
-  --cyan-dim: oklch(0.62 0.19 274);       /* base blurple */
-  --purple: oklch(0.62 0.19 274);         /* base blurple */
-  --purple-dim: oklch(0.48 0.18 278);     /* deep blurple */
-  --mint: oklch(0.82 0.17 175);
+  /* Vapor Chrome — iridescent indigo/cyan over deep obsidian */
+  --void: oklch(0.09 0.012 280);
+  --surface: oklch(0.145 0.018 280);
+  --surface-2: oklch(0.2 0.028 280);
+  --line: oklch(1 0 0 / 0.07);
+  /* --cyan / --purple keep their token names for backward compat but now
+     resolve to the Vapor Chrome palette so the whole app shares one language. */
+  --blurple: oklch(0.7 0.14 285);         /* #818cf8 */
+  --blurple-soft: oklch(0.8 0.1 293);     /* #c4b5fd */
+  --cyan: oklch(0.86 0.11 205);           /* #67e8f9 */
+  --cyan-dim: oklch(0.91 0.07 198);       /* #a5f3fc */
+  --purple: oklch(0.7 0.14 285);          /* #818cf8 */
+  --purple-dim: oklch(0.58 0.18 282);     /* deep indigo */
+  --mint: oklch(0.86 0.11 205);
   --amber: oklch(0.83 0.16 88);
   --rose: oklch(0.7 0.2 25);
-  --ink: oklch(0.98 0.01 240);
-  --ink-dim: oklch(0.78 0.02 245);
-  --ink-mute: oklch(0.55 0.03 260);
+  --ink: oklch(0.98 0.005 280);
+  --ink-dim: oklch(0.8 0.015 280);
+  --ink-mute: oklch(0.6 0.025 280);
 
   --background: var(--void);
   --foreground: var(--ink);
@@ -150,7 +149,12 @@
 
   h1, h2, h3 {
     font-family: var(--font-display);
-    letter-spacing: -0.015em;
+    font-weight: 400;
+    letter-spacing: -0.03em;
+  }
+
+  .font-black, .font-extrabold, .font-bold {
+    letter-spacing: -0.02em;
   }
 
   code,
@@ -399,10 +403,21 @@
   flex-direction: column;
   gap: 0.75rem;
   height: 100%;
-  background: color-mix(in oklab, white 3%, transparent);
-  border: 1px solid color-mix(in oklab, white 8%, transparent);
-  border-radius: 1rem;
+  background: color-mix(in oklab, white 4%, transparent);
+  backdrop-filter: blur(16px) saturate(140%);
+  border: 1px solid color-mix(in oklab, white 9%, transparent);
+  border-radius: 1.25rem;
   padding: 1.25rem;
+  box-shadow: 0 1px 0 color-mix(in oklab, white 7%, transparent) inset,
+    0 24px 60px -40px color-mix(in oklab, var(--purple) 70%, transparent);
+  transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1), border-color 0.35s ease,
+    box-shadow 0.35s ease, background 0.35s ease;
+}
+.card-surface:hover {
+  transform: translateY(-3px);
+  border-color: color-mix(in oklab, var(--purple) 45%, transparent);
+  box-shadow: 0 1px 0 color-mix(in oklab, white 10%, transparent) inset,
+    0 24px 70px -30px color-mix(in oklab, var(--purple) 60%, transparent);
 }
 @media (min-width: 640px) {
   .card-surface { padding: 1.5rem; }
@@ -479,3 +494,102 @@
   }
 }
 
+
+/* ── Vapor Chrome premium primitives ─────────────────────────────────── */
+
+@utility chrome-text {
+  background-image: linear-gradient(
+    100deg,
+    var(--blurple-soft) 0%,
+    var(--purple) 40%,
+    var(--cyan) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@utility chrome-rule {
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    color-mix(in oklab, var(--purple) 55%, transparent),
+    color-mix(in oklab, var(--cyan) 45%, transparent),
+    transparent
+  );
+}
+
+@utility btn-chrome {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 0.85rem;
+  padding: 0.9rem 1.75rem;
+  font-weight: 700;
+  color: oklch(0.16 0.02 280);
+  background-image: linear-gradient(100deg, var(--purple), var(--cyan));
+  box-shadow: 0 12px 40px -18px color-mix(in oklab, var(--purple) 90%, transparent);
+  transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.25s ease,
+    filter 0.25s ease;
+}
+.btn-chrome:hover {
+  transform: translateY(-2px) scale(1.02);
+  filter: brightness(1.06);
+  box-shadow: 0 0 45px -8px color-mix(in oklab, var(--purple) 70%, transparent);
+}
+.btn-chrome:active { transform: translateY(0) scale(0.99); }
+
+@utility btn-glass {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 0.85rem;
+  padding: 0.9rem 1.75rem;
+  font-weight: 600;
+  color: var(--ink);
+  background: color-mix(in oklab, white 5%, transparent);
+  border: 1px solid color-mix(in oklab, white 10%, transparent);
+  backdrop-filter: blur(14px) saturate(140%);
+  transition: background 0.25s ease, transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1),
+    border-color 0.25s ease;
+}
+.btn-glass:hover {
+  background: color-mix(in oklab, white 10%, transparent);
+  border-color: color-mix(in oklab, var(--cyan) 40%, transparent);
+  transform: translateY(-2px);
+}
+
+@utility chip-glass {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-radius: 999px;
+  padding: 0.35rem 0.9rem;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--cyan-dim);
+  background: color-mix(in oklab, white 5%, transparent);
+  border: 1px solid color-mix(in oklab, white 10%, transparent);
+  backdrop-filter: blur(14px);
+}
+
+@utility orb-indigo {
+  position: absolute;
+  border-radius: 999px;
+  background: color-mix(in oklab, var(--purple) 22%, transparent);
+  filter: blur(120px);
+  pointer-events: none;
+}
+
+@utility orb-cyan {
+  position: absolute;
+  border-radius: 999px;
+  background: color-mix(in oklab, var(--cyan) 18%, transparent);
+  filter: blur(120px);
+  pointer-events: none;
+}

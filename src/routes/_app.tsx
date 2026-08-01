@@ -102,7 +102,7 @@ function AppLayout() {
                 <button
                   onClick={() => setMobileOpen(false)}
                   aria-label="Fechar menu"
-                  className="rounded-md border border-white/10 p-1.5 text-slate-400 hover:border-[#5865F2]/50 hover:text-[#a5b4fc]"
+                  className="rounded-md border border-white/10 p-1.5 text-slate-400 hover:border-[#818cf8]/50 hover:text-[#c4b5fd]"
                 >
                   <X className="h-4 w-4" />
                 </button>
@@ -139,14 +139,14 @@ function SidebarBody({
     <div className="flex h-full flex-col">
       <Link to="/" className="flex items-center gap-2.5 px-5 py-5">
         <div
-          className="grid h-9 w-9 place-items-center rounded-lg border border-[#5865F2]/50 bg-gradient-to-br from-[#5865F2]/15 to-[#a78bfa]/20 font-mono text-sm font-bold text-[#a5b4fc]"
+          className="grid h-9 w-9 place-items-center rounded-lg border border-[#818cf8]/50 bg-gradient-to-br from-[#818cf8]/15 to-[#a78bfa]/20 font-mono text-sm font-bold text-[#c4b5fd]"
           style={{ boxShadow: "0 0 18px -4px color-mix(in oklab, var(--purple) 55%, transparent)" }}
         >
           N
         </div>
         <div className="min-w-0">
           <div className="truncate text-sm font-semibold tracking-tight text-white">
-            Neighbors<span className="text-[#a5b4fc]">hub</span>
+            Neighbors<span className="text-[#c4b5fd]">hub</span>
           </div>
           <div className="font-mono text-[9px] uppercase tracking-[0.25em] text-[#a78bfa]">neon</div>
         </div>
@@ -175,13 +175,13 @@ function SidebarBody({
                     {active && (
                       <span
                         aria-hidden
-                        className="absolute left-0 top-1/2 h-5 w-[2px] -translate-y-1/2 rounded-r-full bg-gradient-to-b from-[#5865F2] to-[#a78bfa]"
+                        className="absolute left-0 top-1/2 h-5 w-[2px] -translate-y-1/2 rounded-r-full bg-gradient-to-b from-[#818cf8] to-[#a78bfa]"
                         style={{ boxShadow: "0 0 8px color-mix(in oklab, var(--purple) 70%, transparent)" }}
                       />
                     )}
                     <Icon
                       className={`h-4 w-4 shrink-0 transition ${
-                        active ? "text-[#a5b4fc]" : "text-slate-500 group-hover:text-[#a5b4fc]"
+                        active ? "text-[#c4b5fd]" : "text-slate-500 group-hover:text-[#c4b5fd]"
                       }`}
                     />
                     <span className={active ? "font-medium tracking-tight" : "tracking-tight"}>
@@ -252,19 +252,19 @@ function TopBar({ onOpenMenu, pathname }: { onOpenMenu: () => void; pathname: st
           <button
             onClick={onOpenMenu}
             aria-label="Abrir menu"
-            className="grid h-9 w-9 place-items-center rounded-md border border-white/10 text-slate-400 hover:border-[#5865F2]/50 hover:text-[#a5b4fc] lg:hidden"
+            className="grid h-9 w-9 place-items-center rounded-md border border-white/10 text-slate-400 hover:border-[#818cf8]/50 hover:text-[#c4b5fd] lg:hidden"
           >
             <Menu className="h-4 w-4" />
           </button>
           <Link to="/" className="flex items-center gap-2 lg:hidden">
             <div
-              className="grid h-8 w-8 place-items-center rounded-lg border border-[#5865F2]/50 bg-gradient-to-br from-[#5865F2]/15 to-[#a78bfa]/20 font-mono text-xs font-bold text-[#a5b4fc]"
+              className="grid h-8 w-8 place-items-center rounded-lg border border-[#818cf8]/50 bg-gradient-to-br from-[#818cf8]/15 to-[#a78bfa]/20 font-mono text-xs font-bold text-[#c4b5fd]"
               style={{ boxShadow: "0 0 14px -4px color-mix(in oklab, var(--purple) 55%, transparent)" }}
             >
               N
             </div>
             <span className="text-sm font-semibold tracking-tight text-white">
-              Neighbors<span className="text-[#a5b4fc]">hub</span>
+              Neighbors<span className="text-[#c4b5fd]">hub</span>
             </span>
           </Link>
           <div className="hidden lg:block" />
@@ -335,7 +335,7 @@ function TopBar({ onOpenMenu, pathname }: { onOpenMenu: () => void; pathname: st
                   className="cursor-pointer focus:bg-white/5 focus:text-white"
                 >
                   <Link to="/hub" className="flex items-center gap-2">
-                    <LayoutDashboard className="h-4 w-4 text-[#a5b4fc]" />
+                    <LayoutDashboard className="h-4 w-4 text-[#c4b5fd]" />
                     Dashboard
                   </Link>
                 </DropdownMenuItem>
@@ -344,7 +344,7 @@ function TopBar({ onOpenMenu, pathname }: { onOpenMenu: () => void; pathname: st
                   className="cursor-pointer focus:bg-white/5 focus:text-white"
                 >
                   <Link to="/settings" className="flex items-center gap-2">
-                    <KeyRound className="h-4 w-4 text-[#a5b4fc]" />
+                    <KeyRound className="h-4 w-4 text-[#c4b5fd]" />
                     Login / Token
                   </Link>
                 </DropdownMenuItem>

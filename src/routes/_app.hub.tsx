@@ -198,13 +198,13 @@ function HubPage() {
         <section className="pt-2">
           <div className="grid items-center gap-10 md:grid-cols-[1.1fr_1fr]">
             <div>
-              <div className="inline-flex items-center gap-2 rounded-full border border-[#5865F2]/30 bg-[#5865F2]/10 px-3 py-1 font-mono text-[10px] uppercase tracking-widest text-[#a5b4fc]">
+              <div className="inline-flex items-center gap-2 rounded-full border border-[#818cf8]/30 bg-[#818cf8]/10 px-3 py-1 font-mono text-[10px] uppercase tracking-widest text-[#c4b5fd]">
                 <Sparkles className="h-3 w-3" /> bem-vindo ao hub
               </div>
               <h1 className="mt-4 text-5xl font-black leading-[1.05] tracking-tight sm:text-6xl md:text-7xl">
                 Conecte seu Discord
                 <br />
-                <span className="text-[#5865F2]">e comece a farmar.</span>
+                <span className="text-[#818cf8]">e comece a farmar.</span>
               </h1>
               <p className="mt-5 max-w-md text-sm leading-relaxed text-slate-400 sm:text-base">
                 Cole seu token ou faça login por email — o Neighborshub roda as missões em segundo
@@ -214,13 +214,13 @@ function HubPage() {
               <div className="mt-8 flex flex-wrap gap-3">
                 <Link
                   to="/settings"
-                  className="inline-flex items-center gap-2 rounded-md bg-[#5865F2] px-6 py-3 font-mono text-xs font-bold uppercase tracking-widest text-white shadow-lg shadow-indigo-500/30 transition hover:bg-[#4752c4]"
+                  className="inline-flex items-center gap-2 rounded-md bg-[#818cf8] px-6 py-3 font-mono text-xs font-bold uppercase tracking-widest text-white shadow-lg shadow-indigo-500/30 transition hover:bg-[#4752c4]"
                 >
                   Configurar token <ArrowRight className="h-3.5 w-3.5" />
                 </Link>
                 <Link
                   to="/settings"
-                  className="inline-flex items-center gap-2 rounded-md border border-[#5865F2]/40 bg-[#5865F2]/10 px-6 py-3 font-mono text-xs font-bold uppercase tracking-widest text-white backdrop-blur transition hover:border-[#5865F2]/70 hover:bg-[#5865F2]/20"
+                  className="inline-flex items-center gap-2 rounded-md border border-[#818cf8]/40 bg-[#818cf8]/10 px-6 py-3 font-mono text-xs font-bold uppercase tracking-widest text-white backdrop-blur transition hover:border-[#818cf8]/70 hover:bg-[#818cf8]/20"
                 >
                   Login por email
                 </Link>
@@ -250,7 +250,7 @@ function HubPage() {
                   style={{ animation: "hub-spin-slow 28s linear infinite" }}
                 />
                 <div
-                  className="absolute h-[85%] w-[85%] rounded-full border border-[#5865F2]/20"
+                  className="absolute h-[85%] w-[85%] rounded-full border border-[#818cf8]/20"
                   style={{ animation: "hub-spin-slow 22s linear infinite reverse" }}
                 />
                 {[0, 1, 2, 3, 4].map((i) => (
@@ -278,7 +278,7 @@ function HubPage() {
                     <linearGradient id="hub-bolt-grad" x1="50%" y1="0%" x2="50%" y2="100%">
                       <stop offset="0%" stopColor="#ffffff" />
                       <stop offset="35%" stopColor="#c4b5fd" />
-                      <stop offset="100%" stopColor="#5865F2" />
+                      <stop offset="100%" stopColor="#818cf8" />
                     </linearGradient>
                   </defs>
                   <path
@@ -353,7 +353,7 @@ function HubPage() {
                   {s.value.includes("ms") ? (
                     <>
                       {s.value.replace("ms", "")}
-                      <span className="text-[#5865F2]">ms</span>
+                      <span className="text-[#818cf8]">ms</span>
                     </>
                   ) : (
                     s.value
@@ -375,7 +375,7 @@ function HubPage() {
           <div className="mt-4 grid gap-8 md:grid-cols-[1.1fr_1fr] md:items-center">
             <div>
               <h2 className="text-4xl font-bold leading-tight tracking-tight sm:text-5xl">
-                Nenhum token <span className="text-[#5865F2]">configurado</span>
+                Nenhum token <span className="text-[#818cf8]">configurado</span>
               </h2>
               <p className="mt-4 max-w-md text-sm leading-relaxed text-slate-400">
                 Para o hub começar a executar missões, precisamos do seu token do Discord. Ele fica
@@ -384,7 +384,7 @@ function HubPage() {
               </p>
               <Link
                 to="/settings"
-                className="mt-6 inline-flex items-center gap-2 rounded-md bg-[#5865F2] px-6 py-3 font-mono text-xs font-bold uppercase tracking-widest text-white shadow-lg shadow-indigo-500/30 transition hover:bg-[#4752c4]"
+                className="mt-6 inline-flex items-center gap-2 rounded-md bg-[#818cf8] px-6 py-3 font-mono text-xs font-bold uppercase tracking-widest text-white shadow-lg shadow-indigo-500/30 transition hover:bg-[#4752c4]"
               >
                 → configurar agora
               </Link>
@@ -411,9 +411,9 @@ function HubPage() {
                 return (
                   <div
                     key={f.title}
-                    className="flex items-start gap-3 rounded-xl border border-white/10 bg-white/5 p-4 backdrop-blur transition hover:border-[#5865F2]/40"
+                    className="flex items-start gap-3 rounded-xl border border-white/10 bg-white/5 p-4 backdrop-blur transition hover:border-[#818cf8]/40"
                   >
-                    <div className="grid h-9 w-9 shrink-0 place-items-center rounded-lg border border-[#5865F2]/30 bg-[#5865F2]/10 text-[#a5b4fc]">
+                    <div className="grid h-9 w-9 shrink-0 place-items-center rounded-lg border border-[#818cf8]/30 bg-[#818cf8]/10 text-[#c4b5fd]">
                       <Icon className="h-4 w-4" />
                     </div>
                     <div className="min-w-0">
@@ -558,7 +558,7 @@ function HubPage() {
                           <button
                             type="button"
                             aria-label={b.label}
-                            className="shrink-0 rounded transition-transform hover:scale-110 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#5865F2]/60"
+                            className="shrink-0 rounded transition-transform hover:scale-110 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#818cf8]/60"
                           >
                             <img
                               src={b.src}
@@ -595,7 +595,7 @@ function HubPage() {
                 href={`https://discord.com/users/${user.id}`}
                 target="_blank"
                 rel="noreferrer"
-                className="rounded border border-[#5865F2]/40 bg-[#5865F2]/10 px-2 py-1 text-center font-mono text-[10px] uppercase tracking-widest text-[#a5b4fc] hover:bg-[#5865F2]/20"
+                className="rounded border border-[#818cf8]/40 bg-[#818cf8]/10 px-2 py-1 text-center font-mono text-[10px] uppercase tracking-widest text-[#c4b5fd] hover:bg-[#818cf8]/20"
               >
                 abrir perfil
               </a>
@@ -607,7 +607,7 @@ function HubPage() {
         {stats.bio && (
           <div className="border-t border-white/10 px-4 py-4 sm:px-6">
             <div className="mb-2 font-mono text-[10px] uppercase tracking-[0.3em] text-slate-500">
-              <span className="text-[#a5b4fc]">◆</span> bio
+              <span className="text-[#c4b5fd]">◆</span> bio
             </div>
             <p className="whitespace-pre-wrap text-sm leading-relaxed text-slate-400">{stats.bio}</p>
           </div>
@@ -690,10 +690,10 @@ function HubPage() {
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         <Link
           to="/missoes"
-          className="card-hover group flex items-center justify-between gap-3 rounded-2xl border border-white/10 bg-gradient-to-br from-[#5865F2]/[0.08] via-surface/40 to-[#a78bfa]/[0.08] px-6 py-5 backdrop-blur-md"
+          className="card-hover group flex items-center justify-between gap-3 rounded-2xl border border-white/10 bg-gradient-to-br from-[#818cf8]/[0.08] via-surface/40 to-[#a78bfa]/[0.08] px-6 py-5 backdrop-blur-md"
         >
           <div className="min-w-0">
-            <div className="font-mono text-[10px] font-semibold uppercase tracking-[0.3em] text-[#a5b4fc]">
+            <div className="font-mono text-[10px] font-semibold uppercase tracking-[0.3em] text-[#c4b5fd]">
               $ next
             </div>
             <div className="mt-1.5 text-lg font-semibold tracking-tight text-white">Ir para Missões</div>
@@ -703,13 +703,13 @@ function HubPage() {
                 : "Rode um scan para ver o que está disponível"}
             </div>
           </div>
-          <span className="font-mono text-2xl text-[#a5b4fc] opacity-60 transition group-hover:translate-x-1 group-hover:opacity-100">
+          <span className="font-mono text-2xl text-[#c4b5fd] opacity-60 transition group-hover:translate-x-1 group-hover:opacity-100">
             →
           </span>
         </Link>
         <Link
           to="/history"
-          className="card-hover group flex items-center justify-between gap-3 rounded-2xl border border-white/10 bg-gradient-to-br from-[#a78bfa]/[0.08] via-surface/40 to-[#5865F2]/[0.05] px-6 py-5 backdrop-blur-md"
+          className="card-hover group flex items-center justify-between gap-3 rounded-2xl border border-white/10 bg-gradient-to-br from-[#a78bfa]/[0.08] via-surface/40 to-[#818cf8]/[0.05] px-6 py-5 backdrop-blur-md"
         >
           <div className="min-w-0">
             <div className="font-mono text-[10px] font-semibold uppercase tracking-[0.3em] text-[#a78bfa]">
@@ -854,8 +854,8 @@ function QuickActions() {
 
       <div className="grid gap-3 lg:grid-cols-3">
         {/* UserInfo Premium */}
-        <div className="rounded-xl border border-[#5865F2]/30 bg-white/5 p-4">
-          <div className="mb-1 flex items-center gap-2 font-mono text-[11px] uppercase tracking-widest text-[#a5b4fc]">
+        <div className="rounded-xl border border-[#818cf8]/30 bg-white/5 p-4">
+          <div className="mb-1 flex items-center gap-2 font-mono text-[11px] uppercase tracking-widest text-[#c4b5fd]">
             <span>◎</span> UserInfo Premium
           </div>
           <p className="text-xs leading-relaxed text-slate-400">
@@ -865,12 +865,12 @@ function QuickActions() {
             value={profileId}
             onChange={(e) => setProfileId(e.target.value.replace(/[^0-9]/g, "").slice(0, 20))}
             placeholder="ID do usuário (deixe vazio para você)"
-            className="mt-3 w-full rounded-md border border-white/10 bg-[#0b0d12] px-3 py-2 font-mono text-xs text-white outline-none focus:border-[#5865F2]"
+            className="mt-3 w-full rounded-md border border-white/10 bg-[#0b0d12] px-3 py-2 font-mono text-xs text-white outline-none focus:border-[#818cf8]"
           />
           <button
             onClick={searchProfile}
             disabled={loadingProfile}
-            className="mt-2 w-full rounded-md border border-[#5865F2]/50 bg-[#5865F2]/15 px-3 py-2 font-mono text-[11px] font-semibold uppercase tracking-widest text-[#a5b4fc] transition hover:bg-[#5865F2]/25 disabled:opacity-40"
+            className="mt-2 w-full rounded-md border border-[#818cf8]/50 bg-[#818cf8]/15 px-3 py-2 font-mono text-[11px] font-semibold uppercase tracking-widest text-[#c4b5fd] transition hover:bg-[#818cf8]/25 disabled:opacity-40"
           >
             {loadingProfile ? "buscando…" : "Buscar Perfil"}
           </button>
@@ -884,7 +884,7 @@ function QuickActions() {
                 href={`https://discord.com/users/${foundUser.id as string}`}
                 target="_blank"
                 rel="noreferrer"
-                className="mt-1 inline-block font-mono text-[10px] uppercase tracking-widest text-[#a5b4fc] hover:underline"
+                className="mt-1 inline-block font-mono text-[10px] uppercase tracking-widest text-[#c4b5fd] hover:underline"
               >
                 → abrir no discord
               </a>
@@ -1053,10 +1053,10 @@ function WelcomeModal() {
   }> = {
     intro: {
       tag: "$ bem-vindo",
-      title: <>O que é o Neighbors<span className="text-[#a5b4fc]">hub</span>?</>,
+      title: <>O que é o Neighbors<span className="text-[#c4b5fd]">hub</span>?</>,
       body: (
         <>
-          Automatize suas <span className="text-[#a5b4fc]">Discord Quests</span> em segundo
+          Automatize suas <span className="text-[#c4b5fd]">Discord Quests</span> em segundo
           plano — assista vídeos e "jogue" sem esforço, ganhando{" "}
           <span className="text-emerald-400">Orbs</span> e recompensas exclusivas.
           Totalmente client-side, seu token nunca sai criptografado do seu navegador.
@@ -1075,7 +1075,7 @@ function WelcomeModal() {
     },
     instagram: {
       tag: "$ criador",
-      title: <>Siga no <span className="text-[#a5b4fc]">Instagram</span></>,
+      title: <>Siga no <span className="text-[#c4b5fd]">Instagram</span></>,
       body: <>Bastidores do projeto, novidades e outras coisas feitas pelo criador.</>,
       href: "https://www.instagram.com/davizinzkn/",
       action: "📸 abrir Instagram",
@@ -1092,9 +1092,9 @@ function WelcomeModal() {
   };
 
   const c = content[step];
-  const toneBorder = { cyan: "border-[#5865F2]/40", purple: "border-[#a78bfa]/40", mint: "border-emerald-400/40" }[c.tone];
-  const toneBg = { cyan: "bg-[#5865F2]/10 hover:bg-[#5865F2]/20", purple: "bg-[#a78bfa]/10 hover:bg-[#a78bfa]/20", mint: "bg-emerald-500/10 hover:bg-emerald-500/20" }[c.tone];
-  const toneText = { cyan: "text-[#a5b4fc]", purple: "text-[#a78bfa]", mint: "text-emerald-400" }[c.tone];
+  const toneBorder = { cyan: "border-[#818cf8]/40", purple: "border-[#a78bfa]/40", mint: "border-emerald-400/40" }[c.tone];
+  const toneBg = { cyan: "bg-[#818cf8]/10 hover:bg-[#818cf8]/20", purple: "bg-[#a78bfa]/10 hover:bg-[#a78bfa]/20", mint: "bg-emerald-500/10 hover:bg-emerald-500/20" }[c.tone];
+  const toneText = { cyan: "text-[#c4b5fd]", purple: "text-[#a78bfa]", mint: "text-emerald-400" }[c.tone];
 
   const stepOrder: Exclude<Step, null>[] = ["intro", "discord", "instagram", "donate"];
   const stepIdx = stepOrder.indexOf(step);
@@ -1110,7 +1110,7 @@ function WelcomeModal() {
         <button
           onClick={finish}
           aria-label="Fechar"
-          className="absolute right-3 top-3 grid h-8 w-8 place-items-center rounded-md border border-white/10 text-slate-500 hover:border-[#5865F2]/50 hover:text-[#a5b4fc]"
+          className="absolute right-3 top-3 grid h-8 w-8 place-items-center rounded-md border border-white/10 text-slate-500 hover:border-[#818cf8]/50 hover:text-[#c4b5fd]"
         >
           ✕
         </button>
@@ -1141,7 +1141,7 @@ function WelcomeModal() {
           )}
           <button
             onClick={advance}
-            className="font-mono text-[10px] uppercase tracking-widest text-slate-500 hover:text-[#a5b4fc]"
+            className="font-mono text-[10px] uppercase tracking-widest text-slate-500 hover:text-[#c4b5fd]"
           >
             {stepIdx === stepOrder.length - 1 ? "concluir" : "pular →"}
           </button>
@@ -1152,7 +1152,7 @@ function WelcomeModal() {
             <span
               key={s}
               className={`h-1.5 rounded-full transition-all ${
-                i === stepIdx ? "w-6 bg-[#5865F2]" : "w-1.5 bg-line"
+                i === stepIdx ? "w-6 bg-[#818cf8]" : "w-1.5 bg-line"
               }`}
             />
           ))}
@@ -1185,7 +1185,7 @@ function InfoField({
       ? "border-emerald-400/30 text-emerald-400"
       : badgeTone === "amber"
         ? "border-amber-400/30 text-amber-300"
-        : "border-[#5865F2]/30 text-[#a5b4fc]";
+        : "border-[#818cf8]/30 text-[#c4b5fd]";
   const hidden = sensitive && !revealed && value !== "—";
   const shown = hidden ? "•".repeat(Math.min(value.length, 14)) : value;
   return (
@@ -1203,7 +1203,7 @@ function InfoField({
           {sensitive && value !== "—" && (
             <button
               onClick={() => setRevealed((v) => !v)}
-              className="rounded border border-white/10 px-1.5 py-0.5 font-mono text-[9px] uppercase tracking-widest text-slate-500 hover:border-[#5865F2]/40 hover:text-[#a5b4fc]"
+              className="rounded border border-white/10 px-1.5 py-0.5 font-mono text-[9px] uppercase tracking-widest text-slate-500 hover:border-[#818cf8]/40 hover:text-[#c4b5fd]"
             >
               {revealed ? "ocultar" : "mostrar"}
             </button>
@@ -1231,7 +1231,7 @@ const StatCard = memo(function StatCard({
 }) {
   const accent =
     tone === "cyan"
-      ? "text-[#a5b4fc]"
+      ? "text-[#c4b5fd]"
       : tone === "purple"
         ? "text-[#a78bfa]"
         : tone === "mint"
@@ -1241,7 +1241,7 @@ const StatCard = memo(function StatCard({
             : "text-white";
   const border =
     tone === "cyan"
-      ? "border-[#5865F2]/40"
+      ? "border-[#818cf8]/40"
       : tone === "purple"
         ? "border-[#a78bfa]/40"
         : tone === "mint"
@@ -1300,8 +1300,8 @@ export const MissionCard = memo(function MissionCard({
     <article
       className={`group relative flex flex-col overflow-hidden rounded-2xl border bg-white/5 backdrop-blur transition ${
         active
-          ? "border-[#5865F2]/60 glow-cyan"
-          : "border-white/10 hover:border-[#5865F2]/40 hover:bg-white/5"
+          ? "border-[#818cf8]/60 glow-cyan"
+          : "border-white/10 hover:border-[#818cf8]/40 hover:bg-white/5"
       }`}
     >
       <div className="relative aspect-[16/9] w-full overflow-hidden bg-[#0b0d12]">
@@ -1336,7 +1336,7 @@ export const MissionCard = memo(function MissionCard({
           className={`absolute right-3 top-3 rounded-full px-2.5 py-0.5 font-mono text-[10px] font-semibold uppercase tracking-widest ${
             quest.isEnrolled
               ? "bg-emerald-500/90 text-background"
-              : "bg-[#5865F2]/90 text-background"
+              : "bg-[#818cf8]/90 text-background"
           }`}
         >
           {quest.isEnrolled ? "aceita" : "disponível"}
@@ -1372,11 +1372,11 @@ export const MissionCard = memo(function MissionCard({
           <div>
             <div className="flex items-center justify-between font-mono text-[10px] uppercase tracking-widest text-slate-500">
               <span>{progress.current}/{progress.total}</span>
-              <span className="text-[#a5b4fc]">{pct}%</span>
+              <span className="text-[#c4b5fd]">{pct}%</span>
             </div>
             <div className="mt-1 h-1.5 overflow-hidden rounded-full bg-[#0b0d12]">
               <div
-                className="h-full rounded-full bg-gradient-to-r from-[#5865F2] via-emerald-400 to-amber-400 transition-all"
+                className="h-full rounded-full bg-gradient-to-r from-[#818cf8] via-emerald-400 to-amber-400 transition-all"
                 style={{ width: `${pct}%` }}
               />
             </div>
@@ -1387,7 +1387,7 @@ export const MissionCard = memo(function MissionCard({
           onClick={onExec}
           disabled={disabled}
           title={gateHint}
-          className="mt-auto rounded-md border border-white/10 bg-black/40 px-3 py-2 text-sm font-medium text-white transition hover:border-[#5865F2]/50 hover:text-[#a5b4fc] disabled:cursor-not-allowed disabled:opacity-30"
+          className="mt-auto rounded-md border border-white/10 bg-black/40 px-3 py-2 text-sm font-medium text-white transition hover:border-[#818cf8]/50 hover:text-[#c4b5fd] disabled:cursor-not-allowed disabled:opacity-30"
         >
           {gateHint ?? "Completar"}
         </button>
@@ -1454,7 +1454,7 @@ export function CaptchaModal({
 
   return (
     <div className="fixed inset-0 z-50 grid place-items-center bg-black/40 p-4 backdrop-blur-sm">
-      <div className="w-full max-w-sm rounded-2xl border border-[#5865F2]/30 bg-white/5 p-6 shadow-2xl">
+      <div className="w-full max-w-sm rounded-2xl border border-[#818cf8]/30 bg-white/5 p-6 shadow-2xl">
         <div className="font-mono text-[10px] uppercase tracking-[0.3em] text-slate-400">
           $ verify --human
         </div>
@@ -1481,16 +1481,16 @@ export function CaptchaModal({
         ) : (
           <div className="mt-5 grid grid-cols-[1fr_auto_1fr_auto_1fr] items-center gap-2 rounded-lg border border-white/10 bg-black/40 p-3 font-mono text-xl text-white">
             <span className="text-center">{challenge.a}</span>
-            <span className="text-[#a5b4fc]">+</span>
+            <span className="text-[#c4b5fd]">+</span>
             <span className="text-center">{challenge.b}</span>
-            <span className="text-[#a5b4fc]">=</span>
+            <span className="text-[#c4b5fd]">=</span>
             <input
               autoFocus
               inputMode="numeric"
               value={value}
               onChange={(e) => { setError(false); setValue(e.target.value.replace(/\D/g, "").slice(0, 3)); }}
               onKeyDown={(e) => e.key === "Enter" && submit()}
-              className="w-full rounded border border-white/10 bg-[#0b0d12] px-2 py-1 text-center text-white outline-none focus:border-[#5865F2]"
+              className="w-full rounded border border-white/10 bg-[#0b0d12] px-2 py-1 text-center text-white outline-none focus:border-[#818cf8]"
             />
           </div>
         )}
@@ -1510,7 +1510,7 @@ export function CaptchaModal({
           {!useTurnstile && (
             <button
               onClick={submit}
-              className="flex-1 rounded-md bg-[#5865F2] px-3 py-2 font-mono text-xs font-semibold uppercase tracking-widest text-primary-foreground hover:brightness-110"
+              className="flex-1 rounded-md bg-[#818cf8] px-3 py-2 font-mono text-xs font-semibold uppercase tracking-widest text-primary-foreground hover:brightness-110"
             >
               confirmar
             </button>
@@ -1533,7 +1533,7 @@ export function EmptyState({ onScan }: { onScan: () => void }) {
       </p>
       <button
         onClick={onScan}
-        className="mt-5 rounded-md border border-[#5865F2]/40 bg-[#5865F2]/10 px-4 py-2 font-mono text-[11px] font-semibold uppercase tracking-widest text-[#a5b4fc] hover:bg-[#5865F2]/20"
+        className="mt-5 rounded-md border border-[#818cf8]/40 bg-[#818cf8]/10 px-4 py-2 font-mono text-[11px] font-semibold uppercase tracking-widest text-[#c4b5fd] hover:bg-[#818cf8]/20"
       >
         → sondar missões
       </button>
@@ -1560,7 +1560,7 @@ export function PlanBanner({
     plan === "boost"
       ? { border: "border-amber-400/40", bg: "bg-amber-500-500/10", text: "text-amber-300" }
       : plan === "premium"
-        ? { border: "border-[#5865F2]/40", bg: "bg-[#5865F2]/10", text: "text-[#a5b4fc]" }
+        ? { border: "border-[#818cf8]/40", bg: "bg-[#818cf8]/10", text: "text-[#c4b5fd]" }
         : { border: "border-white/10", bg: "bg-white/5", text: "text-slate-400" };
 
   const dailyText = limits.daily === Infinity ? "ilimitado" : `${usedToday}/${limits.daily}`;
@@ -1600,7 +1600,7 @@ export function PlanBanner({
       {cooldownLeft > 0 && (
         <div className="mt-3 h-1.5 overflow-hidden rounded-full bg-black/40">
           <div
-            className="h-full rounded-full bg-gradient-to-r from-[#5865F2] via-emerald-400 to-amber-400 transition-all"
+            className="h-full rounded-full bg-gradient-to-r from-[#818cf8] via-emerald-400 to-amber-400 transition-all"
             style={{ width: `${100 - cooldownPct}%` }}
           />
         </div>
@@ -1812,7 +1812,7 @@ function NotificationsCard() {
       style={{ boxShadow: "0 0 30px -20px color-mix(in oklab, var(--purple) 55%, transparent)" }}
     >
       <div className="mb-3 flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.3em] text-slate-500">
-        <span className="text-[#a5b4fc]">◆</span> avisos
+        <span className="text-[#c4b5fd]">◆</span> avisos
       </div>
       <ul className="grid gap-2 sm:grid-cols-2">
         {items.map((it, i) => {
@@ -1820,7 +1820,7 @@ function NotificationsCard() {
             it.tone === "mint"
               ? "border-emerald-400/30 bg-emerald-500/5 text-emerald-400"
               : it.tone === "cyan"
-                ? "border-[#5865F2]/30 bg-[#5865F2]/5 text-[#a5b4fc]"
+                ? "border-[#818cf8]/30 bg-[#818cf8]/5 text-[#c4b5fd]"
                 : it.tone === "amber"
                   ? "border-amber-400/30 bg-amber-500-500/5 text-amber-300"
                   : "border-rose-400/30 bg-rose-500/5 text-rose-400";
