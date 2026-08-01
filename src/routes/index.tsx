@@ -212,7 +212,7 @@ function Index() {
 
           {/* Big logo mark */}
 
-          <div className="relative flex items-center justify-center">
+          <div className="relative order-1 flex w-full max-w-md items-center justify-center">
             <div
               aria-hidden
               className="pointer-events-none absolute inset-0 -z-10"
