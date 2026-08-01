@@ -905,7 +905,7 @@ function LiveStatsRow() {
     };
   }, []);
 
-  const showSkeleton = !hasFresh && !cached.current;
+  const showSkeleton = !hasFresh;
 
   const quests = useCountUp(stats.quests, inView);
   const membersC = useCountUp(stats.members, inView);
@@ -914,8 +914,9 @@ function LiveStatsRow() {
   return (
     <div
       ref={ref}
-      className="mt-20 grid grid-cols-1 gap-0 border-y border-white/10 sm:grid-cols-3"
+      className="mt-20 grid grid-cols-1 gap-2 rounded-3xl border border-white/10 bg-white/[0.02] p-4 shadow-[0_40px_120px_-60px_rgba(129,140,248,0.9)] backdrop-blur-3xl sm:grid-cols-3 sm:p-6"
     >
+
       <StatCell
         loading={showSkeleton}
         skeletonKind="int"
