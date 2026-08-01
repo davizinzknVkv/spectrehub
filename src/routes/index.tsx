@@ -125,15 +125,14 @@ function Avatar({ seed }: { seed: string }) {
 
 function Index() {
   return (
-    <div className="min-h-screen bg-[#0b0d12] text-slate-100 antialiased">
-      <div
-        aria-hidden
-        className="pointer-events-none fixed inset-0 -z-10 opacity-60"
-        style={{
-          background:
-            "radial-gradient(600px 400px at 15% 10%, rgba(88,101,242,0.25), transparent 60%), radial-gradient(500px 350px at 85% 20%, rgba(235,69,158,0.15), transparent 60%)",
-        }}
-      />
+    <div className="relative min-h-screen overflow-hidden bg-[#0a0a0c] text-slate-200 antialiased">
+      {/* Background orbs — Vapor Chrome */}
+      <div aria-hidden className="pointer-events-none fixed inset-0 -z-10">
+        <div className="orb-indigo -left-32 top-[-10rem] h-[34rem] w-[34rem]" />
+        <div className="orb-cyan -right-32 top-[40%] h-[30rem] w-[30rem]" />
+        <div className="orb-indigo bottom-[-12rem] left-1/3 h-[28rem] w-[28rem]" />
+      </div>
+
 
       {/* Floating pill nav */}
       <header className="sticky top-4 z-50 mx-auto w-full max-w-5xl px-3 sm:top-6 sm:px-6">
