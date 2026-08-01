@@ -20,9 +20,9 @@
 
 @theme inline {
   --font-sans:
-    "DM Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    "Hind", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   --font-display:
-    "Space Grotesk", "DM Sans", ui-sans-serif, system-ui, sans-serif;
+    "Archivo Black", "Hind", ui-sans-serif, system-ui, sans-serif;
   --font-mono:
     "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, "Cascadia Mono", monospace;
 
@@ -76,26 +76,25 @@
 :root {
   --radius: 1rem;
 
-  /* Neon Glass — deeper surfaces, subtler lines */
-  --void: oklch(0.11 0.02 265);
-  --surface: oklch(0.16 0.025 265);
-  --surface-2: oklch(0.21 0.035 265);
-  --line: oklch(1 0 0 / 0.06);
-  /* Blurple-first palette. --cyan and --purple are kept as token names for
-     backward compat but both resolve to Discord blurple family shades so the
-     whole app renders in one consistent hue. */
-  --blurple: oklch(0.62 0.19 274);        /* #5865F2 */
-  --blurple-soft: oklch(0.78 0.12 274);   /* #a5b4fc-ish */
-  --cyan: oklch(0.78 0.12 274);           /* light blurple accent */
-  --cyan-dim: oklch(0.62 0.19 274);       /* base blurple */
-  --purple: oklch(0.62 0.19 274);         /* base blurple */
-  --purple-dim: oklch(0.48 0.18 278);     /* deep blurple */
-  --mint: oklch(0.82 0.17 175);
+  /* Vapor Chrome — iridescent indigo/cyan over deep obsidian */
+  --void: oklch(0.09 0.012 280);
+  --surface: oklch(0.145 0.018 280);
+  --surface-2: oklch(0.2 0.028 280);
+  --line: oklch(1 0 0 / 0.07);
+  /* --cyan / --purple keep their token names for backward compat but now
+     resolve to the Vapor Chrome palette so the whole app shares one language. */
+  --blurple: oklch(0.7 0.14 285);         /* #818cf8 */
+  --blurple-soft: oklch(0.8 0.1 293);     /* #c4b5fd */
+  --cyan: oklch(0.86 0.11 205);           /* #67e8f9 */
+  --cyan-dim: oklch(0.91 0.07 198);       /* #a5f3fc */
+  --purple: oklch(0.7 0.14 285);          /* #818cf8 */
+  --purple-dim: oklch(0.58 0.18 282);     /* deep indigo */
+  --mint: oklch(0.86 0.11 205);
   --amber: oklch(0.83 0.16 88);
   --rose: oklch(0.7 0.2 25);
-  --ink: oklch(0.98 0.01 240);
-  --ink-dim: oklch(0.78 0.02 245);
-  --ink-mute: oklch(0.55 0.03 260);
+  --ink: oklch(0.98 0.005 280);
+  --ink-dim: oklch(0.8 0.015 280);
+  --ink-mute: oklch(0.6 0.025 280);
 
   --background: var(--void);
   --foreground: var(--ink);
@@ -150,7 +149,12 @@
 
   h1, h2, h3 {
     font-family: var(--font-display);
-    letter-spacing: -0.015em;
+    font-weight: 400;
+    letter-spacing: -0.03em;
+  }
+
+  .font-black, .font-extrabold, .font-bold {
+    letter-spacing: -0.02em;
   }
 
   code,
