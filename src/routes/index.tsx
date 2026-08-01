@@ -973,19 +973,22 @@ function StatCell({
   skeletonKind?: "int" | "ms";
 }) {
   return (
-    <div className={`px-4 py-8 sm:px-8 sm:py-10 ${border ? "sm:border-l border-white/10" : ""}`}>
-      <div className="text-3xl font-black tracking-tight tabular-nums sm:text-5xl min-h-[2.5rem] sm:min-h-[3.5rem] transition-opacity duration-300">
+    <div
+      className={`rounded-2xl px-4 py-7 text-center transition-colors duration-300 hover:bg-white/[0.03] sm:px-8 sm:py-8 ${border ? "sm:border-l border-white/5" : ""}`}
+    >
+      <div className="chrome-text text-3xl tracking-tight tabular-nums sm:text-5xl min-h-[2.5rem] sm:min-h-[3.5rem] font-display transition-opacity duration-300 flex items-center justify-center">
         {loading ? <StatSkeleton kind={skeletonKind} /> : value}
       </div>
-      <div className="mt-2 flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.25em] text-slate-500">
+      <div className="mt-2 flex items-center justify-center gap-2 font-mono text-[10px] uppercase tracking-[0.25em] text-slate-500">
         {(loading || pulse) && (
-          <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-[#818cf8]" />
+          <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-[#67e8f9]" />
         )}
         {label}
       </div>
     </div>
   );
 }
+
 
 function MembersSection() {
 
