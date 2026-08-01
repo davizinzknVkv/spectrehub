@@ -136,32 +136,33 @@ function Index() {
 
       {/* Floating pill nav */}
       <header className="sticky top-4 z-50 mx-auto w-full max-w-5xl px-3 sm:top-6 sm:px-6">
-        <div className="flex items-center justify-between gap-3 rounded-full border border-white/10 bg-[#0b0d12]/40 py-2 pl-4 pr-2 shadow-xl shadow-black/40 backdrop-blur-2xl">
+        <div className="flex items-center justify-between gap-3 rounded-full border border-white/10 bg-white/[0.04] py-2 pl-4 pr-2 shadow-[0_20px_60px_-30px_rgba(129,140,248,0.8)] backdrop-blur-2xl">
           <Link to="/" className="flex items-center gap-2">
             <img
               src={nghcLogo.url}
               alt="NGHC"
-              className="h-9 w-9 shrink-0 rounded-lg object-contain"
+              className="h-9 w-9 shrink-0 rounded-lg object-contain transition-transform duration-300 hover:scale-110"
               style={{ filter: "drop-shadow(0 0 10px color-mix(in oklab, var(--blurple) 60%, transparent))" }}
             />
             <span className="text-sm font-semibold tracking-tight sm:text-base">
-              Neighbors<span className="text-[#c4b5fd]">hub</span>
+              Neighbors<span className="chrome-text">hub</span>
             </span>
           </Link>
           <nav className="hidden items-center gap-6 text-sm text-slate-400 md:flex">
-            <a href="#missoes" className="transition hover:text-white">Missões</a>
-            <a href="#planos" className="transition hover:text-white">Planos</a>
-            <a href="#membros" className="transition hover:text-white">Membros</a>
-            <a href="#como-funciona" className="transition hover:text-white">Como funciona</a>
+            <a href="#missoes" className="transition-colors duration-200 hover:text-[#a5f3fc]">Missões</a>
+            <a href="#planos" className="transition-colors duration-200 hover:text-[#a5f3fc]">Planos</a>
+            <a href="#membros" className="transition-colors duration-200 hover:text-[#a5f3fc]">Membros</a>
+            <a href="#como-funciona" className="transition-colors duration-200 hover:text-[#a5f3fc]">Como funciona</a>
           </nav>
           <Link
             to="/hub"
-            className="rounded-full bg-[#818cf8] px-4 py-2 text-xs font-semibold text-white shadow-lg shadow-indigo-500/30 transition hover:bg-[#4752c4] sm:text-sm"
+            className="btn-chrome rounded-full px-5 py-2 text-xs sm:text-sm"
           >
             Abrir Hub
           </Link>
         </div>
       </header>
+
 
       {/* Hero — split style */}
       <section className="mx-auto max-w-6xl px-4 pt-12 sm:px-6 sm:pt-20">
