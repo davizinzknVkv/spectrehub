@@ -23,7 +23,7 @@ export const Route = createFileRoute("/")({
     ],
     links: [
       // Preload LCP — logo do hero — pra reduzir tempo de pintura.
-      { rel: "preload", as: "image", href: nghcLogo.url, fetchpriority: "high" },
+      { rel: "preload", as: "image", href: nghcLogo.url, fetchPriority: "high" },
       // Antecipa handshake com o CDN do Discord (widget + avatares).
       { rel: "preconnect", href: "https://discord.com" },
       { rel: "preconnect", href: "https://cdn.discordapp.com", crossOrigin: "anonymous" },
@@ -1084,7 +1084,7 @@ function MembersSection() {
               height={500}
               title="Discord widget"
               loading="lazy"
-              allowTransparency
+              allowtransparency=""
               frameBorder={0}
               sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"
               className="mx-auto block h-[500px] w-full max-w-[350px] rounded-xl"
