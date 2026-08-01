@@ -17,7 +17,7 @@ const PAGE_SIZE = 48;
 // paleta determinística p/ tile de imagem improvisada
 const PALETTES: [string, string][] = [
   ["#7dd3fc", "#0369a1"], ["#f0abfc", "#7e22ce"], ["#fda4af", "#9f1239"],
-  ["#fcd34d", "#b45309"], ["#86efac", "#166534"], ["#a5b4fc", "#3730a3"],
+  ["#fcd34d", "#b45309"], ["#86efac", "#166534"], ["#c4b5fd", "#3730a3"],
   ["#fbcfe8", "#be185d"], ["#5eead4", "#115e59"], ["#fca5a5", "#991b1b"],
   ["#c4b5fd", "#5b21b6"], ["#fdba74", "#9a3412"], ["#bef264", "#3f6212"],
 ];

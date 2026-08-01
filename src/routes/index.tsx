@@ -38,7 +38,7 @@ const PLANS = [
     price: "R$ 0",
     period: "sempre",
     tone: "border-white/10 bg-white/[0.03]",
-    accent: "text-[#a5b4fc]",
+    accent: "text-[#c4b5fd]",
     cta: "Começar grátis",
     highlight: false,
     features: [
@@ -52,8 +52,8 @@ const PLANS = [
     name: "Premium",
     price: "R$ 9,90",
     period: "30 dias",
-    tone: "border-[#5865F2]/50 bg-[#5865F2]/[0.08]",
-    accent: "text-[#a5b4fc]",
+    tone: "border-[#818cf8]/50 bg-[#818cf8]/[0.08]",
+    accent: "text-[#c4b5fd]",
     cta: "Assinar 30 dias",
     highlight: true,
     features: [
@@ -67,8 +67,8 @@ const PLANS = [
     name: "Lifetime",
     price: "R$ 39,90",
     period: "pagamento único",
-    tone: "border-[#5865F2]/40 bg-[#5865F2]/[0.05]",
-    accent: "text-[#a5b4fc]",
+    tone: "border-[#818cf8]/40 bg-[#818cf8]/[0.05]",
+    accent: "text-[#c4b5fd]",
     cta: "Comprar lifetime",
     highlight: false,
     features: [
@@ -82,8 +82,8 @@ const PLANS = [
     name: "Boost",
     price: "Grátis",
     period: "boost o servidor",
-    tone: "border-[#5865F2]/40 bg-[#5865F2]/[0.05]",
-    accent: "text-[#a5b4fc]",
+    tone: "border-[#818cf8]/40 bg-[#818cf8]/[0.05]",
+    accent: "text-[#c4b5fd]",
     cta: "Boost o servidor",
     highlight: false,
     features: [
@@ -146,7 +146,7 @@ function Index() {
               style={{ filter: "drop-shadow(0 0 10px color-mix(in oklab, var(--blurple) 60%, transparent))" }}
             />
             <span className="text-sm font-semibold tracking-tight sm:text-base">
-              Neighbors<span className="text-[#a5b4fc]">hub</span>
+              Neighbors<span className="text-[#c4b5fd]">hub</span>
             </span>
           </Link>
           <nav className="hidden items-center gap-6 text-sm text-slate-400 md:flex">
@@ -157,7 +157,7 @@ function Index() {
           </nav>
           <Link
             to="/hub"
-            className="rounded-full bg-[#5865F2] px-4 py-2 text-xs font-semibold text-white shadow-lg shadow-indigo-500/30 transition hover:bg-[#4752c4] sm:text-sm"
+            className="rounded-full bg-[#818cf8] px-4 py-2 text-xs font-semibold text-white shadow-lg shadow-indigo-500/30 transition hover:bg-[#4752c4] sm:text-sm"
           >
             Abrir Hub
           </Link>
@@ -171,7 +171,7 @@ function Index() {
             <h1 className="text-5xl font-black leading-[1.05] tracking-tight sm:text-6xl md:text-7xl">
               Complete missões pra
               <br />
-              <span className="text-[#5865F2]">dominar o Discord.</span>
+              <span className="text-[#818cf8]">dominar o Discord.</span>
             </h1>
             <p className="mt-5 max-w-md text-sm leading-relaxed text-slate-400 sm:text-base">
               Auto-quests em segundo plano, detecção de plano em tempo real e farm de Orbs sem
@@ -181,7 +181,7 @@ function Index() {
             <div className="mt-8 flex flex-wrap gap-3">
               <Link
                 to="/hub"
-                className="inline-flex items-center gap-2 rounded-md bg-[#5865F2] px-6 py-3 text-xs font-bold uppercase tracking-widest text-white shadow-lg shadow-indigo-500/30 transition hover:bg-[#4752c4]"
+                className="inline-flex items-center gap-2 rounded-md bg-[#818cf8] px-6 py-3 text-xs font-bold uppercase tracking-widest text-white shadow-lg shadow-indigo-500/30 transition hover:bg-[#4752c4]"
               >
                 Abrir o Hub <ArrowRight className="h-3.5 w-3.5" />
               </Link>
@@ -189,7 +189,7 @@ function Index() {
                 href="https://discord.com"
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex items-center gap-2 rounded-md border border-[#5865F2]/40 bg-[#5865F2]/10 px-6 py-3 text-xs font-bold uppercase tracking-widest text-white backdrop-blur transition hover:border-[#5865F2]/70 hover:bg-[#5865F2]/20"
+                className="inline-flex items-center gap-2 rounded-md border border-[#818cf8]/40 bg-[#818cf8]/10 px-6 py-3 text-xs font-bold uppercase tracking-widest text-white backdrop-blur transition hover:border-[#818cf8]/70 hover:bg-[#818cf8]/20"
               >
                 Entrar no Discord
               </a>
@@ -230,7 +230,7 @@ function Index() {
                 style={{ animation: "spin-slow 28s linear infinite" }}
               />
               <div
-                className="absolute h-[85%] w-[85%] rounded-full border border-[#5865F2]/20"
+                className="absolute h-[85%] w-[85%] rounded-full border border-[#818cf8]/20"
                 style={{ animation: "spin-slow 22s linear infinite reverse" }}
               />
               {[0, 1, 2, 3, 4].map((i) => (
@@ -259,7 +259,7 @@ function Index() {
                   <linearGradient id="bolt-grad" x1="50%" y1="0%" x2="50%" y2="100%">
                     <stop offset="0%" stopColor="#ffffff" />
                     <stop offset="35%" stopColor="#c4b5fd" />
-                    <stop offset="100%" stopColor="#5865F2" />
+                    <stop offset="100%" stopColor="#818cf8" />
                   </linearGradient>
                   <filter id="bolt-glow" x="-60%" y="-20%" width="220%" height="140%">
                     <feGaussianBlur stdDeviation="4" result="blur" />
@@ -304,8 +304,8 @@ function Index() {
               </div>
             </div>
             <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 rotate-45">
-              <div className="grid h-6 w-6 place-items-center border border-[#5865F2]/60">
-                <span className="block h-1.5 w-1.5 rounded-sm bg-[#5865F2]" />
+              <div className="grid h-6 w-6 place-items-center border border-[#818cf8]/60">
+                <span className="block h-1.5 w-1.5 rounded-sm bg-[#818cf8]" />
               </div>
             </div>
 
@@ -352,11 +352,11 @@ function Index() {
       <section id="missoes" className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20">
         <div className="grid items-center gap-10 md:grid-cols-2">
           <div>
-            <div className="inline-flex items-center gap-2 rounded-full border border-[#5865F2]/30 bg-[#5865F2]/10 px-3 py-1 text-[10px] font-mono uppercase tracking-widest text-[#a5b4fc]">
+            <div className="inline-flex items-center gap-2 rounded-full border border-[#818cf8]/30 bg-[#818cf8]/10 px-3 py-1 text-[10px] font-mono uppercase tracking-widest text-[#c4b5fd]">
               <Sparkles className="h-3 w-3" /> auto quests
             </div>
             <h2 className="mt-4 text-4xl font-bold leading-tight tracking-tight sm:text-5xl">
-              Missões do Discord no <span className="text-[#5865F2]">automático</span>, num só lugar
+              Missões do Discord no <span className="text-[#818cf8]">automático</span>, num só lugar
             </h2>
             <p className="mt-4 max-w-lg text-slate-400">
               O hub detecta suas quests disponíveis, executa vídeo e jogo em background e mostra o
@@ -378,7 +378,7 @@ function Index() {
                 },
               ].map((f) => (
                 <li key={f.t} className="flex gap-3">
-                  <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-[#5865F2]" />
+                  <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-[#818cf8]" />
                   <div>
                     <div className="font-semibold text-white">{f.t}</div>
                     <div className="text-slate-400">{f.d}</div>
@@ -400,7 +400,7 @@ function Index() {
               <div className="grid grid-cols-[80px_1fr] gap-3">
                 {/* sidebar */}
                 <div className="space-y-2 rounded-lg bg-white/[0.03] p-2">
-                  <div className="h-2 w-full rounded bg-[#5865F2]/60" />
+                  <div className="h-2 w-full rounded bg-[#818cf8]/60" />
                   <div className="h-1.5 w-3/4 rounded bg-white/10" />
                   <div className="h-1.5 w-2/3 rounded bg-white/10" />
                   <div className="h-1.5 w-4/5 rounded bg-white/10" />
@@ -411,7 +411,7 @@ function Index() {
                   {/* quest cards */}
                   {[
                     { l: "Assista Fortnite Trailer", p: 100, tone: "bg-emerald-500" },
-                    { l: "Jogue Valorant 15 min", p: 62, tone: "bg-[#5865F2]" },
+                    { l: "Jogue Valorant 15 min", p: 62, tone: "bg-[#818cf8]" },
                     { l: "Assista LoL Highlights", p: 28, tone: "bg-fuchsia-500" },
                   ].map((q) => (
                     <div key={q.l} className="rounded-lg border border-white/5 bg-white/[0.03] p-2.5">
@@ -429,8 +429,8 @@ function Index() {
                     <svg viewBox="0 0 200 40" className="h-10 w-full">
                       <defs>
                         <linearGradient id="ln" x1="0" x2="0" y1="0" y2="1">
-                          <stop offset="0%" stopColor="#5865F2" stopOpacity="0.6" />
-                          <stop offset="100%" stopColor="#5865F2" stopOpacity="0" />
+                          <stop offset="0%" stopColor="#818cf8" stopOpacity="0.6" />
+                          <stop offset="100%" stopColor="#818cf8" stopOpacity="0" />
                         </linearGradient>
                       </defs>
                       <path
@@ -440,7 +440,7 @@ function Index() {
                       <path
                         d="M0 30 L 30 25 L 60 27 L 90 18 L 120 22 L 150 10 L 180 14 L 200 6"
                         fill="none"
-                        stroke="#a5b4fc"
+                        stroke="#c4b5fd"
                         strokeWidth="1.5"
                       />
                     </svg>
@@ -460,8 +460,8 @@ function Index() {
       {/* Estatísticas em Tempo Real */}
       <section id="stats" className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20">
         <div className="text-center">
-          <div className="inline-flex items-center gap-2 rounded-full border border-[#5865F2]/30 bg-[#5865F2]/10 px-3 py-1 font-mono text-[10px] uppercase tracking-[0.3em] text-[#a5b4fc]">
-            <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-[#a5b4fc]" />
+          <div className="inline-flex items-center gap-2 rounded-full border border-[#818cf8]/30 bg-[#818cf8]/10 px-3 py-1 font-mono text-[10px] uppercase tracking-[0.3em] text-[#c4b5fd]">
+            <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-[#c4b5fd]" />
             Ao vivo
           </div>
           <h2 className="mt-4 text-3xl font-bold tracking-tight text-white md:text-5xl">
@@ -497,21 +497,21 @@ function Index() {
             return (
               <div
                 key={s.label}
-                className="group relative overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-br from-[#131624]/80 to-[#0b0d12]/60 p-6 text-center backdrop-blur-xl transition hover:border-[#5865F2]/40 hover:shadow-[0_20px_60px_-20px_rgba(88,101,242,0.45)]"
+                className="group relative overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-br from-[#131624]/80 to-[#0b0d12]/60 p-6 text-center backdrop-blur-xl transition hover:border-[#818cf8]/40 hover:shadow-[0_20px_60px_-20px_rgba(88,101,242,0.45)]"
               >
                 <div
                   aria-hidden
-                  className="pointer-events-none absolute inset-x-0 -top-24 mx-auto h-40 w-40 rounded-full bg-[#5865F2]/20 blur-3xl opacity-0 transition group-hover:opacity-100"
+                  className="pointer-events-none absolute inset-x-0 -top-24 mx-auto h-40 w-40 rounded-full bg-[#818cf8]/20 blur-3xl opacity-0 transition group-hover:opacity-100"
                 />
                 <div
-                  className="relative mx-auto grid h-14 w-14 place-items-center rounded-xl bg-[#5865F2] text-white shadow-lg shadow-indigo-500/40"
+                  className="relative mx-auto grid h-14 w-14 place-items-center rounded-xl bg-[#818cf8] text-white shadow-lg shadow-indigo-500/40"
                 >
                   <Icon className="h-6 w-6" />
                 </div>
                 <div className="relative mt-5 text-4xl font-black tracking-tight text-white sm:text-5xl">
                   {s.value}
                 </div>
-                <div className="relative mt-1.5 text-sm font-semibold text-[#a5b4fc]">
+                <div className="relative mt-1.5 text-sm font-semibold text-[#c4b5fd]">
                   {s.label}
                 </div>
                 <p className="relative mt-3 text-xs leading-relaxed text-slate-400 sm:text-sm">
@@ -532,8 +532,8 @@ function Index() {
       {/* Por que Neighborshub — 2x2 feature grid */}
       <section id="como-funciona" className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20">
         <div className="max-w-2xl">
-          <div className="inline-flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.3em] text-[#a5b4fc]">
-            <span className="h-3 w-0.5 bg-[#5865F2]" /> por que neighborshub
+          <div className="inline-flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.3em] text-[#c4b5fd]">
+            <span className="h-3 w-0.5 bg-[#818cf8]" /> por que neighborshub
           </div>
           <h2 className="mt-3 text-3xl font-bold tracking-tight md:text-5xl">
             Feito por quem vive Discord cheio.
@@ -578,7 +578,7 @@ function Index() {
                 key={f.title}
                 className="relative rounded-2xl border border-white/10 bg-white/[0.02] p-6 backdrop-blur-md transition hover:border-white/20 hover:bg-white/[0.04]"
               >
-                <Icon className="h-5 w-5 text-[#5865F2]" />
+                <Icon className="h-5 w-5 text-[#818cf8]" />
                 <h3 className="mt-8 text-lg font-bold text-white">{f.title}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-slate-400">{f.body}</p>
               </div>
@@ -593,27 +593,27 @@ function Index() {
 
       {/* Aviso */}
       <section id="aviso" className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20">
-        <div className="relative overflow-hidden rounded-2xl border border-[#5865F2]/25 bg-gradient-to-br from-[#5865F2]/[0.08] via-[#0b0d12]/60 to-[#0b0d12]/40 p-6 shadow-2xl shadow-indigo-500/10 backdrop-blur-xl md:p-10">
+        <div className="relative overflow-hidden rounded-2xl border border-[#818cf8]/25 bg-gradient-to-br from-[#818cf8]/[0.08] via-[#0b0d12]/60 to-[#0b0d12]/40 p-6 shadow-2xl shadow-indigo-500/10 backdrop-blur-xl md:p-10">
           <div
             aria-hidden
-            className="pointer-events-none absolute -top-24 -right-24 h-64 w-64 rounded-full bg-[#5865F2]/20 blur-3xl"
+            className="pointer-events-none absolute -top-24 -right-24 h-64 w-64 rounded-full bg-[#818cf8]/20 blur-3xl"
           />
           <div
             aria-hidden
-            className="pointer-events-none absolute -bottom-32 -left-20 h-72 w-72 rounded-full bg-[#5865F2]/10 blur-3xl"
+            className="pointer-events-none absolute -bottom-32 -left-20 h-72 w-72 rounded-full bg-[#818cf8]/10 blur-3xl"
           />
 
           <div className="relative flex flex-col gap-6 md:flex-row md:items-start">
             <div
-              className="grid h-14 w-14 shrink-0 place-items-center rounded-2xl border border-[#5865F2]/40 bg-[#5865F2]/15 text-2xl"
+              className="grid h-14 w-14 shrink-0 place-items-center rounded-2xl border border-[#818cf8]/40 bg-[#818cf8]/15 text-2xl"
               style={{ boxShadow: "0 0 30px -6px rgba(88,101,242,0.55)" }}
             >
               ⚠️
             </div>
 
             <div className="flex-1">
-              <div className="inline-flex items-center gap-2 rounded-full border border-[#5865F2]/30 bg-[#5865F2]/10 px-3 py-1 font-mono text-[10px] uppercase tracking-[0.3em] text-[#a5b4fc]">
-                <span className="h-1.5 w-1.5 rounded-full bg-[#a5b4fc]" />
+              <div className="inline-flex items-center gap-2 rounded-full border border-[#818cf8]/30 bg-[#818cf8]/10 px-3 py-1 font-mono text-[10px] uppercase tracking-[0.3em] text-[#c4b5fd]">
+                <span className="h-1.5 w-1.5 rounded-full bg-[#c4b5fd]" />
                 Aviso
               </div>
 
@@ -626,7 +626,7 @@ function Index() {
                   href="https://discord.com/terms"
                   target="_blank"
                   rel="noreferrer"
-                  className="font-medium text-[#a5b4fc] underline decoration-[#5865F2]/60 underline-offset-2 transition hover:text-white"
+                  className="font-medium text-[#c4b5fd] underline decoration-[#818cf8]/60 underline-offset-2 transition hover:text-white"
                 >
                   Termos de Serviço do Discord
                 </a>{" "}
@@ -645,7 +645,7 @@ function Index() {
                     key={item.t}
                     className="flex items-start gap-3 rounded-xl border border-white/5 bg-white/[0.02] p-3 backdrop-blur"
                   >
-                    <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[#5865F2]" />
+                    <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[#818cf8]" />
                     <div>
                       <div className="text-xs font-semibold uppercase tracking-wider text-white">
                         {item.t}
@@ -677,7 +677,7 @@ function Index() {
                   style={{ filter: "drop-shadow(0 0 12px color-mix(in oklab, var(--blurple) 55%, transparent))" }}
                 />
                 <span className="text-lg font-semibold tracking-tight">
-                  Neighbors<span className="text-[#a5b4fc]">hub</span>
+                  Neighbors<span className="text-[#c4b5fd]">hub</span>
                 </span>
               </Link>
               <p className="mt-6 max-w-sm text-sm leading-relaxed text-slate-400">
@@ -734,7 +734,7 @@ function Index() {
               </a>
               <span className="mx-2 text-slate-700">·</span>
               Código-fonte fornecido por{" "}
-              <span className="font-semibold text-[#a5b4fc]">isnouu</span>
+              <span className="font-semibold text-[#c4b5fd]">isnouu</span>
             </div>
 
           </div>
@@ -929,7 +929,7 @@ function LiveStatsRow() {
         value={
           <>
             {ms.toFixed(2)}
-            <span className="text-[#5865F2]">ms</span>
+            <span className="text-[#818cf8]">ms</span>
           </>
         }
         label="de impacto no discord"
@@ -970,7 +970,7 @@ function StatCell({
       </div>
       <div className="mt-2 flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.25em] text-slate-500">
         {(loading || pulse) && (
-          <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-[#5865F2]" />
+          <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-[#818cf8]" />
         )}
         {label}
       </div>
@@ -1011,7 +1011,7 @@ function MembersSection() {
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <div className="max-w-2xl">
           <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 font-mono text-[10px] uppercase tracking-[0.3em] text-slate-400 backdrop-blur">
-            membros {presence !== null && <span className="text-[#a5b4fc]">· {presence} online</span>}
+            membros {presence !== null && <span className="text-[#c4b5fd]">· {presence} online</span>}
           </div>
           <h2 className="mt-4 text-3xl font-bold tracking-tight md:text-4xl">
             Quem já está no servidor
@@ -1041,9 +1041,9 @@ function MembersSection() {
                 <span
                   className={`absolute -bottom-0.5 -right-0.5 h-2.5 w-2.5 rounded-full border-2 border-[#0b0d12] ${
                     m.status === "online"
-                      ? "bg-[#5865F2]"
+                      ? "bg-[#818cf8]"
                       : m.status === "idle"
-                        ? "bg-[#a5b4fc]"
+                        ? "bg-[#c4b5fd]"
                         : m.status === "dnd"
                           ? "bg-[#4752c4]"
                           : "bg-slate-500"
@@ -1059,8 +1059,8 @@ function MembersSection() {
       <div className="mx-auto mt-10 max-w-6xl px-4 sm:px-6">
         <div className="grid gap-6 md:grid-cols-[1fr_auto] md:items-center">
           <div className="glass-panel p-6 md:p-8">
-            <div className="inline-flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.3em] text-[#a5b4fc]">
-              <span className="h-3 w-0.5 bg-[#5865F2]" /> ao vivo
+            <div className="inline-flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.3em] text-[#c4b5fd]">
+              <span className="h-3 w-0.5 bg-[#818cf8]" /> ao vivo
             </div>
             <h3 className="mt-3 text-2xl font-bold tracking-tight md:text-3xl">
               Servidor oficial no Discord
@@ -1072,7 +1072,7 @@ function MembersSection() {
               href={GUILD_INVITE}
               target="_blank"
               rel="noreferrer"
-              className="mt-5 inline-flex items-center gap-2 rounded-md bg-[#5865F2] px-4 py-2.5 text-xs font-bold uppercase tracking-widest text-white transition hover:bg-[#4752c4]"
+              className="mt-5 inline-flex items-center gap-2 rounded-md bg-[#818cf8] px-4 py-2.5 text-xs font-bold uppercase tracking-widest text-white transition hover:bg-[#4752c4]"
             >
               Entrar no servidor <ArrowRight className="h-3.5 w-3.5" />
             </a>
@@ -1112,8 +1112,8 @@ function PlansShowcase() {
     <section id="planos" className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20">
       <div className="flex items-start justify-between gap-6">
         <div className="max-w-2xl">
-          <div className="inline-flex items-center gap-2 rounded-full border border-[#5865F2]/30 bg-[#5865F2]/10 px-3 py-1 font-mono text-[10px] uppercase tracking-[0.3em] text-[#a5b4fc]">
-            <span className="h-1 w-1 rounded-full bg-[#5865F2]" /> planos
+          <div className="inline-flex items-center gap-2 rounded-full border border-[#818cf8]/30 bg-[#818cf8]/10 px-3 py-1 font-mono text-[10px] uppercase tracking-[0.3em] text-[#c4b5fd]">
+            <span className="h-1 w-1 rounded-full bg-[#818cf8]" /> planos
           </div>
           <h2 className="mt-4 text-4xl font-bold leading-tight tracking-tight md:text-5xl">
             Tudo pronto pra <br className="hidden sm:block" />
@@ -1121,8 +1121,8 @@ function PlansShowcase() {
           </h2>
         </div>
         <div className="hidden shrink-0 rotate-45 md:block">
-          <div className="grid h-12 w-12 place-items-center border border-[#5865F2]/50">
-            <span className="block h-2 w-2 rounded-sm bg-[#5865F2]" />
+          <div className="grid h-12 w-12 place-items-center border border-[#818cf8]/50">
+            <span className="block h-2 w-2 rounded-sm bg-[#818cf8]" />
           </div>
         </div>
       </div>
@@ -1142,7 +1142,7 @@ function PlansShowcase() {
                 onClick={() => setActive(i)}
                 className={`whitespace-nowrap rounded-md px-3 py-1.5 text-xs font-semibold transition ${
                   i === active
-                    ? "border-b-2 border-[#5865F2] text-white"
+                    ? "border-b-2 border-[#818cf8] text-white"
                     : "text-slate-500 hover:text-slate-300"
                 }`}
               >
@@ -1164,17 +1164,17 @@ function PlansShowcase() {
               }}
             />
             <div className="relative">
-              <div className={`inline-flex rounded-md bg-[#5865F2]/20 px-2 py-0.5 font-mono text-[10px] uppercase tracking-widest ${plan.accent}`}>
+              <div className={`inline-flex rounded-md bg-[#818cf8]/20 px-2 py-0.5 font-mono text-[10px] uppercase tracking-widest ${plan.accent}`}>
                 {plan.highlight ? "mais popular" : "plano"}
               </div>
               <h3 className="mt-4 text-5xl font-black uppercase leading-none tracking-tight">
                 {plan.name}
               </h3>
-              <div className="mt-4 h-px w-16 bg-[#5865F2]" />
+              <div className="mt-4 h-px w-16 bg-[#818cf8]" />
               <ul className="mt-5 space-y-2 text-sm text-slate-300">
                 {plan.features.map((f) => (
                   <li key={f} className="flex gap-2">
-                    <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-sm bg-[#5865F2]" />
+                    <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-sm bg-[#818cf8]" />
                     <span>{f}</span>
                   </li>
                 ))}
@@ -1198,7 +1198,7 @@ function PlansShowcase() {
               <ul className="mt-5 grid grid-cols-1 gap-2 text-xs text-slate-300 sm:grid-cols-2">
                 {plan.features.slice(0, 4).map((f) => (
                   <li key={f} className="flex gap-2">
-                    <CheckCircle2 className="mt-0.5 h-3.5 w-3.5 shrink-0 text-[#5865F2]" />
+                    <CheckCircle2 className="mt-0.5 h-3.5 w-3.5 shrink-0 text-[#818cf8]" />
                     <span>{f}</span>
                   </li>
                 ))}
@@ -1207,14 +1207,14 @@ function PlansShowcase() {
             {plan.name === "Free" ? (
               <a
                 href="#free"
-                className="inline-flex items-center justify-center gap-2 rounded-md bg-[#5865F2] px-5 py-3 text-xs font-bold uppercase tracking-widest text-white transition hover:bg-[#4752c4]"
+                className="inline-flex items-center justify-center gap-2 rounded-md bg-[#818cf8] px-5 py-3 text-xs font-bold uppercase tracking-widest text-white transition hover:bg-[#4752c4]"
               >
                 Cadastrar no Free <ArrowRight className="h-3.5 w-3.5" />
               </a>
             ) : (
               <Link
                 to="/hub"
-                className="inline-flex items-center justify-center gap-2 rounded-md bg-[#5865F2] px-5 py-3 text-xs font-bold uppercase tracking-widest text-white transition hover:bg-[#4752c4]"
+                className="inline-flex items-center justify-center gap-2 rounded-md bg-[#818cf8] px-5 py-3 text-xs font-bold uppercase tracking-widest text-white transition hover:bg-[#4752c4]"
               >
                 {plan.cta} <ArrowRight className="h-3.5 w-3.5" />
               </Link>
@@ -1296,7 +1296,7 @@ function FreeSignup() {
                   onChange={(e) => setName(e.target.value)}
                   maxLength={40}
                   required
-                  className="mt-1.5 w-full rounded-md border border-white/10 bg-white/[0.03] px-3 py-2 text-sm text-white outline-none placeholder:text-slate-600 focus:border-[#5865F2]"
+                  className="mt-1.5 w-full rounded-md border border-white/10 bg-white/[0.03] px-3 py-2 text-sm text-white outline-none placeholder:text-slate-600 focus:border-[#818cf8]"
                   placeholder="Ex: davizinzkn"
                 />
               </label>
@@ -1309,13 +1309,13 @@ function FreeSignup() {
                   onChange={(e) => setDiscord(e.target.value)}
                   maxLength={40}
                   required
-                  className="mt-1.5 w-full rounded-md border border-white/10 bg-white/[0.03] px-3 py-2 text-sm text-white outline-none placeholder:text-slate-600 focus:border-[#5865F2]"
+                  className="mt-1.5 w-full rounded-md border border-white/10 bg-white/[0.03] px-3 py-2 text-sm text-white outline-none placeholder:text-slate-600 focus:border-[#818cf8]"
                   placeholder="@usuario"
                 />
               </label>
               <button
                 type="submit"
-                className="w-full rounded-md bg-[#5865F2] px-4 py-2.5 text-xs font-bold uppercase tracking-widest text-white transition hover:bg-[#4752c4]"
+                className="w-full rounded-md bg-[#818cf8] px-4 py-2.5 text-xs font-bold uppercase tracking-widest text-white transition hover:bg-[#4752c4]"
               >
                 Gerar meu código Free
               </button>
@@ -1351,7 +1351,7 @@ function FreeSignup() {
                 href={GUILD_INVITE}
                 target="_blank"
                 rel="noreferrer"
-                className="flex w-full items-center justify-center gap-2 rounded-md bg-[#5865F2] px-4 py-2.5 text-xs font-bold uppercase tracking-widest text-white transition hover:bg-[#4752c4]"
+                className="flex w-full items-center justify-center gap-2 rounded-md bg-[#818cf8] px-4 py-2.5 text-xs font-bold uppercase tracking-widest text-white transition hover:bg-[#4752c4]"
               >
                 Ir pro servidor abrir ticket <ArrowRight className="h-3.5 w-3.5" />
               </a>

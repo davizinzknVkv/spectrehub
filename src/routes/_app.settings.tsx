@@ -286,7 +286,7 @@ function EmailLoginForm({ onLogged }: { onLogged: () => void }) {
               value={login}
               onChange={(e) => setLogin(e.target.value)}
               placeholder="voce@exemplo.com"
-              className="mt-2 block w-full rounded-md border border-white/10 bg-black/40 px-3 py-3 text-base text-white placeholder:text-slate-500 focus:border-[#5865F2] focus:outline-none focus:ring-2 focus:ring-[#5865F2]/40 sm:text-sm"
+              className="mt-2 block w-full rounded-md border border-white/10 bg-black/40 px-3 py-3 text-base text-white placeholder:text-slate-500 focus:border-[#818cf8] focus:outline-none focus:ring-2 focus:ring-[#818cf8]/40 sm:text-sm"
             />
           </div>
           <div>
@@ -297,7 +297,7 @@ function EmailLoginForm({ onLogged }: { onLogged: () => void }) {
               <button
                 type="button"
                 onClick={() => setShowPw((v) => !v)}
-                className="font-mono text-[10px] uppercase tracking-widest text-slate-500 hover:text-[#a5b4fc]"
+                className="font-mono text-[10px] uppercase tracking-widest text-slate-500 hover:text-[#c4b5fd]"
               >
                 {showPw ? "ocultar" : "mostrar"}
               </button>
@@ -309,14 +309,14 @@ function EmailLoginForm({ onLogged }: { onLogged: () => void }) {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="••••••••"
-              className="mt-2 block w-full rounded-md border border-white/10 bg-black/40 px-3 py-3 text-base text-white placeholder:text-slate-500 focus:border-[#5865F2] focus:outline-none focus:ring-2 focus:ring-[#5865F2]/40 sm:text-sm"
+              className="mt-2 block w-full rounded-md border border-white/10 bg-black/40 px-3 py-3 text-base text-white placeholder:text-slate-500 focus:border-[#818cf8] focus:outline-none focus:ring-2 focus:ring-[#818cf8]/40 sm:text-sm"
             />
           </div>
         </>
       ) : (
         <div className="space-y-3">
           <div>
-            <div className="font-mono text-[10px] uppercase tracking-[0.3em] text-[#a5b4fc]">
+            <div className="font-mono text-[10px] uppercase tracking-[0.3em] text-[#c4b5fd]">
               ◆ verificação 2fa
             </div>
             <p className="mt-1 text-xs text-slate-400">
@@ -340,7 +340,7 @@ function EmailLoginForm({ onLogged }: { onLogged: () => void }) {
                     }}
                     className={`flex-1 rounded-md px-3 py-1.5 font-mono text-[10px] font-semibold uppercase tracking-widest transition ${
                       active
-                        ? "bg-[#5865F2] text-white"
+                        ? "bg-[#818cf8] text-white"
                         : "text-slate-400 hover:text-white"
                     }`}
                   >
@@ -376,7 +376,7 @@ function EmailLoginForm({ onLogged }: { onLogged: () => void }) {
                 setMfaCode(cleaned);
               }}
               placeholder={mfaMethod === "backup" ? "xxxxxxxx" : "000000"}
-              className="mt-2 block w-full rounded-md border border-white/10 bg-black/40 px-3 py-3 text-center font-mono text-lg tracking-widest text-white placeholder:text-slate-500 focus:border-[#5865F2] focus:outline-none focus:ring-2 focus:ring-[#5865F2]/40"
+              className="mt-2 block w-full rounded-md border border-white/10 bg-black/40 px-3 py-3 text-center font-mono text-lg tracking-widest text-white placeholder:text-slate-500 focus:border-[#818cf8] focus:outline-none focus:ring-2 focus:ring-[#818cf8]/40"
             />
           </div>
 
@@ -387,7 +387,7 @@ function EmailLoginForm({ onLogged }: { onLogged: () => void }) {
               setMfaMethods([]);
               setMfaCode("");
             }}
-            className="font-mono text-[10px] uppercase tracking-widest text-slate-500 hover:text-[#a5b4fc]"
+            className="font-mono text-[10px] uppercase tracking-widest text-slate-500 hover:text-[#c4b5fd]"
           >
             ← voltar para email/senha
           </button>
@@ -402,8 +402,8 @@ function EmailLoginForm({ onLogged }: { onLogged: () => void }) {
       )}
 
       {!mfaTicket && discordCaptcha && (
-        <div className="space-y-2 rounded-lg border border-[#5865F2]/30 bg-[#5865F2]/5 p-3">
-          <div className="font-mono text-[10px] uppercase tracking-[0.3em] text-[#a5b4fc]">
+        <div className="space-y-2 rounded-lg border border-[#818cf8]/30 bg-[#818cf8]/5 p-3">
+          <div className="font-mono text-[10px] uppercase tracking-[0.3em] text-[#c4b5fd]">
             ◆ captcha do discord
           </div>
           <Hcaptcha
@@ -427,7 +427,7 @@ function EmailLoginForm({ onLogged }: { onLogged: () => void }) {
               !captchaToken ||
               (discordCaptcha ? !discordCaptchaToken : false))
         }
-        className="inline-flex w-full items-center justify-center gap-2 rounded-md bg-[#5865F2] px-5 py-3 font-mono text-xs font-semibold uppercase tracking-widest text-white transition hover:bg-[#4752c4] disabled:cursor-not-allowed disabled:opacity-40"
+        className="inline-flex w-full items-center justify-center gap-2 rounded-md bg-[#818cf8] px-5 py-3 font-mono text-xs font-semibold uppercase tracking-widest text-white transition hover:bg-[#4752c4] disabled:cursor-not-allowed disabled:opacity-40"
       >
         {loading
           ? "entrando…"
@@ -440,7 +440,7 @@ function EmailLoginForm({ onLogged }: { onLogged: () => void }) {
 
       <p className="font-mono text-[10px] leading-relaxed text-slate-500">
         Se o Discord pedir captcha, resolva o desafio acima. Como alternativa,
-        use a aba <span className="text-[#a5b4fc]">Token</span>.
+        use a aba <span className="text-[#c4b5fd]">Token</span>.
       </p>
 
     </form>

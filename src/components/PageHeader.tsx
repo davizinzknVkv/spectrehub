@@ -17,7 +17,7 @@ export function PageHeader({ eyebrow, title, highlight, description, icon: Icon,
       <div className="relative flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
         <div className="min-w-0">
           {eyebrow && (
-            <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.3em] text-[#a5b4fc]">
+            <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.3em] text-[#c4b5fd]">
               {Icon && <Icon className="h-3 w-3" />}
               {eyebrow}
             </div>
@@ -27,7 +27,7 @@ export function PageHeader({ eyebrow, title, highlight, description, icon: Icon,
             {highlight && (
               <>
                 {" "}
-                <span className="bg-gradient-to-r from-[#a5b4fc] via-[#c4b5fd] to-[#f0abfc] bg-clip-text text-transparent">
+                <span className="bg-gradient-to-r from-[#c4b5fd] via-[#c4b5fd] to-[#f0abfc] bg-clip-text text-transparent">
                   {highlight}
                 </span>
               </>

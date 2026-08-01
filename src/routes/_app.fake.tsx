@@ -17,7 +17,7 @@ function FakePage() {
   const [message, setMessage] = useState("mano acabei de ganhar nitro de graça 🤯");
   const [avatarUrl, setAvatarUrl] = useState(DEFAULT_AVATAR);
   const [timestamp, setTimestamp] = useState("hoje às 14:32");
-  const [roleColor, setRoleColor] = useState("#5865F2");
+  const [roleColor, setRoleColor] = useState("#818cf8");
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   const draw = () => {
@@ -65,7 +65,7 @@ function FakePage() {
     };
     img.onerror = () => {
       // fallback círculo cinza
-      ctx.fillStyle = "#5865F2";
+      ctx.fillStyle = "#818cf8";
       ctx.beginPath();
       ctx.arc(60, 60, 40, 0, Math.PI * 2);
       ctx.fill();
