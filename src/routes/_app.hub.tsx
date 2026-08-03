@@ -1395,7 +1395,7 @@ export const MissionCard = memo(function MissionCard({
         <div
           className={`inline-flex w-fit items-center gap-2 rounded-md border px-2.5 py-1 text-xs ${
             isOrbs
-              ? "border-amber-400/30 bg-amber-500-500/10 text-amber-300"
+              ? "border-amber-400/30 bg-amber-500/10 text-amber-300"
               : "border-white/10 bg-black/40 text-slate-400"
           }`}
         >
@@ -1498,7 +1498,7 @@ export function CaptchaModal({
           {label ?? quest?.questName ?? "Antes de executar, resolva o desafio."}
         </p>
 
-        <div className="mt-4 rounded-lg border border-amber-400/40 bg-amber-500-500/10 p-3">
+        <div className="mt-4 rounded-lg border border-amber-400/40 bg-amber-500/10 p-3">
           <div className="font-mono text-[10px] uppercase tracking-[0.25em] text-amber-300">
             ⚠ aviso de risco
           </div>
@@ -1854,7 +1854,7 @@ function NotificationsCard() {
               : it.tone === "cyan"
                 ? "border-[#818cf8]/30 bg-[#818cf8]/5 text-[#c4b5fd]"
                 : it.tone === "amber"
-                  ? "border-amber-400/30 bg-amber-500-500/5 text-amber-300"
+                  ? "border-amber-400/30 bg-amber-500/5 text-amber-300"
                   : "border-rose-400/30 bg-rose-500/5 text-rose-400";
           return (
             <li key={i} className={`rounded-lg border px-3 py-2 ${tone}`}>
