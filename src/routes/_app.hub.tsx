@@ -633,18 +633,25 @@ function HubPage() {
 
           </div>
           {user?.id && (
-            <div className="flex shrink-0 flex-wrap gap-2 self-start sm:self-end">
+            <div className="flex shrink-0 flex-wrap gap-1.5 self-start sm:self-end">
               <button
                 onClick={copyId}
-                className="rounded-lg border border-white/10 bg-transparent px-3.5 py-2 font-mono text-[10px] uppercase tracking-[0.2em] text-slate-300 transition-all duration-200 hover:border-[#a78bfa]/50 hover:text-[#c4b5fd]"
+                className="rounded-md border border-white/[0.09] bg-white/[0.02] px-2.5 py-1.5 font-mono text-[9px] uppercase tracking-[0.18em] text-slate-300 transition-all duration-200 hover:border-[#a78bfa]/50 hover:text-[#c4b5fd]"
               >
                 copiar id
+              </button>
+              <button
+                onClick={copyAvatar}
+                disabled={!avatarUrl}
+                className="rounded-md border border-white/[0.09] bg-white/[0.02] px-2.5 py-1.5 font-mono text-[9px] uppercase tracking-[0.18em] text-slate-300 transition-all duration-200 hover:border-[#a78bfa]/50 hover:text-[#c4b5fd] disabled:cursor-not-allowed disabled:opacity-40"
+              >
+                copiar foto
               </button>
               <a
                 href={`https://discord.com/users/${user.id}`}
                 target="_blank"
                 rel="noreferrer"
-                className="rounded-lg border border-white/10 bg-transparent px-3.5 py-2 text-center font-mono text-[10px] uppercase tracking-[0.2em] text-slate-300 transition-all duration-200 hover:border-[#818cf8]/50 hover:text-[#c4b5fd]"
+                className="rounded-md border border-white/[0.09] bg-white/[0.02] px-2.5 py-1.5 text-center font-mono text-[9px] uppercase tracking-[0.18em] text-slate-300 transition-all duration-200 hover:border-[#818cf8]/50 hover:text-[#c4b5fd]"
               >
                 abrir perfil
               </a>
@@ -653,21 +660,22 @@ function HubPage() {
         </div>
 
         {/* Bio */}
-        <div className="border-t border-white/[0.06] px-6 py-8 sm:px-10">
-          <div className="mb-3 font-mono text-[10px] uppercase tracking-[0.3em] text-slate-500">
+        <div className="border-t border-white/[0.06] px-5 py-4 sm:px-7 sm:py-5">
+          <div className="mb-2 font-mono text-[10px] uppercase tracking-[0.3em] text-slate-500">
             <span className="mr-1 text-[#c4b5fd]">◆</span> bio
           </div>
           {stats.bio ? (
-            <p className="max-w-3xl whitespace-pre-wrap text-sm leading-7 text-slate-300">{stats.bio}</p>
+            <p className="max-w-3xl whitespace-pre-wrap text-sm leading-6 text-slate-300">{stats.bio}</p>
           ) : (
-            <p className="text-sm leading-7 text-slate-600">
+            <p className="text-sm leading-6 text-slate-600">
               Este usuário ainda não adicionou uma bio.
             </p>
           )}
         </div>
 
         {/* Stat grid (primary) */}
-        <div className="grid gap-4 border-t border-white/[0.06] px-6 py-8 sm:grid-cols-2 sm:px-10 lg:grid-cols-3">
+        <div className="grid gap-2.5 border-t border-white/[0.06] px-5 py-5 sm:grid-cols-3 sm:px-7 lg:grid-cols-6">
+
 
           <StatCard
             label="Servidores"
