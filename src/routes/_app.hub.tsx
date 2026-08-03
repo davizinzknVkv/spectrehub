@@ -1189,31 +1189,32 @@ function InfoField({
   const hidden = sensitive && !revealed && value !== "—";
   const shown = hidden ? "•".repeat(Math.min(value.length, 14)) : value;
   return (
-    <div className="rounded-lg border border-white/10 bg-black/40 p-3">
-      <div className="flex items-center justify-between gap-2">
-        <div className="font-mono text-[10px] uppercase tracking-[0.25em] text-slate-500">
-          {label}
-        </div>
-        <div className="flex items-center gap-1.5">
-          {badge && (
-            <span className={`rounded border px-1.5 py-0.5 font-mono text-[9px] uppercase tracking-widest ${tone}`}>
-              {badge}
-            </span>
-          )}
-          {sensitive && value !== "—" && (
-            <button
-              onClick={() => setRevealed((v) => !v)}
-              className="rounded border border-white/10 px-1.5 py-0.5 font-mono text-[9px] uppercase tracking-widest text-slate-500 hover:border-[#818cf8]/40 hover:text-[#c4b5fd]"
-            >
-              {revealed ? "ocultar" : "mostrar"}
-            </button>
-          )}
-        </div>
+    <div className="group rounded-xl border border-white/[0.07] bg-[#111111]/70 p-5 transition-all duration-300 hover:border-white/[0.14] hover:bg-[#141414]/90">
+      <div className="font-mono text-[10px] uppercase tracking-[0.28em] text-slate-500">
+        {label}
       </div>
-      <div className="mt-1.5 truncate text-sm text-white" title={revealed ? value : undefined}>
+      <div
+        className="mt-3 truncate text-sm text-white/90 transition-opacity duration-300"
+        title={revealed ? value : undefined}
+      >
         {shown}
       </div>
-      {hint && <div className="mt-0.5 font-mono text-[10px] text-slate-500">{hint}</div>}
+      <div className="mt-3 flex items-center gap-2">
+        {badge && (
+          <span className={`rounded-md border px-2 py-0.5 font-mono text-[9px] uppercase tracking-[0.2em] ${tone}`}>
+            {badge}
+          </span>
+        )}
+        {sensitive && value !== "—" && (
+          <button
+            onClick={() => setRevealed((v) => !v)}
+            className="rounded-md border border-white/10 px-2 py-0.5 font-mono text-[9px] uppercase tracking-[0.2em] text-slate-500 transition-colors duration-200 hover:border-[#818cf8]/40 hover:text-[#c4b5fd]"
+          >
+            {revealed ? "ocultar" : "mostrar"}
+          </button>
+        )}
+        {hint && <span className="font-mono text-[10px] text-slate-600">{hint}</span>}
+      </div>
     </div>
   );
 }
