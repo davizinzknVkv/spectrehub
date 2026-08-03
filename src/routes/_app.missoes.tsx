@@ -10,8 +10,8 @@ import {
 } from "@/lib/quest-runner";
 import { useQuestStore, type Quest } from "@/lib/quest-store";
 import { PageHeader } from "@/components/PageHeader";
-import { Button, Badge } from "@/components/ui/ds";
-import { Target } from "lucide-react";
+import { Button, Badge, EmptyState as DSEmptyState } from "@/components/ui/ds";
+import { Target, KeyRound } from "lucide-react";
 import {
   CaptchaModal,
   EmptyState,
@@ -119,20 +119,21 @@ function MissoesPage() {
 
   if (!creds) {
     return (
-      <div className="mx-auto max-w-2xl">
-        <div className="ds-card">
-          <div className="ds-label">status --token</div>
-          <h2 className="ds-h2 mt-3">Nenhum token configurado</h2>
-          <p className="mt-2 max-w-md ds-body">
-            Configure seu token do Discord para carregar e executar missões.
-          </p>
-          <Link to="/settings" className="mt-6 inline-block">
-            <Button variant="primary">→ configurar token</Button>
-          </Link>
-        </div>
+      <div className="mx-auto w-full max-w-xl">
+        <DSEmptyState
+          icon={KeyRound}
+          title="Nenhum token configurado"
+          description="Configure seu token do Discord (ou entre com email e senha) para carregar e executar missões."
+          action={
+            <Link to="/settings">
+              <Button variant="primary">→ configurar login</Button>
+            </Link>
+          }
+        />
       </div>
     );
   }
+
 
   return (
     <div className="page-stack">
