@@ -607,7 +607,7 @@ function HubPage() {
                             />
                           </button>
                         </TooltipTrigger>
-                        <TooltipContent side="top" className="font-mono text-[11px]">
+                        <TooltipContent side="top" className={TOOLTIP_CLS}>
                           {b.label}
                         </TooltipContent>
                       </Tooltip>
