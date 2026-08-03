@@ -8,7 +8,7 @@ import { verifyTurnstile } from "@/lib/turnstile.functions";
 import { Turnstile } from "@/components/Turnstile";
 import { Hcaptcha } from "@/components/Hcaptcha";
 import { PageHeader } from "@/components/PageHeader";
-import { KeyRound, Mail, type LucideIcon } from "lucide-react";
+import { KeyRound, Mail, ShieldCheck, type LucideIcon } from "lucide-react";
 import { Badge, Button, Card, Field, Input } from "@/components/ui/ds";
 
 
