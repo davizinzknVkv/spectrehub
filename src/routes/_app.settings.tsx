@@ -184,6 +184,8 @@ function EmailLoginForm({ onLogged }: { onLogged: () => void }) {
     rqtoken?: string;
   } | null>(null);
   const [discordCaptchaToken, setDiscordCaptchaToken] = useState<string | null>(null);
+  // true depois que o Turnstile foi validado no servidor (token é single-use)
+  const [humanVerified, setHumanVerified] = useState(false);
 
   const codeMaxLen = mfaMethod === "backup" ? 8 : 6;
   const codeMinLen = mfaMethod === "backup" ? 8 : 6;
