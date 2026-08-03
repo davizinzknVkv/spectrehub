@@ -9,7 +9,7 @@ import { Turnstile } from "@/components/Turnstile";
 import { Hcaptcha } from "@/components/Hcaptcha";
 import { PageHeader } from "@/components/PageHeader";
 import { KeyRound, Mail, ShieldCheck, type LucideIcon } from "lucide-react";
-import { Badge, Button, Card, Field, Input } from "@/components/ui/ds";
+import { Badge, Button, Card, Field, Input, Modal } from "@/components/ui/ds";
 
 
 
@@ -95,7 +95,7 @@ function SettingsPage() {
                 <span className="ml-1 truncate">sessão ativa neste navegador</span>
               </Badge>
             </div>
-            <Button variant="danger" size="sm" onClick={disconnect} className="shrink-0">
+            <Button variant="danger" size="sm" onClick={() => setConfirmDisconnect(true)} className="shrink-0">
               sair
             </Button>
           </Card>
