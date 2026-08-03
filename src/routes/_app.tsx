@@ -150,9 +150,7 @@ function SidebarBody({
       <nav className="flex flex-col gap-5 px-3 py-5 lg:flex-1">
         {NAV_GROUPS.map((group) => (
           <div key={group.title}>
-            <div className="px-3 pb-2 font-mono text-[9px] uppercase tracking-[0.3em] text-slate-600">
-              {group.title}
-            </div>
+            <div className="ds-label px-3 pb-2">{group.title}</div>
             <div className="flex flex-col gap-0.5">
               {group.items.map((item) => {
                 const Icon = item.icon;
@@ -300,7 +298,7 @@ function TopBar({ onOpenMenu, pathname }: { onOpenMenu: () => void; pathname: st
               <DropdownMenuContent
                 align="end"
                 sideOffset={8}
-                className="w-56 border-white/10 bg-[#0f1219]/95 text-slate-200 backdrop-blur"
+                className="w-56 rounded-[12px] border-white/[0.08] bg-[#0c0c0c]/95 text-[#a1a1aa] backdrop-blur-xl"
               >
                 <DropdownMenuLabel className="flex items-center gap-2 py-2">
                   {avatarUrl && (

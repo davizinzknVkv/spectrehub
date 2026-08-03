@@ -4,6 +4,7 @@ import { useQuestStore } from "@/lib/quest-store";
 import { PageHeader } from "@/components/PageHeader";
 import { Section } from "@/components/Section";
 import { PLAN_LIMITS, getGateStatus } from "@/lib/quest-runner";
+import { Card, StatCard, Badge } from "@/components/ui/ds";
 import {
   Tractor,
   Activity,
@@ -106,103 +107,97 @@ function FarmsPage() {
         description="Painel dedicado das suas farms de missões. Dados locais deste navegador."
       />
 
-
       <Section eyebrow="status --live" title="Status ao vivo">
-        <div className="card-grid-sm">
-          <BigStat
-            icon={<Activity className="h-4 w-4" />}
+        <div className="ds-grid-4">
+          <StatCard
+            icon={Activity}
             label="Status"
             value={running ? "Executando" : "Ocioso"}
-            tone={running ? "mint" : "ink-mute"}
-            sub={running && activeQuestId ? `#${activeQuestId.slice(-6)}` : "—"}
+            hint={running && activeQuestId ? `#${activeQuestId.slice(-6)}` : "—"}
+            accent={running}
           />
-          <BigStat
-            icon={<Clock className="h-4 w-4" />}
+          <StatCard
+            icon={Clock}
             label="Tempo ativo"
             value={running ? fmtDuration(activeMs) : "—"}
-            tone="cyan"
-            sub={running ? "farm em curso" : "sem farm ativa"}
+            hint={running ? "farm em curso" : "sem farm ativa"}
+            accent={running}
           />
-          <BigStat
-            icon={<Timer className="h-4 w-4" />}
+          <StatCard
+            icon={Timer}
             label="Tempo restante"
             value={remainingCd > 0 ? fmtDuration(remainingCd) : "livre"}
-            tone={remainingCd > 0 ? "amber" : "mint"}
-            sub={`cooldown ${limits.label}`}
+            hint={`cooldown ${limits.label}`}
+            accent={remainingCd === 0}
           />
-          <BigStat
-            icon={<CheckCircle2 className="h-4 w-4" />}
+          <StatCard
+            icon={CheckCircle2}
             label="Missões hoje"
             value={
               limits.daily === Infinity
                 ? `${stats.todayDone}`
                 : `${stats.todayDone}/${limits.daily}`
             }
-            tone="purple"
-            sub={`${gate.remaining === Infinity ? "∞" : gate.remaining} restantes`}
+            hint={`${gate.remaining === Infinity ? "∞" : gate.remaining} restantes`}
           />
         </div>
       </Section>
 
       {running && progress && (
         <Section eyebrow="run --progress" title="Progresso da run">
-          <div className="card-surface">
-            <div className="flex items-center justify-between text-xs text-ink-dim">
-              <span className="font-mono uppercase tracking-widest text-cyan">progresso</span>
-              <span className="font-mono tabular-nums">
+          <Card>
+            <div className="flex items-center justify-between">
+              <span className="ds-label text-[var(--accent-soft)]">progresso</span>
+              <span className="ds-small tabular-nums">
                 {progress.current}/{progress.total}
               </span>
             </div>
-            <div className="mt-2 h-2 overflow-hidden rounded-full bg-background/60">
+            <div className="mt-2 h-2 overflow-hidden rounded-full bg-white/5">
               <div
-                className="h-full bg-gradient-to-r from-cyan via-purple to-mint transition-all"
+                className="h-full bg-[var(--accent-1)] transition-all"
                 style={{
                   width: `${Math.min(100, (progress.current / Math.max(1, progress.total)) * 100)}%`,
                 }}
               />
             </div>
-          </div>
+          </Card>
         </Section>
       )}
 
       <Section eyebrow="orbs --earnings" title="Ganhos">
-        <div className="card-grid">
-          <EarningCard
-            icon={<Coins className="h-4 w-4" />}
+        <div className="ds-grid-3">
+          <StatCard
+            icon={Coins}
             label="Ganhos totais"
-            value={stats.totalOrbs}
-            suffix="Orbs"
-            tone="amber"
+            value={stats.totalOrbs.toLocaleString("pt-BR")}
+            hint="Orbs"
           />
-          <EarningCard
-            icon={<CalendarDays className="h-4 w-4" />}
+          <StatCard
+            icon={CalendarDays}
             label="Ganhos diários"
-            value={stats.todayOrbs}
-            suffix="Orbs hoje"
-            tone="mint"
+            value={stats.todayOrbs.toLocaleString("pt-BR")}
+            hint="Orbs hoje"
           />
-          <EarningCard
-            icon={<CheckCircle2 className="h-4 w-4" />}
+          <StatCard
+            icon={CheckCircle2}
             label="Missões concluídas"
             value={stats.done}
-            suffix={`${stats.failed} falhas`}
-            tone="cyan"
+            hint={`${stats.failed} falhas`}
           />
         </div>
       </Section>
 
-
       {/* Estatísticas + Histórico */}
       <section className="grid gap-4 lg:grid-cols-[1fr_1.2fr]">
-        <div className="rounded-xl border border-line bg-surface/60 p-5">
-          <div className="mb-3 font-mono text-[10px] uppercase tracking-[0.3em] text-ink-mute">
-            <span className="text-purple">◆</span> estatísticas
+        <Card>
+          <div className="ds-label mb-3">
+            <span className="text-[var(--accent-soft)]">◆</span> estatísticas
           </div>
-          <dl className="space-y-2 text-sm">
+          <dl className="space-y-2 ds-body">
             <Row k="Total de runs" v={String(runs.length)} />
-            <Row k="Concluídas" v={String(stats.done)} tone="text-mint" />
-            <Row k="Falhas" v={String(stats.failed)} tone="text-rose" />
-            <Row k="Puladas" v={String(stats.skipped)} tone="text-amber" />
+            <Row k="Concluídas" v={String(stats.done)} tone="text-[var(--ok)]" />
+            <Row k="Falhas" v={String(stats.failed)} tone="text-[var(--danger)]" />
+            <Row k="Puladas" v={String(stats.skipped)} tone="text-[var(--warn)]" />
             <Row
               k="Taxa de sucesso"
               v={
@@ -210,43 +205,36 @@ function FarmsPage() {
                   ? `${Math.round((stats.done / runs.length) * 100)}%`
                   : "—"
               }
-              tone="text-cyan"
             />
-            <Row k="Plano ativo" v={limits.label} tone="text-purple" />
-            <Row
-              k="Cooldown"
-              v={`${limits.cooldownMs / 60000}m`}
-              tone="text-ink"
-            />
+            <Row k="Plano ativo" v={limits.label} tone="text-[var(--accent-soft)]" />
+            <Row k="Cooldown" v={`${limits.cooldownMs / 60000}m`} />
           </dl>
-        </div>
+        </Card>
 
-        <div className="rounded-xl border border-line bg-surface/60 p-5">
+        <Card>
           <div className="mb-3 flex items-center justify-between">
-            <div className="font-mono text-[10px] uppercase tracking-[0.3em] text-ink-mute">
-              <span className="text-cyan">◆</span> histórico recente
+            <div className="ds-label">
+              <span className="text-[var(--accent-soft)]">◆</span> histórico recente
             </div>
-            <span className="font-mono text-[10px] text-ink-mute">
-              últimas {Math.min(10, runs.length)}
-            </span>
+            <span className="ds-small">últimas {Math.min(10, runs.length)}</span>
           </div>
-          <ul className="divide-y divide-line/40">
+          <ul className="divide-y divide-[var(--border-1)]">
             {runs.slice(0, 10).map((r) => (
-              <li key={r.id} className="flex items-center gap-3 py-2 text-sm">
+              <li key={r.id} className="flex items-center gap-3 py-2 ds-body">
                 <span
                   className={`h-1.5 w-1.5 shrink-0 rounded-full ${
                     r.status === "completed"
-                      ? "bg-mint"
+                      ? "bg-[var(--ok)]"
                       : r.status === "failed"
-                        ? "bg-rose"
-                        : "bg-amber"
+                        ? "bg-[var(--danger)]"
+                        : "bg-[var(--warn)]"
                   }`}
                 />
-                <span className="min-w-0 flex-1 truncate text-ink">{r.quest_name}</span>
-                <span className="hidden shrink-0 font-mono text-[11px] text-ink-mute sm:inline">
+                <span className="min-w-0 flex-1 truncate text-[var(--text-1)]">{r.quest_name}</span>
+                <span className="hidden shrink-0 ds-small sm:inline">
                   {r.reward_text ?? "—"}
                 </span>
-                <span className="shrink-0 font-mono text-[10px] text-ink-mute">
+                <span className="shrink-0 ds-small">
                   {new Date(r.started_at).toLocaleTimeString("pt-BR", {
                     hour: "2-digit",
                     minute: "2-digit",
@@ -255,28 +243,26 @@ function FarmsPage() {
               </li>
             ))}
             {runs.length === 0 && (
-              <li className="py-6 text-center font-mono text-xs text-ink-mute">
-                <span className="text-cyan">›</span> nenhuma farm executada ainda
+              <li className="py-6 text-center ds-small">
+                <span className="text-[var(--accent-soft)]">›</span> nenhuma farm executada ainda
               </li>
             )}
           </ul>
-        </div>
+        </Card>
       </section>
 
       {/* Logs live */}
-      <section className="rounded-xl border border-line bg-surface/60 p-5">
+      <Card>
         <div className="mb-3 flex items-center justify-between">
-          <div className="flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.3em] text-ink-mute">
-            <Terminal className="h-3.5 w-3.5 text-cyan" /> logs
+          <div className="flex items-center gap-2 ds-label">
+            <Terminal className="h-3.5 w-3.5 text-[var(--accent-soft)]" /> logs
           </div>
-          <span className="font-mono text-[10px] text-ink-mute">
-            {logs.length} eventos
-          </span>
+          <span className="ds-small">{logs.length} eventos</span>
         </div>
-        <div className="max-h-72 overflow-auto rounded-md border border-line/60 bg-background/60 p-3 font-mono text-[12px] leading-relaxed">
+        <div className="max-h-72 overflow-auto rounded-md border border-[var(--border-1)] bg-black/40 p-3 font-mono text-[12px] leading-relaxed">
           {logs.length === 0 ? (
-            <div className="text-ink-mute">
-              <span className="text-cyan">›</span> nenhum log ainda
+            <div className="text-[var(--text-3)]">
+              <span className="text-[var(--accent-soft)]">›</span> nenhum log ainda
             </div>
           ) : (
             logs
@@ -287,13 +273,13 @@ function FarmsPage() {
                   key={l.id}
                   className={
                     l.level === "success"
-                      ? "text-mint"
+                      ? "text-[var(--ok)]"
                       : l.level === "error"
-                        ? "text-rose"
-                        : "text-ink-dim"
+                        ? "text-[var(--danger)]"
+                        : "text-[var(--text-2)]"
                   }
                 >
-                  <span className="text-ink-mute">
+                  <span className="text-[var(--text-3)]">
                     [{new Date(l.ts).toLocaleTimeString("pt-BR")}]
                   </span>{" "}
                   {l.text}
@@ -301,87 +287,15 @@ function FarmsPage() {
               ))
           )}
         </div>
-      </section>
+      </Card>
     </div>
   );
 }
 
-function BigStat({
-  icon,
-  label,
-  value,
-  tone,
-  sub,
-}: {
-  icon: React.ReactNode;
-  label: string;
-  value: string;
-  tone: "cyan" | "mint" | "purple" | "amber" | "ink-mute";
-  sub?: string;
-}) {
-  const toneClass =
-    tone === "cyan"
-      ? "text-cyan border-cyan/30"
-      : tone === "mint"
-        ? "text-mint border-mint/30"
-        : tone === "purple"
-          ? "text-purple border-purple/30"
-          : tone === "amber"
-            ? "text-amber border-amber/30"
-            : "text-ink-mute border-line";
+function Row({ k, v, tone = "text-[var(--text-1)]" }: { k: string; v: string; tone?: string }) {
   return (
-    <div className={`rounded-xl border bg-surface/60 p-4 ${toneClass}`}>
-      <div className="flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.25em] opacity-80">
-        {icon}
-        {label}
-      </div>
-      <div className="mt-2 font-mono text-2xl font-semibold tabular-nums text-ink">
-        {value}
-      </div>
-      {sub && <div className="mt-1 text-[11px] text-ink-mute">{sub}</div>}
-    </div>
-  );
-}
-
-function EarningCard({
-  icon,
-  label,
-  value,
-  suffix,
-  tone,
-}: {
-  icon: React.ReactNode;
-  label: string;
-  value: number;
-  suffix: string;
-  tone: "amber" | "mint" | "cyan";
-}) {
-  const toneClass =
-    tone === "amber"
-      ? "from-amber/15 to-transparent border-amber/30 text-amber"
-      : tone === "mint"
-        ? "from-mint/15 to-transparent border-mint/30 text-mint"
-        : "from-cyan/15 to-transparent border-cyan/30 text-cyan";
-  return (
-    <div className={`rounded-xl border bg-gradient-to-br ${toneClass} p-5`}>
-      <div className="flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.25em]">
-        {icon}
-        {label}
-      </div>
-      <div className="mt-3 flex items-baseline gap-2">
-        <span className="font-mono text-4xl font-semibold tabular-nums text-ink">
-          {value.toLocaleString("pt-BR")}
-        </span>
-        <span className="text-xs text-ink-dim">{suffix}</span>
-      </div>
-    </div>
-  );
-}
-
-function Row({ k, v, tone = "text-ink" }: { k: string; v: string; tone?: string }) {
-  return (
-    <div className="flex items-center justify-between border-b border-line/30 pb-2 last:border-0">
-      <span className="text-ink-dim">{k}</span>
+    <div className="flex items-center justify-between border-b border-[var(--border-1)] pb-2 last:border-0">
+      <span className="text-[var(--text-2)]">{k}</span>
       <span className={`font-mono tabular-nums ${tone}`}>{v}</span>
     </div>
   );
