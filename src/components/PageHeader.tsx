@@ -10,29 +10,31 @@ type Props = {
   actions?: ReactNode;
 };
 
+/**
+ * Cabeçalho padrão de página: LABEL → TÍTULO → DESCRIÇÃO.
+ * Usado por todas as abas do Hub para manter a mesma hierarquia.
+ */
 export function PageHeader({ eyebrow, title, highlight, description, icon: Icon, actions }: Props) {
   return (
     <header className="fade-up relative pb-5 sm:pb-6">
       <div className="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
         <div className="min-w-0">
           {eyebrow && (
-            <div className="flex items-center gap-2 font-mono text-[10px] font-medium uppercase tracking-[0.32em] text-slate-500">
-              {Icon && <Icon className="h-3 w-3 text-[#a5b4fc]" />}
+            <div className="ds-label">
+              {Icon && <Icon className="h-3 w-3 text-[var(--accent-soft)]" />}
               {eyebrow}
             </div>
           )}
-          <h1 className="mt-2.5 text-[1.7rem] font-semibold leading-[1.1] tracking-[-0.03em] text-white sm:text-[2.1rem]">
+          <h1 className="ds-h1 mt-2.5">
             {title}
             {highlight && (
               <>
                 {" "}
-                <span className="text-[#a5b4fc]">{highlight}</span>
+                <span className="text-[var(--accent-soft)]">{highlight}</span>
               </>
             )}
           </h1>
-          {description && (
-            <p className="mt-2.5 max-w-2xl text-sm leading-relaxed text-slate-400">{description}</p>
-          )}
+          {description && <p className="ds-body mt-2.5 max-w-2xl">{description}</p>}
         </div>
         {actions && <div className="flex flex-wrap items-center gap-2">{actions}</div>}
       </div>
