@@ -1877,3 +1877,95 @@ function NotificationsCard() {
     </section>
   );
 }
+
+function QuickLinks({
+  questCount,
+  orbQuests,
+  runsCount,
+}: {
+  questCount: number;
+  orbQuests: number;
+  runsCount: number;
+}) {
+  const items = [
+    {
+      to: "/missoes" as const,
+      label: "Missões",
+      desc:
+        questCount > 0
+          ? `${questCount} carregadas · ${orbQuests} com Orbs`
+          : "Rode um scan para ver o disponível",
+      icon: Zap,
+    },
+    { to: "/farms" as const, label: "Farms", desc: "Automação de farm", icon: Sparkles },
+    { to: "/resgatar" as const, label: "Resgatar Orbs", desc: "Loja de recompensas", icon: Gift },
+    { to: "/history" as const, label: "Histórico", desc: `${runsCount} execuções`, icon: LayoutDashboard },
+  ];
+
+  return (
+    <section className="section-stack">
+      <div className="font-mono text-[10px] uppercase tracking-[0.3em] text-slate-500">
+        <span className="mr-1 text-[#a78bfa]">◆</span> ações rápidas
+      </div>
+      <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-2 lg:grid-cols-4">
+        {items.map((it) => (
+          <Link
+            key={it.to}
+            to={it.to}
+            className="group flex items-center gap-3 rounded-xl border border-white/[0.07] bg-[#0c0c0c]/70 px-3.5 py-3 backdrop-blur-xl transition-all duration-200 hover:-translate-y-0.5 hover:border-[#818cf8]/40 hover:bg-[#121212]/80"
+          >
+            <span className="grid h-9 w-9 shrink-0 place-items-center rounded-lg border border-white/[0.08] bg-white/[0.03] text-[#c4b5fd]">
+              <it.icon className="h-4 w-4" />
+            </span>
+            <span className="min-w-0 flex-1">
+              <span className="block truncate text-sm font-semibold tracking-tight text-white">
+                {it.label}
+              </span>
+              <span className="block truncate text-[11px] text-slate-500">{it.desc}</span>
+            </span>
+            <ArrowRight className="h-4 w-4 shrink-0 text-slate-600 transition group-hover:translate-x-0.5 group-hover:text-[#c4b5fd]" />
+          </Link>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function DonateBanner() {
+  return (
+    <section className="section-stack">
+      <div className="relative overflow-hidden rounded-2xl border border-white/[0.07] bg-[#0a0a0a]/80 p-5 backdrop-blur-xl sm:p-6">
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0 opacity-60"
+          style={{
+            background:
+              "radial-gradient(70% 120% at 100% 0%, color-mix(in oklab, #a78bfa 12%, transparent), transparent 65%)",
+          }}
+        />
+        <div className="relative flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+          <div className="min-w-0">
+            <div className="font-mono text-[10px] uppercase tracking-[0.3em] text-[#c4b5fd]">
+              <span className="mr-1">◆</span> apoie o projeto
+            </div>
+            <h3 className="mt-2 text-lg font-semibold tracking-tight text-white sm:text-xl">
+              Mantenha o NGHC no ar
+            </h3>
+            <p className="mt-1.5 max-w-xl text-sm leading-relaxed text-slate-400">
+              Doações cobrem servidores, proxies e desenvolvimento contínuo. Qualquer valor ajuda.
+            </p>
+          </div>
+          <a
+            href="https://livepix.gg/davizinzkngg"
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex shrink-0 items-center justify-center gap-2 rounded-lg border border-[#a78bfa]/40 bg-[#a78bfa]/10 px-4 py-2.5 font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-[#c4b5fd] transition-all duration-200 hover:-translate-y-0.5 hover:bg-[#a78bfa]/20"
+          >
+            <Gift className="h-3.5 w-3.5" />
+            doar agora
+          </a>
+        </div>
+      </div>
+    </section>
+  );
+}
