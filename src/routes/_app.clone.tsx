@@ -5,11 +5,22 @@ import { fetchGuilds, type Guild } from "@/lib/quest-runner";
 import { useQuestStore } from "@/lib/quest-store";
 import { Copy, Search } from "lucide-react";
 import { PageHeader } from "@/components/PageHeader";
+import { ComingSoon } from "@/components/ComingSoon";
 
 export const Route = createFileRoute("/_app/clone")({
-  head: () => ({ meta: [{ title: "Clonar Discord — Neighborshub" }] }),
-  component: ClonePage,
+  head: () => ({ meta: [{ title: "Clonar Discord — Em breve — Neighborshub" }] }),
+  component: () => (
+    <ComingSoon
+      name="Clonar Discord"
+      icon={Copy}
+      eyebrow="clone --soon"
+      description="Clonar Discord está em desenvolvimento e estará disponível em breve."
+    />
+  ),
 });
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+
 
 function ClonePage() {
   const creds = useQuestStore((s) => s.creds);

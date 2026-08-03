@@ -189,6 +189,17 @@ function HubPage() {
     toast.success("ID copiado");
   };
 
+  const copyAvatar = async () => {
+    if (!avatarUrl) return;
+    try {
+      await navigator.clipboard.writeText(avatarUrl);
+      toast.success("Foto do perfil copiada.");
+    } catch {
+      toast.error("Não foi possível copiar a foto. Copie manualmente pelo link do avatar.");
+    }
+  };
+
+
   const orbQuests = useMemo(
     () => quests.filter((q) => q.rewardText.includes("Orbs")).length,
     [quests],
@@ -470,8 +481,8 @@ function HubPage() {
 
       {/* Unified profile + stats + account */}
       <section
-        className="fade-up relative overflow-hidden rounded-2xl border border-white/[0.07] bg-[#080808]/90"
-        style={{ boxShadow: "0 40px 120px -60px color-mix(in oklab, var(--purple) 45%, transparent), inset 0 1px 0 color-mix(in oklab, white 4%, transparent)" }}
+        className="fade-up relative overflow-hidden rounded-2xl border border-white/[0.07] bg-[#080808]/85 backdrop-blur-xl"
+        style={{ boxShadow: "0 18px 50px -40px rgba(0,0,0,0.9), inset 0 1px 0 rgba(255,255,255,0.03)" }}
       >
 
 
@@ -493,38 +504,39 @@ function HubPage() {
         )}
         {/* Banner */}
         <div
-          className="relative h-32 w-full sm:h-48"
+          className="relative h-20 w-full sm:h-28"
           style={
             bannerUrl
               ? { backgroundImage: `url(${bannerUrl})`, backgroundSize: "cover", backgroundPosition: "center" }
               : { background: accentBg }
           }
         >
-          {!bannerUrl && <div className="absolute inset-0 grid-bg opacity-25" />}
-          <div className="absolute inset-0 bg-black/25" />
-          <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-[#080808] via-[#080808]/80 to-transparent" />
+          {!bannerUrl && <div className="absolute inset-0 grid-bg opacity-20" />}
+          <div className="absolute inset-0 bg-black/35" />
+          <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-[#080808] via-[#080808]/85 to-transparent" />
         </div>
 
 
         {/* Identity row */}
-        <div className="relative -mt-12 flex flex-col gap-6 px-6 pb-8 sm:-mt-14 sm:flex-row sm:items-end sm:gap-7 sm:px-10">
+        <div className="relative -mt-8 flex flex-col gap-4 px-5 pb-5 sm:-mt-10 sm:flex-row sm:items-end sm:gap-5 sm:px-7">
           {avatarUrl && (
             <img
               src={avatarUrl}
               alt={user?.username ?? "avatar"}
-              width={112}
-              height={112}
+              width={80}
+              height={80}
               decoding="async"
               fetchPriority="high"
-              className="h-24 w-24 shrink-0 rounded-2xl border border-white/10 object-cover ring-4 ring-[#080808] transition-transform duration-300 hover:scale-[1.02] sm:h-28 sm:w-28"
-              style={{ boxShadow: "0 0 40px -12px color-mix(in oklab, var(--purple) 70%, transparent), 0 20px 50px -30px rgba(0,0,0,0.9)" }}
+              className="h-16 w-16 shrink-0 rounded-xl border border-white/10 object-cover ring-4 ring-[#080808] transition-transform duration-300 hover:scale-[1.02] sm:h-20 sm:w-20"
+              style={{ boxShadow: "0 12px 30px -22px rgba(0,0,0,0.9)" }}
             />
           )}
+
 
           <div className="min-w-0 flex-1">
             <TooltipProvider delayDuration={100}>
               <div className="flex flex-wrap items-center gap-2.5">
-                <h2 className="truncate text-2xl font-semibold tracking-tight text-white sm:text-3xl">
+                <h2 className="truncate text-xl font-semibold tracking-tight text-white sm:text-2xl">
                   {user?.global_name || user?.username || "—"}
                 </h2>
                 {user?.mfa_enabled && (
@@ -561,7 +573,7 @@ function HubPage() {
             </TooltipProvider>
 
             {user?.username && (
-              <div className="mt-1.5 truncate font-mono text-xs text-slate-500">@{user.username}</div>
+              <div className="mt-1 truncate font-mono text-xs text-slate-500">@{user.username}</div>
             )}
 
             {/* Insígnias — combina flags + badges do perfil (Nitro, Boost, Quests, etc.) */}
@@ -588,7 +600,7 @@ function HubPage() {
               if (all.length === 0) return null;
               return (
                 <TooltipProvider delayDuration={100}>
-                  <div className="mt-4 flex flex-wrap items-center gap-2">
+                  <div className="mt-2.5 flex flex-wrap items-center gap-1.5">
                     {all.map((b) => (
                       <Tooltip key={b.key}>
                         <TooltipTrigger asChild>
@@ -621,18 +633,25 @@ function HubPage() {
 
           </div>
           {user?.id && (
-            <div className="flex shrink-0 flex-wrap gap-2 self-start sm:self-end">
+            <div className="flex shrink-0 flex-wrap gap-1.5 self-start sm:self-end">
               <button
                 onClick={copyId}
-                className="rounded-lg border border-white/10 bg-transparent px-3.5 py-2 font-mono text-[10px] uppercase tracking-[0.2em] text-slate-300 transition-all duration-200 hover:border-[#a78bfa]/50 hover:text-[#c4b5fd]"
+                className="rounded-md border border-white/[0.09] bg-white/[0.02] px-2.5 py-1.5 font-mono text-[9px] uppercase tracking-[0.18em] text-slate-300 transition-all duration-200 hover:border-[#a78bfa]/50 hover:text-[#c4b5fd]"
               >
                 copiar id
+              </button>
+              <button
+                onClick={copyAvatar}
+                disabled={!avatarUrl}
+                className="rounded-md border border-white/[0.09] bg-white/[0.02] px-2.5 py-1.5 font-mono text-[9px] uppercase tracking-[0.18em] text-slate-300 transition-all duration-200 hover:border-[#a78bfa]/50 hover:text-[#c4b5fd] disabled:cursor-not-allowed disabled:opacity-40"
+              >
+                copiar foto
               </button>
               <a
                 href={`https://discord.com/users/${user.id}`}
                 target="_blank"
                 rel="noreferrer"
-                className="rounded-lg border border-white/10 bg-transparent px-3.5 py-2 text-center font-mono text-[10px] uppercase tracking-[0.2em] text-slate-300 transition-all duration-200 hover:border-[#818cf8]/50 hover:text-[#c4b5fd]"
+                className="rounded-md border border-white/[0.09] bg-white/[0.02] px-2.5 py-1.5 text-center font-mono text-[9px] uppercase tracking-[0.18em] text-slate-300 transition-all duration-200 hover:border-[#818cf8]/50 hover:text-[#c4b5fd]"
               >
                 abrir perfil
               </a>
@@ -641,21 +660,22 @@ function HubPage() {
         </div>
 
         {/* Bio */}
-        <div className="border-t border-white/[0.06] px-6 py-8 sm:px-10">
-          <div className="mb-3 font-mono text-[10px] uppercase tracking-[0.3em] text-slate-500">
+        <div className="border-t border-white/[0.06] px-5 py-4 sm:px-7 sm:py-5">
+          <div className="mb-2 font-mono text-[10px] uppercase tracking-[0.3em] text-slate-500">
             <span className="mr-1 text-[#c4b5fd]">◆</span> bio
           </div>
           {stats.bio ? (
-            <p className="max-w-3xl whitespace-pre-wrap text-sm leading-7 text-slate-300">{stats.bio}</p>
+            <p className="max-w-3xl whitespace-pre-wrap text-sm leading-6 text-slate-300">{stats.bio}</p>
           ) : (
-            <p className="text-sm leading-7 text-slate-600">
+            <p className="text-sm leading-6 text-slate-600">
               Este usuário ainda não adicionou uma bio.
             </p>
           )}
         </div>
 
         {/* Stat grid (primary) */}
-        <div className="grid gap-4 border-t border-white/[0.06] px-6 py-8 sm:grid-cols-2 sm:px-10 lg:grid-cols-3">
+        <div className="grid gap-2.5 border-t border-white/[0.06] px-5 py-5 sm:grid-cols-3 sm:px-7 lg:grid-cols-6">
+
 
           <StatCard
             label="Servidores"
@@ -697,11 +717,12 @@ function HubPage() {
 
         {/* Account details */}
         {user && (
-          <div className="border-t border-white/[0.06] px-6 py-8 sm:px-10">
-            <div className="mb-5 flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.3em] text-slate-500">
+          <div className="border-t border-white/[0.06] px-5 py-5 sm:px-7">
+            <div className="mb-3 flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.3em] text-slate-500">
               <span className="text-[#a78bfa]">◆</span> detalhes da conta
             </div>
-            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            <div className="grid gap-2.5 sm:grid-cols-2 lg:grid-cols-4">
+
 
               <InfoField
                 label="Email"
@@ -729,50 +750,15 @@ function HubPage() {
         )}
       </section>
 
-      {/* Missões, log e execução movidos para /missoes */}
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-        <Link
-          to="/missoes"
-          className="card-hover group flex items-center justify-between gap-3 rounded-2xl border border-white/10 bg-gradient-to-br from-[#818cf8]/[0.08] via-surface/40 to-[#a78bfa]/[0.08] px-6 py-5 backdrop-blur-md"
-        >
-          <div className="min-w-0">
-            <div className="font-mono text-[10px] font-semibold uppercase tracking-[0.3em] text-[#c4b5fd]">
-              $ next
-            </div>
-            <div className="mt-1.5 text-lg font-semibold tracking-tight text-white">Ir para Missões</div>
-            <div className="mt-1 truncate text-xs text-slate-400">
-              {quests.length > 0
-                ? `${quests.length} carregadas · ${orbQuests} com Orbs`
-                : "Rode um scan para ver o que está disponível"}
-            </div>
-          </div>
-          <span className="font-mono text-2xl text-[#c4b5fd] opacity-60 transition group-hover:translate-x-1 group-hover:opacity-100">
-            →
-          </span>
-        </Link>
-        <Link
-          to="/history"
-          className="card-hover group flex items-center justify-between gap-3 rounded-2xl border border-white/10 bg-gradient-to-br from-[#a78bfa]/[0.08] via-surface/40 to-[#818cf8]/[0.05] px-6 py-5 backdrop-blur-md"
-        >
-          <div className="min-w-0">
-            <div className="font-mono text-[10px] font-semibold uppercase tracking-[0.3em] text-[#a78bfa]">
-              $ log
-            </div>
-            <div className="mt-1.5 text-lg font-semibold tracking-tight text-white">Ver Histórico</div>
-            <div className="mt-1 truncate text-xs text-slate-400">
-              {runsCount} execuções registradas
-            </div>
-          </div>
-          <span className="font-mono text-2xl text-[#a78bfa] opacity-60 transition group-hover:translate-x-1 group-hover:opacity-100">
-            →
-          </span>
-        </Link>
-      </div>
-
+      {/* Ações rápidas — atalhos para ferramentas já existentes */}
+      <QuickLinks questCount={quests.length} orbQuests={orbQuests} runsCount={runsCount} />
 
       <QuickActions />
 
+      <DonateBanner />
+
       <DonorsCard />
+
 
 
 
@@ -1305,20 +1291,21 @@ const StatCard = memo(function StatCard({
             : "bg-white/40";
   return (
     <div
-      className={`group relative overflow-hidden rounded-xl border border-white/[0.07] bg-[#111111]/80 p-6 transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#141414]/90 ${border}`}
+      className={`group relative overflow-hidden rounded-xl border border-white/[0.07] bg-[#101010]/80 p-3.5 transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#141414]/90 ${border}`}
       style={{ boxShadow: "0 1px 0 0 color-mix(in oklab, white 3%, transparent) inset" }}
     >
 
       <div className="flex items-center gap-2">
         <span className={`h-1.5 w-1.5 rounded-full ${dot} opacity-70 transition group-hover:opacity-100`} />
-        <div className="font-mono text-[10px] font-medium uppercase tracking-[0.28em] text-slate-500">
+        <div className="truncate font-mono text-[9px] font-medium uppercase tracking-[0.24em] text-slate-500">
           {label}
         </div>
       </div>
-      <div className={`mt-5 truncate text-3xl font-semibold tabular-nums tracking-tight sm:text-4xl ${accent}`}>
+      <div className={`mt-2 truncate text-2xl font-semibold tabular-nums tracking-tight ${accent}`}>
         {value}
       </div>
-      <div className="mt-2 truncate text-xs leading-relaxed text-slate-500">{hint}</div>
+      <div className="mt-1 truncate text-[11px] leading-relaxed text-slate-500">{hint}</div>
+
       <div
         className={`pointer-events-none absolute inset-x-0 bottom-0 h-px opacity-0 transition-opacity duration-300 group-hover:opacity-100 ${dot}`}
       />
@@ -1887,6 +1874,98 @@ function NotificationsCard() {
           );
         })}
       </ul>
+    </section>
+  );
+}
+
+function QuickLinks({
+  questCount,
+  orbQuests,
+  runsCount,
+}: {
+  questCount: number;
+  orbQuests: number;
+  runsCount: number;
+}) {
+  const items = [
+    {
+      to: "/missoes" as const,
+      label: "Missões",
+      desc:
+        questCount > 0
+          ? `${questCount} carregadas · ${orbQuests} com Orbs`
+          : "Rode um scan para ver o disponível",
+      icon: Zap,
+    },
+    { to: "/farms" as const, label: "Farms", desc: "Automação de farm", icon: Sparkles },
+    { to: "/resgatar" as const, label: "Resgatar Orbs", desc: "Loja de recompensas", icon: Gift },
+    { to: "/history" as const, label: "Histórico", desc: `${runsCount} execuções`, icon: LayoutDashboard },
+  ];
+
+  return (
+    <section className="section-stack">
+      <div className="font-mono text-[10px] uppercase tracking-[0.3em] text-slate-500">
+        <span className="mr-1 text-[#a78bfa]">◆</span> ações rápidas
+      </div>
+      <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-2 lg:grid-cols-4">
+        {items.map((it) => (
+          <Link
+            key={it.to}
+            to={it.to}
+            className="group flex items-center gap-3 rounded-xl border border-white/[0.07] bg-[#0c0c0c]/70 px-3.5 py-3 backdrop-blur-xl transition-all duration-200 hover:-translate-y-0.5 hover:border-[#818cf8]/40 hover:bg-[#121212]/80"
+          >
+            <span className="grid h-9 w-9 shrink-0 place-items-center rounded-lg border border-white/[0.08] bg-white/[0.03] text-[#c4b5fd]">
+              <it.icon className="h-4 w-4" />
+            </span>
+            <span className="min-w-0 flex-1">
+              <span className="block truncate text-sm font-semibold tracking-tight text-white">
+                {it.label}
+              </span>
+              <span className="block truncate text-[11px] text-slate-500">{it.desc}</span>
+            </span>
+            <ArrowRight className="h-4 w-4 shrink-0 text-slate-600 transition group-hover:translate-x-0.5 group-hover:text-[#c4b5fd]" />
+          </Link>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function DonateBanner() {
+  return (
+    <section className="section-stack">
+      <div className="relative overflow-hidden rounded-2xl border border-white/[0.07] bg-[#0a0a0a]/80 p-5 backdrop-blur-xl sm:p-6">
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0 opacity-60"
+          style={{
+            background:
+              "radial-gradient(70% 120% at 100% 0%, color-mix(in oklab, #a78bfa 12%, transparent), transparent 65%)",
+          }}
+        />
+        <div className="relative flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+          <div className="min-w-0">
+            <div className="font-mono text-[10px] uppercase tracking-[0.3em] text-[#c4b5fd]">
+              <span className="mr-1">◆</span> apoie o projeto
+            </div>
+            <h3 className="mt-2 text-lg font-semibold tracking-tight text-white sm:text-xl">
+              Mantenha o NGHC no ar
+            </h3>
+            <p className="mt-1.5 max-w-xl text-sm leading-relaxed text-slate-400">
+              Doações cobrem servidores, proxies e desenvolvimento contínuo. Qualquer valor ajuda.
+            </p>
+          </div>
+          <a
+            href="https://livepix.gg/davizinzkngg"
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex shrink-0 items-center justify-center gap-2 rounded-lg border border-[#a78bfa]/40 bg-[#a78bfa]/10 px-4 py-2.5 font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-[#c4b5fd] transition-all duration-200 hover:-translate-y-0.5 hover:bg-[#a78bfa]/20"
+          >
+            <Gift className="h-3.5 w-3.5" />
+            doar agora
+          </a>
+        </div>
+      </div>
     </section>
   );
 }

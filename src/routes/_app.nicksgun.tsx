@@ -4,11 +4,22 @@ import { toast } from "sonner";
 import { Copy, Crosshair, Loader2, Play, Square, ExternalLink, Trash2 } from "lucide-react";
 import { checkDiscordUsername } from "@/lib/nicks.functions";
 import { PageHeader } from "@/components/PageHeader";
+import { ComingSoon } from "@/components/ComingSoon";
 
 export const Route = createFileRoute("/_app/nicksgun")({
-  head: () => ({ meta: [{ title: "Nicks-Gun — Neighborshub" }] }),
-  component: NicksGunPage,
+  head: () => ({ meta: [{ title: "Nicks-Gun — Em breve — Neighborshub" }] }),
+  component: () => (
+    <ComingSoon
+      name="Nicks-Gun"
+      icon={Crosshair}
+      eyebrow="nicks --soon"
+      description="Nicks-Gun está em desenvolvimento e estará disponível em breve."
+    />
+  ),
 });
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+
 
 type Charset = "letters" | "alnum" | "full";
 type Result = { username: string; available: boolean };

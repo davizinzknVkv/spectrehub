@@ -37,28 +37,28 @@ export const Route = createFileRoute("/_app")({
 const NAV_GROUPS = [
   {
     title: "Visão geral",
-    items: [{ to: "/hub", label: "Dashboard", icon: LayoutDashboard }],
+    items: [{ to: "/hub", label: "Dashboard", icon: LayoutDashboard, soon: false }],
   },
   {
     title: "Ferramentas",
     items: [
-      { to: "/missoes", label: "Missões", icon: Target },
-      { to: "/farms", label: "Farms", icon: Tractor },
-      { to: "/history", label: "Histórico", icon: History },
-      { to: "/resgatar", label: "Resgatar Orbs", icon: Gift },
-      { to: "/settings", label: "Login", icon: KeyRound },
+      { to: "/missoes", label: "Missões", icon: Target, soon: false },
+      { to: "/farms", label: "Farms", icon: Tractor, soon: false },
+      { to: "/history", label: "Histórico", icon: History, soon: false },
+      { to: "/resgatar", label: "Resgatar Orbs", icon: Gift, soon: false },
     ],
   },
   {
     title: "Utilitários",
     items: [
-      { to: "/nicksgun", label: "Nicks-Gun", icon: Crosshair },
-      { to: "/clone", label: "Clonar Discord", icon: Copy },
-      { to: "/spotify", label: "Gerador Spotify", icon: Music },
-      { to: "/fake", label: "Foto Fake", icon: ImageIcon },
+      { to: "/nicksgun", label: "Nicks-Gun", icon: Crosshair, soon: true },
+      { to: "/clone", label: "Clonar Discord", icon: Copy, soon: true },
+      { to: "/spotify", label: "Gerador Spotify", icon: Music, soon: true },
+      { to: "/fake", label: "Foto Fake", icon: ImageIcon, soon: false },
     ],
   },
 ] as const;
+
 
 function AppLayout() {
   const hydrate = useQuestStore((s) => s.hydrate);
@@ -172,7 +172,13 @@ function SidebarBody({
                     <span className={active ? "font-medium tracking-[-0.01em]" : "tracking-[-0.01em]"}>
                       {item.label}
                     </span>
+                    {item.soon && (
+                      <span className="ml-auto shrink-0 rounded-[0.3rem] border border-white/[0.08] bg-white/[0.03] px-1.5 py-0.5 font-mono text-[8px] uppercase tracking-[0.18em] text-slate-500">
+                        em breve
+                      </span>
+                    )}
                   </Link>
+
                 );
               })}
             </div>
@@ -217,9 +223,25 @@ function TopBar({ onOpenMenu, pathname }: { onOpenMenu: () => void; pathname: st
       : `https://cdn.discordapp.com/embed/avatars/${(BigInt(me.id) >> 22n) % 6n}.png`
     : null;
 
+  const [scrolled, setScrolled] = useState(false);
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 8);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
   return (
-    <div className="sticky top-0 z-20 border-b border-white/[0.06] bg-[#060606]/70 backdrop-blur-xl">
+    <div
+      className="sticky top-0 z-20 transition-[background-color,backdrop-filter,border-color] duration-300"
+      style={{
+        backgroundColor: scrolled ? "rgba(5,5,5,0.72)" : "rgba(5,5,5,0.40)",
+        backdropFilter: `blur(${scrolled ? 22 : 12}px) saturate(120%)`,
+        borderBottom: `1px solid rgba(255,255,255,${scrolled ? 0.06 : 0.025})`,
+      }}
+    >
       <div className="mx-auto flex w-full max-w-6xl items-center justify-between gap-3 px-4 py-3 sm:px-6 lg:px-10">
+
         <div className="flex items-center gap-3">
           <button
             onClick={onOpenMenu}
