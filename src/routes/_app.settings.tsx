@@ -414,17 +414,38 @@ function EmailLoginForm({ onLogged }: { onLogged: () => void }) {
         </div>
       )}
 
-      {!mfaTicket && (
+      {/* etapa 1: verificação humana (Turnstile). Some assim que validada
+          para não conflitar com o hCaptcha do Discord. */}
+      {!mfaTicket && !humanVerified && !discordCaptcha && (
         <Turnstile
           onVerify={(t) => setCaptchaToken(t)}
           onExpire={() => setCaptchaToken(null)}
         />
       )}
 
+      {!mfaTicket && humanVerified && !discordCaptcha && (
+        <div className="flex items-center justify-between gap-3 rounded-[var(--r-md)] border border-[color-mix(in_oklab,var(--ok,#22c55e)_25%,transparent)] bg-[color-mix(in_oklab,var(--ok,#22c55e)_6%,transparent)] px-3 py-2">
+          <span className="ds-small">✓ verificação humana concluída</span>
+          <Button
+            type="button"
+            variant="ghost"
+            size="sm"
+            onClick={() => {
+              setHumanVerified(false);
+              setCaptchaToken(null);
+            }}
+          >
+            refazer
+          </Button>
+        </div>
+      )}
+
+      {/* etapa 2: captcha exigido pelo Discord (hCaptcha) — renderizado sozinho */}
       {!mfaTicket && discordCaptcha && (
         <div className="space-y-2 rounded-[var(--r-md)] border border-[color-mix(in_oklab,var(--accent-1)_28%,transparent)] bg-[color-mix(in_oklab,var(--accent-1)_5%,transparent)] p-3">
           <div className="ds-label text-[var(--accent-soft)]">captcha do discord</div>
           <Hcaptcha
+            key={discordCaptcha.sitekey + (discordCaptcha.rqdata ?? "")}
             sitekey={discordCaptcha.sitekey}
             rqdata={discordCaptcha.rqdata}
             onVerify={(t) => setDiscordCaptchaToken(t)}
@@ -432,6 +453,7 @@ function EmailLoginForm({ onLogged }: { onLogged: () => void }) {
           />
         </div>
       )}
+
 
 
       <Button
