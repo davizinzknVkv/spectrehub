@@ -184,13 +184,15 @@ function EmailLoginForm({ onLogged }: { onLogged: () => void }) {
     rqtoken?: string;
   } | null>(null);
   const [discordCaptchaToken, setDiscordCaptchaToken] = useState<string | null>(null);
+  // true depois que o Turnstile foi validado no servidor (token é single-use)
+  const [humanVerified, setHumanVerified] = useState(false);
 
   const codeMaxLen = mfaMethod === "backup" ? 8 : 6;
   const codeMinLen = mfaMethod === "backup" ? 8 : 6;
 
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!mfaTicket && !captchaToken) {
+    if (!mfaTicket && !humanVerified && !captchaToken) {
       toast.error("Complete o captcha antes de entrar");
       return;
     }
@@ -200,15 +202,18 @@ function EmailLoginForm({ onLogged }: { onLogged: () => void }) {
     }
     setLoading(true);
     try {
-      if (!mfaTicket && captchaToken) {
+      // Turnstile só é validado uma vez (token single-use). Depois disso o
+      // fluxo segue para o hCaptcha do Discord sem re-renderizar o Turnstile.
+      if (!mfaTicket && !humanVerified && captchaToken) {
         const cap = await verifyTurnstile({ data: { token: captchaToken } });
+        setCaptchaToken(null);
         if (!cap.ok) {
           toast.error(cap.error);
-          setCaptchaToken(null);
           window.turnstile?.reset();
           setLoading(false);
           return;
         }
+        setHumanVerified(true);
       }
       const res = await discordLogin({
         data: mfaTicket
@@ -233,6 +238,7 @@ function EmailLoginForm({ onLogged }: { onLogged: () => void }) {
         setMfaError(null);
         setDiscordCaptcha(null);
         setDiscordCaptchaToken(null);
+        setHumanVerified(false);
         onLogged();
         return;
       }
@@ -414,17 +420,38 @@ function EmailLoginForm({ onLogged }: { onLogged: () => void }) {
         </div>
       )}
 
-      {!mfaTicket && (
+      {/* etapa 1: verificação humana (Turnstile). Some assim que validada
+          para não conflitar com o hCaptcha do Discord. */}
+      {!mfaTicket && !humanVerified && !discordCaptcha && (
         <Turnstile
           onVerify={(t) => setCaptchaToken(t)}
           onExpire={() => setCaptchaToken(null)}
         />
       )}
 
+      {!mfaTicket && humanVerified && !discordCaptcha && (
+        <div className="flex items-center justify-between gap-3 rounded-[var(--r-md)] border border-[color-mix(in_oklab,var(--ok,#22c55e)_25%,transparent)] bg-[color-mix(in_oklab,var(--ok,#22c55e)_6%,transparent)] px-3 py-2">
+          <span className="ds-small">✓ verificação humana concluída</span>
+          <Button
+            type="button"
+            variant="ghost"
+            size="sm"
+            onClick={() => {
+              setHumanVerified(false);
+              setCaptchaToken(null);
+            }}
+          >
+            refazer
+          </Button>
+        </div>
+      )}
+
+      {/* etapa 2: captcha exigido pelo Discord (hCaptcha) — renderizado sozinho */}
       {!mfaTicket && discordCaptcha && (
         <div className="space-y-2 rounded-[var(--r-md)] border border-[color-mix(in_oklab,var(--accent-1)_28%,transparent)] bg-[color-mix(in_oklab,var(--accent-1)_5%,transparent)] p-3">
           <div className="ds-label text-[var(--accent-soft)]">captcha do discord</div>
           <Hcaptcha
+            key={discordCaptcha.sitekey + (discordCaptcha.rqdata ?? "")}
             sitekey={discordCaptcha.sitekey}
             rqdata={discordCaptcha.rqdata}
             onVerify={(t) => setDiscordCaptchaToken(t)}
@@ -432,6 +459,7 @@ function EmailLoginForm({ onLogged }: { onLogged: () => void }) {
           />
         </div>
       )}
+
 
 
       <Button
@@ -445,7 +473,7 @@ function EmailLoginForm({ onLogged }: { onLogged: () => void }) {
               mfaCode.replace(/[^a-zA-Z0-9]/g, "").length > codeMaxLen + 4
             : !login ||
               !password ||
-              !captchaToken ||
+              (!humanVerified && !captchaToken) ||
               (discordCaptcha ? !discordCaptchaToken : false))
         }
       >
