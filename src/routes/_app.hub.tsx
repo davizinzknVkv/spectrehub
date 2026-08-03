@@ -750,50 +750,15 @@ function HubPage() {
         )}
       </section>
 
-      {/* Missões, log e execução movidos para /missoes */}
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-        <Link
-          to="/missoes"
-          className="card-hover group flex items-center justify-between gap-3 rounded-2xl border border-white/10 bg-gradient-to-br from-[#818cf8]/[0.08] via-surface/40 to-[#a78bfa]/[0.08] px-6 py-5 backdrop-blur-md"
-        >
-          <div className="min-w-0">
-            <div className="font-mono text-[10px] font-semibold uppercase tracking-[0.3em] text-[#c4b5fd]">
-              $ next
-            </div>
-            <div className="mt-1.5 text-lg font-semibold tracking-tight text-white">Ir para Missões</div>
-            <div className="mt-1 truncate text-xs text-slate-400">
-              {quests.length > 0
-                ? `${quests.length} carregadas · ${orbQuests} com Orbs`
-                : "Rode um scan para ver o que está disponível"}
-            </div>
-          </div>
-          <span className="font-mono text-2xl text-[#c4b5fd] opacity-60 transition group-hover:translate-x-1 group-hover:opacity-100">
-            →
-          </span>
-        </Link>
-        <Link
-          to="/history"
-          className="card-hover group flex items-center justify-between gap-3 rounded-2xl border border-white/10 bg-gradient-to-br from-[#a78bfa]/[0.08] via-surface/40 to-[#818cf8]/[0.05] px-6 py-5 backdrop-blur-md"
-        >
-          <div className="min-w-0">
-            <div className="font-mono text-[10px] font-semibold uppercase tracking-[0.3em] text-[#a78bfa]">
-              $ log
-            </div>
-            <div className="mt-1.5 text-lg font-semibold tracking-tight text-white">Ver Histórico</div>
-            <div className="mt-1 truncate text-xs text-slate-400">
-              {runsCount} execuções registradas
-            </div>
-          </div>
-          <span className="font-mono text-2xl text-[#a78bfa] opacity-60 transition group-hover:translate-x-1 group-hover:opacity-100">
-            →
-          </span>
-        </Link>
-      </div>
-
+      {/* Ações rápidas — atalhos para ferramentas já existentes */}
+      <QuickLinks questCount={quests.length} orbQuests={orbQuests} runsCount={runsCount} />
 
       <QuickActions />
 
+      <DonateBanner />
+
       <DonorsCard />
+
 
 
 
