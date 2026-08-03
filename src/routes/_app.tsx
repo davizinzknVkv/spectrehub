@@ -336,7 +336,7 @@ function TopBar({ onOpenMenu, pathname }: { onOpenMenu: () => void; pathname: st
                 </DropdownMenuItem>
                 <DropdownMenuSeparator className="bg-white/10" />
                 <DropdownMenuItem
-                  onClick={() => setCreds(null)}
+                  onClick={() => setConfirmLogout(true)}
                   className="cursor-pointer text-rose-300 focus:bg-rose-500/10 focus:text-rose-200"
                 >
                   <LogOut className="h-4 w-4" />
@@ -353,6 +353,45 @@ function TopBar({ onOpenMenu, pathname }: { onOpenMenu: () => void; pathname: st
 
         </div>
       </div>
+
+      {confirmLogout && (
+        <Modal
+          title="Sair da conta"
+          description="Seu token será removido deste navegador. Você poderá entrar novamente quando quiser."
+          onClose={() => setConfirmLogout(false)}
+          actions={
+            <>
+              <Button variant="ghost" onClick={() => setConfirmLogout(false)}>
+                Cancelar
+              </Button>
+              <Button
+                variant="danger"
+                onClick={() => {
+                  setConfirmLogout(false);
+                  setCreds(null);
+                  toast.success("Sessão encerrada");
+                }}
+              >
+                <LogOut className="h-4 w-4" />
+                Sair
+              </Button>
+            </>
+          }
+        >
+          <div className="flex items-center gap-3">
+            {avatarUrl && (
+              <img src={avatarUrl} alt="" className="h-10 w-10 rounded-full object-cover ring-1 ring-white/10" />
+            )}
+            <div className="min-w-0 leading-tight">
+              <div className="truncate text-sm font-semibold text-white">
+                {me?.global_name || me?.username}
+              </div>
+              <div className="truncate font-mono text-[11px] text-slate-500">@{me?.username}</div>
+            </div>
+          </div>
+        </Modal>
+      )}
     </div>
   );
+
 }
