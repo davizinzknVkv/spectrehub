@@ -1,30 +1,45 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
-import { Zap, CheckCircle2, Instagram, Send, Sparkles, Timer, Infinity as InfinityIcon, ArrowRight, Code2, Plug, MessageSquare, Copy, Check, ShieldCheck, Users, Activity } from "lucide-react";
+import {
+  ArrowRight,
+  Check,
+  CheckCircle2,
+  Copy,
+  Gauge,
+  Instagram,
+  LifeBuoy,
+  Menu,
+  MessageSquare,
+  Music4,
+  Send,
+  ShieldCheck,
+  Sparkles,
+  Tag,
+  Target,
+  Users,
+  X,
+  Zap,
+} from "lucide-react";
 import nghcLogo from "@/assets/nghc-logo.png.asset.json";
+
+const TITLE = "NeighborD Hub — Automação premium de quests do Discord";
+const DESCRIPTION =
+  "Plataforma para comunidades que levam a experiência a sério: auto quests, farm de Orbs, sniper de nicks e ferramentas de servidor num único hub.";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Neighborshub — Auto Quests do Discord" },
-      {
-        name: "description",
-        content:
-          "Complete missões do Discord automaticamente e acumule Orbs. Planos Free, Premium (30 dias ou lifetime) e Boost.",
-      },
-      { property: "og:title", content: "Neighborshub — Auto Quests do Discord" },
-      {
-        property: "og:description",
-        content:
-          "Complete missões do Discord automaticamente e acumule Orbs. Planos Free, Premium (30 dias ou lifetime) e Boost.",
-      },
+      { title: TITLE },
+      { name: "description", content: DESCRIPTION },
+      { property: "og:title", content: TITLE },
+      { property: "og:description", content: DESCRIPTION },
       { property: "og:type", content: "website" },
+      { property: "og:url", content: "https://neighbordhubdc.lovable.app/" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [
-      // Preload LCP — logo do hero — pra reduzir tempo de pintura.
+      { rel: "canonical", href: "https://neighbordhubdc.lovable.app/" },
       { rel: "preload", as: "image", href: nghcLogo.url, fetchPriority: "high" },
-      // Antecipa handshake com o CDN do Discord (widget + avatares).
       { rel: "preconnect", href: "https://discord.com" },
       { rel: "preconnect", href: "https://cdn.discordapp.com", crossOrigin: "anonymous" },
     ],
@@ -32,14 +47,114 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
+const GUILD_ID = "1511467436543709184";
+const GUILD_INVITE = "https://discord.com/invite/fVeXNmmF";
+const WIDGET_URL = `https://discord.com/api/guilds/${GUILD_ID}/widget.json`;
+
+const NAV = [
+  { label: "Início", href: "#topo" },
+  { label: "Produtos", href: "#produtos" },
+  { label: "Recursos", href: "#recursos" },
+  { label: "Sobre", href: "#sobre" },
+  { label: "Comunidade", href: "#comunidade" },
+];
+
+type Product = {
+  name: string;
+  category: "Automação" | "Discord" | "Economia" | "Utilidades";
+  desc: string;
+  status: string;
+  price?: string;
+  to: string;
+  icon: typeof Zap;
+};
+
+const PRODUCTS: Product[] = [
+  {
+    name: "Auto Quests",
+    category: "Automação",
+    desc: "Detecta, executa e acompanha suas quests do Discord em segundo plano, com fila e cooldown por plano.",
+    status: "Estável",
+    to: "/missoes",
+    icon: Zap,
+  },
+  {
+    name: "Nicks-Gun",
+    category: "Discord",
+    desc: "Sniper de usernames curtos: varre nicks de 2 e 3 letras e mostra o que está disponível em tempo real.",
+    status: "Beta",
+    to: "/nicksgun",
+    icon: Target,
+  },
+  {
+    name: "Resgatar Orbs",
+    category: "Economia",
+    desc: "Catálogo completo da loja de Orbs com preços, imagens reais e resgate direto pelo hub.",
+    status: "Estável",
+    to: "/resgatar",
+    icon: Tag,
+  },
+  {
+    name: "Farms",
+    category: "Automação",
+    desc: "Rotinas de farm contínuo com controle de ritmo para manter progresso sem supervisão.",
+    status: "Estável",
+    to: "/farms",
+    icon: Gauge,
+  },
+  {
+    name: "Server Tools",
+    category: "Utilidades",
+    desc: "Gestão de servidores em massa: clonagem, saída em lote e limpeza da sua lista de guildas.",
+    status: "Estável",
+    to: "/clone",
+    icon: ShieldCheck,
+  },
+  {
+    name: "Spotify Sync",
+    category: "Utilidades",
+    desc: "Integra sua presença musical ao perfil e mantém o status vivo enquanto você farma.",
+    status: "Estável",
+    to: "/spotify",
+    icon: Music4,
+  },
+];
+
+const CATEGORIES = ["Todos", "Automação", "Discord", "Economia", "Utilidades"] as const;
+
+const REASONS = [
+  {
+    n: "01",
+    icon: Gauge,
+    title: "Performance",
+    desc: "Execução em background com impacto mínimo: o hub trabalha enquanto você usa o Discord normalmente.",
+  },
+  {
+    n: "02",
+    icon: ShieldCheck,
+    title: "Controle",
+    desc: "Cooldowns, filas e limites por plano respeitam os limites da API — nada de ação atropelada.",
+  },
+  {
+    n: "03",
+    icon: Sparkles,
+    title: "Experiência",
+    desc: "Interface única para quests, orbs, nicks e servidores, com histórico e progresso ao vivo.",
+  },
+  {
+    n: "04",
+    icon: LifeBuoy,
+    title: "Suporte",
+    desc: "Comunidade ativa e atendimento por ticket no servidor oficial, direto com quem desenvolve.",
+  },
+];
+
 const PLANS = [
   {
     name: "Free",
     price: "R$ 0",
     period: "sempre",
-    tone: "border-white/10 bg-white/[0.03]",
-    accent: "text-[#c4b5fd]",
-    cta: "Começar grátis",
+    cta: "Cadastrar no Free",
     highlight: false,
     features: [
       "3 missões por dia",
@@ -52,8 +167,6 @@ const PLANS = [
     name: "Premium",
     price: "R$ 9,90",
     period: "30 dias",
-    tone: "border-[#818cf8]/50 bg-[#818cf8]/[0.08]",
-    accent: "text-[#c4b5fd]",
     cta: "Assinar 30 dias",
     highlight: true,
     features: [
@@ -67,8 +180,6 @@ const PLANS = [
     name: "Lifetime",
     price: "R$ 39,90",
     period: "pagamento único",
-    tone: "border-[#818cf8]/40 bg-[#818cf8]/[0.05]",
-    accent: "text-[#c4b5fd]",
     cta: "Comprar lifetime",
     highlight: false,
     features: [
@@ -82,8 +193,6 @@ const PLANS = [
     name: "Boost",
     price: "Grátis",
     period: "boost o servidor",
-    tone: "border-[#818cf8]/40 bg-[#818cf8]/[0.05]",
-    accent: "text-[#c4b5fd]",
     cta: "Boost o servidor",
     highlight: false,
     features: [
@@ -95,655 +204,23 @@ const PLANS = [
   },
 ];
 
-
-// Membros “destaque” do servidor — usa avatares gerados por hash (dicebear)
-const MEMBERS = [
-  { name: "davizinzkn", seed: "davizinzkn", tone: "from-indigo-500/40 to-fuchsia-500/20" },
-  { name: "rd9m", seed: "rd9m", tone: "from-sky-500/40 to-blue-800/20" },
-  { name: "fuam", seed: "fuam", tone: "from-emerald-500/30 to-cyan-500/20" },
-  { name: "felipe", seed: "felipe", tone: "from-orange-500/40 to-red-500/20" },
-  { name: "biell", seed: "biell", tone: "from-teal-500/40 to-emerald-800/20" },
-  { name: "VALE DA LUA VIPS", seed: "vale-lua", tone: "from-purple-500/50 to-fuchsia-800/20" },
-  { name: "lilith", seed: "lilith", tone: "from-rose-500/40 to-pink-800/20" },
-  { name: "neo", seed: "neo", tone: "from-cyan-400/40 to-indigo-600/20" },
-  { name: "kaz", seed: "kaz", tone: "from-amber-400/40 to-orange-700/20" },
-  { name: "mira", seed: "mira", tone: "from-violet-500/40 to-indigo-800/20" },
-  { name: "juno", seed: "juno", tone: "from-lime-400/30 to-emerald-700/20" },
-  { name: "hex", seed: "hex", tone: "from-pink-500/40 to-purple-700/20" },
+const FALLBACK_MEMBERS = [
+  "davizinzkn",
+  "rd9m",
+  "fuam",
+  "felipe",
+  "biell",
+  "lilith",
+  "neo",
+  "kaz",
+  "mira",
+  "juno",
+  "hex",
 ];
 
-function Avatar({ seed }: { seed: string }) {
-  return (
-    <img
-      src={`https://api.dicebear.com/9.x/adventurer/svg?seed=${encodeURIComponent(seed)}&backgroundType=gradientLinear`}
-      alt=""
-      className="h-full w-full object-cover"
-      loading="lazy"
-    />
-  );
-}
+/* ─────────────────────────── helpers ─────────────────────────── */
 
-function Index() {
-  return (
-    <div className="relative min-h-screen overflow-hidden bg-[#0a0a0c] text-slate-200 antialiased">
-      {/* Background orbs — Vapor Chrome */}
-      <div aria-hidden className="pointer-events-none fixed inset-0 -z-10">
-        <div className="orb-indigo -left-32 top-[-10rem] h-[34rem] w-[34rem]" />
-        <div className="orb-cyan -right-32 top-[40%] h-[30rem] w-[30rem]" />
-        <div className="orb-indigo bottom-[-12rem] left-1/3 h-[28rem] w-[28rem]" />
-      </div>
-
-
-      {/* Floating pill nav */}
-      <header className="sticky top-4 z-50 mx-auto w-full max-w-5xl px-3 sm:top-6 sm:px-6">
-        <div className="flex items-center justify-between gap-3 rounded-full border border-white/10 bg-white/[0.04] py-2 pl-4 pr-2 shadow-[0_20px_60px_-30px_rgba(129,140,248,0.8)] backdrop-blur-2xl">
-          <Link to="/" className="flex items-center gap-2">
-            <img
-              src={nghcLogo.url}
-              alt="NGHC"
-              className="h-9 w-9 shrink-0 rounded-lg object-contain transition-transform duration-300 hover:scale-110"
-              style={{ filter: "drop-shadow(0 0 10px color-mix(in oklab, var(--blurple) 60%, transparent))" }}
-            />
-            <span className="text-sm font-semibold tracking-tight sm:text-base">
-              Neighbors<span className="chrome-text">hub</span>
-            </span>
-          </Link>
-          <nav className="hidden items-center gap-6 text-sm text-slate-400 md:flex">
-            <a href="#missoes" className="transition-colors duration-200 hover:text-[#a5f3fc]">Missões</a>
-            <a href="#planos" className="transition-colors duration-200 hover:text-[#a5f3fc]">Planos</a>
-            <a href="#membros" className="transition-colors duration-200 hover:text-[#a5f3fc]">Membros</a>
-            <a href="#como-funciona" className="transition-colors duration-200 hover:text-[#a5f3fc]">Como funciona</a>
-          </nav>
-          <Link
-            to="/hub"
-            className="btn-chrome rounded-full px-5 py-2 text-xs sm:text-sm"
-          >
-            Abrir Hub
-          </Link>
-        </div>
-      </header>
-
-
-      {/* Hero — centered chrome */}
-      <section className="mx-auto max-w-5xl px-4 pt-12 text-center sm:px-6 sm:pt-20">
-        <div className="flex flex-col items-center gap-12">
-          <div className="order-2 w-full max-w-3xl">
-            <span className="chip-glass mb-6">Auto-quests em tempo real</span>
-            <h1 className="text-5xl leading-[0.95] tracking-tight sm:text-6xl md:text-7xl">
-              <span className="chrome-text">Complete missões</span>
-              <br />
-              <span className="text-white">pra dominar o Discord</span>
-            </h1>
-            <p className="mx-auto mt-6 max-w-2xl text-base font-light leading-relaxed text-slate-400 sm:text-lg">
-              Auto-quests em segundo plano, detecção de plano em tempo real e farm de Orbs sem
-              esforço. O Neighborshub roda o pesado — você só coleta.
-            </p>
-
-            <div className="mt-9 flex flex-wrap items-center justify-center gap-4">
-              <Link to="/hub" className="btn-chrome text-xs uppercase tracking-widest sm:text-sm">
-                Abrir o Hub <ArrowRight className="h-3.5 w-3.5" />
-              </Link>
-              <a
-                href="https://discord.com"
-                target="_blank"
-                rel="noreferrer"
-                className="btn-glass text-xs uppercase tracking-widest sm:text-sm"
-              >
-                Entrar no Discord
-              </a>
-            </div>
-
-            <div className="mt-9 flex items-center justify-center gap-3">
-              <div className="flex -space-x-2">
-                {MEMBERS.slice(0, 5).map((m) => (
-                  <div
-                    key={m.seed}
-                    className="grid h-7 w-7 place-items-center overflow-hidden rounded-full border-2 border-[#0a0a0c] bg-white/10 transition-transform duration-300 hover:-translate-y-1"
-                  >
-                    <Avatar seed={m.seed} />
-                  </div>
-                ))}
-              </div>
-              <div className="font-mono text-[10px] uppercase tracking-[0.25em] text-slate-500">
-                Já existem mais de 100 usuários usando o NGHC
-              </div>
-            </div>
-          </div>
-
-          {/* Big logo mark */}
-
-          <div className="relative order-1 flex w-full max-w-md items-center justify-center">
-            <div
-              aria-hidden
-              className="pointer-events-none absolute inset-0 -z-10"
-              style={{
-                background:
-                  "radial-gradient(400px 300px at 50% 50%, rgba(88,101,242,0.35), transparent 65%)",
-              }}
-            />
-
-            {/* Orbit rings + spark particles */}
-            <div aria-hidden className="pointer-events-none absolute inset-0 grid place-items-center">
-              <div
-                className="h-[110%] w-[110%] rounded-full border border-[#a78bfa]/15"
-                style={{ animation: "spin-slow 28s linear infinite" }}
-              />
-              <div
-                className="absolute h-[85%] w-[85%] rounded-full border border-[#818cf8]/20"
-                style={{ animation: "spin-slow 22s linear infinite reverse" }}
-              />
-              {[0, 1, 2, 3, 4].map((i) => (
-                <span
-                  key={i}
-                  className="absolute h-1 w-1 rounded-full bg-[#c4b5fd]"
-                  style={{
-                    boxShadow: "0 0 12px 2px #a78bfa",
-                    top: `${20 + i * 12}%`,
-                    left: `${15 + i * 15}%`,
-                    animation: `spark-float ${3 + i * 0.6}s ease-in-out ${i * 0.4}s infinite`,
-                  }}
-                />
-              ))}
-            </div>
-
-            <div className="relative text-center">
-              {/* Purple lightning bolt striking the logo */}
-              <svg
-                aria-hidden
-                viewBox="0 0 100 200"
-                className="pointer-events-none absolute -top-16 left-1/2 -z-[1] h-56 w-28 -translate-x-1/2 sm:h-72 sm:w-36 md:-top-24 md:h-96 md:w-48"
-                style={{ animation: "lightning-flash 3.2s ease-in-out infinite" }}
-              >
-                <defs>
-                  <linearGradient id="bolt-grad" x1="50%" y1="0%" x2="50%" y2="100%">
-                    <stop offset="0%" stopColor="#ffffff" />
-                    <stop offset="35%" stopColor="#c4b5fd" />
-                    <stop offset="100%" stopColor="#818cf8" />
-                  </linearGradient>
-                  <filter id="bolt-glow" x="-60%" y="-20%" width="220%" height="140%">
-                    <feGaussianBlur stdDeviation="4" result="blur" />
-                    <feMerge>
-                      <feMergeNode in="blur" />
-                      <feMergeNode in="SourceGraphic" />
-                    </feMerge>
-                  </filter>
-                </defs>
-                <path
-                  d="M62 4 L28 96 L48 96 L34 168 L74 74 L52 74 L66 4 Z"
-                  fill="url(#bolt-grad)"
-                  filter="url(#bolt-glow)"
-                  stroke="#e9d5ff"
-                  strokeWidth="0.8"
-                />
-              </svg>
-
-              {/* Impact flash where the bolt hits */}
-              <div
-                aria-hidden
-                className="pointer-events-none absolute left-1/2 top-6 h-16 w-16 -translate-x-1/2 rounded-full sm:top-10 sm:h-24 sm:w-24 md:h-32 md:w-32"
-                style={{
-                  background:
-                    "radial-gradient(circle, rgba(196,181,253,0.85), rgba(139,92,246,0.35) 45%, transparent 70%)",
-                  filter: "blur(6px)",
-                  animation: "impact-pulse 3.2s ease-in-out infinite",
-                }}
-              />
-
-              <img
-                src={nghcLogo.url}
-                alt="NGHC"
-                className="relative mx-auto h-40 w-40 object-contain sm:h-56 sm:w-56 md:h-72 md:w-72 float-soft"
-                style={{
-                  filter:
-                    "drop-shadow(0 0 30px rgba(167,139,250,0.55)) drop-shadow(0 20px 60px color-mix(in oklab, var(--blurple) 55%, transparent))",
-                }}
-              />
-              <div className="mt-3 font-mono text-[10px] uppercase tracking-[0.4em] text-slate-500">
-                neighborshub
-              </div>
-            </div>
-            <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 rotate-45">
-              <div className="grid h-6 w-6 place-items-center border border-[#818cf8]/60">
-                <span className="block h-1.5 w-1.5 rounded-sm bg-[#818cf8]" />
-              </div>
-            </div>
-
-            <style>{`
-              @keyframes lightning-flash {
-                0%, 100% { opacity: 0; transform: translate(-50%, -12px) scale(0.9); }
-                6%       { opacity: 1; transform: translate(-50%, 0) scale(1.05); }
-                10%      { opacity: 0.35; }
-                14%      { opacity: 1; transform: translate(-50%, 2px) scale(1); }
-                22%      { opacity: 0; }
-                92%      { opacity: 0; }
-              }
-              @keyframes impact-pulse {
-                0%, 100% { opacity: 0; transform: translate(-50%, 0) scale(0.6); }
-                8%       { opacity: 1; transform: translate(-50%, 0) scale(1.15); }
-                20%      { opacity: 0; transform: translate(-50%, 0) scale(1.4); }
-              }
-              @keyframes spin-slow {
-                to { transform: rotate(360deg); }
-              }
-              @keyframes spark-float {
-                0%, 100% { transform: translate(0, 0); opacity: 0.4; }
-                50%      { transform: translate(6px, -8px); opacity: 1; }
-              }
-              @media (prefers-reduced-motion: reduce) {
-                svg[viewBox="0 0 100 200"],
-                [style*="impact-pulse"],
-                [style*="spin-slow"],
-                [style*="spark-float"] { animation: none !important; }
-              }
-            `}</style>
-          </div>
-        </div>
-
-
-
-        {/* Stats row */}
-        <LiveStatsRow />
-
-      </section>
-
-
-      {/* Missões — split section like image 1 */}
-      <section id="missoes" className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20">
-        <div className="grid items-center gap-10 md:grid-cols-2">
-          <div>
-            <div className="inline-flex items-center gap-2 rounded-full border border-[#818cf8]/30 bg-[#818cf8]/10 px-3 py-1 text-[10px] font-mono uppercase tracking-widest text-[#c4b5fd]">
-              <Sparkles className="h-3 w-3" /> auto quests
-            </div>
-            <h2 className="mt-4 text-4xl font-bold leading-tight tracking-tight sm:text-5xl">
-              Missões do Discord no <span className="text-[#818cf8]">automático</span>, num só lugar
-            </h2>
-            <p className="mt-4 max-w-lg text-slate-400">
-              O hub detecta suas quests disponíveis, executa vídeo e jogo em background e mostra o
-              progresso em tempo real — sem abrir cliente, sem ficar apertando botão.
-            </p>
-            <ul className="mt-6 space-y-3 text-sm">
-              {[
-                {
-                  t: "Detecção automática",
-                  d: "Lista todas as quests ativas do seu Discord — inclusive as regionais.",
-                },
-                {
-                  t: "Execução em fila",
-                  d: "Run all respeita o cooldown do seu plano e roda uma atrás da outra.",
-                },
-                {
-                  t: "Progresso ao vivo",
-                  d: "Barra por missão, log de eventos e histórico completo persistido.",
-                },
-              ].map((f) => (
-                <li key={f.t} className="flex gap-3">
-                  <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-[#818cf8]" />
-                  <div>
-                    <div className="font-semibold text-white">{f.t}</div>
-                    <div className="text-slate-400">{f.d}</div>
-                  </div>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Illustration mock — monitor com missões */}
-          <div className="relative">
-            <div className="relative rounded-2xl border border-white/10 bg-gradient-to-br from-[#131624] to-[#0b0d12] p-4 shadow-2xl shadow-indigo-500/10">
-              {/* topbar dots */}
-              <div className="flex gap-1.5 pb-3">
-                <span className="h-2.5 w-2.5 rounded-full bg-red-500/60" />
-                <span className="h-2.5 w-2.5 rounded-full bg-amber-400/60" />
-                <span className="h-2.5 w-2.5 rounded-full bg-emerald-500/60" />
-              </div>
-              <div className="grid grid-cols-[80px_1fr] gap-3">
-                {/* sidebar */}
-                <div className="space-y-2 rounded-lg bg-white/[0.03] p-2">
-                  <div className="h-2 w-full rounded bg-[#818cf8]/60" />
-                  <div className="h-1.5 w-3/4 rounded bg-white/10" />
-                  <div className="h-1.5 w-2/3 rounded bg-white/10" />
-                  <div className="h-1.5 w-4/5 rounded bg-white/10" />
-                  <div className="h-1.5 w-1/2 rounded bg-white/10" />
-                </div>
-                {/* content */}
-                <div className="space-y-2">
-                  {/* quest cards */}
-                  {[
-                    { l: "Assista Fortnite Trailer", p: 100, tone: "bg-emerald-500" },
-                    { l: "Jogue Valorant 15 min", p: 62, tone: "bg-[#818cf8]" },
-                    { l: "Assista LoL Highlights", p: 28, tone: "bg-fuchsia-500" },
-                  ].map((q) => (
-                    <div key={q.l} className="rounded-lg border border-white/5 bg-white/[0.03] p-2.5">
-                      <div className="flex items-center justify-between text-[10px] text-slate-300">
-                        <span>{q.l}</span>
-                        <span className="font-mono text-slate-400">{q.p}%</span>
-                      </div>
-                      <div className="mt-1.5 h-1.5 overflow-hidden rounded-full bg-white/5">
-                        <div className={`h-full ${q.tone}`} style={{ width: `${q.p}%` }} />
-                      </div>
-                    </div>
-                  ))}
-                  {/* mini chart */}
-                  <div className="rounded-lg border border-white/5 bg-white/[0.03] p-2.5">
-                    <svg viewBox="0 0 200 40" className="h-10 w-full">
-                      <defs>
-                        <linearGradient id="ln" x1="0" x2="0" y1="0" y2="1">
-                          <stop offset="0%" stopColor="#818cf8" stopOpacity="0.6" />
-                          <stop offset="100%" stopColor="#818cf8" stopOpacity="0" />
-                        </linearGradient>
-                      </defs>
-                      <path
-                        d="M0 30 L 30 25 L 60 27 L 90 18 L 120 22 L 150 10 L 180 14 L 200 6 L 200 40 L 0 40 Z"
-                        fill="url(#ln)"
-                      />
-                      <path
-                        d="M0 30 L 30 25 L 60 27 L 90 18 L 120 22 L 150 10 L 180 14 L 200 6"
-                        fill="none"
-                        stroke="#c4b5fd"
-                        strokeWidth="1.5"
-                      />
-                    </svg>
-                  </div>
-                </div>
-              </div>
-            </div>
-            {/* pedestal */}
-            <div className="mx-auto mt-3 h-4 w-32 rounded-b-xl border-x border-b border-white/10 bg-white/[0.04]" />
-            <div className="mx-auto h-px w-56 bg-white/10" />
-          </div>
-        </div>
-      </section>
-
-      {/* Membros — grid cards + cursor diamante */}
-      <MembersSection />
-      {/* Estatísticas em Tempo Real */}
-      <section id="stats" className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20">
-        <div className="text-center">
-          <div className="inline-flex items-center gap-2 rounded-full border border-[#818cf8]/30 bg-[#818cf8]/10 px-3 py-1 font-mono text-[10px] uppercase tracking-[0.3em] text-[#c4b5fd]">
-            <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-[#c4b5fd]" />
-            Ao vivo
-          </div>
-          <h2 className="mt-4 text-3xl font-bold tracking-tight text-white md:text-5xl">
-            Estatísticas em Tempo Real
-          </h2>
-          <p className="mt-3 text-sm text-slate-400 sm:text-base">
-            Dados atualizados da nossa API em tempo real
-          </p>
-        </div>
-
-        <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {[
-            {
-              icon: CheckCircle2,
-              value: "18.042",
-              label: "Licenças Criadas",
-              desc: "Número total de licenças válidas geradas para nossos clientes, garantindo autenticidade e suporte oficial para todos os produtos adquiridos.",
-            },
-            {
-              icon: ShieldCheck,
-              value: "150",
-              label: "Tentativas de Crack",
-              desc: "Tentativas de violação de segurança bloqueadas pelo nosso sistema de proteção avançado, garantindo a integridade dos nossos produtos.",
-            },
-            {
-              icon: Users,
-              value: "+100",
-              label: "Usuários Ativos",
-              desc: "Comunidade crescente de usuários farmando Orbs com o Neighborshub todos os dias, em servidores por todo o Brasil.",
-            },
-          ].map((s) => {
-            const Icon = s.icon;
-            return (
-              <div
-                key={s.label}
-                className="group relative overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-br from-[#131624]/80 to-[#0b0d12]/60 p-6 text-center backdrop-blur-xl transition hover:border-[#818cf8]/40 hover:shadow-[0_20px_60px_-20px_rgba(88,101,242,0.45)]"
-              >
-                <div
-                  aria-hidden
-                  className="pointer-events-none absolute inset-x-0 -top-24 mx-auto h-40 w-40 rounded-full bg-[#818cf8]/20 blur-3xl opacity-0 transition group-hover:opacity-100"
-                />
-                <div
-                  className="relative mx-auto grid h-14 w-14 place-items-center rounded-xl bg-[#818cf8] text-white shadow-lg shadow-indigo-500/40"
-                >
-                  <Icon className="h-6 w-6" />
-                </div>
-                <div className="relative mt-5 text-4xl font-black tracking-tight text-white sm:text-5xl">
-                  {s.value}
-                </div>
-                <div className="relative mt-1.5 text-sm font-semibold text-[#c4b5fd]">
-                  {s.label}
-                </div>
-                <p className="relative mt-3 text-xs leading-relaxed text-slate-400 sm:text-sm">
-                  {s.desc}
-                </p>
-              </div>
-            );
-          })}
-        </div>
-      </section>
-
-      {/* Planos — estilo "featured product" com tabs */}
-      <PlansShowcase />
-
-
-
-
-      {/* Por que Neighborshub — 2x2 feature grid */}
-      <section id="como-funciona" className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20">
-        <div className="max-w-2xl">
-          <div className="inline-flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.3em] text-[#c4b5fd]">
-            <span className="h-3 w-0.5 bg-[#818cf8]" /> por que neighborshub
-          </div>
-          <h2 className="mt-3 text-3xl font-bold tracking-tight md:text-5xl">
-            Feito por quem vive Discord cheio.
-          </h2>
-          <p className="mt-3 text-sm text-slate-400">
-            Cada sistema nasce de quem joga, farma e aguenta o tranco junto com você.
-          </p>
-        </div>
-
-        <div className="relative mt-10 grid gap-4 md:grid-cols-2">
-          <div
-            aria-hidden
-            className="pointer-events-none absolute right-8 top-6 select-none font-black text-white/[0.03] text-[120px] leading-none"
-          >
-            0.00
-          </div>
-          {[
-            {
-              icon: Zap,
-              title: "Performance real",
-              body: "0.00ms de impacto. Roda em background sem travar seu Discord nem seu PC.",
-            },
-            {
-              icon: Code2,
-              title: "Código limpo",
-              body: "Tudo revisado antes de chegar no seu navegador. Zero gambiarra, zero conflito.",
-            },
-            {
-              icon: Plug,
-              title: "Standalone",
-              body: "Compatível com qualquer cargo, plano ou servidor. Você entra e já está rodando.",
-            },
-            {
-              icon: MessageSquare,
-              title: "Suporte de gente",
-              body: "Resposta rápida, direto com quem desenvolveu. Aqui ninguém fica na mão.",
-            },
-          ].map((f) => {
-            const Icon = f.icon;
-            return (
-              <div
-                key={f.title}
-                className="relative rounded-2xl border border-white/10 bg-white/[0.02] p-6 backdrop-blur-md transition hover:border-white/20 hover:bg-white/[0.04]"
-              >
-                <Icon className="h-5 w-5 text-[#818cf8]" />
-                <h3 className="mt-8 text-lg font-bold text-white">{f.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-slate-400">{f.body}</p>
-              </div>
-            );
-          })}
-        </div>
-      </section>
-
-      {/* Cadastro Free */}
-      <FreeSignup />
-
-
-      {/* Aviso */}
-      <section id="aviso" className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20">
-        <div className="relative overflow-hidden rounded-2xl border border-[#818cf8]/25 bg-gradient-to-br from-[#818cf8]/[0.08] via-[#0b0d12]/60 to-[#0b0d12]/40 p-6 shadow-2xl shadow-indigo-500/10 backdrop-blur-xl md:p-10">
-          <div
-            aria-hidden
-            className="pointer-events-none absolute -top-24 -right-24 h-64 w-64 rounded-full bg-[#818cf8]/20 blur-3xl"
-          />
-          <div
-            aria-hidden
-            className="pointer-events-none absolute -bottom-32 -left-20 h-72 w-72 rounded-full bg-[#818cf8]/10 blur-3xl"
-          />
-
-          <div className="relative flex flex-col gap-6 md:flex-row md:items-start">
-            <div
-              className="grid h-14 w-14 shrink-0 place-items-center rounded-2xl border border-[#818cf8]/40 bg-[#818cf8]/15 text-2xl"
-              style={{ boxShadow: "0 0 30px -6px rgba(88,101,242,0.55)" }}
-            >
-              ⚠️
-            </div>
-
-            <div className="flex-1">
-              <div className="inline-flex items-center gap-2 rounded-full border border-[#818cf8]/30 bg-[#818cf8]/10 px-3 py-1 font-mono text-[10px] uppercase tracking-[0.3em] text-[#c4b5fd]">
-                <span className="h-1.5 w-1.5 rounded-full bg-[#c4b5fd]" />
-                Aviso
-              </div>
-
-              <h3 className="mt-3 text-2xl font-bold tracking-tight text-white sm:text-3xl">
-                Leia antes de usar o Neighborshub
-              </h3>
-              <p className="mt-3 max-w-2xl text-sm leading-relaxed text-slate-300 sm:text-base">
-                Automatizar a API do Discord com o token da sua conta pessoal viola os{" "}
-                <a
-                  href="https://discord.com/terms"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="font-medium text-[#c4b5fd] underline decoration-[#818cf8]/60 underline-offset-2 transition hover:text-white"
-                >
-                  Termos de Serviço do Discord
-                </a>{" "}
-                (self-bots) e pode resultar em suspensão da conta. Este projeto é
-                educacional — você é o único responsável pelo uso.
-              </p>
-
-              <ul className="mt-6 grid gap-3 sm:grid-cols-2">
-                {[
-                  { t: "Sem garantias", d: "Uso oferecido como está, sem qualquer promessa de resultado." },
-                  { t: "Token = sua responsabilidade", d: "Nunca compartilhe seu token com terceiros ou serviços desconhecidos." },
-                  { t: "Não afiliado ao Discord", d: "Projeto independente, sem qualquer vínculo oficial." },
-                  { t: "Uso educacional", d: "Feito para estudo e automação pessoal — use com bom senso." },
-                ].map((item) => (
-                  <li
-                    key={item.t}
-                    className="flex items-start gap-3 rounded-xl border border-white/5 bg-white/[0.02] p-3 backdrop-blur"
-                  >
-                    <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[#818cf8]" />
-                    <div>
-                      <div className="text-xs font-semibold uppercase tracking-wider text-white">
-                        {item.t}
-                      </div>
-                      <div className="mt-0.5 text-xs leading-relaxed text-slate-400">
-                        {item.d}
-                      </div>
-                    </div>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
-
-
-
-      {/* Footer — like image 4 */}
-      <footer className="border-t border-white/5 bg-black/30">
-        <div className="mx-auto max-w-6xl px-6 py-14">
-          <div className="grid gap-10 md:grid-cols-[1.4fr_1fr]">
-            <div>
-              <Link to="/" className="flex items-center gap-2">
-                <img
-                  src={nghcLogo.url}
-                  alt="NGHC"
-                  className="h-10 w-10 object-contain"
-                  style={{ filter: "drop-shadow(0 0 12px color-mix(in oklab, var(--blurple) 55%, transparent))" }}
-                />
-                <span className="text-lg font-semibold tracking-tight">
-                  Neighbors<span className="text-[#c4b5fd]">hub</span>
-                </span>
-              </Link>
-              <p className="mt-6 max-w-sm text-sm leading-relaxed text-slate-400">
-                Infraestrutura de auto-quests para a comunidade Discord. Farm de Orbs sem esforço,
-                com detecção de plano em tempo real.
-              </p>
-            </div>
-
-            <div className="md:justify-self-end">
-              <div className="font-mono text-[10px] uppercase tracking-[0.3em] text-slate-500">
-                Links
-              </div>
-              <ul className="mt-4 space-y-2.5 text-sm text-slate-300">
-                <li><a href="#missoes" className="transition hover:text-white">Missões</a></li>
-                <li><a href="#planos" className="transition hover:text-white">Planos</a></li>
-                <li><a href="#membros" className="transition hover:text-white">Membros</a></li>
-                <li><a href="#como-funciona" className="transition hover:text-white">Como funciona</a></li>
-                <li><a href="#aviso" className="transition hover:text-white">Aviso</a></li>
-                <li><Link to="/hub" className="transition hover:text-white">Abrir Hub</Link></li>
-              </ul>
-            </div>
-          </div>
-
-          <div className="mt-12 flex flex-col items-start justify-between gap-4 border-t border-white/5 pt-6 sm:flex-row sm:items-center">
-            <div className="flex gap-2">
-              <a
-                href="https://www.instagram.com/davizinzkn/"
-                target="_blank"
-                rel="noreferrer"
-                aria-label="Instagram"
-                className="grid h-9 w-9 place-items-center rounded-full border border-white/10 bg-white/[0.03] text-slate-300 transition hover:border-white/30 hover:text-white"
-              >
-                <Instagram className="h-4 w-4" />
-              </a>
-              <a
-                href="https://discord.com"
-                target="_blank"
-                rel="noreferrer"
-                aria-label="Discord"
-                className="grid h-9 w-9 place-items-center rounded-full border border-white/10 bg-white/[0.03] text-slate-300 transition hover:border-white/30 hover:text-white"
-              >
-                <Send className="h-4 w-4" />
-              </a>
-            </div>
-            <div className="text-xs text-slate-500">
-              © {new Date().getFullYear()} Neighborshub · Feito por{" "}
-              <a
-                href="https://www.instagram.com/davizinzkn/"
-                target="_blank"
-                rel="noreferrer"
-                className="font-semibold text-[#a78bfa] hover:text-white"
-              >
-                davizinzknTheGod
-              </a>
-              <span className="mx-2 text-slate-700">·</span>
-              Código-fonte fornecido por{" "}
-              <span className="font-semibold text-[#c4b5fd]">isnouu</span>
-            </div>
-
-          </div>
-        </div>
-      </footer>
-    </div>
-  );
-}
-
-function useInView<T extends Element>(): [React.RefObject<T | null>, boolean] {
+function useInView<T extends Element>(threshold = 0.15): [React.RefObject<T | null>, boolean] {
   const ref = useRef<T | null>(null);
   const [inView, setInView] = useState(false);
   useEffect(() => {
@@ -756,12 +233,33 @@ function useInView<T extends Element>(): [React.RefObject<T | null>, boolean] {
           io.disconnect();
         }
       },
-      { threshold: 0.2 },
+      { threshold },
     );
     io.observe(el);
     return () => io.disconnect();
-  }, [inView]);
+  }, [inView, threshold]);
   return [ref, inView];
+}
+
+function Reveal({
+  children,
+  delay = 0,
+  className = "",
+}: {
+  children: React.ReactNode;
+  delay?: number;
+  className?: string;
+}) {
+  const [ref, inView] = useInView<HTMLDivElement>();
+  return (
+    <div
+      ref={ref}
+      className={`reveal ${inView ? "is-visible" : ""} ${className}`}
+      style={{ transitionDelay: `${delay}ms` }}
+    >
+      {children}
+    </div>
+  );
 }
 
 function useCountUp(target: number, run: boolean, duration = 1400) {
@@ -772,8 +270,7 @@ function useCountUp(target: number, run: boolean, duration = 1400) {
     const start = performance.now();
     const tick = (now: number) => {
       const t = Math.min(1, (now - start) / duration);
-      const eased = 1 - Math.pow(1 - t, 3);
-      setValue(target * eased);
+      setValue(target * (1 - Math.pow(1 - t, 3)));
       if (t < 1) raf = requestAnimationFrame(tick);
     };
     raf = requestAnimationFrame(tick);
@@ -782,18 +279,318 @@ function useCountUp(target: number, run: boolean, duration = 1400) {
   return value;
 }
 
-// ---- Live stats: cache + auto-refresh ----
-const STATS_CACHE_KEY = "nghc:home-stats:v2";
+function Avatar({ seed }: { seed: string }) {
+  return (
+    <img
+      src={`https://api.dicebear.com/9.x/adventurer/svg?seed=${encodeURIComponent(seed)}&backgroundType=gradientLinear`}
+      alt=""
+      className="h-full w-full object-cover"
+      loading="lazy"
+    />
+  );
+}
+
+/* ─────────────────────────── page ─────────────────────────── */
+
+function Index() {
+  return (
+    <div
+      id="topo"
+      className="relative min-h-screen overflow-x-hidden bg-[#050505] font-sans text-[#f5f5f5] antialiased"
+    >
+      <div aria-hidden className="pointer-events-none fixed inset-0 -z-10">
+        <div className="tech-grid absolute inset-0" />
+        <div className="absolute -top-40 left-1/2 h-[42rem] w-[42rem] -translate-x-1/2 rounded-full bg-[#818cf8]/[0.09] blur-[140px]" />
+        <div className="absolute bottom-0 right-[-12rem] h-[32rem] w-[32rem] rounded-full bg-[#818cf8]/[0.05] blur-[140px]" />
+      </div>
+
+      <SiteHeader />
+
+      <main>
+        <Hero />
+        <SocialProof />
+        <ProductsSection />
+        <FeaturedProduct />
+        <ReasonsSection />
+        <PlansSection />
+        <FreeSignup />
+        <CommunitySection />
+        <FinalCta />
+      </main>
+
+      <SiteFooter />
+    </div>
+  );
+}
+
+/* ─────────────────────────── header ─────────────────────────── */
+
+function SiteHeader() {
+  const [scrolled, setScrolled] = useState(false);
+  const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 12);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  return (
+    <header
+      className={`sticky top-0 z-50 w-full transition-[background,border-color,backdrop-filter] duration-300 ${
+        scrolled
+          ? "border-b border-white/[0.07] bg-[#050505]/80 backdrop-blur-xl"
+          : "border-b border-transparent bg-transparent"
+      }`}
+    >
+      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
+        <Link to="/" className="flex min-w-0 items-center gap-2.5">
+          <img
+            src={nghcLogo.url}
+            alt="NeighborD Hub"
+            width={32}
+            height={32}
+            className="h-8 w-8 shrink-0 object-contain"
+          />
+          <span className="truncate font-display text-[15px] font-extrabold tracking-tight text-white">
+            NeighborD<span className="text-[#818cf8]"> Hub</span>
+          </span>
+        </Link>
+
+        <nav className="hidden items-center gap-8 md:flex">
+          {NAV.map((n) => (
+            <a
+              key={n.href}
+              href={n.href}
+              className="text-[13px] font-medium text-[#8a8a8a] transition-colors duration-200 hover:text-white"
+            >
+              {n.label}
+            </a>
+          ))}
+        </nav>
+
+        <div className="hidden items-center gap-2 md:flex">
+          <Link to="/hub" className="btn-ghost">
+            Entrar
+          </Link>
+          <a href={GUILD_INVITE} target="_blank" rel="noreferrer" className="btn-accent">
+            Comunidade
+          </a>
+        </div>
+
+        <button
+          type="button"
+          onClick={() => setOpen((v) => !v)}
+          aria-label={open ? "Fechar menu" : "Abrir menu"}
+          aria-expanded={open}
+          className="grid h-10 w-10 shrink-0 place-items-center rounded-lg border border-white/10 bg-white/[0.03] text-white transition hover:bg-white/[0.07] md:hidden"
+        >
+          {open ? <X className="h-4.5 w-4.5" /> : <Menu className="h-4.5 w-4.5" />}
+        </button>
+      </div>
+
+      {open && (
+        <div className="border-t border-white/[0.07] bg-[#050505]/95 backdrop-blur-xl md:hidden">
+          <nav className="mx-auto flex max-w-7xl flex-col px-4 py-3 sm:px-6">
+            {NAV.map((n) => (
+              <a
+                key={n.href}
+                href={n.href}
+                onClick={() => setOpen(false)}
+                className="rounded-lg px-2 py-3 text-sm font-medium text-[#a0a0a0] transition hover:bg-white/[0.04] hover:text-white"
+              >
+                {n.label}
+              </a>
+            ))}
+            <div className="mt-3 grid grid-cols-2 gap-2 border-t border-white/[0.07] pt-3">
+              <Link to="/hub" className="btn-ghost w-full" onClick={() => setOpen(false)}>
+                Entrar
+              </Link>
+              <a href={GUILD_INVITE} target="_blank" rel="noreferrer" className="btn-accent w-full">
+                Discord
+              </a>
+            </div>
+          </nav>
+        </div>
+      )}
+    </header>
+  );
+}
+
+/* ─────────────────────────── hero ─────────────────────────── */
+
+function Hero() {
+  return (
+    <section className="relative mx-auto max-w-7xl px-4 pb-20 pt-16 sm:px-6 sm:pb-28 sm:pt-24 lg:px-8">
+      <div className="grid items-center gap-14 lg:grid-cols-[1.05fr_0.95fr]">
+        <div>
+          <Reveal>
+            <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-3 py-1 font-mono text-[10px] uppercase tracking-[0.28em] text-[#a0a0a0]">
+              <span className="h-1.5 w-1.5 rounded-full bg-[#818cf8]" />
+              NeighborD Hub
+            </span>
+          </Reveal>
+
+          <Reveal delay={80}>
+            <h1 className="mt-6 font-display text-[2.6rem] font-extrabold leading-[1.03] tracking-[-0.035em] text-white sm:text-6xl lg:text-[4.1rem]">
+              Uma nova experiência
+              <br />
+              para sua comunidade.
+            </h1>
+          </Reveal>
+
+          <Reveal delay={160}>
+            <p className="mt-6 max-w-xl text-[15px] leading-relaxed text-[#8a8a8a] sm:text-base">
+              Automação de quests, farm de Orbs, sniper de nicks e ferramentas de servidor reunidos
+              numa plataforma só. O NeighborD Hub cuida do trabalho repetitivo — você fica com o
+              resultado.
+            </p>
+          </Reveal>
+
+          <Reveal delay={240}>
+            <div className="mt-9 flex flex-wrap items-center gap-3">
+              <a href="#produtos" className="btn-accent px-5 py-3">
+                Explorar produtos <ArrowRight className="h-4 w-4" />
+              </a>
+              <a
+                href={GUILD_INVITE}
+                target="_blank"
+                rel="noreferrer"
+                className="btn-ghost px-5 py-3"
+              >
+                Entrar na comunidade
+              </a>
+            </div>
+          </Reveal>
+
+          <Reveal delay={320}>
+            <div className="mt-10 flex items-center gap-3">
+              <div className="flex -space-x-2">
+                {FALLBACK_MEMBERS.slice(0, 5).map((m) => (
+                  <div
+                    key={m}
+                    className="h-7 w-7 overflow-hidden rounded-full border-2 border-[#050505] bg-white/10"
+                  >
+                    <Avatar seed={m} />
+                  </div>
+                ))}
+              </div>
+              <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-[#6f6f6f]">
+                comunidade ativa no discord
+              </p>
+            </div>
+          </Reveal>
+        </div>
+
+        <Reveal delay={200}>
+          <HeroPreview />
+        </Reveal>
+      </div>
+    </section>
+  );
+}
+
+function HeroPreview() {
+  return (
+    <div className="relative">
+      <div
+        aria-hidden
+        className="pointer-events-none absolute -inset-10 -z-10 rounded-[3rem] bg-[#818cf8]/10 blur-[90px]"
+      />
+      <div className="overflow-hidden rounded-2xl border border-white/[0.08] bg-[#0d0d0d]/90 shadow-[0_50px_120px_-60px_rgba(0,0,0,0.9)] backdrop-blur-xl">
+        <div className="flex items-center gap-3 border-b border-white/[0.06] px-4 py-3">
+          <div className="flex gap-1.5">
+            <span className="h-2.5 w-2.5 rounded-full bg-white/10" />
+            <span className="h-2.5 w-2.5 rounded-full bg-white/10" />
+            <span className="h-2.5 w-2.5 rounded-full bg-white/10" />
+          </div>
+          <div className="font-mono text-[10px] uppercase tracking-[0.25em] text-[#6f6f6f]">
+            hub / missões
+          </div>
+        </div>
+
+        <div className="grid grid-cols-[84px_1fr] gap-3 p-4">
+          <div className="space-y-2 rounded-xl border border-white/[0.05] bg-white/[0.02] p-2.5">
+            <div className="h-1.5 w-full rounded-full bg-[#818cf8]/70" />
+            {[80, 65, 72, 50, 60].map((w, i) => (
+              <div key={i} className="h-1.5 rounded-full bg-white/[0.08]" style={{ width: `${w}%` }} />
+            ))}
+          </div>
+
+          <div className="space-y-2.5">
+            {[
+              { l: "Assistir trailer — Fortnite", p: 100 },
+              { l: "Jogar 15 min — Valorant", p: 64 },
+              { l: "Assistir highlights — LoL", p: 27 },
+            ].map((q) => (
+              <div
+                key={q.l}
+                className="rounded-xl border border-white/[0.05] bg-white/[0.02] p-3"
+              >
+                <div className="flex items-center justify-between text-[11px] text-[#d4d4d4]">
+                  <span className="truncate pr-2">{q.l}</span>
+                  <span className="font-mono text-[#8a8a8a]">{q.p}%</span>
+                </div>
+                <div className="mt-2 h-1 overflow-hidden rounded-full bg-white/[0.06]">
+                  <div className="h-full rounded-full bg-[#818cf8]" style={{ width: `${q.p}%` }} />
+                </div>
+              </div>
+            ))}
+
+            <div className="rounded-xl border border-white/[0.05] bg-white/[0.02] p-3">
+              <svg viewBox="0 0 200 44" className="h-11 w-full" aria-hidden>
+                <defs>
+                  <linearGradient id="spark" x1="0" x2="0" y1="0" y2="1">
+                    <stop offset="0%" stopColor="#818cf8" stopOpacity="0.35" />
+                    <stop offset="100%" stopColor="#818cf8" stopOpacity="0" />
+                  </linearGradient>
+                </defs>
+                <path
+                  d="M0 32 L30 27 L60 29 L90 19 L120 23 L150 11 L180 15 L200 7 L200 44 L0 44 Z"
+                  fill="url(#spark)"
+                />
+                <path
+                  d="M0 32 L30 27 L60 29 L90 19 L120 23 L150 11 L180 15 L200 7"
+                  fill="none"
+                  stroke="#818cf8"
+                  strokeWidth="1.4"
+                />
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="absolute -bottom-6 -left-4 hidden rounded-xl border border-white/[0.08] bg-[#0d0d0d]/95 px-4 py-3 backdrop-blur-xl sm:block">
+        <div className="font-mono text-[9px] uppercase tracking-[0.25em] text-[#6f6f6f]">
+          status
+        </div>
+        <div className="mt-1 flex items-center gap-2 text-xs font-semibold text-white">
+          <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-[#818cf8]" />
+          Rodando em background
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ─────────────────────── social proof / stats ─────────────────────── */
+
+const STATS_CACHE_KEY = "nghc:home-stats:v3";
 const STATS_TTL_MS = 60_000;
-const WIDGET_URL = "https://discord.com/api/guilds/1511467436543709184/widget.json";
 
-type StatsSnapshot = { latency: number; members: number; quests: number; ts: number };
+type StatsSnapshot = { latency: number; members: number; products: number; ts: number };
 
-const DEFAULT_STATS: StatsSnapshot = { latency: 0.42, members: 120, quests: 240, ts: 0 };
+const DEFAULT_STATS: StatsSnapshot = {
+  latency: 0.42,
+  members: 100,
+  products: PRODUCTS.length,
+  ts: 0,
+};
 
 function clampLatency(ms: number): number {
   if (!Number.isFinite(ms) || ms <= 0) return 0.1;
-  // Scale roundtrip → perceived background impact, cap at 0.89ms, 2dp.
   const scaled = ms / 100;
   return Math.min(0.89, Math.max(0.05, Math.round(scaled * 100) / 100));
 }
@@ -804,8 +601,7 @@ function readCache(): StatsSnapshot | null {
     const raw = window.localStorage.getItem(STATS_CACHE_KEY);
     if (!raw) return null;
     const parsed = JSON.parse(raw) as StatsSnapshot;
-    if (typeof parsed?.latency !== "number") return null;
-    return parsed;
+    return typeof parsed?.latency === "number" ? parsed : null;
   } catch {
     return null;
   }
@@ -816,7 +612,7 @@ function writeCache(snap: StatsSnapshot) {
   try {
     window.localStorage.setItem(STATS_CACHE_KEY, JSON.stringify(snap));
   } catch {
-    /* ignore quota */
+    /* ignore */
   }
 }
 
@@ -842,30 +638,24 @@ async function fetchLiveStats(signal: AbortSignal): Promise<Partial<StatsSnapsho
   return { latency: clampLatency(samples[1]), members, ts: Date.now() };
 }
 
-function LiveStatsRow() {
+function SocialProof() {
   const [ref, inView] = useInView<HTMLDivElement>();
-  const cached = useRef<StatsSnapshot | null>(null);
-
   const [stats, setStats] = useState<StatsSnapshot>(DEFAULT_STATS);
   const [hasFresh, setHasFresh] = useState(false);
   const inFlight = useRef<AbortController | null>(null);
 
-  // Cache só é lido depois da hidratação pra não divergir do HTML do servidor.
   useEffect(() => {
     const snap = readCache();
     if (snap) {
-      cached.current = snap;
-      setStats(snap);
+      setStats({ ...snap, products: PRODUCTS.length });
       setHasFresh(true);
     }
   }, []);
 
   useEffect(() => {
     let mounted = true;
-
-
     const refresh = async () => {
-      if (inFlight.current) return; // dedupe
+      if (inFlight.current) return;
       const ctrl = new AbortController();
       inFlight.current = ctrl;
       try {
@@ -875,7 +665,7 @@ function LiveStatsRow() {
           const merged: StatsSnapshot = {
             latency: next.latency ?? prev.latency,
             members: next.members ?? prev.members,
-            quests: prev.quests,
+            products: PRODUCTS.length,
             ts: next.ts ?? Date.now(),
           };
           writeCache(merged);
@@ -883,19 +673,17 @@ function LiveStatsRow() {
         });
         setHasFresh(true);
       } catch {
-        // keep cache on failure
+        /* keep cache */
       } finally {
         if (inFlight.current === ctrl) inFlight.current = null;
       }
     };
-
     refresh();
     const iv = window.setInterval(refresh, STATS_TTL_MS);
     const onVis = () => {
       if (document.visibilityState === "visible") refresh();
     };
     document.addEventListener("visibilitychange", onVis);
-
     return () => {
       mounted = false;
       window.clearInterval(iv);
@@ -905,340 +693,334 @@ function LiveStatsRow() {
     };
   }, []);
 
-  const showSkeleton = !hasFresh;
-
-  const quests = useCountUp(stats.quests, inView);
-  const membersC = useCountUp(stats.members, inView);
-  const ms = useCountUp(stats.latency, inView);
+  const members = useCountUp(stats.members, inView);
+  const products = useCountUp(stats.products, inView);
+  const latency = useCountUp(stats.latency, inView);
 
   return (
-    <div
-      ref={ref}
-      className="mt-20 grid grid-cols-1 gap-2 rounded-3xl border border-white/10 bg-white/[0.02] p-4 shadow-[0_40px_120px_-60px_rgba(129,140,248,0.9)] backdrop-blur-3xl sm:grid-cols-3 sm:p-6"
-    >
-
-      <StatCell
-        loading={showSkeleton}
-        skeletonKind="int"
-        value={`${Math.round(quests)}+`}
-        label="quests suportadas"
-      />
-      <StatCell
-        loading={showSkeleton}
-        skeletonKind="int"
-        border
-        value={`${Math.round(membersC)}+`}
-        label="membros ativos"
-      />
-      <StatCell
-        loading={showSkeleton}
-        skeletonKind="ms"
-        border
-        pulse={!hasFresh}
-        value={
-          <>
-            {ms.toFixed(2)}
-            <span className="text-[#818cf8]">ms</span>
-          </>
-        }
-        label="de impacto no discord"
-      />
-    </div>
-  );
-}
-
-function StatSkeleton({ kind }: { kind: "int" | "ms" }) {
-  const width = kind === "ms" ? "w-32 sm:w-44" : "w-20 sm:w-28";
-  return (
-    <div
-      className={`${width} h-9 sm:h-12 rounded-md shimmer opacity-70`}
-      aria-hidden
-    />
+    <section className="border-y border-white/[0.06] bg-white/[0.012]">
+      <div ref={ref} className="mx-auto max-w-7xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8">
+        <p className="max-w-2xl text-sm text-[#8a8a8a]">
+          Construído para comunidades que levam sua experiência a sério.
+        </p>
+        <div className="mt-8 grid grid-cols-1 gap-px overflow-hidden rounded-xl border border-white/[0.06] bg-white/[0.05] sm:grid-cols-3">
+          <StatCell
+            loading={!hasFresh}
+            value={`${Math.round(members)}+`}
+            label="membros na comunidade"
+          />
+          <StatCell
+            loading={!hasFresh}
+            value={`${Math.round(products)}`}
+            label="produtos disponíveis"
+          />
+          <StatCell
+            loading={!hasFresh}
+            value={
+              <>
+                {latency.toFixed(2)}
+                <span className="text-[#818cf8]">ms</span>
+              </>
+            }
+            label="de impacto no discord"
+          />
+        </div>
+      </div>
+    </section>
   );
 }
 
 function StatCell({
   value,
   label,
-  border,
   loading,
-  pulse,
-  skeletonKind = "int",
 }: {
   value: React.ReactNode;
   label: string;
-  border?: boolean;
   loading?: boolean;
-  pulse?: boolean;
-  skeletonKind?: "int" | "ms";
 }) {
   return (
-    <div
-      className={`rounded-2xl px-4 py-7 text-center transition-colors duration-300 hover:bg-white/[0.03] sm:px-8 sm:py-8 ${border ? "sm:border-l border-white/5" : ""}`}
-    >
-      <div className="chrome-text text-3xl tracking-tight tabular-nums sm:text-5xl min-h-[2.5rem] sm:min-h-[3.5rem] font-display transition-opacity duration-300 flex items-center justify-center">
-        {loading ? <StatSkeleton kind={skeletonKind} /> : value}
-      </div>
-      <div className="mt-2 flex items-center justify-center gap-2 font-mono text-[10px] uppercase tracking-[0.25em] text-slate-500">
-        {(loading || pulse) && (
-          <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-[#67e8f9]" />
+    <div className="bg-[#080808] px-6 py-8">
+      <div className="flex min-h-[2.75rem] items-center font-display text-3xl font-extrabold tracking-tight tabular-nums text-white sm:text-4xl">
+        {loading ? (
+          <span className="block h-8 w-24 animate-pulse rounded bg-white/[0.07]" aria-hidden />
+        ) : (
+          value
         )}
+      </div>
+      <div className="mt-2 font-mono text-[10px] uppercase tracking-[0.25em] text-[#6f6f6f]">
         {label}
       </div>
     </div>
   );
 }
 
+/* ─────────────────────────── produtos ─────────────────────────── */
 
-function MembersSection() {
-
-  const [live, setLive] = useState<Array<{ id: string; name: string; avatar: string | null; status: string }> | null>(null);
-  const [presence, setPresence] = useState<number | null>(null);
-
-  useEffect(() => {
-    const ctrl = new AbortController();
-    fetch("https://discord.com/api/guilds/1511467436543709184/widget.json", { signal: ctrl.signal })
-      .then((r) => (r.ok ? r.json() : null))
-      .then((j) => {
-        if (!j || !Array.isArray(j.members)) return;
-        setPresence(typeof j.presence_count === "number" ? j.presence_count : null);
-        setLive(
-          j.members.map((m: { id: string; username: string; avatar_url: string | null; status: string }) => ({
-            id: m.id,
-            name: m.username,
-            avatar: m.avatar_url,
-            status: m.status,
-          })),
-        );
-      })
-      .catch(() => {});
-    return () => ctrl.abort();
-  }, []);
-
-  const list = live ?? MEMBERS.map((m) => ({ id: m.seed, name: m.name, avatar: null as string | null, status: "online" }));
-  const loop = [...list, ...list];
+function ProductsSection() {
+  const [cat, setCat] = useState<(typeof CATEGORIES)[number]>("Todos");
+  const list = cat === "Todos" ? PRODUCTS : PRODUCTS.filter((p) => p.category === cat);
 
   return (
-    <section id="membros" className="py-16 sm:py-20">
-      <div className="mx-auto max-w-6xl px-4 sm:px-6">
-        <div className="max-w-2xl">
-          <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 font-mono text-[10px] uppercase tracking-[0.3em] text-slate-400 backdrop-blur">
-            membros {presence !== null && <span className="text-[#c4b5fd]">· {presence} online</span>}
-          </div>
-          <h2 className="mt-4 text-3xl font-bold tracking-tight md:text-4xl">
-            Quem já está no servidor
-          </h2>
-          <p className="mt-3 text-sm text-slate-400">
-            {live ? "Membros online agora, direto do Discord." : "Alguns destaques da comunidade."}
-          </p>
-        </div>
-      </div>
-
-      <div className="relative mt-10 overflow-hidden">
-        <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-24 bg-gradient-to-r from-[#0b0d12] to-transparent" />
-        <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-24 bg-gradient-to-l from-[#0b0d12] to-transparent" />
-
-        <div className="flex gap-3 animate-[marquee_50s_linear_infinite] hover:[animation-play-state:paused]">
-          {loop.map((m, i) => (
-            <div
-              key={`${m.id}-${i}`}
-              className="flex shrink-0 items-center gap-3 rounded-full border border-white/10 bg-white/[0.03] py-1.5 pl-1.5 pr-5 backdrop-blur-md"
-            >
-              <div className="relative grid h-9 w-9 shrink-0 place-items-center overflow-hidden rounded-full border border-white/10 bg-white/5">
-                {m.avatar ? (
-                  <img src={m.avatar} alt="" className="h-full w-full object-cover" loading="lazy" />
-                ) : (
-                  <Avatar seed={m.id} />
-                )}
-                <span
-                  className={`absolute -bottom-0.5 -right-0.5 h-2.5 w-2.5 rounded-full border-2 border-[#0b0d12] ${
-                    m.status === "online"
-                      ? "bg-[#818cf8]"
-                      : m.status === "idle"
-                        ? "bg-[#c4b5fd]"
-                        : m.status === "dnd"
-                          ? "bg-[#4752c4]"
-                          : "bg-slate-500"
-                  }`}
-                />
-              </div>
-              <span className="whitespace-nowrap text-sm font-semibold text-white">{m.name}</span>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      <div className="mx-auto mt-10 max-w-6xl px-4 sm:px-6">
-        <div className="grid gap-6 md:grid-cols-[1fr_auto] md:items-center">
-          <div className="glass-panel p-6 md:p-8">
-            <div className="inline-flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.3em] text-[#c4b5fd]">
-              <span className="h-3 w-0.5 bg-[#818cf8]" /> ao vivo
-            </div>
-            <h3 className="mt-3 text-2xl font-bold tracking-tight md:text-3xl">
-              Servidor oficial no Discord
-            </h3>
-            <p className="mt-2 max-w-md text-sm text-slate-400">
-              Widget conectado direto à guilda. Entra, farma missão e conversa com quem já tá dentro.
+    <section id="produtos" className="mx-auto max-w-7xl px-4 py-20 sm:px-6 sm:py-28 lg:px-8">
+      <Reveal>
+        <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
+          <div className="max-w-2xl">
+            <span className="eyebrow">produtos</span>
+            <h2 className="mt-4 font-display text-3xl font-extrabold tracking-[-0.03em] text-white sm:text-[2.6rem]">
+              Produtos feitos para elevar sua experiência.
+            </h2>
+            <p className="mt-3 text-sm text-[#8a8a8a]">
+              Cada ferramenta do hub resolve uma dor real de quem vive Discord todo dia.
             </p>
-            <a
-              href={GUILD_INVITE}
-              target="_blank"
-              rel="noreferrer"
-              className="mt-5 inline-flex items-center gap-2 rounded-md bg-[#818cf8] px-4 py-2.5 text-xs font-bold uppercase tracking-widest text-white transition hover:bg-[#4752c4]"
-            >
-              Entrar no servidor <ArrowRight className="h-3.5 w-3.5" />
-            </a>
           </div>
-          <div className="glass-frame mx-auto w-full max-w-[380px]">
-            <iframe
-              src="https://discord.com/widget?id=1511467436543709184&theme=dark"
-              width={350}
-              height={500}
-              title="Discord widget"
-              loading="lazy"
-              frameBorder={0}
-              sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"
-              className="mx-auto block h-[500px] w-full max-w-[350px] rounded-xl"
-            />
-          </div>
-        </div>
-      </div>
-
-      <style>{`
-        @keyframes marquee {
-          0% { transform: translateX(0); }
-          100% { transform: translateX(-50%); }
-        }
-      `}</style>
-    </section>
-  );
-}
-
-
-
-function PlansShowcase() {
-  const [active, setActive] = useState(1);
-  const plan = PLANS[active];
-
-  return (
-    <section id="planos" className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20">
-      <div className="flex items-start justify-between gap-6">
-        <div className="max-w-2xl">
-          <div className="inline-flex items-center gap-2 rounded-full border border-[#818cf8]/30 bg-[#818cf8]/10 px-3 py-1 font-mono text-[10px] uppercase tracking-[0.3em] text-[#c4b5fd]">
-            <span className="h-1 w-1 rounded-full bg-[#818cf8]" /> planos
-          </div>
-          <h2 className="mt-4 text-4xl font-bold leading-tight tracking-tight md:text-5xl">
-            Tudo pronto pra <br className="hidden sm:block" />
-            <span className="text-slate-400">subir de plano.</span>
-          </h2>
-        </div>
-        <div className="hidden shrink-0 rotate-45 md:block">
-          <div className="grid h-12 w-12 place-items-center border border-[#818cf8]/50">
-            <span className="block h-2 w-2 rounded-sm bg-[#818cf8]" />
-          </div>
-        </div>
-      </div>
-
-      <div className="mt-10 overflow-hidden rounded-2xl border border-white/10 bg-white/[0.02] shadow-2xl shadow-black/40 backdrop-blur-xl">
-        {/* topbar dots + tabs */}
-        <div className="flex items-center gap-4 border-b border-white/10 bg-white/[0.02] px-4 py-3">
-          <div className="flex gap-1.5">
-            <span className="h-2.5 w-2.5 rounded-full bg-red-500/60" />
-            <span className="h-2.5 w-2.5 rounded-full bg-amber-400/60" />
-            <span className="h-2.5 w-2.5 rounded-full bg-emerald-500/60" />
-          </div>
-          <div className="flex gap-1 overflow-x-auto">
-            {PLANS.map((p, i) => (
+          <div className="flex flex-wrap gap-2">
+            {CATEGORIES.map((c) => (
               <button
-                key={p.name}
-                onClick={() => setActive(i)}
-                className={`whitespace-nowrap rounded-md px-3 py-1.5 text-xs font-semibold transition ${
-                  i === active
-                    ? "border-b-2 border-[#818cf8] text-white"
-                    : "text-slate-500 hover:text-slate-300"
+                key={c}
+                type="button"
+                onClick={() => setCat(c)}
+                className={`rounded-full border px-3.5 py-1.5 text-xs font-medium transition duration-200 ${
+                  cat === c
+                    ? "border-[#818cf8]/50 bg-[#818cf8]/12 text-white"
+                    : "border-white/[0.08] bg-white/[0.02] text-[#8a8a8a] hover:border-white/20 hover:text-white"
                 }`}
               >
-                {p.name.toLowerCase()}
+                {c}
               </button>
             ))}
           </div>
         </div>
+      </Reveal>
 
-        {/* body */}
-        <div className="grid gap-6 p-6 md:grid-cols-[1.1fr_1fr] md:p-8">
-          <div className="relative overflow-hidden rounded-xl border border-white/10 bg-gradient-to-br from-[#131624]/60 to-[#0b0d12]/60 p-6 backdrop-blur">
-            <div
-              aria-hidden
-              className="pointer-events-none absolute inset-0 opacity-40"
-              style={{
-                background:
-                  "radial-gradient(400px 240px at 80% 20%, rgba(88,101,242,0.35), transparent 60%)",
-              }}
-            />
-            <div className="relative">
-              <div className={`inline-flex rounded-md bg-[#818cf8]/20 px-2 py-0.5 font-mono text-[10px] uppercase tracking-widest ${plan.accent}`}>
-                {plan.highlight ? "mais popular" : "plano"}
-              </div>
-              <h3 className="mt-4 text-5xl font-black uppercase leading-none tracking-tight">
-                {plan.name}
-              </h3>
-              <div className="mt-4 h-px w-16 bg-[#818cf8]" />
-              <ul className="mt-5 space-y-2 text-sm text-slate-300">
-                {plan.features.map((f) => (
-                  <li key={f} className="flex gap-2">
-                    <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-sm bg-[#818cf8]" />
-                    <span>{f}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
+      <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        {list.map((p, i) => (
+          <Reveal key={p.name} delay={i * 60}>
+            <ProductCard product={p} />
+          </Reveal>
+        ))}
+      </div>
+    </section>
+  );
+}
 
-          <div className="flex flex-col justify-between gap-6 rounded-xl border border-white/10 bg-white/[0.02] p-6 backdrop-blur">
+function ProductCard({ product }: { product: Product }) {
+  const Icon = product.icon;
+  return (
+    <Link
+      to={product.to}
+      className="surface-card group flex h-full flex-col overflow-hidden p-0"
+    >
+      <div className="relative h-32 overflow-hidden border-b border-white/[0.06] bg-[#0b0b0b]">
+        <div
+          aria-hidden
+          className="absolute inset-0 opacity-60 transition-transform duration-[350ms] group-hover:scale-110"
+          style={{
+            background:
+              "radial-gradient(320px 140px at 30% 0%, rgba(129,140,248,0.18), transparent 70%)",
+          }}
+        />
+        <div className="tech-grid absolute inset-0 opacity-70" aria-hidden />
+        <Icon className="absolute bottom-4 left-5 h-7 w-7 text-[#818cf8] transition-transform duration-300 group-hover:-translate-y-0.5" />
+        <span className="absolute right-4 top-4 rounded-full border border-white/10 bg-black/40 px-2.5 py-1 font-mono text-[9px] uppercase tracking-[0.2em] text-[#a0a0a0]">
+          {product.status}
+        </span>
+      </div>
+
+      <div className="flex flex-1 flex-col p-5">
+        <div className="font-mono text-[10px] uppercase tracking-[0.25em] text-[#6f6f6f]">
+          {product.category}
+        </div>
+        <h3 className="mt-2 font-display text-lg font-bold tracking-tight text-white">
+          {product.name}
+        </h3>
+        <p className="mt-2 flex-1 text-[13px] leading-relaxed text-[#8a8a8a]">{product.desc}</p>
+        <div className="mt-5 flex items-center justify-between border-t border-white/[0.06] pt-4">
+          <span className="text-xs font-semibold text-[#a0a0a0]">
+            {product.price ?? "Incluído no hub"}
+          </span>
+          <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#818cf8] transition-transform duration-300 group-hover:translate-x-0.5">
+            Visualizar <ArrowRight className="h-3.5 w-3.5" />
+          </span>
+        </div>
+      </div>
+    </Link>
+  );
+}
+
+/* ─────────────────────── produto em destaque ─────────────────────── */
+
+function FeaturedProduct() {
+  return (
+    <section className="relative border-y border-white/[0.06] bg-white/[0.012]">
+      <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 sm:py-28 lg:px-8">
+        <div className="grid items-center gap-12 lg:grid-cols-2">
+          <Reveal>
             <div>
-              <div className={`font-mono text-[10px] uppercase tracking-[0.3em] ${plan.accent}`}>
-                standalone · {plan.period}
-              </div>
-              <div className="mt-2 flex items-baseline gap-2">
-                <div className="text-3xl font-black">{plan.price}</div>
-                <span className="text-xs text-slate-500">/ {plan.period}</span>
-              </div>
-              <p className="mt-4 text-sm text-slate-400">
-                Detectamos seu cargo no Discord em tempo real. Se expirar, o hub volta pro Free
-                automaticamente.
+              <span className="eyebrow">produto em destaque</span>
+              <h2 className="mt-4 font-display text-3xl font-extrabold tracking-[-0.03em] text-white sm:text-[2.6rem]">
+                Auto Quests, do jeito que deveria ser.
+              </h2>
+              <p className="mt-4 max-w-lg text-[15px] leading-relaxed text-[#8a8a8a]">
+                O hub identifica todas as quests ativas da sua conta, executa vídeo e jogo em
+                segundo plano e mostra o progresso ao vivo — sem abrir o cliente, sem ficar
+                apertando botão.
               </p>
-              <ul className="mt-5 grid grid-cols-1 gap-2 text-xs text-slate-300 sm:grid-cols-2">
-                {plan.features.slice(0, 4).map((f) => (
-                  <li key={f} className="flex gap-2">
-                    <CheckCircle2 className="mt-0.5 h-3.5 w-3.5 shrink-0 text-[#818cf8]" />
-                    <span>{f}</span>
+
+              <ul className="mt-8 space-y-4">
+                {[
+                  {
+                    t: "Detecção automática",
+                    d: "Lista todas as quests disponíveis, inclusive as regionais.",
+                  },
+                  {
+                    t: "Execução em fila",
+                    d: "Run all respeita o cooldown do seu plano e roda uma atrás da outra.",
+                  },
+                  {
+                    t: "Progresso ao vivo",
+                    d: "Barra por missão, log de eventos e histórico completo persistido.",
+                  },
+                ].map((f) => (
+                  <li key={f.t} className="flex gap-3">
+                    <CheckCircle2 className="mt-0.5 h-4.5 w-4.5 shrink-0 text-[#818cf8]" />
+                    <div>
+                      <div className="text-sm font-semibold text-white">{f.t}</div>
+                      <div className="text-[13px] text-[#8a8a8a]">{f.d}</div>
+                    </div>
                   </li>
                 ))}
               </ul>
-            </div>
-            {plan.name === "Free" ? (
-              <a
-                href="#free"
-                className="inline-flex items-center justify-center gap-2 rounded-md bg-[#818cf8] px-5 py-3 text-xs font-bold uppercase tracking-widest text-white transition hover:bg-[#4752c4]"
-              >
-                Cadastrar no Free <ArrowRight className="h-3.5 w-3.5" />
-              </a>
-            ) : (
-              <Link
-                to="/hub"
-                className="inline-flex items-center justify-center gap-2 rounded-md bg-[#818cf8] px-5 py-3 text-xs font-bold uppercase tracking-widest text-white transition hover:bg-[#4752c4]"
-              >
-                {plan.cta} <ArrowRight className="h-3.5 w-3.5" />
+
+              <Link to="/missoes" className="btn-accent mt-9 px-5 py-3">
+                Abrir Auto Quests <ArrowRight className="h-4 w-4" />
               </Link>
-            )}
-          </div>
+            </div>
+          </Reveal>
+
+          <Reveal delay={120}>
+            <HeroPreview />
+          </Reveal>
         </div>
       </div>
     </section>
   );
 }
 
-const GUILD_INVITE = "https://discord.com/invite/fVeXNmmF";
+/* ─────────────────────── por que / recursos ─────────────────────── */
+
+function ReasonsSection() {
+  return (
+    <section id="recursos" className="mx-auto max-w-7xl px-4 py-20 sm:px-6 sm:py-28 lg:px-8">
+      <Reveal>
+        <div className="max-w-2xl">
+          <span className="eyebrow">por que neighbord hub</span>
+          <h2 className="mt-4 font-display text-3xl font-extrabold tracking-[-0.03em] text-white sm:text-[2.6rem]">
+            Feito para quem não aceita o básico.
+          </h2>
+          <p className="mt-3 text-sm text-[#8a8a8a]">
+            Quatro princípios que guiam cada release do hub.
+          </p>
+        </div>
+      </Reveal>
+
+      <div className="mt-14 grid gap-px overflow-hidden rounded-xl border border-white/[0.06] bg-white/[0.05] sm:grid-cols-2 lg:grid-cols-4">
+        {REASONS.map((r, i) => {
+          const Icon = r.icon;
+          return (
+            <Reveal key={r.n} delay={i * 80}>
+              <div className="group h-full bg-[#080808] p-7 transition-colors duration-300 hover:bg-[#0d0d0d]">
+                <div className="flex items-center justify-between">
+                  <span className="font-mono text-xs tracking-[0.2em] text-[#818cf8]">{r.n}</span>
+                  <Icon className="h-4.5 w-4.5 text-[#6f6f6f] transition-colors duration-300 group-hover:text-[#818cf8]" />
+                </div>
+                <h3 className="mt-8 font-display text-lg font-bold tracking-tight text-white">
+                  {r.title}
+                </h3>
+                <p className="mt-2 text-[13px] leading-relaxed text-[#8a8a8a]">{r.desc}</p>
+              </div>
+            </Reveal>
+          );
+        })}
+      </div>
+    </section>
+  );
+}
+
+/* ─────────────────────────── planos ─────────────────────────── */
+
+function PlansSection() {
+  return (
+    <section
+      id="sobre"
+      className="relative border-y border-white/[0.06] bg-white/[0.012]"
+    >
+      <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 sm:py-28 lg:px-8">
+        <Reveal>
+          <div className="max-w-2xl">
+            <span className="eyebrow">planos</span>
+            <h2 className="mt-4 font-display text-3xl font-extrabold tracking-[-0.03em] text-white sm:text-[2.6rem]">
+              Escolha o ritmo do seu farm.
+            </h2>
+            <p className="mt-3 text-sm text-[#8a8a8a]">
+              O plano é detectado pelo seu cargo no Discord — se expirar, o hub volta pro Free
+              automaticamente.
+            </p>
+          </div>
+        </Reveal>
+
+        <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          {PLANS.map((p, i) => (
+            <Reveal key={p.name} delay={i * 70}>
+              <div
+                className={`surface-card flex h-full flex-col p-6 ${
+                  p.highlight ? "border-[#818cf8]/40 bg-[#818cf8]/[0.05]" : ""
+                }`}
+              >
+                {p.highlight && (
+                  <span className="absolute right-5 top-5 rounded-full bg-[#818cf8] px-2.5 py-0.5 font-mono text-[9px] uppercase tracking-[0.2em] text-white">
+                    popular
+                  </span>
+                )}
+                <h3 className="font-display text-lg font-bold tracking-tight text-white">
+                  {p.name}
+                </h3>
+                <div className="mt-4 flex items-baseline gap-1.5">
+                  <span className="font-display text-3xl font-extrabold tracking-tight text-white">
+                    {p.price}
+                  </span>
+                  <span className="text-xs text-[#6f6f6f]">/ {p.period}</span>
+                </div>
+                <ul className="mt-6 flex-1 space-y-2.5">
+                  {p.features.map((f) => (
+                    <li key={f} className="flex gap-2.5 text-[13px] text-[#a0a0a0]">
+                      <Check className="mt-0.5 h-3.5 w-3.5 shrink-0 text-[#818cf8]" />
+                      <span>{f}</span>
+                    </li>
+                  ))}
+                </ul>
+                {p.name === "Free" ? (
+                  <a href="#free" className="btn-ghost mt-7 w-full">
+                    {p.cta}
+                  </a>
+                ) : (
+                  <Link
+                    to="/hub"
+                    className={`${p.highlight ? "btn-accent" : "btn-ghost"} mt-7 w-full`}
+                  >
+                    {p.cta}
+                  </Link>
+                )}
+              </div>
+            </Reveal>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ─────────────────────── cadastro free ─────────────────────── */
 
 function FreeSignup() {
   const [name, setName] = useState("");
@@ -1257,7 +1039,9 @@ function FreeSignup() {
         "nh:free-signup",
         JSON.stringify({ ...clean, code: c, at: new Date().toISOString() }),
       );
-    } catch {}
+    } catch {
+      /* ignore */
+    }
     setCode(c);
   }
 
@@ -1267,122 +1051,423 @@ function FreeSignup() {
       await navigator.clipboard.writeText(code);
       setCopied(true);
       setTimeout(() => setCopied(false), 1500);
-    } catch {}
+    } catch {
+      /* ignore */
+    }
   }
 
   return (
-    <section id="free" className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20">
-      <div className="glass-panel-strong grid gap-6 p-6 md:grid-cols-[1.1fr_1fr] md:p-10">
-        <div>
-          <div className="inline-flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.3em] text-emerald-300">
-            <span className="h-3 w-0.5 bg-emerald-400" /> cadastro free
+    <section id="free" className="mx-auto max-w-7xl px-4 py-20 sm:px-6 sm:py-28 lg:px-8">
+      <Reveal>
+        <div className="grid gap-10 rounded-2xl border border-white/[0.07] bg-[#0d0d0d]/70 p-7 backdrop-blur-xl md:grid-cols-[1.05fr_0.95fr] md:p-12">
+          <div>
+            <span className="eyebrow">cadastro free</span>
+            <h2 className="mt-4 font-display text-2xl font-extrabold tracking-[-0.03em] text-white sm:text-4xl">
+              Ganhe o cargo Free em um minuto.
+            </h2>
+            <ol className="mt-8 space-y-4">
+              {[
+                "Preencha o formulário — geramos um código único pra você.",
+                "Entre no servidor e abra um ticket no canal de suporte.",
+                "Informe o código no ticket. A staff libera o cargo Free na hora.",
+              ].map((s, i) => (
+                <li key={s} className="flex gap-3 text-[13px] text-[#a0a0a0]">
+                  <span className="grid h-6 w-6 shrink-0 place-items-center rounded-md border border-white/[0.08] bg-white/[0.03] font-mono text-[10px] font-semibold text-[#818cf8]">
+                    {i + 1}
+                  </span>
+                  <span className="pt-0.5">{s}</span>
+                </li>
+              ))}
+            </ol>
           </div>
-          <h2 className="mt-3 text-3xl font-bold tracking-tight md:text-4xl">
-            Ganhe o cargo <span className="text-emerald-400">Free</span> em 1 minuto
-          </h2>
-          <ol className="mt-6 space-y-3 text-sm text-slate-300">
-            {[
-              "Preencha o formulário ao lado — geramos um código único pra você.",
-              "Entre no servidor e abra um ticket no canal de suporte.",
-              "Informe o código no ticket. A staff libera o cargo Free na hora.",
-            ].map((s, i) => (
-              <li key={s} className="flex gap-3">
-                <span className="grid h-6 w-6 shrink-0 place-items-center rounded-md bg-emerald-500/15 font-mono text-[11px] font-bold text-emerald-300">
-                  {i + 1}
+
+          <div className="rounded-xl border border-white/[0.07] bg-white/[0.02] p-6">
+            {!code ? (
+              <form onSubmit={generate} className="space-y-4">
+                <label className="block">
+                  <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-[#6f6f6f]">
+                    Seu nome
+                  </span>
+                  <input
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    maxLength={40}
+                    required
+                    className="mt-2 w-full rounded-lg border border-white/[0.08] bg-white/[0.02] px-3 py-2.5 text-sm text-white outline-none transition placeholder:text-[#5a5a5a] focus:border-[#818cf8]/60"
+                    placeholder="Ex: davizinzkn"
+                  />
+                </label>
+                <label className="block">
+                  <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-[#6f6f6f]">
+                    Seu usuário do Discord
+                  </span>
+                  <input
+                    value={discord}
+                    onChange={(e) => setDiscord(e.target.value)}
+                    maxLength={40}
+                    required
+                    className="mt-2 w-full rounded-lg border border-white/[0.08] bg-white/[0.02] px-3 py-2.5 text-sm text-white outline-none transition placeholder:text-[#5a5a5a] focus:border-[#818cf8]/60"
+                    placeholder="@usuario"
+                  />
+                </label>
+                <button type="submit" className="btn-accent w-full py-3">
+                  Gerar meu código Free
+                </button>
+                <p className="text-[11px] leading-relaxed text-[#6f6f6f]">
+                  O código fica salvo no seu navegador para você abrir o ticket quando quiser.
+                </p>
+              </form>
+            ) : (
+              <div className="space-y-4">
+                <div>
+                  <div className="font-mono text-[10px] uppercase tracking-[0.22em] text-[#6f6f6f]">
+                    Seu código Free
+                  </div>
+                  <div className="mt-2 flex items-center gap-2 rounded-lg border border-[#818cf8]/30 bg-[#818cf8]/[0.08] p-3">
+                    <code className="flex-1 font-mono text-lg font-bold tracking-[0.2em] text-[#c4b5fd]">
+                      {code}
+                    </code>
+                    <button
+                      type="button"
+                      onClick={copy}
+                      aria-label="Copiar código"
+                      className="grid h-8 w-8 place-items-center rounded-md border border-white/10 bg-white/[0.04] text-[#a0a0a0] transition hover:text-white"
+                    >
+                      {copied ? <Check className="h-4 w-4 text-[#818cf8]" /> : <Copy className="h-4 w-4" />}
+                    </button>
+                  </div>
+                </div>
+                <p className="text-[13px] leading-relaxed text-[#8a8a8a]">
+                  Abra um ticket no servidor e cole esse código na primeira mensagem.
+                </p>
+                <a
+                  href={GUILD_INVITE}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="btn-accent w-full py-3"
+                >
+                  Ir pro servidor abrir ticket <ArrowRight className="h-4 w-4" />
+                </a>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setCode(null);
+                    setName("");
+                    setDiscord("");
+                  }}
+                  className="w-full font-mono text-[10px] uppercase tracking-[0.22em] text-[#6f6f6f] transition hover:text-white"
+                >
+                  Gerar outro código
+                </button>
+              </div>
+            )}
+          </div>
+        </div>
+      </Reveal>
+    </section>
+  );
+}
+
+/* ─────────────────────────── comunidade ─────────────────────────── */
+
+type LiveMember = { id: string; name: string; avatar: string | null; status: string };
+
+function CommunitySection() {
+  const [live, setLive] = useState<LiveMember[] | null>(null);
+  const [presence, setPresence] = useState<number | null>(null);
+
+  useEffect(() => {
+    const ctrl = new AbortController();
+    fetch(WIDGET_URL, { signal: ctrl.signal })
+      .then((r) => (r.ok ? r.json() : null))
+      .then((j) => {
+        if (!j || !Array.isArray(j.members)) return;
+        setPresence(typeof j.presence_count === "number" ? j.presence_count : null);
+        setLive(
+          j.members.map(
+            (m: { id: string; username: string; avatar_url: string | null; status: string }) => ({
+              id: m.id,
+              name: m.username,
+              avatar: m.avatar_url,
+              status: m.status,
+            }),
+          ),
+        );
+      })
+      .catch(() => {});
+    return () => ctrl.abort();
+  }, []);
+
+  const list: LiveMember[] =
+    live ?? FALLBACK_MEMBERS.map((n) => ({ id: n, name: n, avatar: null, status: "online" }));
+  const loop = [...list, ...list];
+
+  return (
+    <section id="comunidade" className="border-t border-white/[0.06] bg-white/[0.012]">
+      <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 sm:py-28 lg:px-8">
+        <Reveal>
+          <div className="max-w-2xl">
+            <span className="eyebrow">comunidade</span>
+            <h2 className="mt-4 font-display text-3xl font-extrabold tracking-[-0.03em] text-white sm:text-[2.6rem]">
+              Faça parte da comunidade.
+            </h2>
+            <p className="mt-3 text-sm text-[#8a8a8a]">
+              Suporte por ticket, avisos de update, canais de farm e gente online o dia inteiro.
+            </p>
+          </div>
+        </Reveal>
+
+        <div
+          className="relative mt-12 overflow-hidden"
+          style={{
+            maskImage: "linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent)",
+          }}
+        >
+          <div className="marquee flex w-max gap-3">
+            {loop.map((m, i) => (
+              <div
+                key={`${m.id}-${i}`}
+                className="flex shrink-0 items-center gap-2.5 rounded-full border border-white/[0.07] bg-white/[0.02] py-2 pl-2 pr-4"
+              >
+                <div className="relative h-7 w-7 overflow-hidden rounded-full bg-white/10">
+                  {m.avatar ? (
+                    <img src={m.avatar} alt="" loading="lazy" className="h-full w-full object-cover" />
+                  ) : (
+                    <Avatar seed={m.id} />
+                  )}
+                </div>
+                <span className="whitespace-nowrap text-[13px] font-medium text-[#d4d4d4]">
+                  {m.name}
                 </span>
-                <span>{s}</span>
-              </li>
+              </div>
             ))}
-          </ol>
+          </div>
         </div>
 
-        <div className="glass-panel p-5">
-          {!code ? (
-            <form onSubmit={generate} className="space-y-4">
-              <label className="block">
-                <span className="font-mono text-[10px] uppercase tracking-[0.25em] text-slate-500">
-                  Seu nome
-                </span>
-                <input
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  maxLength={40}
-                  required
-                  className="mt-1.5 w-full rounded-md border border-white/10 bg-white/[0.03] px-3 py-2 text-sm text-white outline-none placeholder:text-slate-600 focus:border-[#818cf8]"
-                  placeholder="Ex: davizinzkn"
-                />
-              </label>
-              <label className="block">
-                <span className="font-mono text-[10px] uppercase tracking-[0.25em] text-slate-500">
-                  Seu usuário do Discord
-                </span>
-                <input
-                  value={discord}
-                  onChange={(e) => setDiscord(e.target.value)}
-                  maxLength={40}
-                  required
-                  className="mt-1.5 w-full rounded-md border border-white/10 bg-white/[0.03] px-3 py-2 text-sm text-white outline-none placeholder:text-slate-600 focus:border-[#818cf8]"
-                  placeholder="@usuario"
-                />
-              </label>
-              <button
-                type="submit"
-                className="w-full rounded-md bg-[#818cf8] px-4 py-2.5 text-xs font-bold uppercase tracking-widest text-white transition hover:bg-[#4752c4]"
-              >
-                Gerar meu código Free
-              </button>
-              <p className="text-[11px] leading-relaxed text-slate-500">
-                Ao cadastrar, você guarda o código no navegador e pode ir direto pro servidor abrir
-                o ticket.
-              </p>
-            </form>
-          ) : (
-            <div className="space-y-4">
-              <div>
-                <div className="font-mono text-[10px] uppercase tracking-[0.25em] text-slate-500">
-                  Seu código Free
-                </div>
-                <div className="mt-2 flex items-center gap-2 rounded-md border border-emerald-500/30 bg-emerald-500/10 p-3">
-                  <code className="flex-1 font-mono text-lg font-bold tracking-widest text-emerald-300">
-                    {code}
-                  </code>
-                  <button
-                    onClick={copy}
-                    className="grid h-8 w-8 place-items-center rounded-md border border-white/10 bg-white/5 text-slate-300 transition hover:bg-white/10"
-                    aria-label="Copiar código"
-                  >
-                    {copied ? <Check className="h-4 w-4 text-emerald-300" /> : <Copy className="h-4 w-4" />}
-                  </button>
-                </div>
+        <div className="mt-12 grid gap-6 lg:grid-cols-[1fr_380px] lg:items-center">
+          <Reveal>
+            <div className="rounded-2xl border border-white/[0.07] bg-[#0d0d0d]/70 p-7 backdrop-blur-xl sm:p-9">
+              <div className="flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.25em] text-[#6f6f6f]">
+                <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-[#818cf8]" /> ao vivo
               </div>
-              <p className="text-xs leading-relaxed text-slate-400">
-                Abra um ticket no servidor e cole esse código na primeira mensagem. A staff libera o
-                cargo Free assim que confirmar.
+              <h3 className="mt-4 font-display text-2xl font-bold tracking-tight text-white">
+                Servidor oficial no Discord
+              </h3>
+              <p className="mt-2 max-w-md text-[13px] leading-relaxed text-[#8a8a8a]">
+                Widget conectado direto à guilda — entre, farme e converse com quem já está dentro.
               </p>
+
+              <div className="mt-7 grid grid-cols-2 gap-px overflow-hidden rounded-xl border border-white/[0.06] bg-white/[0.05] sm:grid-cols-3">
+                <MiniStat
+                  icon={Users}
+                  label="online agora"
+                  value={presence !== null ? String(presence) : "—"}
+                />
+                <MiniStat icon={MessageSquare} label="suporte" value="Ticket" />
+                <MiniStat icon={Sparkles} label="cargos" value="Free · Premium" />
+              </div>
+
               <a
                 href={GUILD_INVITE}
                 target="_blank"
                 rel="noreferrer"
-                className="flex w-full items-center justify-center gap-2 rounded-md bg-[#818cf8] px-4 py-2.5 text-xs font-bold uppercase tracking-widest text-white transition hover:bg-[#4752c4]"
+                className="btn-accent mt-7 px-5 py-3"
               >
-                Ir pro servidor abrir ticket <ArrowRight className="h-3.5 w-3.5" />
+                Entrar no Discord <ArrowRight className="h-4 w-4" />
               </a>
-              <button
-                onClick={() => {
-                  setCode(null);
-                  setName("");
-                  setDiscord("");
-                }}
-                className="w-full text-center text-[11px] font-mono uppercase tracking-widest text-slate-500 transition hover:text-slate-300"
-              >
-                Gerar outro código
-              </button>
             </div>
-          )}
+          </Reveal>
+
+          <div className="mx-auto w-full max-w-[380px] rounded-2xl border border-white/[0.07] bg-[#0d0d0d]/70 p-3 backdrop-blur-xl">
+            <iframe
+              src={`https://discord.com/widget?id=${GUILD_ID}&theme=dark`}
+              width={350}
+              height={460}
+              title="Widget do Discord do NeighborD Hub"
+              loading="lazy"
+              frameBorder={0}
+              sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"
+              className="mx-auto block h-[460px] w-full rounded-xl"
+            />
+          </div>
         </div>
       </div>
     </section>
   );
 }
 
+function MiniStat({
+  icon: Icon,
+  label,
+  value,
+}: {
+  icon: typeof Users;
+  label: string;
+  value: string;
+}) {
+  return (
+    <div className="bg-[#080808] p-4">
+      <Icon className="h-4 w-4 text-[#818cf8]" />
+      <div className="mt-3 truncate text-sm font-semibold text-white">{value}</div>
+      <div className="mt-0.5 font-mono text-[9px] uppercase tracking-[0.2em] text-[#6f6f6f]">
+        {label}
+      </div>
+    </div>
+  );
+}
 
+/* ─────────────────────────── cta final ─────────────────────────── */
+
+function FinalCta() {
+  return (
+    <section className="relative overflow-hidden border-t border-white/[0.06]">
+      <div
+        aria-hidden
+        className="pointer-events-none absolute left-1/2 top-1/2 h-[26rem] w-[46rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#818cf8]/[0.08] blur-[130px]"
+      />
+      <Reveal>
+        <div className="relative mx-auto max-w-3xl px-4 py-24 text-center sm:px-6 sm:py-32">
+          <img
+            src={nghcLogo.url}
+            alt=""
+            width={56}
+            height={56}
+            loading="lazy"
+            className="mx-auto h-14 w-14 object-contain opacity-90"
+          />
+          <h2 className="mt-8 font-display text-3xl font-extrabold tracking-[-0.035em] text-white sm:text-5xl">
+            Pronto para conhecer o NeighborD Hub?
+          </h2>
+          <p className="mx-auto mt-4 max-w-lg text-[15px] text-[#8a8a8a]">
+            Crie seu acesso, escolha um plano e comece a farmar em minutos.
+          </p>
+          <div className="mt-9 flex flex-wrap items-center justify-center gap-3">
+            <Link to="/hub" className="btn-accent px-6 py-3.5">
+              Começar agora <ArrowRight className="h-4 w-4" />
+            </Link>
+            <a
+              href={GUILD_INVITE}
+              target="_blank"
+              rel="noreferrer"
+              className="btn-ghost px-6 py-3.5"
+            >
+              Entrar no Discord
+            </a>
+          </div>
+        </div>
+      </Reveal>
+    </section>
+  );
+}
+
+/* ─────────────────────────── footer ─────────────────────────── */
+
+function SiteFooter() {
+  return (
+    <footer className="border-t border-white/[0.06] bg-[#050505]">
+      <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
+        <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
+          <div>
+            <div className="flex items-center gap-2.5">
+              <img
+                src={nghcLogo.url}
+                alt=""
+                width={28}
+                height={28}
+                loading="lazy"
+                className="h-7 w-7 object-contain"
+              />
+              <span className="font-display text-sm font-extrabold tracking-tight text-white">
+                NeighborD<span className="text-[#818cf8]"> Hub</span>
+              </span>
+            </div>
+            <p className="mt-4 max-w-xs text-[13px] leading-relaxed text-[#6f6f6f]">
+              Plataforma de automação e ferramentas para comunidades do Discord.
+            </p>
+          </div>
+
+          <FooterCol
+            title="NeighborD Hub"
+            links={[
+              { label: "Sobre", href: "#sobre" },
+              { label: "Produtos", href: "#produtos" },
+              { label: "Recursos", href: "#recursos" },
+            ]}
+          />
+          <FooterCol
+            title="Comunidade"
+            links={[
+              { label: "Discord", href: GUILD_INVITE, external: true },
+              { label: "Suporte", href: GUILD_INVITE, external: true },
+              { label: "Contato", href: "https://www.instagram.com/davizinzkn/", external: true },
+            ]}
+          />
+          <FooterCol
+            title="Legal"
+            links={[
+              { label: "Termos", href: "#sobre" },
+              { label: "Privacidade", href: "#sobre" },
+            ]}
+          />
+        </div>
+
+        <div className="hairline my-10" />
+
+        <div className="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center">
+          <div className="flex gap-2">
+            <a
+              href="https://www.instagram.com/davizinzkn/"
+              target="_blank"
+              rel="noreferrer"
+              aria-label="Instagram"
+              className="grid h-9 w-9 place-items-center rounded-lg border border-white/[0.08] bg-white/[0.02] text-[#8a8a8a] transition hover:border-white/20 hover:text-white"
+            >
+              <Instagram className="h-4 w-4" />
+            </a>
+            <a
+              href={GUILD_INVITE}
+              target="_blank"
+              rel="noreferrer"
+              aria-label="Discord"
+              className="grid h-9 w-9 place-items-center rounded-lg border border-white/[0.08] bg-white/[0.02] text-[#8a8a8a] transition hover:border-white/20 hover:text-white"
+            >
+              <Send className="h-4 w-4" />
+            </a>
+          </div>
+          <p className="text-[11px] text-[#6f6f6f]">
+            © {new Date().getFullYear()} NeighborD Hub. Todos os direitos reservados.
+            <span className="mx-2 text-white/15">·</span>
+            Código-fonte fornecido por <span className="text-[#a0a0a0]">isnouu</span>
+          </p>
+        </div>
+      </div>
+    </footer>
+  );
+}
+
+function FooterCol({
+  title,
+  links,
+}: {
+  title: string;
+  links: Array<{ label: string; href: string; external?: boolean }>;
+}) {
+  return (
+    <div>
+      <h3 className="font-mono text-[10px] uppercase tracking-[0.25em] text-[#6f6f6f]">{title}</h3>
+      <ul className="mt-4 space-y-2.5">
+        {links.map((l) => (
+          <li key={l.label}>
+            <a
+              href={l.href}
+              {...(l.external ? { target: "_blank", rel: "noreferrer" } : {})}
+              className="text-[13px] text-[#a0a0a0] transition-colors duration-200 hover:text-white"
+            >
+              {l.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
