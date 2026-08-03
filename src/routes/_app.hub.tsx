@@ -55,6 +55,16 @@ function formatAge(date: Date) {
   return `${days}d`;
 }
 
+// Estilo unificado dos tooltips (tema obsidiana / glass)
+const TOOLTIP_CLS =
+  "border border-white/10 bg-[#0b0b0b]/95 px-2.5 py-1.5 font-mono text-[10px] uppercase tracking-[0.14em] text-slate-200 shadow-[0_10px_30px_-12px_rgba(0,0,0,0.9)] backdrop-blur-xl";
+
+const NITRO_LABELS: Record<number, string> = {
+  1: "Nitro Classic",
+  2: "Nitro",
+  3: "Nitro Basic",
+};
+
 
 // Discord public user flags → badge label + official icon hash
 const USER_BADGES: Array<{ bit: number; label: string; tone: "cyan" | "purple" | "mint" | "amber"; icon: string }> = [
@@ -512,21 +522,44 @@ function HubPage() {
           )}
 
           <div className="min-w-0 flex-1">
-            <div className="flex flex-wrap items-center gap-2.5">
-              <h2 className="truncate text-2xl font-semibold tracking-tight text-white sm:text-3xl">
-                {user?.global_name || user?.username || "—"}
-              </h2>
-              {user?.mfa_enabled && (
-                <span className="rounded-md border border-emerald-400/30 px-2 py-0.5 font-mono text-[9px] uppercase tracking-[0.2em] text-emerald-400">
-                  2fa
-                </span>
-              )}
-              {user?.premium_type ? (
-                <span className="rounded-md border border-[#a78bfa]/40 bg-[#a78bfa]/[0.08] px-2 py-0.5 font-mono text-[9px] uppercase tracking-[0.2em] text-[#a78bfa]">
-                  nitro
-                </span>
-              ) : null}
-            </div>
+            <TooltipProvider delayDuration={100}>
+              <div className="flex flex-wrap items-center gap-2.5">
+                <h2 className="truncate text-2xl font-semibold tracking-tight text-white sm:text-3xl">
+                  {user?.global_name || user?.username || "—"}
+                </h2>
+                {user?.mfa_enabled && (
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <span
+                        tabIndex={0}
+                        className="cursor-default rounded-md border border-emerald-400/30 px-2 py-0.5 font-mono text-[9px] uppercase tracking-[0.2em] text-emerald-400 transition-colors duration-200 hover:border-emerald-400/60 hover:bg-emerald-400/[0.08] focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400/50"
+                      >
+                        2fa
+                      </span>
+                    </TooltipTrigger>
+                    <TooltipContent side="top" className={TOOLTIP_CLS}>
+                      Autenticação de dois fatores ativada
+                    </TooltipContent>
+                  </Tooltip>
+                )}
+                {user?.premium_type ? (
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <span
+                        tabIndex={0}
+                        className="cursor-default rounded-md border border-[#a78bfa]/40 bg-[#a78bfa]/[0.08] px-2 py-0.5 font-mono text-[9px] uppercase tracking-[0.2em] text-[#a78bfa] transition-colors duration-200 hover:border-[#a78bfa]/70 hover:bg-[#a78bfa]/[0.14] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#a78bfa]/50"
+                      >
+                        nitro
+                      </span>
+                    </TooltipTrigger>
+                    <TooltipContent side="top" className={TOOLTIP_CLS}>
+                      {NITRO_LABELS[user.premium_type] ?? "Assinante Nitro"}
+                    </TooltipContent>
+                  </Tooltip>
+                ) : null}
+              </div>
+            </TooltipProvider>
+
             {user?.username && (
               <div className="mt-1.5 truncate font-mono text-xs text-slate-500">@{user.username}</div>
             )}
@@ -574,7 +607,7 @@ function HubPage() {
                             />
                           </button>
                         </TooltipTrigger>
-                        <TooltipContent side="top" className="font-mono text-[11px]">
+                        <TooltipContent side="top" className={TOOLTIP_CLS}>
                           {b.label}
                         </TooltipContent>
                       </Tooltip>
