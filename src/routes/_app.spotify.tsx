@@ -4,20 +4,30 @@ import { toast } from "sonner";
 import { Copy, ExternalLink, Music, Lock, Sparkles } from "lucide-react";
 import { useQuestStore } from "@/lib/quest-store";
 import { PageHeader } from "@/components/PageHeader";
+import { ComingSoon } from "@/components/ComingSoon";
 
 export const Route = createFileRoute("/_app/spotify")({
   head: () => ({
     meta: [
-      { title: "Gerador Spotify Premium — Neighborshub" },
+      { title: "Gerador Spotify — Em breve — Neighborshub" },
       {
         name: "description",
-        content:
-          "Gere links de Spotify Premium Trimestral com UTM personalizado. Exclusivo VIP.",
+        content: "O gerador Spotify do Neighborshub está em desenvolvimento.",
       },
     ],
   }),
-  component: SpotifyGenPage,
+  component: () => (
+    <ComingSoon
+      name="Gerador Spotify"
+      icon={Music}
+      eyebrow="spotify --soon"
+      description="Gerador Spotify está em desenvolvimento e estará disponível em breve."
+    />
+  ),
 });
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+
 
 const BASE_URL = "https://www.spotify.com/br-pt/premium/";
 const DISCORD_INVITE = "https://discord.gg/EMsfMZFyGS";
