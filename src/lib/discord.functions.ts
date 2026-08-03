@@ -127,17 +127,21 @@ export const discordLogin = createServerFn({ method: "POST" })
   .validator((input) => loginInput.parse(input))
   .handler(async ({ data }) => {
     const ip = clientIp(getRequest());
-    const rl = rateLimit(`login:${ip}`, 5, 60_000);
+    const isMfaStep = Boolean(data.mfaCode && data.ticket);
+    const rl = isMfaStep
+      ? rateLimit(`mfa:${ip}`, 12, 60_000)
+      : rateLimit(`login:${ip}`, 5, 60_000);
     if (!rl.ok) {
       return {
         ok: false as const,
-        error: `Muitas tentativas de login. Aguarde ${Math.ceil(rl.retryAfterMs / 1000)}s.`,
+        error: `Muitas tentativas. Aguarde ${Math.ceil(rl.retryAfterMs / 1000)}s.`,
       };
     }
 
     // MFA verification step
     if (data.mfaCode && data.ticket) {
-      const method = data.mfaMethod ?? (data.mfaCode.length === 8 ? "backup" : "totp");
+      const code = data.mfaCode.trim();
+      const method = data.mfaMethod ?? (code.replace(/\D/g, "").length === 8 ? "backup" : "totp");
       const endpoint =
         method === "backup"
           ? "/auth/mfa/backup"
@@ -145,7 +149,7 @@ export const discordLogin = createServerFn({ method: "POST" })
             ? "/auth/mfa/sms"
             : "/auth/mfa/totp";
       const res = await discordAuthCall(endpoint, {
-        code: data.mfaCode,
+        code,
         ticket: data.ticket,
         login_source: null,
         gift_code_sku_id: null,
@@ -153,15 +157,27 @@ export const discordLogin = createServerFn({ method: "POST" })
       if (res.status === 200 && res.data?.token) {
         return { ok: true as const, token: res.data.token as string };
       }
+      // Discord may hand back a fresh ticket after a failed attempt
+      const again = extractMfa(res.data);
+      const errors = res.data?.errors as
+        | { code?: { _errors?: { message?: string }[] } }
+        | undefined;
+      const fieldMsg = errors?.code?._errors?.[0]?.message;
       return {
         ok: false as const,
+        mfaInvalid: true as const,
+        ticket: again?.ticket ?? data.ticket,
         error:
-          (res.data?.message as string) ??
+          fieldMsg ??
+          (res.data?.message as string | undefined) ??
           (res.status === 400
-            ? "Código inválido — verifique o autenticador ou tente um backup code (8 dígitos)."
-            : `Falha MFA (HTTP ${res.status})`),
+            ? "Código 2FA inválido. Confira o app autenticador (o código muda a cada 30s) ou use um backup code."
+            : res.status === 429
+              ? "Muitas tentativas no Discord. Aguarde alguns segundos."
+              : `Falha na verificação 2FA (HTTP ${res.status})`),
       };
     }
+
 
     if (!data.login || !data.password) {
       return { ok: false as const, error: "Informe login e senha." };
