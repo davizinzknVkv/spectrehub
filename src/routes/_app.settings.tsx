@@ -329,10 +329,10 @@ function EmailLoginForm({ onLogged }: { onLogged: () => void }) {
 
 
           {mfaMethods.length > 1 && (
-            <div className="flex flex-wrap gap-1.5 rounded-lg border border-[var(--border-1)] bg-[#0a0a0a] p-1">
+            <div className="flex flex-wrap gap-1 rounded-[var(--r-md)] border border-[var(--border-1)] bg-[var(--surface-1)] p-1">
               {mfaMethods.map((m) => {
                 const label =
-                  m === "totp" ? "🔐 App autenticador" : m === "backup" ? "🎫 Backup code" : "📱 SMS";
+                  m === "totp" ? "app autenticador" : m === "backup" ? "backup code" : "sms";
                 const active = mfaMethod === m;
                 return (
                   <button
@@ -343,10 +343,10 @@ function EmailLoginForm({ onLogged }: { onLogged: () => void }) {
                       setMfaCode("");
                       setMfaError(null);
                     }}
-                    className={`flex-1 rounded-md px-3 py-1.5 text-[10px] font-semibold uppercase tracking-widest transition ${
+                    className={`flex-1 rounded-[var(--r-sm)] px-3 py-1.5 text-[10px] font-semibold uppercase tracking-widest transition ${
                       active
                         ? "bg-[var(--accent-1)] text-[#0a0a12]"
-                        : "text-[var(--text-3)] hover:text-[var(--text-1)]"
+                        : "text-[var(--text-3)] hover:bg-white/[0.04] hover:text-[var(--text-1)]"
                     }`}
                   >
                     {label}
