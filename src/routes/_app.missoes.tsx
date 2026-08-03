@@ -10,6 +10,7 @@ import {
 } from "@/lib/quest-runner";
 import { useQuestStore, type Quest } from "@/lib/quest-store";
 import { PageHeader } from "@/components/PageHeader";
+import { Button, Badge } from "@/components/ui/ds";
 import { Target } from "lucide-react";
 import {
   CaptchaModal,
@@ -119,20 +120,14 @@ function MissoesPage() {
   if (!creds) {
     return (
       <div className="mx-auto max-w-2xl">
-        <div className="relative overflow-hidden rounded-xl border border-amber/30 bg-surface/60 p-8">
-          <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-amber to-transparent" />
-          <div className="font-mono text-[10px] uppercase tracking-[0.3em] text-amber">
-            $ status --token
-          </div>
-          <h2 className="mt-3 text-2xl font-semibold text-ink">Nenhum token configurado</h2>
-          <p className="mt-2 max-w-md text-sm leading-relaxed text-ink-dim">
+        <div className="ds-card">
+          <div className="ds-label">status --token</div>
+          <h2 className="ds-h2 mt-3">Nenhum token configurado</h2>
+          <p className="mt-2 max-w-md ds-body">
             Configure seu token do Discord para carregar e executar missões.
           </p>
-          <Link
-            to="/settings"
-            className="mt-6 inline-flex items-center gap-2 rounded-md bg-cyan px-4 py-2.5 font-mono text-xs font-semibold uppercase tracking-widest text-primary-foreground transition hover:brightness-110"
-          >
-            → configurar token
+          <Link to="/settings" className="mt-6 inline-block">
+            <Button variant="primary">→ configurar token</Button>
           </Link>
         </div>
       </div>
@@ -149,12 +144,9 @@ function MissoesPage() {
         description="Quests disponíveis do Discord. Complete para ganhar recompensas."
         actions={
           running ? (
-            <button
-              onClick={requestStop}
-              className="shrink-0 rounded-md border border-rose/40 bg-rose/10 px-3 py-2 font-mono text-[11px] font-semibold uppercase tracking-widest text-rose hover:bg-rose/20 sm:px-4"
-            >
+            <Button variant="danger" size="sm" onClick={requestStop}>
               ■ stop
-            </button>
+            </Button>
           ) : null
         }
       />
@@ -172,41 +164,39 @@ function MissoesPage() {
       <section className="min-w-0 space-y-4">
         <div className="grid grid-cols-1 gap-3 sm:grid-cols-[minmax(0,1fr)_auto] sm:items-end">
           <div className="min-w-0">
-            {quests.length > 0 && (
-              <span className="font-mono text-[11px] uppercase tracking-widest text-ink-mute">
-                {quests.length} disponíveis
-              </span>
-            )}
+            {quests.length > 0 && <span className="ds-label">{quests.length} disponíveis</span>}
           </div>
           <div className="flex flex-wrap items-center gap-2 sm:justify-end">
-            <button
+            <Button
+              variant="secondary"
+              size="sm"
               onClick={loadQuests}
               disabled={loadingQuests || running}
-              className="rounded-md border border-cyan/50 bg-gradient-to-r from-cyan/15 to-purple/15 px-3 py-2 font-mono text-[11px] font-semibold uppercase tracking-widest text-cyan transition hover:from-cyan/25 hover:to-purple/25 disabled:cursor-not-allowed disabled:opacity-40"
-              style={{ boxShadow: "0 0 16px -6px color-mix(in oklab, var(--cyan) 60%, transparent)" }}
             >
               {loadingQuests ? "sondando…" : "→ scan missões"}
-            </button>
-            <button
+            </Button>
+            <Button
+              variant="primary"
+              size="sm"
               onClick={() => setCaptchaAll(true)}
               disabled={running || quests.length === 0 || remaining <= 0}
               title={remaining <= 0 ? `Limite diário do plano ${limits.label} atingido` : undefined}
-              className="rounded-md border border-purple/50 bg-purple/15 px-3 py-2 font-mono text-[11px] font-semibold uppercase tracking-widest text-purple transition hover:bg-purple/25 disabled:cursor-not-allowed disabled:opacity-40"
-              style={{ boxShadow: "0 0 16px -6px color-mix(in oklab, var(--purple) 60%, transparent)" }}
             >
               ▶ run all
-            </button>
+            </Button>
           </div>
         </div>
 
         {quests.length === 0 && !loadingQuests && <EmptyState onScan={loadQuests} />}
         {loadingQuests && quests.length === 0 && (
-          <div className="rounded-xl border border-line bg-surface/40 p-10 text-center font-mono text-xs text-ink-mute">
-            <span className="pulse-dot inline-block">▮</span> sondando o discord…
+          <div className="ds-card text-center">
+            <span className="ds-label">
+              <span className="pulse-dot inline-block">▮</span> sondando o discord…
+            </span>
           </div>
         )}
 
-        <div className="card-grid-lg">
+        <div className="ds-grid-3">
           {quests.map((q) => (
             <MissionCard
               key={q.questId}
@@ -229,39 +219,22 @@ function MissoesPage() {
 
       {ownerId === LOG_ALLOWED_ID && (
         <section>
-          <div className="overflow-hidden rounded-xl border border-line bg-surface/70 scanline">
-            <div className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-3 border-b border-line/70 bg-surface px-4 py-2.5">
-              <div className="flex min-w-0 items-center gap-2 font-mono text-[11px] uppercase tracking-widest text-ink-mute">
-                <span className="flex gap-1">
-                  <span className="h-2 w-2 rounded-full bg-rose/70" />
-                  <span className="h-2 w-2 rounded-full bg-amber/70" />
-                  <span className="h-2 w-2 rounded-full bg-mint/70" />
-                </span>
-                <span className="ml-1 truncate">neighborshub — log</span>
+          <div className="overflow-hidden rounded-xl border border-[var(--border-1)]" style={{ background: "#0c0c0c" }}>
+            <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[var(--border-1)] px-4 py-2.5">
+              <div className="flex min-w-0 items-center gap-2 ds-label">
+                <span className="truncate">neighborshub — log</span>
               </div>
               <div className="flex shrink-0 items-center gap-2">
-                <span
-                  className={`inline-flex items-center gap-1.5 font-mono text-[10px] uppercase tracking-widest ${
-                    running ? "text-mint" : "text-ink-mute"
-                  }`}
-                >
-                  <span
-                    className={`h-1.5 w-1.5 rounded-full ${running ? "bg-mint pulse-dot" : "bg-ink-mute"}`}
-                  />
-                  {running ? "live" : "idle"}
-                </span>
-                <button
-                  onClick={clearLogs}
-                  className="rounded border border-line px-2 py-0.5 font-mono text-[10px] uppercase tracking-widest text-ink-mute hover:text-ink"
-                >
+                <Badge variant={running ? "success" : "default"}>{running ? "live" : "idle"}</Badge>
+                <Button variant="ghost" size="sm" onClick={clearLogs}>
                   clear
-                </button>
+                </Button>
               </div>
             </div>
             <div className="max-h-[360px] min-h-[200px] overflow-y-auto p-4 font-mono text-[12px] leading-6">
               {logs.length === 0 ? (
-                <div className="text-ink-mute">
-                  <span className="text-cyan">›</span> aguardando eventos…
+                <div className="ds-small">
+                  <span className="text-[var(--accent-soft)]">›</span> aguardando eventos…
                 </div>
               ) : (
                 logs.slice(-100).map((l) => (
@@ -269,13 +242,13 @@ function MissoesPage() {
                     key={l.id}
                     className={
                       l.level === "error"
-                        ? "text-rose"
+                        ? "text-[var(--danger)]"
                         : l.level === "success"
-                          ? "text-mint"
-                          : "text-ink-dim"
+                          ? "text-[var(--ok)]"
+                          : "text-[var(--text-2)]"
                     }
                   >
-                    <span className="mr-2 text-ink-mute">
+                    <span className="mr-2 ds-small">
                       {new Date(l.ts).toLocaleTimeString("pt-BR", { hour12: false })}
                     </span>
                     {l.text}
