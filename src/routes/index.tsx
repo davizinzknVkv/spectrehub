@@ -579,7 +579,7 @@ function HeroPreview() {
         </div>
       </div>
 
-      <div className="absolute -bottom-6 -left-4 hidden rounded-xl border border-white/[0.08] bg-[#0d0d0d]/95 px-4 py-3 backdrop-blur-xl sm:block">
+      <div className="absolute -bottom-6 -left-4 z-30 hidden rounded-xl border border-white/[0.08] bg-[#0d0d0d]/95 px-4 py-3 shadow-[0_8px_30px_rgba(0,0,0,0.6)] backdrop-blur-xl sm:block">
         <div className="font-mono text-[9px] uppercase tracking-[0.25em] text-[#6f6f6f]">
           status
         </div>
