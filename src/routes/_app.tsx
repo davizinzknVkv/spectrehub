@@ -220,6 +220,8 @@ function TopBar({ onOpenMenu, pathname }: { onOpenMenu: () => void; pathname: st
     : null;
 
   const [scrolled, setScrolled] = useState(false);
+  const [confirmLogout, setConfirmLogout] = useState(false);
+
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
     onScroll();
