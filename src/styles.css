@@ -403,24 +403,20 @@
   flex-direction: column;
   gap: 0.75rem;
   height: 100%;
-  background: color-mix(in oklab, white 4%, transparent);
-  backdrop-filter: blur(16px) saturate(140%);
-  border: 1px solid color-mix(in oklab, white 9%, transparent);
-  border-radius: 1.25rem;
-  padding: 1.25rem;
-  box-shadow: 0 1px 0 color-mix(in oklab, white 7%, transparent) inset,
-    0 24px 60px -40px color-mix(in oklab, var(--purple) 70%, transparent);
-  transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1), border-color 0.35s ease,
-    box-shadow 0.35s ease, background 0.35s ease;
+  background: linear-gradient(180deg, rgb(255 255 255 / 0.032), rgb(255 255 255 / 0.012));
+  border: 1px solid rgb(255 255 255 / 0.07);
+  border-radius: 0.85rem;
+  padding: 1.15rem;
+  transition: transform 260ms cubic-bezier(0.22, 1, 0.36, 1), border-color 260ms ease,
+    background 260ms ease;
 }
 .card-surface:hover {
-  transform: translateY(-3px);
-  border-color: color-mix(in oklab, var(--purple) 45%, transparent);
-  box-shadow: 0 1px 0 color-mix(in oklab, white 10%, transparent) inset,
-    0 24px 70px -30px color-mix(in oklab, var(--purple) 60%, transparent);
+  transform: translateY(-2px);
+  border-color: color-mix(in oklab, var(--blurple) 32%, transparent);
+  background: linear-gradient(180deg, rgb(255 255 255 / 0.05), rgb(255 255 255 / 0.016));
 }
 @media (min-width: 640px) {
-  .card-surface { padding: 1.5rem; }
+  .card-surface { padding: 1.35rem; }
 }
 
 /* Responsive card grids: mobile-first, auto-fit with minmax.
