@@ -65,52 +65,47 @@ function SettingsPage() {
         description="Escolha como quer logar. Fica salvo apenas no seu navegador (localStorage) e só é enviado para o Discord via proxy deste site."
       />
 
-      {creds && (
-        <div className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-3 rounded-xl border border-[color-mix(in_oklab,var(--ok)_30%,transparent)] bg-[color-mix(in_oklab,var(--ok)_6%,transparent)] px-3 py-3 sm:px-4">
-          <div className="min-w-0">
-            <Badge variant="success">
-              <span className="pulse-dot inline-block">●</span>
-              <span className="ml-1 truncate">sessão ativa neste navegador</span>
-            </Badge>
-          </div>
-          <Button variant="danger" size="sm" onClick={disconnect} className="shrink-0">
-            sair
-          </Button>
+      <div className="mx-auto w-full max-w-xl space-y-4">
+        {creds && (
+          <Card className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-3 !py-3">
+            <div className="min-w-0">
+              <Badge variant="success">
+                <span className="pulse-dot inline-block">●</span>
+                <span className="ml-1 truncate">sessão ativa neste navegador</span>
+              </Badge>
+            </div>
+            <Button variant="danger" size="sm" onClick={disconnect} className="shrink-0">
+              sair
+            </Button>
+          </Card>
+        )}
+
+        {/* Tabs */}
+        <div className="grid grid-cols-2 gap-1 rounded-[var(--r-md)] border border-[var(--border-1)] bg-[var(--surface-1)] p-1">
+          <TabButton active={tab === "email"} onClick={() => setTab("email")} icon={Mail}>
+            email & senha
+          </TabButton>
+          <TabButton active={tab === "token"} onClick={() => setTab("token")} icon={KeyRound}>
+            token
+          </TabButton>
         </div>
-      )}
 
-      {/* Tabs */}
-      <div className="grid grid-cols-2 gap-1 rounded-lg border border-[var(--border-1)] bg-[var(--surface-1)] p-1">
-        <TabButton active={tab === "email"} onClick={() => setTab("email")}>
-          📱 Email & senha
-        </TabButton>
-        <TabButton active={tab === "token"} onClick={() => setTab("token")}>
-          🔑 Token
-        </TabButton>
-      </div>
-
-      {tab === "email" ? (
-        <EmailLoginForm onLogged={() => toast.success("Conectado!")} />
-      ) : (
-        <form onSubmit={save} className="ds-card space-y-5">
-            <div>
-              <div className="flex items-center justify-between gap-2">
-                <span className="ds-label">authorization</span>
-                <button
-                  type="button"
-                  onClick={() => setShow((v) => !v)}
-                  className="ds-small uppercase tracking-widest hover:text-[var(--text-1)]"
-                >
-                  {show ? "ocultar" : "mostrar"}
-                </button>
-              </div>
-              <p className="mt-1 ds-small">
-                DevTools (F12) → Network → qualquer request → header{" "}
-                <code className="rounded bg-[#0a0a0a] px-1 py-0.5 font-mono text-[11px] text-[var(--accent-soft)]">
-                  authorization
-                </code>
-                .
-              </p>
+        {tab === "email" ? (
+          <EmailLoginForm onLogged={() => toast.success("Conectado!")} />
+        ) : (
+          <form onSubmit={save} className="ds-card space-y-5">
+            <Field
+              label="authorization"
+              hint={
+                <>
+                  DevTools (F12) → Network → qualquer request → header{" "}
+                  <code className="rounded bg-[#0a0a0a] px-1 py-0.5 font-mono text-[11px] text-[var(--accent-soft)]">
+                    authorization
+                  </code>
+                  .
+                </>
+              }
+            >
               <Input
                 type={show ? "text" : "password"}
                 required
@@ -118,19 +113,25 @@ function SettingsPage() {
                 onChange={(e) => setToken(e.target.value)}
                 placeholder="MTIzNDU2Nzg5MDEyMzQ1Njc4.XxXxXx.…"
                 autoComplete="off"
-                className="mt-3 font-mono"
+                className="font-mono"
               />
+            </Field>
+
+            <div className="flex flex-wrap items-center justify-between gap-3">
+              <Button type="submit" variant="primary" disabled={saving || !token}>
+                {saving ? "validando…" : "→ salvar & validar"}
+              </Button>
+              <Button type="button" variant="ghost" size="sm" onClick={() => setShow((v) => !v)}>
+                {show ? "ocultar token" : "mostrar token"}
+              </Button>
             </div>
+          </form>
+        )}
 
-            <Button type="submit" variant="primary" disabled={saving || !token} className="w-full sm:w-auto">
-              {saving ? "validando…" : "→ salvar & validar"}
-            </Button>
-        </form>
-      )}
-
-      <div className="rounded-lg border border-[color-mix(in_oklab,var(--warn)_25%,transparent)] bg-[color-mix(in_oklab,var(--warn)_5%,transparent)] p-4 ds-small">
-        ⚠ automação com conta pessoal viola os Termos do Discord e pode causar banimento — use por
-        sua conta e risco.
+        <div className="rounded-[var(--r-md)] border border-[color-mix(in_oklab,var(--warn)_25%,transparent)] bg-[color-mix(in_oklab,var(--warn)_5%,transparent)] p-4 ds-small">
+          ⚠ automação com conta pessoal viola os Termos do Discord e pode causar banimento — use por
+          sua conta e risco.
+        </div>
       </div>
     </div>
   );
@@ -139,23 +140,30 @@ function SettingsPage() {
 function TabButton({
   active,
   onClick,
+  icon: Icon,
   children,
 }: {
   active: boolean;
   onClick: () => void;
+  icon: LucideIcon;
   children: React.ReactNode;
 }) {
   return (
     <button
       onClick={onClick}
-      className={`rounded-md px-3 py-2 text-center text-[11px] font-semibold uppercase tracking-widest transition ${
-        active ? "bg-[var(--accent-1)] text-[#0a0a12]" : "text-[var(--text-3)] hover:text-[var(--text-1)]"
+      type="button"
+      className={`flex items-center justify-center gap-2 rounded-[var(--r-sm)] px-3 py-2 text-[11px] font-semibold uppercase tracking-widest transition ${
+        active
+          ? "bg-[var(--accent-1)] text-[#0a0a12]"
+          : "text-[var(--text-3)] hover:bg-white/[0.04] hover:text-[var(--text-1)]"
       }`}
     >
+      <Icon className="h-3.5 w-3.5" />
       {children}
     </button>
   );
 }
+
 
 function EmailLoginForm({ onLogged }: { onLogged: () => void }) {
   const setCreds = useQuestStore((s) => s.setCreds);
