@@ -77,11 +77,12 @@ function AppLayout() {
   }, [pathname]);
 
   return (
-    <div className="min-h-screen bg-[#0b0d12] text-slate-100 antialiased">
+    <div className="min-h-screen text-slate-100 antialiased">
+      <div className="app-shell-bg" aria-hidden />
 
-      <div className="grid min-h-screen w-full grid-cols-1 lg:grid-cols-[240px_1fr]">
+      <div className="grid min-h-screen w-full grid-cols-1 lg:grid-cols-[236px_1fr]">
         {/* Desktop sidebar */}
-        <aside className="hidden border-r border-[color:var(--glass-border)] glass-panel !rounded-none lg:sticky lg:top-0 lg:block lg:h-screen">
+        <aside className="hidden border-r border-white/[0.06] bg-[#070707]/70 backdrop-blur-xl lg:sticky lg:top-0 lg:block lg:h-screen">
           <SidebarBody pathname={pathname} creds={creds} setCreds={setCreds} />
         </aside>
 
@@ -89,20 +90,17 @@ function AppLayout() {
         {mobileOpen && (
           <>
             <div
-              className="fixed inset-0 z-40 bg-[#0b0d12]/70 backdrop-blur-sm lg:hidden"
+              className="fixed inset-0 z-40 bg-black/70 backdrop-blur-sm lg:hidden"
               onClick={() => setMobileOpen(false)}
               aria-hidden
             />
-            <aside
-              className="fixed inset-y-0 left-0 z-50 w-[260px] glass-panel-strong !rounded-none lg:hidden"
-            >
-
-              <div className="flex items-center justify-between px-4 py-3 border-b border-white/10">
-                <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-slate-500">menu</span>
+            <aside className="fixed inset-y-0 left-0 z-50 w-[264px] border-r border-white/[0.08] bg-[#070707]/95 backdrop-blur-xl lg:hidden">
+              <div className="flex items-center justify-between border-b border-white/[0.06] px-4 py-3">
+                <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-slate-600">menu</span>
                 <button
                   onClick={() => setMobileOpen(false)}
                   aria-label="Fechar menu"
-                  className="rounded-md border border-white/10 p-1.5 text-slate-400 hover:border-[#818cf8]/50 hover:text-[#c4b5fd]"
+                  className="rounded-md border border-white/[0.08] p-1.5 text-slate-400 transition hover:border-white/20 hover:text-white"
                 >
                   <X className="h-4 w-4" />
                 </button>
@@ -115,12 +113,10 @@ function AppLayout() {
         {/* Main */}
         <main className="min-w-0">
           <TopBar onOpenMenu={() => setMobileOpen(true)} pathname={pathname} />
-          <div className="mx-auto w-full max-w-6xl px-4 pb-10 pt-5 sm:px-6 sm:pt-6 lg:px-8 lg:pb-8 lg:pt-8">
+          <div className="mx-auto w-full max-w-6xl px-4 pb-14 pt-6 sm:px-6 sm:pt-8 lg:px-10 lg:pb-16 lg:pt-10">
             <Outlet />
           </div>
-
         </main>
-
       </div>
     </div>
   );
@@ -137,25 +133,24 @@ function SidebarBody({
 }) {
   return (
     <div className="flex h-full flex-col">
-      <Link to="/" className="flex items-center gap-2.5 px-5 py-5">
-        <div
-          className="grid h-9 w-9 place-items-center rounded-lg border border-[#818cf8]/50 bg-gradient-to-br from-[#818cf8]/15 to-[#a78bfa]/20 font-mono text-sm font-bold text-[#c4b5fd]"
-          style={{ boxShadow: "0 0 18px -4px color-mix(in oklab, var(--purple) 55%, transparent)" }}
-        >
+      <Link to="/" className="flex items-center gap-3 px-5 pb-5 pt-6">
+        <div className="grid h-9 w-9 place-items-center rounded-[0.6rem] border border-white/10 bg-white/[0.04] font-mono text-sm font-bold text-[#a5b4fc]">
           N
         </div>
-        <div className="min-w-0">
-          <div className="truncate text-sm font-semibold tracking-tight text-white">
-            Neighbors<span className="text-[#c4b5fd]">hub</span>
+        <div className="min-w-0 leading-tight">
+          <div className="truncate text-[0.9rem] font-semibold tracking-[-0.02em] text-white">
+            NeighborD Hub
           </div>
-          <div className="font-mono text-[9px] uppercase tracking-[0.25em] text-[#a78bfa]">neon</div>
+          <div className="font-mono text-[9px] uppercase tracking-[0.3em] text-slate-600">neon</div>
         </div>
       </Link>
 
-      <nav className="flex flex-col gap-2 px-3 pb-3 lg:flex-1">
+      <div className="hairline mx-5" aria-hidden />
+
+      <nav className="flex flex-col gap-5 px-3 py-5 lg:flex-1">
         {NAV_GROUPS.map((group) => (
           <div key={group.title}>
-            <div className="px-3 pb-2 font-mono text-[10px] uppercase tracking-[0.25em] text-slate-500">
+            <div className="px-3 pb-2 font-mono text-[9px] uppercase tracking-[0.3em] text-slate-600">
               {group.title}
             </div>
             <div className="flex flex-col gap-0.5">
@@ -166,44 +161,28 @@ function SidebarBody({
                   <Link
                     key={`${item.to}-${item.label}`}
                     to={item.to}
-                    className={`group relative flex items-center gap-3 rounded-lg px-3 py-2 text-sm transition ${
-                      active
-                        ? "text-white"
-                        : "text-slate-400 hover:bg-white/[0.03] hover:text-slate-100"
-                    }`}
+                    data-active={active}
+                    className="nav-item group"
                   >
-                    {active && (
-                      <span
-                        aria-hidden
-                        className="absolute left-0 top-1/2 h-5 w-[2px] -translate-y-1/2 rounded-r-full bg-gradient-to-b from-[#818cf8] to-[#a78bfa]"
-                        style={{ boxShadow: "0 0 8px color-mix(in oklab, var(--purple) 70%, transparent)" }}
-                      />
-                    )}
                     <Icon
-                      className={`h-4 w-4 shrink-0 transition ${
-                        active ? "text-[#c4b5fd]" : "text-slate-500 group-hover:text-[#c4b5fd]"
+                      className={`h-[15px] w-[15px] shrink-0 transition ${
+                        active ? "text-[#a5b4fc]" : "text-slate-600 group-hover:text-[#a5b4fc]"
                       }`}
                     />
-                    <span className={active ? "font-medium tracking-tight" : "tracking-tight"}>
+                    <span className={active ? "font-medium tracking-[-0.01em]" : "tracking-[-0.01em]"}>
                       {item.label}
                     </span>
                   </Link>
                 );
               })}
             </div>
-
           </div>
         ))}
       </nav>
 
       <div className="mt-auto border-t border-white/[0.06] p-3">
-        <a
-          href={DISCORD_INVITE}
-          target="_blank"
-          rel="noreferrer"
-          className="flex items-center gap-3 rounded-lg px-3 py-2 text-sm text-slate-400 transition hover:bg-white/[0.03] hover:text-slate-100"
-        >
-          <LifeBuoy className="h-4 w-4 text-slate-500" />
+        <a href={DISCORD_INVITE} target="_blank" rel="noreferrer" className="nav-item">
+          <LifeBuoy className="h-[15px] w-[15px] shrink-0 text-slate-600" />
           Suporte Discord
         </a>
       </div>
@@ -239,55 +218,42 @@ function TopBar({ onOpenMenu, pathname }: { onOpenMenu: () => void; pathname: st
     : null;
 
   return (
-    <div
-      className="sticky top-0 z-10 border-b border-[color:var(--glass-border)]"
-      style={{
-        background: "var(--glass-bg-strong)",
-        backdropFilter: "blur(var(--glass-blur)) saturate(150%)",
-      }}
-    >
-
-      <div className="flex items-center justify-between gap-3 px-4 py-3 sm:px-6 lg:px-8">
+    <div className="sticky top-0 z-20 border-b border-white/[0.06] bg-[#060606]/70 backdrop-blur-xl">
+      <div className="mx-auto flex w-full max-w-6xl items-center justify-between gap-3 px-4 py-3 sm:px-6 lg:px-10">
         <div className="flex items-center gap-3">
           <button
             onClick={onOpenMenu}
             aria-label="Abrir menu"
-            className="grid h-9 w-9 place-items-center rounded-md border border-white/10 text-slate-400 hover:border-[#818cf8]/50 hover:text-[#c4b5fd] lg:hidden"
+            className="grid h-9 w-9 place-items-center rounded-lg border border-white/[0.08] text-slate-400 transition hover:border-white/20 hover:text-white lg:hidden"
           >
             <Menu className="h-4 w-4" />
           </button>
           <Link to="/" className="flex items-center gap-2 lg:hidden">
-            <div
-              className="grid h-8 w-8 place-items-center rounded-lg border border-[#818cf8]/50 bg-gradient-to-br from-[#818cf8]/15 to-[#a78bfa]/20 font-mono text-xs font-bold text-[#c4b5fd]"
-              style={{ boxShadow: "0 0 14px -4px color-mix(in oklab, var(--purple) 55%, transparent)" }}
-            >
+            <div className="grid h-8 w-8 place-items-center rounded-lg border border-white/10 bg-white/[0.04] font-mono text-xs font-bold text-[#a5b4fc]">
               N
             </div>
-            <span className="text-sm font-semibold tracking-tight text-white">
-              Neighbors<span className="text-[#c4b5fd]">hub</span>
-            </span>
+            <span className="text-sm font-semibold tracking-[-0.02em] text-white">NeighborD Hub</span>
           </Link>
           <div className="hidden lg:block" />
         </div>
 
         {currentLabel && (
           <div className="hidden flex-1 justify-center md:flex">
-            <span className="font-mono text-[11px] uppercase tracking-[0.3em] text-slate-500">
+            <span className="font-mono text-[10px] uppercase tracking-[0.34em] text-slate-500">
               {currentLabel}
             </span>
           </div>
         )}
 
         <div className="flex items-center gap-3">
-
           <span
-            className={`h-2 w-2 rounded-full ${creds ? "bg-emerald-500 pulse-dot" : "bg-amber-500"}`}
+            className={`h-1.5 w-1.5 rounded-full ${creds ? "bg-emerald-400 pulse-dot" : "bg-amber-400"}`}
             title={creds ? "conectado" : "desconectado"}
           />
           {creds && me ? (
             <DropdownMenu>
               <DropdownMenuTrigger
-                className="group flex items-center gap-2.5 rounded-full border border-white/10 bg-white/[0.03] py-1 pl-1 pr-3 transition hover:border-[#a78bfa]/40 hover:bg-white/[0.06] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#a78bfa]/40"
+                className="group flex items-center gap-2.5 rounded-full border border-white/[0.08] bg-white/[0.02] py-1 pl-1 pr-3 transition hover:border-white/20 hover:bg-white/[0.05] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#818cf8]/40"
               >
                 {avatarUrl ? (
                   <img
