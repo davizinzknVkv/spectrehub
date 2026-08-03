@@ -192,7 +192,7 @@ function EmailLoginForm({ onLogged }: { onLogged: () => void }) {
 
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!mfaTicket && !captchaToken) {
+    if (!mfaTicket && !humanVerified && !captchaToken) {
       toast.error("Complete o captcha antes de entrar");
       return;
     }
@@ -202,15 +202,18 @@ function EmailLoginForm({ onLogged }: { onLogged: () => void }) {
     }
     setLoading(true);
     try {
-      if (!mfaTicket && captchaToken) {
+      // Turnstile só é validado uma vez (token single-use). Depois disso o
+      // fluxo segue para o hCaptcha do Discord sem re-renderizar o Turnstile.
+      if (!mfaTicket && !humanVerified && captchaToken) {
         const cap = await verifyTurnstile({ data: { token: captchaToken } });
+        setCaptchaToken(null);
         if (!cap.ok) {
           toast.error(cap.error);
-          setCaptchaToken(null);
           window.turnstile?.reset();
           setLoading(false);
           return;
         }
+        setHumanVerified(true);
       }
       const res = await discordLogin({
         data: mfaTicket
