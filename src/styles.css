@@ -75,27 +75,26 @@
 
 
 :root {
-  --radius: 1rem;
+  --radius: 0.75rem;
 
-  /* Vapor Chrome — iridescent indigo/cyan over deep obsidian */
-  --void: oklch(0.09 0.012 280);
-  --surface: oklch(0.145 0.018 280);
-  --surface-2: oklch(0.2 0.028 280);
+  /* NeighborD Hub — obsidian near-black + indigo signature */
+  --void: oklch(0.13 0 0);              /* #050505 */
+  --surface: oklch(0.17 0 0);           /* #0d0d0d */
+  --surface-2: oklch(0.21 0 0);         /* #151515 */
   --line: oklch(1 0 0 / 0.07);
-  /* --cyan / --purple keep their token names for backward compat but now
-     resolve to the Vapor Chrome palette so the whole app shares one language. */
   --blurple: oklch(0.7 0.14 285);         /* #818cf8 */
   --blurple-soft: oklch(0.8 0.1 293);     /* #c4b5fd */
-  --cyan: oklch(0.86 0.11 205);           /* #67e8f9 */
-  --cyan-dim: oklch(0.91 0.07 198);       /* #a5f3fc */
-  --purple: oklch(0.7 0.14 285);          /* #818cf8 */
-  --purple-dim: oklch(0.58 0.18 282);     /* deep indigo */
-  --mint: oklch(0.86 0.11 205);
+  --cyan: oklch(0.7 0.14 285);
+  --cyan-dim: oklch(0.8 0.1 293);
+  --purple: oklch(0.7 0.14 285);
+  --purple-dim: oklch(0.58 0.18 282);
+  --mint: oklch(0.8 0.1 293);
   --amber: oklch(0.83 0.16 88);
   --rose: oklch(0.7 0.2 25);
-  --ink: oklch(0.98 0.005 280);
-  --ink-dim: oklch(0.8 0.015 280);
-  --ink-mute: oklch(0.6 0.025 280);
+  --ink: oklch(1 0 0);
+  --ink-dim: oklch(0.87 0 0);
+  --ink-mute: oklch(0.65 0 0);
+
 
   --background: var(--void);
   --foreground: var(--ink);
