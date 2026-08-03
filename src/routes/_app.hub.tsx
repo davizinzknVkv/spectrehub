@@ -460,9 +460,10 @@ function HubPage() {
 
       {/* Unified profile + stats + account */}
       <section
-        className="overflow-hidden rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl"
-        style={{ boxShadow: "0 30px 80px -40px color-mix(in oklab, var(--purple) 55%, transparent), inset 0 1px 0 color-mix(in oklab, white 4%, transparent)" }}
+        className="fade-up relative overflow-hidden rounded-2xl border border-white/[0.07] bg-[#080808]/90"
+        style={{ boxShadow: "0 40px 120px -60px color-mix(in oklab, var(--purple) 45%, transparent), inset 0 1px 0 color-mix(in oklab, white 4%, transparent)" }}
       >
+
 
         {loadError && (
           <div className="flex flex-wrap items-center justify-between gap-3 border-b border-rose-400/30 bg-rose-500/10 px-4 py-3 text-sm text-rose-400 sm:px-6">
@@ -482,51 +483,54 @@ function HubPage() {
         )}
         {/* Banner */}
         <div
-          className="relative h-28 w-full sm:h-40"
+          className="relative h-32 w-full sm:h-48"
           style={
             bannerUrl
               ? { backgroundImage: `url(${bannerUrl})`, backgroundSize: "cover", backgroundPosition: "center" }
               : { background: accentBg }
           }
         >
-          {!bannerUrl && <div className="absolute inset-0 grid-bg opacity-30" />}
-          <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-surface via-surface/70 to-transparent" />
+          {!bannerUrl && <div className="absolute inset-0 grid-bg opacity-25" />}
+          <div className="absolute inset-0 bg-black/25" />
+          <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-[#080808] via-[#080808]/80 to-transparent" />
         </div>
 
 
         {/* Identity row */}
-        <div className="flex flex-col gap-4 px-4 pb-5 pt-4 sm:flex-row sm:items-start sm:gap-5 sm:px-6">
+        <div className="relative -mt-12 flex flex-col gap-6 px-6 pb-8 sm:-mt-14 sm:flex-row sm:items-end sm:gap-7 sm:px-10">
           {avatarUrl && (
             <img
               src={avatarUrl}
               alt={user?.username ?? "avatar"}
-              width={96}
-              height={96}
+              width={112}
+              height={112}
               decoding="async"
               fetchPriority="high"
-              className="h-20 w-20 shrink-0 rounded-full border-4 border-surface object-cover sm:h-24 sm:w-24"
-              style={{ boxShadow: "0 0 24px -4px color-mix(in oklab, var(--purple) 60%, transparent)" }}
+              className="h-24 w-24 shrink-0 rounded-2xl border border-white/10 object-cover ring-4 ring-[#080808] transition-transform duration-300 hover:scale-[1.02] sm:h-28 sm:w-28"
+              style={{ boxShadow: "0 0 40px -12px color-mix(in oklab, var(--purple) 70%, transparent), 0 20px 50px -30px rgba(0,0,0,0.9)" }}
             />
           )}
+
           <div className="min-w-0 flex-1">
-            <div className="flex flex-wrap items-center gap-2">
-              <h2 className="truncate text-xl font-semibold text-white sm:text-2xl">
+            <div className="flex flex-wrap items-center gap-2.5">
+              <h2 className="truncate text-2xl font-semibold tracking-tight text-white sm:text-3xl">
                 {user?.global_name || user?.username || "—"}
               </h2>
               {user?.mfa_enabled && (
-                <span className="rounded border border-emerald-400/40 px-1.5 py-0.5 font-mono text-[9px] uppercase tracking-widest text-emerald-400">
+                <span className="rounded-md border border-emerald-400/30 px-2 py-0.5 font-mono text-[9px] uppercase tracking-[0.2em] text-emerald-400">
                   2fa
                 </span>
               )}
               {user?.premium_type ? (
-                <span className="rounded border border-[#a78bfa]/50 px-1.5 py-0.5 font-mono text-[9px] uppercase tracking-widest text-[#a78bfa]">
+                <span className="rounded-md border border-[#a78bfa]/40 bg-[#a78bfa]/[0.08] px-2 py-0.5 font-mono text-[9px] uppercase tracking-[0.2em] text-[#a78bfa]">
                   nitro
                 </span>
               ) : null}
             </div>
             {user?.username && (
-              <div className="mt-0.5 truncate font-mono text-xs text-slate-500">@{user.username}</div>
+              <div className="mt-1.5 truncate font-mono text-xs text-slate-500">@{user.username}</div>
             )}
+
             {/* Insígnias — combina flags + badges do perfil (Nitro, Boost, Quests, etc.) */}
             {(() => {
               const flagBadges = USER_BADGES
@@ -551,14 +555,14 @@ function HubPage() {
               if (all.length === 0) return null;
               return (
                 <TooltipProvider delayDuration={100}>
-                  <div className="mt-2 flex flex-wrap items-center gap-1.5">
+                  <div className="mt-4 flex flex-wrap items-center gap-2">
                     {all.map((b) => (
                       <Tooltip key={b.key}>
                         <TooltipTrigger asChild>
                           <button
                             type="button"
                             aria-label={b.label}
-                            className="shrink-0 rounded transition-transform hover:scale-110 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#818cf8]/60"
+                            className="grid h-8 w-8 shrink-0 place-items-center rounded-lg border border-white/[0.07] bg-white/[0.03] transition-all duration-200 hover:-translate-y-0.5 hover:border-[#818cf8]/40 hover:bg-white/[0.06] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#818cf8]/60"
                           >
                             <img
                               src={b.src}
@@ -584,10 +588,10 @@ function HubPage() {
 
           </div>
           {user?.id && (
-            <div className="flex shrink-0 flex-wrap gap-2 self-start sm:flex-col sm:self-end">
+            <div className="flex shrink-0 flex-wrap gap-2 self-start sm:self-end">
               <button
                 onClick={copyId}
-                className="rounded border border-[#a78bfa]/40 bg-[#a78bfa]/10 px-2 py-1 font-mono text-[10px] uppercase tracking-widest text-[#a78bfa] hover:bg-[#a78bfa]/20"
+                className="rounded-lg border border-white/10 bg-transparent px-3.5 py-2 font-mono text-[10px] uppercase tracking-[0.2em] text-slate-300 transition-all duration-200 hover:border-[#a78bfa]/50 hover:text-[#c4b5fd]"
               >
                 copiar id
               </button>
@@ -595,7 +599,7 @@ function HubPage() {
                 href={`https://discord.com/users/${user.id}`}
                 target="_blank"
                 rel="noreferrer"
-                className="rounded border border-[#818cf8]/40 bg-[#818cf8]/10 px-2 py-1 text-center font-mono text-[10px] uppercase tracking-widest text-[#c4b5fd] hover:bg-[#818cf8]/20"
+                className="rounded-lg border border-white/10 bg-transparent px-3.5 py-2 text-center font-mono text-[10px] uppercase tracking-[0.2em] text-slate-300 transition-all duration-200 hover:border-[#818cf8]/50 hover:text-[#c4b5fd]"
               >
                 abrir perfil
               </a>
@@ -604,17 +608,22 @@ function HubPage() {
         </div>
 
         {/* Bio */}
-        {stats.bio && (
-          <div className="border-t border-white/10 px-4 py-4 sm:px-6">
-            <div className="mb-2 font-mono text-[10px] uppercase tracking-[0.3em] text-slate-500">
-              <span className="text-[#c4b5fd]">◆</span> bio
-            </div>
-            <p className="whitespace-pre-wrap text-sm leading-relaxed text-slate-400">{stats.bio}</p>
+        <div className="border-t border-white/[0.06] px-6 py-8 sm:px-10">
+          <div className="mb-3 font-mono text-[10px] uppercase tracking-[0.3em] text-slate-500">
+            <span className="mr-1 text-[#c4b5fd]">◆</span> bio
           </div>
-        )}
+          {stats.bio ? (
+            <p className="max-w-3xl whitespace-pre-wrap text-sm leading-7 text-slate-300">{stats.bio}</p>
+          ) : (
+            <p className="text-sm leading-7 text-slate-600">
+              Este usuário ainda não adicionou uma bio.
+            </p>
+          )}
+        </div>
 
         {/* Stat grid (primary) */}
-        <div className="grid gap-2 border-t border-white/10 px-4 py-4 sm:grid-cols-2 sm:gap-3 sm:px-6 lg:grid-cols-3">
+        <div className="grid gap-4 border-t border-white/[0.06] px-6 py-8 sm:grid-cols-2 sm:px-10 lg:grid-cols-3">
+
           <StatCard
             label="Servidores"
             value={stats.guilds === null ? "…" : String(stats.guilds)}
@@ -655,11 +664,12 @@ function HubPage() {
 
         {/* Account details */}
         {user && (
-          <div className="border-t border-white/10 px-4 py-4 sm:px-6">
-            <div className="mb-3 flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.25em] text-slate-500">
+          <div className="border-t border-white/[0.06] px-6 py-8 sm:px-10">
+            <div className="mb-5 flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.3em] text-slate-500">
               <span className="text-[#a78bfa]">◆</span> detalhes da conta
             </div>
-            <div className="grid gap-2 sm:grid-cols-2 sm:gap-3 lg:grid-cols-4">
+            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+
               <InfoField
                 label="Email"
                 value={user.email ?? "—"}
@@ -1189,31 +1199,32 @@ function InfoField({
   const hidden = sensitive && !revealed && value !== "—";
   const shown = hidden ? "•".repeat(Math.min(value.length, 14)) : value;
   return (
-    <div className="rounded-lg border border-white/10 bg-black/40 p-3">
-      <div className="flex items-center justify-between gap-2">
-        <div className="font-mono text-[10px] uppercase tracking-[0.25em] text-slate-500">
-          {label}
-        </div>
-        <div className="flex items-center gap-1.5">
-          {badge && (
-            <span className={`rounded border px-1.5 py-0.5 font-mono text-[9px] uppercase tracking-widest ${tone}`}>
-              {badge}
-            </span>
-          )}
-          {sensitive && value !== "—" && (
-            <button
-              onClick={() => setRevealed((v) => !v)}
-              className="rounded border border-white/10 px-1.5 py-0.5 font-mono text-[9px] uppercase tracking-widest text-slate-500 hover:border-[#818cf8]/40 hover:text-[#c4b5fd]"
-            >
-              {revealed ? "ocultar" : "mostrar"}
-            </button>
-          )}
-        </div>
+    <div className="group rounded-xl border border-white/[0.07] bg-[#111111]/70 p-5 transition-all duration-300 hover:border-white/[0.14] hover:bg-[#141414]/90">
+      <div className="font-mono text-[10px] uppercase tracking-[0.28em] text-slate-500">
+        {label}
       </div>
-      <div className="mt-1.5 truncate text-sm text-white" title={revealed ? value : undefined}>
+      <div
+        className="mt-3 truncate text-sm text-white/90 transition-opacity duration-300"
+        title={revealed ? value : undefined}
+      >
         {shown}
       </div>
-      {hint && <div className="mt-0.5 font-mono text-[10px] text-slate-500">{hint}</div>}
+      <div className="mt-3 flex items-center gap-2">
+        {badge && (
+          <span className={`rounded-md border px-2 py-0.5 font-mono text-[9px] uppercase tracking-[0.2em] ${tone}`}>
+            {badge}
+          </span>
+        )}
+        {sensitive && value !== "—" && (
+          <button
+            onClick={() => setRevealed((v) => !v)}
+            className="rounded-md border border-white/10 px-2 py-0.5 font-mono text-[9px] uppercase tracking-[0.2em] text-slate-500 transition-colors duration-200 hover:border-[#818cf8]/40 hover:text-[#c4b5fd]"
+          >
+            {revealed ? "ocultar" : "mostrar"}
+          </button>
+        )}
+        {hint && <span className="font-mono text-[10px] text-slate-600">{hint}</span>}
+      </div>
     </div>
   );
 }
@@ -1241,38 +1252,47 @@ const StatCard = memo(function StatCard({
             : "text-white";
   const border =
     tone === "cyan"
-      ? "border-[#818cf8]/40"
+      ? "hover:border-[#818cf8]/40"
       : tone === "purple"
-        ? "border-[#a78bfa]/40"
+        ? "hover:border-[#a78bfa]/40"
         : tone === "mint"
-          ? "border-emerald-400/40"
+          ? "hover:border-emerald-400/40"
           : tone === "amber"
-            ? "border-amber-400/40"
-            : "border-white/10";
+            ? "hover:border-amber-400/40"
+            : "hover:border-white/20";
+  const dot =
+    tone === "mint"
+      ? "bg-emerald-400"
+      : tone === "amber"
+        ? "bg-amber-300"
+        : tone === "purple"
+          ? "bg-[#a78bfa]"
+          : tone === "cyan"
+            ? "bg-[#c4b5fd]"
+            : "bg-white/40";
   return (
     <div
-      className={`card-hover group relative overflow-hidden rounded-2xl border ${border} bg-white/5 p-4 backdrop-blur-md sm:p-5`}
-      style={{
-        boxShadow:
-          tone === "purple"
-            ? "inset 0 1px 0 color-mix(in oklab, var(--purple) 18%, transparent), 0 0 30px -18px color-mix(in oklab, var(--purple) 70%, transparent)"
-            : tone === "cyan"
-              ? "inset 0 1px 0 color-mix(in oklab, var(--cyan) 18%, transparent), 0 0 30px -18px color-mix(in oklab, var(--cyan) 65%, transparent)"
-              : tone === "mint"
-                ? "inset 0 1px 0 color-mix(in oklab, var(--mint) 15%, transparent), 0 0 30px -18px color-mix(in oklab, var(--mint) 55%, transparent)"
-                : "inset 0 1px 0 color-mix(in oklab, var(--cyan) 6%, transparent)",
-      }}
+      className={`group relative overflow-hidden rounded-xl border border-white/[0.07] bg-[#111111]/80 p-6 transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#141414]/90 ${border}`}
+      style={{ boxShadow: "0 1px 0 0 color-mix(in oklab, white 3%, transparent) inset" }}
     >
-      <div className="font-mono text-[10px] font-semibold uppercase tracking-[0.28em] text-slate-500">
-        {label}
+
+      <div className="flex items-center gap-2">
+        <span className={`h-1.5 w-1.5 rounded-full ${dot} opacity-70 transition group-hover:opacity-100`} />
+        <div className="font-mono text-[10px] font-medium uppercase tracking-[0.28em] text-slate-500">
+          {label}
+        </div>
       </div>
-      <div className={`mt-3 truncate font-mono text-2xl font-bold tabular-nums sm:text-3xl lg:text-4xl ${accent}`}>
+      <div className={`mt-5 truncate text-3xl font-semibold tabular-nums tracking-tight sm:text-4xl ${accent}`}>
         {value}
       </div>
-      <div className="mt-1.5 truncate text-xs text-slate-500">{hint}</div>
+      <div className="mt-2 truncate text-xs leading-relaxed text-slate-500">{hint}</div>
+      <div
+        className={`pointer-events-none absolute inset-x-0 bottom-0 h-px opacity-0 transition-opacity duration-300 group-hover:opacity-100 ${dot}`}
+      />
     </div>
   );
 });
+
 
 
 export const MissionCard = memo(function MissionCard({
