@@ -77,23 +77,70 @@
 :root {
   --radius: 0.75rem;
 
-  /* NeighborD Hub — obsidian near-black + indigo signature */
-  --void: oklch(0.13 0 0);              /* #050505 */
-  --surface: oklch(0.17 0 0);           /* #0d0d0d */
-  --surface-2: oklch(0.21 0 0);         /* #151515 */
-  --line: oklch(1 0 0 / 0.07);
-  --blurple: oklch(0.7 0.14 285);         /* #818cf8 */
-  --blurple-soft: oklch(0.8 0.1 293);     /* #c4b5fd */
-  --cyan: oklch(0.7 0.14 285);
-  --cyan-dim: oklch(0.8 0.1 293);
-  --purple: oklch(0.7 0.14 285);
-  --purple-dim: oklch(0.58 0.18 282);
-  --mint: oklch(0.8 0.1 293);
-  --amber: oklch(0.83 0.16 88);
-  --rose: oklch(0.7 0.2 25);
-  --ink: oklch(1 0 0);
-  --ink-dim: oklch(0.87 0 0);
-  --ink-mute: oklch(0.65 0 0);
+  /* ── NGHC Design System — single source of truth ─────────────────── */
+  /* Backgrounds / surfaces */
+  --bg: #050505;
+  --bg-2: #080808;
+  --surface-1: #0c0c0c;
+  --surface-3: #111111;
+  --surface-hover: #151515;
+
+  /* Text */
+  --text-1: #ffffff;
+  --text-2: #a1a1aa;
+  --text-3: #71717a;
+
+  /* Borders */
+  --border-1: rgb(255 255 255 / 0.08);
+  --border-2: rgb(255 255 255 / 0.14);
+
+  /* Accent (roxo NGHC) — usar só como destaque */
+  --accent-1: #818cf8;
+  --accent-2: #a78bfa;
+  --accent-soft: #c4b5fd;
+
+  /* Feedback (discretos) */
+  --ok: #34d399;
+  --warn: #fbbf24;
+  --danger: #f87171;
+
+  /* Spacing scale */
+  --sp-1: 4px;  --sp-2: 8px;  --sp-3: 12px; --sp-4: 16px;
+  --sp-5: 20px; --sp-6: 24px; --sp-8: 32px; --sp-10: 40px;
+  --sp-12: 48px; --sp-16: 64px;
+
+  /* Radius scale */
+  --r-sm: 8px; --r-md: 10px; --r-lg: 12px; --r-xl: 16px;
+
+  /* Motion */
+  --dur-fast: 150ms;
+  --dur: 200ms;
+  --dur-slow: 300ms;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+
+  /* Elevation (leve, sem glow pesado) */
+  --shadow-1: 0 1px 0 rgb(255 255 255 / 0.03) inset;
+  --shadow-2: 0 12px 32px -24px rgb(0 0 0 / 0.9);
+  --accent-glow: 0 6px 24px -14px color-mix(in oklab, var(--accent-1) 80%, transparent);
+
+  /* Legacy aliases (mantidos para não quebrar telas existentes) */
+  --void: #050505;
+  --surface: #0d0d0d;
+  --surface-2: #151515;
+  --line: rgb(255 255 255 / 0.08);
+  --blurple: var(--accent-1);
+  --blurple-soft: var(--accent-soft);
+  --cyan: var(--accent-1);
+  --cyan-dim: var(--accent-soft);
+  --purple: var(--accent-2);
+  --purple-dim: var(--accent-1);
+  --mint: var(--ok);
+  --amber: var(--warn);
+  --rose: var(--danger);
+  --ink: var(--text-1);
+  --ink-dim: var(--text-2);
+  --ink-mute: var(--text-3);
+
 
 
   --background: var(--void);
