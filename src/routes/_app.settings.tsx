@@ -9,7 +9,7 @@ import { Turnstile } from "@/components/Turnstile";
 import { Hcaptcha } from "@/components/Hcaptcha";
 import { PageHeader } from "@/components/PageHeader";
 import { KeyRound, Mail, ShieldCheck, type LucideIcon } from "lucide-react";
-import { Badge, Button, Card, Field, Input } from "@/components/ui/ds";
+import { Badge, Button, Card, Field, Input, Modal } from "@/components/ui/ds";
 
 
 
@@ -48,15 +48,38 @@ function SettingsPage() {
     }
   };
 
+  const [confirmDisconnect, setConfirmDisconnect] = useState(false);
+
   const disconnect = () => {
-    if (!confirm("Remover o token salvo?")) return;
+    setConfirmDisconnect(false);
     setCreds(null);
     setToken("");
     toast.success("Sessão removida");
   };
 
+  const disconnectModal = confirmDisconnect ? (
+    <Modal
+      title="Remover token salvo?"
+      description="O token será apagado deste navegador e você será desconectado do hub."
+      onClose={() => setConfirmDisconnect(false)}
+      actions={
+        <>
+          <Button variant="ghost" onClick={() => setConfirmDisconnect(false)}>
+            Cancelar
+          </Button>
+          <Button variant="danger" onClick={disconnect}>
+            Remover
+          </Button>
+        </>
+      }
+    />
+  ) : null;
+
+
   return (
     <div className="page-stack">
+      {disconnectModal}
+
       <PageHeader
         eyebrow="auth --login"
         icon={KeyRound}
@@ -74,7 +97,7 @@ function SettingsPage() {
                 <span className="ml-1 truncate">sessão ativa neste navegador</span>
               </Badge>
             </div>
-            <Button variant="danger" size="sm" onClick={disconnect} className="shrink-0">
+            <Button variant="danger" size="sm" onClick={() => setConfirmDisconnect(true)} className="shrink-0">
               sair
             </Button>
           </Card>
