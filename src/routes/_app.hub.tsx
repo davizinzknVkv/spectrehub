@@ -664,11 +664,12 @@ function HubPage() {
 
         {/* Account details */}
         {user && (
-          <div className="border-t border-white/10 px-4 py-4 sm:px-6">
-            <div className="mb-3 flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.25em] text-slate-500">
+          <div className="border-t border-white/[0.06] px-6 py-8 sm:px-10">
+            <div className="mb-5 flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.3em] text-slate-500">
               <span className="text-[#a78bfa]">◆</span> detalhes da conta
             </div>
-            <div className="grid gap-2 sm:grid-cols-2 sm:gap-3 lg:grid-cols-4">
+            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+
               <InfoField
                 label="Email"
                 value={user.email ?? "—"}
