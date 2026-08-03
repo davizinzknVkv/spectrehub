@@ -392,24 +392,25 @@ function EmailLoginForm({ onLogged }: { onLogged: () => void }) {
           {mfaError && (
             <div
               role="alert"
-              className="rounded-lg border border-[color-mix(in_oklab,var(--danger)_35%,transparent)] bg-[color-mix(in_oklab,var(--danger)_8%,transparent)] px-3 py-2 text-[12px] text-[var(--danger)]"
+              className="rounded-[var(--r-md)] border border-[color-mix(in_oklab,var(--danger)_35%,transparent)] bg-[color-mix(in_oklab,var(--danger)_8%,transparent)] px-3 py-2 text-[12px] text-[var(--danger)]"
             >
               ✕ {mfaError}
             </div>
           )}
 
-          <button
+          <Button
             type="button"
+            variant="ghost"
+            size="sm"
             onClick={() => {
               setMfaTicket(null);
               setMfaMethods([]);
               setMfaCode("");
               setMfaError(null);
             }}
-            className="ds-small uppercase tracking-widest hover:text-[var(--accent-soft)]"
           >
             ← voltar para email/senha
-          </button>
+          </Button>
         </div>
       )}
 
@@ -421,8 +422,8 @@ function EmailLoginForm({ onLogged }: { onLogged: () => void }) {
       )}
 
       {!mfaTicket && discordCaptcha && (
-        <div className="space-y-2 rounded-lg border border-[color-mix(in_oklab,var(--accent-1)_30%,transparent)] bg-[color-mix(in_oklab,var(--accent-1)_5%,transparent)] p-3">
-          <div className="ds-label text-[var(--accent-soft)]">◆ captcha do discord</div>
+        <div className="space-y-2 rounded-[var(--r-md)] border border-[color-mix(in_oklab,var(--accent-1)_28%,transparent)] bg-[color-mix(in_oklab,var(--accent-1)_5%,transparent)] p-3">
+          <div className="ds-label text-[var(--accent-soft)]">captcha do discord</div>
           <Hcaptcha
             sitekey={discordCaptcha.sitekey}
             rqdata={discordCaptcha.rqdata}
@@ -431,6 +432,7 @@ function EmailLoginForm({ onLogged }: { onLogged: () => void }) {
           />
         </div>
       )}
+
 
       <Button
         type="submit"
