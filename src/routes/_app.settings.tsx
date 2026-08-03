@@ -78,6 +78,8 @@ function SettingsPage() {
 
   return (
     <div className="page-stack">
+      {disconnectModal}
+
       <PageHeader
         eyebrow="auth --login"
         icon={KeyRound}
