@@ -1252,14 +1252,14 @@ const StatCard = memo(function StatCard({
             : "text-white";
   const border =
     tone === "cyan"
-      ? "border-[#818cf8]/40"
+      ? "hover:border-[#818cf8]/40"
       : tone === "purple"
-        ? "border-[#a78bfa]/40"
+        ? "hover:border-[#a78bfa]/40"
         : tone === "mint"
-          ? "border-emerald-400/40"
+          ? "hover:border-emerald-400/40"
           : tone === "amber"
-            ? "border-amber-400/40"
-            : "border-white/10";
+            ? "hover:border-amber-400/40"
+            : "hover:border-white/20";
   const dot =
     tone === "mint"
       ? "bg-emerald-400"
@@ -1272,9 +1272,10 @@ const StatCard = memo(function StatCard({
             : "bg-white/40";
   return (
     <div
-      className={`group relative overflow-hidden rounded-xl border border-white/[0.07] bg-[#111111]/80 p-6 transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#141414]/90 hover:${border.replace("border-", "border-")}`}
+      className={`group relative overflow-hidden rounded-xl border border-white/[0.07] bg-[#111111]/80 p-6 transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#141414]/90 ${border}`}
       style={{ boxShadow: "0 1px 0 0 color-mix(in oklab, white 3%, transparent) inset" }}
     >
+
       <div className="flex items-center gap-2">
         <span className={`h-1.5 w-1.5 rounded-full ${dot} opacity-70 transition group-hover:opacity-100`} />
         <div className="font-mono text-[10px] font-medium uppercase tracking-[0.28em] text-slate-500">
