@@ -1326,20 +1326,21 @@ const StatCard = memo(function StatCard({
             : "bg-white/40";
   return (
     <div
-      className={`group relative overflow-hidden rounded-xl border border-white/[0.07] bg-[#111111]/80 p-6 transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#141414]/90 ${border}`}
+      className={`group relative overflow-hidden rounded-xl border border-white/[0.07] bg-[#101010]/80 p-3.5 transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#141414]/90 ${border}`}
       style={{ boxShadow: "0 1px 0 0 color-mix(in oklab, white 3%, transparent) inset" }}
     >
 
       <div className="flex items-center gap-2">
         <span className={`h-1.5 w-1.5 rounded-full ${dot} opacity-70 transition group-hover:opacity-100`} />
-        <div className="font-mono text-[10px] font-medium uppercase tracking-[0.28em] text-slate-500">
+        <div className="truncate font-mono text-[9px] font-medium uppercase tracking-[0.24em] text-slate-500">
           {label}
         </div>
       </div>
-      <div className={`mt-5 truncate text-3xl font-semibold tabular-nums tracking-tight sm:text-4xl ${accent}`}>
+      <div className={`mt-2 truncate text-2xl font-semibold tabular-nums tracking-tight ${accent}`}>
         {value}
       </div>
-      <div className="mt-2 truncate text-xs leading-relaxed text-slate-500">{hint}</div>
+      <div className="mt-1 truncate text-[11px] leading-relaxed text-slate-500">{hint}</div>
+
       <div
         className={`pointer-events-none absolute inset-x-0 bottom-0 h-px opacity-0 transition-opacity duration-300 group-hover:opacity-100 ${dot}`}
       />
