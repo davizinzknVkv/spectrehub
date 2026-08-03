@@ -481,8 +481,8 @@ function HubPage() {
 
       {/* Unified profile + stats + account */}
       <section
-        className="fade-up relative overflow-hidden rounded-2xl border border-white/[0.07] bg-[#080808]/90"
-        style={{ boxShadow: "0 40px 120px -60px color-mix(in oklab, var(--purple) 45%, transparent), inset 0 1px 0 color-mix(in oklab, white 4%, transparent)" }}
+        className="fade-up relative overflow-hidden rounded-2xl border border-white/[0.07] bg-[#080808]/85 backdrop-blur-xl"
+        style={{ boxShadow: "0 18px 50px -40px rgba(0,0,0,0.9), inset 0 1px 0 rgba(255,255,255,0.03)" }}
       >
 
 
