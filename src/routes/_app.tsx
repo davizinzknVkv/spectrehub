@@ -172,7 +172,13 @@ function SidebarBody({
                     <span className={active ? "font-medium tracking-[-0.01em]" : "tracking-[-0.01em]"}>
                       {item.label}
                     </span>
+                    {item.soon && (
+                      <span className="ml-auto shrink-0 rounded-[0.3rem] border border-white/[0.08] bg-white/[0.03] px-1.5 py-0.5 font-mono text-[8px] uppercase tracking-[0.18em] text-slate-500">
+                        em breve
+                      </span>
+                    )}
                   </Link>
+
                 );
               })}
             </div>
