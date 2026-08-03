@@ -512,24 +512,25 @@ function HubPage() {
           )}
 
           <div className="min-w-0 flex-1">
-            <div className="flex flex-wrap items-center gap-2">
-              <h2 className="truncate text-xl font-semibold text-white sm:text-2xl">
+            <div className="flex flex-wrap items-center gap-2.5">
+              <h2 className="truncate text-2xl font-semibold tracking-tight text-white sm:text-3xl">
                 {user?.global_name || user?.username || "—"}
               </h2>
               {user?.mfa_enabled && (
-                <span className="rounded border border-emerald-400/40 px-1.5 py-0.5 font-mono text-[9px] uppercase tracking-widest text-emerald-400">
+                <span className="rounded-md border border-emerald-400/30 px-2 py-0.5 font-mono text-[9px] uppercase tracking-[0.2em] text-emerald-400">
                   2fa
                 </span>
               )}
               {user?.premium_type ? (
-                <span className="rounded border border-[#a78bfa]/50 px-1.5 py-0.5 font-mono text-[9px] uppercase tracking-widest text-[#a78bfa]">
+                <span className="rounded-md border border-[#a78bfa]/40 bg-[#a78bfa]/[0.08] px-2 py-0.5 font-mono text-[9px] uppercase tracking-[0.2em] text-[#a78bfa]">
                   nitro
                 </span>
               ) : null}
             </div>
             {user?.username && (
-              <div className="mt-0.5 truncate font-mono text-xs text-slate-500">@{user.username}</div>
+              <div className="mt-1.5 truncate font-mono text-xs text-slate-500">@{user.username}</div>
             )}
+
             {/* Insígnias — combina flags + badges do perfil (Nitro, Boost, Quests, etc.) */}
             {(() => {
               const flagBadges = USER_BADGES
