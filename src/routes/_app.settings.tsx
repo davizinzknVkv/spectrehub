@@ -329,6 +329,7 @@ function EmailLoginForm({ onLogged }: { onLogged: () => void }) {
                     onClick={() => {
                       setMfaMethod(m as "totp" | "backup" | "sms");
                       setMfaCode("");
+                      setMfaError(null);
                     }}
                     className={`flex-1 rounded-md px-3 py-1.5 text-[10px] font-semibold uppercase tracking-widest transition ${
                       active
