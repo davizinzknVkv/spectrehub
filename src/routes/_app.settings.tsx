@@ -472,7 +472,7 @@ function EmailLoginForm({ onLogged }: { onLogged: () => void }) {
               mfaCode.replace(/[^a-zA-Z0-9]/g, "").length > codeMaxLen + 4
             : !login ||
               !password ||
-              !captchaToken ||
+              (!humanVerified && !captchaToken) ||
               (discordCaptcha ? !discordCaptchaToken : false))
         }
       >
