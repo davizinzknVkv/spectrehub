@@ -1335,11 +1335,19 @@ export const MissionCard = memo(function MissionCard({
 
   return (
     <article
-      className={`ds-card group relative flex flex-col overflow-hidden !p-0 transition ${
-        active ? "border-[#818cf8]/50" : ""
+      className={`group relative flex flex-col overflow-hidden rounded-xl border transition duration-300 ${
+        active
+          ? "border-[color-mix(in_oklab,var(--accent-1)_45%,transparent)]"
+          : "border-[var(--border-1)] hover:border-[color-mix(in_oklab,var(--accent-1)_28%,transparent)]"
       }`}
+      style={{
+        // selected card stays fully opaque — no transparency artefacts
+        background: active ? "#101014" : "color-mix(in oklab, #0c0c0c 88%, transparent)",
+        backdropFilter: active ? undefined : "blur(10px)",
+        isolation: "isolate",
+      }}
     >
-      <div className="relative aspect-[16/9] w-full overflow-hidden bg-[#0b0d12]">
+      <div className="relative aspect-[16/7] w-full overflow-hidden bg-[#08080a]">
         {quest.imageUrl ? (
           <img
             src={quest.imageUrl}
@@ -1359,59 +1367,54 @@ export const MissionCard = memo(function MissionCard({
                 img.style.opacity = "0";
               }
             }}
-            className="h-full w-full object-cover transition duration-500 group-hover:scale-[1.03]"
+            className="h-full w-full object-cover transition duration-500 group-hover:scale-[1.04]"
           />
         ) : (
-          <div className="grid h-full w-full place-items-center font-mono text-xs text-slate-500">
+          <div className="grid h-full w-full place-items-center font-mono text-[10px] uppercase tracking-widest text-[var(--text-3)]">
             sem imagem
           </div>
         )}
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background/70 via-transparent" />
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#0c0c0c] via-[#0c0c0c]/20 to-transparent" />
         <span
-          className={`absolute right-3 top-3 rounded-full px-2.5 py-0.5 font-mono text-[10px] font-semibold uppercase tracking-widest ${
+          className={`absolute right-2.5 top-2.5 rounded-full px-2 py-0.5 font-mono text-[9px] font-semibold uppercase tracking-widest backdrop-blur-md ${
             quest.isEnrolled
-              ? "bg-emerald-500/90 text-background"
-              : "bg-[#818cf8]/90 text-background"
+              ? "bg-[color-mix(in_oklab,var(--ok)_18%,transparent)] text-[var(--ok)]"
+              : "bg-[color-mix(in_oklab,var(--accent-1)_18%,transparent)] text-[var(--accent-soft)]"
           }`}
         >
           {quest.isEnrolled ? "aceita" : "disponível"}
         </span>
       </div>
 
-      <div className="flex flex-1 flex-col gap-3 p-4">
+      <div className="flex flex-1 flex-col gap-2 p-3.5">
         <div className="min-w-0">
-          <h3 className="truncate text-base font-semibold text-white">{quest.questName}</h3>
+          <h3 className="truncate text-[13px] font-semibold tracking-tight text-[var(--text-1)]">
+            {quest.questName}
+          </h3>
           {quest.publisher && (
-            <p className="mt-0.5 truncate text-xs text-slate-400">{quest.publisher}</p>
+            <p className="mt-0.5 truncate text-[11px] text-[var(--text-3)]">{quest.publisher}</p>
           )}
         </div>
 
-        <div className="flex flex-wrap items-center gap-2 font-mono text-[10px] uppercase tracking-widest text-slate-500">
-          {expires && <span>Expira: {expires}</span>}
-          <span className="opacity-40">·</span>
+        <div className="flex flex-wrap items-center gap-1.5 font-mono text-[9px] uppercase tracking-widest text-[var(--text-3)]">
+          {expires && <span>exp {expires}</span>}
+          {expires && <span className="opacity-30">·</span>}
           <span>{formatDuration(quest.target)}</span>
-        </div>
-
-        <div
-          className={`inline-flex w-fit items-center gap-2 rounded-md border px-2.5 py-1 text-xs ${
-            isOrbs
-              ? "border-amber-400/30 bg-amber-500/10 text-amber-300"
-              : "border-white/10 bg-black/40 text-slate-400"
-          }`}
-        >
-          <span>◈</span>
-          {quest.rewardText}
+          <span className="opacity-30">·</span>
+          <span className={isOrbs ? "text-amber-300" : "text-[var(--text-2)]"}>
+            ◈ {quest.rewardText}
+          </span>
         </div>
 
         {active && progress && (
-          <div>
-            <div className="flex items-center justify-between font-mono text-[10px] uppercase tracking-widest text-slate-500">
+          <div className="mt-0.5">
+            <div className="flex items-center justify-between font-mono text-[9px] uppercase tracking-widest text-[var(--text-3)]">
               <span>{progress.current}/{progress.total}</span>
-              <span className="text-[#c4b5fd]">{pct}%</span>
+              <span className="text-[var(--accent-soft)]">{pct}%</span>
             </div>
-            <div className="mt-1 h-1.5 overflow-hidden rounded-full bg-[#0b0d12]">
+            <div className="mt-1 h-1 overflow-hidden rounded-full bg-[#08080a]">
               <div
-                className="h-full rounded-full bg-gradient-to-r from-[#818cf8] via-emerald-400 to-amber-400 transition-all"
+                className="h-full rounded-full bg-[var(--accent-1)] transition-all"
                 style={{ width: `${pct}%` }}
               />
             </div>
@@ -1422,7 +1425,7 @@ export const MissionCard = memo(function MissionCard({
           onClick={onExec}
           disabled={disabled}
           title={gateHint}
-          className="mt-auto rounded-md border border-white/10 bg-black/40 px-3 py-2 text-sm font-medium text-white transition hover:border-[#818cf8]/50 hover:text-[#c4b5fd] disabled:cursor-not-allowed disabled:opacity-30"
+          className="mt-auto rounded-lg border border-[var(--border-1)] bg-[#0a0a0a] px-3 py-1.5 text-[12px] font-medium text-[var(--text-1)] transition hover:border-[color-mix(in_oklab,var(--accent-1)_45%,transparent)] hover:text-[var(--accent-soft)] disabled:cursor-not-allowed disabled:opacity-30"
         >
           {gateHint ?? "Completar"}
         </button>
@@ -1430,6 +1433,7 @@ export const MissionCard = memo(function MissionCard({
     </article>
   );
 });
+
 
 export function CaptchaModal({
   quest,
