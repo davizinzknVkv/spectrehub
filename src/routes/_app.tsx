@@ -37,28 +37,28 @@ export const Route = createFileRoute("/_app")({
 const NAV_GROUPS = [
   {
     title: "Visão geral",
-    items: [{ to: "/hub", label: "Dashboard", icon: LayoutDashboard }],
+    items: [{ to: "/hub", label: "Dashboard", icon: LayoutDashboard, soon: false }],
   },
   {
     title: "Ferramentas",
     items: [
-      { to: "/missoes", label: "Missões", icon: Target },
-      { to: "/farms", label: "Farms", icon: Tractor },
-      { to: "/history", label: "Histórico", icon: History },
-      { to: "/resgatar", label: "Resgatar Orbs", icon: Gift },
-      { to: "/settings", label: "Login", icon: KeyRound },
+      { to: "/missoes", label: "Missões", icon: Target, soon: false },
+      { to: "/farms", label: "Farms", icon: Tractor, soon: false },
+      { to: "/history", label: "Histórico", icon: History, soon: false },
+      { to: "/resgatar", label: "Resgatar Orbs", icon: Gift, soon: false },
     ],
   },
   {
     title: "Utilitários",
     items: [
-      { to: "/nicksgun", label: "Nicks-Gun", icon: Crosshair },
-      { to: "/clone", label: "Clonar Discord", icon: Copy },
-      { to: "/spotify", label: "Gerador Spotify", icon: Music },
-      { to: "/fake", label: "Foto Fake", icon: ImageIcon },
+      { to: "/nicksgun", label: "Nicks-Gun", icon: Crosshair, soon: true },
+      { to: "/clone", label: "Clonar Discord", icon: Copy, soon: true },
+      { to: "/spotify", label: "Gerador Spotify", icon: Music, soon: true },
+      { to: "/fake", label: "Foto Fake", icon: ImageIcon, soon: false },
     ],
   },
 ] as const;
+
 
 function AppLayout() {
   const hydrate = useQuestStore((s) => s.hydrate);
