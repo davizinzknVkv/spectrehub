@@ -77,11 +77,12 @@ function AppLayout() {
   }, [pathname]);
 
   return (
-    <div className="min-h-screen bg-[#0b0d12] text-slate-100 antialiased">
+    <div className="min-h-screen text-slate-100 antialiased">
+      <div className="app-shell-bg" aria-hidden />
 
-      <div className="grid min-h-screen w-full grid-cols-1 lg:grid-cols-[240px_1fr]">
+      <div className="grid min-h-screen w-full grid-cols-1 lg:grid-cols-[236px_1fr]">
         {/* Desktop sidebar */}
-        <aside className="hidden border-r border-[color:var(--glass-border)] glass-panel !rounded-none lg:sticky lg:top-0 lg:block lg:h-screen">
+        <aside className="hidden border-r border-white/[0.06] bg-[#070707]/70 backdrop-blur-xl lg:sticky lg:top-0 lg:block lg:h-screen">
           <SidebarBody pathname={pathname} creds={creds} setCreds={setCreds} />
         </aside>
 
@@ -89,20 +90,17 @@ function AppLayout() {
         {mobileOpen && (
           <>
             <div
-              className="fixed inset-0 z-40 bg-[#0b0d12]/70 backdrop-blur-sm lg:hidden"
+              className="fixed inset-0 z-40 bg-black/70 backdrop-blur-sm lg:hidden"
               onClick={() => setMobileOpen(false)}
               aria-hidden
             />
-            <aside
-              className="fixed inset-y-0 left-0 z-50 w-[260px] glass-panel-strong !rounded-none lg:hidden"
-            >
-
-              <div className="flex items-center justify-between px-4 py-3 border-b border-white/10">
-                <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-slate-500">menu</span>
+            <aside className="fixed inset-y-0 left-0 z-50 w-[264px] border-r border-white/[0.08] bg-[#070707]/95 backdrop-blur-xl lg:hidden">
+              <div className="flex items-center justify-between border-b border-white/[0.06] px-4 py-3">
+                <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-slate-600">menu</span>
                 <button
                   onClick={() => setMobileOpen(false)}
                   aria-label="Fechar menu"
-                  className="rounded-md border border-white/10 p-1.5 text-slate-400 hover:border-[#818cf8]/50 hover:text-[#c4b5fd]"
+                  className="rounded-md border border-white/[0.08] p-1.5 text-slate-400 transition hover:border-white/20 hover:text-white"
                 >
                   <X className="h-4 w-4" />
                 </button>
@@ -115,12 +113,10 @@ function AppLayout() {
         {/* Main */}
         <main className="min-w-0">
           <TopBar onOpenMenu={() => setMobileOpen(true)} pathname={pathname} />
-          <div className="mx-auto w-full max-w-6xl px-4 pb-10 pt-5 sm:px-6 sm:pt-6 lg:px-8 lg:pb-8 lg:pt-8">
+          <div className="mx-auto w-full max-w-6xl px-4 pb-14 pt-6 sm:px-6 sm:pt-8 lg:px-10 lg:pb-16 lg:pt-10">
             <Outlet />
           </div>
-
         </main>
-
       </div>
     </div>
   );
