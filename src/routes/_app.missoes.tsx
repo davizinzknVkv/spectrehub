@@ -10,8 +10,8 @@ import {
 } from "@/lib/quest-runner";
 import { useQuestStore, type Quest } from "@/lib/quest-store";
 import { PageHeader } from "@/components/PageHeader";
-import { Button, Badge } from "@/components/ui/ds";
-import { Target } from "lucide-react";
+import { Button, Badge, EmptyState as DSEmptyState } from "@/components/ui/ds";
+import { Target, KeyRound } from "lucide-react";
 import {
   CaptchaModal,
   EmptyState,
