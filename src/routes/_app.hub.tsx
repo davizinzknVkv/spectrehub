@@ -536,7 +536,7 @@ function HubPage() {
           <div className="min-w-0 flex-1">
             <TooltipProvider delayDuration={100}>
               <div className="flex flex-wrap items-center gap-2.5">
-                <h2 className="truncate text-2xl font-semibold tracking-tight text-white sm:text-3xl">
+                <h2 className="truncate text-xl font-semibold tracking-tight text-white sm:text-2xl">
                   {user?.global_name || user?.username || "—"}
                 </h2>
                 {user?.mfa_enabled && (
@@ -573,7 +573,7 @@ function HubPage() {
             </TooltipProvider>
 
             {user?.username && (
-              <div className="mt-1.5 truncate font-mono text-xs text-slate-500">@{user.username}</div>
+              <div className="mt-1 truncate font-mono text-xs text-slate-500">@{user.username}</div>
             )}
 
             {/* Insígnias — combina flags + badges do perfil (Nitro, Boost, Quests, etc.) */}
@@ -600,7 +600,7 @@ function HubPage() {
               if (all.length === 0) return null;
               return (
                 <TooltipProvider delayDuration={100}>
-                  <div className="mt-4 flex flex-wrap items-center gap-2">
+                  <div className="mt-2.5 flex flex-wrap items-center gap-1.5">
                     {all.map((b) => (
                       <Tooltip key={b.key}>
                         <TooltipTrigger asChild>
