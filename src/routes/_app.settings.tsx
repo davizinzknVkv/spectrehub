@@ -368,11 +368,23 @@ function EmailLoginForm({ onLogged }: { onLogged: () => void }) {
                     ? raw.replace(/[^a-zA-Z0-9-]/g, "").slice(0, 12)
                     : raw.replace(/\D/g, "").slice(0, 8);
                 setMfaCode(cleaned);
+                if (mfaError) setMfaError(null);
               }}
               placeholder={mfaMethod === "backup" ? "xxxxxxxx" : "000000"}
-              className="text-center font-mono text-lg tracking-widest"
+              className={`text-center font-mono text-lg tracking-widest ${
+                mfaError ? "border-[color-mix(in_oklab,var(--danger)_55%,transparent)]" : ""
+              }`}
             />
           </Field>
+
+          {mfaError && (
+            <div
+              role="alert"
+              className="rounded-lg border border-[color-mix(in_oklab,var(--danger)_35%,transparent)] bg-[color-mix(in_oklab,var(--danger)_8%,transparent)] px-3 py-2 text-[12px] text-[var(--danger)]"
+            >
+              ✕ {mfaError}
+            </div>
+          )}
 
           <button
             type="button"
@@ -380,6 +392,7 @@ function EmailLoginForm({ onLogged }: { onLogged: () => void }) {
               setMfaTicket(null);
               setMfaMethods([]);
               setMfaCode("");
+              setMfaError(null);
             }}
             className="ds-small uppercase tracking-widest hover:text-[var(--accent-soft)]"
           >
