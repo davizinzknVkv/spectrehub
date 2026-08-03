@@ -1249,30 +1249,38 @@ const StatCard = memo(function StatCard({
           : tone === "amber"
             ? "border-amber-400/40"
             : "border-white/10";
+  const dot =
+    tone === "mint"
+      ? "bg-emerald-400"
+      : tone === "amber"
+        ? "bg-amber-300"
+        : tone === "purple"
+          ? "bg-[#a78bfa]"
+          : tone === "cyan"
+            ? "bg-[#c4b5fd]"
+            : "bg-white/40";
   return (
     <div
-      className={`card-hover group relative overflow-hidden rounded-2xl border ${border} bg-white/5 p-4 backdrop-blur-md sm:p-5`}
-      style={{
-        boxShadow:
-          tone === "purple"
-            ? "inset 0 1px 0 color-mix(in oklab, var(--purple) 18%, transparent), 0 0 30px -18px color-mix(in oklab, var(--purple) 70%, transparent)"
-            : tone === "cyan"
-              ? "inset 0 1px 0 color-mix(in oklab, var(--cyan) 18%, transparent), 0 0 30px -18px color-mix(in oklab, var(--cyan) 65%, transparent)"
-              : tone === "mint"
-                ? "inset 0 1px 0 color-mix(in oklab, var(--mint) 15%, transparent), 0 0 30px -18px color-mix(in oklab, var(--mint) 55%, transparent)"
-                : "inset 0 1px 0 color-mix(in oklab, var(--cyan) 6%, transparent)",
-      }}
+      className={`group relative overflow-hidden rounded-xl border border-white/[0.07] bg-[#111111]/80 p-6 transition-all duration-300 hover:-translate-y-0.5 hover:${border} hover:bg-[#141414]/90`}
+      style={{ boxShadow: "0 1px 0 0 color-mix(in oklab, white 3%, transparent) inset" }}
     >
-      <div className="font-mono text-[10px] font-semibold uppercase tracking-[0.28em] text-slate-500">
-        {label}
+      <div className="flex items-center gap-2">
+        <span className={`h-1.5 w-1.5 rounded-full ${dot} opacity-70 transition group-hover:opacity-100`} />
+        <div className="font-mono text-[10px] font-medium uppercase tracking-[0.28em] text-slate-500">
+          {label}
+        </div>
       </div>
-      <div className={`mt-3 truncate font-mono text-2xl font-bold tabular-nums sm:text-3xl lg:text-4xl ${accent}`}>
+      <div className={`mt-5 truncate text-3xl font-semibold tabular-nums tracking-tight sm:text-4xl ${accent}`}>
         {value}
       </div>
-      <div className="mt-1.5 truncate text-xs text-slate-500">{hint}</div>
+      <div className="mt-2 truncate text-xs leading-relaxed text-slate-500">{hint}</div>
+      <div
+        className={`pointer-events-none absolute inset-x-0 bottom-0 h-px opacity-0 transition-opacity duration-300 group-hover:opacity-100 ${dot}`}
+      />
     </div>
   );
 });
+
 
 
 export const MissionCard = memo(function MissionCard({
