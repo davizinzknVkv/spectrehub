@@ -504,33 +504,34 @@ function HubPage() {
         )}
         {/* Banner */}
         <div
-          className="relative h-32 w-full sm:h-48"
+          className="relative h-20 w-full sm:h-28"
           style={
             bannerUrl
               ? { backgroundImage: `url(${bannerUrl})`, backgroundSize: "cover", backgroundPosition: "center" }
               : { background: accentBg }
           }
         >
-          {!bannerUrl && <div className="absolute inset-0 grid-bg opacity-25" />}
-          <div className="absolute inset-0 bg-black/25" />
-          <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-[#080808] via-[#080808]/80 to-transparent" />
+          {!bannerUrl && <div className="absolute inset-0 grid-bg opacity-20" />}
+          <div className="absolute inset-0 bg-black/35" />
+          <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-[#080808] via-[#080808]/85 to-transparent" />
         </div>
 
 
         {/* Identity row */}
-        <div className="relative -mt-12 flex flex-col gap-6 px-6 pb-8 sm:-mt-14 sm:flex-row sm:items-end sm:gap-7 sm:px-10">
+        <div className="relative -mt-8 flex flex-col gap-4 px-5 pb-5 sm:-mt-10 sm:flex-row sm:items-end sm:gap-5 sm:px-7">
           {avatarUrl && (
             <img
               src={avatarUrl}
               alt={user?.username ?? "avatar"}
-              width={112}
-              height={112}
+              width={80}
+              height={80}
               decoding="async"
               fetchPriority="high"
-              className="h-24 w-24 shrink-0 rounded-2xl border border-white/10 object-cover ring-4 ring-[#080808] transition-transform duration-300 hover:scale-[1.02] sm:h-28 sm:w-28"
-              style={{ boxShadow: "0 0 40px -12px color-mix(in oklab, var(--purple) 70%, transparent), 0 20px 50px -30px rgba(0,0,0,0.9)" }}
+              className="h-16 w-16 shrink-0 rounded-xl border border-white/10 object-cover ring-4 ring-[#080808] transition-transform duration-300 hover:scale-[1.02] sm:h-20 sm:w-20"
+              style={{ boxShadow: "0 12px 30px -22px rgba(0,0,0,0.9)" }}
             />
           )}
+
 
           <div className="min-w-0 flex-1">
             <TooltipProvider delayDuration={100}>
