@@ -133,25 +133,24 @@ function SidebarBody({
 }) {
   return (
     <div className="flex h-full flex-col">
-      <Link to="/" className="flex items-center gap-2.5 px-5 py-5">
-        <div
-          className="grid h-9 w-9 place-items-center rounded-lg border border-[#818cf8]/50 bg-gradient-to-br from-[#818cf8]/15 to-[#a78bfa]/20 font-mono text-sm font-bold text-[#c4b5fd]"
-          style={{ boxShadow: "0 0 18px -4px color-mix(in oklab, var(--purple) 55%, transparent)" }}
-        >
+      <Link to="/" className="flex items-center gap-3 px-5 pb-5 pt-6">
+        <div className="grid h-9 w-9 place-items-center rounded-[0.6rem] border border-white/10 bg-white/[0.04] font-mono text-sm font-bold text-[#a5b4fc]">
           N
         </div>
-        <div className="min-w-0">
-          <div className="truncate text-sm font-semibold tracking-tight text-white">
-            Neighbors<span className="text-[#c4b5fd]">hub</span>
+        <div className="min-w-0 leading-tight">
+          <div className="truncate text-[0.9rem] font-semibold tracking-[-0.02em] text-white">
+            NeighborD Hub
           </div>
-          <div className="font-mono text-[9px] uppercase tracking-[0.25em] text-[#a78bfa]">neon</div>
+          <div className="font-mono text-[9px] uppercase tracking-[0.3em] text-slate-600">neon</div>
         </div>
       </Link>
 
-      <nav className="flex flex-col gap-2 px-3 pb-3 lg:flex-1">
+      <div className="hairline mx-5" aria-hidden />
+
+      <nav className="flex flex-col gap-5 px-3 py-5 lg:flex-1">
         {NAV_GROUPS.map((group) => (
           <div key={group.title}>
-            <div className="px-3 pb-2 font-mono text-[10px] uppercase tracking-[0.25em] text-slate-500">
+            <div className="px-3 pb-2 font-mono text-[9px] uppercase tracking-[0.3em] text-slate-600">
               {group.title}
             </div>
             <div className="flex flex-col gap-0.5">
@@ -162,44 +161,28 @@ function SidebarBody({
                   <Link
                     key={`${item.to}-${item.label}`}
                     to={item.to}
-                    className={`group relative flex items-center gap-3 rounded-lg px-3 py-2 text-sm transition ${
-                      active
-                        ? "text-white"
-                        : "text-slate-400 hover:bg-white/[0.03] hover:text-slate-100"
-                    }`}
+                    data-active={active}
+                    className="nav-item group"
                   >
-                    {active && (
-                      <span
-                        aria-hidden
-                        className="absolute left-0 top-1/2 h-5 w-[2px] -translate-y-1/2 rounded-r-full bg-gradient-to-b from-[#818cf8] to-[#a78bfa]"
-                        style={{ boxShadow: "0 0 8px color-mix(in oklab, var(--purple) 70%, transparent)" }}
-                      />
-                    )}
                     <Icon
-                      className={`h-4 w-4 shrink-0 transition ${
-                        active ? "text-[#c4b5fd]" : "text-slate-500 group-hover:text-[#c4b5fd]"
+                      className={`h-[15px] w-[15px] shrink-0 transition ${
+                        active ? "text-[#a5b4fc]" : "text-slate-600 group-hover:text-[#a5b4fc]"
                       }`}
                     />
-                    <span className={active ? "font-medium tracking-tight" : "tracking-tight"}>
+                    <span className={active ? "font-medium tracking-[-0.01em]" : "tracking-[-0.01em]"}>
                       {item.label}
                     </span>
                   </Link>
                 );
               })}
             </div>
-
           </div>
         ))}
       </nav>
 
       <div className="mt-auto border-t border-white/[0.06] p-3">
-        <a
-          href={DISCORD_INVITE}
-          target="_blank"
-          rel="noreferrer"
-          className="flex items-center gap-3 rounded-lg px-3 py-2 text-sm text-slate-400 transition hover:bg-white/[0.03] hover:text-slate-100"
-        >
-          <LifeBuoy className="h-4 w-4 text-slate-500" />
+        <a href={DISCORD_INVITE} target="_blank" rel="noreferrer" className="nav-item">
+          <LifeBuoy className="h-[15px] w-[15px] shrink-0 text-slate-600" />
           Suporte Discord
         </a>
       </div>
