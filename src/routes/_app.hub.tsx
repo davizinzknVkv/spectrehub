@@ -55,6 +55,16 @@ function formatAge(date: Date) {
   return `${days}d`;
 }
 
+// Estilo unificado dos tooltips (tema obsidiana / glass)
+const TOOLTIP_CLS =
+  "border border-white/10 bg-[#0b0b0b]/95 px-2.5 py-1.5 font-mono text-[10px] uppercase tracking-[0.14em] text-slate-200 shadow-[0_10px_30px_-12px_rgba(0,0,0,0.9)] backdrop-blur-xl";
+
+const NITRO_LABELS: Record<number, string> = {
+  1: "Nitro Classic",
+  2: "Nitro",
+  3: "Nitro Basic",
+};
+
 
 // Discord public user flags → badge label + official icon hash
 const USER_BADGES: Array<{ bit: number; label: string; tone: "cyan" | "purple" | "mint" | "amber"; icon: string }> = [
