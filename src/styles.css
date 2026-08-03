@@ -835,8 +835,13 @@
 
 @utility ds-card-interactive {
   cursor: pointer;
+  &:hover {
+    background: var(--surface-hover);
+    border-color: var(--border-2);
+    transform: translateY(-2px);
+  }
 }
-.ds-card-interactive:hover,
+
 @utility ds-card-hover {
   cursor: pointer;
   &:hover {
