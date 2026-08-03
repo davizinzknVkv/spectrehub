@@ -555,14 +555,14 @@ function HubPage() {
               if (all.length === 0) return null;
               return (
                 <TooltipProvider delayDuration={100}>
-                  <div className="mt-2 flex flex-wrap items-center gap-1.5">
+                  <div className="mt-4 flex flex-wrap items-center gap-2">
                     {all.map((b) => (
                       <Tooltip key={b.key}>
                         <TooltipTrigger asChild>
                           <button
                             type="button"
                             aria-label={b.label}
-                            className="shrink-0 rounded transition-transform hover:scale-110 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#818cf8]/60"
+                            className="grid h-8 w-8 shrink-0 place-items-center rounded-lg border border-white/[0.07] bg-white/[0.03] transition-all duration-200 hover:-translate-y-0.5 hover:border-[#818cf8]/40 hover:bg-white/[0.06] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#818cf8]/60"
                           >
                             <img
                               src={b.src}
@@ -588,10 +588,10 @@ function HubPage() {
 
           </div>
           {user?.id && (
-            <div className="flex shrink-0 flex-wrap gap-2 self-start sm:flex-col sm:self-end">
+            <div className="flex shrink-0 flex-wrap gap-2 self-start sm:self-end">
               <button
                 onClick={copyId}
-                className="rounded border border-[#a78bfa]/40 bg-[#a78bfa]/10 px-2 py-1 font-mono text-[10px] uppercase tracking-widest text-[#a78bfa] hover:bg-[#a78bfa]/20"
+                className="rounded-lg border border-white/10 bg-transparent px-3.5 py-2 font-mono text-[10px] uppercase tracking-[0.2em] text-slate-300 transition-all duration-200 hover:border-[#a78bfa]/50 hover:text-[#c4b5fd]"
               >
                 copiar id
               </button>
@@ -599,7 +599,7 @@ function HubPage() {
                 href={`https://discord.com/users/${user.id}`}
                 target="_blank"
                 rel="noreferrer"
-                className="rounded border border-[#818cf8]/40 bg-[#818cf8]/10 px-2 py-1 text-center font-mono text-[10px] uppercase tracking-widest text-[#c4b5fd] hover:bg-[#818cf8]/20"
+                className="rounded-lg border border-white/10 bg-transparent px-3.5 py-2 text-center font-mono text-[10px] uppercase tracking-[0.2em] text-slate-300 transition-all duration-200 hover:border-[#818cf8]/50 hover:text-[#c4b5fd]"
               >
                 abrir perfil
               </a>
@@ -608,17 +608,22 @@ function HubPage() {
         </div>
 
         {/* Bio */}
-        {stats.bio && (
-          <div className="border-t border-white/10 px-4 py-4 sm:px-6">
-            <div className="mb-2 font-mono text-[10px] uppercase tracking-[0.3em] text-slate-500">
-              <span className="text-[#c4b5fd]">◆</span> bio
-            </div>
-            <p className="whitespace-pre-wrap text-sm leading-relaxed text-slate-400">{stats.bio}</p>
+        <div className="border-t border-white/[0.06] px-6 py-8 sm:px-10">
+          <div className="mb-3 font-mono text-[10px] uppercase tracking-[0.3em] text-slate-500">
+            <span className="mr-1 text-[#c4b5fd]">◆</span> bio
           </div>
-        )}
+          {stats.bio ? (
+            <p className="max-w-3xl whitespace-pre-wrap text-sm leading-7 text-slate-300">{stats.bio}</p>
+          ) : (
+            <p className="text-sm leading-7 text-slate-600">
+              Este usuário ainda não adicionou uma bio.
+            </p>
+          )}
+        </div>
 
         {/* Stat grid (primary) */}
-        <div className="grid gap-2 border-t border-white/10 px-4 py-4 sm:grid-cols-2 sm:gap-3 sm:px-6 lg:grid-cols-3">
+        <div className="grid gap-4 border-t border-white/[0.06] px-6 py-8 sm:grid-cols-2 sm:px-10 lg:grid-cols-3">
+
           <StatCard
             label="Servidores"
             value={stats.guilds === null ? "…" : String(stats.guilds)}
