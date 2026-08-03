@@ -483,32 +483,34 @@ function HubPage() {
         )}
         {/* Banner */}
         <div
-          className="relative h-28 w-full sm:h-40"
+          className="relative h-32 w-full sm:h-48"
           style={
             bannerUrl
               ? { backgroundImage: `url(${bannerUrl})`, backgroundSize: "cover", backgroundPosition: "center" }
               : { background: accentBg }
           }
         >
-          {!bannerUrl && <div className="absolute inset-0 grid-bg opacity-30" />}
-          <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-surface via-surface/70 to-transparent" />
+          {!bannerUrl && <div className="absolute inset-0 grid-bg opacity-25" />}
+          <div className="absolute inset-0 bg-black/25" />
+          <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-[#080808] via-[#080808]/80 to-transparent" />
         </div>
 
 
         {/* Identity row */}
-        <div className="flex flex-col gap-4 px-4 pb-5 pt-4 sm:flex-row sm:items-start sm:gap-5 sm:px-6">
+        <div className="relative -mt-12 flex flex-col gap-6 px-6 pb-8 sm:-mt-14 sm:flex-row sm:items-end sm:gap-7 sm:px-10">
           {avatarUrl && (
             <img
               src={avatarUrl}
               alt={user?.username ?? "avatar"}
-              width={96}
-              height={96}
+              width={112}
+              height={112}
               decoding="async"
               fetchPriority="high"
-              className="h-20 w-20 shrink-0 rounded-full border-4 border-surface object-cover sm:h-24 sm:w-24"
-              style={{ boxShadow: "0 0 24px -4px color-mix(in oklab, var(--purple) 60%, transparent)" }}
+              className="h-24 w-24 shrink-0 rounded-2xl border border-white/10 object-cover ring-4 ring-[#080808] transition-transform duration-300 hover:scale-[1.02] sm:h-28 sm:w-28"
+              style={{ boxShadow: "0 0 40px -12px color-mix(in oklab, var(--purple) 70%, transparent), 0 20px 50px -30px rgba(0,0,0,0.9)" }}
             />
           )}
+
           <div className="min-w-0 flex-1">
             <div className="flex flex-wrap items-center gap-2">
               <h2 className="truncate text-xl font-semibold text-white sm:text-2xl">
