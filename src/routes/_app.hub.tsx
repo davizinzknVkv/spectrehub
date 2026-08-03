@@ -1272,7 +1272,7 @@ const StatCard = memo(function StatCard({
             : "bg-white/40";
   return (
     <div
-      className={`group relative overflow-hidden rounded-xl border border-white/[0.07] bg-[#111111]/80 p-6 transition-all duration-300 hover:-translate-y-0.5 hover:${border} hover:bg-[#141414]/90`}
+      className={`group relative overflow-hidden rounded-xl border border-white/[0.07] bg-[#111111]/80 p-6 transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#141414]/90 hover:${border.replace("border-", "border-")}`}
       style={{ boxShadow: "0 1px 0 0 color-mix(in oklab, white 3%, transparent) inset" }}
     >
       <div className="flex items-center gap-2">
