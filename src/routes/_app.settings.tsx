@@ -166,6 +166,8 @@ function EmailLoginForm({ onLogged }: { onLogged: () => void }) {
   const [mfaMethods, setMfaMethods] = useState<string[]>([]);
   const [mfaMethod, setMfaMethod] = useState<"totp" | "backup" | "sms">("totp");
   const [mfaCode, setMfaCode] = useState("");
+  const [mfaError, setMfaError] = useState<string | null>(null);
+
   const [loading, setLoading] = useState(false);
   const [captchaToken, setCaptchaToken] = useState<string | null>(null);
   const [discordCaptcha, setDiscordCaptcha] = useState<{
@@ -220,6 +222,7 @@ function EmailLoginForm({ onLogged }: { onLogged: () => void }) {
         setMfaTicket(null);
         setMfaMethods([]);
         setMfaCode("");
+        setMfaError(null);
         setDiscordCaptcha(null);
         setDiscordCaptchaToken(null);
         onLogged();
@@ -227,6 +230,7 @@ function EmailLoginForm({ onLogged }: { onLogged: () => void }) {
       }
       if ("mfa" in res && res.mfa && res.ticket) {
         setMfaTicket(res.ticket);
+        setMfaError(null);
         const methods = (res as { methods?: string[] }).methods ?? ["totp"];
         const usable = methods.filter((m) => m === "totp" || m === "backup" || m === "sms");
         setMfaMethods(usable.length ? usable : ["totp"]);
@@ -240,6 +244,14 @@ function EmailLoginForm({ onLogged }: { onLogged: () => void }) {
         });
         return;
       }
+      if ("mfaInvalid" in res && res.mfaInvalid) {
+        // stay on the 2FA step, keep/refresh ticket and surface the error
+        if (res.ticket) setMfaTicket(res.ticket);
+        setMfaCode("");
+        setMfaError(res.error ?? "Código 2FA inválido.");
+        toast.error(res.error ?? "Código 2FA inválido.");
+        return;
+      }
       if ("captcha" in res && res.captcha && res.sitekey) {
         setDiscordCaptcha({ sitekey: res.sitekey, rqdata: res.rqdata, rqtoken: res.rqtoken });
         setDiscordCaptchaToken(null);
@@ -249,6 +261,7 @@ function EmailLoginForm({ onLogged }: { onLogged: () => void }) {
         return;
       }
       toast.error(res.error ?? "Falha no login");
+
     } catch (err) {
       toast.error(err instanceof Error ? err.message : "Erro de rede");
     } finally {
@@ -316,6 +329,7 @@ function EmailLoginForm({ onLogged }: { onLogged: () => void }) {
                     onClick={() => {
                       setMfaMethod(m as "totp" | "backup" | "sms");
                       setMfaCode("");
+                      setMfaError(null);
                     }}
                     className={`flex-1 rounded-md px-3 py-1.5 text-[10px] font-semibold uppercase tracking-widest transition ${
                       active
@@ -354,11 +368,23 @@ function EmailLoginForm({ onLogged }: { onLogged: () => void }) {
                     ? raw.replace(/[^a-zA-Z0-9-]/g, "").slice(0, 12)
                     : raw.replace(/\D/g, "").slice(0, 8);
                 setMfaCode(cleaned);
+                if (mfaError) setMfaError(null);
               }}
               placeholder={mfaMethod === "backup" ? "xxxxxxxx" : "000000"}
-              className="text-center font-mono text-lg tracking-widest"
+              className={`text-center font-mono text-lg tracking-widest ${
+                mfaError ? "border-[color-mix(in_oklab,var(--danger)_55%,transparent)]" : ""
+              }`}
             />
           </Field>
+
+          {mfaError && (
+            <div
+              role="alert"
+              className="rounded-lg border border-[color-mix(in_oklab,var(--danger)_35%,transparent)] bg-[color-mix(in_oklab,var(--danger)_8%,transparent)] px-3 py-2 text-[12px] text-[var(--danger)]"
+            >
+              ✕ {mfaError}
+            </div>
+          )}
 
           <button
             type="button"
@@ -366,6 +392,7 @@ function EmailLoginForm({ onLogged }: { onLogged: () => void }) {
               setMfaTicket(null);
               setMfaMethods([]);
               setMfaCode("");
+              setMfaError(null);
             }}
             className="ds-small uppercase tracking-widest hover:text-[var(--accent-soft)]"
           >

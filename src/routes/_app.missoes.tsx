@@ -196,7 +196,7 @@ function MissoesPage() {
           </div>
         )}
 
-        <div className="ds-grid-3">
+        <div className="grid grid-cols-[repeat(auto-fill,minmax(220px,1fr))] gap-3">
           {quests.map((q) => (
             <MissionCard
               key={q.questId}
