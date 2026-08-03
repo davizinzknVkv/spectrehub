@@ -299,7 +299,7 @@ function EmailLoginForm({ onLogged }: { onLogged: () => void }) {
               <button
                 type="button"
                 onClick={() => setShowPw((v) => !v)}
-                className="ds-small uppercase tracking-widest hover:text-[var(--accent-soft)]"
+                className="ds-small uppercase tracking-widest transition hover:text-[var(--accent-soft)]"
               >
                 {showPw ? "ocultar" : "mostrar"}
               </button>
@@ -317,12 +317,16 @@ function EmailLoginForm({ onLogged }: { onLogged: () => void }) {
         </>
       ) : (
         <div className="space-y-3">
-          <div>
-            <div className="ds-label text-[var(--accent-soft)]">◆ verificação 2fa</div>
-            <p className="mt-1 ds-small">
-              Sua conta tem 2FA ativada. Escolha o método e digite o código para concluir o login.
-            </p>
+          <div className="flex items-start gap-3 rounded-[var(--r-md)] border border-[var(--border-1)] bg-white/[0.02] p-3">
+            <ShieldCheck className="mt-0.5 h-4 w-4 shrink-0 text-[var(--accent-soft)]" />
+            <div className="min-w-0">
+              <div className="ds-label text-[var(--accent-soft)]">verificação 2fa</div>
+              <p className="mt-1 ds-small">
+                Sua conta tem 2FA ativada. Escolha o método e digite o código para concluir o login.
+              </p>
+            </div>
           </div>
+
 
           {mfaMethods.length > 1 && (
             <div className="flex flex-wrap gap-1.5 rounded-lg border border-[var(--border-1)] bg-[#0a0a0a] p-1">
