@@ -422,74 +422,91 @@ function SiteHeader() {
 
 function Hero() {
   return (
-    <section className="relative mx-auto max-w-7xl px-4 pb-20 pt-16 sm:px-6 sm:pb-28 sm:pt-24 lg:px-8">
-      <div className="grid items-center gap-14 lg:grid-cols-[1.05fr_0.95fr]">
-        <div>
-          <Reveal>
-            <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-3 py-1 font-mono text-[10px] uppercase tracking-[0.28em] text-[#a0a0a0]">
-              <span className="h-1.5 w-1.5 rounded-full bg-[#818cf8]" />
-              NeighborD Hub
-            </span>
-          </Reveal>
+    <section className="relative overflow-hidden px-4 pb-24 pt-20 sm:px-6 sm:pb-32 sm:pt-28 lg:px-8">
+      {/* grid + glow background */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 -z-10 opacity-[0.35] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_40%,transparent_100%)]"
+        style={{
+          backgroundImage:
+            "linear-gradient(to right, rgba(255,255,255,0.06) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.06) 1px, transparent 1px)",
+          backgroundSize: "64px 64px",
+        }}
+      />
+      <div
+        aria-hidden
+        className="pointer-events-none absolute left-1/2 top-[-14rem] -z-10 h-[32rem] w-[52rem] -translate-x-1/2 rounded-full bg-[#818cf8]/12 blur-[130px]"
+      />
 
-          <Reveal delay={80}>
-            <h1 className="mt-6 font-display text-[2.6rem] font-extrabold leading-[1.03] tracking-[-0.035em] text-white sm:text-6xl lg:text-[4.1rem]">
-              Uma nova experiência
-              <br />
+      <div className="mx-auto max-w-3xl text-center">
+        <Reveal>
+          <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-3.5 py-1.5 font-mono text-[10px] uppercase tracking-[0.28em] text-[#a0a0a0] backdrop-blur-xl">
+            <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-[#818cf8]" />
+            NeighborD Hub
+          </span>
+        </Reveal>
+
+        <Reveal delay={80}>
+          <h1 className="mt-7 font-display text-[2.7rem] font-extrabold leading-[1.02] tracking-[-0.04em] text-white sm:text-6xl lg:text-[4.5rem]">
+            Uma nova experiência
+            <br />
+            <span className="bg-gradient-to-b from-white via-white to-[#8f8f8f] bg-clip-text text-transparent">
               para sua comunidade.
-            </h1>
-          </Reveal>
+            </span>
+          </h1>
+        </Reveal>
 
-          <Reveal delay={160}>
-            <p className="mt-6 max-w-xl text-[15px] leading-relaxed text-[#8a8a8a] sm:text-base">
-              Automação de quests, farm de Orbs, sniper de nicks e ferramentas de servidor reunidos
-              numa plataforma só. O NeighborD Hub cuida do trabalho repetitivo — você fica com o
-              resultado.
+        <Reveal delay={160}>
+          <p className="mx-auto mt-6 max-w-xl text-[15px] leading-relaxed text-[#8a8a8a] sm:text-base">
+            Automação de quests, farm de Orbs, sniper de nicks e ferramentas de servidor reunidos
+            numa plataforma só. O NeighborD Hub cuida do trabalho repetitivo — você fica com o
+            resultado.
+          </p>
+        </Reveal>
+
+        <Reveal delay={240}>
+          <div className="mt-9 flex flex-wrap items-center justify-center gap-3">
+            <a href="#produtos" className="btn-accent px-5 py-3">
+              Explorar produtos <ArrowRight className="h-4 w-4" />
+            </a>
+            <a href={GUILD_INVITE} target="_blank" rel="noreferrer" className="btn-ghost px-5 py-3">
+              Entrar na comunidade
+            </a>
+          </div>
+        </Reveal>
+
+        <Reveal delay={320}>
+          <div className="mt-10 flex items-center justify-center gap-3">
+            <div className="flex -space-x-2">
+              {FALLBACK_MEMBERS.slice(0, 5).map((m) => (
+                <div
+                  key={m}
+                  className="h-7 w-7 overflow-hidden rounded-full border-2 border-[#050505] bg-white/10"
+                >
+                  <Avatar seed={m} />
+                </div>
+              ))}
+            </div>
+            <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-[#6f6f6f]">
+              comunidade ativa no discord
             </p>
-          </Reveal>
-
-          <Reveal delay={240}>
-            <div className="mt-9 flex flex-wrap items-center gap-3">
-              <a href="#produtos" className="btn-accent px-5 py-3">
-                Explorar produtos <ArrowRight className="h-4 w-4" />
-              </a>
-              <a
-                href={GUILD_INVITE}
-                target="_blank"
-                rel="noreferrer"
-                className="btn-ghost px-5 py-3"
-              >
-                Entrar na comunidade
-              </a>
-            </div>
-          </Reveal>
-
-          <Reveal delay={320}>
-            <div className="mt-10 flex items-center gap-3">
-              <div className="flex -space-x-2">
-                {FALLBACK_MEMBERS.slice(0, 5).map((m) => (
-                  <div
-                    key={m}
-                    className="h-7 w-7 overflow-hidden rounded-full border-2 border-[#050505] bg-white/10"
-                  >
-                    <Avatar seed={m} />
-                  </div>
-                ))}
-              </div>
-              <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-[#6f6f6f]">
-                comunidade ativa no discord
-              </p>
-            </div>
-          </Reveal>
-        </div>
-
-        <Reveal delay={200}>
-          <HeroPreview />
+          </div>
         </Reveal>
       </div>
+
+      <Reveal delay={380}>
+        <div className="relative mx-auto mt-16 max-w-5xl">
+          <HeroPreview />
+          <div
+            aria-hidden
+            className="pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-[#050505] to-transparent"
+          />
+        </div>
+      </Reveal>
     </section>
   );
 }
+
 
 function HeroPreview() {
   return (
