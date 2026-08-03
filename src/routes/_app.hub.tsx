@@ -460,9 +460,10 @@ function HubPage() {
 
       {/* Unified profile + stats + account */}
       <section
-        className="overflow-hidden rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl"
-        style={{ boxShadow: "0 30px 80px -40px color-mix(in oklab, var(--purple) 55%, transparent), inset 0 1px 0 color-mix(in oklab, white 4%, transparent)" }}
+        className="fade-up relative overflow-hidden rounded-2xl border border-white/[0.07] bg-[#080808]/90"
+        style={{ boxShadow: "0 40px 120px -60px color-mix(in oklab, var(--purple) 45%, transparent), inset 0 1px 0 color-mix(in oklab, white 4%, transparent)" }}
       >
+
 
         {loadError && (
           <div className="flex flex-wrap items-center justify-between gap-3 border-b border-rose-400/30 bg-rose-500/10 px-4 py-3 text-sm text-rose-400 sm:px-6">
