@@ -5,6 +5,7 @@ import { Copy, Crosshair, Loader2, Play, Square, ExternalLink, Trash2 } from "lu
 import { checkDiscordUsername } from "@/lib/nicks.functions";
 import { PageHeader } from "@/components/PageHeader";
 import { ComingSoon } from "@/components/ComingSoon";
+import { Button, Card, EmptyState, Field, Input } from "@/components/ui/ds";
 
 export const Route = createFileRoute("/_app/nicksgun")({
   head: () => ({ meta: [{ title: "Nicks-Gun — Em breve — Neighborshub" }] }),
@@ -164,31 +165,28 @@ function NicksGunPage() {
         description={
           <>
             Encontre usernames globais do Discord de{" "}
-            <span className="text-white">2 ou 3 letras</span> que estão{" "}
-            <span className="text-emerald-400">disponíveis</span> para registrar.
+            <span className="text-[var(--text-1)]">2 ou 3 letras</span> que estão{" "}
+            <span className="text-[var(--ok)]">disponíveis</span> para registrar.
           </>
         }
       />
 
-
       {/* Controles */}
-      <div className="rounded-xl border border-white/10 bg-white/5 p-4 sm:p-6 backdrop-blur">
+      <Card>
         <div className="card-grid-sm">
           {/* Length */}
           <div>
-            <label className="font-mono text-[10px] uppercase tracking-widest text-slate-500">
-              tamanho
-            </label>
-            <div className="mt-2 flex gap-1 rounded-lg border border-white/10 bg-black/40 p-1">
+            <span className="ds-label">tamanho</span>
+            <div className="mt-2 flex gap-1 rounded-lg border border-[var(--border-1)] bg-black/40 p-1">
               {[2, 3].map((n) => (
                 <button
                   key={n}
                   disabled={running}
                   onClick={() => setLength(n as 2 | 3)}
-                  className={`flex-1 rounded-md py-1.5 font-mono text-xs font-bold uppercase tracking-widest transition ${
+                  className={`flex-1 rounded-md py-1.5 text-xs font-bold uppercase tracking-widest transition ${
                     length === n
-                      ? "bg-[#818cf8] text-white"
-                      : "text-slate-400 hover:text-white"
+                      ? "bg-[var(--accent-1)] text-[#0a0a12]"
+                      : "text-[var(--text-3)] hover:text-[var(--text-1)]"
                   } disabled:opacity-50`}
                 >
                   {n} letras
@@ -198,47 +196,38 @@ function NicksGunPage() {
           </div>
 
           {/* Charset */}
-          <div>
-            <label className="font-mono text-[10px] uppercase tracking-widest text-slate-500">
-              caracteres
-            </label>
+          <Field label="caracteres">
             <select
               disabled={running}
               value={charset}
               onChange={(e) => setCharset(e.target.value as Charset)}
-              className="mt-2 w-full rounded-lg border border-white/10 bg-black/40 px-3 py-2 text-sm text-white outline-none focus:border-[#818cf8] disabled:opacity-50"
+              className="ds-input disabled:opacity-50"
             >
               <option value="letters">apenas a-z</option>
               <option value="alnum">a-z + 0-9</option>
               <option value="full">a-z + 0-9 + _ .</option>
             </select>
-          </div>
+          </Field>
 
           {/* Starts with */}
-          <div>
-            <label className="font-mono text-[10px] uppercase tracking-widest text-slate-500">
-              começa com (opcional)
-            </label>
-            <input
+          <Field label="começa com (opcional)">
+            <Input
               disabled={running}
               value={startsWith}
               onChange={(e) => setStartsWith(e.target.value.toLowerCase().replace(/[^a-z0-9_.]/g, ""))}
               maxLength={length}
               placeholder="ex: a"
-              className="mt-2 w-full rounded-lg border border-white/10 bg-black/40 px-3 py-2 font-mono text-sm text-white outline-none focus:border-[#818cf8] disabled:opacity-50"
+              className="font-mono disabled:opacity-50"
             />
-          </div>
+          </Field>
 
           {/* Concurrency */}
-          <div>
-            <label className="font-mono text-[10px] uppercase tracking-widest text-slate-500">
-              velocidade
-            </label>
+          <Field label="velocidade">
             <select
               disabled={running}
               value={concurrency}
               onChange={(e) => setConcurrency(Number(e.target.value))}
-              className="mt-2 w-full rounded-lg border border-white/10 bg-black/40 px-3 py-2 text-sm text-white outline-none focus:border-[#818cf8] disabled:opacity-50"
+              className="ds-input disabled:opacity-50"
             >
               <option value={1}>1x (lenta)</option>
               <option value={2}>2x</option>
@@ -246,105 +235,90 @@ function NicksGunPage() {
               <option value={6}>6x</option>
               <option value={8}>8x (agressiva)</option>
             </select>
-          </div>
+          </Field>
         </div>
 
         <div className="mt-5 flex flex-wrap items-center gap-3">
           {!running ? (
-            <button
-              onClick={start}
-              className="inline-flex items-center gap-2 rounded-md bg-[#818cf8] px-5 py-2.5 font-mono text-xs font-bold uppercase tracking-widest text-white shadow-lg shadow-indigo-500/30 transition hover:bg-[#4752c4]"
-            >
+            <Button variant="primary" onClick={start}>
               <Play className="h-3.5 w-3.5" /> iniciar varredura
-            </button>
+            </Button>
           ) : (
-            <button
-              onClick={stop}
-              className="inline-flex items-center gap-2 rounded-md border border-rose-400/40 bg-rose-500/10 px-5 py-2.5 font-mono text-xs font-bold uppercase tracking-widest text-rose-300 hover:bg-rose-500/20"
-            >
+            <Button variant="danger" onClick={stop}>
               <Square className="h-3.5 w-3.5" /> parar
-            </button>
+            </Button>
           )}
           {results.length > 0 && !running && (
-            <button
-              onClick={clear}
-              className="inline-flex items-center gap-2 rounded-md border border-white/10 bg-white/5 px-4 py-2.5 font-mono text-xs font-bold uppercase tracking-widest text-slate-400 hover:text-white"
-            >
+            <Button variant="ghost" onClick={clear}>
               <Trash2 className="h-3.5 w-3.5" /> limpar
-            </button>
+            </Button>
           )}
-          <span className="font-mono text-[10px] uppercase tracking-widest text-slate-500">
+          <span className="ds-small">
             ~{estimate.toLocaleString("pt-BR")} candidatos
           </span>
         </div>
-      </div>
+      </Card>
 
       {/* Progresso */}
       {(running || total > 0) && (
-        <div className="rounded-xl border border-white/10 bg-white/5 p-4 sm:p-5">
+        <Card>
           <div className="flex items-baseline justify-between gap-4">
-            <div className="font-mono text-[10px] uppercase tracking-[0.25em] text-slate-500">
-              progresso
-            </div>
-            <div className="font-mono text-xs text-slate-400">
+            <div className="ds-label">progresso</div>
+            <div className="ds-small">
               {checked.toLocaleString("pt-BR")} / {total.toLocaleString("pt-BR")}
               {running && current && (
-                <span className="ml-3 text-[#c4b5fd]">testando: {current}</span>
+                <span className="ml-3 text-[var(--accent-soft)]">testando: {current}</span>
               )}
             </div>
           </div>
           <div className="mt-3 h-1.5 overflow-hidden rounded-full bg-white/5">
             <div
-              className="h-full bg-gradient-to-r from-[#818cf8] to-[#a78bfa] transition-[width]"
+              className="h-full bg-[var(--accent-1)] transition-[width]"
               style={{ width: `${progress}%` }}
             />
           </div>
-          <div className="mt-3 flex items-center gap-4 font-mono text-[10px] uppercase tracking-widest text-slate-500">
+          <div className="mt-3 flex items-center gap-4 ds-small">
             <span>
               disponíveis:{" "}
-              <span className="text-emerald-400">{availableCount.toLocaleString("pt-BR")}</span>
+              <span className="text-[var(--ok)]">{availableCount.toLocaleString("pt-BR")}</span>
             </span>
             <span>
               taxa:{" "}
-              <span className="text-white">
+              <span className="text-[var(--text-1)]">
                 {checked > 0 ? ((availableCount / checked) * 100).toFixed(1) : "0"}%
               </span>
             </span>
           </div>
-        </div>
+        </Card>
       )}
 
       {/* Resultados */}
       {results.length === 0 ? (
-        <div className="rounded-xl border border-dashed border-white/10 bg-white/5 p-10 text-center">
-          {running ? (
-            <div className="flex flex-col items-center gap-2 text-slate-400">
-              <Loader2 className="h-5 w-5 animate-spin text-[#c4b5fd]" />
-              <span className="text-sm">Escaneando... nomes disponíveis vão aparecer aqui.</span>
-            </div>
-          ) : (
-            <div className="text-sm text-slate-500">
-              Configure os filtros acima e clique em{" "}
-              <span className="text-[#c4b5fd]">iniciar varredura</span>.
-            </div>
-          )}
-        </div>
+        <EmptyState
+          icon={running ? Loader2 : undefined}
+          title={running ? "Escaneando..." : "Nenhum resultado ainda"}
+          description={
+            running
+              ? "Nomes disponíveis vão aparecer aqui."
+              : "Configure os filtros acima e clique em iniciar varredura."
+          }
+        />
       ) : (
         <div className="grid gap-2.5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {results.map((r) => (
             <div
               key={r.username}
-              className="group flex items-center justify-between gap-2 rounded-lg border border-emerald-400/20 bg-emerald-400/5 px-3 py-2.5 transition hover:border-emerald-400/50 hover:bg-emerald-400/10"
+              className="group flex items-center justify-between gap-2 rounded-lg border border-[color-mix(in_oklab,var(--ok)_20%,transparent)] bg-[color-mix(in_oklab,var(--ok)_5%,transparent)] px-3 py-2.5 transition hover:border-[color-mix(in_oklab,var(--ok)_50%,transparent)]"
             >
               <div className="min-w-0 flex-1">
-                <div className="font-mono text-sm font-bold text-white">@{r.username}</div>
-                <div className="font-mono text-[9px] uppercase tracking-widest text-emerald-400/80">
+                <div className="truncate text-sm font-bold text-[var(--text-1)]">@{r.username}</div>
+                <div className="ds-small uppercase tracking-widest text-[var(--ok)]">
                   disponível
                 </div>
               </div>
               <button
                 onClick={() => copy(r.username)}
-                className="rounded-md p-1.5 text-slate-400 hover:bg-white/5 hover:text-white"
+                className="rounded-md p-1.5 text-[var(--text-3)] hover:bg-white/5 hover:text-[var(--text-1)]"
                 title="Copiar"
               >
                 <Copy className="h-3.5 w-3.5" />
@@ -353,7 +327,7 @@ function NicksGunPage() {
                 href="https://discord.com/register"
                 target="_blank"
                 rel="noreferrer"
-                className="rounded-md p-1.5 text-slate-400 hover:bg-white/5 hover:text-[#c4b5fd]"
+                className="rounded-md p-1.5 text-[var(--text-3)] hover:bg-white/5 hover:text-[var(--accent-soft)]"
                 title="Registrar no Discord"
               >
                 <ExternalLink className="h-3.5 w-3.5" />
@@ -363,7 +337,7 @@ function NicksGunPage() {
         </div>
       )}
 
-      <div className="rounded-lg border border-amber-400/20 bg-amber-400/5 p-3 font-mono text-[10px] leading-relaxed text-amber-200/80">
+      <div className="rounded-lg border border-[color-mix(in_oklab,var(--warn)_25%,transparent)] bg-[color-mix(in_oklab,var(--warn)_5%,transparent)] p-3 ds-small">
         ⚠ nomes de 2–3 letras são extremamente raros — o Discord costuma reservar os mais curtos.
         Se um nome aparecer como disponível, corra pra registrá-lo antes de outra pessoa. A
         verificação usa o mesmo endpoint que a página de cadastro do Discord.

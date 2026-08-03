@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import { toast } from "sonner";
 import { Download, ImagePlus, RefreshCw } from "lucide-react";
 import { PageHeader } from "@/components/PageHeader";
+import { Button, Card, Field, buttonClass } from "@/components/ui/ds";
 
 export const Route = createFileRoute("/_app/fake")({
   head: () => ({ meta: [{ title: "Foto Fake — Neighborshub" }] }),
@@ -113,15 +114,14 @@ function FakePage() {
         description="Monta um print estilo mensagem do Discord — só troll, use com juízo."
       />
 
-
       <div className="grid gap-6 lg:grid-cols-[1fr_1.2fr]">
         {/* Form */}
-        <div className="space-y-4 rounded-2xl border border-line/60 bg-surface/50 p-4 sm:p-5">
+        <Card className="space-y-4">
           <Field label="Nome de usuário">
             <input
               value={username}
               onChange={(e) => setUsername(e.target.value)}
-              className="input"
+              className="ds-input"
               maxLength={32}
             />
           </Field>
@@ -130,14 +130,14 @@ function FakePage() {
               type="color"
               value={roleColor}
               onChange={(e) => setRoleColor(e.target.value)}
-              className="h-10 w-20 cursor-pointer rounded border border-line bg-transparent"
+              className="h-10 w-20 cursor-pointer rounded border border-[var(--border-1)] bg-transparent"
             />
           </Field>
           <Field label="Horário">
             <input
               value={timestamp}
               onChange={(e) => setTimestamp(e.target.value)}
-              className="input"
+              className="ds-input"
             />
           </Field>
           <Field label="Mensagem">
@@ -145,7 +145,7 @@ function FakePage() {
               value={message}
               onChange={(e) => setMessage(e.target.value)}
               rows={4}
-              className="input resize-none"
+              className="ds-input resize-none"
             />
           </Field>
           <Field label="Avatar (URL ou upload)">
@@ -153,10 +153,10 @@ function FakePage() {
               <input
                 value={avatarUrl}
                 onChange={(e) => setAvatarUrl(e.target.value)}
-                className="input flex-1"
+                className="ds-input flex-1"
                 placeholder="https://…"
               />
-              <label className="flex cursor-pointer items-center gap-2 rounded-md border border-line px-3 py-2 text-sm text-ink-dim hover:border-cyan/50 hover:text-cyan">
+              <label className={buttonClass("secondary", "md", "cursor-pointer")}>
                 <ImagePlus className="h-4 w-4" />
                 upload
                 <input
@@ -173,57 +173,24 @@ function FakePage() {
           </Field>
 
           <div className="flex gap-2 pt-2">
-            <button
-              onClick={draw}
-              className="flex items-center gap-2 rounded-md border border-line px-3 py-2 text-sm text-ink-dim hover:border-purple/50 hover:text-purple"
-            >
+            <Button variant="secondary" onClick={draw}>
               <RefreshCw className="h-4 w-4" /> Atualizar
-            </button>
-            <button
-              onClick={download}
-              className="flex items-center gap-2 rounded-md border border-cyan/50 bg-cyan/10 px-3 py-2 text-sm font-medium text-cyan hover:bg-cyan/20"
-            >
+            </Button>
+            <Button variant="primary" onClick={download}>
               <Download className="h-4 w-4" /> Baixar PNG
-            </button>
+            </Button>
           </div>
-        </div>
+        </Card>
 
         {/* Preview */}
         <div className="space-y-2">
-          <div className="font-mono text-[10px] uppercase tracking-[0.25em] text-ink-mute">
-            preview
-          </div>
-          <div className="overflow-hidden rounded-xl border border-line/60 bg-[#313338] p-2">
+          <div className="ds-label">preview</div>
+          <div className="overflow-hidden rounded-xl border border-[var(--border-1)] bg-[#313338] p-2">
             <canvas ref={canvasRef} className="h-auto w-full" />
           </div>
         </div>
       </div>
-
-      <style>{`
-        .input {
-          width: 100%;
-          background: color-mix(in oklab, var(--surface-2) 60%, transparent);
-          border: 1px solid var(--line);
-          border-radius: 6px;
-          padding: 8px 10px;
-          font-size: 14px;
-          color: var(--ink);
-          outline: none;
-        }
-        .input:focus { border-color: color-mix(in oklab, var(--cyan) 60%, transparent); }
-      `}</style>
     </div>
-  );
-}
-
-function Field({ label, children }: { label: string; children: React.ReactNode }) {
-  return (
-    <label className="block">
-      <div className="mb-1 font-mono text-[10px] uppercase tracking-widest text-ink-mute">
-        {label}
-      </div>
-      {children}
-    </label>
   );
 }
 

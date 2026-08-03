@@ -4,8 +4,9 @@ import { useQuestStore } from "@/lib/quest-store";
 import { fetchOrbs, purchaseWithOrbs } from "@/lib/quest-runner";
 import { SHOP_ITEMS, type ShopItem } from "@/lib/shop-catalog";
 import { getShopImage, getCachedShopImage } from "@/lib/shop-images";
-import { Gift, Coins, Search, Loader2, X, ShieldCheck, Sparkles } from "lucide-react";
+import { Gift, Coins, Search, Loader2, ShieldCheck, Sparkles } from "lucide-react";
 import { PageHeader } from "@/components/PageHeader";
+import { Button, Card, Modal } from "@/components/ui/ds";
 
 export const Route = createFileRoute("/_app/resgatar")({
   head: () => ({ meta: [{ title: "Resgatar Orbs — Neighborshub" }] }),
@@ -110,42 +111,37 @@ function RedeemPage() {
         description={`Catálogo com ${SHOP_ITEMS.length} itens da loja oficial. Compra direto via API do Discord.`}
       />
 
-
       {/* Saldo */}
-      <section className="flex flex-wrap items-center justify-between gap-4 rounded-xl border border-amber/30 bg-gradient-to-br from-amber/15 to-transparent p-5">
+      <Card className="flex flex-wrap items-center justify-between gap-4">
         <div>
-          <div className="flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.25em] text-amber">
-            <Coins className="h-4 w-4" />
+          <div className="ds-label">
+            <Coins className="h-3.5 w-3.5" />
             saldo atual
           </div>
           <div className="mt-2 flex items-baseline gap-2">
-            <span className="font-mono text-4xl font-semibold tabular-nums text-ink">
+            <span className="text-4xl font-semibold tabular-nums text-[var(--accent-soft)]">
               {creds ? (orbs ?? "—").toLocaleString("pt-BR") : "—"}
             </span>
-            <span className="text-xs text-ink-dim">Orbs</span>
+            <span className="ds-small">Orbs</span>
           </div>
         </div>
-        <button
-          onClick={loadOrbs}
-          disabled={!creds || loadingOrbs}
-          className="rounded-md border border-line px-3 py-1.5 font-mono text-[11px] uppercase tracking-widest text-ink-dim hover:border-cyan/50 hover:text-cyan disabled:opacity-40"
-        >
+        <Button variant="secondary" size="sm" onClick={loadOrbs} disabled={!creds || loadingOrbs}>
           {loadingOrbs ? "atualizando..." : "atualizar"}
-        </button>
-      </section>
+        </Button>
+      </Card>
 
       {!creds && (
-        <div className="rounded-xl border border-amber/40 bg-amber/5 p-4 text-sm text-amber">
+        <div className="ds-card border-[color-mix(in_oklab,var(--warn)_34%,transparent)] ds-body">
           Faça login em <span className="font-mono">/settings</span> para comprar.
         </div>
       )}
 
       {msg && (
         <div
-          className={`rounded-xl border p-4 text-sm ${
+          className={`ds-card ds-body ${
             msg.tone === "ok"
-              ? "border-mint/40 bg-mint/5 text-mint"
-              : "border-red-500/40 bg-red-500/5 text-red-400"
+              ? "border-[color-mix(in_oklab,var(--ok)_34%,transparent)] text-[var(--ok)]"
+              : "border-[color-mix(in_oklab,var(--danger)_34%,transparent)] text-[var(--danger)]"
           }`}
         >
           {msg.text}
@@ -154,14 +150,14 @@ function RedeemPage() {
 
       {/* Busca */}
       <div className="relative">
-        <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-ink-mute" />
+        <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-[var(--text-3)]" />
         <input
           value={q}
           onChange={(e) => setQ(e.target.value)}
           placeholder="Buscar por nome ou SKU..."
-          className="w-full rounded-lg border border-line bg-surface/60 py-2.5 pl-9 pr-3 text-sm text-ink placeholder:text-ink-mute focus:border-cyan/50 focus:outline-none"
+          className="ds-input pl-9"
         />
-        <div className="mt-2 flex items-center justify-between font-mono text-[10px] uppercase tracking-widest text-ink-mute">
+        <div className="mt-2 flex items-center justify-between ds-small">
           <span>{filtered.length.toLocaleString("pt-BR")} itens</span>
           <span>página {curPage}/{totalPages}</span>
         </div>
@@ -176,7 +172,7 @@ function RedeemPage() {
               key={it.skuId}
               onClick={() => creds && setConfirmItem(it)}
               disabled={!creds || busy}
-              className="group flex flex-col overflow-hidden rounded-xl border border-line bg-surface/60 text-left transition-all hover:-translate-y-0.5 hover:border-cyan/50 hover:shadow-lg hover:shadow-cyan/5 disabled:cursor-not-allowed disabled:opacity-40"
+              className="ds-card ds-card-interactive group flex flex-col overflow-hidden !p-0 text-left disabled:cursor-not-allowed disabled:opacity-40"
             >
               <div
                 className="relative aspect-square w-full"
@@ -185,17 +181,17 @@ function RedeemPage() {
                 <OrbImage sku={it.skuId} name={it.name} />
                 <Sparkles className="absolute right-1.5 top-1.5 h-3 w-3 text-white/60" />
                 {busy && (
-                  <div className="absolute inset-0 grid place-items-center bg-background/70">
-                    <Loader2 className="h-5 w-5 animate-spin text-cyan" />
+                  <div className="absolute inset-0 grid place-items-center bg-[var(--bg)]/70">
+                    <Loader2 className="h-5 w-5 animate-spin text-[var(--accent-soft)]" />
                   </div>
                 )}
               </div>
 
               <div className="flex-1 p-2.5">
-                <div className="line-clamp-2 text-xs font-medium text-ink" title={it.name}>
+                <div className="line-clamp-2 text-xs font-medium text-[var(--text-1)]" title={it.name}>
                   {it.name}
                 </div>
-                <div className="mt-1 font-mono text-[9px] text-ink-mute truncate">
+                <div className="mt-1 font-mono text-[9px] text-[var(--text-3)] truncate">
                   #{it.skuId.slice(-6)}
                 </div>
               </div>
@@ -207,46 +203,47 @@ function RedeemPage() {
       {/* Paginação */}
       {totalPages > 1 && (
         <div className="flex items-center justify-center gap-2 pb-4">
-          <button
+          <Button
+            variant="secondary"
+            size="sm"
             onClick={() => setPage((p) => Math.max(1, p - 1))}
             disabled={curPage === 1}
-            className="rounded-md border border-line px-3 py-1.5 font-mono text-[11px] uppercase tracking-widest text-ink-dim hover:border-cyan/50 hover:text-cyan disabled:opacity-30"
           >
             ← anterior
-          </button>
-          <span className="font-mono text-xs text-ink-mute">
+          </Button>
+          <span className="ds-small">
             {curPage} / {totalPages}
           </span>
-          <button
+          <Button
+            variant="secondary"
+            size="sm"
             onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
             disabled={curPage === totalPages}
-            className="rounded-md border border-line px-3 py-1.5 font-mono text-[11px] uppercase tracking-widest text-ink-dim hover:border-cyan/50 hover:text-cyan disabled:opacity-30"
           >
             próxima →
-          </button>
+          </Button>
         </div>
       )}
 
       {/* Modal confirmação */}
       {confirmItem && (
-        <div
-          className="fixed inset-0 z-50 grid place-items-center bg-background/80 p-4 backdrop-blur-sm animate-in fade-in duration-150"
-          onClick={() => setConfirmItem(null)}
+        <Modal
+          title={confirmItem.name}
+          onClose={() => setConfirmItem(null)}
+          actions={
+            <>
+              <Button variant="secondary" onClick={() => setConfirmItem(null)}>
+                cancelar
+              </Button>
+              <Button variant="primary" onClick={confirmPurchase}>
+                confirmar compra
+              </Button>
+            </>
+          }
         >
-          <div
-            onClick={(e) => e.stopPropagation()}
-            className="relative w-full max-w-md overflow-hidden rounded-2xl border border-line bg-surface shadow-2xl animate-in zoom-in-95 duration-200"
-          >
-            <button
-              onClick={() => setConfirmItem(null)}
-              className="absolute right-3 top-3 z-10 rounded-md bg-background/50 p-1.5 text-ink-mute transition hover:bg-background/80 hover:text-ink"
-              aria-label="Fechar"
-            >
-              <X className="h-4 w-4" />
-            </button>
-
+          <div className="space-y-3">
             <div
-              className="relative aspect-[2/1] w-full"
+              className="relative -mx-5 -mt-4 mb-1 aspect-[3/1] w-[calc(100%+2.5rem)] sm:-mx-6"
               style={{ background: tileFor(confirmItem.skuId) }}
             >
               <div className="absolute inset-0 grid place-items-center">
@@ -255,44 +252,25 @@ function RedeemPage() {
                 </span>
               </div>
             </div>
-
-            <div className="space-y-3 border-t border-line px-6 py-5">
-              <h3 className="text-center text-lg font-semibold text-ink">{confirmItem.name}</h3>
-              <div className="flex items-center justify-between text-sm">
-                <span className="text-ink-dim">SKU</span>
-                <span className="font-mono text-xs text-ink">{confirmItem.skuId}</span>
-              </div>
-              <div className="flex items-center justify-between text-sm">
-                <span className="text-ink-dim">Saldo atual</span>
-                <span className="font-mono tabular-nums text-ink">
-                  {(orbs ?? 0).toLocaleString("pt-BR")} Orbs
-                </span>
-              </div>
-              <div className="flex items-start gap-2 rounded-lg border border-line bg-background/40 p-3 text-[11px] text-ink-dim">
-                <ShieldCheck className="mt-0.5 h-4 w-4 shrink-0 text-mint" />
-                <span>
-                  O preço em Orbs é validado pela API do Discord no momento da compra. Se o saldo
-                  for insuficiente, a compra falha sem debitar.
-                </span>
-              </div>
+            <div className="flex items-center justify-between text-sm">
+              <span className="ds-small">SKU</span>
+              <span className="font-mono text-xs text-[var(--text-1)]">{confirmItem.skuId}</span>
             </div>
-
-            <div className="flex gap-2 border-t border-line bg-background/30 px-6 py-4">
-              <button
-                onClick={() => setConfirmItem(null)}
-                className="flex-1 rounded-md border border-line px-4 py-2 font-mono text-[11px] uppercase tracking-widest text-ink-dim transition hover:border-ink-dim hover:text-ink"
-              >
-                cancelar
-              </button>
-              <button
-                onClick={confirmPurchase}
-                className="flex-1 rounded-md border border-mint/50 bg-mint/15 px-4 py-2 font-mono text-[11px] uppercase tracking-widest text-mint transition hover:bg-mint/25"
-              >
-                confirmar compra
-              </button>
+            <div className="flex items-center justify-between text-sm">
+              <span className="ds-small">Saldo atual</span>
+              <span className="font-mono tabular-nums text-[var(--text-1)]">
+                {(orbs ?? 0).toLocaleString("pt-BR")} Orbs
+              </span>
+            </div>
+            <div className="flex items-start gap-2 rounded-lg border border-[var(--border-1)] bg-white/[0.03] p-3 ds-small">
+              <ShieldCheck className="mt-0.5 h-4 w-4 shrink-0 text-[var(--ok)]" />
+              <span>
+                O preço em Orbs é validado pela API do Discord no momento da compra. Se o saldo
+                for insuficiente, a compra falha sem debitar.
+              </span>
             </div>
           </div>
-        </div>
+        </Modal>
       )}
     </div>
   );
@@ -344,4 +322,3 @@ function OrbImage({ sku, name }: { sku: string; name: string }) {
     </div>
   );
 }
-

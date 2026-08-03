@@ -6,6 +6,7 @@ import { useQuestStore } from "@/lib/quest-store";
 import { Copy, Search } from "lucide-react";
 import { PageHeader } from "@/components/PageHeader";
 import { ComingSoon } from "@/components/ComingSoon";
+import { Card, EmptyState, Input } from "@/components/ui/ds";
 
 export const Route = createFileRoute("/_app/clone")({
   head: () => ({ meta: [{ title: "Clonar Discord — Em breve — Neighborshub" }] }),
@@ -45,14 +46,8 @@ function ClonePage() {
 
   if (!creds) {
     return (
-      <div className="mx-auto max-w-2xl rounded-xl border border-amber/30 bg-surface/60 p-8">
-        <div className="font-mono text-[10px] uppercase tracking-[0.3em] text-amber">
-          $ status --token
-        </div>
-        <h2 className="mt-3 text-2xl font-semibold text-ink">Token não configurado</h2>
-        <p className="mt-2 text-sm text-ink-dim">
-          Configure seu token na página de Login para carregar seus servidores.
-        </p>
+      <div className="mx-auto max-w-2xl">
+        <EmptyState title="Token não configurado" description="Configure seu token na página de Login para carregar seus servidores." />
       </div>
     );
   }
@@ -67,26 +62,23 @@ function ClonePage() {
         description="Selecione um servidor para clonar canais, cargos e categorias."
       />
 
-
       <div className="grid grid-cols-1 gap-3 sm:grid-cols-[1fr_auto] sm:items-center">
         <div className="relative">
-          <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-ink-mute" />
-          <input
+          <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-[var(--text-3)]" />
+          <Input
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Buscar servidor…"
-            className="w-full rounded-md border border-line bg-surface/60 py-2 pl-9 pr-3 text-sm text-ink placeholder:text-ink-mute focus:border-cyan/50 focus:outline-none"
+            className="pl-9"
           />
         </div>
-        <span className="font-mono text-[11px] uppercase tracking-widest text-ink-mute">
+        <span className="ds-small">
           {loading ? "carregando…" : `${filtered.length}/${guilds.length} servidores`}
         </span>
       </div>
 
       {!loading && guilds.length === 0 && (
-        <div className="rounded-xl border border-line bg-surface/40 p-10 text-center font-mono text-xs text-ink-mute">
-          nenhum servidor encontrado
-        </div>
+        <EmptyState title="Nenhum servidor encontrado" />
       )}
 
       <div className="card-grid-sm">
@@ -103,7 +95,7 @@ function ClonePage() {
           return (
             <div
               key={g.id}
-              className="flex items-center gap-3 rounded-lg border border-line/70 bg-background/40 p-2.5 transition hover:border-purple/40"
+              className="flex items-center gap-3 rounded-lg border border-[var(--border-1)] bg-[var(--surface-1)] p-2.5 transition hover:border-[var(--border-2)]"
               title={g.name}
             >
               {iconUrl ? (
@@ -114,22 +106,22 @@ function ClonePage() {
                   decoding="async"
                   width={40}
                   height={40}
-                  className="h-10 w-10 shrink-0 rounded-md border border-line object-cover"
+                  className="h-10 w-10 shrink-0 rounded-md border border-[var(--border-1)] object-cover"
                 />
               ) : (
-                <div className="grid h-10 w-10 shrink-0 place-items-center rounded-md border border-line bg-surface font-mono text-[11px] font-semibold text-cyan">
+                <div className="grid h-10 w-10 shrink-0 place-items-center rounded-md border border-[var(--border-1)] bg-[var(--elevated)] text-[11px] font-semibold text-[var(--accent-soft)]">
                   {initials || "?"}
                 </div>
               )}
               <div className="min-w-0 flex-1">
-                <div className="truncate text-sm text-ink">{g.name}</div>
-                <div className="font-mono text-[10px] uppercase tracking-widest text-ink-mute">
+                <div className="truncate text-sm text-[var(--text-1)]">{g.name}</div>
+                <div className="ds-small">
                   {g.owner ? "owner" : "membro"}
                 </div>
               </div>
               <button
                 onClick={() => toast.info("Clonagem em breve 🚀")}
-                className="grid h-8 w-8 place-items-center rounded-md border border-purple/40 bg-purple/10 text-purple hover:bg-purple/20"
+                className="grid h-8 w-8 place-items-center rounded-md border border-[color-mix(in_oklab,var(--accent-1)_34%,transparent)] bg-[color-mix(in_oklab,var(--accent-1)_10%,transparent)] text-[var(--accent-soft)] hover:bg-[color-mix(in_oklab,var(--accent-1)_18%,transparent)]"
                 title="Clonar"
               >
                 <Copy className="h-3.5 w-3.5" />

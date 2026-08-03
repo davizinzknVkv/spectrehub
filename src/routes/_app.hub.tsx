@@ -1131,10 +1131,7 @@ function WelcomeModal() {
   return (
     <div className="fixed inset-0 z-50 grid place-items-center bg-black/40 p-4 backdrop-blur-md">
       <div
-        className={`relative w-full max-w-md rounded-2xl border ${toneBorder} bg-white/5 p-6 backdrop-blur-xl`}
-        style={{
-          boxShadow: "0 0 60px -10px color-mix(in oklab, var(--purple) 55%, transparent), 0 0 40px -20px color-mix(in oklab, var(--cyan) 60%, transparent)",
-        }}
+        className={`ds-card relative w-full max-w-md border ${toneBorder} p-6`}
       >
         <button
           onClick={finish}
@@ -1338,10 +1335,8 @@ export const MissionCard = memo(function MissionCard({
 
   return (
     <article
-      className={`group relative flex flex-col overflow-hidden rounded-2xl border bg-white/5 backdrop-blur transition ${
-        active
-          ? "border-[#818cf8]/60 glow-cyan"
-          : "border-white/10 hover:border-[#818cf8]/40 hover:bg-white/5"
+      className={`ds-card group relative flex flex-col overflow-hidden !p-0 transition ${
+        active ? "border-[#818cf8]/50" : ""
       }`}
     >
       <div className="relative aspect-[16/9] w-full overflow-hidden bg-[#0b0d12]">
@@ -1400,7 +1395,7 @@ export const MissionCard = memo(function MissionCard({
         <div
           className={`inline-flex w-fit items-center gap-2 rounded-md border px-2.5 py-1 text-xs ${
             isOrbs
-              ? "border-amber-400/30 bg-amber-500-500/10 text-amber-300"
+              ? "border-amber-400/30 bg-amber-500/10 text-amber-300"
               : "border-white/10 bg-black/40 text-slate-400"
           }`}
         >
@@ -1494,7 +1489,7 @@ export function CaptchaModal({
 
   return (
     <div className="fixed inset-0 z-50 grid place-items-center bg-black/40 p-4 backdrop-blur-sm">
-      <div className="w-full max-w-sm rounded-2xl border border-[#818cf8]/30 bg-white/5 p-6 shadow-2xl">
+      <div className="ds-card w-full max-w-sm p-6">
         <div className="font-mono text-[10px] uppercase tracking-[0.3em] text-slate-400">
           $ verify --human
         </div>
@@ -1503,7 +1498,7 @@ export function CaptchaModal({
           {label ?? quest?.questName ?? "Antes de executar, resolva o desafio."}
         </p>
 
-        <div className="mt-4 rounded-lg border border-amber-400/40 bg-amber-500-500/10 p-3">
+        <div className="mt-4 rounded-lg border border-amber-400/40 bg-amber-500/10 p-3">
           <div className="font-mono text-[10px] uppercase tracking-[0.25em] text-amber-300">
             ⚠ aviso de risco
           </div>
@@ -1598,16 +1593,16 @@ export function PlanBanner({
 }) {
   const tone =
     plan === "boost"
-      ? { border: "border-amber-400/40", bg: "bg-amber-500-500/10", text: "text-amber-300" }
+      ? { border: "border-amber-400/30", bg: "", text: "text-amber-300" }
       : plan === "premium"
-        ? { border: "border-[#818cf8]/40", bg: "bg-[#818cf8]/10", text: "text-[#c4b5fd]" }
-        : { border: "border-white/10", bg: "bg-white/5", text: "text-slate-400" };
+        ? { border: "border-[#818cf8]/30", bg: "", text: "text-[#c4b5fd]" }
+        : { border: "", bg: "", text: "text-[#a1a1aa]" };
 
   const dailyText = limits.daily === Infinity ? "ilimitado" : `${usedToday}/${limits.daily}`;
   const cooldownPct = cooldownLeft > 0 ? Math.min(100, (cooldownLeft / limits.cooldownMs) * 100) : 0;
 
   return (
-    <section className={`overflow-hidden rounded-2xl border ${tone.border} ${tone.bg} p-4 sm:p-5`}>
+    <section className={`ds-card overflow-hidden ${tone.border} p-4 sm:p-5`}>
       <div className="flex flex-wrap items-center gap-4">
         <div className="flex items-center gap-3">
           <span
@@ -1698,13 +1693,13 @@ function DonorsCard() {
     t === "boost"
       ? "bg-fuchsia-500/15 text-fuchsia-300 border-fuchsia-400/30"
       : t === "premium"
-        ? "bg-amber-500-500/15 text-amber-300-300 border-amber-400/30"
+        ? "bg-amber-500/15 text-amber-300 border-amber-400/30"
         : "bg-emerald-500/15 text-emerald-400 border-emerald-400/30";
   const tierLabel = (t: Donor["tier"]) =>
     t === "boost" ? "Boost" : t === "premium" ? "Premium" : "Apoiador";
 
   return (
-    <div className="mt-6 rounded-2xl border border-white/10 bg-black/30 p-5 backdrop-blur">
+    <div className="ds-card mt-6 p-5">
       <div className="flex items-center justify-between gap-3">
         <div>
           <h3 className="flex items-center gap-2 text-lg font-semibold text-white">
@@ -1847,10 +1842,7 @@ function NotificationsCard() {
   }
 
   return (
-    <section
-      className="rounded-2xl border border-[#a78bfa]/25 bg-white/5 p-4 sm:p-5 backdrop-blur"
-      style={{ boxShadow: "0 0 30px -20px color-mix(in oklab, var(--purple) 55%, transparent)" }}
-    >
+    <section className="ds-card p-4 sm:p-5">
       <div className="mb-3 flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.3em] text-slate-500">
         <span className="text-[#c4b5fd]">◆</span> avisos
       </div>
@@ -1862,7 +1854,7 @@ function NotificationsCard() {
               : it.tone === "cyan"
                 ? "border-[#818cf8]/30 bg-[#818cf8]/5 text-[#c4b5fd]"
                 : it.tone === "amber"
-                  ? "border-amber-400/30 bg-amber-500-500/5 text-amber-300"
+                  ? "border-amber-400/30 bg-amber-500/5 text-amber-300"
                   : "border-rose-400/30 bg-rose-500/5 text-rose-400";
           return (
             <li key={i} className={`rounded-lg border px-3 py-2 ${tone}`}>

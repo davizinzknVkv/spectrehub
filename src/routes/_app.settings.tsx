@@ -9,6 +9,7 @@ import { Turnstile } from "@/components/Turnstile";
 import { Hcaptcha } from "@/components/Hcaptcha";
 import { PageHeader } from "@/components/PageHeader";
 import { KeyRound } from "lucide-react";
+import { Badge, Button, Card, Field, Input } from "@/components/ui/ds";
 
 
 
@@ -64,24 +65,22 @@ function SettingsPage() {
         description="Escolha como quer logar. Fica salvo apenas no seu navegador (localStorage) e só é enviado para o Discord via proxy deste site."
       />
 
-
       {creds && (
-        <div className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-3 rounded-xl border border-mint/30 bg-mint/[0.06] px-3 py-3 sm:px-4">
-          <div className="min-w-0 font-mono text-[11px] uppercase tracking-widest text-mint">
-            <span className="pulse-dot inline-block">●</span>
-            <span className="ml-2 truncate">sessão ativa neste navegador</span>
+        <div className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-3 rounded-xl border border-[color-mix(in_oklab,var(--ok)_30%,transparent)] bg-[color-mix(in_oklab,var(--ok)_6%,transparent)] px-3 py-3 sm:px-4">
+          <div className="min-w-0">
+            <Badge variant="success">
+              <span className="pulse-dot inline-block">●</span>
+              <span className="ml-1 truncate">sessão ativa neste navegador</span>
+            </Badge>
           </div>
-          <button
-            onClick={disconnect}
-            className="shrink-0 rounded-md border border-rose/40 bg-rose/10 px-3 py-1.5 font-mono text-[10px] font-semibold uppercase tracking-widest text-rose hover:bg-rose/20"
-          >
+          <Button variant="danger" size="sm" onClick={disconnect} className="shrink-0">
             sair
-          </button>
+          </Button>
         </div>
       )}
 
       {/* Tabs */}
-      <div className="grid grid-cols-2 gap-1 rounded-lg border border-line bg-surface/50 p-1">
+      <div className="grid grid-cols-2 gap-1 rounded-lg border border-[var(--border-1)] bg-[var(--surface-1)] p-1">
         <TabButton active={tab === "email"} onClick={() => setTab("email")}>
           📱 Email & senha
         </TabButton>
@@ -93,52 +92,43 @@ function SettingsPage() {
       {tab === "email" ? (
         <EmailLoginForm onLogged={() => toast.success("Conectado!")} />
       ) : (
-        <form
-          onSubmit={save}
-          className="space-y-5 rounded-xl border border-line bg-surface/60 p-4 scanline sm:p-6"
-        >
-          <div>
-            <div className="flex items-center justify-between gap-2">
-              <label className="font-mono text-[11px] uppercase tracking-widest text-ink-dim">
-                authorization
-              </label>
-              <button
-                type="button"
-                onClick={() => setShow((v) => !v)}
-                className="font-mono text-[10px] uppercase tracking-widest text-ink-mute hover:text-cyan"
-              >
-                {show ? "ocultar" : "mostrar"}
-              </button>
+        <form onSubmit={save} className="ds-card space-y-5">
+            <div>
+              <div className="flex items-center justify-between gap-2">
+                <span className="ds-label">authorization</span>
+                <button
+                  type="button"
+                  onClick={() => setShow((v) => !v)}
+                  className="ds-small uppercase tracking-widest hover:text-[var(--text-1)]"
+                >
+                  {show ? "ocultar" : "mostrar"}
+                </button>
+              </div>
+              <p className="mt-1 ds-small">
+                DevTools (F12) → Network → qualquer request → header{" "}
+                <code className="rounded bg-[#0a0a0a] px-1 py-0.5 font-mono text-[11px] text-[var(--accent-soft)]">
+                  authorization
+                </code>
+                .
+              </p>
+              <Input
+                type={show ? "text" : "password"}
+                required
+                value={token}
+                onChange={(e) => setToken(e.target.value)}
+                placeholder="MTIzNDU2Nzg5MDEyMzQ1Njc4.XxXxXx.…"
+                autoComplete="off"
+                className="mt-3 font-mono"
+              />
             </div>
-            <p className="mt-1 text-xs leading-relaxed text-ink-mute">
-              DevTools (F12) → Network → qualquer request → header{" "}
-              <code className="rounded bg-background/60 px-1 py-0.5 font-mono text-[11px] text-cyan">
-                authorization
-              </code>
-              .
-            </p>
-            <input
-              type={show ? "text" : "password"}
-              required
-              value={token}
-              onChange={(e) => setToken(e.target.value)}
-              placeholder="MTIzNDU2Nzg5MDEyMzQ1Njc4.XxXxXx.…"
-              autoComplete="off"
-              className="mt-3 block w-full rounded-md border border-line bg-background/70 px-3 py-2.5 font-mono text-sm text-ink placeholder:text-ink-mute focus:border-cyan focus:outline-none focus:ring-2 focus:ring-cyan/40"
-            />
-          </div>
 
-          <button
-            type="submit"
-            disabled={saving || !token}
-            className="inline-flex w-full items-center justify-center gap-2 rounded-md bg-cyan px-5 py-2.5 font-mono text-xs font-semibold uppercase tracking-widest text-primary-foreground transition hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-40 sm:w-auto"
-          >
-            {saving ? "validando…" : "→ salvar & validar"}
-          </button>
+            <Button type="submit" variant="primary" disabled={saving || !token} className="w-full sm:w-auto">
+              {saving ? "validando…" : "→ salvar & validar"}
+            </Button>
         </form>
       )}
 
-      <div className="rounded-lg border border-amber/25 bg-amber/[0.05] p-4 font-mono text-[11px] leading-relaxed text-amber/90">
+      <div className="rounded-lg border border-[color-mix(in_oklab,var(--warn)_25%,transparent)] bg-[color-mix(in_oklab,var(--warn)_5%,transparent)] p-4 ds-small">
         ⚠ automação com conta pessoal viola os Termos do Discord e pode causar banimento — use por
         sua conta e risco.
       </div>
@@ -158,8 +148,8 @@ function TabButton({
   return (
     <button
       onClick={onClick}
-      className={`rounded-md px-3 py-2 text-center font-mono text-[11px] font-semibold uppercase tracking-widest transition ${
-        active ? "bg-cyan text-primary-foreground" : "text-ink-dim hover:text-ink"
+      className={`rounded-md px-3 py-2 text-center text-[11px] font-semibold uppercase tracking-widest transition ${
+        active ? "bg-[var(--accent-1)] text-[#0a0a12]" : "text-[var(--text-3)] hover:text-[var(--text-1)]"
       }`}
     >
       {children}
@@ -268,17 +258,11 @@ function EmailLoginForm({ onLogged }: { onLogged: () => void }) {
 
 
   return (
-    <form
-      onSubmit={submit}
-      className="space-y-4 rounded-xl border border-white/10 bg-white/5 p-4 scanline sm:p-6"
-    >
+    <form onSubmit={submit} className="ds-card space-y-4">
       {!mfaTicket ? (
         <>
-          <div>
-            <label className="font-mono text-[11px] uppercase tracking-widest text-slate-400">
-              email ou telefone
-            </label>
-            <input
+          <Field label="email ou telefone">
+            <Input
               type="text"
               required
               autoComplete="username"
@@ -286,46 +270,41 @@ function EmailLoginForm({ onLogged }: { onLogged: () => void }) {
               value={login}
               onChange={(e) => setLogin(e.target.value)}
               placeholder="voce@exemplo.com"
-              className="mt-2 block w-full rounded-md border border-white/10 bg-black/40 px-3 py-3 text-base text-white placeholder:text-slate-500 focus:border-[#818cf8] focus:outline-none focus:ring-2 focus:ring-[#818cf8]/40 sm:text-sm"
             />
-          </div>
+          </Field>
           <div>
             <div className="flex items-center justify-between gap-2">
-              <label className="font-mono text-[11px] uppercase tracking-widest text-slate-400">
-                senha
-              </label>
+              <span className="ds-label">senha</span>
               <button
                 type="button"
                 onClick={() => setShowPw((v) => !v)}
-                className="font-mono text-[10px] uppercase tracking-widest text-slate-500 hover:text-[#c4b5fd]"
+                className="ds-small uppercase tracking-widest hover:text-[var(--accent-soft)]"
               >
                 {showPw ? "ocultar" : "mostrar"}
               </button>
             </div>
-            <input
+            <Input
               type={showPw ? "text" : "password"}
               required
               autoComplete="current-password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="••••••••"
-              className="mt-2 block w-full rounded-md border border-white/10 bg-black/40 px-3 py-3 text-base text-white placeholder:text-slate-500 focus:border-[#818cf8] focus:outline-none focus:ring-2 focus:ring-[#818cf8]/40 sm:text-sm"
+              className="mt-2"
             />
           </div>
         </>
       ) : (
         <div className="space-y-3">
           <div>
-            <div className="font-mono text-[10px] uppercase tracking-[0.3em] text-[#c4b5fd]">
-              ◆ verificação 2fa
-            </div>
-            <p className="mt-1 text-xs text-slate-400">
+            <div className="ds-label text-[var(--accent-soft)]">◆ verificação 2fa</div>
+            <p className="mt-1 ds-small">
               Sua conta tem 2FA ativada. Escolha o método e digite o código para concluir o login.
             </p>
           </div>
 
           {mfaMethods.length > 1 && (
-            <div className="flex flex-wrap gap-1.5 rounded-lg border border-white/10 bg-black/40 p-1">
+            <div className="flex flex-wrap gap-1.5 rounded-lg border border-[var(--border-1)] bg-[#0a0a0a] p-1">
               {mfaMethods.map((m) => {
                 const label =
                   m === "totp" ? "🔐 App autenticador" : m === "backup" ? "🎫 Backup code" : "📱 SMS";
@@ -338,10 +317,10 @@ function EmailLoginForm({ onLogged }: { onLogged: () => void }) {
                       setMfaMethod(m as "totp" | "backup" | "sms");
                       setMfaCode("");
                     }}
-                    className={`flex-1 rounded-md px-3 py-1.5 font-mono text-[10px] font-semibold uppercase tracking-widest transition ${
+                    className={`flex-1 rounded-md px-3 py-1.5 text-[10px] font-semibold uppercase tracking-widest transition ${
                       active
-                        ? "bg-[#818cf8] text-white"
-                        : "text-slate-400 hover:text-white"
+                        ? "bg-[var(--accent-1)] text-[#0a0a12]"
+                        : "text-[var(--text-3)] hover:text-[var(--text-1)]"
                     }`}
                   >
                     {label}
@@ -351,15 +330,16 @@ function EmailLoginForm({ onLogged }: { onLogged: () => void }) {
             </div>
           )}
 
-          <div>
-            <label className="font-mono text-[11px] uppercase tracking-widest text-slate-400">
-              {mfaMethod === "backup"
+          <Field
+            label={
+              mfaMethod === "backup"
                 ? "backup code (8 dígitos ou alfanumérico)"
                 : mfaMethod === "sms"
                   ? "código enviado por sms"
-                  : "código do app autenticador (6 dígitos)"}
-            </label>
-            <input
+                  : "código do app autenticador (6 dígitos)"
+            }
+          >
+            <Input
               type="text"
               required
               inputMode={mfaMethod === "backup" ? "text" : "numeric"}
@@ -376,9 +356,9 @@ function EmailLoginForm({ onLogged }: { onLogged: () => void }) {
                 setMfaCode(cleaned);
               }}
               placeholder={mfaMethod === "backup" ? "xxxxxxxx" : "000000"}
-              className="mt-2 block w-full rounded-md border border-white/10 bg-black/40 px-3 py-3 text-center font-mono text-lg tracking-widest text-white placeholder:text-slate-500 focus:border-[#818cf8] focus:outline-none focus:ring-2 focus:ring-[#818cf8]/40"
+              className="text-center font-mono text-lg tracking-widest"
             />
-          </div>
+          </Field>
 
           <button
             type="button"
@@ -387,7 +367,7 @@ function EmailLoginForm({ onLogged }: { onLogged: () => void }) {
               setMfaMethods([]);
               setMfaCode("");
             }}
-            className="font-mono text-[10px] uppercase tracking-widest text-slate-500 hover:text-[#c4b5fd]"
+            className="ds-small uppercase tracking-widest hover:text-[var(--accent-soft)]"
           >
             ← voltar para email/senha
           </button>
@@ -402,10 +382,8 @@ function EmailLoginForm({ onLogged }: { onLogged: () => void }) {
       )}
 
       {!mfaTicket && discordCaptcha && (
-        <div className="space-y-2 rounded-lg border border-[#818cf8]/30 bg-[#818cf8]/5 p-3">
-          <div className="font-mono text-[10px] uppercase tracking-[0.3em] text-[#c4b5fd]">
-            ◆ captcha do discord
-          </div>
+        <div className="space-y-2 rounded-lg border border-[color-mix(in_oklab,var(--accent-1)_30%,transparent)] bg-[color-mix(in_oklab,var(--accent-1)_5%,transparent)] p-3">
+          <div className="ds-label text-[var(--accent-soft)]">◆ captcha do discord</div>
           <Hcaptcha
             sitekey={discordCaptcha.sitekey}
             rqdata={discordCaptcha.rqdata}
@@ -415,8 +393,10 @@ function EmailLoginForm({ onLogged }: { onLogged: () => void }) {
         </div>
       )}
 
-      <button
+      <Button
         type="submit"
+        variant="primary"
+        className="w-full"
         disabled={
           loading ||
           (mfaTicket
@@ -427,7 +407,6 @@ function EmailLoginForm({ onLogged }: { onLogged: () => void }) {
               !captchaToken ||
               (discordCaptcha ? !discordCaptchaToken : false))
         }
-        className="inline-flex w-full items-center justify-center gap-2 rounded-md bg-[#818cf8] px-5 py-3 font-mono text-xs font-semibold uppercase tracking-widest text-white transition hover:bg-[#4752c4] disabled:cursor-not-allowed disabled:opacity-40"
       >
         {loading
           ? "entrando…"
@@ -436,11 +415,11 @@ function EmailLoginForm({ onLogged }: { onLogged: () => void }) {
               ? "→ usar backup code"
               : "→ confirmar 2fa"
             : "→ entrar"}
-      </button>
+      </Button>
 
-      <p className="font-mono text-[10px] leading-relaxed text-slate-500">
+      <p className="ds-small">
         Se o Discord pedir captcha, resolva o desafio acima. Como alternativa,
-        use a aba <span className="text-[#c4b5fd]">Token</span>.
+        use a aba <span className="text-[var(--accent-soft)]">Token</span>.
       </p>
 
     </form>

@@ -77,23 +77,70 @@
 :root {
   --radius: 0.75rem;
 
-  /* NeighborD Hub — obsidian near-black + indigo signature */
-  --void: oklch(0.13 0 0);              /* #050505 */
-  --surface: oklch(0.17 0 0);           /* #0d0d0d */
-  --surface-2: oklch(0.21 0 0);         /* #151515 */
-  --line: oklch(1 0 0 / 0.07);
-  --blurple: oklch(0.7 0.14 285);         /* #818cf8 */
-  --blurple-soft: oklch(0.8 0.1 293);     /* #c4b5fd */
-  --cyan: oklch(0.7 0.14 285);
-  --cyan-dim: oklch(0.8 0.1 293);
-  --purple: oklch(0.7 0.14 285);
-  --purple-dim: oklch(0.58 0.18 282);
-  --mint: oklch(0.8 0.1 293);
-  --amber: oklch(0.83 0.16 88);
-  --rose: oklch(0.7 0.2 25);
-  --ink: oklch(1 0 0);
-  --ink-dim: oklch(0.87 0 0);
-  --ink-mute: oklch(0.65 0 0);
+  /* ── NGHC Design System — single source of truth ─────────────────── */
+  /* Backgrounds / surfaces */
+  --bg: #050505;
+  --bg-2: #080808;
+  --surface-1: #0c0c0c;
+  --surface-3: #111111;
+  --surface-hover: #151515;
+
+  /* Text */
+  --text-1: #ffffff;
+  --text-2: #a1a1aa;
+  --text-3: #71717a;
+
+  /* Borders */
+  --border-1: rgb(255 255 255 / 0.08);
+  --border-2: rgb(255 255 255 / 0.14);
+
+  /* Accent (roxo NGHC) — usar só como destaque */
+  --accent-1: #818cf8;
+  --accent-2: #a78bfa;
+  --accent-soft: #c4b5fd;
+
+  /* Feedback (discretos) */
+  --ok: #34d399;
+  --warn: #fbbf24;
+  --danger: #f87171;
+
+  /* Spacing scale */
+  --sp-1: 4px;  --sp-2: 8px;  --sp-3: 12px; --sp-4: 16px;
+  --sp-5: 20px; --sp-6: 24px; --sp-8: 32px; --sp-10: 40px;
+  --sp-12: 48px; --sp-16: 64px;
+
+  /* Radius scale */
+  --r-sm: 8px; --r-md: 10px; --r-lg: 12px; --r-xl: 16px;
+
+  /* Motion */
+  --dur-fast: 150ms;
+  --dur: 200ms;
+  --dur-slow: 300ms;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+
+  /* Elevation (leve, sem glow pesado) */
+  --shadow-1: 0 1px 0 rgb(255 255 255 / 0.03) inset;
+  --shadow-2: 0 12px 32px -24px rgb(0 0 0 / 0.9);
+  --accent-glow: 0 6px 24px -14px color-mix(in oklab, var(--accent-1) 80%, transparent);
+
+  /* Legacy aliases (mantidos para não quebrar telas existentes) */
+  --void: #050505;
+  --surface: #0d0d0d;
+  --surface-2: #151515;
+  --line: rgb(255 255 255 / 0.08);
+  --blurple: var(--accent-1);
+  --blurple-soft: var(--accent-soft);
+  --cyan: var(--accent-1);
+  --cyan-dim: var(--accent-soft);
+  --purple: var(--accent-2);
+  --purple-dim: var(--accent-1);
+  --mint: var(--ok);
+  --amber: var(--warn);
+  --rose: var(--danger);
+  --ink: var(--text-1);
+  --ink-dim: var(--text-2);
+  --ink-mute: var(--text-3);
+
 
 
   --background: var(--void);
@@ -122,9 +169,8 @@
   --glass-border: color-mix(in oklab, var(--blurple) 22%, transparent);
   --glass-border-soft: color-mix(in oklab, #ffffff 8%, transparent);
   --glass-shadow:
-    0 1px 0 color-mix(in oklab, #ffffff 6%, transparent) inset,
-    0 10px 40px -12px color-mix(in oklab, var(--blurple) 45%, transparent),
-    0 30px 80px -30px color-mix(in oklab, #000 90%, transparent);
+    0 1px 0 rgb(255 255 255 / 0.04) inset,
+    0 18px 48px -36px rgb(0 0 0 / 0.95);
   --glass-blur: 18px;
   --glass-radius: 1rem;
 }
@@ -768,4 +814,260 @@
 }
 @media (prefers-reduced-motion: reduce) {
   .fade-up { animation: none; }
+}
+
+/* ══════════════════════════════════════════════════════════════════════
+   NGHC DESIGN SYSTEM — primitivos únicos usados por todas as páginas
+   ══════════════════════════════════════════════════════════════════ */
+
+/* ── Superfícies ─────────────────────────────────────────────────── */
+@utility ds-card {
+  position: relative;
+  background: var(--surface-1);
+  border: 1px solid var(--border-1);
+  border-radius: var(--r-lg);
+  padding: var(--sp-5);
+  box-shadow: var(--shadow-1);
+  transition: background var(--dur) ease, border-color var(--dur) ease,
+    transform var(--dur) var(--ease);
+}
+@media (min-width: 640px) { .ds-card { padding: var(--sp-6); } }
+
+@utility ds-card-interactive {
+  cursor: pointer;
+  &:hover {
+    background: var(--surface-hover);
+    border-color: var(--border-2);
+    transform: translateY(-2px);
+  }
+}
+
+@utility ds-card-hover {
+  cursor: pointer;
+  &:hover {
+    background: var(--surface-hover);
+    border-color: var(--border-2);
+    transform: translateY(-2px);
+  }
+}
+
+@utility ds-card-highlighted {
+  border-color: color-mix(in oklab, var(--accent-1) 34%, transparent);
+  box-shadow: var(--shadow-1), var(--accent-glow);
+}
+
+/* ── Tipografia ──────────────────────────────────────────────────── */
+@utility ds-h1 {
+  font-family: var(--font-display);
+  font-size: 1.75rem;
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  color: var(--text-1);
+}
+@media (min-width: 640px) { .ds-h1 { font-size: 2.25rem; } }
+
+@utility ds-h2 {
+  font-family: var(--font-display);
+  font-size: 1.375rem;
+  font-weight: 600;
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+  color: var(--text-1);
+}
+@media (min-width: 640px) { .ds-h2 { font-size: 1.625rem; } }
+
+@utility ds-h3 {
+  font-size: 1.0625rem;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  color: var(--text-1);
+}
+@media (min-width: 640px) { .ds-h3 { font-size: 1.25rem; } }
+
+@utility ds-body { font-size: 0.875rem; line-height: 1.6; color: var(--text-2); }
+@utility ds-small { font-size: 0.75rem; line-height: 1.5; color: var(--text-3); }
+
+@utility ds-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--text-3);
+}
+
+/* ── Botões ──────────────────────────────────────────────────────── */
+@utility ds-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  height: 38px;
+  padding: 0 var(--sp-4);
+  border-radius: var(--r-md);
+  border: 1px solid transparent;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  line-height: 1;
+  white-space: nowrap;
+  transition: background var(--dur) ease, border-color var(--dur) ease,
+    color var(--dur) ease, transform var(--dur) var(--ease), opacity var(--dur) ease;
+}
+.ds-btn:active { transform: translateY(1px); }
+.ds-btn:disabled,
+.ds-btn[aria-disabled="true"] { opacity: 0.45; cursor: not-allowed; transform: none; }
+.ds-btn:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--bg), 0 0 0 4px color-mix(in oklab, var(--accent-1) 55%, transparent);
+}
+
+@utility ds-btn-sm { height: 32px; padding: 0 var(--sp-3); font-size: 0.75rem; border-radius: var(--r-sm); }
+@utility ds-btn-lg { height: 44px; padding: 0 var(--sp-6); font-size: 0.875rem; }
+
+@utility ds-btn-primary {
+  background: var(--accent-1);
+  color: #0a0a12;
+  box-shadow: var(--accent-glow);
+}
+.ds-btn-primary:hover:not(:disabled) { background: color-mix(in oklab, var(--accent-1) 86%, #fff); }
+
+@utility ds-btn-secondary {
+  background: transparent;
+  border-color: var(--border-1);
+  color: var(--text-1);
+}
+.ds-btn-secondary:hover:not(:disabled) { background: rgb(255 255 255 / 0.04); border-color: var(--border-2); }
+
+@utility ds-btn-ghost {
+  background: transparent;
+  color: var(--text-2);
+}
+.ds-btn-ghost:hover:not(:disabled) { background: rgb(255 255 255 / 0.04); color: var(--text-1); }
+
+@utility ds-btn-danger {
+  background: color-mix(in oklab, var(--danger) 14%, transparent);
+  border-color: color-mix(in oklab, var(--danger) 34%, transparent);
+  color: var(--danger);
+}
+.ds-btn-danger:hover:not(:disabled) { background: color-mix(in oklab, var(--danger) 22%, transparent); }
+
+/* ── Inputs ──────────────────────────────────────────────────────── */
+@utility ds-input {
+  display: block;
+  width: 100%;
+  height: 38px;
+  padding: 0 var(--sp-3);
+  border-radius: var(--r-md);
+  border: 1px solid var(--border-1);
+  background: #0a0a0a;
+  color: var(--text-1);
+  font-size: 0.875rem;
+  transition: border-color var(--dur) ease, box-shadow var(--dur) ease;
+}
+.ds-input::placeholder { color: var(--text-3); }
+.ds-input:focus {
+  outline: none;
+  border-color: color-mix(in oklab, var(--accent-1) 55%, transparent);
+  box-shadow: 0 0 0 3px color-mix(in oklab, var(--accent-1) 16%, transparent);
+}
+textarea.ds-input { height: auto; padding: var(--sp-3); line-height: 1.6; }
+
+/* ── Badges ──────────────────────────────────────────────────────── */
+@utility ds-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  height: 20px;
+  padding: 0 8px;
+  border-radius: 999px;
+  border: 1px solid var(--border-1);
+  background: rgb(255 255 255 / 0.03);
+  color: var(--text-2);
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+@utility ds-badge-accent {
+  border-color: color-mix(in oklab, var(--accent-1) 34%, transparent);
+  background: color-mix(in oklab, var(--accent-1) 12%, transparent);
+  color: var(--accent-soft);
+}
+@utility ds-badge-success {
+  border-color: color-mix(in oklab, var(--ok) 32%, transparent);
+  background: color-mix(in oklab, var(--ok) 10%, transparent);
+  color: var(--ok);
+}
+@utility ds-badge-warning {
+  border-color: color-mix(in oklab, var(--warn) 32%, transparent);
+  background: color-mix(in oklab, var(--warn) 10%, transparent);
+  color: var(--warn);
+}
+@utility ds-badge-danger {
+  border-color: color-mix(in oklab, var(--danger) 32%, transparent);
+  background: color-mix(in oklab, var(--danger) 10%, transparent);
+  color: var(--danger);
+}
+
+/* ── Modal ───────────────────────────────────────────────────────── */
+@utility ds-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: grid;
+  place-items: center;
+  padding: var(--sp-4);
+  background: rgb(0 0 0 / 0.65);
+  backdrop-filter: blur(8px);
+  animation: fade-up var(--dur) var(--ease) both;
+}
+@utility ds-modal {
+  width: 100%;
+  max-width: 30rem;
+  background: var(--surface-1);
+  border: 1px solid var(--border-1);
+  border-radius: var(--r-xl);
+  box-shadow: 0 30px 80px -50px rgb(0 0 0 / 0.95);
+  animation: ds-pop var(--dur-slow) var(--ease) both;
+}
+@keyframes ds-pop {
+  from { opacity: 0; transform: scale(0.97) translateY(6px); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* ── Skeleton ────────────────────────────────────────────────────── */
+@keyframes ds-shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
+@utility ds-skeleton {
+  border-radius: var(--r-sm);
+  background: linear-gradient(
+    90deg,
+    rgb(255 255 255 / 0.035) 0%,
+    rgb(255 255 255 / 0.075) 50%,
+    rgb(255 255 255 / 0.035) 100%
+  );
+  background-size: 200% 100%;
+  animation: ds-shimmer 1.6s linear infinite;
+}
+
+/* ── Grids padronizados ──────────────────────────────────────────── */
+@utility ds-grid-2 { display: grid; gap: var(--sp-4); grid-template-columns: 1fr; }
+@utility ds-grid-3 { display: grid; gap: var(--sp-4); grid-template-columns: 1fr; }
+@utility ds-grid-4 { display: grid; gap: var(--sp-4); grid-template-columns: 1fr; }
+@media (min-width: 640px) {
+  .ds-grid-2, .ds-grid-3, .ds-grid-4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (min-width: 1024px) {
+  .ds-grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .ds-grid-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ds-skeleton, .ds-modal, .ds-backdrop { animation: none !important; }
+  .ds-card, .ds-btn { transition: none !important; }
 }
