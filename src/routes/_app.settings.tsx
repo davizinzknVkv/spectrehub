@@ -238,6 +238,7 @@ function EmailLoginForm({ onLogged }: { onLogged: () => void }) {
         setMfaError(null);
         setDiscordCaptcha(null);
         setDiscordCaptchaToken(null);
+        setHumanVerified(false);
         onLogged();
         return;
       }
