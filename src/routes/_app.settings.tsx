@@ -92,8 +92,7 @@ function SettingsPage() {
       {tab === "email" ? (
         <EmailLoginForm onLogged={() => toast.success("Conectado!")} />
       ) : (
-        <Card asChild={false} as="form" className="space-y-5">
-          <form onSubmit={save} className="space-y-5">
+        <form onSubmit={save} className="ds-card space-y-5">
             <div>
               <div className="flex items-center justify-between gap-2">
                 <span className="ds-label">authorization</span>
@@ -126,8 +125,7 @@ function SettingsPage() {
             <Button type="submit" variant="primary" disabled={saving || !token} className="w-full sm:w-auto">
               {saving ? "validando…" : "→ salvar & validar"}
             </Button>
-          </form>
-        </Card>
+        </form>
       )}
 
       <div className="rounded-lg border border-[color-mix(in_oklab,var(--warn)_25%,transparent)] bg-[color-mix(in_oklab,var(--warn)_5%,transparent)] p-4 ds-small">
