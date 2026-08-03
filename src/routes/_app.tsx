@@ -223,9 +223,25 @@ function TopBar({ onOpenMenu, pathname }: { onOpenMenu: () => void; pathname: st
       : `https://cdn.discordapp.com/embed/avatars/${(BigInt(me.id) >> 22n) % 6n}.png`
     : null;
 
+  const [scrolled, setScrolled] = useState(false);
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 8);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
   return (
-    <div className="sticky top-0 z-20 border-b border-white/[0.06] bg-[#060606]/70 backdrop-blur-xl">
+    <div
+      className="sticky top-0 z-20 transition-[background-color,backdrop-filter,border-color] duration-300"
+      style={{
+        backgroundColor: scrolled ? "rgba(5,5,5,0.72)" : "rgba(5,5,5,0.40)",
+        backdropFilter: `blur(${scrolled ? 22 : 12}px) saturate(120%)`,
+        borderBottom: `1px solid rgba(255,255,255,${scrolled ? 0.06 : 0.025})`,
+      }}
+    >
       <div className="mx-auto flex w-full max-w-6xl items-center justify-between gap-3 px-4 py-3 sm:px-6 lg:px-10">
+
         <div className="flex items-center gap-3">
           <button
             onClick={onOpenMenu}
