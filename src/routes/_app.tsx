@@ -218,55 +218,42 @@ function TopBar({ onOpenMenu, pathname }: { onOpenMenu: () => void; pathname: st
     : null;
 
   return (
-    <div
-      className="sticky top-0 z-10 border-b border-[color:var(--glass-border)]"
-      style={{
-        background: "var(--glass-bg-strong)",
-        backdropFilter: "blur(var(--glass-blur)) saturate(150%)",
-      }}
-    >
-
-      <div className="flex items-center justify-between gap-3 px-4 py-3 sm:px-6 lg:px-8">
+    <div className="sticky top-0 z-20 border-b border-white/[0.06] bg-[#060606]/70 backdrop-blur-xl">
+      <div className="mx-auto flex w-full max-w-6xl items-center justify-between gap-3 px-4 py-3 sm:px-6 lg:px-10">
         <div className="flex items-center gap-3">
           <button
             onClick={onOpenMenu}
             aria-label="Abrir menu"
-            className="grid h-9 w-9 place-items-center rounded-md border border-white/10 text-slate-400 hover:border-[#818cf8]/50 hover:text-[#c4b5fd] lg:hidden"
+            className="grid h-9 w-9 place-items-center rounded-lg border border-white/[0.08] text-slate-400 transition hover:border-white/20 hover:text-white lg:hidden"
           >
             <Menu className="h-4 w-4" />
           </button>
           <Link to="/" className="flex items-center gap-2 lg:hidden">
-            <div
-              className="grid h-8 w-8 place-items-center rounded-lg border border-[#818cf8]/50 bg-gradient-to-br from-[#818cf8]/15 to-[#a78bfa]/20 font-mono text-xs font-bold text-[#c4b5fd]"
-              style={{ boxShadow: "0 0 14px -4px color-mix(in oklab, var(--purple) 55%, transparent)" }}
-            >
+            <div className="grid h-8 w-8 place-items-center rounded-lg border border-white/10 bg-white/[0.04] font-mono text-xs font-bold text-[#a5b4fc]">
               N
             </div>
-            <span className="text-sm font-semibold tracking-tight text-white">
-              Neighbors<span className="text-[#c4b5fd]">hub</span>
-            </span>
+            <span className="text-sm font-semibold tracking-[-0.02em] text-white">NeighborD Hub</span>
           </Link>
           <div className="hidden lg:block" />
         </div>
 
         {currentLabel && (
           <div className="hidden flex-1 justify-center md:flex">
-            <span className="font-mono text-[11px] uppercase tracking-[0.3em] text-slate-500">
+            <span className="font-mono text-[10px] uppercase tracking-[0.34em] text-slate-500">
               {currentLabel}
             </span>
           </div>
         )}
 
         <div className="flex items-center gap-3">
-
           <span
-            className={`h-2 w-2 rounded-full ${creds ? "bg-emerald-500 pulse-dot" : "bg-amber-500"}`}
+            className={`h-1.5 w-1.5 rounded-full ${creds ? "bg-emerald-400 pulse-dot" : "bg-amber-400"}`}
             title={creds ? "conectado" : "desconectado"}
           />
           {creds && me ? (
             <DropdownMenu>
               <DropdownMenuTrigger
-                className="group flex items-center gap-2.5 rounded-full border border-white/10 bg-white/[0.03] py-1 pl-1 pr-3 transition hover:border-[#a78bfa]/40 hover:bg-white/[0.06] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#a78bfa]/40"
+                className="group flex items-center gap-2.5 rounded-full border border-white/[0.08] bg-white/[0.02] py-1 pl-1 pr-3 transition hover:border-white/20 hover:bg-white/[0.05] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#818cf8]/40"
               >
                 {avatarUrl ? (
                   <img
