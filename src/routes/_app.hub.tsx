@@ -189,6 +189,17 @@ function HubPage() {
     toast.success("ID copiado");
   };
 
+  const copyAvatar = async () => {
+    if (!avatarUrl) return;
+    try {
+      await navigator.clipboard.writeText(avatarUrl);
+      toast.success("Foto do perfil copiada.");
+    } catch {
+      toast.error("Não foi possível copiar a foto. Copie manualmente pelo link do avatar.");
+    }
+  };
+
+
   const orbQuests = useMemo(
     () => quests.filter((q) => q.rewardText.includes("Orbs")).length,
     [quests],
