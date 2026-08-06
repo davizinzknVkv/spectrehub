@@ -1268,9 +1268,9 @@ function FreeSignup() {
       <Reveal>
         <div className="grid gap-10 rounded-2xl border border-white/[0.07] bg-[#0d0d0d]/70 p-7 backdrop-blur-xl md:grid-cols-[1.05fr_0.95fr] md:p-12">
           <div>
-            <span className="eyebrow">cadastro free</span>
+            <span className="eyebrow">Acesso Comunitário</span>
             <h2 className="mt-4 font-display text-2xl font-extrabold tracking-[-0.03em] text-white sm:text-4xl">
-              Ganhe o cargo Free em um minuto.
+              Habilite seu Acesso Gratuito em Segundos.
             </h2>
             <ol className="mt-8 space-y-4">
               {[
