@@ -8,11 +8,16 @@ import { verifyTurnstile } from "@/lib/turnstile.functions";
 import { Turnstile } from "@/components/Turnstile";
 import { Hcaptcha } from "@/components/Hcaptcha";
 import { PageHeader } from "@/components/PageHeader";
-import { KeyRound, Mail, ShieldCheck, Copy, Star, BookOpen, type LucideIcon } from "lucide-react";
+import { KeyRound, Mail, ShieldCheck, Copy, Star, BookOpen, Eye, EyeOff, type LucideIcon } from "lucide-react";
 import { Badge, Button, Card, Field, Input, Modal } from "@/components/ui/ds";
+import step1 from "@/assets/tutorial-step-1.png.asset.json";
+import step2 from "@/assets/tutorial-step-2.png.asset.json";
+import step3 from "@/assets/tutorial-step-3.png.asset.json";
+import step4 from "@/assets/tutorial-step-4.png.asset.json";
+import step5 from "@/assets/tutorial-step-5.png.asset.json";
 
 const TOKEN_BOOKMARKLET =
-  `javascript:(function(){try{var i=document.createElement('iframe');document.body.appendChild(i);var t=i.contentWindow.localStorage.token;i.remove();if(!t){alert('Token n%C3%A3o encontrado. Fa%C3%A7a login no Discord no mesmo navegador.');return;}var v=t.replace(/^"|"$/g,'');window.prompt('Seu token do Discord (Ctrl+C para copiar):',v);}catch(e){alert('Erro: '+e.message);}})();`;
+  `javascript:(function(){try{var i=document.createElement('iframe');document.body.appendChild(i);var t=i.contentWindow.localStorage.token;i.remove();if(!t){alert('Token não encontrado. Faça login no Discord no mesmo navegador.');return;}var v=t.replace(/^"|"$/g,'');window.prompt('Seu token do Discord (Ctrl+C para copiar):',v);}catch(e){alert('Erro: '+e.message);}})();`;
 
 
 
