@@ -1588,13 +1588,13 @@ export function EmptyState({ onScan }: { onScan: () => void }) {
         $ scan --available
       </div>
       <p className="mt-3 max-w-sm text-sm text-slate-400">
-        Nenhuma missão carregada. Rode um scan pra ver o que o Discord tem disponível agora.
+        Nenhuma missão detectada na fila atual. Inicie uma varredura para identificar oportunidades disponíveis no Discord.
       </p>
       <button
         onClick={onScan}
         className="mt-5 rounded-md border border-[#818cf8]/40 bg-[#818cf8]/10 px-4 py-2 font-mono text-[11px] font-semibold uppercase tracking-widest text-[#c4b5fd] hover:bg-[#818cf8]/20"
       >
-        → sondar missões
+        → iniciar varredura
       </button>
     </div>
   );
