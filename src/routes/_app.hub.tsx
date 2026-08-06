@@ -107,6 +107,7 @@ function HubPage() {
     flags?: number;
     nsfw_allowed?: boolean;
   } | null>(null);
+  const [loading, setLoading] = useState(true);
   const [loadError, setLoadError] = useState<string | null>(null);
   const [stats, setStats] = useState<{
     guilds: number | null;
@@ -125,6 +126,7 @@ function HubPage() {
   useEffect(() => {
     if (!creds) return;
     setLoadError(null);
+    setLoading(true);
     fetchUserInfoDetailed()
       .then((r) => {
         if (!r.ok) {
@@ -146,7 +148,8 @@ function HubPage() {
         const msg = e instanceof Error ? e.message : "Erro de rede ao carregar perfil";
         setLoadError(msg);
         toast.error(msg);
-      });
+      })
+      .finally(() => setLoading(false));
 
     fetchGuilds().then((g) => setStats((s) => ({ ...s, guilds: g.length }))).catch(() => {});
     fetchRelationshipsCount()
@@ -454,6 +457,35 @@ function HubPage() {
 
 
 
+  if (loading && !loadError) {
+    return (
+      <div className="page-stack">
+        <PageHeader
+          eyebrow="account --overview"
+          icon={LayoutDashboard}
+          title="Dashboard"
+          highlight="pessoal"
+          description="Visão geral da sua conta e estatísticas."
+        />
+        <div className="fade-up relative overflow-hidden rounded-2xl border border-white/[0.07] bg-[#080808]/85 backdrop-blur-xl">
+          <div className="relative h-20 w-full animate-pulse bg-white/[0.03] sm:h-28" />
+          <div className="relative -mt-8 px-5 pb-5 sm:-mt-10 sm:px-7">
+            <div className="h-16 w-16 animate-pulse rounded-xl bg-white/5 ring-4 ring-[#080808] sm:h-20 sm:w-20" />
+            <div className="mt-4 space-y-2">
+              <div className="h-6 w-48 animate-pulse rounded bg-white/5" />
+              <div className="h-3 w-32 animate-pulse rounded bg-white/5" />
+            </div>
+          </div>
+        </div>
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {Array.from({ length: 4 }).map((_, i) => (
+            <div key={i} className="h-32 animate-pulse rounded-2xl border border-white/[0.07] bg-white/[0.02]" />
+          ))}
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="page-stack">
       <PageHeader
@@ -474,18 +506,12 @@ function HubPage() {
         }
       />
 
-
-      {/* Avisos / Notificações */}
       <NotificationsCard />
 
-
-      {/* Unified profile + stats + account */}
       <section
         className="fade-up relative overflow-hidden rounded-2xl border border-white/[0.07] bg-[#080808]/85 backdrop-blur-xl"
         style={{ boxShadow: "0 18px 50px -40px rgba(0,0,0,0.9), inset 0 1px 0 rgba(255,255,255,0.03)" }}
       >
-
-
         {loadError && (
           <div className="flex flex-wrap items-center justify-between gap-3 border-b border-rose-400/30 bg-rose-500/10 px-4 py-3 text-sm text-rose-400 sm:px-6">
             <div>
@@ -502,7 +528,6 @@ function HubPage() {
             </Link>
           </div>
         )}
-        {/* Banner */}
         <div
           className="relative h-20 w-full sm:h-28"
           style={
@@ -516,8 +541,6 @@ function HubPage() {
           <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-[#080808] via-[#080808]/85 to-transparent" />
         </div>
 
-
-        {/* Identity row */}
         <div className="relative -mt-8 flex flex-col gap-4 px-5 pb-5 sm:-mt-10 sm:flex-row sm:items-end sm:gap-5 sm:px-7">
           {avatarUrl && (
             <img
