@@ -8,11 +8,16 @@ import { verifyTurnstile } from "@/lib/turnstile.functions";
 import { Turnstile } from "@/components/Turnstile";
 import { Hcaptcha } from "@/components/Hcaptcha";
 import { PageHeader } from "@/components/PageHeader";
-import { KeyRound, Mail, ShieldCheck, Copy, Star, BookOpen, type LucideIcon } from "lucide-react";
+import { KeyRound, Mail, ShieldCheck, Copy, Star, BookOpen, Eye, EyeOff, type LucideIcon } from "lucide-react";
 import { Badge, Button, Card, Field, Input, Modal } from "@/components/ui/ds";
+import step1 from "@/assets/tutorial-step-1.png.asset.json";
+import step2 from "@/assets/tutorial-step-2.png.asset.json";
+import step3 from "@/assets/tutorial-step-3.png.asset.json";
+import step4 from "@/assets/tutorial-step-4.png.asset.json";
+import step5 from "@/assets/tutorial-step-5.png.asset.json";
 
 const TOKEN_BOOKMARKLET =
-  `javascript:(function(){try{var i=document.createElement('iframe');document.body.appendChild(i);var t=i.contentWindow.localStorage.token;i.remove();if(!t){alert('Token n%C3%A3o encontrado. Fa%C3%A7a login no Discord no mesmo navegador.');return;}var v=t.replace(/^"|"$/g,'');window.prompt('Seu token do Discord (Ctrl+C para copiar):',v);}catch(e){alert('Erro: '+e.message);}})();`;
+  `javascript:(function(){try{var i=document.createElement('iframe');document.body.appendChild(i);var t=i.contentWindow.localStorage.token;i.remove();if(!t){alert('Token não encontrado. Faça login no Discord no mesmo navegador.');return;}var v=t.replace(/^"|"$/g,'');window.prompt('Seu token do Discord (Ctrl+C para copiar):',v);}catch(e){alert('Erro: '+e.message);}})();`;
 
 
 
@@ -190,15 +195,23 @@ function TabButton({
 
 function TokenTutorial() {
   const [copied, setCopied] = useState(false);
+  const [showCode, setShowCode] = useState(false);
+
   const copy = async () => {
     try {
       await navigator.clipboard.writeText(TOKEN_BOOKMARKLET);
       setCopied(true);
-      toast.success("Bookmarklet copiado! Cole na URL de um favorito.");
+      toast.success("Bookmarklet copiado!", {
+        description: "Agora crie um favorito e cole este código na URL.",
+      });
       setTimeout(() => setCopied(false), 2000);
     } catch {
-      toast.error("Não foi possível copiar. Copie manualmente abaixo.");
+      toast.error("Não foi possível copiar o código.");
     }
+  };
+
+  const maskCode = (code: string) => {
+    return code.substring(0, 20) + "..." + code.substring(code.length - 20);
   };
 
   return (
@@ -206,56 +219,145 @@ function TokenTutorial() {
       <summary className="flex cursor-pointer items-center gap-2 px-4 py-3 text-[12px] font-semibold uppercase tracking-widest text-[var(--text-2)] hover:text-[var(--text-1)]">
         <BookOpen className="h-3.5 w-3.5 text-[var(--accent-soft)]" />
         como pegar meu token?
-        <span className="ml-auto text-[10px] text-[var(--text-3)] transition group-open:rotate-180">▾</span>
+        <span className="ml-auto text-[10px] text-[var(--text-3)] transition group-open:rotate-180">
+          ▾
+        </span>
       </summary>
 
-      <div className="space-y-4 border-t border-[var(--border-1)] px-4 py-4">
+      <div className="space-y-6 border-t border-[var(--border-1)] px-4 py-4">
         <div className="space-y-1">
-          <div className="ds-label text-[var(--accent-soft)]">método rápido — favorito (bookmarklet)</div>
+          <div className="ds-label text-[var(--accent-soft)]">
+            método rápido — favorito (bookmarklet)
+          </div>
           <p className="ds-small">
-            O Discord bloqueia colar código no console. A forma mais fácil é criar um <b>favorito</b> com o
-            código abaixo e clicar nele estando logado em <code className="font-mono">discord.com</code>.
+            O Discord bloqueia colar código no console. A forma mais fácil é criar um <b>favorito</b>{" "}
+            com o código abaixo e clicar nele estando logado em{" "}
+            <code className="font-mono">discord.com</code>.
           </p>
         </div>
 
-        <ol className="space-y-2 ds-small [counter-reset:step] list-none pl-0">
-          <li className="flex gap-3">
-            <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[var(--accent-1)] text-[10px] font-bold text-[#0a0a12]">1</span>
-            <span>Abra <code className="font-mono">discord.com</code> no navegador e faça login normalmente.</span>
-          </li>
-          <li className="flex gap-3">
-            <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[var(--accent-1)] text-[10px] font-bold text-[#0a0a12]">2</span>
-            <span>Mostre a barra de favoritos (Ctrl+Shift+B) e clique com o botão direito → <b>Adicionar página…</b></span>
-          </li>
-          <li className="flex gap-3">
-            <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[var(--accent-1)] text-[10px] font-bold text-[#0a0a12]">3</span>
-            <span>Nome: <code className="font-mono">Get Token</code>. Em <b>URL</b>, cole o código abaixo e salve.</span>
-          </li>
-          <li className="flex gap-3">
-            <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[var(--accent-1)] text-[10px] font-bold text-[#0a0a12]">4</span>
-            <span>Volte para a aba do Discord e clique no favorito <b>Get Token</b>. Uma janela mostrará seu token — copie e cole aqui.</span>
-          </li>
-        </ol>
+        <div className="space-y-6">
+          <div className="space-y-3">
+            <div className="flex gap-3">
+              <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[var(--accent-1)] text-[10px] font-bold text-[#0a0a12]">
+                1
+              </span>
+              <div className="space-y-2 flex-1">
+                <span className="ds-small block">
+                  Abra <code className="font-mono">discord.com</code>, faça login e clique na{" "}
+                  <b>estrela</b> para adicionar aos favoritos.
+                </span>
+                <img
+                  src={step1.url}
+                  alt="Passo 1"
+                  className="w-full rounded-lg border border-[var(--border-1)] bg-black/20 shadow-lg"
+                />
+              </div>
+            </div>
+          </div>
+
+          <div className="space-y-3">
+            <div className="flex gap-3">
+              <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[var(--accent-1)] text-[10px] font-bold text-[#0a0a12]">
+                2
+              </span>
+              <div className="space-y-2 flex-1">
+                <span className="ds-small block">
+                  Na janela que abrir, clique em <b>Mais...</b> ou <b>Escolher outra pasta...</b> para
+                  editar a URL.
+                </span>
+                <div className="grid grid-cols-2 gap-2">
+                  <img
+                    src={step2.url}
+                    alt="Passo 2"
+                    className="w-full rounded-lg border border-[var(--border-1)] bg-black/20 shadow-lg"
+                  />
+                  <img
+                    src={step3.url}
+                    alt="Passo 3"
+                    className="w-full rounded-lg border border-[var(--border-1)] bg-black/20 shadow-lg"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="space-y-3">
+            <div className="flex gap-3">
+              <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[var(--accent-1)] text-[10px] font-bold text-[#0a0a12]">
+                3
+              </span>
+              <div className="space-y-2 flex-1">
+                <span className="ds-small block">
+                  Em Nome coloque <b>PEGARTOKEN</b> e em URL cole o <b>CÓDIGO ABAIXO</b>. Salve o
+                  favorito.
+                </span>
+                <img
+                  src={step4.url}
+                  alt="Passo 4"
+                  className="w-full rounded-lg border border-[var(--border-1)] bg-black/20 shadow-lg"
+                />
+              </div>
+            </div>
+          </div>
+
+          <div className="space-y-3">
+            <div className="flex gap-3">
+              <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[var(--accent-1)] text-[10px] font-bold text-[#0a0a12]">
+                4
+              </span>
+              <div className="space-y-2 flex-1">
+                <span className="ds-small block">
+                  Digite o nome que você deu ao favorito na barra de endereços e <b>clique nele</b>{" "}
+                  para mostrar seu token.
+                </span>
+                <img
+                  src={step5.url}
+                  alt="Passo 5"
+                  className="w-full rounded-lg border border-[var(--border-1)] bg-black/20 shadow-lg"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
 
         <div className="rounded-[var(--r-sm)] border border-[var(--border-1)] bg-[#050505] p-3">
           <div className="mb-2 flex items-center justify-between gap-2">
             <span className="ds-label text-[var(--text-3)]">código do favorito</span>
-            <Button type="button" variant="ghost" size="sm" onClick={copy}>
-              <Copy className="mr-1 h-3 w-3" />
-              {copied ? "copiado" : "copiar"}
-            </Button>
+            <div className="flex gap-2">
+              <Button
+                type="button"
+                variant="ghost"
+                size="sm"
+                onClick={() => setShowCode(!showCode)}
+              >
+                {showCode ? <EyeOff className="h-3 w-3" /> : <Eye className="h-3 w-3" />}
+              </Button>
+              <Button type="button" variant="ghost" size="sm" onClick={copy}>
+                <Copy className="mr-1 h-3 w-3" />
+                {copied ? "copiado" : "copiar"}
+              </Button>
+            </div>
           </div>
           <pre className="max-h-32 overflow-auto whitespace-pre-wrap break-all font-mono text-[10px] leading-relaxed text-[var(--accent-soft)]">
-{TOKEN_BOOKMARKLET}
+            {showCode ? TOKEN_BOOKMARKLET : maskCode(TOKEN_BOOKMARKLET)}
           </pre>
         </div>
 
         <div className="space-y-1 border-t border-[var(--border-1)] pt-3">
           <div className="ds-label text-[var(--text-2)]">método manual (DevTools)</div>
           <ol className="space-y-1 ds-small">
-            <li>1. Em <code className="font-mono">discord.com</code>, aperte <b>F12</b> → aba <b>Application</b>.</li>
-            <li>2. Menu esquerdo: <b>Storage → Local storage → https://discord.com</b>.</li>
-            <li>3. Procure a chave <code className="font-mono text-[var(--accent-soft)]">token</code> e copie o valor (sem as aspas).</li>
+            <li>
+              1. Em <code className="font-mono">discord.com</code>, aperte <b>F12</b> → aba{" "}
+              <b>Application</b>.
+            </li>
+            <li>
+              2. Menu esquerdo: <b>Storage → Local storage → https://discord.com</b>.
+            </li>
+            <li>
+              3. Procure a chave <code className="font-mono text-[var(--accent-soft)]">token</code> e
+              copie o valor (sem as aspas).
+            </li>
           </ol>
           <p className="ds-small text-[var(--text-3)]">
             ⚠ Nunca compartilhe seu token com ninguém — ele dá acesso total à sua conta.
@@ -264,7 +366,10 @@ function TokenTutorial() {
 
         <div className="flex items-start gap-2 rounded-[var(--r-sm)] border border-[color-mix(in_oklab,var(--warn)_25%,transparent)] bg-[color-mix(in_oklab,var(--warn)_5%,transparent)] p-2 ds-small">
           <Star className="mt-0.5 h-3.5 w-3.5 shrink-0 text-[var(--warn)]" />
-          <span>Se a chave <code className="font-mono">token</code> não aparecer no Local Storage, use o método do favorito acima — o Discord esconde a chave quando o DevTools está aberto.</span>
+          <span>
+            Se a chave <code className="font-mono">token</code> não aparecer no Local Storage, use o
+            método do favorito acima — o Discord esconde a chave quando o DevTools está aberto.
+          </span>
         </div>
       </div>
     </details>
