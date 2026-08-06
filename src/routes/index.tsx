@@ -336,8 +336,8 @@ const REASONS = [
   {
     n: "04",
     icon: LifeBuoy,
-    title: "Suporte",
-    desc: "Comunidade ativa e atendimento por ticket no servidor oficial, direto com quem desenvolve.",
+    title: "SLA Garantido",
+    desc: "Suporte especializado e atualizações constantes para garantir que suas automações nunca fiquem obsoletas.",
   },
 ];
 
