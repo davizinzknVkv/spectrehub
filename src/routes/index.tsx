@@ -1121,9 +1121,9 @@ function ReasonsSection() {
     <section id="recursos" className="mx-auto max-w-7xl px-4 py-20 sm:px-6 sm:py-28 lg:px-8">
       <Reveal>
         <div className="max-w-2xl">
-          <span className="eyebrow">por que neighbord hub</span>
+          <span className="eyebrow">Diferenciais Competitivos</span>
           <h2 className="mt-4 font-display text-3xl font-extrabold tracking-[-0.03em] text-white sm:text-[2.6rem]">
-            Feito para quem não aceita o básico.
+            A Vantagem Injusta que Você Estava Buscando.
           </h2>
           <p className="mt-3 text-sm text-[#8a8a8a]">
             Quatro princípios que guiam cada release do hub.
