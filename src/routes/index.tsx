@@ -1165,9 +1165,9 @@ function PlansSection() {
       <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 sm:py-28 lg:px-8">
         <Reveal>
           <div className="max-w-2xl">
-            <span className="eyebrow">planos</span>
+            <span className="eyebrow">Assinaturas e Licenciamento</span>
             <h2 className="mt-4 font-display text-3xl font-extrabold tracking-[-0.03em] text-white sm:text-[2.6rem]">
-              Escolha o ritmo do seu farm.
+              Escalabilidade sob medida.
             </h2>
             <p className="mt-3 text-sm text-[#8a8a8a]">
               O plano é detectado pelo seu cargo no Discord — se expirar, o hub volta pro Free
