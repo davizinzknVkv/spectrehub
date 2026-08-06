@@ -83,12 +83,12 @@
   --bg-2: #080808;
   --surface-1: #0c0c0c;
   --surface-3: #111111;
-  --surface-hover: #151515;
+  --surface-hover: #161616;
 
   /* Text */
   --text-1: #ffffff;
   --text-2: #a1a1aa;
-  --text-3: #71717a;
+  --text-3: #6b6b72;
 
   /* Borders */
   --border-1: rgb(255 255 255 / 0.08);
@@ -112,16 +112,16 @@
   /* Radius scale */
   --r-sm: 8px; --r-md: 10px; --r-lg: 12px; --r-xl: 16px;
 
-  /* Motion */
-  --dur-fast: 120ms;
+  /* Motion - Faster, more energetic feel */
+  --dur-fast: 100ms;
   --dur: 200ms;
-  --dur-slow: 350ms;
-  --ease: cubic-bezier(0.4, 0, 0.2, 1);
+  --dur-slow: 300ms;
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
 
-  /* Elevation (leve, sem glow pesado) */
+  /* Elevation (refined) */
   --shadow-1: 0 1px 0 rgb(255 255 255 / 0.03) inset;
-  --shadow-2: 0 12px 32px -24px rgb(0 0 0 / 0.9);
-  --accent-glow: 0 6px 24px -14px color-mix(in oklab, var(--accent-1) 80%, transparent);
+  --shadow-2: 0 20px 48px -20px rgb(0 0 0 / 0.95);
+  --accent-glow: 0 4px 20px -10px color-mix(in oklab, var(--accent-1) 70%, transparent);
 
   /* Legacy aliases (mantidos para não quebrar telas existentes) */
   --void: #050505;
