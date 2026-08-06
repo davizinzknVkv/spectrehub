@@ -223,16 +223,15 @@ function HubPage() {
           <div className="grid items-center gap-10 md:grid-cols-[1.1fr_1fr]">
             <div>
               <div className="inline-flex items-center gap-2 rounded-full border border-[#818cf8]/30 bg-[#818cf8]/10 px-3 py-1 font-mono text-[10px] uppercase tracking-widest text-[#c4b5fd]">
-                <Sparkles className="h-3 w-3" /> bem-vindo ao hub
+                <Sparkles className="h-3 w-3" /> hub de elite ativado
               </div>
               <h1 className="mt-4 text-5xl font-black leading-[1.05] tracking-tight sm:text-6xl md:text-7xl">
-                Conecte seu Discord
+                Maximize sua conta
                 <br />
-                <span className="text-[#818cf8]">e comece a farmar.</span>
+                <span className="text-[#818cf8]">em minutos.</span>
               </h1>
               <p className="mt-5 max-w-md text-sm leading-relaxed text-slate-400 sm:text-base">
-                Cole seu token ou faça login por email — o Neighborshub roda as missões em segundo
-                plano e você só coleta os Orbs. Fica tudo salvo no seu navegador.
+                Conecte sua conta e assuma o controle. Nossa infraestrutura automatiza as tarefas repetitivas para que você possa focar no que realmente importa. Segurança máxima com processamento local.
               </p>
 
               <div className="mt-8 flex flex-wrap gap-3">
