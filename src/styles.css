@@ -113,10 +113,10 @@
   --r-sm: 8px; --r-md: 10px; --r-lg: 12px; --r-xl: 16px;
 
   /* Motion */
-  --dur-fast: 150ms;
-  --dur: 250ms;
-  --dur-slow: 400ms;
-  --ease: cubic-bezier(0.25, 1, 0.5, 1);
+  --dur-fast: 120ms;
+  --dur: 200ms;
+  --dur-slow: 350ms;
+  --ease: cubic-bezier(0.4, 0, 0.2, 1);
 
   /* Elevation (leve, sem glow pesado) */
   --shadow-1: 0 1px 0 rgb(255 255 255 / 0.03) inset;
