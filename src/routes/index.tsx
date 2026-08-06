@@ -1642,9 +1642,9 @@ function SiteFooter() {
             </a>
           </div>
           <p className="text-[11px] text-[#6f6f6f]">
-            © {new Date().getFullYear()} NeighborD Hub. Todos os direitos reservados.
+            © {new Date().getFullYear()} NeighborD Hub — Sistemas de Alta Disponibilidade.
             <span className="mx-2 text-white/15">·</span>
-            Código-fonte fornecido por <span className="text-[#a0a0a0]">isnouu</span>
+            Arquitetura desenvolvida por <span className="text-[#a0a0a0]">isnouu</span>
           </p>
         </div>
       </div>
