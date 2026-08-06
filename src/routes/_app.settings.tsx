@@ -593,9 +593,9 @@ function EmailLoginForm({ onLogged }: { onLogged: () => void }) {
           <div className="flex items-start gap-3 rounded-[var(--r-md)] border border-[var(--border-1)] bg-white/[0.02] p-3">
             <ShieldCheck className="mt-0.5 h-4 w-4 shrink-0 text-[var(--accent-soft)]" />
             <div className="min-w-0">
-              <div className="ds-label text-[var(--accent-soft)]">verificação 2fa</div>
+              <div className="ds-label text-[var(--accent-soft)]">protocolo 2fa ativado</div>
               <p className="mt-1 ds-small">
-                Sua conta tem 2FA ativada. Escolha o método e digite o código para concluir o login.
+                Esta conta exige um segundo fator de autenticação. Insira o código gerado pelo seu dispositivo de segurança.
               </p>
             </div>
           </div>
