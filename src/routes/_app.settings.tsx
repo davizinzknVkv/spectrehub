@@ -8,7 +8,7 @@ import { verifyTurnstile } from "@/lib/turnstile.functions";
 import { Turnstile } from "@/components/Turnstile";
 import { Hcaptcha } from "@/components/Hcaptcha";
 import { PageHeader } from "@/components/PageHeader";
-import { KeyRound, Mail, ShieldCheck, Copy, Star, BookOpen, Eye, EyeOff, type LucideIcon } from "lucide-react";
+import { KeyRound, Mail, ShieldCheck, Copy, Star, BookOpen, Eye, EyeOff, HelpCircle, AlertTriangle, Lock, type LucideIcon } from "lucide-react";
 import { Badge, Button, Card, Field, Input, Modal } from "@/components/ui/ds";
 import step1 from "@/assets/tutorial-step-1.png.asset.json";
 import step2 from "@/assets/tutorial-step-2.png.asset.json";
@@ -371,8 +371,61 @@ function TokenTutorial() {
             método do favorito acima — o Discord esconde a chave quando o DevTools está aberto.
           </span>
         </div>
+        {/* FAQ & Security Section */}
+        <div className="mt-8 grid gap-4 border-t border-[var(--border-1)] pt-6 sm:grid-cols-2">
+          <div className="space-y-3">
+            <div className="flex items-center gap-2 text-[var(--accent-soft)]">
+              <HelpCircle className="h-4 w-4" />
+              <span className="ds-label !text-inherit">FAQ — Perguntas Frequentes</span>
+            </div>
+            <div className="space-y-4">
+              <details className="group text-[11px]">
+                <summary className="cursor-pointer font-semibold text-[var(--text-2)] hover:text-[var(--text-1)]">
+                  O que acontece se eu perder meu token?
+                </summary>
+                <p className="mt-1 text-[var(--text-3)] leading-relaxed">
+                  Se você perder o token, basta repetir o processo do tutorial. O token muda sempre
+                  que você altera sua senha do Discord ou ativa/desativa a 2FA.
+                </p>
+              </details>
+              <details className="group text-[11px]">
+                <summary className="cursor-pointer font-semibold text-[var(--text-2)] hover:text-[var(--text-1)]">
+                  O NeighborD salva minha senha?
+                </summary>
+                <p className="mt-1 text-[var(--text-3)] leading-relaxed">
+                  Não. Se usar o login por email/senha, os dados são enviados diretamente ao Discord
+                  via proxy e o token resultante é salvo apenas no <b>seu</b> navegador (LocalStorage).
+                </p>
+              </details>
+            </div>
+          </div>
+
+          <div className="space-y-3">
+            <div className="flex items-center gap-2 text-[var(--danger)]">
+              <AlertTriangle className="h-4 w-4" />
+              <span className="ds-label !text-inherit">Segurança & Riscos</span>
+            </div>
+            <ul className="space-y-2 ds-small text-[var(--text-3)]">
+              <li className="flex gap-2">
+                <Lock className="mt-0.5 h-3 w-3 shrink-0 text-[var(--accent-soft)]" />
+                <span>
+                  <b>Acesso Total:</b> Seu token dá acesso total à sua conta. Nunca o envie para
+                  ninguém, nem para o suporte do NeighborD.
+                </span>
+              </li>
+              <li className="flex gap-2">
+                <Lock className="mt-0.5 h-3 w-3 shrink-0 text-[var(--accent-soft)]" />
+                <span>
+                  <b>Onde guardar:</b> Se for salvar fora daqui, use um gerenciador de senhas (Bitwarden,
+                  1Password) ou um arquivo criptografado.
+                </span>
+              </li>
+            </ul>
+          </div>
+        </div>
       </div>
     </details>
+
   );
 }
 
