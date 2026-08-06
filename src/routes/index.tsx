@@ -1,3 +1,16 @@
+/**
+ * Antes de realizar qualquer ação, entenda o contexto e instrução recente do usuário:
+ * ## Solicitação de Auditoria e Correção de Erro em Aplicação
+ *
+ * Objetivo: Realizar uma auditoria completa de uma aplicação para identificar e corrigir um erro específico, utilizando múltiplos agentes especializados.
+ *
+ * Instruções Detalhadas (Resumo):
+ * 1. Coleta de Informações (Erro, Linguagem, Framework, Sintomas, Impacto).
+ * 2. Criação de Sub-Agentes (Código, Testes, Desempenho, Banco de Dados, Configuração, Documentação).
+ * 3. Execução Coordenada.
+ * 4. Correção e Validação Rigorosa.
+ * 5. Relatório Final Estruturado.
+ */
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import {
