@@ -124,11 +124,7 @@ function SettingsPage() {
               label="authorization"
               hint={
                 <>
-                  DevTools (F12) → Network → qualquer request → header{" "}
-                  <code className="rounded bg-[#0a0a0a] px-1 py-0.5 font-mono text-[11px] text-[var(--accent-soft)]">
-                    authorization
-                  </code>
-                  .
+                  Cole abaixo o token do Discord. Veja o tutorial se não souber como pegar.
                 </>
               }
             >
@@ -151,6 +147,8 @@ function SettingsPage() {
                 {show ? "ocultar token" : "mostrar token"}
               </Button>
             </div>
+
+            <TokenTutorial />
           </form>
         )}
 
