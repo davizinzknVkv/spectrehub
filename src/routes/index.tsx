@@ -1414,9 +1414,9 @@ function CommunitySection() {
       <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 sm:py-28 lg:px-8">
         <Reveal>
           <div className="max-w-2xl">
-            <span className="eyebrow">comunidade</span>
+            <span className="eyebrow">Ecossistema Exclusivo</span>
             <h2 className="mt-4 font-display text-3xl font-extrabold tracking-[-0.03em] text-white sm:text-[2.6rem]">
-              Faça parte da comunidade.
+              Conecte-se com a Elite.
             </h2>
             <p className="mt-3 text-sm text-[#8a8a8a]">
               Suporte por ticket, avisos de update, canais de farm e gente online o dia inteiro.
