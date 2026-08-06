@@ -4,7 +4,7 @@ import { useQuestStore } from "@/lib/quest-store";
 import { PageHeader } from "@/components/PageHeader";
 import { Section } from "@/components/Section";
 import { PLAN_LIMITS, getGateStatus } from "@/lib/quest-runner";
-import { Card, StatCard, Badge } from "@/components/ui/ds";
+import { Card, StatCard, Badge, Skeleton } from "@/components/ui/ds";
 import {
   Tractor,
   Activity,
@@ -85,10 +85,8 @@ function FarmsPage() {
   const gate = getGateStatus();
   const limits = PLAN_LIMITS[plan];
 
-  // Tempo restante até próxima missão liberada (cooldown)
   const remainingCd = Math.max(0, lastCompletedAt + limits.cooldownMs - now);
 
-  // Tempo ativo (heurística): tempo desde o started_at da run mais recente enquanto running
   const activeStart = useMemo(() => {
     if (!running) return null;
     const active = runs.find((r) => r.quest_id === activeQuestId);
@@ -187,7 +185,6 @@ function FarmsPage() {
         </div>
       </Section>
 
-      {/* Estatísticas + Histórico */}
       <section className="grid gap-4 lg:grid-cols-[1fr_1.2fr]">
         <Card>
           <div className="ds-label mb-3">
@@ -218,40 +215,40 @@ function FarmsPage() {
             </div>
             <span className="ds-small">últimas {Math.min(10, runs.length)}</span>
           </div>
-          <ul className="divide-y divide-[var(--border-1)]">
-            {runs.slice(0, 10).map((r) => (
-              <li key={r.id} className="flex items-center gap-3 py-2 ds-body">
-                <span
-                  className={`h-1.5 w-1.5 shrink-0 rounded-full ${
-                    r.status === "completed"
-                      ? "bg-[var(--ok)]"
-                      : r.status === "failed"
-                        ? "bg-[var(--danger)]"
-                        : "bg-[var(--warn)]"
-                  }`}
-                />
-                <span className="min-w-0 flex-1 truncate text-[var(--text-1)]">{r.quest_name}</span>
-                <span className="hidden shrink-0 ds-small sm:inline">
-                  {r.reward_text ?? "—"}
-                </span>
-                <span className="shrink-0 ds-small">
-                  {new Date(r.started_at).toLocaleTimeString("pt-BR", {
-                    hour: "2-digit",
-                    minute: "2-digit",
-                  })}
-                </span>
-              </li>
-            ))}
-            {runs.length === 0 && (
-              <li className="py-6 text-center ds-small">
-                <span className="text-[var(--accent-soft)]">›</span> nenhuma farm executada ainda
-              </li>
-            )}
-          </ul>
+          {runs.length === 0 ? (
+            <div className="flex h-32 items-center justify-center rounded-lg border border-[var(--border-1)] bg-white/[0.02]">
+              <p className="ds-small text-[var(--text-3)]">Nenhuma farm executada ainda</p>
+            </div>
+          ) : (
+            <ul className="divide-y divide-[var(--border-1)]">
+              {runs.slice(0, 10).map((r) => (
+                <li key={r.id} className="flex items-center gap-3 py-2 ds-body">
+                  <span
+                    className={`h-1.5 w-1.5 shrink-0 rounded-full ${
+                      r.status === "completed"
+                        ? "bg-[var(--ok)]"
+                        : r.status === "failed"
+                          ? "bg-[var(--danger)]"
+                          : "bg-[var(--warn)]"
+                    }`}
+                  />
+                  <span className="min-w-0 flex-1 truncate text-[var(--text-1)]">{r.quest_name}</span>
+                  <span className="hidden shrink-0 ds-small sm:inline">
+                    {r.reward_text ?? "—"}
+                  </span>
+                  <span className="shrink-0 ds-small">
+                    {new Date(r.started_at).toLocaleTimeString("pt-BR", {
+                      hour: "2-digit",
+                      minute: "2-digit",
+                    })}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          )}
         </Card>
       </section>
 
-      {/* Logs live */}
       <Card>
         <div className="mb-3 flex items-center justify-between">
           <div className="flex items-center gap-2 ds-label">
@@ -262,7 +259,7 @@ function FarmsPage() {
         <div className="max-h-72 overflow-auto rounded-md border border-[var(--border-1)] bg-black/40 p-3 font-mono text-[12px] leading-relaxed">
           {logs.length === 0 ? (
             <div className="text-[var(--text-3)]">
-              <span className="text-[var(--accent-soft)]">›</span> nenhum log ainda
+              <span className="text-[var(--accent-soft)]">›</span> Nenhum log ainda
             </div>
           ) : (
             logs
