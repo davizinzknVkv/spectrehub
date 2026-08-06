@@ -6,7 +6,7 @@ import { SHOP_ITEMS, type ShopItem } from "@/lib/shop-catalog";
 import { getShopImage, getCachedShopImage } from "@/lib/shop-images";
 import { Gift, Coins, Search, Loader2, ShieldCheck, Sparkles } from "lucide-react";
 import { PageHeader } from "@/components/PageHeader";
-import { Button, Card, Modal } from "@/components/ui/ds";
+import { Button, Card, Modal, EmptyState as DSEmptyState } from "@/components/ui/ds";
 
 export const Route = createFileRoute("/_app/resgatar")({
   head: () => ({ meta: [{ title: "Resgatar Orbs — Neighborshub" }] }),
