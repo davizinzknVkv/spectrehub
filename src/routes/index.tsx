@@ -324,8 +324,8 @@ const REASONS = [
   {
     n: "02",
     icon: ShieldCheck,
-    title: "Controle",
-    desc: "Cooldowns, filas e limites por plano respeitam os limites da API — nada de ação atropelada.",
+    title: "Segurança de Nível Bancário",
+    desc: "Sistemas de proteção que emulam padrões de comportamento humano, mitigando riscos de detecção por heurística.",
   },
   {
     n: "03",
