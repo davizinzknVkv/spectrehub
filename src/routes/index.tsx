@@ -1543,10 +1543,10 @@ function FinalCta() {
             className="mx-auto h-14 w-14 object-contain opacity-90"
           />
           <h2 className="mt-8 font-display text-3xl font-extrabold tracking-[-0.035em] text-white sm:text-5xl">
-            Pronto para conhecer o NeighborD Hub?
+            Pronto para Dominar o Ecossistema?
           </h2>
           <p className="mx-auto mt-4 max-w-lg text-[15px] text-[#8a8a8a]">
-            Crie seu acesso, escolha um plano e comece a farmar em minutos.
+            Junte-se à elite e ative sua infraestrutura de automação hoje mesmo.
           </p>
           <div className="mt-9 flex flex-wrap items-center justify-center gap-3">
             <Link to="/hub" className="btn-accent px-6 py-3.5">
