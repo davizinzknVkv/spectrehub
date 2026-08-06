@@ -1,15 +1,40 @@
 /**
- * Antes de realizar qualquer ação, entenda o contexto e instrução recente do usuário:
- * ## Solicitação de Auditoria e Correção de Erro em Aplicação
+ * Antes de realizar qualquer ação, entenda o contexto e instrução recente do usuário, comando mais recente enviado por ele: ## Implementação de Transições de Página Avançadas
  *
- * Objetivo: Realizar uma auditoria completa de uma aplicação para identificar e corrigir um erro específico, utilizando múltiplos agentes especializados.
+ * Objetivo: Desenvolver um sistema de transições de página dinâmicas e visualmente atraentes para uma aplicação web.
  *
- * Instruções Detalhadas (Resumo):
- * 1. Coleta de Informações (Erro, Linguagem, Framework, Sintomas, Impacto).
- * 2. Criação de Sub-Agentes (Código, Testes, Desempenho, Banco de Dados, Configuração, Documentação).
- * 3. Execução Coordenada.
- * 4. Correção e Validação Rigorosa.
- * 5. Relatório Final Estruturado.
+ * Funcionalidade:
+ *
+ * *   **Efeitos de Transição:** Implementar uma variedade de efeitos de transição modernos e suaves entre as páginas, como:
+ *     *   Fade In/Out
+ *     *   Slide (esquerda/direita/cima/baixo)
+ *     *   Zoom In/Out
+ *     *   Flip (horizontal/vertical)
+ *     *   Parallax
+ *     *   Efeitos personalizados (a serem definidos)
+ * *   **Configurabilidade:** Permitir a configuração de parâmetros para cada transição, como:
+ *     *   Duração
+ *     *   Curva de aceleração (easing)
+ *     *   Direção
+ *     *   Opacidade
+ * *   **Otimização:** Garantir que as transições sejam performáticas e não causem gargalos na experiência do usuário, utilizando técnicas como hardware acceleration quando possível.
+ * *   **Compatibilidade:** Assegurar a compatibilidade com os principais navegadores modernos.
+ * *   **Integração:** Facilitar a integração com frameworks JavaScript existentes (ex: React, Vue, Angular) ou ser uma solução independente.
+ *
+ * **Requisitos Técnicos:**
+ *
+ * *   Utilizar tecnologias web modernas (HTML5, CSS3, JavaScript).
+ * *   Preferencialmente, utilizar bibliotecas ou frameworks de animação eficientes (ex: GSAP, Anime.js, Framer Motion).
+ * *   Considerar a acessibilidade e o impacto em usuários com sensibilidade a movimento.
+ *
+ * **Passos Necessários:**
+ *
+ * 1.  **Pesquisa e Seleção de Ferramentas:** Identificar e selecionar as bibliotecas/frameworks de animação mais adequadas.
+ * 2.  **Definição da Arquitetura:** Projetar a estrutura do código para gerenciar as transições de forma modular e escalável.
+ * 3.  **Implementação dos Efeitos:** Codificar os diferentes efeitos de transição, começando pelos mais comuns.
+ * 4.  **Criação da Interface de Configuração (Opcional):** Se aplicável, desenvolver uma interface para gerenciar as configurações das transições.
+ * 5.  **Testes e Otimização:** Realizar testes rigorosos em diferentes navegadores e dispositivos, otimizando a performance.
+ * 6.  **Documentação:** Documentar o uso e a configuração das transições.
  */
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
