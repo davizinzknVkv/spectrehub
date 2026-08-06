@@ -330,8 +330,8 @@ const REASONS = [
   {
     n: "03",
     icon: Sparkles,
-    title: "Experiência",
-    desc: "Interface única para quests, orbs, nicks e servidores, com histórico e progresso ao vivo.",
+    title: "Omnicanalidade",
+    desc: "Centralize o gerenciamento de múltiplas frentes — quests, economia e identidade — em um único dashboard intuitivo.",
   },
   {
     n: "04",
