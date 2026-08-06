@@ -1517,19 +1517,19 @@ export function CaptchaModal({
         <div className="font-mono text-[10px] uppercase tracking-[0.3em] text-slate-400">
           $ verify --human
         </div>
-        <h3 className="mt-2 text-lg font-semibold text-white">Confirme que é humano</h3>
+        <h3 className="mt-2 text-lg font-semibold text-white">Verificação de Segurança</h3>
         <p className="mt-1 text-sm text-slate-400">
-          {label ?? quest?.questName ?? "Antes de executar, resolva o desafio."}
+          {label ?? quest?.questName ?? "Valide sua identidade para prosseguir com a execução."}
         </p>
 
         <div className="mt-4 rounded-lg border border-amber-400/40 bg-amber-500/10 p-3">
           <div className="font-mono text-[10px] uppercase tracking-[0.25em] text-amber-300">
-            ⚠ aviso de risco
+            ⚠ protocolo de segurança
           </div>
           <p className="mt-1 text-[12px] leading-relaxed text-slate-400">
-            Automatizar missões {label ? "em lote (run all) aumenta o risco de detecção e " : ""}
-            viola os Termos de Serviço do Discord e pode resultar em{" "}
-            <span className="text-rose-400">suspensão ou banimento</span> da sua conta. Use por sua conta e risco.
+            A execução automatizada {label ? "em lote " : ""}
+            pode ser interpretada como comportamento anômalo pelos sistemas de auditoria do Discord, o que pode resultar em{" "}
+            <span className="text-rose-400">restrições permanentes na conta</span>. A responsabilidade operacional é integralmente do usuário.
           </p>
         </div>
 
