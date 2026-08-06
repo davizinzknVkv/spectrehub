@@ -1,10 +1,10 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useMemo, useState } from "react";
 import { useQuestStore } from "@/lib/quest-store";
 import { PageHeader } from "@/components/PageHeader";
 import { Section } from "@/components/Section";
 import { PLAN_LIMITS, getGateStatus } from "@/lib/quest-runner";
-import { Card, StatCard, Badge, Skeleton } from "@/components/ui/ds";
+import { Card, StatCard, Badge, Skeleton, EmptyState as DSEmptyState, Button } from "@/components/ui/ds";
 import {
   Tractor,
   Activity,
@@ -39,6 +39,7 @@ function fmtDuration(ms: number) {
 }
 
 function FarmsPage() {
+  const creds = useQuestStore((s) => s.creds);
   const runs = useQuestStore((s) => s.runs);
   const logs = useQuestStore((s) => s.logs);
   const plan = useQuestStore((s) => s.plan);
@@ -94,6 +95,23 @@ function FarmsPage() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [running, activeQuestId, runs]);
   const activeMs = running && activeStart ? now - activeStart : 0;
+
+  if (!creds) {
+    return (
+      <div className="mx-auto w-full max-w-xl pt-10">
+        <DSEmptyState
+          icon={Tractor}
+          title="Farms desativadas"
+          description="Conecte seu token do Discord para visualizar estatísticas de farm e histórico de missões."
+          action={
+            <Link to="/settings">
+              <Button variant="primary">→ configurar login</Button>
+            </Link>
+          }
+        />
+      </div>
+    );
+  }
 
   return (
     <div className="page-stack">
