@@ -640,19 +640,17 @@ function Hero() {
 
         <Reveal delay={80}>
           <h1 className="mt-7 font-display text-[2.7rem] font-extrabold leading-[1.02] tracking-[-0.04em] text-white sm:text-6xl lg:text-[4.5rem]">
-            Uma nova experiência
+            A Próxima Geração da
             <br />
             <span className="bg-gradient-to-b from-white via-white to-[#8f8f8f] bg-clip-text text-transparent">
-              para sua comunidade.
+              Experiência no Discord.
             </span>
           </h1>
         </Reveal>
 
         <Reveal delay={160}>
           <p className="mx-auto mt-6 max-w-xl text-[15px] leading-relaxed text-[#8a8a8a] sm:text-base">
-            Automação de quests, farm de Orbs, sniper de nicks e ferramentas de servidor reunidos
-            numa plataforma só. O NeighborD Hub cuida do trabalho repetitivo — você fica com o
-            resultado.
+            O NeighborD Hub é a infraestrutura definitiva para automação. Quests, orbs, nicks raros e ferramentas de gestão em uma única interface premium projetada para performance extrema.
           </p>
         </Reveal>
 
