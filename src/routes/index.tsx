@@ -713,7 +713,7 @@ function HeroPreview() {
             <span className="h-2.5 w-2.5 rounded-full bg-white/10" />
           </div>
           <div className="font-mono text-[10px] uppercase tracking-[0.25em] text-[#6f6f6f]">
-            hub / missões
+            core / automation
           </div>
         </div>
 
