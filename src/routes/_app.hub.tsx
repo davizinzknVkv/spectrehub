@@ -398,18 +398,16 @@ function HubPage() {
           <div className="mt-4 grid gap-8 md:grid-cols-[1.1fr_1fr] md:items-center">
             <div>
               <h2 className="text-4xl font-bold leading-tight tracking-tight sm:text-5xl">
-                Nenhum token <span className="text-[#818cf8]">configurado</span>
+                Autenticação <span className="text-[#818cf8]">Necessária</span>
               </h2>
               <p className="mt-4 max-w-md text-sm leading-relaxed text-slate-400">
-                Para o hub começar a executar missões, precisamos do seu token do Discord. Ele fica
-                salvo <span className="text-white">apenas no seu navegador</span> — nunca sai
-                daqui.
+                Para ativar os módulos de automação, é necessário vincular sua identidade. Utilizamos criptografia local para garantir que suas credenciais <span className="text-white">nunca deixem este dispositivo</span>.
               </p>
               <Link
                 to="/settings"
                 className="mt-6 inline-flex items-center gap-2 rounded-md bg-[#818cf8] px-6 py-3 font-mono text-xs font-bold uppercase tracking-widest text-white shadow-lg shadow-indigo-500/30 transition hover:bg-[#4752c4]"
               >
-                → configurar agora
+                → vincular conta agora
               </Link>
             </div>
             <div className="grid gap-3">
