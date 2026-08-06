@@ -1,40 +1,144 @@
 /**
- * Antes de realizar qualquer ação, entenda o contexto e instrução recente do usuário, comando mais recente enviado por ele: ## Revisão e Aprimoramento Visual de Componentes de Interface
+ * Antes de realizar qualquer ação, entenda o contexto e instrução recente do usuário, comando mais recente enviado por ele: Analise completamente toda a aplicação antes de realizar qualquer alteração e execute uma melhoria profunda de UI/UX em todo o sistema.
  *
- * Objetivo: Realize uma revisão completa e o aprimoramento visual de todos os cards e botões presentes em uma página web específica. O foco principal é otimizar a estética geral, implementar interações dinâmicas e garantir uma experiência de usuário mais envolvente e moderna.
+ * Seu objetivo é elevar o nível visual e de experiência do usuário para um padrão moderno, premium e altamente intuitivo, sem alterar funcionalidades existentes.
  *
- * Funcionalidades Detalhadas:
+ * ━━━━━━━━━━━━━━━━━━━
+ * OBJETIVO PRINCIPAL
+ * ━━━━━━━━━━━━━━━━━━━
  *
- * 1.  **Revisão Abrangente:**
- *     *   Analisar todos os elementos de card e botão na página designada.
- *     *   Identificar inconsistências visuais, problemas de alinhamento, espaçamento inadequado e tipografia não otimizada.
- *     *   Avaliar a clareza e a eficácia das chamadas para ação (CTAs) nos botões.
+ * Transformar a interface em uma experiência:
+ * - Mais clara
+ * - Mais intuitiva
+ * - Mais moderna
+ * - Mais consistente
+ * - Mais agradável de usar
+ * - Mais profissional visualmente
  *
- * 2.  **Aprimoramento Estético (CSS):**
- *     *   Refinar o design de cada card e botão para aderir a um padrão estético coeso e profissional.
- *     *   Aplicar melhorias no CSS, incluindo, mas não se limitando a:
- *         *   Paleta de cores consistente e agradável.
- *         *   Tipografia legível e esteticamente alinhada com o design geral.
- *         *   Bordas, sombras e fundos otimizados.
- *         *   Layouts responsivos para garantir a adaptabilidade em diferentes tamanhos de tela.
+ * ━━━━━━━━━━━━━━━━━━━
+ * ANÁLISE OBRIGATÓRIA
+ * ━━━━━━━━━━━━━━━━━━━
  *
- * 3.  **Efeitos Interativos:**
- *     *   Implementar efeitos de "hover" sutis e informativos para botões e cards, indicando interatividade.
- *     *   Adicionar animações de entrada e saída para os elementos, proporcionando uma experiência de navegação fluida e dinâmica. Exemplos incluem fades, slides, ou outras animações que melhorem a percepção de movimento e engajamento.
+ * Antes de modificar qualquer coisa, analise:
  *
- * **Requisitos Técnicos:**
+ * - Estrutura visual geral do sistema
+ * - Hierarquia de informação
+ * - Consistência de componentes
+ * - Layouts de páginas
+ * - Espaçamentos e alinhamentos
+ * - Tipografia e legibilidade
+ * - Cores e contraste
+ * - Botões e elementos interativos
+ * - Fluxos de navegação do usuário
+ * - Estados (loading, empty, error, success)
+ * - Responsividade mobile e desktop
+ * - Feedback visual de ações
+ * - Microinterações existentes
+ * - Usabilidade geral do sistema
+ * - Clareza dos formulários
+ * - Organização de conteúdo
+ * - Densidade visual (muito cheio vs muito vazio)
  *
- * *   O agente deve ter capacidade de interpretar e manipular código CSS.
- * *   O agente deve ser capaz de identificar e aplicar padrões de design modernos.
- * *   As animações e efeitos devem ser implementados de forma performática, sem comprometer o tempo de carregamento da página.
- * *   O prompt deve ser acompanhado da URL da página a ser revisada ou do código-fonte HTML/CSS relevante.
+ * ━━━━━━━━━━━━━━━━━━━
+ * MELHORIAS DE UI
+ * ━━━━━━━━━━━━━━━━━━━
  *
- * **Passos Necessários:**
+ * Aprimorar toda a interface com foco em:
  *
- * 1.  Fornecer a URL da página web ou o código-fonte.
- * 2.  Especificar quaisquer diretrizes de estilo ou marca existentes que devam ser seguidas.
- * 3.  Indicar o nível de sofisticação desejado para as animações e efeitos.
- * 4.  Aguardar a revisão e as sugestões de aprimoramento, ou a implementação direta das mudanças, conforme instruído.
+ * VISUAL MODERNO:
+ * - Melhorar hierarquia visual
+ * - Padronizar espaçamentos (grid consistente)
+ * - Melhorar alinhamento de elementos
+ * - Criar consistência entre páginas
+ * - Melhorar composição visual geral
+ * - Ajustar proporções de elementos
+ * - Melhorar leitura e escaneabilidade
+ *
+ * TIPOGRAFIA:
+ * - Melhorar hierarquia de títulos
+ * - Ajustar tamanhos de fonte
+ * - Melhorar espaçamento entre linhas
+ * - Melhorar legibilidade geral
+ * - Padronizar estilos de texto
+ *
+ * CORES E CONTRASTE:
+ * - Melhorar contraste para acessibilidade
+ * - Padronizar paleta de cores
+ * - Corrigir cores inconsistentes
+ * - Melhorar estados (hover, active, disabled)
+ *
+ * COMPONENTES:
+ * - Padronizar botões (tamanhos, estilos, estados)
+ * - Melhorar cards e containers
+ * - Unificar estilos de inputs e formulários
+ * - Melhorar modais e dropdowns
+ * - Criar consistência entre componentes
+ *
+ * ━━━━━━━━━━━━━━━━━━━
+ * MELHORIAS DE UX
+ * ━━━━━━━━━━━━━━━━━━━
+ *
+ * FOCO NA EXPERIÊNCIA DO USUÁRIO:
+ *
+ * - Tornar navegação mais intuitiva
+ * - Reduzir fricção em fluxos importantes
+ * - Melhorar clareza das ações principais
+ * - Melhorar feedback ao usuário
+ * - Melhorar estados de carregamento
+ * - Melhorar mensagens de erro e sucesso
+ * - Simplificar interações complexas
+ * - Melhorar fluxo de formulários
+ * - Tornar ações mais previsíveis
+ * - Melhorar descoberta de funcionalidades
+ *
+ * ━━━━━━━━━━━━━━━━━━━
+ * MICROINTERAÇÕES
+ * ━━━━━━━━━━━━━━━━━━━
+ *
+ * - Adicionar/transicionar estados de hover suaves
+ * - Melhorar feedback visual de cliques
+ * - Melhorar transições entre estados
+ * - Melhorar animações leves e não intrusivas
+ * - Evitar animações pesadas ou exageradas
+ * - Garantir fluidez visual
+ *
+ * ━━━━━━━━━━━━━━━━━━━
+ * RESPONSIVIDADE
+ * ━━━━━━━━━━━━━━━━━━━
+ *
+ * - Melhorar layout mobile-first
+ * - Ajustar espaçamentos em telas pequenas
+ * - Melhorar usabilidade touch
+ * - Evitar elementos pequenos demais
+ * - Garantir boa leitura no mobile
+ * - Ajustar grids responsivos
+ *
+ * ━━━━━━━━━━━━━━━━━━━
+ * PRINCÍPIOS IMPORTANTES
+ * ━━━━━━━━━━━━━━━━━━━
+ *
+ * - NÃO alterar funcionalidades existentes
+ * - NÃO remover features
+ * - NÃO quebrar fluxos atuais
+ * - NÃO mudar identidade visual sem necessidade extrema
+ * - Priorizar consistência acima de mudanças radicais
+ * - Melhorar sem descaracterizar o sistema
+ * - Manter performance leve e fluida
+ *
+ * ━━━━━━━━━━━━━━━━━━━
+ * RESULTADO ESPERADO
+ * ━━━━━━━━━━━━━━━━━━━
+ *
+ * Ao final, o sistema deve parecer:
+ *
+ * - Mais profissional
+ * - Mais moderno
+ * - Mais polido visualmente
+ * - Mais fácil de usar
+ * - Mais intuitivo
+ * - Mais consistente
+ * - Mais agradável de navegar
+ * - Com UX claramente melhorada em todos os fluxos
  */
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
