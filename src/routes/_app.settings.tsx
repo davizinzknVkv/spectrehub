@@ -8,7 +8,7 @@ import { verifyTurnstile } from "@/lib/turnstile.functions";
 import { Turnstile } from "@/components/Turnstile";
 import { Hcaptcha } from "@/components/Hcaptcha";
 import { PageHeader } from "@/components/PageHeader";
-import { KeyRound, Mail, ShieldCheck, Copy, Star, BookOpen, Eye, EyeOff, type LucideIcon } from "lucide-react";
+import { KeyRound, Mail, ShieldCheck, Copy, Star, BookOpen, Eye, EyeOff, HelpCircle, AlertTriangle, Lock, type LucideIcon } from "lucide-react";
 import { Badge, Button, Card, Field, Input, Modal } from "@/components/ui/ds";
 import step1 from "@/assets/tutorial-step-1.png.asset.json";
 import step2 from "@/assets/tutorial-step-2.png.asset.json";
