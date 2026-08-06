@@ -164,7 +164,21 @@ function RedeemPage() {
       </div>
 
       {/* Grid */}
-      <section className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
+      {creds && loadingOrbs && pageItems.length === 0 ? (
+        <section className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
+          {Array.from({ length: 12 }).map((_, i) => (
+            <div key={i} className="ds-card aspect-[4/5] animate-pulse !p-0" />
+          ))}
+        </section>
+      ) : filtered.length === 0 ? (
+        <DSEmptyState
+          icon={Search}
+          title="Nenhum item encontrado"
+          description={q ? `Não encontramos nada para "${q}". Tente outro termo.` : "O catálogo está vazio no momento."}
+          action={q ? <Button variant="secondary" onClick={() => setQ("")}>Limpar busca</Button> : null}
+        />
+      ) : (
+        <section className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
         {pageItems.map((it) => {
           const busy = busySku === it.skuId;
           return (
@@ -198,7 +212,8 @@ function RedeemPage() {
             </button>
           );
         })}
-      </section>
+        </section>
+      )}
 
       {/* Paginação */}
       {totalPages > 1 && (
