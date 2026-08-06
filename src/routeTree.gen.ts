@@ -23,6 +23,7 @@ import { Route as AppFarmsRouteImport } from './routes/_app.farms'
 import { Route as AppFakeRouteImport } from './routes/_app.fake'
 import { Route as AppCloneRouteImport } from './routes/_app.clone'
 import { Route as ApiPublicDiscordImageRouteImport } from './routes/api/public/discord-image'
+import { Route as ApiPublicAuditRouteImport } from './routes/api/public/audit'
 
 const AppRoute = AppRouteImport.update({
   id: '/_app',
@@ -93,6 +94,11 @@ const ApiPublicDiscordImageRoute = ApiPublicDiscordImageRouteImport.update({
   path: '/api/public/discord-image',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiPublicAuditRoute = ApiPublicAuditRouteImport.update({
+  id: '/api/public/audit',
+  path: '/api/public/audit',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -107,6 +113,7 @@ export interface FileRoutesByFullPath {
   '/settings': typeof AppSettingsRoute
   '/showcase': typeof AppShowcaseRoute
   '/spotify': typeof AppSpotifyRoute
+  '/api/public/audit': typeof ApiPublicAuditRoute
   '/api/public/discord-image': typeof ApiPublicDiscordImageRoute
 }
 export interface FileRoutesByTo {
@@ -122,6 +129,7 @@ export interface FileRoutesByTo {
   '/settings': typeof AppSettingsRoute
   '/showcase': typeof AppShowcaseRoute
   '/spotify': typeof AppSpotifyRoute
+  '/api/public/audit': typeof ApiPublicAuditRoute
   '/api/public/discord-image': typeof ApiPublicDiscordImageRoute
 }
 export interface FileRoutesById {
@@ -139,6 +147,7 @@ export interface FileRoutesById {
   '/_app/settings': typeof AppSettingsRoute
   '/_app/showcase': typeof AppShowcaseRoute
   '/_app/spotify': typeof AppSpotifyRoute
+  '/api/public/audit': typeof ApiPublicAuditRoute
   '/api/public/discord-image': typeof ApiPublicDiscordImageRoute
 }
 export interface FileRouteTypes {
@@ -156,6 +165,7 @@ export interface FileRouteTypes {
     | '/settings'
     | '/showcase'
     | '/spotify'
+    | '/api/public/audit'
     | '/api/public/discord-image'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -171,6 +181,7 @@ export interface FileRouteTypes {
     | '/settings'
     | '/showcase'
     | '/spotify'
+    | '/api/public/audit'
     | '/api/public/discord-image'
   id:
     | '__root__'
@@ -187,12 +198,14 @@ export interface FileRouteTypes {
     | '/_app/settings'
     | '/_app/showcase'
     | '/_app/spotify'
+    | '/api/public/audit'
     | '/api/public/discord-image'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AppRoute: typeof AppRouteWithChildren
+  ApiPublicAuditRoute: typeof ApiPublicAuditRoute
   ApiPublicDiscordImageRoute: typeof ApiPublicDiscordImageRoute
 }
 
@@ -296,6 +309,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiPublicDiscordImageRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/audit': {
+      id: '/api/public/audit'
+      path: '/api/public/audit'
+      fullPath: '/api/public/audit'
+      preLoaderRoute: typeof ApiPublicAuditRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -332,6 +352,7 @@ const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AppRoute: AppRouteWithChildren,
+  ApiPublicAuditRoute: ApiPublicAuditRoute,
   ApiPublicDiscordImageRoute: ApiPublicDiscordImageRoute,
 }
 export const routeTree = rootRouteImport
