@@ -318,8 +318,8 @@ const REASONS = [
   {
     n: "01",
     icon: Gauge,
-    title: "Performance",
-    desc: "Execução em background com impacto mínimo: o hub trabalha enquanto você usa o Discord normalmente.",
+    title: "Latência Ultra-Baixa",
+    desc: "Execução distribuída que minimiza tempos de resposta e maximiza a taxa de sucesso nas operações.",
   },
   {
     n: "02",
