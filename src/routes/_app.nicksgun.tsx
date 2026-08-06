@@ -8,13 +8,13 @@ import { ComingSoon } from "@/components/ComingSoon";
 import { Button, Card, EmptyState, Field, Input } from "@/components/ui/ds";
 
 export const Route = createFileRoute("/_app/nicksgun")({
-  head: () => ({ meta: [{ title: "Nicks-Gun — Em breve — Neighborshub" }] }),
+  head: () => ({ meta: [{ title: "Nicks-Gun — Sniper de Usernames — Neighborshub" }] }),
   component: () => (
     <ComingSoon
       name="Nicks-Gun"
       icon={Crosshair}
-      eyebrow="nicks --soon"
-      description="Nicks-Gun está em desenvolvimento e estará disponível em breve."
+      eyebrow="identity --sniper"
+      description="Capture identidades raras de 2 e 3 letras. O sniper avançado está em fase final de calibração para garantir latência zero na detecção."
     />
   ),
 });

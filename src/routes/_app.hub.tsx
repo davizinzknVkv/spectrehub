@@ -223,16 +223,15 @@ function HubPage() {
           <div className="grid items-center gap-10 md:grid-cols-[1.1fr_1fr]">
             <div>
               <div className="inline-flex items-center gap-2 rounded-full border border-[#818cf8]/30 bg-[#818cf8]/10 px-3 py-1 font-mono text-[10px] uppercase tracking-widest text-[#c4b5fd]">
-                <Sparkles className="h-3 w-3" /> bem-vindo ao hub
+                <Sparkles className="h-3 w-3" /> hub de elite ativado
               </div>
               <h1 className="mt-4 text-5xl font-black leading-[1.05] tracking-tight sm:text-6xl md:text-7xl">
-                Conecte seu Discord
+                Maximize sua conta
                 <br />
-                <span className="text-[#818cf8]">e comece a farmar.</span>
+                <span className="text-[#818cf8]">em minutos.</span>
               </h1>
               <p className="mt-5 max-w-md text-sm leading-relaxed text-slate-400 sm:text-base">
-                Cole seu token ou faça login por email — o Neighborshub roda as missões em segundo
-                plano e você só coleta os Orbs. Fica tudo salvo no seu navegador.
+                Conecte sua conta e assuma o controle. Nossa infraestrutura automatiza as tarefas repetitivas para que você possa focar no que realmente importa. Segurança máxima com processamento local.
               </p>
 
               <div className="mt-8 flex flex-wrap gap-3">
@@ -399,18 +398,16 @@ function HubPage() {
           <div className="mt-4 grid gap-8 md:grid-cols-[1.1fr_1fr] md:items-center">
             <div>
               <h2 className="text-4xl font-bold leading-tight tracking-tight sm:text-5xl">
-                Nenhum token <span className="text-[#818cf8]">configurado</span>
+                Autenticação <span className="text-[#818cf8]">Necessária</span>
               </h2>
               <p className="mt-4 max-w-md text-sm leading-relaxed text-slate-400">
-                Para o hub começar a executar missões, precisamos do seu token do Discord. Ele fica
-                salvo <span className="text-white">apenas no seu navegador</span> — nunca sai
-                daqui.
+                Para ativar os módulos de automação, é necessário vincular sua identidade. Utilizamos criptografia local para garantir que suas credenciais <span className="text-white">nunca deixem este dispositivo</span>.
               </p>
               <Link
                 to="/settings"
                 className="mt-6 inline-flex items-center gap-2 rounded-md bg-[#818cf8] px-6 py-3 font-mono text-xs font-bold uppercase tracking-widest text-white shadow-lg shadow-indigo-500/30 transition hover:bg-[#4752c4]"
               >
-                → configurar agora
+                → vincular conta agora
               </Link>
             </div>
             <div className="grid gap-3">
@@ -1520,19 +1517,19 @@ export function CaptchaModal({
         <div className="font-mono text-[10px] uppercase tracking-[0.3em] text-slate-400">
           $ verify --human
         </div>
-        <h3 className="mt-2 text-lg font-semibold text-white">Confirme que é humano</h3>
+        <h3 className="mt-2 text-lg font-semibold text-white">Verificação de Segurança</h3>
         <p className="mt-1 text-sm text-slate-400">
-          {label ?? quest?.questName ?? "Antes de executar, resolva o desafio."}
+          {label ?? quest?.questName ?? "Valide sua identidade para prosseguir com a execução."}
         </p>
 
         <div className="mt-4 rounded-lg border border-amber-400/40 bg-amber-500/10 p-3">
           <div className="font-mono text-[10px] uppercase tracking-[0.25em] text-amber-300">
-            ⚠ aviso de risco
+            ⚠ protocolo de segurança
           </div>
           <p className="mt-1 text-[12px] leading-relaxed text-slate-400">
-            Automatizar missões {label ? "em lote (run all) aumenta o risco de detecção e " : ""}
-            viola os Termos de Serviço do Discord e pode resultar em{" "}
-            <span className="text-rose-400">suspensão ou banimento</span> da sua conta. Use por sua conta e risco.
+            A execução automatizada {label ? "em lote " : ""}
+            pode ser interpretada como comportamento anômalo pelos sistemas de auditoria do Discord, o que pode resultar em{" "}
+            <span className="text-rose-400">restrições permanentes na conta</span>. A responsabilidade operacional é integralmente do usuário.
           </p>
         </div>
 
@@ -1591,13 +1588,13 @@ export function EmptyState({ onScan }: { onScan: () => void }) {
         $ scan --available
       </div>
       <p className="mt-3 max-w-sm text-sm text-slate-400">
-        Nenhuma missão carregada. Rode um scan pra ver o que o Discord tem disponível agora.
+        Nenhuma missão detectada na fila atual. Inicie uma varredura para identificar oportunidades disponíveis no Discord.
       </p>
       <button
         onClick={onScan}
         className="mt-5 rounded-md border border-[#818cf8]/40 bg-[#818cf8]/10 px-4 py-2 font-mono text-[11px] font-semibold uppercase tracking-widest text-[#c4b5fd] hover:bg-[#818cf8]/20"
       >
-        → sondar missões
+        → iniciar varredura
       </button>
     </div>
   );

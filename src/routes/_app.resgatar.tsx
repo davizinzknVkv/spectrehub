@@ -280,8 +280,7 @@ function RedeemPage() {
             <div className="flex items-start gap-2 rounded-lg border border-[var(--border-1)] bg-white/[0.03] p-3 ds-small">
               <ShieldCheck className="mt-0.5 h-4 w-4 shrink-0 text-[var(--ok)]" />
               <span>
-                O preço em Orbs é validado pela API do Discord no momento da compra. Se o saldo
-                for insuficiente, a compra falha sem debitar.
+                A transação é validada em tempo real pela infraestrutura do Discord. Caso o saldo seja insuficiente ou o item esteja indisponível, a operação será abortada sem custos.
               </span>
             </div>
           </div>

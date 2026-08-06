@@ -1,5 +1,194 @@
 /**
- * Antes de realizar qualquer ação, entenda o contexto e instrução recente do usuário, comando mais recente enviado por ele: Melhorar no meu sistema os estados de loading, empty, error e success em todas as telas, mantendo as funcionalidades existentes.
+ * Antes de realizar qualquer ação, entenda o contexto e instrução recente do usuário, comando mais recente enviado por ele: ```txt
+Analise completamente toda a aplicação, página, fluxo, produto ou estrutura de comunicação antes de realizar qualquer alteração.
+
+Seu objetivo é atuar como um especialista sênior em Copywriting, Marketing, Conversão, Branding, Growth e UX Writing, realizando melhorias profundas em toda comunicação da plataforma para maximizar clareza, autoridade, retenção, engajamento e conversão.
+
+Você deve otimizar qualquer tipo de copy presente no sistema:
+- Landing pages
+- Páginas de vendas
+- Headlines
+- CTAs
+- Textos institucionais
+- Dashboards SaaS
+- Funis
+- Onboarding
+- Mensagens automáticas
+- UX writing
+- E-mails
+- Descrições de produtos
+- Textos de marketing
+- Mensagens de erro
+- Microcopy
+- Copy de anúncios
+- Copy para IA/chatbots
+- Fluxos de conversão
+- Ofertas
+- Upsells
+- Checkout
+- Notificações
+- Scripts de vendas
+- WhatsApp
+- Interfaces e componentes
+
+━━━━━━━━━━━━━━━━━━━
+OBJETIVO PRINCIPAL
+━━━━━━━━━━━━━━━━━━━
+
+Transformar toda a comunicação do sistema em uma experiência:
+- Mais persuasiva
+- Mais clara
+- Mais profissional
+- Mais moderna
+- Mais estratégica
+- Mais confiável
+- Mais envolvente
+- Mais focada em conversão
+
+━━━━━━━━━━━━━━━━━━━
+ANÁLISE OBRIGATÓRIA
+━━━━━━━━━━━━━━━━━━━
+
+Antes de modificar qualquer texto, analise:
+
+- Público-alvo
+- Posicionamento da marca
+- Nível de consciência do usuário
+- Jornada do usuário
+- Estrutura da oferta
+- Clareza da comunicação
+- Hierarquia textual
+- CTA principais
+- Fluxos de conversão
+- Possíveis objeções
+- Pontos de fricção
+- Credibilidade da comunicação
+- Tom de voz da marca
+- Estratégia de retenção
+- Estratégia de persuasão
+- Qualidade das headlines
+- Legibilidade dos textos
+- Escaneabilidade visual
+- Gatilhos mentais utilizados
+- Consistência da comunicação
+
+━━━━━━━━━━━━━━━━━━━
+OTIMIZAÇÕES DE COPY
+━━━━━━━━━━━━━━━━━━━
+
+Melhore:
+- Headlines fracas
+- CTAs genéricos
+- Textos confusos
+- Mensagens sem clareza
+- Comunicação pouco persuasiva
+- Textos longos e cansativos
+- Falta de hierarquia visual
+- Falta de benefício claro
+- Falta de prova social
+- Falta de urgência estratégica
+- Falta de diferenciação
+- Falta de autoridade
+- Falta de conexão emocional
+- UX Writing ruim
+- Fluxos pouco intuitivos
+
+━━━━━━━━━━━━━━━━━━━
+ESTRATÉGIAS QUE DEVEM SER UTILIZADAS
+━━━━━━━━━━━━━━━━━━━
+
+Aplicar quando fizer sentido:
+
+- Copywriting de conversão
+- Marketing emocional
+- Marketing direto
+- Storytelling
+- Gatilhos mentais
+- Escassez
+- Urgência
+- Autoridade
+- Prova social
+- Clareza extrema
+- Benefício acima de funcionalidade
+- Estrutura AIDA
+- Estrutura PAS
+- Estrutura BAB
+- Growth marketing
+- UX Writing
+- Neurocopy
+- Persuasão estratégica
+- Escrita focada em retenção
+
+━━━━━━━━━━━━━━━━━━━
+FOCO EM CONVERSÃO
+━━━━━━━━━━━━━━━━━━━
+
+Toda comunicação deve:
+- Reduzir dúvidas
+- Aumentar confiança
+- Facilitar decisões
+- Direcionar ações
+- Melhorar retenção
+- Melhorar ativação do usuário
+- Melhorar onboarding
+- Melhorar vendas
+- Melhorar engajamento
+- Melhorar percepção de valor
+
+━━━━━━━━━━━━━━━━━━━
+UX WRITING
+━━━━━━━━━━━━━━━━━━━
+
+Melhore:
+- Mensagens de erro
+- Estados vazios
+- Loadings
+- Tooltips
+- Placeholders
+- Mensagens automáticas
+- Fluxos de confirmação
+- Textos de onboarding
+- Navegação textual
+- Comunicação de sistema
+
+A comunicação deve parecer:
+- Humana
+- Inteligente
+- Clara
+- Natural
+- Profissional
+- Moderna
+
+━━━━━━━━━━━━━━━━━━━
+REGRAS IMPORTANTES
+━━━━━━━━━━━━━━━━━━━
+
+- NÃO gerar textos genéricos
+- NÃO exagerar em gatilhos mentais
+- NÃO usar linguagem amadora
+- NÃO usar copy apelativa ou forçada
+- NÃO quebrar identidade da marca
+- Priorizar clareza acima de exagero
+- Manter consistência em toda comunicação
+- Adaptar a copy ao contexto de cada página
+- Pensar sempre na experiência do usuário final
+
+━━━━━━━━━━━━━━━━━━━
+RESULTADO ESPERADO
+━━━━━━━━━━━━━━━━━━━
+
+Ao finalizar, toda a comunicação da aplicação deve estar:
+- Muito mais profissional
+- Mais persuasiva
+- Mais moderna
+- Mais estratégica
+- Mais clara
+- Mais confiável
+- Mais agradável de consumir
+- Mais focada em conversão e retenção
+
+A aplicação deve parecer construída por uma empresa SaaS premium especializada em marketing, tecnologia e inteligência artificial.
+```
  */
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
@@ -25,9 +214,9 @@ import {
 } from "lucide-react";
 import nghcLogo from "@/assets/nghc-logo.png.asset.json";
 
-const TITLE = "NeighborD Hub — Automação premium de quests do Discord";
+const TITLE = "NeighborD Hub — A Elite da Automação para Discord";
 const DESCRIPTION =
-  "Plataforma para comunidades que levam a experiência a sério: auto quests, farm de Orbs, sniper de nicks e ferramentas de servidor num único hub.";
+  "Maximize sua eficiência no Discord. Automação avançada de quests, sniper de nicks raros e ferramentas de elite em uma infraestrutura premium de alta performance.";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -76,7 +265,7 @@ const PRODUCTS: Product[] = [
   {
     name: "Auto Quests",
     category: "Automação",
-    desc: "Detecta, executa e acompanha suas quests do Discord em segundo plano, com fila e cooldown por plano.",
+    desc: "Acelere seu progresso. Detecção e execução inteligente de missões em segundo plano com latência ultra-baixa.",
     status: "Estável",
     to: "/missoes",
     icon: Zap,
@@ -84,7 +273,7 @@ const PRODUCTS: Product[] = [
   {
     name: "Nicks-Gun",
     category: "Discord",
-    desc: "Sniper de usernames curtos: varre nicks de 2 e 3 letras e mostra o que está disponível em tempo real.",
+    desc: "Domine sua identidade. Sniper avançado para capturar usernames raros de 2 e 3 letras antes de todos.",
     status: "Beta",
     to: "/nicksgun",
     icon: Target,
@@ -92,31 +281,31 @@ const PRODUCTS: Product[] = [
   {
     name: "Resgatar Orbs",
     category: "Economia",
-    desc: "Catálogo completo da loja de Orbs com preços, imagens reais e resgate direto pelo hub.",
+    desc: "Transforme esforço em recompensa. Acesso direto ao catálogo oficial com resgate otimizado em um clique.",
     status: "Estável",
     to: "/resgatar",
     icon: Tag,
   },
   {
-    name: "Farms",
+    name: "Farms Automáticas",
     category: "Automação",
-    desc: "Rotinas de farm contínuo com controle de ritmo para manter progresso sem supervisão.",
+    desc: "Produtividade ininterrupta. Sistemas de farm contínuo com algoritmos de proteção anti-detecção.",
     status: "Estável",
     to: "/farms",
     icon: Gauge,
   },
   {
-    name: "Server Tools",
+    name: "Server Control",
     category: "Utilidades",
-    desc: "Gestão de servidores em massa: clonagem, saída em lote e limpeza da sua lista de guildas.",
+    desc: "Poder total sobre sua conta. Gestão profissional de servidores, clonagem e limpeza em massa.",
     status: "Estável",
     to: "/clone",
     icon: ShieldCheck,
   },
   {
-    name: "Spotify Sync",
+    name: "Presence Sync",
     category: "Utilidades",
-    desc: "Integra sua presença musical ao perfil e mantém o status vivo enquanto você farma.",
+    desc: "Identidade ativa. Sincronize seu status e música enquanto nossas ferramentas trabalham para você.",
     status: "Estável",
     to: "/spotify",
     icon: Music4,
@@ -129,26 +318,26 @@ const REASONS = [
   {
     n: "01",
     icon: Gauge,
-    title: "Performance",
-    desc: "Execução em background com impacto mínimo: o hub trabalha enquanto você usa o Discord normalmente.",
+    title: "Latência Ultra-Baixa",
+    desc: "Execução distribuída que minimiza tempos de resposta e maximiza a taxa de sucesso nas operações.",
   },
   {
     n: "02",
     icon: ShieldCheck,
-    title: "Controle",
-    desc: "Cooldowns, filas e limites por plano respeitam os limites da API — nada de ação atropelada.",
+    title: "Segurança de Nível Bancário",
+    desc: "Sistemas de proteção que emulam padrões de comportamento humano, mitigando riscos de detecção por heurística.",
   },
   {
     n: "03",
     icon: Sparkles,
-    title: "Experiência",
-    desc: "Interface única para quests, orbs, nicks e servidores, com histórico e progresso ao vivo.",
+    title: "Omnicanalidade",
+    desc: "Centralize o gerenciamento de múltiplas frentes — quests, economia e identidade — em um único dashboard intuitivo.",
   },
   {
     n: "04",
     icon: LifeBuoy,
-    title: "Suporte",
-    desc: "Comunidade ativa e atendimento por ticket no servidor oficial, direto com quem desenvolve.",
+    title: "SLA Garantido",
+    desc: "Suporte especializado e atualizações constantes para garantir que suas automações nunca fiquem obsoletas.",
   },
 ];
 
@@ -156,53 +345,53 @@ const PLANS = [
   {
     name: "Free",
     price: "R$ 0",
-    period: "sempre",
-    cta: "Cadastrar no Free",
+    period: "para sempre",
+    cta: "Começar Grátis",
     highlight: false,
     features: [
-      "3 missões por dia",
-      "Cooldown de 10 min entre missões",
-      "Todos os tipos de quest (vídeo e jogo)",
-      "Histórico local no navegador",
+      "3 missões diárias",
+      "Cooldown de 10 min",
+      "Acesso a todas as quests",
+      "Estatísticas locais",
     ],
   },
   {
     name: "Premium",
     price: "R$ 9,90",
-    period: "30 dias",
-    cta: "Assinar 30 dias",
+    period: "acesso 30 dias",
+    cta: "Obter Acesso Premium",
     highlight: true,
     features: [
-      "Missões ilimitadas por dia",
-      "Cooldown de apenas 3 min",
-      "Cargo Premium no Discord",
-      "Expira automaticamente após 30 dias",
+      "Missões ilimitadas",
+      "Cooldown reduzido (3 min)",
+      "Cargo Premium exclusivo",
+      "Suporte prioritário",
     ],
   },
   {
     name: "Lifetime",
     price: "R$ 39,90",
     period: "pagamento único",
-    cta: "Comprar lifetime",
+    cta: "Comprar Acesso Vitalício",
     highlight: false,
     features: [
-      "Todos os benefícios Premium",
-      "Cargo permanente — sem expiração",
-      "Cooldown de 3 min entre missões",
-      "Prioridade em novos recursos",
+      "Benefícios Premium vitalícios",
+      "Cargo permanente no Discord",
+      "Zero mensalidades",
+      "Acesso antecipado a betas",
     ],
   },
   {
-    name: "Boost",
+    name: "Booster",
     price: "Grátis",
-    period: "boost o servidor",
-    cta: "Boost o servidor",
+    period: "via server boost",
+    cta: "Impulsionar Servidor",
     highlight: false,
     features: [
-      "Missões ilimitadas por dia",
-      "Cooldown mínimo de 1 min",
+      "Missões ilimitadas",
+      "Menor cooldown do sistema (1 min)",
       "Cargo Booster automático",
-      "Se remover o boost, perde o acesso",
+      "Status VIP na comunidade",
     ],
   },
 ];
@@ -451,19 +640,17 @@ function Hero() {
 
         <Reveal delay={80}>
           <h1 className="mt-7 font-display text-[2.7rem] font-extrabold leading-[1.02] tracking-[-0.04em] text-white sm:text-6xl lg:text-[4.5rem]">
-            Uma nova experiência
+            A Próxima Geração da
             <br />
             <span className="bg-gradient-to-b from-white via-white to-[#8f8f8f] bg-clip-text text-transparent">
-              para sua comunidade.
+              Experiência no Discord.
             </span>
           </h1>
         </Reveal>
 
         <Reveal delay={160}>
           <p className="mx-auto mt-6 max-w-xl text-[15px] leading-relaxed text-[#8a8a8a] sm:text-base">
-            Automação de quests, farm de Orbs, sniper de nicks e ferramentas de servidor reunidos
-            numa plataforma só. O NeighborD Hub cuida do trabalho repetitivo — você fica com o
-            resultado.
+            O NeighborD Hub é a infraestrutura definitiva para automação. Quests, orbs, nicks raros e ferramentas de gestão em uma única interface premium projetada para performance extrema.
           </p>
         </Reveal>
 
@@ -526,7 +713,7 @@ function HeroPreview() {
             <span className="h-2.5 w-2.5 rounded-full bg-white/10" />
           </div>
           <div className="font-mono text-[10px] uppercase tracking-[0.25em] text-[#6f6f6f]">
-            hub / missões
+            core / automation
           </div>
         </div>
 
@@ -786,9 +973,9 @@ function ProductsSection() {
       <Reveal>
         <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
           <div className="max-w-2xl">
-            <span className="eyebrow">produtos</span>
+            <span className="eyebrow">Soluções de Engenharia</span>
             <h2 className="mt-4 font-display text-3xl font-extrabold tracking-[-0.03em] text-white sm:text-[2.6rem]">
-              Produtos feitos para elevar sua experiência.
+              Arsenal de Performance.
             </h2>
             <p className="mt-3 text-sm text-[#8a8a8a]">
               Cada ferramenta do hub resolve uma dor real de quem vive Discord todo dia.
@@ -934,9 +1121,9 @@ function ReasonsSection() {
     <section id="recursos" className="mx-auto max-w-7xl px-4 py-20 sm:px-6 sm:py-28 lg:px-8">
       <Reveal>
         <div className="max-w-2xl">
-          <span className="eyebrow">por que neighbord hub</span>
+          <span className="eyebrow">Diferenciais Competitivos</span>
           <h2 className="mt-4 font-display text-3xl font-extrabold tracking-[-0.03em] text-white sm:text-[2.6rem]">
-            Feito para quem não aceita o básico.
+            A Vantagem Injusta que Você Estava Buscando.
           </h2>
           <p className="mt-3 text-sm text-[#8a8a8a]">
             Quatro princípios que guiam cada release do hub.
@@ -978,9 +1165,9 @@ function PlansSection() {
       <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 sm:py-28 lg:px-8">
         <Reveal>
           <div className="max-w-2xl">
-            <span className="eyebrow">planos</span>
+            <span className="eyebrow">Assinaturas e Licenciamento</span>
             <h2 className="mt-4 font-display text-3xl font-extrabold tracking-[-0.03em] text-white sm:text-[2.6rem]">
-              Escolha o ritmo do seu farm.
+              Escalabilidade sob medida.
             </h2>
             <p className="mt-3 text-sm text-[#8a8a8a]">
               O plano é detectado pelo seu cargo no Discord — se expirar, o hub volta pro Free
@@ -1081,9 +1268,9 @@ function FreeSignup() {
       <Reveal>
         <div className="grid gap-10 rounded-2xl border border-white/[0.07] bg-[#0d0d0d]/70 p-7 backdrop-blur-xl md:grid-cols-[1.05fr_0.95fr] md:p-12">
           <div>
-            <span className="eyebrow">cadastro free</span>
+            <span className="eyebrow">Acesso Comunitário</span>
             <h2 className="mt-4 font-display text-2xl font-extrabold tracking-[-0.03em] text-white sm:text-4xl">
-              Ganhe o cargo Free em um minuto.
+              Habilite seu Acesso Gratuito em Segundos.
             </h2>
             <ol className="mt-8 space-y-4">
               {[
@@ -1227,9 +1414,9 @@ function CommunitySection() {
       <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 sm:py-28 lg:px-8">
         <Reveal>
           <div className="max-w-2xl">
-            <span className="eyebrow">comunidade</span>
+            <span className="eyebrow">Ecossistema Exclusivo</span>
             <h2 className="mt-4 font-display text-3xl font-extrabold tracking-[-0.03em] text-white sm:text-[2.6rem]">
-              Faça parte da comunidade.
+              Conecte-se com a Elite.
             </h2>
             <p className="mt-3 text-sm text-[#8a8a8a]">
               Suporte por ticket, avisos de update, canais de farm e gente online o dia inteiro.
@@ -1356,10 +1543,10 @@ function FinalCta() {
             className="mx-auto h-14 w-14 object-contain opacity-90"
           />
           <h2 className="mt-8 font-display text-3xl font-extrabold tracking-[-0.035em] text-white sm:text-5xl">
-            Pronto para conhecer o NeighborD Hub?
+            Pronto para Dominar o Ecossistema?
           </h2>
           <p className="mx-auto mt-4 max-w-lg text-[15px] text-[#8a8a8a]">
-            Crie seu acesso, escolha um plano e comece a farmar em minutos.
+            Junte-se à elite e ative sua infraestrutura de automação hoje mesmo.
           </p>
           <div className="mt-9 flex flex-wrap items-center justify-center gap-3">
             <Link to="/hub" className="btn-accent px-6 py-3.5">
@@ -1455,9 +1642,9 @@ function SiteFooter() {
             </a>
           </div>
           <p className="text-[11px] text-[#6f6f6f]">
-            © {new Date().getFullYear()} NeighborD Hub. Todos os direitos reservados.
+            © {new Date().getFullYear()} NeighborD Hub — Sistemas de Alta Disponibilidade.
             <span className="mx-2 text-white/15">·</span>
-            Código-fonte fornecido por <span className="text-[#a0a0a0]">isnouu</span>
+            Arquitetura desenvolvida por <span className="text-[#a0a0a0]">isnouu</span>
           </p>
         </div>
       </div>
