@@ -190,10 +190,10 @@ function MissoesPage() {
 
         {quests.length === 0 && !loadingQuests && <EmptyState onScan={loadQuests} />}
         {loadingQuests && quests.length === 0 && (
-          <div className="ds-card text-center">
-            <span className="ds-label">
-              <span className="pulse-dot inline-block">▮</span> sondando o discord…
-            </span>
+          <div className="grid grid-cols-[repeat(auto-fill,minmax(220px,1fr))] gap-3">
+            {Array.from({ length: 6 }).map((_, i) => (
+              <div key={i} className="ds-card aspect-[4/3] animate-pulse !p-0" />
+            ))}
           </div>
         )}
 
