@@ -89,11 +89,11 @@ function SettingsPage() {
       {disconnectModal}
 
       <PageHeader
-        eyebrow="auth --login"
+        eyebrow="auth --gateway"
         icon={KeyRound}
-        title="Entrar na sua"
-        highlight="conta"
-        description="Escolha como quer logar. Fica salvo apenas no seu navegador (localStorage) e só é enviado para o Discord via proxy deste site."
+        title="Portal de"
+        highlight="Acesso"
+        description="Vincule sua conta para ativar os recursos premium. Seus dados são processados localmente e nunca são compartilhados com terceiros."
       />
 
       <div className="mx-auto w-full max-w-xl space-y-4">
