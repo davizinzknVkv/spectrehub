@@ -1,40 +1,40 @@
 /**
- * Antes de realizar qualquer ação, entenda o contexto e instrução recente do usuário, comando mais recente enviado por ele: ## Implementação de Transições de Página Avançadas
+ * Antes de realizar qualquer ação, entenda o contexto e instrução recente do usuário, comando mais recente enviado por ele: ## Revisão e Aprimoramento Visual de Componentes de Interface
  *
- * Objetivo: Desenvolver um sistema de transições de página dinâmicas e visualmente atraentes para uma aplicação web.
+ * Objetivo: Realize uma revisão completa e o aprimoramento visual de todos os cards e botões presentes em uma página web específica. O foco principal é otimizar a estética geral, implementar interações dinâmicas e garantir uma experiência de usuário mais envolvente e moderna.
  *
- * Funcionalidade:
+ * Funcionalidades Detalhadas:
  *
- * *   **Efeitos de Transição:** Implementar uma variedade de efeitos de transição modernos e suaves entre as páginas, como:
- *     *   Fade In/Out
- *     *   Slide (esquerda/direita/cima/baixo)
- *     *   Zoom In/Out
- *     *   Flip (horizontal/vertical)
- *     *   Parallax
- *     *   Efeitos personalizados (a serem definidos)
- * *   **Configurabilidade:** Permitir a configuração de parâmetros para cada transição, como:
- *     *   Duração
- *     *   Curva de aceleração (easing)
- *     *   Direção
- *     *   Opacidade
- * *   **Otimização:** Garantir que as transições sejam performáticas e não causem gargalos na experiência do usuário, utilizando técnicas como hardware acceleration quando possível.
- * *   **Compatibilidade:** Assegurar a compatibilidade com os principais navegadores modernos.
- * *   **Integração:** Facilitar a integração com frameworks JavaScript existentes (ex: React, Vue, Angular) ou ser uma solução independente.
+ * 1.  **Revisão Abrangente:**
+ *     *   Analisar todos os elementos de card e botão na página designada.
+ *     *   Identificar inconsistências visuais, problemas de alinhamento, espaçamento inadequado e tipografia não otimizada.
+ *     *   Avaliar a clareza e a eficácia das chamadas para ação (CTAs) nos botões.
+ *
+ * 2.  **Aprimoramento Estético (CSS):**
+ *     *   Refinar o design de cada card e botão para aderir a um padrão estético coeso e profissional.
+ *     *   Aplicar melhorias no CSS, incluindo, mas não se limitando a:
+ *         *   Paleta de cores consistente e agradável.
+ *         *   Tipografia legível e esteticamente alinhada com o design geral.
+ *         *   Bordas, sombras e fundos otimizados.
+ *         *   Layouts responsivos para garantir a adaptabilidade em diferentes tamanhos de tela.
+ *
+ * 3.  **Efeitos Interativos:**
+ *     *   Implementar efeitos de "hover" sutis e informativos para botões e cards, indicando interatividade.
+ *     *   Adicionar animações de entrada e saída para os elementos, proporcionando uma experiência de navegação fluida e dinâmica. Exemplos incluem fades, slides, ou outras animações que melhorem a percepção de movimento e engajamento.
  *
  * **Requisitos Técnicos:**
  *
- * *   Utilizar tecnologias web modernas (HTML5, CSS3, JavaScript).
- * *   Preferencialmente, utilizar bibliotecas ou frameworks de animação eficientes (ex: GSAP, Anime.js, Framer Motion).
- * *   Considerar a acessibilidade e o impacto em usuários com sensibilidade a movimento.
+ * *   O agente deve ter capacidade de interpretar e manipular código CSS.
+ * *   O agente deve ser capaz de identificar e aplicar padrões de design modernos.
+ * *   As animações e efeitos devem ser implementados de forma performática, sem comprometer o tempo de carregamento da página.
+ * *   O prompt deve ser acompanhado da URL da página a ser revisada ou do código-fonte HTML/CSS relevante.
  *
  * **Passos Necessários:**
  *
- * 1.  **Pesquisa e Seleção de Ferramentas:** Identificar e selecionar as bibliotecas/frameworks de animação mais adequadas.
- * 2.  **Definição da Arquitetura:** Projetar a estrutura do código para gerenciar as transições de forma modular e escalável.
- * 3.  **Implementação dos Efeitos:** Codificar os diferentes efeitos de transição, começando pelos mais comuns.
- * 4.  **Criação da Interface de Configuração (Opcional):** Se aplicável, desenvolver uma interface para gerenciar as configurações das transições.
- * 5.  **Testes e Otimização:** Realizar testes rigorosos em diferentes navegadores e dispositivos, otimizando a performance.
- * 6.  **Documentação:** Documentar o uso e a configuração das transições.
+ * 1.  Fornecer a URL da página web ou o código-fonte.
+ * 2.  Especificar quaisquer diretrizes de estilo ou marca existentes que devam ser seguidas.
+ * 3.  Indicar o nível de sofisticação desejado para as animações e efeitos.
+ * 4.  Aguardar a revisão e as sugestões de aprimoramento, ou a implementação direta das mudanças, conforme instruído.
  */
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
