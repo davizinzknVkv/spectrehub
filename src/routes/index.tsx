@@ -973,9 +973,9 @@ function ProductsSection() {
       <Reveal>
         <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
           <div className="max-w-2xl">
-            <span className="eyebrow">produtos</span>
+            <span className="eyebrow">Soluções de Engenharia</span>
             <h2 className="mt-4 font-display text-3xl font-extrabold tracking-[-0.03em] text-white sm:text-[2.6rem]">
-              Produtos feitos para elevar sua experiência.
+              Arsenal de Performance.
             </h2>
             <p className="mt-3 text-sm text-[#8a8a8a]">
               Cada ferramenta do hub resolve uma dor real de quem vive Discord todo dia.
