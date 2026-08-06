@@ -214,9 +214,9 @@ import {
 } from "lucide-react";
 import nghcLogo from "@/assets/nghc-logo.png.asset.json";
 
-const TITLE = "NeighborD Hub — Automação premium de quests do Discord";
+const TITLE = "NeighborD Hub — A Elite da Automação para Discord";
 const DESCRIPTION =
-  "Plataforma para comunidades que levam a experiência a sério: auto quests, farm de Orbs, sniper de nicks e ferramentas de servidor num único hub.";
+  "Maximize sua eficiência no Discord. Automação avançada de quests, sniper de nicks raros e ferramentas de elite em uma infraestrutura premium de alta performance.";
 
 export const Route = createFileRoute("/")({
   head: () => ({
