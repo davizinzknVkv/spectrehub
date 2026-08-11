@@ -189,8 +189,8 @@ function SidebarBody({
       </nav>
 
       <div className="mt-auto border-t border-white/[0.06] p-3">
-        <a href={DISCORD_INVITE} target="_blank" rel="noreferrer" className="nav-item">
-          <LifeBuoy className="h-[15px] w-[15px] shrink-0 text-slate-600" />
+        <a href={DISCORD_INVITE} target="_blank" rel="noreferrer" className="nav-item group">
+          <LifeBuoy className="h-[14px] w-[14px] shrink-0 text-[#444] group-hover:text-white transition-colors" />
           Suporte Discord
         </a>
       </div>
