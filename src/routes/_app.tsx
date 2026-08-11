@@ -266,7 +266,7 @@ function TopBar({ onOpenMenu, pathname }: { onOpenMenu: () => void; pathname: st
 
         {currentLabel && (
           <div className="hidden flex-1 justify-center md:flex">
-            <span className="font-mono text-[10px] uppercase tracking-[0.34em] text-slate-500">
+            <span className="font-display text-[10px] font-black uppercase tracking-[0.3em] text-[#444]">
               {currentLabel}
             </span>
           </div>
