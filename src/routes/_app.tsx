@@ -288,7 +288,7 @@ function TopBar({ onOpenMenu, pathname }: { onOpenMenu: () => void; pathname: st
                     alt=""
                     width={28}
                     height={28}
-                    className="h-7 w-7 rounded-full object-cover ring-1 ring-white/10 transition group-hover:ring-[#a78bfa]/50"
+                    className="h-7 w-7 rounded-none object-cover grayscale transition group-hover:grayscale-0"
                   />
                 ) : (
                   <div className="grid h-7 w-7 place-items-center rounded-full bg-white/5 text-slate-400">
