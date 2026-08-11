@@ -101,12 +101,132 @@ export type Database = {
         }
         Relationships: []
       }
+      site_features: {
+        Row: {
+          allowed_role_ids: string[]
+          created_at: string
+          enabled: boolean
+          id: string
+          key: string
+          label: string
+          path: string
+          price: string
+          sort: number
+          updated_at: string
+        }
+        Insert: {
+          allowed_role_ids?: string[]
+          created_at?: string
+          enabled?: boolean
+          id?: string
+          key: string
+          label: string
+          path?: string
+          price?: string
+          sort?: number
+          updated_at?: string
+        }
+        Update: {
+          allowed_role_ids?: string[]
+          created_at?: string
+          enabled?: boolean
+          id?: string
+          key?: string
+          label?: string
+          path?: string
+          price?: string
+          sort?: number
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      site_plans: {
+        Row: {
+          active: boolean
+          created_at: string
+          cta: string
+          features: string[]
+          highlight: boolean
+          id: string
+          name: string
+          period: string
+          price: string
+          role_ids: string[]
+          sort: number
+          updated_at: string
+        }
+        Insert: {
+          active?: boolean
+          created_at?: string
+          cta?: string
+          features?: string[]
+          highlight?: boolean
+          id?: string
+          name: string
+          period?: string
+          price?: string
+          role_ids?: string[]
+          sort?: number
+          updated_at?: string
+        }
+        Update: {
+          active?: boolean
+          created_at?: string
+          cta?: string
+          features?: string[]
+          highlight?: boolean
+          id?: string
+          name?: string
+          period?: string
+          price?: string
+          role_ids?: string[]
+          sort?: number
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      site_previews: {
+        Row: {
+          active: boolean
+          created_at: string
+          description: string
+          id: string
+          image_url: string
+          product_id: string
+          sort: number
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          active?: boolean
+          created_at?: string
+          description?: string
+          id?: string
+          image_url: string
+          product_id: string
+          sort?: number
+          title?: string
+          updated_at?: string
+        }
+        Update: {
+          active?: boolean
+          created_at?: string
+          description?: string
+          id?: string
+          image_url?: string
+          product_id?: string
+          sort?: number
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      is_site_admin: { Args: { _user_id: string }; Returns: boolean }
     }
     Enums: {
       [_ in never]: never
