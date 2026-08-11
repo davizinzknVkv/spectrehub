@@ -151,7 +151,7 @@ function SidebarBody({
         </span>
       </Link>
 
-      <div className="hairline mx-5" aria-hidden />
+      <div className="mx-6 h-px bg-white/5" aria-hidden />
 
       <nav className="flex flex-col gap-5 px-3 py-5 lg:flex-1">
         {NAV_GROUPS.map((group) => (
