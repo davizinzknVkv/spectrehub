@@ -72,7 +72,7 @@ export const Route = createFileRoute("/")({
 });
 
 const GUILD_ID = "1511467436543709184";
-const GUILD_INVITE = "https://discord.com/invite/fVeXNmmF";
+const GUILD_INVITE = "https://discord.gg/JK7cC9je87";
 const WIDGET_URL = `https://discord.com/api/guilds/${GUILD_ID}/widget.json`;
 
 const NAV = [

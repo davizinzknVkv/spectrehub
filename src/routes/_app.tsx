@@ -32,7 +32,7 @@ import {
 } from "lucide-react";
 import logoAsset from "@/assets/spectre-hub-logo.png.asset.json";
 
-const DISCORD_INVITE = "https://discord.gg/EMsfMZFyGS";
+const DISCORD_INVITE = "https://discord.gg/JK7cC9je87";
 
 export const Route = createFileRoute("/_app")({
   component: AppLayout,
