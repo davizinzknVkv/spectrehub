@@ -27,14 +27,6 @@ export const Route = createFileRoute("/_app/hub")({
 });
 
 
-export function formatDuration(seconds: number) {
-  if (seconds >= 60) {
-    const m = Math.floor(seconds / 60);
-    const s = seconds % 60;
-    return s > 0 ? `${m}m${s.toString().padStart(2, "0")}` : `${m}m`;
-  }
-  return `${seconds}s`;
-}
 
 const DISCORD_EPOCH = 1420070400000n;
 function snowflakeDate(id: string): Date | null {
@@ -86,6 +78,15 @@ const USER_BADGES: Array<{ bit: number; label: string; tone: "cyan" | "purple" |
 ];
 
 const WELCOME_KEY = "nh:welcome-dismissed";
+
+export function formatDuration(seconds: number) {
+  if (seconds >= 60) {
+    const m = Math.floor(seconds / 60);
+    const s = seconds % 60;
+    return s > 0 ? `${m}m${s.toString().padStart(2, "0")}` : `${m}m`;
+  }
+  return `${seconds}s`;
+}
 
 
 function HubPage() {
