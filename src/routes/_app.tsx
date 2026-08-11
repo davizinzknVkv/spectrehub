@@ -307,7 +307,7 @@ function TopBar({ onOpenMenu, pathname }: { onOpenMenu: () => void; pathname: st
               <DropdownMenuContent
                 align="end"
                 sideOffset={8}
-                className="w-56 rounded-[12px] border-white/[0.08] bg-[#0c0c0c]/95 text-[#a1a1aa] backdrop-blur-xl"
+                className="w-56 rounded-none border-white/5 bg-[#0a0a0a] text-[#a1a1aa] backdrop-blur-xl"
               >
                 <DropdownMenuLabel className="flex items-center gap-2 py-2">
                   {avatarUrl && (
