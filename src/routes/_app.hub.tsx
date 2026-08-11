@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { memo, useEffect, useMemo, useRef, useState } from "react";
 import logoAsset from "@/assets/spectre-hub-logo-transparent.png.asset.json";
-import { ArrowRight, Sparkles, Zap, Gift, LayoutDashboard, X, ShieldCheck, Mail, History } from "lucide-react";
+import { ArrowRight, Sparkles, Zap, Gift, LayoutDashboard, X, ShieldCheck, Mail, History, Target, Tractor, UserRound } from "lucide-react";
 import { PageHeader } from "@/components/PageHeader";
 import { Badge } from "@/components/ui/ds";
 import { cn } from "@/lib/utils";
@@ -409,14 +409,28 @@ function HubPage() {
                 <span className="text-xs font-bold text-slate-400">{formatAge(created)}</span>
               </div>
             )}
-            {user?.id && (
+            <div className="flex gap-2">
               <button
                 onClick={copyId}
                 className="rounded-none border border-white/[0.09] bg-white/[0.02] px-3 py-1.5 font-mono text-[9px] font-bold uppercase tracking-[0.2em] text-slate-300 transition-all duration-200 hover:border-[#ff0055]/50 hover:bg-[#ff0055]/5 hover:text-[#ff0055]"
               >
                 copiar id
               </button>
-            )}
+              <button
+                onClick={copyAvatar}
+                className="rounded-none border border-white/[0.09] bg-white/[0.02] px-3 py-1.5 font-mono text-[9px] font-bold uppercase tracking-[0.2em] text-slate-300 transition-all duration-200 hover:border-[#ff0055]/50 hover:bg-[#ff0055]/5 hover:text-[#ff0055]"
+              >
+                copiar foto
+              </button>
+              <a
+                href={`https://discord.com/users/${user?.id}`}
+                target="_blank"
+                rel="noreferrer"
+                className="rounded-none border border-white/[0.09] bg-white/[0.02] px-3 py-1.5 font-mono text-[9px] font-bold uppercase tracking-[0.2em] text-slate-300 transition-all duration-200 hover:border-[#ff0055]/50 hover:bg-[#ff0055]/5 hover:text-[#ff0055]"
+              >
+                abrir perfil
+              </a>
+            </div>
           </div>
         </div>
       </section>
@@ -447,19 +461,66 @@ function HubPage() {
             />
           </div>
 
-          <div className="rounded-none border border-white/5 bg-[#080808] p-6">
-            <div className="mb-6 flex items-center gap-3">
-              <div className="grid h-8 w-8 place-items-center bg-[#ff0055]/10 text-[#ff0055]">
-                <ShieldCheck className="h-4 w-4" />
+          <div className="space-y-6">
+            <div className="rounded-none border border-white/5 bg-[#080808] p-6">
+              <div className="mb-6 flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <div className="grid h-8 w-8 place-items-center bg-[#ff0055]/10 text-[#ff0055]">
+                    <Zap className="h-4 w-4" />
+                  </div>
+                  <div>
+                    <h3 className="font-display text-sm font-bold uppercase tracking-tight text-white">Ações Rápidas</h3>
+                    <p className="text-[10px] text-slate-600">Atalhos para as funções mais usadas.</p>
+                  </div>
+                </div>
               </div>
-              <div>
-                <h3 className="font-mono text-[10px] uppercase tracking-[0.3em] text-slate-500">segurança & detalhes</h3>
-                <p className="text-[10px] text-slate-600">Informações críticas da conta</p>
+              
+              <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+                <QuickAction to="/missoes" icon={Target} title="Missões" sub="Rode um scan para ver o disponível" />
+                <QuickAction to="/farms" icon={Tractor} title="Farms" sub="Automação de farm" />
+                <QuickAction to="/resgatar" icon={Gift} title="Resgatar Orbs" sub="Loja de recompensas" />
+                <QuickAction to="/history" icon={History} title="Histórico" sub="0 execuções" />
               </div>
             </div>
-            <div className="grid gap-4 sm:grid-cols-2">
-              <InfoField icon={Mail} label="Email Principal" value={user?.email ?? "—"} sensitive />
-              <InfoField icon={ShieldCheck} label="Autenticação 2FA" value={user?.mfa_enabled ? "ATIVADO" : "DESATIVADO"} accent={user?.mfa_enabled} />
+
+            <div className="rounded-none border border-white/5 bg-[#080808] p-6">
+              <div className="mb-6 flex items-center gap-3">
+                <div className="grid h-8 w-8 place-items-center bg-[#ff0055]/10 text-[#ff0055]">
+                  <ShieldCheck className="h-4 w-4" />
+                </div>
+                <div>
+                  <h3 className="font-mono text-[10px] uppercase tracking-[0.3em] text-slate-500">segurança & detalhes</h3>
+                  <p className="text-[10px] text-slate-600">Informações críticas da conta</p>
+                </div>
+              </div>
+              <div className="grid gap-4 sm:grid-cols-2">
+                <InfoField icon={Mail} label="Email Principal" value={user?.email ?? "—"} sensitive />
+                <InfoField icon={ShieldCheck} label="Autenticação 2FA" value={user?.mfa_enabled ? "ATIVADO" : "DESATIVADO"} accent={user?.mfa_enabled} />
+              </div>
+            </div>
+
+            <div className="rounded-none border border-white/5 bg-[#080808] p-6">
+              <div className="mb-6 flex items-center gap-3">
+                <div className="grid h-8 w-8 place-items-center bg-[#ff0055]/10 text-[#ff0055]">
+                  <UserRound className="h-4 w-4" />
+                </div>
+                <div>
+                  <h3 className="font-mono text-[10px] uppercase tracking-[0.3em] text-slate-500">userinfo premium</h3>
+                  <p className="text-[10px] text-slate-600">Consulte badges, idade, servidores em comum e banner de qualquer usuário.</p>
+                </div>
+              </div>
+              <div className="space-y-4">
+                <div className="relative">
+                  <input 
+                    type="text" 
+                    placeholder="ID do usuário (deixe vazio para você)" 
+                    className="w-full rounded-none border border-white/5 bg-white/[0.02] px-4 py-2.5 font-mono text-xs text-white outline-none transition-colors focus:border-[#ff0055]/50 focus:bg-white/[0.04]"
+                  />
+                </div>
+                <button className="w-full bg-[#ff0055] py-2.5 font-mono text-[10px] font-bold uppercase tracking-[0.25em] text-white transition-opacity hover:opacity-90">
+                  buscar perfil
+                </button>
+              </div>
             </div>
           </div>
 
@@ -534,6 +595,26 @@ function StatCard({ icon: Icon, label, value, hint }: { icon?: any; label: strin
       <div className="text-2xl font-bold text-white tracking-tight">{value}</div>
       <div className="mt-1 text-[10px] text-slate-600 uppercase tracking-tighter">{hint}</div>
     </div>
+  );
+}
+
+function QuickAction({ to, icon: Icon, title, sub }: { to: string; icon: any; title: string; sub: string }) {
+  return (
+    <Link 
+      to={to} 
+      className="group flex items-center justify-between border border-white/5 bg-white/[0.02] p-4 transition-all hover:border-[#ff0055]/30 hover:bg-white/[0.04]"
+    >
+      <div className="flex items-center gap-4">
+        <div className="grid h-10 w-10 place-items-center border border-white/5 bg-white/[0.03] text-slate-400 group-hover:text-[#ff0055]">
+          <Icon className="h-5 w-5" />
+        </div>
+        <div className="min-w-0">
+          <div className="text-[11px] font-bold uppercase tracking-tight text-white">{title}</div>
+          <div className="truncate text-[9px] text-slate-500">{sub}</div>
+        </div>
+      </div>
+      <ArrowRight className="h-3.5 w-3.5 text-slate-700 transition-transform group-hover:translate-x-1 group-hover:text-[#ff0055]" />
+    </Link>
   );
 }
 
