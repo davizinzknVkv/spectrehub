@@ -461,16 +461,16 @@ function Hero() {
       {/* grid + glow background */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 -z-10 opacity-[0.35] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_40%,transparent_100%)]"
+        className="pointer-events-none absolute inset-0 -z-10 opacity-[0.05] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_40%,transparent_100%)]"
         style={{
           backgroundImage:
             "linear-gradient(to right, rgba(255,255,255,0.06) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.06) 1px, transparent 1px)",
-          backgroundSize: "64px 64px",
+          backgroundSize: "40px 40px",
         }}
       />
       <div
         aria-hidden
-        className="pointer-events-none absolute left-1/2 top-[-14rem] -z-10 h-[32rem] w-[52rem] -translate-x-1/2 rounded-full bg-[#818cf8]/12 blur-[130px]"
+        className="pointer-events-none absolute left-1/2 top-[-14rem] -z-10 h-[32rem] w-[52rem] -translate-x-1/2 rounded-full bg-[#ff0055]/5 blur-[130px]"
       />
 
       <div className="mx-auto max-w-3xl text-center">
