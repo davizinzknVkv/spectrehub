@@ -341,7 +341,7 @@ function TopBar({ onOpenMenu, pathname }: { onOpenMenu: () => void; pathname: st
                     Login / Token
                   </Link>
                 </DropdownMenuItem>
-                <DropdownMenuSeparator className="bg-white/10" />
+                <DropdownMenuSeparator className="bg-white/5" />
                 <DropdownMenuItem
                   onClick={() => setConfirmLogout(true)}
                   className="cursor-pointer text-rose-300 focus:bg-rose-500/10 focus:text-rose-200"
