@@ -220,12 +220,12 @@ function HubPage() {
       <div className="space-y-14 sm:space-y-20">
         {/* Hero — mesmo estilo da home */}
         <section className="pt-2">
-          <div className="grid items-center gap-10 md:grid-cols-[1.1fr_1fr]">
+          <div className="grid items-center gap-10 lg:grid-cols-[1.1fr_1fr]">
             <div>
               <div className="inline-flex items-center gap-2 rounded-full border border-[#818cf8]/30 bg-[#818cf8]/10 px-3 py-1 font-mono text-[10px] uppercase tracking-widest text-[#c4b5fd]">
                 <Sparkles className="h-3 w-3" /> hub de elite ativado
               </div>
-              <h1 className="mt-4 text-5xl font-black leading-[1.05] tracking-tight sm:text-6xl md:text-7xl">
+              <h1 className="mt-4 text-4xl font-black leading-[1.05] tracking-tight xs:text-5xl sm:text-6xl md:text-7xl">
                 Maximize sua conta
                 <br />
                 <span className="text-[#818cf8]">em minutos.</span>
@@ -397,7 +397,7 @@ function HubPage() {
           </div>
           <div className="mt-4 grid gap-8 md:grid-cols-[1.1fr_1fr] md:items-center">
             <div>
-              <h2 className="text-4xl font-bold leading-tight tracking-tight sm:text-5xl">
+              <h2 className="text-3xl font-bold leading-tight tracking-tight xs:text-4xl sm:text-5xl">
                 Autenticação <span className="text-[#818cf8]">Necessária</span>
               </h2>
               <p className="mt-4 max-w-md text-sm leading-relaxed text-slate-400">

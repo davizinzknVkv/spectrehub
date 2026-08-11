@@ -379,7 +379,7 @@ function SiteHeader() {
           : "border-b border-transparent bg-transparent"
       }`}
     >
-      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8 overflow-hidden">
         <Link to="/" className="flex min-w-0 items-center gap-2.5">
           <img
             src={logoAsset.url}
@@ -388,8 +388,8 @@ function SiteHeader() {
             height={32}
             className="h-8 w-auto shrink-0 invert"
           />
-          <span className="truncate font-display text-[16px] font-extrabold tracking-tighter text-white uppercase">
-            Spectre<span className="opacity-40 ml-1.5 font-light">|</span><span className="text-[#ff0055] ml-1.5">HUB</span>
+          <span className="truncate font-display text-[15px] xs:text-[16px] font-extrabold tracking-tighter text-white uppercase shrink-0">
+            Spectre<span className="opacity-40 ml-1 font-light">|</span><span className="text-[#ff0055] ml-1">HUB</span>
           </span>
         </Link>
 
@@ -482,7 +482,7 @@ function Hero() {
         </Reveal>
 
         <Reveal delay={80}>
-          <h1 className="mt-8 font-display text-[3.2rem] font-extrabold leading-[0.95] tracking-tighter text-white sm:text-7xl lg:text-[6rem]">
+          <h1 className="mt-8 font-display text-[2.6rem] font-extrabold leading-[0.95] tracking-tighter text-white xs:text-[3.2rem] sm:text-7xl lg:text-[6rem]">
             A SPECTRE
             <br />
             CRIA.
