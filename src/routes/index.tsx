@@ -344,11 +344,6 @@ function Index() {
         <div className="noise-overlay" />
       </div>
 
-      <div className="aurora-bg">
-        <div className="grid-overlay" />
-        <div className="noise-overlay" />
-      </div>
-
       <SiteHeader />
 
       <main>
@@ -1033,7 +1028,7 @@ function FreeSignup() {
   return (
     <section id="free" className="mx-auto max-w-7xl px-4 py-20 sm:px-6 sm:py-28 lg:px-8">
       <Reveal>
-        <div className="grid gap-10 rounded-2xl border border-white/[0.07] bg-[#0d0d0d]/70 p-7 backdrop-blur-xl md:grid-cols-[1.05fr_0.95fr] md:p-12">
+        <div className="grid gap-10 rounded-2xl border border-white/[0.07] bg-[#030303]/70 p-7 backdrop-blur-xl md:grid-cols-[1.05fr_0.95fr] md:p-12">
           <div>
             <span className="eyebrow">Acesso Comunitário</span>
             <h2 className="mt-4 font-display text-2xl font-extrabold tracking-[-0.03em] text-white sm:text-4xl">
