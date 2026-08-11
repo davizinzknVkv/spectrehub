@@ -811,13 +811,10 @@
   content: "";
   position: absolute;
   left: 0;
-  top: 50%;
-  height: 1.05rem;
+  top: 0;
+  bottom: 0;
   width: 2px;
-  translate: 0 -50%;
-  border-radius: 999px;
-  background: var(--blurple);
-  box-shadow: 0 0 10px color-mix(in oklab, var(--blurple) 65%, transparent);
+  background: #ff0055;
 }
 
 @keyframes fade-up {
