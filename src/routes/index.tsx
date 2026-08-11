@@ -1308,81 +1308,65 @@ function FinalCta() {
 
 function SiteFooter() {
   return (
-    <footer className="border-t border-white/[0.06] bg-[#050505]">
-      <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
-        <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
-          <div>
-            <div className="flex items-center gap-2.5">
+    <footer className="bg-[#050505] border-t border-white/5 pt-20 pb-10">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="flex flex-col lg:flex-row justify-between gap-16">
+          <div className="max-w-xs">
+            <Link to="/" className="flex items-center gap-2.5">
               <img
                 src={logoAsset.url}
                 alt="Spectre Hub"
                 width={32}
                 height={32}
-                loading="lazy"
-                className="h-8 w-auto"
+                className="h-8 w-auto invert"
               />
-              <span className="font-display text-sm font-extrabold tracking-tight text-white uppercase">
-                Spectre<span className="text-[#818cf8]"> Hub</span>
+              <span className="font-display text-[16px] font-extrabold tracking-tighter text-white uppercase">
+                Spectre<span className="opacity-40 ml-1.5 font-light">|</span><span className="text-[#ff0055] ml-1.5">REBIRTH</span>
               </span>
-            </div>
-            <p className="mt-4 max-w-xs text-[13px] leading-relaxed text-[#6f6f6f]">
-              Plataforma de automação e ferramentas para comunidades do Discord.
+            </Link>
+            <p className="mt-6 text-[10px] font-bold text-[#444] uppercase tracking-[0.2em] leading-loose">
+              INOVAÇÃO · PRODUTO & TECNOLOGIA
+              <br />
+              Feito por jogadores, para servidores que levam a sério.
             </p>
           </div>
 
-          <FooterCol
-            title="Spectre Hub"
-            links={[
-              { label: "Sobre", href: "#sobre" },
-              { label: "Produtos", href: "#produtos" },
-              { label: "Recursos", href: "#recursos" },
-            ]}
-          />
-          <FooterCol
-            title="Comunidade"
-            links={[
-              { label: "Discord", href: GUILD_INVITE, external: true },
-              { label: "Suporte", href: GUILD_INVITE, external: true },
-              { label: "Contato", href: "https://www.instagram.com/davizinzkn/", external: true },
-            ]}
-          />
-          <FooterCol
-            title="Legal"
-            links={[
-              { label: "Termos", href: "#sobre" },
-              { label: "Privacidade", href: "#sobre" },
-            ]}
-          />
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-12">
+            <FooterCol
+              title="CORE"
+              links={[
+                { label: "Sistemas", href: "#produtos" },
+                { label: "Por que CORE", href: "#recursos" },
+                { label: "Servidores", href: "#comunidade" },
+              ]}
+            />
+            <FooterCol
+              title="CLIENTE"
+              links={[
+                { label: "Entrar", href: "/hub" },
+                { label: "Abrir ticket", href: GUILD_INVITE, external: true },
+              ]}
+            />
+            <FooterCol
+              title="COMUNIDADE"
+              links={[
+                { label: "Discord", href: GUILD_INVITE, external: true },
+              ]}
+            />
+          </div>
         </div>
 
-        <div className="hairline my-10" />
-
-        <div className="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center">
-          <div className="flex gap-2">
-            <a
-              href="https://www.instagram.com/davizinzkn/"
-              target="_blank"
-              rel="noreferrer"
-              aria-label="Instagram"
-              className="grid h-9 w-9 place-items-center rounded-lg border border-white/[0.08] bg-white/[0.02] text-[#8a8a8a] transition hover:border-white/20 hover:text-white"
-            >
-              <Instagram className="h-4 w-4" />
-            </a>
-            <a
-              href={GUILD_INVITE}
-              target="_blank"
-              rel="noreferrer"
-              aria-label="Discord"
-              className="grid h-9 w-9 place-items-center rounded-lg border border-white/[0.08] bg-white/[0.02] text-[#8a8a8a] transition hover:border-white/20 hover:text-white"
-            >
-              <Send className="h-4 w-4" />
-            </a>
+        <div className="mt-20 flex flex-col sm:flex-row items-center justify-between gap-6 text-[10px] font-bold text-[#444] uppercase tracking-[0.25em]">
+          <div className="flex items-center gap-8">
+            <span>CORE REBIRTH</span>
+            <span className="opacity-20">//</span>
+            <span>AGO/2026</span>
+            <span className="opacity-20">©</span>
+            <span>PROPERTY OF CORE. ALL CREATIVE RIGHTS RESERVED.</span>
           </div>
-          <p className="text-[11px] text-[#6f6f6f]">
-            © {new Date().getFullYear()} Spectre Hub — Sistemas de Alta Disponibilidade.
-            <span className="mx-2 text-white/15">·</span>
-            Arquitetura desenvolvida por <span className="text-[#a0a0a0]">isnouu</span>
-          </p>
+          <div className="flex items-center gap-2">
+            CÓDIGO FONTE FORNECIDO POR <span className="text-[#666]">ISNOUU</span>
+          </div>
         </div>
       </div>
     </footer>
