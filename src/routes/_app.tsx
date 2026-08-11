@@ -82,7 +82,13 @@ function AppLayout() {
 
   return (
     <div className="min-h-screen text-slate-100 antialiased">
-      <div className="app-shell-bg" aria-hidden />
+      <div
+        className="pointer-events-none fixed inset-0 -z-10 opacity-[0.03]"
+        style={{
+          backgroundImage: `linear-gradient(#fff 1px, transparent 1px), linear-gradient(90deg, #fff 1px, transparent 1px)`,
+          backgroundSize: '40px 40px'
+        }}
+      />
 
       <div className="grid min-h-screen w-full grid-cols-1 lg:grid-cols-[236px_1fr]">
         {/* Desktop sidebar */}
