@@ -177,7 +177,7 @@ function SidebarBody({
                       {item.label}
                     </span>
                     {item.soon && (
-                      <span className="ds-badge ml-auto shrink-0">em breve</span>
+                      <span className="ml-auto rounded-none border border-[#ff0055]/20 bg-[#ff0055]/5 px-2 py-0.5 text-[8px] font-bold uppercase tracking-widest text-[#ff0055]">em breve</span>
                     )}
                   </Link>
 
