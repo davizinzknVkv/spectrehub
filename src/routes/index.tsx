@@ -44,7 +44,7 @@ import {
   X,
   Zap,
 } from "lucide-react";
-import logoAsset from "@/assets/spectre-hub-final-logo.jpg.asset.json";
+import logoAsset from "@/assets/spectre-hub-logo-transparent.png.asset.json";
 
 const TITLE = "Spectre Hub — Elite Discord Automation";
 const DESCRIPTION =

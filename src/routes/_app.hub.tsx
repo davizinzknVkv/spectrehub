@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { memo, useEffect, useMemo, useRef, useState } from "react";
-import logoAsset from "@/assets/spectre-hub-final-logo.jpg.asset.json";
+import logoAsset from "@/assets/spectre-hub-logo-transparent.png.asset.json";
 import { ArrowRight, Sparkles, Zap, Gift, LayoutDashboard } from "lucide-react";
 import { PageHeader } from "@/components/PageHeader";
 
