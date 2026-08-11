@@ -802,6 +802,8 @@ function HubPage() {
 
 
 
+        </div>
+      </div>
       <WelcomeModal />
     </div>
   );
