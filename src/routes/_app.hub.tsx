@@ -1118,7 +1118,7 @@ function WelcomeModal() {
       tag: "$ comunidade",
       title: <>Entre no nosso <span className="text-[#a78bfa]">Discord</span></>,
       body: <>Suporte, avisos de atualização e canal exclusivo pra membros Premium e Boost.</>,
-      href: "https://discord.gg/EMsfMZFyGS",
+      href: "https://discord.gg/JK7cC9je87",
       action: "💬 abrir Discord",
       tone: "purple",
     },
