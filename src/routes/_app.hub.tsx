@@ -322,7 +322,7 @@ function HubPage() {
                   }}
                 />
                 <img
-                  src={nghcLogo.url}
+                  src={logoAsset.url}
                   alt="NGHC"
                   className="relative mx-auto h-40 w-40 object-contain sm:h-56 sm:w-56 md:h-72 md:w-72"
                   style={{
