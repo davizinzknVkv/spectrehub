@@ -328,7 +328,7 @@ function TopBar({ onOpenMenu, pathname }: { onOpenMenu: () => void; pathname: st
                   className="cursor-pointer focus:bg-white/5 focus:text-white"
                 >
                   <Link to="/hub" className="flex items-center gap-2">
-                    <LayoutDashboard className="h-4 w-4 text-[#c4b5fd]" />
+                    <LayoutDashboard className="h-4 w-4 text-[#ff0055]" />
                     Dashboard
                   </Link>
                 </DropdownMenuItem>
