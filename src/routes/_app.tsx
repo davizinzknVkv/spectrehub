@@ -134,6 +134,7 @@ function SidebarBody({
   creds: unknown;
   setCreds: (c: null) => void;
 }) {
+  const logoUrl = logoAsset.url;
   return (
     <div className="flex h-full flex-col">
       <Link to="/" className="flex items-center gap-3 px-5 pb-5 pt-6">
@@ -215,7 +216,6 @@ function TopBar({ onOpenMenu, pathname }: { onOpenMenu: () => void; pathname: st
     return () => { cancelled = true; };
   }, [creds]);
 
-import logoAsset from "@/assets/spectre-hub-logo.png.asset.json";
   const logoUrl = logoAsset.url;
 
   const avatarUrl = me?.id
