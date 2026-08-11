@@ -353,6 +353,7 @@ function Index() {
         <FinalCta />
       </main>
 
+      <WelcomeTour />
       <SiteFooter />
     </div>
   );
