@@ -240,9 +240,9 @@ function TopBar({ onOpenMenu, pathname }: { onOpenMenu: () => void; pathname: st
     <div
       className="sticky top-0 z-20 transition-[background-color,backdrop-filter,border-color] duration-300"
       style={{
-        backgroundColor: scrolled ? "rgba(5,5,5,0.72)" : "rgba(5,5,5,0.40)",
-        backdropFilter: `blur(${scrolled ? 22 : 12}px) saturate(120%)`,
-        borderBottom: `1px solid rgba(255,255,255,${scrolled ? 0.06 : 0.025})`,
+        backgroundColor: scrolled ? "rgba(5,5,5,0.9)" : "transparent",
+        backdropFilter: scrolled ? "blur(12px)" : "none",
+        borderBottom: `1px solid ${scrolled ? "rgba(255,255,255,0.05)" : "transparent"}`,
       }}
     >
       <div className="mx-auto flex w-full max-w-6xl items-center justify-between gap-3 px-4 py-3 sm:px-6 lg:px-10">
