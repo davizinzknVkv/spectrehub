@@ -352,7 +352,7 @@ function TopBar({ onOpenMenu, pathname }: { onOpenMenu: () => void; pathname: st
               </DropdownMenuContent>
             </DropdownMenu>
           ) : (
-            <span className="hidden font-mono text-[11px] uppercase tracking-widest text-slate-500 sm:inline">
+            <span className="hidden font-display text-[10px] font-bold uppercase tracking-[0.2em] text-[#444] sm:inline">
               desconectado
             </span>
           )}
