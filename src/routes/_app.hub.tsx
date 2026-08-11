@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { memo, useEffect, useMemo, useRef, useState } from "react";
 import logoAsset from "@/assets/spectre-hub-logo-transparent.png.asset.json";
-import { ArrowRight, Sparkles, Zap, Gift, LayoutDashboard } from "lucide-react";
+import { ArrowRight, Sparkles, Zap, Gift, LayoutDashboard, X } from "lucide-react";
 import { PageHeader } from "@/components/PageHeader";
 
 import { toast } from "sonner";
@@ -175,6 +175,20 @@ function HubPage() {
     const id = setInterval(refreshPlan, 30_000);
     return () => clearInterval(id);
   }, [creds, setPlan]);
+
+  // Welcome Tour Logic
+  const [welcomeOpen, setWelcomeOpen] = useState(false);
+  useEffect(() => {
+    if (creds && !localStorage.getItem(WELCOME_KEY)) {
+      const timer = setTimeout(() => setWelcomeOpen(true), 1500);
+      return () => clearTimeout(timer);
+    }
+  }, [creds]);
+
+  const closeWelcome = () => {
+    localStorage.setItem(WELCOME_KEY, "true");
+    setWelcomeOpen(false);
+  };
 
   const limits = PLAN_LIMITS[plan];
 
@@ -596,8 +610,14 @@ function HubPage() {
               <div className="mt-1 truncate font-mono text-xs text-slate-500">@{user.username}</div>
             )}
 
-            {/* Insígnias — combina flags + badges do perfil (Nitro, Boost, Quests, etc.) */}
-            {(() => {
+            {/* Badge list logic ... */}
+          </div>
+        </div>
+      </section>
+
+      {welcomeOpen && <WelcomeTour onDismiss={closeWelcome} />}
+
+      <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
               const flagBadges = USER_BADGES
                 .filter((b) => (user?.flags ?? 0) & b.bit)
                 .map((b) => ({

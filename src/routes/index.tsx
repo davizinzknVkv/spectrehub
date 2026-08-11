@@ -1445,9 +1445,8 @@ function WelcomeTour() {
   const [step, setStep] = useState(0);
 
   useEffect(() => {
-    // Sempre aparece ao entrar no site conforme solicitado
-    const timer = setTimeout(() => setOpen(true), 1500);
-    return () => clearTimeout(timer);
+    // Só deve aparecer se o usuário logar no hub, não na home.
+    // Removido o timer automático daqui.
   }, []);
 
   if (!open) return null;
