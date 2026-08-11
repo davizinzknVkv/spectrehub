@@ -1358,16 +1358,16 @@ export const MissionCard = memo(function MissionCard({
       className={`group relative flex flex-col overflow-hidden rounded-xl border transition duration-300 ${
         active
           ? "border-[color-mix(in_oklab,var(--accent-1)_45%,transparent)]"
-          : "border-[var(--border-1)] hover:border-[color-mix(in_oklab,var(--accent-1)_28%,transparent)]"
+          : "border-white/[0.05] hover:border-[#ff0055]/30"
       }`}
       style={{
         // selected card stays fully opaque — no transparency artefacts
-        background: active ? "#101014" : "color-mix(in oklab, #0c0c0c 88%, transparent)",
-        backdropFilter: active ? undefined : "blur(10px)",
+        background: active ? "#0f0f12" : "#080808",
+        boxShadow: active ? "0 0 20px -5px rgba(255,0,85,0.2)" : "none",
         isolation: "isolate",
       }}
     >
-      <div className="relative aspect-[16/7] w-full overflow-hidden bg-[#08080a]">
+      <div className="relative aspect-[16/7] w-full overflow-hidden bg-black/40">
         {quest.imageUrl ? (
           <img
             src={quest.imageUrl}
