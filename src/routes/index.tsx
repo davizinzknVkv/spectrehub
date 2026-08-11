@@ -84,6 +84,7 @@ const NAV = [
 ];
 
 type Product = {
+  id: string;
   name: string;
   category: "Automação" | "Discord" | "Economia" | "Utilidades";
   desc: string;
@@ -95,14 +96,16 @@ type Product = {
 
 const PRODUCTS: Product[] = [
   {
+    id: "quests",
     name: "Auto Quests",
     category: "Automação",
-    desc: "Acelere seu progresso. Detecção e execução inteligente de missões em segundo plano com latência ultra-baixa.",
+    desc: "Automatize vendas e atendimentos com o SPECTRE TOTEM. Um sistema completo de autoatendimento, com estoque integrado, controle de faturamento, personalização individual e totens ilimitados.",
     status: "Estável",
     to: "/missoes",
     icon: Zap,
   },
   {
+    id: "nicks",
     name: "Nicks-Gun",
     category: "Discord",
     desc: "Domine sua identidade. Sniper avançado para capturar usernames raros de 2 e 3 letras antes de todos.",
@@ -111,6 +114,7 @@ const PRODUCTS: Product[] = [
     icon: Target,
   },
   {
+    id: "orbs",
     name: "Resgatar Orbs",
     category: "Economia",
     desc: "Transforme esforço em recompensa. Acesso direto ao catálogo oficial com resgate otimizado em um clique.",
@@ -119,6 +123,7 @@ const PRODUCTS: Product[] = [
     icon: Tag,
   },
   {
+    id: "farms",
     name: "Farms Automáticas",
     category: "Automação",
     desc: "Produtividade ininterrupta. Sistemas de farm contínuo com algoritmos de proteção anti-detecção.",
@@ -127,6 +132,7 @@ const PRODUCTS: Product[] = [
     icon: Gauge,
   },
   {
+    id: "control",
     name: "Server Control",
     category: "Utilidades",
     desc: "Poder total sobre sua conta. Gestão profissional de servidores, clonagem e limpeza em massa.",
@@ -135,6 +141,7 @@ const PRODUCTS: Product[] = [
     icon: ShieldCheck,
   },
   {
+    id: "presence",
     name: "Presence Sync",
     category: "Utilidades",
     desc: "Identidade ativa. Sincronize seu status e música enquanto nossas ferramentas trabalham para você.",
