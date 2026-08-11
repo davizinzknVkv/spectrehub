@@ -30,6 +30,7 @@ import {
   Crosshair,
   UserRound,
 } from "lucide-react";
+import logoAsset from "@/assets/spectre-hub-logo.png.asset.json";
 
 const DISCORD_INVITE = "https://discord.gg/EMsfMZFyGS";
 
