@@ -872,103 +872,43 @@ function ProductsSection() {
   );
 }
 
-function ProductCard({ product }: { product: Product }) {
-  const Icon = product.icon;
+/* ─────────────────────── por que spectre ─────────────────────── */
+
+function ReasonsSection() {
   return (
-    <Link
-      to={product.to}
-      className="surface-card group flex h-full flex-col overflow-hidden p-0"
-    >
-      <div className="relative h-32 overflow-hidden border-b border-white/[0.06] bg-[#0b0b0b]">
-        <div
-          aria-hidden
-          className="absolute inset-0 opacity-60 transition-transform duration-[350ms] group-hover:scale-110"
-          style={{
-            background:
-              "radial-gradient(320px 140px at 30% 0%, rgba(129,140,248,0.18), transparent 70%)",
-          }}
-        />
-        <div className="tech-grid absolute inset-0 opacity-70" aria-hidden />
-        <Icon className="absolute bottom-4 left-5 h-7 w-7 text-[#818cf8] transition-transform duration-300 group-hover:-translate-y-0.5" />
-        <span className="absolute right-4 top-4 rounded-full border border-white/10 bg-black/40 px-2.5 py-1 font-mono text-[9px] uppercase tracking-[0.2em] text-[#a0a0a0]">
-          {product.status}
-        </span>
-      </div>
+    <section id="recursos" className="mx-auto max-w-7xl px-4 py-24 sm:px-6 sm:py-32 lg:px-8">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+        <Reveal>
+          <h2 className="font-display text-4xl font-extrabold leading-[0.95] tracking-tighter text-white sm:text-7xl">
+            POR QUE OS
+            <br />
+            GRANDES
+            <br />
+            ESCOLHEM A
+            <br />
+            SPECTRE.
+          </h2>
+          <p className="mt-8 text-lg font-medium text-[#8a8a8a] leading-relaxed max-w-md">
+            A SPECTRE não revende script de terceiro. Tudo nasce aqui dentro, é testado em servidor com jogador dentro e só chega até você quando aguenta o horário de pico. É por isso que o mercado copia, mas não alcança.
+          </p>
+        </Reveal>
 
-      <div className="flex flex-1 flex-col p-5">
-        <div className="font-mono text-[10px] uppercase tracking-[0.25em] text-[#6f6f6f]">
-          {product.category}
-        </div>
-        <h3 className="mt-2 font-display text-lg font-bold tracking-tight text-white">
-          {product.name}
-        </h3>
-        <p className="mt-2 flex-1 text-[13px] leading-relaxed text-[#8a8a8a]">{product.desc}</p>
-        <div className="mt-5 flex items-center justify-between border-t border-white/[0.06] pt-4">
-          <span className="text-xs font-semibold text-[#a0a0a0]">
-            {product.price ?? "Incluído no hub"}
-          </span>
-          <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#818cf8] transition-transform duration-300 group-hover:translate-x-0.5">
-            Visualizar <ArrowRight className="h-3.5 w-3.5" />
-          </span>
-        </div>
-      </div>
-    </Link>
-  );
-}
-
-/* ─────────────────────── produto em destaque ─────────────────────── */
-
-function FeaturedProduct() {
-  return (
-    <section className="relative border-y border-white/[0.06] bg-white/[0.012]">
-      <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 sm:py-28 lg:px-8">
-        <div className="grid items-center gap-12 lg:grid-cols-2">
-          <Reveal>
-            <div>
-              <span className="eyebrow">produto em destaque</span>
-              <h2 className="mt-4 font-display text-3xl font-extrabold tracking-[-0.03em] text-white sm:text-[2.6rem]">
-                Auto Quests, do jeito que deveria ser.
-              </h2>
-              <p className="mt-4 max-w-lg text-[15px] leading-relaxed text-[#8a8a8a]">
-                O hub identifica todas as quests ativas da sua conta, executa vídeo e jogo em
-                segundo plano e mostra o progresso ao vivo — sem abrir o cliente, sem ficar
-                apertando botão.
-              </p>
-
-              <ul className="mt-8 space-y-4">
-                {[
-                  {
-                    t: "Detecção automática",
-                    d: "Lista todas as quests disponíveis, inclusive as regionais.",
-                  },
-                  {
-                    t: "Execução em fila",
-                    d: "Run all respeita o cooldown do seu plano e roda uma atrás da outra.",
-                  },
-                  {
-                    t: "Progresso ao vivo",
-                    d: "Barra por missão, log de eventos e histórico completo persistido.",
-                  },
-                ].map((f) => (
-                  <li key={f.t} className="flex gap-3">
-                    <CheckCircle2 className="mt-0.5 h-4.5 w-4.5 shrink-0 text-[#818cf8]" />
-                    <div>
-                      <div className="text-sm font-semibold text-white">{f.t}</div>
-                      <div className="text-[13px] text-[#8a8a8a]">{f.d}</div>
-                    </div>
-                  </li>
-                ))}
-              </ul>
-
-              <Link to="/missoes" className="btn-accent mt-9 px-5 py-3">
-                Abrir Auto Quests <ArrowRight className="h-4 w-4" />
-              </Link>
-            </div>
-          </Reveal>
-
-          <Reveal delay={120}>
-            <HeroPreview />
-          </Reveal>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-12 gap-y-16">
+          {REASONS.map((r, i) => (
+            <Reveal key={r.title} delay={i * 100}>
+              <div className="group">
+                <div className="flex items-center gap-3 mb-6">
+                   <div className="h-8 w-8 rounded-sm bg-white/5 border border-white/10 flex items-center justify-center text-[#ff0055] group-hover:bg-[#ff0055] group-hover:text-white transition-all">
+                      <r.icon className="h-4 w-4" />
+                   </div>
+                   <span className="text-[10px] font-bold text-[#444] uppercase tracking-widest">{r.title}</span>
+                </div>
+                <p className="text-sm font-medium text-[#8a8a8a] leading-relaxed">
+                  {r.desc}
+                </p>
+              </div>
+            </Reveal>
+          ))}
         </div>
       </div>
     </section>
