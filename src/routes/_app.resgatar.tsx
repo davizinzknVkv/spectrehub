@@ -9,7 +9,7 @@ import { PageHeader } from "@/components/PageHeader";
 import { Button, Card, Modal, EmptyState as DSEmptyState } from "@/components/ui/ds";
 
 export const Route = createFileRoute("/_app/resgatar")({
-  head: () => ({ meta: [{ title: "Resgatar Orbs — Neighborshub" }] }),
+  head: () => ({ meta: [{ title: "Resgatar Orbs — Spectre Hub" }] }),
   component: RedeemPage,
 });
 
