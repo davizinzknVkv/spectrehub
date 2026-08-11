@@ -1512,8 +1512,8 @@ export function CaptchaModal({
   };
 
   return (
-    <div className="fixed inset-0 z-50 grid place-items-center bg-black/40 p-4 backdrop-blur-sm">
-      <div className="ds-card w-full max-w-sm p-6">
+    <div className="fixed inset-0 z-50 grid place-items-center bg-black/80 p-4 backdrop-blur-md">
+      <div className="ds-card w-full max-w-sm rounded-none border-white/10 bg-[#050505] p-6 shadow-2xl shadow-black/90">
         <div className="font-mono text-[10px] uppercase tracking-[0.3em] text-slate-400">
           $ verify --human
         </div>
@@ -1522,23 +1522,23 @@ export function CaptchaModal({
           {label ?? quest?.questName ?? "Valide sua identidade para prosseguir com a execução."}
         </p>
 
-        <div className="mt-4 rounded-lg border border-amber-400/40 bg-amber-500/10 p-3">
+        <div className="mt-4 rounded-none border border-amber-400/20 bg-amber-400/5 p-3">
           <div className="font-mono text-[10px] uppercase tracking-[0.25em] text-amber-300">
             ⚠ protocolo de segurança
           </div>
           <p className="mt-1 text-[12px] leading-relaxed text-slate-400">
             A execução automatizada {label ? "em lote " : ""}
             pode ser interpretada como comportamento anômalo pelos sistemas de auditoria do Discord, o que pode resultar em{" "}
-            <span className="text-rose-400">restrições permanentes na conta</span>. A responsabilidade operacional é integralmente do usuário.
+            <span className="font-bold text-rose-500 underline decoration-rose-500/30 underline-offset-2">restrições permanentes na conta</span>. A responsabilidade operacional é integralmente do usuário.
           </p>
         </div>
 
         {useTurnstile ? (
-          <div className="mt-5 grid place-items-center rounded-lg border border-white/10 bg-black/40 p-4 min-h-[80px]">
+          <div className="mt-5 grid place-items-center rounded-none border border-white/5 bg-black/40 p-4 min-h-[80px]">
             <div ref={turnstileRef} />
           </div>
         ) : (
-          <div className="mt-5 grid grid-cols-[1fr_auto_1fr_auto_1fr] items-center gap-2 rounded-lg border border-white/10 bg-black/40 p-3 font-mono text-xl text-white">
+          <div className="mt-5 grid grid-cols-[1fr_auto_1fr_auto_1fr] items-center gap-2 rounded-none border border-white/5 bg-black/40 p-3 font-mono text-xl text-white">
             <span className="text-center">{challenge.a}</span>
             <span className="text-[#c4b5fd]">+</span>
             <span className="text-center">{challenge.b}</span>
