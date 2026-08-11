@@ -1,6 +1,6 @@
 import { Target, Loader2, Play, Sparkles, AlertTriangle } from "lucide-react";
 import type { Quest } from "@/lib/quest-store";
-import { Button, Badge, Modal, Card } from "./ds";
+import { Button, Badge, Modal, Card } from "@/components/ui/ds";
 import { cn } from "@/lib/utils";
 
 /* ── PlanBanner ─────────────────────────────────────────────────────────── */
@@ -101,7 +101,7 @@ export function MissionCard({
           <div className="ds-label text-[9px] text-slate-500 uppercase tracking-widest">#{quest.questId.slice(-8)}</div>
           {isOrb && <Sparkles className="h-3 w-3 text-amber-400" />}
         </div>
-        <h3 className="mt-2 line-clamp-2 text-sm font-bold text-white tracking-tight group-hover:text-[#ff0055] transition-colors">{quest.name}</h3>
+        <h3 className="mt-2 line-clamp-2 text-sm font-bold text-white tracking-tight group-hover:text-[#ff0055] transition-colors">{quest.questName}</h3>
         <p className="mt-1 line-clamp-2 text-[10px] leading-relaxed text-slate-500">{quest.rewardText}</p>
       </div>
 
@@ -164,7 +164,7 @@ export function CaptchaModal({
         <div className="flex items-start gap-3 rounded-none border border-amber-500/20 bg-amber-500/5 p-4">
           <AlertTriangle className="h-5 w-5 shrink-0 text-amber-500" />
           <div className="text-xs leading-relaxed text-amber-200/80">
-            {label || `Você está prestes a iniciar a missão "${quest?.name}".`}
+            {label || `Você está prestes a iniciar a missão "${quest?.questName}".`}
             <br /><br />
             Para evitar detecção, o Spectre Hub simula o comportamento humano. Certifique-se de que sua conta não está sendo usada em outro dispositivo no momento.
           </div>
