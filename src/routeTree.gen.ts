@@ -22,6 +22,7 @@ import { Route as AppHistoryRouteImport } from './routes/_app.history'
 import { Route as AppFarmsRouteImport } from './routes/_app.farms'
 import { Route as AppFakeRouteImport } from './routes/_app.fake'
 import { Route as AppCloneRouteImport } from './routes/_app.clone'
+import { Route as AppAdminRouteImport } from './routes/_app.admin'
 import { Route as ApiPublicDiscordImageRouteImport } from './routes/api/public/discord-image'
 import { Route as ApiPublicAuditRouteImport } from './routes/api/public/audit'
 
@@ -89,6 +90,11 @@ const AppCloneRoute = AppCloneRouteImport.update({
   path: '/clone',
   getParentRoute: () => AppRoute,
 } as any)
+const AppAdminRoute = AppAdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => AppRoute,
+} as any)
 const ApiPublicDiscordImageRoute = ApiPublicDiscordImageRouteImport.update({
   id: '/api/public/discord-image',
   path: '/api/public/discord-image',
@@ -102,6 +108,7 @@ const ApiPublicAuditRoute = ApiPublicAuditRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/admin': typeof AppAdminRoute
   '/clone': typeof AppCloneRoute
   '/fake': typeof AppFakeRoute
   '/farms': typeof AppFarmsRoute
@@ -118,6 +125,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/admin': typeof AppAdminRoute
   '/clone': typeof AppCloneRoute
   '/fake': typeof AppFakeRoute
   '/farms': typeof AppFarmsRoute
@@ -136,6 +144,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/_app': typeof AppRouteWithChildren
+  '/_app/admin': typeof AppAdminRoute
   '/_app/clone': typeof AppCloneRoute
   '/_app/fake': typeof AppFakeRoute
   '/_app/farms': typeof AppFarmsRoute
@@ -154,6 +163,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/admin'
     | '/clone'
     | '/fake'
     | '/farms'
@@ -170,6 +180,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/admin'
     | '/clone'
     | '/fake'
     | '/farms'
@@ -187,6 +198,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/_app'
+    | '/_app/admin'
     | '/_app/clone'
     | '/_app/fake'
     | '/_app/farms'
@@ -302,6 +314,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppCloneRouteImport
       parentRoute: typeof AppRoute
     }
+    '/_app/admin': {
+      id: '/_app/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AppAdminRouteImport
+      parentRoute: typeof AppRoute
+    }
     '/api/public/discord-image': {
       id: '/api/public/discord-image'
       path: '/api/public/discord-image'
@@ -320,6 +339,7 @@ declare module '@tanstack/react-router' {
 }
 
 interface AppRouteChildren {
+  AppAdminRoute: typeof AppAdminRoute
   AppCloneRoute: typeof AppCloneRoute
   AppFakeRoute: typeof AppFakeRoute
   AppFarmsRoute: typeof AppFarmsRoute
@@ -334,6 +354,7 @@ interface AppRouteChildren {
 }
 
 const AppRouteChildren: AppRouteChildren = {
+  AppAdminRoute: AppAdminRoute,
   AppCloneRoute: AppCloneRoute,
   AppFakeRoute: AppFakeRoute,
   AppFarmsRoute: AppFarmsRoute,
