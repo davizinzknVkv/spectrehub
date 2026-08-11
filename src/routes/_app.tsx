@@ -322,7 +322,7 @@ function TopBar({ onOpenMenu, pathname }: { onOpenMenu: () => void; pathname: st
                     </div>
                   </div>
                 </DropdownMenuLabel>
-                <DropdownMenuSeparator className="bg-white/10" />
+                <DropdownMenuSeparator className="bg-white/5" />
                 <DropdownMenuItem
                   asChild
                   className="cursor-pointer focus:bg-white/5 focus:text-white"
