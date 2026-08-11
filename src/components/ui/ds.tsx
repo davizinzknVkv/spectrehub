@@ -89,7 +89,16 @@ export function Button({
   className,
   ...props
 }: ButtonHTMLAttributes<HTMLButtonElement> & { variant?: ButtonVariant; size?: ButtonSize }) {
-  return <button className={buttonClass(variant, size, className)} {...props} />;
+  return (
+    <button 
+      className={cn(
+        buttonClass(variant, size, className),
+        "relative overflow-hidden active:scale-[0.98] transition-all duration-200",
+        variant === "primary" && "hover:shadow-[0_0_20px_-5px_var(--accent-1)]"
+      )} 
+      {...props} 
+    />
+  );
 }
 
 /* ── Badge ──────────────────────────────────────────────────────────── */

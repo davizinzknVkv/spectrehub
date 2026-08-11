@@ -162,7 +162,7 @@ function SidebarBody({
       <nav className="flex flex-col gap-5 px-3 py-5 lg:flex-1">
         {NAV_GROUPS.map((group) => (
           <div key={group.title}>
-            <div className="ds-label px-4 pb-2 text-[9px] font-bold uppercase tracking-[0.25em] text-[#444]">{group.title}</div>
+            <div className="ds-label px-4 pb-2 text-[9px] font-bold uppercase tracking-[0.25em] text-[#52525b]">{group.title}</div>
             <div className="flex flex-col gap-0.5">
               {group.items.map((item) => {
                 const Icon = item.icon;
@@ -176,10 +176,10 @@ function SidebarBody({
                   >
                     <Icon
                       className={`h-[14px] w-[14px] shrink-0 transition-colors ${
-                        active ? "text-[#ff0055]" : "text-[#444] group-hover:text-white"
+                        active ? "text-[#ff0055]" : "text-[#52525b] group-hover:text-white"
                       }`}
                     />
-                    <span className={active ? "font-medium tracking-[-0.01em]" : "tracking-[-0.01em]"}>
+                    <span className={active ? "font-bold text-white tracking-[-0.01em]" : "tracking-[-0.01em]"}>
                       {item.label}
                     </span>
                     {item.soon && (
