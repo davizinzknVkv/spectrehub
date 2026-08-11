@@ -1299,10 +1299,10 @@ function MiniStat({
   value: string;
 }) {
   return (
-    <div className="bg-[#080808] p-4">
-      <Icon className="h-4 w-4 text-[#818cf8]" />
-      <div className="mt-3 truncate text-sm font-semibold text-white">{value}</div>
-      <div className="mt-0.5 font-mono text-[9px] uppercase tracking-[0.2em] text-[#6f6f6f]">
+    <div className="bg-[#0a0a0a] p-5">
+      <Icon className="h-4 w-4 text-[#ff0055]" />
+      <div className="mt-4 truncate font-display text-lg font-black text-white">{value}</div>
+      <div className="mt-1 font-display text-[9px] font-bold uppercase tracking-[0.2em] text-[#444]">
         {label}
       </div>
     </div>
