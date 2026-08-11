@@ -311,7 +311,7 @@ function TopBar({ onOpenMenu, pathname }: { onOpenMenu: () => void; pathname: st
               >
                 <DropdownMenuLabel className="flex items-center gap-2 py-2">
                   {avatarUrl && (
-                    <img src={avatarUrl} alt="" className="h-8 w-8 rounded-full object-cover" />
+                    <img src={avatarUrl} alt="" className="h-8 w-8 rounded-none object-cover grayscale" />
                   )}
                   <div className="min-w-0 leading-tight">
                     <div className="truncate text-sm font-semibold text-white">
