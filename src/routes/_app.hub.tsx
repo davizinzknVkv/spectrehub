@@ -1,8 +1,10 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { memo, useEffect, useMemo, useRef, useState } from "react";
 import logoAsset from "@/assets/spectre-hub-logo-transparent.png.asset.json";
-import { ArrowRight, Sparkles, Zap, Gift, LayoutDashboard, X } from "lucide-react";
+import { ArrowRight, Sparkles, Zap, Gift, LayoutDashboard, X, ShieldCheck, Mail, History } from "lucide-react";
 import { PageHeader } from "@/components/PageHeader";
+import { Badge } from "@/components/ui/ds";
+import { cn } from "@/lib/utils";
 import { WelcomeTour } from "@/components/WelcomeTour";
 
 import { toast } from "sonner";
@@ -353,99 +355,206 @@ function HubPage() {
         </div>
 
         <div className="relative -mt-8 flex flex-col gap-4 px-5 pb-5 sm:-mt-10 sm:flex-row sm:items-end sm:gap-5 sm:px-7">
-          {avatarUrl && (
-            <img
-              src={avatarUrl}
-              alt={user?.username ?? "avatar"}
-              width={80}
-              height={80}
-              className="h-16 w-16 shrink-0 rounded-xl border border-white/10 object-cover ring-4 ring-[#080808] sm:h-20 sm:w-20"
-            />
-          )}
-          <div className="min-w-0 flex-1">
-            <div className="flex flex-wrap items-center gap-2.5">
-              <h2 className="truncate text-xl font-semibold tracking-tight text-white sm:text-2xl">
-                {user?.global_name || user?.username || "—"}
-              </h2>
-            </div>
-            {user?.username && (
-              <div className="mt-1 truncate font-mono text-xs text-slate-500">@{user.username}</div>
+          <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-xl border border-white/10 bg-[#080808] ring-4 ring-[#080808] sm:h-20 sm:w-20">
+            {avatarUrl ? (
+              <img
+                src={avatarUrl}
+                alt={user?.username ?? "avatar"}
+                className="h-full w-full rounded-xl object-cover"
+              />
+            ) : (
+              <div className="text-xs font-bold text-slate-700">?</div>
             )}
           </div>
+          <div className="min-w-0 flex-1">
+            <div className="flex flex-col gap-0.5">
+              <h2 className="truncate text-xl font-bold tracking-tight text-white sm:text-2xl">
+                {user?.global_name || user?.username || "—"}
+              </h2>
+              {user?.username && (
+                <div className="truncate font-mono text-xs text-slate-500">@{user.username}</div>
+              )}
+            </div>
+            
+            <div className="mt-3 flex flex-wrap gap-1.5">
+              {user?.premium_type !== undefined && user.premium_type > 0 && (
+                <div className="flex items-center gap-1 rounded-md border border-purple-500/20 bg-purple-500/10 px-2 py-0.5 font-mono text-[9px] font-bold uppercase tracking-wider text-purple-300">
+                  <Zap className="h-2.5 w-2.5" />
+                  {NITRO_LABELS[user.premium_type] || "Nitro"}
+                </div>
+              )}
+              {profileBadges.map((badge) => (
+                <TooltipProvider key={badge.id}>
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <img 
+                        src={`https://cdn.discordapp.com/badge-icons/${badge.icon}.png`} 
+                        alt={badge.description}
+                        className="h-5 w-5 opacity-80 transition-opacity hover:opacity-100"
+                      />
+                    </TooltipTrigger>
+                    <TooltipContent className={TOOLTIP_CLS}>
+                      {badge.description}
+                    </TooltipContent>
+                  </Tooltip>
+                </TooltipProvider>
+              ))}
+            </div>
+          </div>
           
-          {user?.id && (
-            <div className="flex shrink-0 flex-wrap gap-1.5 self-start sm:self-end">
+          <div className="flex shrink-0 flex-wrap gap-2 self-start sm:self-end">
+            {created && (
+              <div className="hidden flex-col items-end sm:flex">
+                <span className="font-mono text-[9px] uppercase tracking-widest text-slate-600">criada há</span>
+                <span className="text-xs font-bold text-slate-400">{formatAge(created)}</span>
+              </div>
+            )}
+            {user?.id && (
               <button
                 onClick={copyId}
-                className="rounded-md border border-white/[0.09] bg-white/[0.02] px-2.5 py-1.5 font-mono text-[9px] uppercase tracking-[0.18em] text-slate-300 transition-all duration-200 hover:border-[#a78bfa]/50 hover:text-[#c4b5fd]"
+                className="rounded-none border border-white/[0.09] bg-white/[0.02] px-3 py-1.5 font-mono text-[9px] font-bold uppercase tracking-[0.2em] text-slate-300 transition-all duration-200 hover:border-[#ff0055]/50 hover:bg-[#ff0055]/5 hover:text-[#ff0055]"
               >
                 copiar id
               </button>
-            </div>
-          )}
+            )}
+          </div>
         </div>
       </section>
 
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
         <div className="lg:col-span-2 space-y-6">
           <div className="grid gap-4 sm:grid-cols-3">
-             <StatCard
-                label="Servidores"
-                value={stats.guilds === null ? "…" : String(stats.guilds)}
-                tone="cyan"
-                hint="guilds do usuário"
-              />
-              <StatCard
-                label="Amigos"
-                value={stats.friends === null ? "…" : String(stats.friends)}
-                tone="mint"
-                hint="relacionamentos ativos"
-              />
-              <StatCard
-                label="DMs"
-                value={stats.dms === null ? "…" : String(stats.dms)}
-                tone="purple"
-                hint="conversas abertas"
-              />
+            <StatCard
+              icon={LayoutDashboard}
+              label="Servidores"
+              value={stats.guilds === null ? "…" : String(stats.guilds)}
+              tone="cyan"
+              hint="guilds do usuário"
+            />
+            <StatCard
+              icon={Sparkles}
+              label="Amigos"
+              value={stats.friends === null ? "…" : String(stats.friends)}
+              tone="mint"
+              hint="relacionamentos ativos"
+            />
+            <StatCard
+              icon={Mail}
+              label="DMs"
+              value={stats.dms === null ? "…" : String(stats.dms)}
+              tone="purple"
+              hint="conversas abertas"
+            />
           </div>
 
-          <div className="rounded-xl border border-white/5 bg-[#080808] p-6">
-             <h3 className="mb-4 font-mono text-[10px] uppercase tracking-[0.3em] text-slate-500">detalhes</h3>
-             <div className="grid gap-4 sm:grid-cols-2">
-                <InfoField label="Email" value={user?.email ?? "—"} sensitive />
-                <InfoField label="2FA" value={user?.mfa_enabled ? "ativado" : "desativado"} />
-             </div>
+          <div className="rounded-none border border-white/5 bg-[#080808] p-6">
+            <div className="mb-6 flex items-center gap-3">
+              <div className="grid h-8 w-8 place-items-center bg-[#ff0055]/10 text-[#ff0055]">
+                <ShieldCheck className="h-4 w-4" />
+              </div>
+              <div>
+                <h3 className="font-mono text-[10px] uppercase tracking-[0.3em] text-slate-500">segurança & detalhes</h3>
+                <p className="text-[10px] text-slate-600">Informações críticas da conta</p>
+              </div>
+            </div>
+            <div className="grid gap-4 sm:grid-cols-2">
+              <InfoField icon={Mail} label="Email Principal" value={user?.email ?? "—"} sensitive />
+              <InfoField icon={ShieldCheck} label="Autenticação 2FA" value={user?.mfa_enabled ? "ATIVADO" : "DESATIVADO"} accent={user?.mfa_enabled} />
+            </div>
           </div>
+
+          {stats.bio && (
+            <div className="rounded-none border border-white/5 bg-[#080808] p-6">
+              <div className="mb-4 flex items-center gap-2">
+                <History className="h-3 w-3 text-slate-600" />
+                <h3 className="font-mono text-[10px] uppercase tracking-[0.3em] text-slate-500">sobre / bio</h3>
+              </div>
+              <p className="text-xs leading-relaxed text-slate-400 font-mono whitespace-pre-wrap">
+                {stats.bio}
+              </p>
+            </div>
+          )}
         </div>
 
         <div className="space-y-6">
-           {/* Sidebar widgets would go here */}
+          <div className="rounded-xl border border-white/5 bg-[#080808] p-6">
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="font-mono text-[10px] uppercase tracking-[0.3em] text-slate-500">quest status</h3>
+              <Badge variant={orbQuests > 0 ? "accent" : "default"}>
+                {orbQuests} ativas
+              </Badge>
+            </div>
+            <div className="space-y-3">
+              <div className="flex items-center justify-between text-xs">
+                <span className="text-slate-500">Missões Hoje</span>
+                <span className="font-bold text-white">{limits.daily === Infinity ? "∞" : `${runsCount}/${limits.daily}`}</span>
+              </div>
+              <div className="h-1.5 w-full bg-white/5 rounded-full overflow-hidden">
+                <div 
+                  className="h-full bg-[#ff0055] transition-all duration-500" 
+                  style={{ width: limits.daily === Infinity ? '100%' : `${(runsCount / limits.daily) * 100}%` }}
+                />
+              </div>
+              <p className="text-[10px] leading-relaxed text-slate-500 italic">
+                {plan === 'free' ? 'Upgrade para Premium e tenha missões ilimitadas.' : 'Seu plano de elite permite execução contínua.'}
+              </p>
+            </div>
+          </div>
+
+          <div className="group relative overflow-hidden rounded-xl border border-[#ff0055]/20 bg-[#ff0055]/5 p-6 transition-all hover:border-[#ff0055]/40">
+            <div className="relative z-10">
+              <div className="flex items-center gap-2 text-[#ff0055] mb-2">
+                <Gift className="h-4 w-4" />
+                <span className="font-mono text-[10px] font-bold uppercase tracking-widest">resgatar orbs</span>
+              </div>
+              <p className="text-xs text-slate-400 mb-4 leading-relaxed">
+                Troque seus orbs acumulados por cosméticos e itens exclusivos no Spectre Hub.
+              </p>
+              <Link
+                to="/resgatar"
+                className="inline-flex w-full items-center justify-center gap-2 rounded-none bg-[#ff0055] py-2 font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-white transition-transform hover:scale-[1.02]"
+              >
+                abrir loja <ArrowRight className="h-3 w-3" />
+              </Link>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   );
 }
 
-function StatCard({ label, value, hint, tone }: { label: string; value: string; hint: string; tone: string }) {
+function StatCard({ icon: Icon, label, value, hint }: { icon?: any; label: string; value: string; hint: string; tone: string }) {
   return (
-    <div className="rounded-xl border border-white/5 bg-[#080808] p-4">
-      <div className="font-mono text-[9px] uppercase tracking-widest text-slate-500">{label}</div>
-      <div className="mt-1 text-2xl font-bold text-white">{value}</div>
-      <div className="mt-1 text-[10px] text-slate-500">{hint}</div>
+    <div className="rounded-none border border-white/5 bg-[#080808] p-4 transition-colors hover:border-white/10">
+      <div className="flex items-center gap-2 mb-1">
+        {Icon && <Icon className="h-3 w-3 text-slate-600" />}
+        <div className="font-mono text-[9px] uppercase tracking-widest text-slate-500">{label}</div>
+      </div>
+      <div className="text-2xl font-bold text-white tracking-tight">{value}</div>
+      <div className="mt-1 text-[10px] text-slate-600 uppercase tracking-tighter">{hint}</div>
     </div>
   );
 }
 
-function InfoField({ label, value, sensitive }: { label: string; value: string; sensitive?: boolean }) {
+function InfoField({ icon: Icon, label, value, sensitive, accent }: { icon?: any; label: string; value: string; sensitive?: boolean; accent?: boolean }) {
   const [revealed, setRevealed] = useState(false);
   const display = sensitive && !revealed ? "••••••••" : value;
   return (
-    <div className="rounded-lg border border-white/5 bg-white/[0.02] p-3">
-      <div className="font-mono text-[9px] uppercase tracking-widest text-slate-500">{label}</div>
-      <div className="mt-1 flex items-center justify-between">
-        <span className="text-sm text-white">{display}</span>
+    <div className="rounded-none border border-white/5 bg-white/[0.02] p-3 transition-colors hover:bg-white/[0.04]">
+      <div className="flex items-center gap-2 mb-1">
+        {Icon && <Icon className="h-3 w-3 text-slate-600" />}
+        <div className="font-mono text-[9px] uppercase tracking-widest text-slate-500">{label}</div>
+      </div>
+      <div className="flex items-center justify-between">
+        <span className={cn(
+          "font-mono text-sm tracking-tight",
+          accent ? "text-[#ff0055] font-bold" : "text-white"
+        )}>
+          {display}
+        </span>
         {sensitive && (
-          <button onClick={() => setRevealed(!revealed)} className="text-[9px] uppercase text-[#a78bfa]">
+          <button onClick={() => setRevealed(!revealed)} className="text-[9px] font-bold uppercase tracking-widest text-[#ff0055] hover:underline">
             {revealed ? "ocultar" : "ver"}
           </button>
         )}
