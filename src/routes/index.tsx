@@ -1,193 +1,25 @@
 /**
  * Antes de realizar qualquer ação, entenda o contexto e instrução recente do usuário, comando mais recente enviado por ele: ```txt
-Analise completamente toda a aplicação, página, fluxo, produto ou estrutura de comunicação antes de realizar qualquer alteração.
+## Restilização da Interface e Mudança de Nome do Site
 
-Seu objetivo é atuar como um especialista sênior em Copywriting, Marketing, Conversão, Branding, Growth e UX Writing, realizando melhorias profundas em toda comunicação da plataforma para maximizar clareza, autoridade, retenção, engajamento e conversão.
+**Objetivo:**
+Restilizar completamente a interface do site e renomeá-lo de "Neighbord" para "Spectre Hub". O site deve se tornar a referência em UI para o nicho de "SI" (Sistemas de Informação ou similar).
 
-Você deve otimizar qualquer tipo de copy presente no sistema:
-- Landing pages
-- Páginas de vendas
-- Headlines
-- CTAs
-- Textos institucionais
-- Dashboards SaaS
-- Funis
-- Onboarding
-- Mensagens automáticas
-- UX writing
-- E-mails
-- Descrições de produtos
-- Textos de marketing
-- Mensagens de erro
-- Microcopy
-- Copy de anúncios
-- Copy para IA/chatbots
-- Fluxos de conversão
-- Ofertas
-- Upsells
-- Checkout
-- Notificações
-- Scripts de vendas
-- WhatsApp
-- Interfaces e componentes
+**Referência de UI:**
+O site `corenetwork.dev` servirá como inspiração principal para o novo design e experiência do usuário.
 
-━━━━━━━━━━━━━━━━━━━
-OBJETIVO PRINCIPAL
-━━━━━━━━━━━━━━━━━━━
+**Requisitos:**
+1. **Identidade Visual:**
+   - Criar um novo logotipo e identidade visual para "Spectre Hub".
+   - Definir uma paleta de cores, tipografia e estilo de elementos visuais que transmitam profissionalismo, modernidade e autoridade.
 
-Transformar toda a comunicação do sistema em uma experiência:
-- Mais persuasiva
-- Mais clara
-- Mais profissional
-- Mais moderna
-- Mais estratégica
-- Mais confiável
-- Mais envolvente
-- Mais focada em conversão
+2. **Design da Interface (UI):**
+   - Redesenhar todas as páginas, focando em uma experiência intuitiva e premium.
+   - Adotar os princípios de `corenetwork.dev`: layout limpo, espaços em branco eficazes, tipografia hierarquizada e responsividade.
 
-━━━━━━━━━━━━━━━━━━━
-ANÁLISE OBRIGATÓRIA
-━━━━━━━━━━━━━━━━━━━
-
-Antes de modificar qualquer texto, analise:
-
-- Público-alvo
-- Posicionamento da marca
-- Nível de consciência do usuário
-- Jornada do usuário
-- Estrutura da oferta
-- Clareza da comunicação
-- Hierarquia textual
-- CTA principais
-- Fluxos de conversão
-- Possíveis objeções
-- Pontos de fricção
-- Credibilidade da comunicação
-- Tom de voz da marca
-- Estratégia de retenção
-- Estratégia de persuasão
-- Qualidade das headlines
-- Legibilidade dos textos
-- Escaneabilidade visual
-- Gatilhos mentais utilizados
-- Consistência da comunicação
-
-━━━━━━━━━━━━━━━━━━━
-OTIMIZAÇÕES DE COPY
-━━━━━━━━━━━━━━━━━━━
-
-Melhore:
-- Headlines fracas
-- CTAs genéricos
-- Textos confusos
-- Mensagens sem clareza
-- Comunicação pouco persuasiva
-- Textos longos e cansativos
-- Falta de hierarquia visual
-- Falta de benefício claro
-- Falta de prova social
-- Falta de urgência estratégica
-- Falta de diferenciação
-- Falta de autoridade
-- Falta de conexão emocional
-- UX Writing ruim
-- Fluxos pouco intuitivos
-
-━━━━━━━━━━━━━━━━━━━
-ESTRATÉGIAS QUE DEVEM SER UTILIZADAS
-━━━━━━━━━━━━━━━━━━━
-
-Aplicar quando fizer sentido:
-
-- Copywriting de conversão
-- Marketing emocional
-- Marketing direto
-- Storytelling
-- Gatilhos mentais
-- Escassez
-- Urgência
-- Autoridade
-- Prova social
-- Clareza extrema
-- Benefício acima de funcionalidade
-- Estrutura AIDA
-- Estrutura PAS
-- Estrutura BAB
-- Growth marketing
-- UX Writing
-- Neurocopy
-- Persuasão estratégica
-- Escrita focada em retenção
-
-━━━━━━━━━━━━━━━━━━━
-FOCO EM CONVERSÃO
-━━━━━━━━━━━━━━━━━━━
-
-Toda comunicação deve:
-- Reduzir dúvidas
-- Aumentar confiança
-- Facilitar decisões
-- Direcionar ações
-- Melhorar retenção
-- Melhorar ativação do usuário
-- Melhorar onboarding
-- Melhorar vendas
-- Melhorar engajamento
-- Melhorar percepção de valor
-
-━━━━━━━━━━━━━━━━━━━
-UX WRITING
-━━━━━━━━━━━━━━━━━━━
-
-Melhore:
-- Mensagens de erro
-- Estados vazios
-- Loadings
-- Tooltips
-- Placeholders
-- Mensagens automáticas
-- Fluxos de confirmação
-- Textos de onboarding
-- Navegação textual
-- Comunicação de sistema
-
-A comunicação deve parecer:
-- Humana
-- Inteligente
-- Clara
-- Natural
-- Profissional
-- Moderna
-
-━━━━━━━━━━━━━━━━━━━
-REGRAS IMPORTANTES
-━━━━━━━━━━━━━━━━━━━
-
-- NÃO gerar textos genéricos
-- NÃO exagerar em gatilhos mentais
-- NÃO usar linguagem amadora
-- NÃO usar copy apelativa ou forçada
-- NÃO quebrar identidade da marca
-- Priorizar clareza acima de exagero
-- Manter consistência em toda comunicação
-- Adaptar a copy ao contexto de cada página
-- Pensar sempre na experiência do usuário final
-
-━━━━━━━━━━━━━━━━━━━
-RESULTADO ESPERADO
-━━━━━━━━━━━━━━━━━━━
-
-Ao finalizar, toda a comunicação da aplicação deve estar:
-- Muito mais profissional
-- Mais persuasiva
-- Mais moderna
-- Mais estratégica
-- Mais clara
-- Mais confiável
-- Mais agradável de consumir
-- Mais focada em conversão e retenção
-
-A aplicação deve parecer construída por uma empresa SaaS premium especializada em marketing, tecnologia e inteligência artificial.
+3. **Conteúdo e Estrutura:**
+   - Adaptar o conteúdo para a nova identidade "Spectre Hub".
+   - Otimizar a navegação para autoridade e conversão.
 ```
  */
 import { createFileRoute, Link } from "@tanstack/react-router";
