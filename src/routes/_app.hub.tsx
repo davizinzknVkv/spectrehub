@@ -506,7 +506,7 @@ function HubPage() {
       <NotificationsCard />
 
       <section
-        className="fade-up relative overflow-hidden rounded-2xl border border-white/[0.07] bg-[#080808]/85 backdrop-blur-xl"
+        className="fade-up relative overflow-hidden rounded-none border border-white/5 bg-[#050505] backdrop-blur-xl"
         style={{ boxShadow: "0 18px 50px -40px rgba(0,0,0,0.9), inset 0 1px 0 rgba(255,255,255,0.03)" }}
       >
         {loadError && (
@@ -535,7 +535,7 @@ function HubPage() {
         >
           {!bannerUrl && <div className="absolute inset-0 grid-bg opacity-20" />}
           <div className="absolute inset-0 bg-black/35" />
-          <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-[#080808] via-[#080808]/85 to-transparent" />
+          <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-[#050505] via-[#050505]/85 to-transparent" />
         </div>
 
         <div className="relative -mt-8 flex flex-col gap-4 px-5 pb-5 sm:-mt-10 sm:flex-row sm:items-end sm:gap-5 sm:px-7">
@@ -1549,12 +1549,12 @@ export function CaptchaModal({
               value={value}
               onChange={(e) => { setError(false); setValue(e.target.value.replace(/\D/g, "").slice(0, 3)); }}
               onKeyDown={(e) => e.key === "Enter" && submit()}
-              className="w-full rounded border border-white/10 bg-[#0b0d12] px-2 py-1 text-center text-white outline-none focus:border-[#818cf8]"
+              className={`w-full bg-transparent text-center outline-none ${error ? "text-rose-500" : "text-white"}`}
             />
           </div>
         )}
         {error && (
-          <p className="mt-2 font-mono text-[11px] text-rose-400">
+          <p className="mt-2 font-mono text-[11px] text-rose-500">
             {useTurnstile ? "✗ verificação falhou, tente novamente" : "✗ resposta incorreta, tente de novo"}
           </p>
         )}
@@ -1562,14 +1562,14 @@ export function CaptchaModal({
         <div className="mt-5 flex gap-2">
           <button
             onClick={onCancel}
-            className="flex-1 rounded-md border border-white/10 px-3 py-2 font-mono text-xs uppercase tracking-widest text-slate-400 hover:text-white"
+            className="flex-1 rounded-none border border-white/5 bg-white/5 px-3 py-2.5 font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-slate-500 hover:text-white"
           >
             cancelar
           </button>
           {!useTurnstile && (
             <button
               onClick={submit}
-              className="flex-1 rounded-md bg-[#818cf8] px-3 py-2 font-mono text-xs font-semibold uppercase tracking-widest text-primary-foreground hover:brightness-110"
+              className="flex-1 rounded-none bg-[#ff0055] px-3 py-2.5 font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-white hover:bg-[#ff0055]/90"
             >
               confirmar
             </button>
