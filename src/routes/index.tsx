@@ -344,6 +344,11 @@ function Index() {
         <div className="noise-overlay" />
       </div>
 
+      <div className="aurora-bg">
+        <div className="grid-overlay" />
+        <div className="noise-overlay" />
+      </div>
+
       <SiteHeader />
 
       <main>
@@ -768,7 +773,7 @@ function SocialProof() {
   const latency = useCountUp(stats.latency, inView);
 
   return (
-    <section className="border-y border-white/[0.06] bg-white/[0.012]">
+    <section className="border-y border-white/[0.06] bg-black/40 backdrop-blur-sm">
       <div ref={ref} className="mx-auto max-w-7xl px-4 py-8 sm:px-6 sm:py-10 lg:px-8">
         <div className="flex flex-wrap items-center justify-between gap-8 text-[10px] font-bold text-[#8a8a8a] uppercase tracking-[0.2em]">
           <div className="flex items-center gap-10">
