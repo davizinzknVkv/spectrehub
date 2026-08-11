@@ -534,6 +534,7 @@
 @media (max-width: 639px) {
   .ds-grid-2 { grid-template-columns: 1fr; }
 }
+@utility card-grid-lg {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr));
   gap: 1rem;
