@@ -327,7 +327,7 @@ function Index() {
   return (
     <div
       id="topo"
-      className="relative min-h-screen overflow-x-hidden bg-[#050505] font-sans text-[#f5f5f5] antialiased"
+      className="relative min-h-screen overflow-x-hidden bg-[#030303] font-sans text-[#f5f5f5] antialiased"
     >
       <div aria-hidden className="pointer-events-none fixed inset-0 -z-10">
         <div
@@ -337,6 +337,11 @@ function Index() {
             backgroundSize: '40px 40px'
           }}
         />
+      </div>
+
+      <div className="aurora-bg">
+        <div className="grid-overlay" />
+        <div className="noise-overlay" />
       </div>
 
       <SiteHeader />
@@ -376,7 +381,7 @@ function SiteHeader() {
     <header
       className={`sticky top-0 z-50 w-full transition-[background,border-color,backdrop-filter] duration-300 ${
         scrolled
-          ? "border-b border-white/[0.07] bg-[#050505]/80 backdrop-blur-xl"
+          ? "border-b border-white/[0.07] bg-[#030303]/80 backdrop-blur-xl"
           : "border-b border-transparent bg-transparent"
       }`}
     >
@@ -427,7 +432,7 @@ function SiteHeader() {
       </div>
 
       {open && (
-        <div className="border-t border-white/[0.07] bg-[#050505]/95 backdrop-blur-xl md:hidden">
+        <div className="border-t border-white/[0.07] bg-[#030303]/95 backdrop-blur-xl md:hidden">
           <nav className="mx-auto flex max-w-7xl flex-col px-4 py-3 sm:px-6">
             {NAV.map((n) => (
               <a
