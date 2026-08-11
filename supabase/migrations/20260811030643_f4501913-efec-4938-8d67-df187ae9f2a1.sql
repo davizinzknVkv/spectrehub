@@ -1,0 +1,1 @@
+REVOKE EXECUTE ON FUNCTION public.is_site_admin(uuid) FROM PUBLIC, anon, authenticated;

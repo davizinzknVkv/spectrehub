@@ -30,7 +30,9 @@ import {
   Crosshair,
   UserRound,
 } from "lucide-react";
-import logoAsset from "@/assets/spectre-hub-logo-transparent.png.asset.json";
+import logoAsset from "@/assets/spectre-logo-nobg.png.asset.json";
+import { AdminNavLink } from "@/components/AdminNavLink";
+
 
 const DISCORD_INVITE = "https://discord.gg/JK7cC9je87";
 
@@ -193,7 +195,9 @@ function SidebarBody({
       </nav>
 
       <div className="mt-auto border-t border-white/[0.06] p-3">
+        <AdminNavLink />
         <a href={DISCORD_INVITE} target="_blank" rel="noreferrer" className="nav-item group">
+
           <LifeBuoy className="h-[14px] w-[14px] shrink-0 text-[#444] group-hover:text-white transition-colors" />
           Suporte Discord
         </a>
