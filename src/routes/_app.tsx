@@ -81,12 +81,18 @@ function AppLayout() {
   }, [pathname]);
 
   return (
-    <div className="min-h-screen text-slate-100 antialiased">
-      <div className="app-shell-bg" aria-hidden />
+    <div className="min-h-screen bg-[#050505] text-slate-100 antialiased">
+      <div
+        className="pointer-events-none fixed inset-0 -z-10 opacity-[0.03]"
+        style={{
+          backgroundImage: `linear-gradient(#fff 1px, transparent 1px), linear-gradient(90deg, #fff 1px, transparent 1px)`,
+          backgroundSize: '40px 40px'
+        }}
+      />
 
       <div className="grid min-h-screen w-full grid-cols-1 lg:grid-cols-[236px_1fr]">
         {/* Desktop sidebar */}
-        <aside className="hidden border-r border-white/[0.06] bg-[#070707]/70 backdrop-blur-xl lg:sticky lg:top-0 lg:block lg:h-screen">
+        <aside className="hidden border-r border-white/5 bg-[#050505] lg:sticky lg:top-0 lg:block lg:h-screen">
           <SidebarBody pathname={pathname} creds={creds} setCreds={setCreds} />
         </aside>
 
@@ -138,24 +144,25 @@ function SidebarBody({
   const logoUrl = logoAsset.url;
   return (
     <div className="flex h-full flex-col">
-      <Link to="/" className="flex items-center gap-3 px-5 pb-5 pt-6">
-        <div className="grid h-9 w-9 place-items-center rounded-[0.6rem] border border-white/10 bg-white/[0.04] p-1.5 shadow-inner">
-          <img src={logoUrl} alt="" className="h-full w-full object-contain" />
-        </div>
-        <div className="min-w-0 leading-tight">
-          <div className="truncate text-[0.9rem] font-bold tracking-[-0.03em] uppercase text-white font-display">
-            Spectre Hub
-          </div>
-          <div className="font-mono text-[9px] uppercase tracking-[0.3em] text-slate-600">elite console</div>
-        </div>
+      <Link to="/" className="flex items-center gap-2.5 px-6 pb-6 pt-8">
+        <img
+          src={logoUrl}
+          alt="Spectre Hub"
+          width={32}
+          height={32}
+          className="h-8 w-auto shrink-0 invert"
+        />
+        <span className="truncate font-display text-[15px] font-extrabold tracking-tighter text-white uppercase">
+          Spectre<span className="opacity-40 ml-1.5 font-light">|</span><span className="text-[#ff0055] ml-1.5">REBIRTH</span>
+        </span>
       </Link>
 
-      <div className="hairline mx-5" aria-hidden />
+      <div className="mx-6 h-px bg-white/5" aria-hidden />
 
       <nav className="flex flex-col gap-5 px-3 py-5 lg:flex-1">
         {NAV_GROUPS.map((group) => (
           <div key={group.title}>
-            <div className="ds-label px-3 pb-2">{group.title}</div>
+            <div className="ds-label px-4 pb-2 text-[9px] font-bold uppercase tracking-[0.25em] text-[#444]">{group.title}</div>
             <div className="flex flex-col gap-0.5">
               {group.items.map((item) => {
                 const Icon = item.icon;
@@ -168,15 +175,15 @@ function SidebarBody({
                     className="nav-item group"
                   >
                     <Icon
-                      className={`h-[15px] w-[15px] shrink-0 transition ${
-                        active ? "text-[#a5b4fc]" : "text-slate-600 group-hover:text-[#a5b4fc]"
+                      className={`h-[14px] w-[14px] shrink-0 transition-colors ${
+                        active ? "text-[#ff0055]" : "text-[#444] group-hover:text-white"
                       }`}
                     />
                     <span className={active ? "font-medium tracking-[-0.01em]" : "tracking-[-0.01em]"}>
                       {item.label}
                     </span>
                     {item.soon && (
-                      <span className="ds-badge ml-auto shrink-0">em breve</span>
+                      <span className="ml-auto rounded-none border border-[#ff0055]/20 bg-[#ff0055]/5 px-2 py-0.5 text-[8px] font-bold uppercase tracking-widest text-[#ff0055]">em breve</span>
                     )}
                   </Link>
 
@@ -188,8 +195,8 @@ function SidebarBody({
       </nav>
 
       <div className="mt-auto border-t border-white/[0.06] p-3">
-        <a href={DISCORD_INVITE} target="_blank" rel="noreferrer" className="nav-item">
-          <LifeBuoy className="h-[15px] w-[15px] shrink-0 text-slate-600" />
+        <a href={DISCORD_INVITE} target="_blank" rel="noreferrer" className="nav-item group">
+          <LifeBuoy className="h-[14px] w-[14px] shrink-0 text-[#444] group-hover:text-white transition-colors" />
           Suporte Discord
         </a>
       </div>
@@ -239,9 +246,9 @@ function TopBar({ onOpenMenu, pathname }: { onOpenMenu: () => void; pathname: st
     <div
       className="sticky top-0 z-20 transition-[background-color,backdrop-filter,border-color] duration-300"
       style={{
-        backgroundColor: scrolled ? "rgba(5,5,5,0.72)" : "rgba(5,5,5,0.40)",
-        backdropFilter: `blur(${scrolled ? 22 : 12}px) saturate(120%)`,
-        borderBottom: `1px solid rgba(255,255,255,${scrolled ? 0.06 : 0.025})`,
+        backgroundColor: scrolled ? "rgba(5,5,5,0.9)" : "transparent",
+        backdropFilter: scrolled ? "blur(12px)" : "none",
+        borderBottom: `1px solid ${scrolled ? "rgba(255,255,255,0.05)" : "transparent"}`,
       }}
     >
       <div className="mx-auto flex w-full max-w-6xl items-center justify-between gap-3 px-4 py-3 sm:px-6 lg:px-10">
@@ -265,7 +272,7 @@ function TopBar({ onOpenMenu, pathname }: { onOpenMenu: () => void; pathname: st
 
         {currentLabel && (
           <div className="hidden flex-1 justify-center md:flex">
-            <span className="font-mono text-[10px] uppercase tracking-[0.34em] text-slate-500">
+            <span className="font-display text-[10px] font-black uppercase tracking-[0.3em] text-[#444]">
               {currentLabel}
             </span>
           </div>
@@ -273,13 +280,13 @@ function TopBar({ onOpenMenu, pathname }: { onOpenMenu: () => void; pathname: st
 
         <div className="flex items-center gap-3">
           <span
-            className={`h-1.5 w-1.5 rounded-full ${creds ? "bg-emerald-400 pulse-dot" : "bg-amber-400"}`}
+            className={`h-1.5 w-1.5 ${creds ? "bg-[#ff0055] pulse-dot" : "bg-amber-400"}`}
             title={creds ? "conectado" : "desconectado"}
           />
           {creds && me ? (
             <DropdownMenu>
               <DropdownMenuTrigger
-                className="group flex items-center gap-2.5 rounded-full border border-white/[0.08] bg-white/[0.02] py-1 pl-1 pr-3 transition hover:border-white/20 hover:bg-white/[0.05] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#818cf8]/40"
+                className="group flex items-center gap-2.5 border border-white/5 bg-white/[0.02] py-1 pl-1 pr-3 transition hover:border-white/10 hover:bg-white/[0.05] focus:outline-none"
               >
                 {avatarUrl ? (
                   <img
@@ -287,7 +294,7 @@ function TopBar({ onOpenMenu, pathname }: { onOpenMenu: () => void; pathname: st
                     alt=""
                     width={28}
                     height={28}
-                    className="h-7 w-7 rounded-full object-cover ring-1 ring-white/10 transition group-hover:ring-[#a78bfa]/50"
+                    className="h-7 w-7 rounded-none object-cover grayscale transition group-hover:grayscale-0"
                   />
                 ) : (
                   <div className="grid h-7 w-7 place-items-center rounded-full bg-white/5 text-slate-400">
@@ -306,11 +313,11 @@ function TopBar({ onOpenMenu, pathname }: { onOpenMenu: () => void; pathname: st
               <DropdownMenuContent
                 align="end"
                 sideOffset={8}
-                className="w-56 rounded-[12px] border-white/[0.08] bg-[#0c0c0c]/95 text-[#a1a1aa] backdrop-blur-xl"
+                className="w-56 rounded-none border-white/5 bg-[#0a0a0a] text-[#a1a1aa] backdrop-blur-xl"
               >
                 <DropdownMenuLabel className="flex items-center gap-2 py-2">
                   {avatarUrl && (
-                    <img src={avatarUrl} alt="" className="h-8 w-8 rounded-full object-cover" />
+                    <img src={avatarUrl} alt="" className="h-8 w-8 rounded-none object-cover grayscale" />
                   )}
                   <div className="min-w-0 leading-tight">
                     <div className="truncate text-sm font-semibold text-white">
@@ -321,13 +328,13 @@ function TopBar({ onOpenMenu, pathname }: { onOpenMenu: () => void; pathname: st
                     </div>
                   </div>
                 </DropdownMenuLabel>
-                <DropdownMenuSeparator className="bg-white/10" />
+                <DropdownMenuSeparator className="bg-white/5" />
                 <DropdownMenuItem
                   asChild
                   className="cursor-pointer focus:bg-white/5 focus:text-white"
                 >
                   <Link to="/hub" className="flex items-center gap-2">
-                    <LayoutDashboard className="h-4 w-4 text-[#c4b5fd]" />
+                    <LayoutDashboard className="h-4 w-4 text-[#ff0055]" />
                     Dashboard
                   </Link>
                 </DropdownMenuItem>
@@ -336,11 +343,11 @@ function TopBar({ onOpenMenu, pathname }: { onOpenMenu: () => void; pathname: st
                   className="cursor-pointer focus:bg-white/5 focus:text-white"
                 >
                   <Link to="/settings" className="flex items-center gap-2">
-                    <KeyRound className="h-4 w-4 text-[#c4b5fd]" />
+                    <KeyRound className="h-4 w-4 text-[#ff0055]" />
                     Login / Token
                   </Link>
                 </DropdownMenuItem>
-                <DropdownMenuSeparator className="bg-white/10" />
+                <DropdownMenuSeparator className="bg-white/5" />
                 <DropdownMenuItem
                   onClick={() => setConfirmLogout(true)}
                   className="cursor-pointer text-rose-300 focus:bg-rose-500/10 focus:text-rose-200"
@@ -351,7 +358,7 @@ function TopBar({ onOpenMenu, pathname }: { onOpenMenu: () => void; pathname: st
               </DropdownMenuContent>
             </DropdownMenu>
           ) : (
-            <span className="hidden font-mono text-[11px] uppercase tracking-widest text-slate-500 sm:inline">
+            <span className="hidden font-display text-[10px] font-bold uppercase tracking-[0.2em] text-[#444] sm:inline">
               desconectado
             </span>
           )}
@@ -386,7 +393,7 @@ function TopBar({ onOpenMenu, pathname }: { onOpenMenu: () => void; pathname: st
         >
           <div className="flex items-center gap-3">
             {avatarUrl && (
-              <img src={avatarUrl} alt="" className="h-10 w-10 rounded-full object-cover ring-1 ring-white/10" />
+              <img src={avatarUrl} alt="" className="h-10 w-10 rounded-none object-cover grayscale border border-white/10" />
             )}
             <div className="min-w-0 leading-tight">
               <div className="truncate text-sm font-semibold text-white">
