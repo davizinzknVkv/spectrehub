@@ -1237,48 +1237,50 @@ function CommunitySection() {
 
         <div className="mt-12 grid gap-6 lg:grid-cols-[1fr_380px] lg:items-center">
           <Reveal>
-            <div className="rounded-2xl border border-white/[0.07] bg-[#0d0d0d]/70 p-7 backdrop-blur-xl sm:p-9">
-              <div className="flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.25em] text-[#6f6f6f]">
-                <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-[#818cf8]" /> ao vivo
+            <div className="border border-white/5 bg-[#0a0a0a] p-8 sm:p-10">
+              <div className="flex items-center gap-3 font-display text-[10px] font-bold uppercase tracking-[0.3em] text-[#ff0055]">
+                <span className="h-1.5 w-1.5 animate-pulse bg-[#ff0055]" /> Conexão Direta
               </div>
-              <h3 className="mt-4 font-display text-2xl font-bold tracking-tight text-white">
-                Servidor oficial no Discord
+              <h3 className="mt-6 font-display text-3xl font-extrabold tracking-tighter text-white sm:text-4xl">
+                SERVIDOR OFICIAL
+                <br />
+                NO DISCORD
               </h3>
-              <p className="mt-2 max-w-md text-[13px] leading-relaxed text-[#8a8a8a]">
-                Widget conectado direto à guilda — entre, farme e converse com quem já está dentro.
+              <p className="mt-4 max-w-md text-xs font-medium leading-relaxed text-[#8a8a8a] uppercase tracking-wider">
+                Widget sincronizado em tempo real — entre, valide seu acesso e interaja com nossa comunidade.
               </p>
 
-              <div className="mt-7 grid grid-cols-2 gap-px overflow-hidden rounded-xl border border-white/[0.06] bg-white/[0.05] sm:grid-cols-3">
+              <div className="mt-10 grid grid-cols-2 gap-px bg-white/5 border border-white/5 sm:grid-cols-3">
                 <MiniStat
                   icon={Users}
                   label="online agora"
                   value={presence !== null ? String(presence) : "—"}
                 />
                 <MiniStat icon={MessageSquare} label="suporte" value="Ticket" />
-                <MiniStat icon={Sparkles} label="cargos" value="Free · Premium" />
+                <MiniStat icon={Sparkles} label="cargos" value="Premium" />
               </div>
 
               <a
                 href={GUILD_INVITE}
                 target="_blank"
                 rel="noreferrer"
-                className="btn-accent mt-7 px-5 py-3"
+                className="mt-10 inline-flex items-center gap-3 bg-[#ff0055] px-8 py-4 font-display text-[11px] font-black uppercase tracking-[0.2em] text-white transition-all hover:bg-[#ff0055]/90"
               >
                 Entrar no Discord <ArrowRight className="h-4 w-4" />
               </a>
             </div>
           </Reveal>
 
-          <div className="mx-auto w-full max-w-[380px] rounded-2xl border border-white/[0.07] bg-[#0d0d0d]/70 p-3 backdrop-blur-xl">
+          <div className="mx-auto w-full max-w-[380px] border border-white/5 bg-[#0a0a0a] p-2">
             <iframe
               src={`https://discord.com/widget?id=${GUILD_ID}&theme=dark`}
               width={350}
-              height={460}
-              title="Widget do Discord do NeighborD Hub"
+              height={480}
+              title="Widget do Discord"
               loading="lazy"
               frameBorder={0}
               sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"
-              className="mx-auto block h-[460px] w-full rounded-xl"
+              className="mx-auto block h-[480px] w-full grayscale contrast-125 brightness-90 transition-all hover:grayscale-0"
             />
           </div>
         </div>
