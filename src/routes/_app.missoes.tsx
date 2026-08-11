@@ -190,14 +190,14 @@ function MissoesPage() {
 
         {quests.length === 0 && !loadingQuests && <EmptyState onScan={loadQuests} />}
         {loadingQuests && quests.length === 0 && (
-          <div className="grid grid-cols-[repeat(auto-fill,minmax(220px,1fr))] gap-3">
+          <div className="grid grid-cols-[repeat(auto-fill,minmax(260px,1fr))] gap-4">
             {Array.from({ length: 6 }).map((_, i) => (
-              <div key={i} className="ds-card aspect-[4/3] animate-pulse !p-0" />
+              <div key={i} className="ds-card aspect-[16/7] animate-pulse !p-0" />
             ))}
           </div>
         )}
 
-        <div className="grid grid-cols-[repeat(auto-fill,minmax(220px,1fr))] gap-3">
+        <div className="grid grid-cols-[repeat(auto-fill,minmax(260px,1fr))] gap-4">
           {quests.map((q) => (
             <MissionCard
               key={q.questId}

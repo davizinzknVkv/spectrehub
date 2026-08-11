@@ -506,7 +506,7 @@ function HubPage() {
       <NotificationsCard />
 
       <section
-        className="fade-up relative overflow-hidden rounded-2xl border border-white/[0.07] bg-[#080808]/85 backdrop-blur-xl"
+        className="fade-up relative overflow-hidden rounded-none border border-white/5 bg-[#050505] backdrop-blur-xl"
         style={{ boxShadow: "0 18px 50px -40px rgba(0,0,0,0.9), inset 0 1px 0 rgba(255,255,255,0.03)" }}
       >
         {loadError && (
@@ -535,7 +535,7 @@ function HubPage() {
         >
           {!bannerUrl && <div className="absolute inset-0 grid-bg opacity-20" />}
           <div className="absolute inset-0 bg-black/35" />
-          <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-[#080808] via-[#080808]/85 to-transparent" />
+          <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-[#050505] via-[#050505]/85 to-transparent" />
         </div>
 
         <div className="relative -mt-8 flex flex-col gap-4 px-5 pb-5 sm:-mt-10 sm:flex-row sm:items-end sm:gap-5 sm:px-7">
@@ -1358,16 +1358,16 @@ export const MissionCard = memo(function MissionCard({
       className={`group relative flex flex-col overflow-hidden rounded-xl border transition duration-300 ${
         active
           ? "border-[color-mix(in_oklab,var(--accent-1)_45%,transparent)]"
-          : "border-[var(--border-1)] hover:border-[color-mix(in_oklab,var(--accent-1)_28%,transparent)]"
+          : "border-white/[0.05] hover:border-[#ff0055]/30"
       }`}
       style={{
         // selected card stays fully opaque — no transparency artefacts
-        background: active ? "#101014" : "color-mix(in oklab, #0c0c0c 88%, transparent)",
-        backdropFilter: active ? undefined : "blur(10px)",
+        background: active ? "#0f0f12" : "#080808",
+        boxShadow: active ? "0 0 20px -5px rgba(255,0,85,0.2)" : "none",
         isolation: "isolate",
       }}
     >
-      <div className="relative aspect-[16/7] w-full overflow-hidden bg-[#08080a]">
+      <div className="relative aspect-[16/7] w-full overflow-hidden bg-black/40">
         {quest.imageUrl ? (
           <img
             src={quest.imageUrl}
@@ -1406,7 +1406,7 @@ export const MissionCard = memo(function MissionCard({
         </span>
       </div>
 
-      <div className="flex flex-1 flex-col gap-2 p-3.5">
+      <div className="flex flex-1 flex-col gap-2 p-4">
         <div className="min-w-0">
           <h3 className="truncate text-[13px] font-semibold tracking-tight text-[var(--text-1)]">
             {quest.questName}
@@ -1445,7 +1445,7 @@ export const MissionCard = memo(function MissionCard({
           onClick={onExec}
           disabled={disabled}
           title={gateHint}
-          className="mt-auto rounded-lg border border-[var(--border-1)] bg-[#0a0a0a] px-3 py-1.5 text-[12px] font-medium text-[var(--text-1)] transition hover:border-[color-mix(in_oklab,var(--accent-1)_45%,transparent)] hover:text-[var(--accent-soft)] disabled:cursor-not-allowed disabled:opacity-30"
+          className="mt-2 w-full rounded-none bg-[#ff0055] py-2.5 font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-white transition-all hover:bg-[#ff0055]/90 active:scale-[0.98] disabled:opacity-40"
         >
           {gateHint ?? "Completar"}
         </button>
@@ -1512,8 +1512,8 @@ export function CaptchaModal({
   };
 
   return (
-    <div className="fixed inset-0 z-50 grid place-items-center bg-black/40 p-4 backdrop-blur-sm">
-      <div className="ds-card w-full max-w-sm p-6">
+    <div className="fixed inset-0 z-50 grid place-items-center bg-black/80 p-4 backdrop-blur-md">
+      <div className="ds-card w-full max-w-sm rounded-none border-white/10 bg-[#050505] p-6 shadow-2xl shadow-black/90">
         <div className="font-mono text-[10px] uppercase tracking-[0.3em] text-slate-400">
           $ verify --human
         </div>
@@ -1522,23 +1522,23 @@ export function CaptchaModal({
           {label ?? quest?.questName ?? "Valide sua identidade para prosseguir com a execução."}
         </p>
 
-        <div className="mt-4 rounded-lg border border-amber-400/40 bg-amber-500/10 p-3">
+        <div className="mt-4 rounded-none border border-amber-400/20 bg-amber-400/5 p-3">
           <div className="font-mono text-[10px] uppercase tracking-[0.25em] text-amber-300">
             ⚠ protocolo de segurança
           </div>
           <p className="mt-1 text-[12px] leading-relaxed text-slate-400">
             A execução automatizada {label ? "em lote " : ""}
             pode ser interpretada como comportamento anômalo pelos sistemas de auditoria do Discord, o que pode resultar em{" "}
-            <span className="text-rose-400">restrições permanentes na conta</span>. A responsabilidade operacional é integralmente do usuário.
+            <span className="font-bold text-rose-500 underline decoration-rose-500/30 underline-offset-2">restrições permanentes na conta</span>. A responsabilidade operacional é integralmente do usuário.
           </p>
         </div>
 
         {useTurnstile ? (
-          <div className="mt-5 grid place-items-center rounded-lg border border-white/10 bg-black/40 p-4 min-h-[80px]">
+          <div className="mt-5 grid place-items-center rounded-none border border-white/5 bg-black/40 p-4 min-h-[80px]">
             <div ref={turnstileRef} />
           </div>
         ) : (
-          <div className="mt-5 grid grid-cols-[1fr_auto_1fr_auto_1fr] items-center gap-2 rounded-lg border border-white/10 bg-black/40 p-3 font-mono text-xl text-white">
+          <div className="mt-5 grid grid-cols-[1fr_auto_1fr_auto_1fr] items-center gap-2 rounded-none border border-white/5 bg-black/40 p-3 font-mono text-xl text-white">
             <span className="text-center">{challenge.a}</span>
             <span className="text-[#c4b5fd]">+</span>
             <span className="text-center">{challenge.b}</span>
@@ -1549,12 +1549,12 @@ export function CaptchaModal({
               value={value}
               onChange={(e) => { setError(false); setValue(e.target.value.replace(/\D/g, "").slice(0, 3)); }}
               onKeyDown={(e) => e.key === "Enter" && submit()}
-              className="w-full rounded border border-white/10 bg-[#0b0d12] px-2 py-1 text-center text-white outline-none focus:border-[#818cf8]"
+              className={`w-full bg-transparent text-center outline-none ${error ? "text-rose-500" : "text-white"}`}
             />
           </div>
         )}
         {error && (
-          <p className="mt-2 font-mono text-[11px] text-rose-400">
+          <p className="mt-2 font-mono text-[11px] text-rose-500">
             {useTurnstile ? "✗ verificação falhou, tente novamente" : "✗ resposta incorreta, tente de novo"}
           </p>
         )}
@@ -1562,14 +1562,14 @@ export function CaptchaModal({
         <div className="mt-5 flex gap-2">
           <button
             onClick={onCancel}
-            className="flex-1 rounded-md border border-white/10 px-3 py-2 font-mono text-xs uppercase tracking-widest text-slate-400 hover:text-white"
+            className="flex-1 rounded-none border border-white/5 bg-white/5 px-3 py-2.5 font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-slate-500 hover:text-white"
           >
             cancelar
           </button>
           {!useTurnstile && (
             <button
               onClick={submit}
-              className="flex-1 rounded-md bg-[#818cf8] px-3 py-2 font-mono text-xs font-semibold uppercase tracking-widest text-primary-foreground hover:brightness-110"
+              className="flex-1 rounded-none bg-[#ff0055] px-3 py-2.5 font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-white hover:bg-[#ff0055]/90"
             >
               confirmar
             </button>
