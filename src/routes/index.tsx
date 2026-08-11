@@ -1181,25 +1181,53 @@ function CommunitySection() {
         </Reveal>
 
         <div
-          className="relative mt-12 overflow-hidden"
+          className="relative mt-20 overflow-hidden"
           style={{
-            maskImage: "linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent)",
+            maskImage: "linear-gradient(90deg, transparent, #000 15%, #000 85%, transparent)",
           }}
         >
-          <div className="marquee flex w-max gap-3">
-            {loop.map((m, i) => (
+          {/* Row 1 */}
+          <div className="marquee flex w-max gap-4 pb-4">
+            {loop.slice(0, Math.ceil(loop.length / 2)).map((m, i) => (
               <div
                 key={`${m.id}-${i}`}
-                className="flex shrink-0 items-center gap-2.5 rounded-full border border-white/[0.07] bg-white/[0.02] py-2 pl-2 pr-4"
+                className="flex shrink-0 items-center gap-4 border border-white/5 bg-[#0a0a0a] py-3 pl-3 pr-8 transition-all hover:border-[#ff0055]/30"
+                style={{
+                  clipPath: "polygon(0 0, 92% 0, 100% 25%, 100% 100%, 8% 100%, 0% 75%)"
+                }}
               >
-                <div className="relative h-7 w-7 overflow-hidden rounded-full bg-white/10">
+                <div className="h-10 w-10 overflow-hidden bg-white/5">
                   {m.avatar ? (
-                    <img src={m.avatar} alt="" loading="lazy" className="h-full w-full object-cover" />
+                    <img src={m.avatar} alt="" loading="lazy" className="h-full w-full object-cover grayscale" />
                   ) : (
-                    <Avatar seed={m.id} />
+                    <div className="h-full w-full bg-white/10" />
                   )}
                 </div>
-                <span className="whitespace-nowrap text-[13px] font-medium text-[#d4d4d4]">
+                <span className="whitespace-nowrap font-display text-[11px] font-black uppercase tracking-[0.2em] text-white">
+                  {m.name}
+                </span>
+              </div>
+            ))}
+          </div>
+
+          {/* Row 2 - Offset */}
+          <div className="marquee flex w-max gap-4" style={{ animationDirection: 'reverse' }}>
+            {loop.slice(Math.ceil(loop.length / 2)).map((m, i) => (
+              <div
+                key={`${m.id}-${i}`}
+                className="flex shrink-0 items-center gap-4 border border-white/5 bg-[#0a0a0a] py-3 pl-3 pr-8 transition-all hover:border-[#ff0055]/30"
+                style={{
+                  clipPath: "polygon(0 0, 92% 0, 100% 25%, 100% 100%, 8% 100%, 0% 75%)"
+                }}
+              >
+                <div className="h-10 w-10 overflow-hidden bg-white/5">
+                  {m.avatar ? (
+                    <img src={m.avatar} alt="" loading="lazy" className="h-full w-full object-cover grayscale" />
+                  ) : (
+                    <div className="h-full w-full bg-white/10" />
+                  )}
+                </div>
+                <span className="whitespace-nowrap font-display text-[11px] font-black uppercase tracking-[0.2em] text-white">
                   {m.name}
                 </span>
               </div>
