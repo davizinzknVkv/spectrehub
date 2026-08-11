@@ -410,7 +410,7 @@ function TokenTutorial() {
                 <Lock className="mt-0.5 h-3 w-3 shrink-0 text-[var(--accent-soft)]" />
                 <span>
                   <b>Acesso Total:</b> Seu token dá acesso total à sua conta. Nunca o envie para
-                  ninguém, nem para o suporte do NeighborD.
+                  ninguém, nem para o suporte do Spectre Hub.
                 </span>
               </li>
               <li className="flex gap-2">

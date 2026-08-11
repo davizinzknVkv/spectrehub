@@ -223,7 +223,7 @@ function MissoesPage() {
           <div className="overflow-hidden rounded-xl border border-[var(--border-1)]" style={{ background: "#0c0c0c" }}>
             <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[var(--border-1)] px-4 py-2.5">
               <div className="flex min-w-0 items-center gap-2 ds-label">
-                <span className="truncate">neighborshub — log</span>
+                <span className="truncate">spectre hub — log</span>
               </div>
               <div className="flex shrink-0 items-center gap-2">
                 <Badge variant={running ? "success" : "default"}>{running ? "live" : "idle"}</Badge>
