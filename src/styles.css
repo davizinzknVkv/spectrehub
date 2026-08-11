@@ -79,25 +79,25 @@
 
   /* ── NGHC Design System — single source of truth ─────────────────── */
   /* Backgrounds / surfaces */
-  --bg: #030303;
-  --bg-2: #050505;
-  --surface-1: #080808;
-  --surface-3: #0c0c0c;
-  --surface-hover: #111111;
+  --bg: #050505;
+  --bg-2: #070707;
+  --surface-1: #0a0a0a;
+  --surface-3: #0f0f0f;
+  --surface-hover: #141414;
 
   /* Text */
   --text-1: #ffffff;
   --text-2: #a1a1aa;
-  --text-3: #6b6b72;
+  --text-3: #71717a;
 
   /* Borders */
-  --border-1: rgb(255 255 255 / 0.08);
-  --border-2: rgb(255 255 255 / 0.14);
+  --border-1: rgba(255, 255, 255, 0.05);
+  --border-2: rgba(255, 255, 255, 0.1);
 
-  /* Accent (roxo NGHC) — usar só como destaque */
-  --accent-1: #818cf8;
-  --accent-2: #a78bfa;
-  --accent-soft: #c4b5fd;
+  /* Accent (Core/Spectre Pink/Red) */
+  --accent-1: #ff0055;
+  --accent-2: #ff2d78;
+  --accent-soft: #ff4d94;
 
   /* Feedback (discretos) */
   --ok: #34d399;
@@ -163,16 +163,16 @@
   --input: var(--surface-2);
   --ring: var(--cyan);
 
-  /* Unified glass tokens — reuse everywhere for consistent frosted look */
-  --glass-bg: color-mix(in oklab, var(--surface-1) 45%, transparent);
-  --glass-bg-strong: color-mix(in oklab, var(--surface-1) 75%, transparent);
-  --glass-border: color-mix(in oklab, var(--blurple) 18%, transparent);
-  --glass-border-soft: color-mix(in oklab, #ffffff 6%, transparent);
+  /* Unified glass tokens — matching corenetwork.dev style */
+  --glass-bg: rgba(10, 10, 10, 0.6);
+  --glass-bg-strong: rgba(7, 7, 7, 0.85);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --glass-border-soft: rgba(255, 255, 255, 0.04);
   --glass-shadow:
-    0 1px 0 rgb(255 255 255 / 0.04) inset,
-    0 24px 64px -32px rgb(0 0 0 / 0.98);
-  --glass-blur: 24px;
-  --glass-radius: 1.25rem;
+    0 4px 32px -8px rgba(0, 0, 0, 0.8),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  --glass-blur: 16px;
+  --glass-radius: 0.5rem;
 }
 
 
