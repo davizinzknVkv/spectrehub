@@ -611,7 +611,57 @@ function HubPage() {
               <div className="mt-1 truncate font-mono text-xs text-slate-500">@{user.username}</div>
             )}
 
-            {/* Badge list logic ... */}
+            {(() => {
+              const flagBadges = USER_BADGES
+                .filter((b) => (user?.flags ?? 0) & b.bit)
+                .map((b) => ({
+                  key: `flag:${b.label}`,
+                  label: b.label,
+                  src: `https://cdn.discordapp.com/badge-icons/${b.icon}.png`,
+                }));
+              const apiBadges = profileBadges.map((b) => ({
+                key: `api:${b.id}`,
+                label: b.description,
+                src: `https://cdn.discordapp.com/badge-icons/${b.icon}.png`,
+              }));
+              const seen = new Set<string>();
+              const all = [...apiBadges, ...flagBadges].filter((b) => {
+                const k = b.src;
+                if (seen.has(k)) return false;
+                seen.add(k);
+                return true;
+              });
+              if (all.length === 0) return null;
+              return (
+                <TooltipProvider delayDuration={100}>
+                  <div className="mt-2.5 flex flex-wrap items-center gap-1.5">
+                    {all.map((b) => (
+                      <Tooltip key={b.key}>
+                        <TooltipTrigger asChild>
+                          <button
+                            type="button"
+                            aria-label={b.label}
+                            className="grid h-8 w-8 shrink-0 place-items-center rounded-lg border border-white/[0.07] bg-white/[0.03] transition-all duration-200 hover:-translate-y-0.5 hover:border-[#818cf8]/40 hover:bg-white/[0.06] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#818cf8]/60"
+                          >
+                            <img
+                              src={b.src}
+                              alt={b.label}
+                              width={20}
+                              height={20}
+                              loading="lazy"
+                              className="h-5 w-5"
+                            />
+                          </button>
+                        </TooltipTrigger>
+                        <TooltipContent side="top" className={TOOLTIP_CLS}>
+                          {b.label}
+                        </TooltipContent>
+                      </Tooltip>
+                    ))}
+                  </div>
+                </TooltipProvider>
+              );
+            })()}
           </div>
         </div>
       </section>
