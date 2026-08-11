@@ -153,7 +153,7 @@ function SidebarBody({
           className="h-8 w-auto shrink-0 invert"
         />
         <span className="truncate font-display text-[15px] font-extrabold tracking-tighter text-white uppercase">
-          Spectre<span className="opacity-40 ml-1.5 font-light">|</span><span className="text-[#ff0055] ml-1.5">REBIRTH</span>
+          Spectre<span className="opacity-40 ml-1.5 font-light">|</span><span className="text-[#ff0055] ml-1.5">HUB</span>
         </span>
       </Link>
 
