@@ -169,8 +169,8 @@ function SidebarBody({
                     className="nav-item group"
                   >
                     <Icon
-                      className={`h-[15px] w-[15px] shrink-0 transition ${
-                        active ? "text-[#a5b4fc]" : "text-slate-600 group-hover:text-[#a5b4fc]"
+                      className={`h-[14px] w-[14px] shrink-0 transition-colors ${
+                        active ? "text-[#ff0055]" : "text-[#444] group-hover:text-white"
                       }`}
                     />
                     <span className={active ? "font-medium tracking-[-0.01em]" : "tracking-[-0.01em]"}>
