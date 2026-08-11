@@ -90,22 +90,33 @@ export function MissionCard({
       "group relative flex flex-col justify-between transition-all duration-300",
       active ? "border-[#ff0055]/40 bg-[#ff0055]/5" : "hover:border-white/10"
     )}>
+      {quest.imageUrl && (
+        <div className="absolute inset-0 z-0 opacity-20 transition-opacity group-hover:opacity-30">
+          <img
+            src={quest.imageUrl}
+            alt=""
+            className="h-full w-full object-cover grayscale transition-all duration-500 group-hover:grayscale-0 group-hover:scale-110"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#030303] via-[#030303]/40 to-transparent" />
+        </div>
+      )}
+
       {active && (
-        <div className="absolute right-3 top-3">
+        <div className="absolute right-3 top-3 z-10">
           <Loader2 className="h-4 w-4 animate-spin text-[#ff0055]" />
         </div>
       )}
 
       <div>
-        <div className="flex items-start justify-between gap-2">
+        <div className="relative z-10 flex items-start justify-between gap-2">
           <div className="ds-label text-[9px] text-slate-500 uppercase tracking-widest">#{quest.questId.slice(-8)}</div>
           {isOrb && <Sparkles className="h-3 w-3 text-amber-400" />}
         </div>
-        <h3 className="mt-2 line-clamp-2 text-sm font-bold text-white tracking-tight group-hover:text-[#ff0055] transition-colors">{quest.questName}</h3>
-        <p className="mt-1 line-clamp-2 text-[10px] leading-relaxed text-slate-500">{quest.rewardText}</p>
+        <h3 className="relative z-10 mt-2 line-clamp-2 text-sm font-bold text-white tracking-tight group-hover:text-[#ff0055] transition-colors">{quest.questName}</h3>
+        <p className="relative z-10 mt-1 line-clamp-2 text-[10px] leading-relaxed text-slate-500">{quest.rewardText}</p>
       </div>
 
-      <div className="mt-4">
+      <div className="relative z-10 mt-4">
         {active ? (
           <div className="space-y-2">
             <div className="flex items-center justify-between text-[9px] font-mono uppercase text-[#ff0055]">
