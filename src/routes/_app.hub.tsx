@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { memo, useEffect, useMemo, useRef, useState } from "react";
-import nghcLogo from "@/assets/nghc-logo.png.asset.json";
+import logoAsset from "@/assets/spectre-hub-final-logo.jpg.asset.json";
 import { ArrowRight, Sparkles, Zap, Gift, LayoutDashboard } from "lucide-react";
 import { PageHeader } from "@/components/PageHeader";
 
@@ -322,7 +322,7 @@ function HubPage() {
                   }}
                 />
                 <img
-                  src={nghcLogo.url}
+                  src={logoAsset.url}
                   alt="NGHC"
                   className="relative mx-auto h-40 w-40 object-contain sm:h-56 sm:w-56 md:h-72 md:w-72"
                   style={{

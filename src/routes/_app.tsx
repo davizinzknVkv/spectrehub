@@ -30,7 +30,7 @@ import {
   Crosshair,
   UserRound,
 } from "lucide-react";
-import logoAsset from "@/assets/spectre-hub-logo.png.asset.json";
+import logoAsset from "@/assets/spectre-hub-final-logo.jpg.asset.json";
 
 const DISCORD_INVITE = "https://discord.gg/JK7cC9je87";
 
@@ -150,7 +150,7 @@ function SidebarBody({
           alt="Spectre Hub"
           width={32}
           height={32}
-          className="h-8 w-auto shrink-0 invert"
+          className="h-8 w-auto shrink-0"
         />
         <span className="truncate font-display text-[15px] font-extrabold tracking-tighter text-white uppercase">
           Spectre<span className="opacity-40 ml-1.5 font-light">|</span><span className="text-[#ff0055] ml-1.5">HUB</span>
