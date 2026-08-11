@@ -353,36 +353,69 @@ function HubPage() {
         </div>
 
         <div className="relative -mt-8 flex flex-col gap-4 px-5 pb-5 sm:-mt-10 sm:flex-row sm:items-end sm:gap-5 sm:px-7">
-          {avatarUrl && (
-            <img
-              src={avatarUrl}
-              alt={user?.username ?? "avatar"}
-              width={80}
-              height={80}
-              className="h-16 w-16 shrink-0 rounded-xl border border-white/10 object-cover ring-4 ring-[#080808] sm:h-20 sm:w-20"
-            />
-          )}
-          <div className="min-w-0 flex-1">
-            <div className="flex flex-wrap items-center gap-2.5">
-              <h2 className="truncate text-xl font-semibold tracking-tight text-white sm:text-2xl">
-                {user?.global_name || user?.username || "—"}
-              </h2>
-            </div>
-            {user?.username && (
-              <div className="mt-1 truncate font-mono text-xs text-slate-500">@{user.username}</div>
+          <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-xl border border-white/10 bg-[#080808] ring-4 ring-[#080808] sm:h-20 sm:w-20">
+            {avatarUrl ? (
+              <img
+                src={avatarUrl}
+                alt={user?.username ?? "avatar"}
+                className="h-full w-full rounded-xl object-cover"
+              />
+            ) : (
+              <div className="text-xs font-bold text-slate-700">?</div>
             )}
           </div>
+          <div className="min-w-0 flex-1">
+            <div className="flex flex-col gap-0.5">
+              <h2 className="truncate text-xl font-bold tracking-tight text-white sm:text-2xl">
+                {user?.global_name || user?.username || "—"}
+              </h2>
+              {user?.username && (
+                <div className="truncate font-mono text-xs text-slate-500">@{user.username}</div>
+              )}
+            </div>
+            
+            <div className="mt-3 flex flex-wrap gap-1.5">
+              {user?.premium_type !== undefined && user.premium_type > 0 && (
+                <div className="flex items-center gap-1 rounded-md border border-purple-500/20 bg-purple-500/10 px-2 py-0.5 font-mono text-[9px] font-bold uppercase tracking-wider text-purple-300">
+                  <Zap className="h-2.5 w-2.5" />
+                  {NITRO_LABELS[user.premium_type] || "Nitro"}
+                </div>
+              )}
+              {profileBadges.map((badge) => (
+                <TooltipProvider key={badge.id}>
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <img 
+                        src={`https://cdn.discordapp.com/badge-icons/${badge.icon}.png`} 
+                        alt={badge.description}
+                        className="h-5 w-5 opacity-80 transition-opacity hover:opacity-100"
+                      />
+                    </TooltipTrigger>
+                    <TooltipContent className={TOOLTIP_CLS}>
+                      {badge.description}
+                    </TooltipContent>
+                  </Tooltip>
+                </TooltipProvider>
+              ))}
+            </div>
+          </div>
           
-          {user?.id && (
-            <div className="flex shrink-0 flex-wrap gap-1.5 self-start sm:self-end">
+          <div className="flex shrink-0 flex-wrap gap-2 self-start sm:self-end">
+            {created && (
+              <div className="hidden flex-col items-end sm:flex">
+                <span className="font-mono text-[9px] uppercase tracking-widest text-slate-600">criada há</span>
+                <span className="text-xs font-bold text-slate-400">{formatAge(created)}</span>
+              </div>
+            )}
+            {user?.id && (
               <button
                 onClick={copyId}
-                className="rounded-md border border-white/[0.09] bg-white/[0.02] px-2.5 py-1.5 font-mono text-[9px] uppercase tracking-[0.18em] text-slate-300 transition-all duration-200 hover:border-[#a78bfa]/50 hover:text-[#c4b5fd]"
+                className="rounded-none border border-white/[0.09] bg-white/[0.02] px-3 py-1.5 font-mono text-[9px] font-bold uppercase tracking-[0.2em] text-slate-300 transition-all duration-200 hover:border-[#ff0055]/50 hover:bg-[#ff0055]/5 hover:text-[#ff0055]"
               >
                 copiar id
               </button>
-            </div>
-          )}
+            )}
+          </div>
         </div>
       </section>
 
