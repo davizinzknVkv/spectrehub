@@ -598,6 +598,26 @@ function StatCard({ icon: Icon, label, value, hint }: { icon?: any; label: strin
   );
 }
 
+function QuickAction({ to, icon: Icon, title, sub }: { to: string; icon: any; title: string; sub: string }) {
+  return (
+    <Link 
+      to={to} 
+      className="group flex items-center justify-between border border-white/5 bg-white/[0.02] p-4 transition-all hover:border-[#ff0055]/30 hover:bg-white/[0.04]"
+    >
+      <div className="flex items-center gap-4">
+        <div className="grid h-10 w-10 place-items-center border border-white/5 bg-white/[0.03] text-slate-400 group-hover:text-[#ff0055]">
+          <Icon className="h-5 w-5" />
+        </div>
+        <div className="min-w-0">
+          <div className="text-[11px] font-bold uppercase tracking-tight text-white">{title}</div>
+          <div className="truncate text-[9px] text-slate-500">{sub}</div>
+        </div>
+      </div>
+      <ArrowRight className="h-3.5 w-3.5 text-slate-700 transition-transform group-hover:translate-x-1 group-hover:text-[#ff0055]" />
+    </Link>
+  );
+}
+
 function InfoField({ icon: Icon, label, value, sensitive, accent }: { icon?: any; label: string; value: string; sensitive?: boolean; accent?: boolean }) {
   const [revealed, setRevealed] = useState(false);
   const display = sensitive && !revealed ? "••••••••" : value;
