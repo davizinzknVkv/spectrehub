@@ -387,7 +387,7 @@ function SiteHeader() {
             alt="Spectre Hub"
             width={32}
             height={32}
-            className="h-8 w-auto shrink-0 invert"
+            className="h-8 w-auto shrink-0"
           />
           <span className="truncate font-display text-[15px] xs:text-[16px] font-extrabold tracking-tighter text-white uppercase shrink-0">
             Spectre<span className="opacity-40 ml-1 font-light">|</span><span className="text-[#ff0055] ml-1">HUB</span>
