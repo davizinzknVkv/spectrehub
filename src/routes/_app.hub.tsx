@@ -423,33 +423,56 @@ function HubPage() {
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
         <div className="lg:col-span-2 space-y-6">
           <div className="grid gap-4 sm:grid-cols-3">
-             <StatCard
-                label="Servidores"
-                value={stats.guilds === null ? "…" : String(stats.guilds)}
-                tone="cyan"
-                hint="guilds do usuário"
-              />
-              <StatCard
-                label="Amigos"
-                value={stats.friends === null ? "…" : String(stats.friends)}
-                tone="mint"
-                hint="relacionamentos ativos"
-              />
-              <StatCard
-                label="DMs"
-                value={stats.dms === null ? "…" : String(stats.dms)}
-                tone="purple"
-                hint="conversas abertas"
-              />
+            <StatCard
+              icon={LayoutDashboard}
+              label="Servidores"
+              value={stats.guilds === null ? "…" : String(stats.guilds)}
+              tone="cyan"
+              hint="guilds do usuário"
+            />
+            <StatCard
+              icon={Sparkles}
+              label="Amigos"
+              value={stats.friends === null ? "…" : String(stats.friends)}
+              tone="mint"
+              hint="relacionamentos ativos"
+            />
+            <StatCard
+              icon={Mail}
+              label="DMs"
+              value={stats.dms === null ? "…" : String(stats.dms)}
+              tone="purple"
+              hint="conversas abertas"
+            />
           </div>
 
-          <div className="rounded-xl border border-white/5 bg-[#080808] p-6">
-             <h3 className="mb-4 font-mono text-[10px] uppercase tracking-[0.3em] text-slate-500">detalhes</h3>
-             <div className="grid gap-4 sm:grid-cols-2">
-                <InfoField label="Email" value={user?.email ?? "—"} sensitive />
-                <InfoField label="2FA" value={user?.mfa_enabled ? "ativado" : "desativado"} />
-             </div>
+          <div className="rounded-none border border-white/5 bg-[#080808] p-6">
+            <div className="mb-6 flex items-center gap-3">
+              <div className="grid h-8 w-8 place-items-center bg-[#ff0055]/10 text-[#ff0055]">
+                <ShieldCheck className="h-4 w-4" />
+              </div>
+              <div>
+                <h3 className="font-mono text-[10px] uppercase tracking-[0.3em] text-slate-500">segurança & detalhes</h3>
+                <p className="text-[10px] text-slate-600">Informações críticas da conta</p>
+              </div>
+            </div>
+            <div className="grid gap-4 sm:grid-cols-2">
+              <InfoField icon={Mail} label="Email Principal" value={user?.email ?? "—"} sensitive />
+              <InfoField icon={ShieldCheck} label="Autenticação 2FA" value={user?.mfa_enabled ? "ATIVADO" : "DESATIVADO"} accent={user?.mfa_enabled} />
+            </div>
           </div>
+
+          {stats.bio && (
+            <div className="rounded-none border border-white/5 bg-[#080808] p-6">
+              <div className="mb-4 flex items-center gap-2">
+                <History className="h-3 w-3 text-slate-600" />
+                <h3 className="font-mono text-[10px] uppercase tracking-[0.3em] text-slate-500">sobre / bio</h3>
+              </div>
+              <p className="text-xs leading-relaxed text-slate-400 font-mono whitespace-pre-wrap">
+                {stats.bio}
+              </p>
+            </div>
+          )}
         </div>
 
         <div className="space-y-6">
