@@ -337,7 +337,7 @@ function TopBar({ onOpenMenu, pathname }: { onOpenMenu: () => void; pathname: st
                   className="cursor-pointer focus:bg-white/5 focus:text-white"
                 >
                   <Link to="/settings" className="flex items-center gap-2">
-                    <KeyRound className="h-4 w-4 text-[#c4b5fd]" />
+                    <KeyRound className="h-4 w-4 text-[#ff0055]" />
                     Login / Token
                   </Link>
                 </DropdownMenuItem>
