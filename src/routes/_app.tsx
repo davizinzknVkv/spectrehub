@@ -138,7 +138,7 @@ function SidebarBody({
     <div className="flex h-full flex-col">
       <Link to="/" className="flex items-center gap-3 px-5 pb-5 pt-6">
         <div className="grid h-9 w-9 place-items-center rounded-[0.6rem] border border-white/10 bg-white/[0.04] p-1.5 shadow-inner">
-          <img src="/src/assets/spectre-hub-logo.png.asset.json" alt="" className="h-full w-full object-contain" />
+          <img src={logoUrl} alt="" className="h-full w-full object-contain" />
         </div>
         <div className="min-w-0 leading-tight">
           <div className="truncate text-[0.9rem] font-bold tracking-[-0.03em] uppercase text-white font-display">
@@ -215,7 +215,8 @@ function TopBar({ onOpenMenu, pathname }: { onOpenMenu: () => void; pathname: st
     return () => { cancelled = true; };
   }, [creds]);
 
-  const logoUrl = "/src/assets/spectre-hub-logo.png.asset.json"; // Placeholder, real asset URL should be imported if possible
+import logoAsset from "@/assets/spectre-hub-logo.png.asset.json";
+  const logoUrl = logoAsset.url;
 
   const avatarUrl = me?.id
     ? me.avatar
@@ -254,7 +255,7 @@ function TopBar({ onOpenMenu, pathname }: { onOpenMenu: () => void; pathname: st
           </button>
           <Link to="/" className="flex items-center gap-2 lg:hidden">
             <div className="grid h-8 w-8 place-items-center rounded-lg border border-white/10 bg-white/[0.04] p-1">
-              <img src="/src/assets/spectre-hub-logo.png.asset.json" alt="" className="h-full w-full object-contain" />
+              <img src={logoUrl} alt="" className="h-full w-full object-contain" />
             </div>
             <span className="text-sm font-bold tracking-[-0.03em] uppercase text-white font-display">Spectre Hub</span>
           </Link>
