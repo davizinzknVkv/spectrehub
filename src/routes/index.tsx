@@ -212,11 +212,11 @@ import {
   X,
   Zap,
 } from "lucide-react";
-import nghcLogo from "@/assets/nghc-logo.png.asset.json";
+import logoAsset from "@/assets/spectre-hub-logo.png.asset.json";
 
-const TITLE = "NeighborD Hub — A Elite da Automação para Discord";
+const TITLE = "Spectre Hub — Elite Discord Automation";
 const DESCRIPTION =
-  "Maximize sua eficiência no Discord. Automação avançada de quests, sniper de nicks raros e ferramentas de elite em uma infraestrutura premium de alta performance.";
+  "Domine o Discord com o Spectre Hub. Automação de quests, sniper de nicks raros e ferramentas de elite em uma infraestrutura obsidian premium.";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -231,7 +231,7 @@ export const Route = createFileRoute("/")({
     ],
     links: [
       { rel: "canonical", href: "https://neighbordhubdc.lovable.app/" },
-      { rel: "preload", as: "image", href: nghcLogo.url, fetchPriority: "high" },
+      { rel: "preload", as: "image", href: logoAsset.url, fetchPriority: "high" },
       { rel: "preconnect", href: "https://discord.com" },
       { rel: "preconnect", href: "https://cdn.discordapp.com", crossOrigin: "anonymous" },
     ],
@@ -539,14 +539,14 @@ function SiteHeader() {
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
         <Link to="/" className="flex min-w-0 items-center gap-2.5">
           <img
-            src={nghcLogo.url}
-            alt="NeighborD Hub"
+            src={logoAsset.url}
+            alt="Spectre Hub"
             width={32}
             height={32}
-            className="h-8 w-8 shrink-0 object-contain"
+            className="h-8 w-auto shrink-0"
           />
-          <span className="truncate font-display text-[15px] font-extrabold tracking-tight text-white">
-            NeighborD<span className="text-[#818cf8]"> Hub</span>
+          <span className="truncate font-display text-[15px] font-extrabold tracking-tight text-white uppercase">
+            Spectre<span className="text-[#818cf8]"> Hub</span>
           </span>
         </Link>
 
@@ -634,7 +634,7 @@ function Hero() {
         <Reveal>
           <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-3.5 py-1.5 font-mono text-[10px] uppercase tracking-[0.28em] text-[#a0a0a0] backdrop-blur-xl">
             <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-[#818cf8]" />
-            NeighborD Hub
+            Spectre Hub Protocol
           </span>
         </Reveal>
 
@@ -650,7 +650,7 @@ function Hero() {
 
         <Reveal delay={160}>
           <p className="mx-auto mt-6 max-w-xl text-[15px] leading-relaxed text-[#8a8a8a] sm:text-base">
-            O NeighborD Hub é a infraestrutura definitiva para automação. Quests, orbs, nicks raros e ferramentas de gestão em uma única interface premium projetada para performance extrema.
+            O Spectre Hub é a infraestrutura definitiva para automação. Quests, orbs, nicks raros e ferramentas de gestão em uma única interface premium projetada para performance extrema.
           </p>
         </Reveal>
 
@@ -1535,12 +1535,12 @@ function FinalCta() {
       <Reveal>
         <div className="relative mx-auto max-w-3xl px-4 py-24 text-center sm:px-6 sm:py-32">
           <img
-            src={nghcLogo.url}
-            alt=""
-            width={56}
-            height={56}
+            src={logoAsset.url}
+            alt="Spectre Hub"
+            width={64}
+            height={64}
             loading="lazy"
-            className="mx-auto h-14 w-14 object-contain opacity-90"
+            className="mx-auto h-16 w-auto opacity-90"
           />
           <h2 className="mt-8 font-display text-3xl font-extrabold tracking-[-0.035em] text-white sm:text-5xl">
             Pronto para Dominar o Ecossistema?
@@ -1577,15 +1577,15 @@ function SiteFooter() {
           <div>
             <div className="flex items-center gap-2.5">
               <img
-                src={nghcLogo.url}
-                alt=""
-                width={28}
-                height={28}
+                src={logoAsset.url}
+                alt="Spectre Hub"
+                width={32}
+                height={32}
                 loading="lazy"
-                className="h-7 w-7 object-contain"
+                className="h-8 w-auto"
               />
-              <span className="font-display text-sm font-extrabold tracking-tight text-white">
-                NeighborD<span className="text-[#818cf8]"> Hub</span>
+              <span className="font-display text-sm font-extrabold tracking-tight text-white uppercase">
+                Spectre<span className="text-[#818cf8]"> Hub</span>
               </span>
             </div>
             <p className="mt-4 max-w-xs text-[13px] leading-relaxed text-[#6f6f6f]">
@@ -1594,7 +1594,7 @@ function SiteFooter() {
           </div>
 
           <FooterCol
-            title="NeighborD Hub"
+            title="Spectre Hub"
             links={[
               { label: "Sobre", href: "#sobre" },
               { label: "Produtos", href: "#produtos" },
@@ -1642,7 +1642,7 @@ function SiteFooter() {
             </a>
           </div>
           <p className="text-[11px] text-[#6f6f6f]">
-            © {new Date().getFullYear()} NeighborD Hub — Sistemas de Alta Disponibilidade.
+            © {new Date().getFullYear()} Spectre Hub — Sistemas de Alta Disponibilidade.
             <span className="mx-2 text-white/15">·</span>
             Arquitetura desenvolvida por <span className="text-[#a0a0a0]">isnouu</span>
           </p>
