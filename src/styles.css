@@ -482,12 +482,16 @@
    Cards stretch to equal height so rows stay aligned. */
 @utility card-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr));
-  gap: 1rem;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
+  gap: 1.25rem;
   align-items: stretch;
 }
-@media (min-width: 768px) { .card-grid { gap: 1.25rem; } }
-@media (min-width: 1024px) { .card-grid { gap: 1.5rem; } }
+@media (max-width: 639px) {
+  .card-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+}
 
 @utility card-grid-sm {
   display: grid;
@@ -495,9 +499,41 @@
   gap: 0.75rem;
   align-items: stretch;
 }
-@media (min-width: 768px) { .card-grid-sm { gap: 1rem; } }
+@media (max-width: 480px) {
+  .card-grid-sm {
+    grid-template-columns: 1fr;
+  }
+}
 
-@utility card-grid-lg {
+@utility ds-grid-4 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+}
+@media (max-width: 1023px) {
+  .ds-grid-4 { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 639px) {
+  .ds-grid-4 { grid-template-columns: 1fr; }
+}
+
+@utility ds-grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+@media (max-width: 767px) {
+  .ds-grid-3 { grid-template-columns: 1fr; }
+}
+
+@utility ds-grid-2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+@media (max-width: 639px) {
+  .ds-grid-2 { grid-template-columns: 1fr; }
+}
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr));
   gap: 1rem;
