@@ -330,9 +330,13 @@ function Index() {
       className="relative min-h-screen overflow-x-hidden bg-[#050505] font-sans text-[#f5f5f5] antialiased"
     >
       <div aria-hidden className="pointer-events-none fixed inset-0 -z-10">
-        <div className="tech-grid absolute inset-0" />
-        <div className="absolute -top-40 left-1/2 h-[42rem] w-[42rem] -translate-x-1/2 rounded-full bg-[#818cf8]/[0.09] blur-[140px]" />
-        <div className="absolute bottom-0 right-[-12rem] h-[32rem] w-[32rem] rounded-full bg-[#818cf8]/[0.05] blur-[140px]" />
+        <div
+          className="absolute inset-0 opacity-[0.03]"
+          style={{
+            backgroundImage: `linear-gradient(#fff 1px, transparent 1px), linear-gradient(90deg, #fff 1px, transparent 1px)`,
+            backgroundSize: '40px 40px'
+          }}
+        />
       </div>
 
       <SiteHeader />
