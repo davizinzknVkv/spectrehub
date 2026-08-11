@@ -280,7 +280,7 @@ function TopBar({ onOpenMenu, pathname }: { onOpenMenu: () => void; pathname: st
           {creds && me ? (
             <DropdownMenu>
               <DropdownMenuTrigger
-                className="group flex items-center gap-2.5 rounded-full border border-white/[0.08] bg-white/[0.02] py-1 pl-1 pr-3 transition hover:border-white/20 hover:bg-white/[0.05] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#818cf8]/40"
+                className="group flex items-center gap-2.5 border border-white/5 bg-white/[0.02] py-1 pl-1 pr-3 transition hover:border-white/10 hover:bg-white/[0.05] focus:outline-none"
               >
                 {avatarUrl ? (
                   <img
