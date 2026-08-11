@@ -1488,7 +1488,7 @@ function WelcomeTour() {
   return (
     <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/60 p-4 backdrop-blur-sm">
       <div className="relative w-full max-w-md animate-in fade-in zoom-in duration-300">
-        <div className="overflow-hidden rounded-xl border border-white/10 bg-[#0a0a0a] shadow-2xl">
+        <div className="overflow-hidden rounded-none border border-white/10 bg-[#050505] shadow-2xl shadow-black/80">
           <div className="absolute right-4 top-4">
             <button 
               onClick={() => setOpen(false)}
@@ -1518,7 +1518,7 @@ function WelcomeTour() {
             <div className="mt-8 space-y-4">
               <button
                 onClick={next}
-                className="w-full rounded-lg bg-white/5 py-3 text-[13px] font-bold text-white border border-white/10 hover:bg-white/10 transition-all uppercase tracking-widest"
+                className="w-full rounded-none bg-[#ff0055] py-3 text-[13px] font-bold text-white shadow-lg shadow-[#ff0055]/10 hover:bg-[#ff0055]/90 transition-all uppercase tracking-widest"
               >
                 {steps[step].button}
               </button>
