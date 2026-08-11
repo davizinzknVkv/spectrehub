@@ -759,59 +759,28 @@ function SocialProof() {
 
   return (
     <section className="border-y border-white/[0.06] bg-white/[0.012]">
-      <div ref={ref} className="mx-auto max-w-7xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8">
-        <p className="max-w-2xl text-sm text-[#8a8a8a]">
-          Construído para comunidades que levam sua experiência a sério.
-        </p>
-        <div className="mt-8 grid grid-cols-1 gap-px overflow-hidden rounded-xl border border-white/[0.06] bg-white/[0.05] sm:grid-cols-3">
-          <StatCell
-            loading={!hasFresh}
-            value={`${Math.round(members)}+`}
-            label="membros na comunidade"
-          />
-          <StatCell
-            loading={!hasFresh}
-            value={`${Math.round(products)}`}
-            label="produtos disponíveis"
-          />
-          <StatCell
-            loading={!hasFresh}
-            value={
-              <>
-                {latency.toFixed(2)}
-                <span className="text-[#818cf8]">ms</span>
-              </>
-            }
-            label="de impacto no discord"
-          />
+      <div ref={ref} className="mx-auto max-w-7xl px-4 py-8 sm:px-6 sm:py-10 lg:px-8">
+        <div className="flex flex-wrap items-center justify-between gap-8 text-[10px] font-bold text-[#8a8a8a] uppercase tracking-[0.2em]">
+          <div className="flex items-center gap-10">
+             <div className="flex items-center gap-3">
+               <span className="text-white text-2xl font-display tracking-tighter">{Math.round(members)}+</span>
+               <span>MEMBROS NA COMUNIDADE</span>
+             </div>
+             <div className="flex items-center gap-3">
+               <span className="text-white text-2xl font-display tracking-tighter">{Math.round(products)}</span>
+               <span>PRODUTOS DISPONÍVEIS</span>
+             </div>
+             <div className="flex items-center gap-3">
+               <span className="text-white text-2xl font-display tracking-tighter">{latency.toFixed(2)}<span className="text-[#ff0055]">ms</span></span>
+               <span>IMPACTO NO DISCORD</span>
+             </div>
+          </div>
+          <div className="hidden lg:block">
+            PROPERTY OF SPECTRE. ALL CREATIVE RIGHTS RESERVED.
+          </div>
         </div>
       </div>
     </section>
-  );
-}
-
-function StatCell({
-  value,
-  label,
-  loading,
-}: {
-  value: React.ReactNode;
-  label: string;
-  loading?: boolean;
-}) {
-  return (
-    <div className="bg-[#080808] px-6 py-8">
-      <div className="flex min-h-[2.75rem] items-center font-display text-3xl font-extrabold tracking-tight tabular-nums text-white sm:text-4xl">
-        {loading ? (
-          <span className="block h-8 w-24 animate-pulse rounded bg-white/[0.07]" aria-hidden />
-        ) : (
-          value
-        )}
-      </div>
-      <div className="mt-2 font-mono text-[10px] uppercase tracking-[0.25em] text-[#6f6f6f]">
-        {label}
-      </div>
-    </div>
   );
 }
 
