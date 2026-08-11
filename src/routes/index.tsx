@@ -482,7 +482,7 @@ function Hero() {
         </Reveal>
 
         <Reveal delay={80}>
-          <h1 className="mt-8 font-display text-[3.2rem] font-extrabold leading-[0.95] tracking-tighter text-white sm:text-7xl lg:text-[6rem]">
+          <h1 className="mt-8 font-display text-[2.6rem] font-extrabold leading-[0.95] tracking-tighter text-white xs:text-[3.2rem] sm:text-7xl lg:text-[6rem]">
             A SPECTRE
             <br />
             CRIA.
