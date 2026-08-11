@@ -327,7 +327,7 @@ function Index() {
   return (
     <div
       id="topo"
-      className="relative min-h-screen overflow-x-hidden bg-[#050505] font-sans text-[#f5f5f5] antialiased"
+      className="relative min-h-screen overflow-x-hidden bg-[#030303] font-sans text-[#f5f5f5] antialiased"
     >
       <div aria-hidden className="pointer-events-none fixed inset-0 -z-10">
         <div
@@ -337,6 +337,11 @@ function Index() {
             backgroundSize: '40px 40px'
           }}
         />
+      </div>
+
+      <div className="aurora-bg">
+        <div className="grid-overlay" />
+        <div className="noise-overlay" />
       </div>
 
       <SiteHeader />
@@ -376,7 +381,7 @@ function SiteHeader() {
     <header
       className={`sticky top-0 z-50 w-full transition-[background,border-color,backdrop-filter] duration-300 ${
         scrolled
-          ? "border-b border-white/[0.07] bg-[#050505]/80 backdrop-blur-xl"
+          ? "border-b border-white/[0.07] bg-[#030303]/80 backdrop-blur-xl"
           : "border-b border-transparent bg-transparent"
       }`}
     >
@@ -427,7 +432,7 @@ function SiteHeader() {
       </div>
 
       {open && (
-        <div className="border-t border-white/[0.07] bg-[#050505]/95 backdrop-blur-xl md:hidden">
+        <div className="border-t border-white/[0.07] bg-[#030303]/95 backdrop-blur-xl md:hidden">
           <nav className="mx-auto flex max-w-7xl flex-col px-4 py-3 sm:px-6">
             {NAV.map((n) => (
               <a
@@ -763,7 +768,7 @@ function SocialProof() {
   const latency = useCountUp(stats.latency, inView);
 
   return (
-    <section className="border-y border-white/[0.06] bg-white/[0.012]">
+    <section className="border-y border-white/[0.06] bg-black/40 backdrop-blur-sm">
       <div ref={ref} className="mx-auto max-w-7xl px-4 py-8 sm:px-6 sm:py-10 lg:px-8">
         <div className="flex flex-wrap items-center justify-between gap-8 text-[10px] font-bold text-[#8a8a8a] uppercase tracking-[0.2em]">
           <div className="flex items-center gap-10">
@@ -1023,7 +1028,7 @@ function FreeSignup() {
   return (
     <section id="free" className="mx-auto max-w-7xl px-4 py-20 sm:px-6 sm:py-28 lg:px-8">
       <Reveal>
-        <div className="grid gap-10 rounded-2xl border border-white/[0.07] bg-[#0d0d0d]/70 p-7 backdrop-blur-xl md:grid-cols-[1.05fr_0.95fr] md:p-12">
+        <div className="grid gap-10 rounded-2xl border border-white/[0.07] bg-[#030303]/70 p-7 backdrop-blur-xl md:grid-cols-[1.05fr_0.95fr] md:p-12">
           <div>
             <span className="eyebrow">Acesso Comunitário</span>
             <h2 className="mt-4 font-display text-2xl font-extrabold tracking-[-0.03em] text-white sm:text-4xl">
