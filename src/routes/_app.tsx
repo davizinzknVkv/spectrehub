@@ -138,16 +138,17 @@ function SidebarBody({
   const logoUrl = logoAsset.url;
   return (
     <div className="flex h-full flex-col">
-      <Link to="/" className="flex items-center gap-3 px-5 pb-5 pt-6">
-        <div className="grid h-9 w-9 place-items-center rounded-[0.6rem] border border-white/10 bg-white/[0.04] p-1.5 shadow-inner">
-          <img src={logoUrl} alt="" className="h-full w-full object-contain" />
-        </div>
-        <div className="min-w-0 leading-tight">
-          <div className="truncate text-[0.9rem] font-bold tracking-[-0.03em] uppercase text-white font-display">
-            Spectre Hub
-          </div>
-          <div className="font-mono text-[9px] uppercase tracking-[0.3em] text-slate-600">elite console</div>
-        </div>
+      <Link to="/" className="flex items-center gap-2.5 px-6 pb-6 pt-8">
+        <img
+          src={logoUrl}
+          alt="Spectre Hub"
+          width={32}
+          height={32}
+          className="h-8 w-auto shrink-0 invert"
+        />
+        <span className="truncate font-display text-[15px] font-extrabold tracking-tighter text-white uppercase">
+          Spectre<span className="opacity-40 ml-1.5 font-light">|</span><span className="text-[#ff0055] ml-1.5">REBIRTH</span>
+        </span>
       </Link>
 
       <div className="hairline mx-5" aria-hidden />
