@@ -382,12 +382,12 @@ function SiteHeader() {
           </span>
         </Link>
 
-        <nav className="hidden items-center gap-8 md:flex">
+        <nav className="hidden items-center gap-10 md:flex">
           {NAV.map((n) => (
             <a
               key={n.href}
               href={n.href}
-              className="text-[13px] font-medium text-[#8a8a8a] transition-colors duration-200 hover:text-white"
+              className="text-[11px] font-bold text-[#8a8a8a] transition-colors duration-200 hover:text-white uppercase tracking-[0.2em]"
             >
               {n.label}
             </a>
@@ -395,11 +395,11 @@ function SiteHeader() {
         </nav>
 
         <div className="hidden items-center gap-2 md:flex">
-          <Link to="/hub" className="btn-ghost">
-            Entrar
+          <Link to="/hub" className="text-[11px] font-bold text-white border border-white/10 px-6 py-2 rounded-sm hover:bg-white/5 transition-all uppercase tracking-widest flex items-center gap-2">
+            <ArrowRight className="h-3 w-3" /> Entrar
           </Link>
-          <a href={GUILD_INVITE} target="_blank" rel="noreferrer" className="btn-accent">
-            Comunidade
+          <a href={GUILD_INVITE} target="_blank" rel="noreferrer" className="text-[11px] font-bold text-white bg-[#ff0055] px-6 py-2 rounded-sm hover:bg-[#ff0055]/90 transition-all uppercase tracking-widest flex items-center gap-2">
+            <ArrowRight className="h-3 w-3" /> Abrir Ticket
           </a>
         </div>
 
@@ -502,6 +502,14 @@ function Hero() {
         </Reveal>
 
         <Reveal delay={320}>
+          <div className="mt-20 flex items-center justify-between border-t border-white/5 pt-8 text-[10px] font-bold text-[#444] uppercase tracking-[0.2em]">
+            <span>SPECTRE REBIRTH</span>
+            <span className="opacity-20">//</span>
+            <span>AGO/2026</span>
+            <span className="opacity-20">©</span>
+            <span>PROPERTY OF SPECTRE. ALL CREATIVE RIGHTS RESERVED.</span>
+          </div>
+        </Reveal>
           <div className="mt-10 flex items-center justify-center gap-3">
             <div className="flex -space-x-2">
               {FALLBACK_MEMBERS.slice(0, 5).map((m) => (
