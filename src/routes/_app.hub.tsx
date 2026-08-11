@@ -803,7 +803,6 @@ function HubPage() {
 
 
 
-      <WelcomeModal />
     </div>
   );
 }
