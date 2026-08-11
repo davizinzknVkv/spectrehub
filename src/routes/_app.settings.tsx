@@ -22,7 +22,7 @@ const TOKEN_BOOKMARKLET =
 
 
 export const Route = createFileRoute("/_app/settings")({
-  head: () => ({ meta: [{ title: "Login — Neighborshub" }] }),
+  head: () => ({ meta: [{ title: "Login — Spectre Hub" }] }),
   component: SettingsPage,
 });
 
@@ -390,7 +390,7 @@ function TokenTutorial() {
               </details>
               <details className="group text-[11px]">
                 <summary className="cursor-pointer font-semibold text-[var(--text-2)] hover:text-[var(--text-1)]">
-                  O NeighborD salva minha senha?
+                  O Spectre Hub salva minha senha?
                 </summary>
                 <p className="mt-1 text-[var(--text-3)] leading-relaxed">
                   Não. Se usar o login por email/senha, os dados são enviados diretamente ao Discord

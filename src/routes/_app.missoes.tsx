@@ -20,7 +20,7 @@ import {
 } from "./_app.hub";
 
 export const Route = createFileRoute("/_app/missoes")({
-  head: () => ({ meta: [{ title: "Missões — Neighborshub" }] }),
+  head: () => ({ meta: [{ title: "Missões — Spectre Hub" }] }),
   component: MissoesPage,
 });
 

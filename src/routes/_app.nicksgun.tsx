@@ -8,7 +8,7 @@ import { ComingSoon } from "@/components/ComingSoon";
 import { Button, Card, EmptyState, Field, Input } from "@/components/ui/ds";
 
 export const Route = createFileRoute("/_app/nicksgun")({
-  head: () => ({ meta: [{ title: "Nicks-Gun — Sniper de Usernames — Neighborshub" }] }),
+  head: () => ({ meta: [{ title: "Nicks-Gun — Sniper de Usernames — Spectre Hub" }] }),
   component: () => (
     <ComingSoon
       name="Nicks-Gun"

@@ -21,7 +21,7 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/comp
 
 
 export const Route = createFileRoute("/_app/hub")({
-  head: () => ({ meta: [{ title: "Hub — Neighborshub" }] }),
+  head: () => ({ meta: [{ title: "Hub — Spectre Hub" }] }),
   component: HubPage,
 });
 
@@ -331,7 +331,7 @@ function HubPage() {
                   }}
                 />
                 <div className="mt-3 font-mono text-[10px] uppercase tracking-[0.4em] text-slate-500">
-                  neighborshub
+                  spectre hub
                 </div>
               </div>
 
