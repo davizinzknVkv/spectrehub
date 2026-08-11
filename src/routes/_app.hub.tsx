@@ -1406,7 +1406,7 @@ export const MissionCard = memo(function MissionCard({
         </span>
       </div>
 
-      <div className="flex flex-1 flex-col gap-2 p-3.5">
+      <div className="flex flex-1 flex-col gap-2 p-4">
         <div className="min-w-0">
           <h3 className="truncate text-[13px] font-semibold tracking-tight text-[var(--text-1)]">
             {quest.questName}
@@ -1445,7 +1445,7 @@ export const MissionCard = memo(function MissionCard({
           onClick={onExec}
           disabled={disabled}
           title={gateHint}
-          className="mt-auto rounded-lg border border-[var(--border-1)] bg-[#0a0a0a] px-3 py-1.5 text-[12px] font-medium text-[var(--text-1)] transition hover:border-[color-mix(in_oklab,var(--accent-1)_45%,transparent)] hover:text-[var(--accent-soft)] disabled:cursor-not-allowed disabled:opacity-30"
+          className="mt-2 w-full rounded-none bg-[#ff0055] py-2.5 font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-white transition-all hover:bg-[#ff0055]/90 active:scale-[0.98] disabled:opacity-40"
         >
           {gateHint ?? "Completar"}
         </button>
