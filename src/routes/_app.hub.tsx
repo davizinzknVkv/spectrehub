@@ -452,7 +452,47 @@ function HubPage() {
         </div>
 
         <div className="space-y-6">
-           {/* Sidebar widgets would go here */}
+          <div className="rounded-xl border border-white/5 bg-[#080808] p-6">
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="font-mono text-[10px] uppercase tracking-[0.3em] text-slate-500">quest status</h3>
+              <Badge variant={orbQuests > 0 ? "accent" : "default"}>
+                {orbQuests} ativas
+              </Badge>
+            </div>
+            <div className="space-y-3">
+              <div className="flex items-center justify-between text-xs">
+                <span className="text-slate-500">Missões Hoje</span>
+                <span className="font-bold text-white">{limits.daily === Infinity ? "∞" : `${runsCount}/${limits.daily}`}</span>
+              </div>
+              <div className="h-1.5 w-full bg-white/5 rounded-full overflow-hidden">
+                <div 
+                  className="h-full bg-[#ff0055] transition-all duration-500" 
+                  style={{ width: limits.daily === Infinity ? '100%' : `${(runsCount / limits.daily) * 100}%` }}
+                />
+              </div>
+              <p className="text-[10px] leading-relaxed text-slate-500 italic">
+                {plan === 'free' ? 'Upgrade para Premium e tenha missões ilimitadas.' : 'Seu plano de elite permite execução contínua.'}
+              </p>
+            </div>
+          </div>
+
+          <div className="group relative overflow-hidden rounded-xl border border-[#ff0055]/20 bg-[#ff0055]/5 p-6 transition-all hover:border-[#ff0055]/40">
+            <div className="relative z-10">
+              <div className="flex items-center gap-2 text-[#ff0055] mb-2">
+                <Gift className="h-4 w-4" />
+                <span className="font-mono text-[10px] font-bold uppercase tracking-widest">resgatar orbs</span>
+              </div>
+              <p className="text-xs text-slate-400 mb-4 leading-relaxed">
+                Troque seus orbs acumulados por cosméticos e itens exclusivos no Spectre Hub.
+              </p>
+              <Link
+                to="/resgatar"
+                className="inline-flex w-full items-center justify-center gap-2 rounded-none bg-[#ff0055] py-2 font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-white transition-transform hover:scale-[1.02]"
+              >
+                abrir loja <ArrowRight className="h-3 w-3" />
+              </Link>
+            </div>
+          </div>
         </div>
       </div>
     </div>
