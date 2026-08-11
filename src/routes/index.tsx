@@ -1279,39 +1279,24 @@ function MiniStat({
 
 function FinalCta() {
   return (
-    <section className="relative overflow-hidden border-t border-white/[0.06]">
-      <div
-        aria-hidden
-        className="pointer-events-none absolute left-1/2 top-1/2 h-[26rem] w-[46rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#818cf8]/[0.08] blur-[130px]"
-      />
+    <section className="relative overflow-hidden border-t border-white/5 py-32">
       <Reveal>
-        <div className="relative mx-auto max-w-3xl px-4 py-24 text-center sm:px-6 sm:py-32">
-          <img
-            src={logoAsset.url}
-            alt="Spectre Hub"
-            width={64}
-            height={64}
-            loading="lazy"
-            className="mx-auto h-16 w-auto opacity-90"
-          />
-          <h2 className="mt-8 font-display text-3xl font-extrabold tracking-[-0.035em] text-white sm:text-5xl">
-            Pronto para Dominar o Ecossistema?
+        <div className="mx-auto max-w-4xl px-4 text-center">
+          <h2 className="font-display text-5xl font-extrabold leading-[0.95] tracking-tighter text-white sm:text-8xl">
+            ABRA UM
+            <br />
+            TICKET!
           </h2>
-          <p className="mx-auto mt-4 max-w-lg text-[15px] text-[#8a8a8a]">
-            Junte-se à elite e ative sua infraestrutura de automação hoje mesmo.
+          <p className="mx-auto mt-10 max-w-xl text-lg font-medium text-[#8a8a8a] leading-relaxed">
+            Junte-se à elite e ative sua infraestrutura de automação hoje mesmo. Suporte direto com quem entende do assunto.
           </p>
-          <div className="mt-9 flex flex-wrap items-center justify-center gap-3">
-            <Link to="/hub" className="btn-accent px-6 py-3.5">
-              Começar agora <ArrowRight className="h-4 w-4" />
-            </Link>
-            <a
-              href={GUILD_INVITE}
-              target="_blank"
-              rel="noreferrer"
-              className="btn-ghost px-6 py-3.5"
-            >
-              Entrar no Discord
+          <div className="mt-12 flex flex-wrap items-center justify-center gap-4">
+            <a href={GUILD_INVITE} target="_blank" rel="noreferrer" className="bg-[#ff0055] text-white font-bold py-4 px-10 rounded-sm uppercase tracking-widest hover:bg-[#ff0055]/90 transition-all flex items-center gap-2">
+              <ArrowRight className="h-4 w-4" /> Abrir meu ticket agora
             </a>
+            <Link to="/hub" className="bg-white/5 border border-white/10 text-white font-bold py-4 px-10 rounded-sm uppercase tracking-widest hover:bg-white/10 transition-all">
+              Acessar painel
+            </Link>
           </div>
         </div>
       </Reveal>
