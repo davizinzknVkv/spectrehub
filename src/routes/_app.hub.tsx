@@ -523,26 +523,37 @@ function HubPage() {
   );
 }
 
-function StatCard({ label, value, hint, tone }: { label: string; value: string; hint: string; tone: string }) {
+function StatCard({ icon: Icon, label, value, hint }: { icon?: any; label: string; value: string; hint: string; tone: string }) {
   return (
-    <div className="rounded-xl border border-white/5 bg-[#080808] p-4">
-      <div className="font-mono text-[9px] uppercase tracking-widest text-slate-500">{label}</div>
-      <div className="mt-1 text-2xl font-bold text-white">{value}</div>
-      <div className="mt-1 text-[10px] text-slate-500">{hint}</div>
+    <div className="rounded-none border border-white/5 bg-[#080808] p-4 transition-colors hover:border-white/10">
+      <div className="flex items-center gap-2 mb-1">
+        {Icon && <Icon className="h-3 w-3 text-slate-600" />}
+        <div className="font-mono text-[9px] uppercase tracking-widest text-slate-500">{label}</div>
+      </div>
+      <div className="text-2xl font-bold text-white tracking-tight">{value}</div>
+      <div className="mt-1 text-[10px] text-slate-600 uppercase tracking-tighter">{hint}</div>
     </div>
   );
 }
 
-function InfoField({ label, value, sensitive }: { label: string; value: string; sensitive?: boolean }) {
+function InfoField({ icon: Icon, label, value, sensitive, accent }: { icon?: any; label: string; value: string; sensitive?: boolean; accent?: boolean }) {
   const [revealed, setRevealed] = useState(false);
   const display = sensitive && !revealed ? "••••••••" : value;
   return (
-    <div className="rounded-lg border border-white/5 bg-white/[0.02] p-3">
-      <div className="font-mono text-[9px] uppercase tracking-widest text-slate-500">{label}</div>
-      <div className="mt-1 flex items-center justify-between">
-        <span className="text-sm text-white">{display}</span>
+    <div className="rounded-none border border-white/5 bg-white/[0.02] p-3 transition-colors hover:bg-white/[0.04]">
+      <div className="flex items-center gap-2 mb-1">
+        {Icon && <Icon className="h-3 w-3 text-slate-600" />}
+        <div className="font-mono text-[9px] uppercase tracking-widest text-slate-500">{label}</div>
+      </div>
+      <div className="flex items-center justify-between">
+        <span className={cn(
+          "font-mono text-sm tracking-tight",
+          accent ? "text-[#ff0055] font-bold" : "text-white"
+        )}>
+          {display}
+        </span>
         {sensitive && (
-          <button onClick={() => setRevealed(!revealed)} className="text-[9px] uppercase text-[#a78bfa]">
+          <button onClick={() => setRevealed(!revealed)} className="text-[9px] font-bold uppercase tracking-widest text-[#ff0055] hover:underline">
             {revealed ? "ocultar" : "ver"}
           </button>
         )}
