@@ -375,10 +375,10 @@ function SiteHeader() {
             alt="Spectre Hub"
             width={32}
             height={32}
-            className="h-8 w-auto shrink-0"
+            className="h-8 w-auto shrink-0 invert"
           />
-          <span className="truncate font-display text-[15px] font-extrabold tracking-tight text-white uppercase">
-            Spectre<span className="text-[#818cf8]"> Hub</span>
+          <span className="truncate font-display text-[16px] font-extrabold tracking-tighter text-white uppercase">
+            Spectre<span className="opacity-40 ml-1.5 font-light">|</span><span className="text-[#ff0055] ml-1.5">REBIRTH</span>
           </span>
         </Link>
 
@@ -464,35 +464,39 @@ function Hero() {
 
       <div className="mx-auto max-w-3xl text-center">
         <Reveal>
-          <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-3.5 py-1.5 font-mono text-[10px] uppercase tracking-[0.28em] text-[#a0a0a0] backdrop-blur-xl">
-            <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-[#818cf8]" />
-            Spectre Hub Protocol
+          <span className="inline-flex items-center gap-3 rounded-full border border-white/5 bg-white/[0.02] px-4 py-1.5 font-mono text-[9px] uppercase tracking-[0.3em] text-[#8a8a8a] backdrop-blur-md">
+            <span className="h-1 w-1 rounded-full bg-[#ff0055] shadow-[0_0_8px_#ff0055]" />
+            Inovação · Produto & Tecnologia
           </span>
         </Reveal>
 
         <Reveal delay={80}>
-          <h1 className="mt-7 font-display text-[2.7rem] font-extrabold leading-[1.02] tracking-[-0.04em] text-white sm:text-6xl lg:text-[4.5rem]">
-            A Próxima Geração da
+          <h1 className="mt-8 font-display text-[3.2rem] font-extrabold leading-[0.95] tracking-tighter text-white sm:text-7xl lg:text-[6rem]">
+            A SPECTRE
             <br />
-            <span className="bg-gradient-to-b from-white via-white to-[#8f8f8f] bg-clip-text text-transparent">
-              Experiência no Discord.
+            CRIA.
+            <br />
+            <span className="text-white">O MERCADO</span>
+            <br />
+            <span className="bg-gradient-to-b from-white to-white/40 bg-clip-text text-transparent">
+              COPIA.
             </span>
           </h1>
         </Reveal>
 
         <Reveal delay={160}>
-          <p className="mx-auto mt-6 max-w-xl text-[15px] leading-relaxed text-[#8a8a8a] sm:text-base">
-            O Spectre Hub é a infraestrutura definitiva para automação. Quests, orbs, nicks raros e ferramentas de gestão em uma única interface premium projetada para performance extrema.
+          <p className="mx-auto mt-8 max-w-xl text-[16px] font-medium leading-relaxed text-[#8a8a8a] sm:text-lg">
+            Somos o estúdio por trás dos sistemas que o Discord brasileiro inteiro tenta imitar. Instalação em minutos, compatível com qualquer base, e performance que segura servidor lotado no horário de pico.
           </p>
         </Reveal>
 
         <Reveal delay={240}>
           <div className="mt-9 flex flex-wrap items-center justify-center gap-3">
-            <a href="#produtos" className="btn-accent px-5 py-3">
-              Explorar produtos <ArrowRight className="h-4 w-4" />
+            <a href="#produtos" className="bg-[#ff0055] hover:bg-[#ff0055]/90 text-white font-bold py-4 px-8 rounded-sm uppercase tracking-wider transition-all hover:scale-[1.02] active:scale-95 flex items-center gap-2">
+              <ArrowRight className="h-4 w-4" /> Quero no meu servidor
             </a>
-            <a href={GUILD_INVITE} target="_blank" rel="noreferrer" className="btn-ghost px-5 py-3">
-              Entrar na comunidade
+            <a href={GUILD_INVITE} target="_blank" rel="noreferrer" className="border border-white/10 bg-white/5 hover:bg-white/10 text-white font-bold py-4 px-8 rounded-sm uppercase tracking-wider transition-all flex items-center gap-2">
+              Ver os sistemas <ArrowRight className="rotate-90 h-4 w-4" />
             </a>
           </div>
         </Reveal>
