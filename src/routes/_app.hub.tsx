@@ -4,6 +4,7 @@ import logoAsset from "@/assets/spectre-hub-logo-transparent.png.asset.json";
 import { ArrowRight, Sparkles, Zap, Gift, LayoutDashboard, X, ShieldCheck, Mail, History } from "lucide-react";
 import { PageHeader } from "@/components/PageHeader";
 import { Badge } from "@/components/ui/ds";
+import { cn } from "@/lib/utils";
 import { WelcomeTour } from "@/components/WelcomeTour";
 
 import { toast } from "sonner";
