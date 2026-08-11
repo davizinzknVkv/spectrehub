@@ -148,9 +148,7 @@ function SidebarBody({
         <img
           src={logoUrl}
           alt="Spectre Hub"
-          width={32}
-          height={32}
-          className="h-8 w-auto shrink-0"
+          className="h-8 w-8 object-contain shrink-0"
         />
         <span className="truncate font-display text-[15px] font-extrabold tracking-tighter text-white uppercase">
           Spectre<span className="opacity-40 ml-1.5 font-light">|</span><span className="text-[#ff0055] ml-1.5">HUB</span>
@@ -262,8 +260,8 @@ function TopBar({ onOpenMenu, pathname }: { onOpenMenu: () => void; pathname: st
             <Menu className="h-4 w-4" />
           </button>
           <Link to="/" className="flex items-center gap-2 lg:hidden">
-            <div className="grid h-8 w-8 place-items-center rounded-lg border border-white/10 bg-white/[0.04] p-1">
-              <img src={logoUrl} alt="" className="h-full w-full object-contain" />
+            <div className="grid h-8 w-8 place-items-center rounded-lg border border-white/10 bg-white/[0.04]">
+              <img src={logoUrl} alt="Spectre Hub" className="h-6 w-6 object-contain" />
             </div>
             <span className="text-sm font-bold tracking-[-0.03em] uppercase text-white font-display">Spectre Hub</span>
           </Link>
