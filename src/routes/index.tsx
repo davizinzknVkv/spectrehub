@@ -341,7 +341,7 @@ function Index() {
         <Hero />
         <SocialProof />
         <ProductsSection />
-        <FeaturedProduct />
+        
         <ReasonsSection />
         <PlansSection />
         <FreeSignup />
@@ -917,112 +917,63 @@ function ReasonsSection() {
 
 /* ─────────────────────── por que / recursos ─────────────────────── */
 
-function ReasonsSection() {
-  return (
-    <section id="recursos" className="mx-auto max-w-7xl px-4 py-20 sm:px-6 sm:py-28 lg:px-8">
-      <Reveal>
-        <div className="max-w-2xl">
-          <span className="eyebrow">Diferenciais Competitivos</span>
-          <h2 className="mt-4 font-display text-3xl font-extrabold tracking-[-0.03em] text-white sm:text-[2.6rem]">
-            A Vantagem Injusta que Você Estava Buscando.
-          </h2>
-          <p className="mt-3 text-sm text-[#8a8a8a]">
-            Quatro princípios que guiam cada release do hub.
-          </p>
-        </div>
-      </Reveal>
-
-      <div className="mt-14 grid gap-px overflow-hidden rounded-xl border border-white/[0.06] bg-white/[0.05] sm:grid-cols-2 lg:grid-cols-4">
-        {REASONS.map((r, i) => {
-          const Icon = r.icon;
-          return (
-            <Reveal key={r.n} delay={i * 80}>
-              <div className="group h-full bg-[#080808] p-7 transition-colors duration-300 hover:bg-[#0d0d0d]">
-                <div className="flex items-center justify-between">
-                  <span className="font-mono text-xs tracking-[0.2em] text-[#818cf8]">{r.n}</span>
-                  <Icon className="h-4.5 w-4.5 text-[#6f6f6f] transition-colors duration-300 group-hover:text-[#818cf8]" />
-                </div>
-                <h3 className="mt-8 font-display text-lg font-bold tracking-tight text-white">
-                  {r.title}
-                </h3>
-                <p className="mt-2 text-[13px] leading-relaxed text-[#8a8a8a]">{r.desc}</p>
-              </div>
-            </Reveal>
-          );
-        })}
-      </div>
-    </section>
-  );
-}
 
 /* ─────────────────────────── planos ─────────────────────────── */
 
 function PlansSection() {
   return (
-    <section
-      id="sobre"
-      className="relative border-y border-white/[0.06] bg-white/[0.012]"
-    >
-      <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 sm:py-28 lg:px-8">
+    <section id="sobre" className="mx-auto max-w-7xl px-4 py-24 sm:px-6 sm:py-32 lg:px-8">
+      <div className="max-w-4xl">
         <Reveal>
-          <div className="max-w-2xl">
-            <span className="eyebrow">Assinaturas e Licenciamento</span>
-            <h2 className="mt-4 font-display text-3xl font-extrabold tracking-[-0.03em] text-white sm:text-[2.6rem]">
-              Escalabilidade sob medida.
-            </h2>
-            <p className="mt-3 text-sm text-[#8a8a8a]">
-              O plano é detectado pelo seu cargo no Discord — se expirar, o hub volta pro Free
-              automaticamente.
-            </p>
-          </div>
+          <h2 className="font-display text-4xl font-extrabold leading-[0.95] tracking-tighter text-white sm:text-7xl">
+            SISTEMAS PARA
+            <br />
+            QUEM LEVA A
+            <br />
+            SÉRIO.
+          </h2>
+          <p className="mt-8 text-lg font-medium text-[#8a8a8a] leading-relaxed max-w-xl">
+            O plano é detectado pelo seu cargo no Discord — se expirar, o hub volta pro Free automaticamente.
+          </p>
         </Reveal>
+      </div>
 
-        <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          {PLANS.map((p, i) => (
-            <Reveal key={p.name} delay={i * 70}>
-              <div
-                className={`surface-card flex h-full flex-col p-6 ${
-                  p.highlight ? "border-[#818cf8]/40 bg-[#818cf8]/[0.05]" : ""
-                }`}
-              >
-                {p.highlight && (
-                  <span className="absolute right-5 top-5 rounded-full bg-[#818cf8] px-2.5 py-0.5 font-mono text-[9px] uppercase tracking-[0.2em] text-white">
-                    popular
-                  </span>
-                )}
-                <h3 className="font-display text-lg font-bold tracking-tight text-white">
-                  {p.name}
-                </h3>
-                <div className="mt-4 flex items-baseline gap-1.5">
-                  <span className="font-display text-3xl font-extrabold tracking-tight text-white">
-                    {p.price}
-                  </span>
-                  <span className="text-xs text-[#6f6f6f]">/ {p.period}</span>
+      <div className="mt-20 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        {PLANS.map((p, i) => (
+          <Reveal key={p.name} delay={i * 100}>
+            <div className={`relative group border border-white/5 bg-white/[0.02] p-8 flex flex-col h-full transition-all hover:border-[#ff0055]/30 ${p.highlight ? 'ring-1 ring-[#ff0055]/50' : ''}`}>
+              {p.highlight && (
+                <div className="absolute top-0 right-0 bg-[#ff0055] text-white text-[9px] font-bold px-3 py-1 uppercase tracking-widest">
+                  Popular
                 </div>
-                <ul className="mt-6 flex-1 space-y-2.5">
-                  {p.features.map((f) => (
-                    <li key={f} className="flex gap-2.5 text-[13px] text-[#a0a0a0]">
-                      <Check className="mt-0.5 h-3.5 w-3.5 shrink-0 text-[#818cf8]" />
-                      <span>{f}</span>
-                    </li>
-                  ))}
-                </ul>
-                {p.name === "Free" ? (
-                  <a href="#free" className="btn-ghost mt-7 w-full">
-                    {p.cta}
-                  </a>
-                ) : (
-                  <Link
-                    to="/hub"
-                    className={`${p.highlight ? "btn-accent" : "btn-ghost"} mt-7 w-full`}
-                  >
-                    {p.cta}
-                  </Link>
-                )}
+              )}
+              <h3 className="text-[10px] font-bold text-[#ff0055] uppercase tracking-[0.3em] mb-4">{p.name}</h3>
+              <div className="flex items-baseline gap-2 mb-8">
+                <span className="text-4xl font-display font-extrabold text-white tracking-tighter">{p.price}</span>
+                <span className="text-[10px] font-bold text-[#444] uppercase tracking-widest">/ {p.period}</span>
               </div>
-            </Reveal>
-          ))}
-        </div>
+              
+              <div className="space-y-4 mb-10 flex-1">
+                {p.features.map(f => (
+                  <div key={f} className="flex items-center gap-3">
+                    <Check className="h-3 w-3 text-[#ff0055]" />
+                    <span className="text-xs font-medium text-[#8a8a8a]">{f}</span>
+                  </div>
+                ))}
+              </div>
+
+              {p.name === "Free" ? (
+                <a href="#free" className="text-center bg-white/5 border border-white/10 text-white font-bold py-3 px-6 text-[11px] uppercase tracking-widest hover:bg-white/10 transition-all">
+                  Começar Grátis
+                </a>
+              ) : (
+                <Link to="/hub" className={`text-center font-bold py-3 px-6 text-[11px] uppercase tracking-widest transition-all ${p.highlight ? 'bg-[#ff0055] text-white hover:bg-[#ff0055]/90' : 'bg-white/5 border border-white/10 text-white hover:bg-white/10'}`}>
+                  {p.cta}
+                </Link>
+              )}
+            </div>
+          </Reveal>
+        ))}
       </div>
     </section>
   );
