@@ -787,47 +787,86 @@ function SocialProof() {
 /* ─────────────────────────── produtos ─────────────────────────── */
 
 function ProductsSection() {
-  const [cat, setCat] = useState<(typeof CATEGORIES)[number]>("Todos");
-  const list = cat === "Todos" ? PRODUCTS : PRODUCTS.filter((p) => p.category === cat);
+  const [activeTab, setActiveTab] = useState(0);
 
   return (
-    <section id="produtos" className="mx-auto max-w-7xl px-4 py-20 sm:px-6 sm:py-28 lg:px-8">
-      <Reveal>
-        <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
-          <div className="max-w-2xl">
-            <span className="eyebrow">Soluções de Engenharia</span>
-            <h2 className="mt-4 font-display text-3xl font-extrabold tracking-[-0.03em] text-white sm:text-[2.6rem]">
-              Arsenal de Performance.
+    <section id="produtos" className="mx-auto max-w-7xl px-4 py-24 sm:px-6 sm:py-32 lg:px-8">
+      <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8">
+        <div className="max-w-2xl">
+          <Reveal>
+            <h2 className="font-display text-4xl font-extrabold leading-[0.95] tracking-tighter text-white sm:text-6xl">
+              CADA SISTEMA É UM
+              <br />
+              MOTIVO PRO
+              <br />
+              JOGADOR FICAR.
             </h2>
-            <p className="mt-3 text-sm text-[#8a8a8a]">
-              Cada ferramenta do hub resolve uma dor real de quem vive Discord todo dia.
+          </Reveal>
+          <Reveal delay={100}>
+            <p className="mt-6 text-[16px] text-[#8a8a8a]">
+              Sistema que o jogador abre, entende na hora e volta pra usar. Todos desenhados, escritos e testados pela SPECTRE, e já rodando em servidor cheio agora.
             </p>
-          </div>
-          <div className="flex flex-wrap gap-2">
-            {CATEGORIES.map((c) => (
-              <button
-                key={c}
-                type="button"
-                onClick={() => setCat(c)}
-                className={`rounded-full border px-3.5 py-1.5 text-xs font-medium transition duration-200 ${
-                  cat === c
-                    ? "border-[#818cf8]/50 bg-[#818cf8]/12 text-white"
-                    : "border-white/[0.08] bg-white/[0.02] text-[#8a8a8a] hover:border-white/20 hover:text-white"
-                }`}
+          </Reveal>
+        </div>
+      </div>
+
+      <div className="mt-16">
+        <div className="flex flex-wrap gap-2">
+          {PRODUCTS.map((p, i) => (
+            <button
+              key={p.id}
+              onClick={() => setActiveTab(i)}
+              className={`px-6 py-2 text-[10px] font-bold uppercase tracking-widest border transition-all ${
+                activeTab === i
+                  ? "bg-[#ff0055] border-[#ff0055] text-white"
+                  : "bg-white/5 border-white/10 text-[#8a8a8a] hover:bg-white/10"
+              }`}
+            >
+              {p.name}
+            </button>
+          ))}
+        </div>
+
+        <div className="mt-12 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+          <Reveal className="relative aspect-video bg-white/5 border border-white/10 overflow-hidden group">
+             <div className="absolute inset-0 bg-gradient-to-tr from-[#ff0055]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+             <div className="absolute inset-0 flex items-center justify-center">
+                <div className="text-[10px] font-bold text-white/20 uppercase tracking-[0.4em]">Preview do Sistema</div>
+             </div>
+          </Reveal>
+
+          <div>
+            <Reveal>
+              <h3 className="font-display text-5xl font-extrabold tracking-tighter text-white uppercase">
+                SPECTRE {PRODUCTS[activeTab].name}
+              </h3>
+              <span className="mt-2 block text-[10px] font-bold text-[#ff0055] uppercase tracking-widest">
+                SPECTRE-{PRODUCTS[activeTab].id.toUpperCase()}
+              </span>
+            </Reveal>
+
+            <Reveal delay={100}>
+              <p className="mt-8 text-lg font-medium text-[#8a8a8a] leading-relaxed">
+                {PRODUCTS[activeTab].desc}
+              </p>
+            </Reveal>
+
+            <Reveal delay={200} className="mt-10 flex flex-wrap gap-3">
+              <span className="px-4 py-1.5 bg-white/5 border border-white/10 text-[10px] font-bold text-white uppercase tracking-widest">VRPEX</span>
+              <span className="px-4 py-1.5 bg-white/5 border border-white/10 text-[10px] font-bold text-white uppercase tracking-widest">CREATIVE</span>
+              <span className="px-4 py-1.5 bg-white/5 border border-white/10 text-[10px] font-bold text-white uppercase tracking-widest">STANDALONE</span>
+            </Reveal>
+
+            <Reveal delay={300} className="mt-12">
+              <Link
+                to={PRODUCTS[activeTab].to}
+                className="bg-[#ff0055] hover:bg-[#ff0055]/90 text-white font-bold py-4 px-8 rounded-sm uppercase tracking-wider transition-all inline-flex items-center gap-2"
               >
-                {c}
-              </button>
-            ))}
+                Quero este sistema <ArrowRight className="h-4 w-4" />
+              </Link>
+            </Reveal>
           </div>
         </div>
-      </Reveal>
-
-      <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-        {list.map((p, i) => (
-          <Reveal key={p.name} delay={i * 60}>
-            <ProductCard product={p} />
-          </Reveal>
-        ))}
       </div>
     </section>
   );
