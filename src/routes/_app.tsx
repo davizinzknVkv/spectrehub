@@ -31,6 +31,8 @@ import {
   UserRound,
 } from "lucide-react";
 import logoAsset from "@/assets/spectre-logo-nobg.png.asset.json";
+import { AdminNavLink } from "@/components/AdminNavLink";
+
 
 const DISCORD_INVITE = "https://discord.gg/JK7cC9je87";
 
