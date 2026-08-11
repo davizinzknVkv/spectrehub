@@ -510,6 +510,8 @@ function Hero() {
             <span>PROPERTY OF SPECTRE. ALL CREATIVE RIGHTS RESERVED.</span>
           </div>
         </Reveal>
+
+        <Reveal delay={360}>
           <div className="mt-10 flex items-center justify-center gap-3">
             <div className="flex -space-x-2">
               {FALLBACK_MEMBERS.slice(0, 5).map((m) => (
