@@ -109,7 +109,7 @@ function MissoesPage() {
     try {
       const q = await fetchAvailableQuests();
       setQuests(q);
-      useQuestStore.getState().log(`🎯 ${q.length} missão(ões) disponíveis`);
+      useQuestStore.getState().log(`🎯 ${q.length} missão(ões) disponível(eis)`);
     } catch (err) {
       toast.error(err instanceof Error ? err.message : "Erro ao carregar");
     } finally {

@@ -129,7 +129,7 @@ function FarmsPage() {
             icon={Activity}
             label="Status"
             value={running ? "Executando" : "Ocioso"}
-            hint={running && activeQuestId ? `#${activeQuestId.slice(-6)}` : "—"}
+            hint={running && activeQuestId ? `#${activeQuestId.slice(-8)}` : "—"}
             accent={running}
           />
           <StatCard

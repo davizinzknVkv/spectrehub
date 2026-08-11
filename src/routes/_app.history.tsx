@@ -5,7 +5,7 @@ import { Card, StatCard, Badge, EmptyState } from "@/components/ui/ds";
 import { History } from "lucide-react";
 
 export const Route = createFileRoute("/_app/history")({
-  head: () => ({ meta: [{ title: "Histórico — Neighborshub" }] }),
+  head: () => ({ meta: [{ title: "Histórico — Spectre Hub" }] }),
   component: HistoryPage,
 });
 
