@@ -137,14 +137,14 @@ function SidebarBody({
   return (
     <div className="flex h-full flex-col">
       <Link to="/" className="flex items-center gap-3 px-5 pb-5 pt-6">
-        <div className="grid h-9 w-9 place-items-center rounded-[0.6rem] border border-white/10 bg-white/[0.04] font-mono text-sm font-bold text-[#a5b4fc]">
-          N
+        <div className="grid h-9 w-9 place-items-center rounded-[0.6rem] border border-white/10 bg-white/[0.04] p-1.5 shadow-inner">
+          <img src="/src/assets/spectre-hub-logo.png.asset.json" alt="" className="h-full w-full object-contain" />
         </div>
         <div className="min-w-0 leading-tight">
-          <div className="truncate text-[0.9rem] font-semibold tracking-[-0.02em] text-white">
-            NeighborD Hub
+          <div className="truncate text-[0.9rem] font-bold tracking-[-0.03em] uppercase text-white font-display">
+            Spectre Hub
           </div>
-          <div className="font-mono text-[9px] uppercase tracking-[0.3em] text-slate-600">neon</div>
+          <div className="font-mono text-[9px] uppercase tracking-[0.3em] text-slate-600">elite console</div>
         </div>
       </Link>
 
@@ -204,7 +204,6 @@ function TopBar({ onOpenMenu, pathname }: { onOpenMenu: () => void; pathname: st
   const setCreds = useQuestStore((s) => s.setCreds);
   const [me, setMe] = useState<{ id?: string; username?: string; global_name?: string; avatar?: string | null } | null>(null);
 
-
   useEffect(() => {
     if (!creds) { setMe(null); return; }
     let cancelled = false;
@@ -215,6 +214,8 @@ function TopBar({ onOpenMenu, pathname }: { onOpenMenu: () => void; pathname: st
     );
     return () => { cancelled = true; };
   }, [creds]);
+
+  const logoUrl = "/src/assets/spectre-hub-logo.png.asset.json"; // Placeholder, real asset URL should be imported if possible
 
   const avatarUrl = me?.id
     ? me.avatar
@@ -252,10 +253,10 @@ function TopBar({ onOpenMenu, pathname }: { onOpenMenu: () => void; pathname: st
             <Menu className="h-4 w-4" />
           </button>
           <Link to="/" className="flex items-center gap-2 lg:hidden">
-            <div className="grid h-8 w-8 place-items-center rounded-lg border border-white/10 bg-white/[0.04] font-mono text-xs font-bold text-[#a5b4fc]">
-              N
+            <div className="grid h-8 w-8 place-items-center rounded-lg border border-white/10 bg-white/[0.04] p-1">
+              <img src="/src/assets/spectre-hub-logo.png.asset.json" alt="" className="h-full w-full object-contain" />
             </div>
-            <span className="text-sm font-semibold tracking-[-0.02em] text-white">NeighborD Hub</span>
+            <span className="text-sm font-bold tracking-[-0.03em] uppercase text-white font-display">Spectre Hub</span>
           </Link>
           <div className="hidden lg:block" />
         </div>

@@ -212,11 +212,11 @@ import {
   X,
   Zap,
 } from "lucide-react";
-import nghcLogo from "@/assets/nghc-logo.png.asset.json";
+import logoAsset from "@/assets/spectre-hub-logo.png.asset.json";
 
-const TITLE = "NeighborD Hub — A Elite da Automação para Discord";
+const TITLE = "Spectre Hub — Elite Discord Automation";
 const DESCRIPTION =
-  "Maximize sua eficiência no Discord. Automação avançada de quests, sniper de nicks raros e ferramentas de elite em uma infraestrutura premium de alta performance.";
+  "Domine o Discord com o Spectre Hub. Automação de quests, sniper de nicks raros e ferramentas de elite em uma infraestrutura obsidian premium.";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -231,7 +231,7 @@ export const Route = createFileRoute("/")({
     ],
     links: [
       { rel: "canonical", href: "https://neighbordhubdc.lovable.app/" },
-      { rel: "preload", as: "image", href: nghcLogo.url, fetchPriority: "high" },
+      { rel: "preload", as: "image", href: logoAsset.url, fetchPriority: "high" },
       { rel: "preconnect", href: "https://discord.com" },
       { rel: "preconnect", href: "https://cdn.discordapp.com", crossOrigin: "anonymous" },
     ],
