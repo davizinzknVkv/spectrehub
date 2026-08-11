@@ -805,8 +805,7 @@
 }
 .nav-item[data-active="true"] {
   color: #fff;
-  background: linear-gradient(90deg, color-mix(in oklab, var(--blurple) 13%, transparent), rgb(255 255 255 / 0.02));
-  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.06);
+  background: rgba(255, 255, 255, 0.04);
 }
 .nav-item[data-active="true"]::before {
   content: "";
