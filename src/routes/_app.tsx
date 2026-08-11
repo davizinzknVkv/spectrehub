@@ -393,7 +393,7 @@ function TopBar({ onOpenMenu, pathname }: { onOpenMenu: () => void; pathname: st
         >
           <div className="flex items-center gap-3">
             {avatarUrl && (
-              <img src={avatarUrl} alt="" className="h-10 w-10 rounded-full object-cover ring-1 ring-white/10" />
+              <img src={avatarUrl} alt="" className="h-10 w-10 rounded-none object-cover grayscale border border-white/10" />
             )}
             <div className="min-w-0 leading-tight">
               <div className="truncate text-sm font-semibold text-white">
