@@ -14,10 +14,10 @@ import { Button, Badge, EmptyState as DSEmptyState } from "@/components/ui/ds";
 import { Target, KeyRound } from "lucide-react";
 import {
   CaptchaModal,
-  EmptyState,
+  MissionEmptyState as EmptyState,
   MissionCard,
   PlanBanner,
-} from "./_app.hub";
+} from "@/components/Missions";
 
 export const Route = createFileRoute("/_app/missoes")({
   head: () => ({ meta: [{ title: "Missões — Spectre Hub" }] }),
@@ -109,7 +109,7 @@ function MissoesPage() {
     try {
       const q = await fetchAvailableQuests();
       setQuests(q);
-      useQuestStore.getState().log(`🎯 ${q.length} missão(ões) disponíveis`);
+      useQuestStore.getState().log(`🎯 ${q.length} missão(ões) disponível(eis)`);
     } catch (err) {
       toast.error(err instanceof Error ? err.message : "Erro ao carregar");
     } finally {
