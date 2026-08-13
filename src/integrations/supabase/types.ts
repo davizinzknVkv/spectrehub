@@ -101,6 +101,24 @@ export type Database = {
         }
         Relationships: []
       }
+      site_admins: {
+        Row: {
+          created_at: string
+          note: string | null
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          note?: string | null
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          note?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
       site_features: {
         Row: {
           allowed_role_ids: string[]
