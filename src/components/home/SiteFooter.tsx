@@ -1,11 +1,11 @@
 import React from "react";
 import { Link } from "@tanstack/react-router";
+import logoAsset from "@/assets/spectre-logo-nobg.png.asset.json";
 
 interface SiteFooterProps {
   guildInvite: string;
 }
 
-const logoAsset = { url: "/logo.png" };
 
 function FooterCol({
   title,

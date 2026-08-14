@@ -2,12 +2,12 @@ import React from "react";
 import { Link } from "@tanstack/react-router";
 import { ArrowRight, X, Menu } from "lucide-react";
 import { useState, useEffect } from "react";
+import logoAsset from "@/assets/spectre-logo-nobg.png.asset.json";
 
 interface SiteHeaderProps {
   guildInvite: string;
 }
 
-const logoAsset = { url: "/logo.png" };
 const NAV = [
   { href: "#produtos", label: "Produtos" },
   { href: "#recursos", label: "Recursos" },
