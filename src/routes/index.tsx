@@ -30,6 +30,7 @@ import {
   CheckCircle2,
   Copy,
   Gauge,
+  Globe,
   Instagram,
   LifeBuoy,
   Menu,
@@ -40,11 +41,14 @@ import {
   Sparkles,
   Tag,
   Target,
+  Trash2,
   Users,
   X,
   Zap,
 } from "lucide-react";
 import logoAsset from "@/assets/spectre-logo-nobg.png.asset.json";
+import { useOptimizerContent } from "@/lib/site-content";
+
 
 const TITLE = "Spectre Hub — Elite Discord Automation";
 const DESCRIPTION =
