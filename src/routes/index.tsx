@@ -88,6 +88,9 @@ const FALLBACK_MEMBERS = [
 
 import { useInView, useCountUp } from "@/components/home/hooks";
 import { Reveal } from "@/components/home/Reveal";
+import { SiteHeader } from "@/components/home/SiteHeader";
+import { Hero } from "@/components/home/Hero";
+import { SocialProof } from "@/components/home/SocialProof";
 
 import { Avatar } from "@/components/home/Avatar";
 
