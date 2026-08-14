@@ -76,7 +76,7 @@ export function SiteHeader({ guildInvite }: SiteHeaderProps) {
             rel="noreferrer"
             className="ds-btn ds-btn-primary !py-2.5 !px-6 !text-[9px]"
           >
-            Acessar Discord
+            Quero Usar o Spectre
           </a>
         </div>
 
@@ -118,7 +118,7 @@ export function SiteHeader({ guildInvite }: SiteHeaderProps) {
               rel="noreferrer"
               className="ds-btn ds-btn-primary w-full"
             >
-              Discord
+              Quero Usar o Spectre
             </a>
           </div>
         </div>
