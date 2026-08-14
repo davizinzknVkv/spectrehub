@@ -1116,22 +1116,22 @@ function CommunitySection() {
   const loop = [...list, ...list];
 
   return (
-    <section id="comunidade" className="border-t border-white/[0.06] bg-white/[0.012]">
-      <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 sm:py-28 lg:px-8">
+    <section id="comunidade" className="border-t border-graphite bg-onyx/20 overflow-hidden">
+      <div className="mx-auto max-w-[1216px] px-6 py-40">
         <Reveal>
           <div className="max-w-2xl">
-            <span className="eyebrow">Ecossistema Exclusivo</span>
-            <h2 className="mt-4 font-display text-3xl font-extrabold tracking-[-0.03em] text-white sm:text-[2.6rem]">
-              Conecte-se com a Elite.
+            <span className="text-eyebrow font-semibold uppercase tracking-widest text-accent mb-4 block">Rede de Elite</span>
+            <h2 className="font-display text-[44px] font-medium leading-[1.1] text-white sm:text-[64px]">
+              Onde o impossível se<br />torna padrão.
             </h2>
-            <p className="mt-3 text-sm text-[#8a8a8a]">
-              Suporte por ticket, avisos de update, canais de farm e gente online o dia inteiro.
+            <p className="mt-8 text-body-sm text-fog leading-relaxed">
+              Junte-se a uma rede privada de operadores, desenvolvedores e entusiastas que definem o futuro do Discord.
             </p>
           </div>
         </Reveal>
 
         <div
-          className="relative mt-20 overflow-hidden"
+          className="relative mt-24 overflow-hidden"
           style={{
             maskImage: "linear-gradient(90deg, transparent, #000 15%, #000 85%, transparent)",
           }}
@@ -1141,19 +1141,16 @@ function CommunitySection() {
             {loop.slice(0, Math.ceil(loop.length / 2)).map((m, i) => (
               <div
                 key={`${m.id}-${i}`}
-                className="flex shrink-0 items-center gap-4 border border-white/5 bg-[#0a0a0a] py-3 pl-3 pr-8 transition-all hover:border-[#ff0055]/30"
-                style={{
-                  clipPath: "polygon(0 0, 92% 0, 100% 25%, 100% 100%, 8% 100%, 0% 75%)"
-                }}
+                className="flex shrink-0 items-center gap-3 rounded-full border border-white/[0.04] bg-obsidian py-2 pl-2 pr-6 transition-all hover:border-accent/30"
               >
-                <div className="h-10 w-10 overflow-hidden bg-white/5">
+                <div className="h-8 w-8 overflow-hidden rounded-full bg-onyx">
                   {m.avatar ? (
-                    <img src={m.avatar} alt="" loading="lazy" className="h-full w-full object-cover grayscale" />
+                    <img src={m.avatar} alt="" loading="lazy" className="h-full w-full object-cover grayscale opacity-60 hover:opacity-100 transition-opacity" />
                   ) : (
-                    <div className="h-full w-full bg-white/10" />
+                    <Avatar seed={m.name} />
                   )}
                 </div>
-                <span className="whitespace-nowrap font-display text-[11px] font-black uppercase tracking-[0.2em] text-white">
+                <span className="text-[13px] font-medium text-white tracking-tight">
                   {m.name}
                 </span>
               </div>
@@ -1165,19 +1162,16 @@ function CommunitySection() {
             {loop.slice(Math.ceil(loop.length / 2)).map((m, i) => (
               <div
                 key={`${m.id}-${i}`}
-                className="flex shrink-0 items-center gap-4 border border-white/5 bg-[#0a0a0a] py-3 pl-3 pr-8 transition-all hover:border-[#ff0055]/30"
-                style={{
-                  clipPath: "polygon(0 0, 92% 0, 100% 25%, 100% 100%, 8% 100%, 0% 75%)"
-                }}
+                className="flex shrink-0 items-center gap-3 rounded-full border border-white/[0.04] bg-obsidian py-2 pl-2 pr-6 transition-all hover:border-accent/30"
               >
-                <div className="h-10 w-10 overflow-hidden bg-white/5">
+                <div className="h-8 w-8 overflow-hidden rounded-full bg-onyx">
                   {m.avatar ? (
-                    <img src={m.avatar} alt="" loading="lazy" className="h-full w-full object-cover grayscale" />
+                    <img src={m.avatar} alt="" loading="lazy" className="h-full w-full object-cover grayscale opacity-60 hover:opacity-100 transition-opacity" />
                   ) : (
-                    <div className="h-full w-full bg-white/10" />
+                    <Avatar seed={m.name} />
                   )}
                 </div>
-                <span className="whitespace-nowrap font-display text-[11px] font-black uppercase tracking-[0.2em] text-white">
+                <span className="text-[13px] font-medium text-white tracking-tight">
                   {m.name}
                 </span>
               </div>
@@ -1185,43 +1179,41 @@ function CommunitySection() {
           </div>
         </div>
 
-        <div className="mt-12 grid gap-6 lg:grid-cols-[1fr_380px] lg:items-center">
+        <div className="mt-32 grid gap-12 lg:grid-cols-[1fr_400px] lg:items-center">
           <Reveal>
-            <div className="border border-white/5 bg-[#0a0a0a] p-8 sm:p-10">
-              <div className="flex items-center gap-3 font-display text-[10px] font-bold uppercase tracking-[0.3em] text-[#ff0055]">
-                <span className="h-1.5 w-1.5 animate-pulse bg-[#ff0055]" /> Conexão Direta
+            <div className="rounded-2xl border border-white/[0.04] bg-onyx/30 p-12">
+              <div className="flex items-center gap-3 text-eyebrow font-semibold text-accent uppercase tracking-widest mb-6">
+                <span className="h-2 w-2 rounded-full bg-accent animate-pulse" /> Sincronizado
               </div>
-              <h3 className="mt-6 font-display text-3xl font-extrabold tracking-tighter text-white sm:text-4xl">
-                SERVIDOR OFICIAL
-                <br />
-                NO DISCORD
+              <h3 className="font-display text-[32px] font-medium text-white leading-tight mb-6">
+                QG Central Spectre
               </h3>
-              <p className="mt-4 max-w-md text-xs font-medium leading-relaxed text-[#8a8a8a] uppercase tracking-wider">
-                Widget sincronizado em tempo real — entre, valide seu acesso e interaja com nossa comunidade.
+              <p className="text-body-sm text-fog leading-relaxed mb-10">
+                Acesse canais exclusivos de suporte prioritário, changelogs em tempo real e betas fechados de novos módulos.
               </p>
 
-              <div className="mt-10 grid grid-cols-2 gap-px bg-white/5 border border-white/5 sm:grid-cols-3">
+              <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 mb-12">
                 <MiniStat
                   icon={Users}
-                  label="online agora"
+                  label="Online agora"
                   value={presence !== null ? String(presence) : "—"}
                 />
-                <MiniStat icon={MessageSquare} label="suporte" value="Ticket" />
-                <MiniStat icon={Sparkles} label="cargos" value="Premium" />
+                <MiniStat icon={MessageSquare} label="Suporte 24/7" value="Live" />
+                <MiniStat icon={Sparkles} label="Benefícios" value="Elite" />
               </div>
 
               <a
                 href={GUILD_INVITE}
                 target="_blank"
                 rel="noreferrer"
-                className="mt-10 inline-flex items-center gap-3 bg-[#ff0055] px-8 py-4 font-display text-[11px] font-black uppercase tracking-[0.2em] text-white transition-all hover:bg-[#ff0055]/90"
+                className="inline-flex items-center gap-3 bg-white hover:opacity-90 px-10 py-4 rounded-full text-[14px] font-medium text-black transition-all uppercase tracking-widest"
               >
                 Entrar no Discord <ArrowRight className="h-4 w-4" />
               </a>
             </div>
           </Reveal>
 
-          <div className="mx-auto w-full max-w-[380px] border border-white/5 bg-[#0a0a0a] p-2">
+          <div className="mx-auto w-full max-w-[400px] rounded-2xl border border-white/[0.04] bg-obsidian p-4 shadow-2xl">
             <iframe
               src={`https://discord.com/widget?id=${GUILD_ID}&theme=dark`}
               width={350}
@@ -1230,12 +1222,14 @@ function CommunitySection() {
               loading="lazy"
               frameBorder={0}
               sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"
-              className="mx-auto block h-[480px] w-full grayscale contrast-125 brightness-90 transition-all hover:grayscale-0"
+              className="mx-auto block h-[480px] w-full grayscale opacity-70 contrast-125 brightness-75 transition-all hover:grayscale-0 hover:opacity-100"
             />
           </div>
         </div>
       </div>
     </section>
+  );
+}
   );
 }
 
