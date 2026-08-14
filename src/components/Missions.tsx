@@ -195,9 +195,17 @@ export function CaptchaModal({
           </div>
         </div>
         
-        <div className="border border-white/5 bg-[#080808] p-6 text-center">
-          <div className="font-mono text-[9px] mb-3 uppercase tracking-[0.3em] text-[#444]">CONFIRMAÇÃO SPECTRE-HUB</div>
-          <div className="font-mono text-2xl font-black tracking-tighter text-white">READY_TO_DEPLOY</div>
+        <div className="relative overflow-hidden border border-white/5 bg-[#080808] p-6 text-center">
+          {quest?.imageUrl && (
+            <div className="absolute inset-0 z-0 opacity-20">
+              <img src={quest.imageUrl} alt="" className="h-full w-full object-cover grayscale" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#080808] to-transparent" />
+            </div>
+          )}
+          <div className="relative z-10">
+            <div className="font-mono text-[9px] mb-3 uppercase tracking-[0.3em] text-[#444]">CONFIRMAÇÃO SPECTRE-HUB</div>
+            <div className="font-mono text-2xl font-black tracking-tighter text-white">READY_TO_DEPLOY</div>
+          </div>
         </div>
       </div>
     </Modal>
