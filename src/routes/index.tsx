@@ -968,96 +968,98 @@ function FreeSignup() {
   }
 
   return (
-    <section id="free" className="mx-auto max-w-7xl px-4 py-20 sm:px-6 sm:py-28 lg:px-8">
+    <section id="free" className="mx-auto max-w-[1216px] px-6 py-40 border-t border-graphite">
       <Reveal>
-        <div className="grid gap-10 rounded-2xl border border-white/[0.07] bg-[#030303]/70 p-7 backdrop-blur-xl md:grid-cols-[1.05fr_0.95fr] md:p-12">
+        <div className="grid gap-20 rounded-2xl border border-white/[0.04] bg-onyx/50 p-12 backdrop-blur-xl lg:grid-cols-2">
           <div>
-            <span className="eyebrow">Acesso Comunitário</span>
-            <h2 className="mt-4 font-display text-2xl font-extrabold tracking-[-0.03em] text-white sm:text-4xl">
-              Habilite seu Acesso Gratuito em Segundos.
+            <span className="text-eyebrow font-semibold uppercase tracking-widest text-accent mb-6 block">Acesso Comunitário</span>
+            <h2 className="font-display text-[44px] font-medium leading-[1.1] text-white">
+              Habilite seu acesso<br />gratuito agora.
             </h2>
-            <ol className="mt-8 space-y-4">
+            <div className="mt-12 space-y-6">
               {[
-                "Preencha o formulário — geramos um código único pra você.",
-                "Entre no servidor e abra um ticket no canal de suporte.",
-                "Informe o código no ticket. A staff libera o cargo Free na hora.",
+                { t: "Gere seu código único", d: "Preencha o formulário para validar sua identidade." },
+                { t: "Entre no servidor", d: "Abra um ticket em nosso canal de suporte oficial." },
+                { t: "Ative sua licença", d: "Informe o código e receba o cargo Free instantaneamente." },
               ].map((s, i) => (
-                <li key={s} className="flex gap-3 text-[13px] text-[#a0a0a0]">
-                  <span className="grid h-6 w-6 shrink-0 place-items-center rounded-md border border-white/[0.08] bg-white/[0.03] font-mono text-[10px] font-semibold text-[#818cf8]">
+                <div key={s.t} className="flex gap-5">
+                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-graphite bg-obsidian font-display text-[16px] text-white">
                     {i + 1}
                   </span>
-                  <span className="pt-0.5">{s}</span>
-                </li>
+                  <div>
+                    <h3 className="text-[16px] font-medium text-white mb-1">{s.t}</h3>
+                    <p className="text-[14px] text-fog leading-relaxed">{s.d}</p>
+                  </div>
+                </div>
               ))}
-            </ol>
+            </div>
           </div>
 
-          <div className="rounded-xl border border-white/[0.07] bg-white/[0.02] p-6">
+          <div className="rounded-xl border border-graphite bg-obsidian/50 p-10">
             {!code ? (
-              <form onSubmit={generate} className="space-y-4">
-                <label className="block">
-                  <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-[#6f6f6f]">
-                    Seu nome
-                  </span>
+              <form onSubmit={generate} className="space-y-6">
+                <div>
+                  <label className="text-eyebrow font-medium text-steel uppercase tracking-widest mb-3 block">
+                    Nome de Operador
+                  </label>
                   <input
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     maxLength={40}
                     required
-                    className="mt-2 w-full rounded-lg border border-white/[0.08] bg-white/[0.02] px-3 py-2.5 text-sm text-white outline-none transition placeholder:text-[#5a5a5a] focus:border-[#818cf8]/60"
-                    placeholder="Ex: davizinzkn"
+                    className="w-full rounded-full border border-graphite bg-transparent px-6 py-4 text-[14px] text-white outline-none transition placeholder:text-steel focus:border-white"
+                    placeholder="Ex: Ghost"
                   />
-                </label>
-                <label className="block">
-                  <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-[#6f6f6f]">
-                    Seu usuário do Discord
-                  </span>
+                </div>
+                <div>
+                  <label className="text-eyebrow font-medium text-steel uppercase tracking-widest mb-3 block">
+                    Discord ID / User
+                  </label>
                   <input
                     value={discord}
                     onChange={(e) => setDiscord(e.target.value)}
                     maxLength={40}
                     required
-                    className="mt-2 w-full rounded-lg border border-white/[0.08] bg-white/[0.02] px-3 py-2.5 text-sm text-white outline-none transition placeholder:text-[#5a5a5a] focus:border-[#818cf8]/60"
+                    className="w-full rounded-full border border-graphite bg-transparent px-6 py-4 text-[14px] text-white outline-none transition placeholder:text-steel focus:border-white"
                     placeholder="@usuario"
                   />
-                </label>
-                <button type="submit" className="btn-accent w-full py-3">
-                  Gerar meu código Free
+                </div>
+                <button type="submit" className="w-full bg-white hover:opacity-90 text-black font-medium py-4 px-6 rounded-full text-[14px] transition-all uppercase tracking-widest mt-4">
+                  Gerar Licença Free
                 </button>
-                <p className="text-[11px] leading-relaxed text-[#6f6f6f]">
-                  O código fica salvo no seu navegador para você abrir o ticket quando quiser.
+                <p className="text-[12px] text-steel text-center italic">
+                  * Licença válida para 1 dispositivo.
                 </p>
               </form>
             ) : (
-              <div className="space-y-4">
+              <div className="space-y-8">
                 <div>
-                  <div className="font-mono text-[10px] uppercase tracking-[0.22em] text-[#6f6f6f]">
-                    Seu código Free
-                  </div>
-                  <div className="mt-2 flex items-center gap-2 rounded-lg border border-[#818cf8]/30 bg-[#818cf8]/[0.08] p-3">
-                    <code className="flex-1 font-mono text-lg font-bold tracking-[0.2em] text-[#c4b5fd]">
+                  <span className="text-eyebrow font-medium text-steel uppercase tracking-widest mb-4 block">Sua Chave de Ativação</span>
+                  <div className="flex items-center gap-3 rounded-xl border border-accent/20 bg-accent/5 p-6">
+                    <code className="flex-1 font-mono text-[24px] font-medium tracking-wider text-accent">
                       {code}
                     </code>
                     <button
                       type="button"
                       onClick={copy}
-                      aria-label="Copiar código"
-                      className="grid h-8 w-8 place-items-center rounded-md border border-white/10 bg-white/[0.04] text-[#a0a0a0] transition hover:text-white"
+                      className="h-12 w-12 flex items-center justify-center rounded-full bg-accent text-black transition hover:opacity-90"
                     >
-                      {copied ? <Check className="h-4 w-4 text-[#818cf8]" /> : <Copy className="h-4 w-4" />}
+                      {copied ? <Check className="h-5 w-5" /> : <Copy className="h-5 w-5" />}
                     </button>
                   </div>
                 </div>
-                <p className="text-[13px] leading-relaxed text-[#8a8a8a]">
-                  Abra um ticket no servidor e cole esse código na primeira mensagem.
-                </p>
+                <div className="p-6 rounded-xl border border-graphite bg-onyx/30">
+                  <p className="text-[14px] text-fog leading-relaxed">
+                    Copie o código acima e abra um ticket em nosso Discord oficial para validação manual pela equipe Spectre.
+                  </p>
+                </div>
                 <a
                   href={GUILD_INVITE}
                   target="_blank"
                   rel="noreferrer"
-                  className="btn-accent w-full py-3"
+                  className="w-full bg-accent hover:opacity-90 text-black font-medium py-4 px-6 rounded-full text-[14px] flex items-center justify-center gap-3 transition-all uppercase tracking-widest"
                 >
-                  Ir pro servidor abrir ticket <ArrowRight className="h-4 w-4" />
+                  Ir para o Discord <ArrowRight className="h-4 w-4" />
                 </a>
                 <button
                   type="button"
@@ -1066,9 +1068,9 @@ function FreeSignup() {
                     setName("");
                     setDiscord("");
                   }}
-                  className="w-full font-mono text-[10px] uppercase tracking-[0.22em] text-[#6f6f6f] transition hover:text-white"
+                  className="w-full text-eyebrow font-medium text-steel uppercase tracking-widest hover:text-white transition-colors text-center"
                 >
-                  Gerar outro código
+                  Gerar nova licença
                 </button>
               </div>
             )}
