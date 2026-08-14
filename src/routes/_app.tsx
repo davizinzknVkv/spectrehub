@@ -48,21 +48,25 @@ const NAV_GROUPS = [
     items: [{ to: "/hub", label: "Dashboard", icon: LayoutDashboard, soon: false }],
   },
   {
-    title: "Ferramentas",
+    title: "Produtos",
     items: [
-      { to: "/missoes", label: "Missões", icon: Target, soon: false },
-      { to: "/farms", label: "Farms", icon: Tractor, soon: false },
-      { to: "/history", label: "Histórico", icon: History, soon: false },
-      { to: "/resgatar", label: "Resgatar Orbs", icon: Gift, soon: false },
+      { to: "/resgatar", label: "Meus Produtos", icon: Gift, soon: false },
     ],
   },
   {
-    title: "Utilitários",
+    title: "Ferramentas",
     items: [
-      { to: "/nicksgun", label: "Nicks-Gun", icon: Crosshair, soon: true },
-      { to: "/clone", label: "Clonar Discord", icon: Copy, soon: true },
-      { to: "/spotify", label: "Gerador Spotify", icon: Music, soon: true },
-      { to: "/fake", label: "Foto Fake", icon: ImageIcon, soon: false },
+      { to: "/missoes", label: "Missões", icon: Target, soon: false },
+      { to: "/farms", label: "Farms Automáticas", icon: Tractor, soon: false },
+      { to: "/nicksgun", label: "Nicks-Gun Sniper", icon: Crosshair, soon: false },
+      { to: "/clone", label: "Discord Tools", icon: Copy, soon: false },
+    ],
+  },
+  {
+    title: "Conta",
+    items: [
+      { to: "/settings", label: "Perfil & Segurança", icon: UserRound, soon: false },
+      { to: "/history", label: "Histórico Global", icon: History, soon: false },
     ],
   },
   {
@@ -72,6 +76,7 @@ const NAV_GROUPS = [
     ],
   },
 ] as const;
+
 
 
 function AppLayout() {
