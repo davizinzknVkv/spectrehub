@@ -136,7 +136,7 @@ export function FreeSignup({ guildInvite }: FreeSignupProps) {
                   rel="noreferrer"
                   className="ds-btn ds-btn-primary w-full py-5 text-[10px]"
                 >
-                  Autenticar no Discord
+                  Quero Usar o Spectre
                 </a>
                 
                 <button

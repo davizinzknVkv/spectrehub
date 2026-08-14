@@ -44,7 +44,7 @@ export function FinalCta({ guildInvite }: FinalCtaProps) {
               className="ds-btn ds-btn-primary min-w-[280px] py-5 shadow-2xl shadow-spectre-pink/20"
             >
               <span className="flex items-center gap-3">
-                Abrir Ticket Agora <ArrowRight className="w-5 h-5" />
+                Quero Usar o Spectre <ArrowRight className="w-5 h-5" />
               </span>
             </a>
             <Link 
