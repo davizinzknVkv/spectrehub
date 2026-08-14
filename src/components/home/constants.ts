@@ -28,10 +28,10 @@ export const PRODUCTS: Product[] = [
     name: "Optimizer",
     category: "Utilidades",
     desc: "Maximize a performance do seu hardware. Ferramenta elite para limpeza de registros, otimização de CPU/RAM e redução drástica de latência em jogos e aplicações.",
-    status: "Beta",
+    status: "Em breve",
     to: "/hub",
     icon: Gauge,
-    previewUrl: "/mnt/documents/hub-preview.png"
+    previewUrl: "" // Removido para mostrar "Em breve"
   },
   {
     id: "nicks",
