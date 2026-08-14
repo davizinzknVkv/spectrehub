@@ -129,7 +129,7 @@ export function SocialProof({ widgetUrl, products: productsList }: SocialProofPr
   const latencyCount = useCountUp(stats.latency, inView);
 
   return (
-    <section className="border-y border-white/[0.08] bg-[#030303] relative z-10">
+    <section className="border-y border-white/[0.08] bg-[#030303] relative z-10 reveal-item">
       <div ref={ref} className="mx-auto max-w-7xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-12 text-[11px] font-black text-[#555] uppercase tracking-[0.25em]">
           <div className="grid grid-cols-1 sm:grid-cols-2 md:flex md:items-center gap-10 sm:gap-16 lg:gap-24 w-full md:w-auto">

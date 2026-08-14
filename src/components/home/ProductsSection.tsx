@@ -12,7 +12,7 @@ export function ProductsSection({ products }: ProductsSectionProps) {
   const [activeTab, setActiveTab] = useState(0);
 
   return (
-    <section id="produtos" className="mx-auto max-w-7xl px-4 py-24 sm:px-6 sm:py-32 lg:px-8">
+    <section id="produtos" className="mx-auto max-w-7xl px-4 py-24 sm:px-6 sm:py-32 lg:px-8 reveal-item">
       <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8">
         <div className="max-w-2xl">
           <Reveal>
