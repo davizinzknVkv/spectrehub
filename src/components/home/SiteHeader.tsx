@@ -28,10 +28,10 @@ export function SiteHeader({ guildInvite }: SiteHeaderProps) {
   return (
     <header className="fixed top-0 left-0 right-0 z-50 px-4 py-6 md:px-8">
       <div 
-        className={`mx-auto max-w-7xl flex items-center justify-between transition-all duration-700 rounded-full ${
+        className={`mx-auto max-w-[1400px] flex items-center justify-between transition-all duration-700 rounded-xl ${
           scrolled 
-            ? "bg-black/40 backdrop-blur-2xl px-6 py-3 border border-white/5 shadow-2xl" 
-            : "bg-transparent px-2 py-2"
+            ? "bg-black/60 backdrop-blur-2xl px-6 py-2 border border-white/5 shadow-[0_8px_32px_rgba(0,0,0,0.8)]" 
+            : "bg-transparent px-4 py-4"
         }`}
       >
         {/* Logo */}
