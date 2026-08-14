@@ -86,7 +86,7 @@ function AppLayout() {
   }, [pathname]);
 
   return (
-    <div className="min-h-screen bg-[#050505] text-slate-100 antialiased">
+    <div className="min-h-screen bg-obsidian text-bone antialiased">
       <div
         className="pointer-events-none fixed inset-0 -z-10 opacity-[0.03]"
         style={{
@@ -95,9 +95,9 @@ function AppLayout() {
         }}
       />
 
-      <div className="grid min-h-screen w-full grid-cols-1 lg:grid-cols-[236px_1fr]">
+      <div className="grid min-h-screen w-full grid-cols-1 lg:grid-cols-[240px_1fr]">
         {/* Desktop sidebar */}
-        <aside className="hidden border-r border-white/5 bg-[#050505] lg:sticky lg:top-0 lg:block lg:h-screen">
+        <aside className="hidden border-r border-graphite bg-obsidian lg:sticky lg:top-0 lg:block lg:h-screen">
           <SidebarBody pathname={pathname} creds={creds} setCreds={setCreds} />
         </aside>
 
