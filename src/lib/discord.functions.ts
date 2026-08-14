@@ -209,18 +209,8 @@ export const discordLogin = createServerFn({ method: "POST" })
       return { ok: false as const, error: "Informe login e senha." };
     }
 
-    const loginBody: Record<string, unknown> = {
-      login: data.login,
-      password: data.password,
-      undelete: false,
-      captcha_key: data.captchaKey ?? null,
-      login_source: null,
-      gift_code_sku_id: null,
-    };
-    if (data.captchaRqtoken) loginBody.captcha_rqtoken = data.captchaRqtoken;
-
     // Sanitization of user input before calling Discord API
-    const sanitizedLogin = data.login?.trim();
+    const sanitizedLogin = data.login.trim();
     const sanitizedPassword = data.password;
 
     const res = await discordAuthCall("/auth/login", {
