@@ -229,9 +229,9 @@ function PlansTab({ token, rows, setRows, reload }: any) {
   return (
     <div className="space-y-6">
       <div className="flex justify-between items-center">
-         <div className="font-display text-[9px] uppercase tracking-widest text-white/30 italic">{rows.length} Níveis</div>
+         <div className="font-display text-[9px] uppercase tracking-widest text-white/30 italic">{rows.length} Níveis Ativos</div>
          <button 
-           onClick={() => setRows([...rows, { name: "New Tier", price: "0", period: "month", cta: "Unlock", highlight: false, features: [], role_ids: [], sort: rows.length, active: true }])}
+           onClick={() => setRows([...rows, { name: "New Tier", price: "0", period: "month", cta: "Unlock", highlight: false, features: ["20 missões diárias"], role_ids: [], sort: rows.length, active: true }])}
            className="ds-btn ds-btn-secondary !py-2 !px-6 !text-[9px]"
          >Novo Plano</button>
       </div>

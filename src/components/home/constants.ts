@@ -94,7 +94,7 @@ export const PLANS: Plan[] = [
     cta: "Acessar Gratuitamente",
     highlight: false,
     features: [
-      "3 missões diárias",
+      "20 missões diárias",
       "Cooldown de 10 min",
       "Acesso a todas as quests",
       "Estatísticas locais",
