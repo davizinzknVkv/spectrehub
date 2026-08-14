@@ -1,19 +1,19 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Link } from "@tanstack/react-router";
 import { ArrowRight, X, Menu } from "lucide-react";
-import logoAsset from "@/assets/spectre-logo-nobg.png.asset.json";
-
-const NAV = [
-  { label: "Início", href: "#topo" },
-  { label: "Produtos", href: "#produtos" },
-  { label: "Recursos", href: "#recursos" },
-  { label: "Sobre", href: "#sobre" },
-  { label: "Comunidade", href: "#comunidade" },
-];
+import { useState, useEffect } from "react";
 
 interface SiteHeaderProps {
   guildInvite: string;
 }
+
+const logoAsset = { url: "/logo.png" };
+const NAV = [
+  { href: "#produtos", label: "Produtos" },
+  { href: "#recursos", label: "Recursos" },
+  { href: "#planos", label: "Planos" },
+  { href: "#comunidade", label: "Comunidade" },
+];
 
 export function SiteHeader({ guildInvite }: SiteHeaderProps) {
   const [scrolled, setScrolled] = useState(false);
