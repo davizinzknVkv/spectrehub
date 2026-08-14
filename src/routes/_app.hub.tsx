@@ -199,11 +199,12 @@ function HubPage() {
                 </div>
                 <div className="flex items-center gap-2">
                   <Users className="w-3.5 h-3.5 text-white/20" />
-                  <span className="font-display text-[10px] uppercase tracking-widest text-white italic">{stats?.friends || 0} <span className="text-white/20">Amigos</span></span>
+                  <span className="font-display text-[10px] uppercase tracking-widest text-white italic">{loading ? "---" : (stats?.friends || 0)} <span className="text-white/20">Amigos</span></span>
                 </div>
                 <div className="flex items-center gap-2">
                   <MessageSquare className="w-3.5 h-3.5 text-white/20" />
-                  <span className="font-display text-[10px] uppercase tracking-widest text-white italic">{dmCount || 0} <span className="text-white/20">DMs</span></span>
+                  <span className="font-display text-[10px] uppercase tracking-widest text-white italic">{loading ? "---" : (dmCount || 0)} <span className="text-white/20">DMs</span></span>
+
                 </div>
               </div>
             </div>
