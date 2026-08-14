@@ -1300,33 +1300,33 @@ function OptimizerSection() {
 
         {/* Previews Showcase */}
         {previews.length > 0 && (
-          <div className="mt-32 space-y-20">
+          <div className="mt-40 space-y-24">
             <Reveal>
               <div className="text-center">
-                <h3 className="font-display text-2xl font-black uppercase tracking-tighter text-white sm:text-4xl">
-                  Conheça a interface do Spectre Optimizer
+                <h3 className="font-display text-[32px] font-medium text-white tracking-tight">
+                  Interface de alta precisão.
                 </h3>
-                <p className="mt-4 font-display text-[10px] font-bold uppercase tracking-[0.2em] text-[#444]">
-                  Veja algumas prévias da plataforma de alta performance
+                <p className="mt-4 text-eyebrow font-medium uppercase tracking-widest text-steel">
+                  Explore o painel de controle do Spectre Optimizer
                 </p>
               </div>
             </Reveal>
 
-            <div className="grid gap-8">
+            <div className="grid gap-12">
               {previews.map((p, i) => (
                 <Reveal key={p.id} delay={i * 150}>
-                  <div className="group relative overflow-hidden bg-[#0a0a0a] border border-white/5">
+                  <div className="group relative overflow-hidden rounded-2xl border border-white/[0.04] bg-onyx/30 transition-all hover:border-accent/30">
                     <div className="aspect-[21/9] overflow-hidden">
                       <img 
                         src={p.image_url} 
                         alt={p.title} 
-                        className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" 
+                        className="h-full w-full object-cover grayscale opacity-50 transition-all duration-700 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-105" 
                       />
                     </div>
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#030303] via-transparent to-transparent opacity-60" />
-                    <div className="absolute bottom-0 left-0 w-full p-8 lg:p-12">
-                      <h4 className="font-display text-xl font-black uppercase tracking-tight text-white sm:text-3xl">{p.title}</h4>
-                      <p className="mt-2 max-w-xl text-sm font-medium text-[#8a8a8a]">{p.description}</p>
+                    <div className="absolute inset-0 bg-gradient-to-t from-obsidian via-transparent to-transparent opacity-80" />
+                    <div className="absolute bottom-0 left-0 w-full p-12">
+                      <h4 className="font-display text-[28px] font-medium text-white tracking-tight">{p.title}</h4>
+                      <p className="mt-4 max-w-xl text-body-sm text-fog leading-relaxed">{p.description}</p>
                     </div>
                   </div>
                 </Reveal>
@@ -1336,19 +1336,19 @@ function OptimizerSection() {
         )}
 
         <Reveal delay={200}>
-          <div className="mt-24 text-center">
+          <div className="mt-32 text-center">
             <a 
               href={settings.button_link} 
               target="_blank" 
               rel="noreferrer" 
-              className="group relative inline-flex items-center gap-3 bg-white px-10 py-5 text-[11px] font-black uppercase tracking-[0.3em] text-black transition-all hover:bg-[#ff0055] hover:text-white"
+              className="bg-white hover:opacity-90 text-black font-medium py-4 px-12 rounded-full text-[14px] transition-all uppercase tracking-widest inline-flex items-center gap-3"
             >
               {settings.button_text}
-              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+              <ArrowRight className="h-4 w-4" />
             </a>
-            <div className="mt-8 flex items-center justify-center gap-6">
-              <span className="font-mono text-[9px] uppercase tracking-widest text-[#444]">
-                Status: <span className="text-[#ff0055]">{settings.status}</span>
+            <div className="mt-10">
+              <span className="text-eyebrow font-medium uppercase tracking-widest text-steel">
+                Status do Sistema: <span className="text-accent">{settings.status}</span>
               </span>
             </div>
           </div>
@@ -1363,23 +1363,22 @@ function OptimizerSection() {
 
 function FinalCta() {
   return (
-    <section className="relative overflow-hidden border-t border-white/5 py-32">
+    <section className="relative overflow-hidden border-t border-graphite bg-onyx/20 py-40">
       <Reveal>
-        <div className="mx-auto max-w-4xl px-4 text-center">
-          <h2 className="font-display text-5xl font-extrabold leading-[0.95] tracking-tighter text-white sm:text-8xl">
-            ABRA UM
-            <br />
-            TICKET!
+        <div className="mx-auto max-w-[1216px] px-6 text-center">
+          <span className="text-eyebrow font-semibold uppercase tracking-widest text-accent mb-6 block">Inicie sua Jornada</span>
+          <h2 className="font-display text-[52px] font-medium leading-[1.1] text-white sm:text-[88px]">
+            Sua soberania<br />digital começa aqui.
           </h2>
-          <p className="mx-auto mt-10 max-w-xl text-lg font-medium text-[#8a8a8a] leading-relaxed">
-            Junte-se à elite e ative sua infraestrutura de automação hoje mesmo. Suporte direto com quem entende do assunto.
+          <p className="mx-auto mt-10 max-w-xl text-body-sm text-fog leading-relaxed">
+            Junte-se a milhares de operadores que confiam na infraestrutura Spectre para dominar o ecossistema digital.
           </p>
-          <div className="mt-12 flex flex-wrap items-center justify-center gap-4">
-            <a href={GUILD_INVITE} target="_blank" rel="noreferrer" className="bg-[#ff0055] text-white font-bold py-4 px-10 rounded-sm uppercase tracking-widest hover:bg-[#ff0055]/90 transition-all flex items-center gap-2">
-              <ArrowRight className="h-4 w-4" /> Abrir meu ticket agora
+          <div className="mt-16 flex flex-col items-center justify-center gap-6 sm:flex-row">
+            <a href={GUILD_INVITE} target="_blank" rel="noreferrer" className="w-full sm:w-auto bg-accent hover:opacity-90 text-black font-medium py-4 px-12 rounded-full text-[14px] uppercase tracking-widest transition-all inline-flex items-center justify-center gap-3">
+              Abrir Ticket no Discord <ArrowRight className="h-4 w-4" />
             </a>
-            <Link to="/hub" className="bg-white/5 border border-white/10 text-white font-bold py-4 px-10 rounded-sm uppercase tracking-widest hover:bg-white/10 transition-all">
-              Acessar painel
+            <Link to="/hub" className="w-full sm:w-auto bg-transparent border border-white/10 text-white font-medium py-4 px-12 rounded-full text-[14px] uppercase tracking-widest hover:border-white/30 transition-all inline-flex justify-center">
+              Acessar Hub Privado
             </Link>
           </div>
         </div>
