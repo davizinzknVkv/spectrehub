@@ -50,7 +50,7 @@ export function Hero({ guildInvite, fallbackMembers }: HeroProps) {
         <Reveal delay={300}>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <a href="#produtos" className="ds-btn ds-btn-primary min-w-[240px]">
-              Iniciar Experiência
+              Quero Usar o Spectre
             </a>
             <a href={guildInvite} target="_blank" rel="noreferrer" className="ds-btn ds-btn-secondary min-w-[240px]">
               Documentação
