@@ -4,6 +4,26 @@ import { discordProxy } from "./discord.functions";
 
 const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
+export const getGuilds = createServerFn({ method: "GET" })
+  .inputValidator((data) => z.object({ token: z.string() }).parse(data))
+  .handler(async ({ data }) => {
+    const res = await discordProxy({
+      data: {
+        token: data.token,
+        endpoint: "/users/@me/guilds",
+        method: "GET",
+      },
+    });
+
+    if (res.status !== 200) {
+      return { ok: false, error: "Falha ao obter lista de servidores." };
+    }
+
+    const guilds = JSON.parse(res.body) as any[];
+    // Filter guilds where the user has MANAGE_GUILD (0x20)
+    return { ok: true, guilds };
+  });
+
 const clonerInput = z.object({
   token: z.string(),
   originGuildId: z.string(),
