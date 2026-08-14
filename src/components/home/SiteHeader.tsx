@@ -30,8 +30,8 @@ export function SiteHeader({ guildInvite }: SiteHeaderProps) {
     <header
       className={`sticky top-0 z-50 w-full transition-[background,border-color,backdrop-filter] duration-300 ${
         scrolled
-          ? "border-b border-white/[0.05] bg-[#030303]/90 backdrop-blur-2xl shadow-2xl"
-          : "border-b border-transparent bg-transparent"
+          ? "border-b border-[#ff0055] bg-[#030303]/90 backdrop-blur-2xl shadow-[0_0_20px_rgba(255,0,85,0.1)]"
+          : "border-b border-[#ff0055] bg-[#030303]"
       }`}
     >
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8 overflow-hidden">
