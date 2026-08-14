@@ -335,7 +335,7 @@ function Index() {
   return (
     <div
       id="topo"
-      className="relative min-h-screen overflow-x-hidden bg-[#030303] font-sans text-[#f5f5f5] antialiased"
+      className="relative min-h-screen overflow-x-hidden bg-obsidian font-sans text-bone antialiased"
     >
       <div aria-hidden className="pointer-events-none fixed inset-0 -z-10">
         <div
