@@ -100,7 +100,7 @@ export function CommunitySection({ widgetUrl, guildId, guildInvite, fallbackMemb
           </Reveal>
         </div>
 
-        <Reveal className="relative bg-obsidian-soft border border-white/5 p-4 overflow-hidden group">
+        <Reveal className="relative bg-obsidian-soft border border-white/5 p-4 overflow-hidden group rounded-none">
            <div className="absolute top-4 left-4 right-4 h-8 bg-black/40 border-b border-white/5 flex items-center px-4 gap-2 z-10">
               <span className="w-2 h-2 rounded-full bg-spectre-pink/40" />
               <span className="font-display text-[9px] text-white/40 uppercase italic tracking-widest">Discord Widget v2.0</span>

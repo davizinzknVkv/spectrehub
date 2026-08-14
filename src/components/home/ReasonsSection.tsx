@@ -27,7 +27,7 @@ export function ReasonsSection({ reasons }: ReasonsSectionProps) {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-px bg-white/5 border border-white/5">
           {reasons.map((r: Reason, i: number) => (
             <Reveal key={r.title} delay={i * 100}>
-              <div className="bg-obsidian p-10 h-full border border-transparent hover:border-spectre-pink/20 transition-all duration-500 group">
+              <div className="bg-obsidian p-10 h-full border border-transparent hover:border-spectre-pink/20 transition-all duration-500 group rounded-none">
                 <div className="mb-8 w-12 h-12 border border-white/10 flex items-center justify-center text-white group-hover:bg-spectre-pink group-hover:border-spectre-pink transition-all duration-500">
                   <r.icon className="w-5 h-5" />
                 </div>

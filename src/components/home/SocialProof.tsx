@@ -134,7 +134,7 @@ export function SocialProof({ widgetUrl, products: productsList }: SocialProofPr
 
       <div ref={ref} className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-px md:bg-white/5">
-           <div className="bg-obsidian flex flex-col items-center text-center p-8 group hover:bg-white/[0.02] transition-colors">
+           <div className="bg-obsidian flex flex-col items-center text-center p-8 group hover:bg-white/[0.02] transition-colors rounded-none">
               <span className="font-display text-4xl md:text-5xl text-white italic mb-2 tracking-tighter">
                 {Math.round(membersCount)}+
               </span>
@@ -142,7 +142,7 @@ export function SocialProof({ widgetUrl, products: productsList }: SocialProofPr
                 Membros Ativos
               </span>
            </div>
-           <div className="bg-obsidian flex flex-col items-center text-center p-8 group hover:bg-white/[0.02] transition-colors">
+           <div className="bg-obsidian flex flex-col items-center text-center p-8 group hover:bg-white/[0.02] transition-colors rounded-none">
               <span className="font-display text-4xl md:text-5xl text-white italic mb-2 tracking-tighter">
                 {Math.round(productsCount)}
               </span>
@@ -150,7 +150,7 @@ export function SocialProof({ widgetUrl, products: productsList }: SocialProofPr
                 Sistemas Elite
               </span>
            </div>
-           <div className="bg-obsidian flex flex-col items-center text-center p-8 group hover:bg-white/[0.02] transition-colors">
+           <div className="bg-obsidian flex flex-col items-center text-center p-8 group hover:bg-white/[0.02] transition-colors rounded-none">
               <span className="font-display text-4xl md:text-5xl text-white italic mb-2 tracking-tighter">
                 {latencyCount.toFixed(2)}<span className="text-spectre-pink not-italic text-2xl">ms</span>
               </span>

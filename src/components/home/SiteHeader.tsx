@@ -9,6 +9,7 @@ interface SiteHeaderProps {
 
 const NAV = [
   { href: "#produtos", label: "sistemas" },
+  { href: "#como-funciona", label: "método" },
   { href: "#planos", label: "planos" },
   { href: "#comunidade", label: "comunidade" },
 ];
@@ -27,9 +28,9 @@ export function SiteHeader({ guildInvite }: SiteHeaderProps) {
   return (
     <header className="fixed top-0 left-0 right-0 z-50 px-4 py-6 md:px-8">
       <div 
-        className={`mx-auto max-w-7xl flex items-center justify-between transition-all duration-700 ${
+        className={`mx-auto max-w-7xl flex items-center justify-between transition-all duration-700 rounded-full ${
           scrolled 
-            ? "bg-black/80 backdrop-blur-2xl px-6 py-3 border border-white/5 shadow-2xl" 
+            ? "bg-black/40 backdrop-blur-2xl px-6 py-3 border border-white/5 shadow-2xl" 
             : "bg-transparent px-2 py-2"
         }`}
       >

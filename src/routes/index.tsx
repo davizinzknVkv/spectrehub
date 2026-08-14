@@ -81,16 +81,24 @@ function Index() {
         <Hero guildInvite={GUILD_INVITE} fallbackMembers={FALLBACK_MEMBERS} />
         
         <SocialProof widgetUrl={WIDGET_URL} products={PRODUCTS} />
-        <ProductsSection products={PRODUCTS} />
-        <ReasonsSection reasons={REASONS} />
-        <PlansSection plans={PLANS} />
+        <div id="produtos">
+          <ProductsSection products={PRODUCTS} />
+        </div>
+        <div id="como-funciona">
+          <ReasonsSection reasons={REASONS} />
+        </div>
+        <div id="planos">
+          <PlansSection plans={PLANS} />
+        </div>
         <FreeSignup guildInvite={GUILD_INVITE} />
-        <CommunitySection 
-          widgetUrl={WIDGET_URL} 
-          guildId={GUILD_ID} 
-          guildInvite={GUILD_INVITE} 
-          fallbackMembers={FALLBACK_MEMBERS} 
-        />
+        <div id="comunidade">
+          <CommunitySection 
+            widgetUrl={WIDGET_URL} 
+            guildId={GUILD_ID} 
+            guildInvite={GUILD_INVITE} 
+            fallbackMembers={FALLBACK_MEMBERS} 
+          />
+        </div>
         <FinalCta guildInvite={GUILD_INVITE} />
       </main>
 
