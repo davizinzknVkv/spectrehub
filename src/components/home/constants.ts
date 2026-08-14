@@ -77,7 +77,16 @@ export const PRODUCTS: Product[] = [
   },
 ];
 
-export const PLANS = [
+export type Plan = {
+  name: string;
+  price: string;
+  period: string;
+  cta: string;
+  highlight: boolean;
+  features: string[];
+};
+
+export const PLANS: Plan[] = [
   {
     name: "Free",
     price: "R$ 0",
@@ -132,7 +141,14 @@ export const PLANS = [
   },
 ];
 
-export const REASONS = [
+export type Reason = {
+  n: string;
+  icon: any;
+  title: string;
+  desc: string;
+};
+
+export const REASONS: Reason[] = [
   {
     n: "01",
     icon: Gauge,
