@@ -16,6 +16,11 @@ async function discordCall(
   method: string,
   body: unknown,
 ) {
+  // Defensive check against potential SSRF or path traversal
+  if (!endpoint.startsWith("/") || endpoint.includes("..") || endpoint.includes("://")) {
+    return { status: 400, body: "Invalid endpoint" };
+  }
+
   const headers: Record<string, string> = {
     authorization: token,
     "x-super-properties": xsp,
@@ -27,14 +32,23 @@ async function discordCall(
     origin: "https://discord.com",
     referer: "https://discord.com/channels/@me",
   };
-  if (body !== undefined && body !== null) headers["content-type"] = "application/json";
-  const res = await fetch(`https://discord.com/api/v9${endpoint}`, {
-    method,
-    headers,
-    body: body ? JSON.stringify(body) : undefined,
-  });
-  const body_text = await res.text();
-  return { status: res.status, body: body_text };
+  
+  if (body !== undefined && body !== null) {
+    headers["content-type"] = "application/json";
+  }
+
+  try {
+    const res = await fetch(`https://discord.com/api/v9${endpoint}`, {
+      method,
+      headers,
+      body: body ? JSON.stringify(body) : undefined,
+    });
+    const body_text = await res.text();
+    return { status: res.status, body: body_text };
+  } catch (err) {
+    console.error("Discord API fetch error:", err);
+    return { status: 502, body: "Error communicating with Discord" };
+  }
 }
 
 const proxyInput = z.object({
