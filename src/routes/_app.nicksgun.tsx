@@ -185,7 +185,7 @@ function NicksGunPage() {
                   onClick={() => setLength(n as 2 | 3)}
                   className={`flex-1 rounded-md py-1.5 text-xs font-bold uppercase tracking-widest transition ${
                     length === n
-                      ? "bg-[var(--accent-1)] text-[#0a0a12]"
+                      ? "bg-[var(--primary)] text-[#0a0a12]"
                       : "text-[var(--text-3)] hover:text-[var(--text-1)]"
                   } disabled:opacity-50`}
                 >
@@ -267,13 +267,13 @@ function NicksGunPage() {
             <div className="ds-small">
               {checked.toLocaleString("pt-BR")} / {total.toLocaleString("pt-BR")}
               {running && current && (
-                <span className="ml-3 text-[var(--accent-soft)]">testando: {current}</span>
+                <span className="ml-3 text-[var(--primary)]">testando: {current}</span>
               )}
             </div>
           </div>
           <div className="mt-3 h-1.5 overflow-hidden rounded-full bg-white/5">
             <div
-              className="h-full bg-[var(--accent-1)] transition-[width]"
+              className="h-full bg-[var(--primary)] transition-[width]"
               style={{ width: `${progress}%` }}
             />
           </div>
@@ -327,7 +327,7 @@ function NicksGunPage() {
                 href="https://discord.com/register"
                 target="_blank"
                 rel="noreferrer"
-                className="rounded-md p-1.5 text-[var(--text-3)] hover:bg-white/5 hover:text-[var(--accent-soft)]"
+                className="rounded-md p-1.5 text-[var(--text-3)] hover:bg-white/5 hover:text-[var(--primary)]"
                 title="Registrar no Discord"
               >
                 <ExternalLink className="h-3.5 w-3.5" />

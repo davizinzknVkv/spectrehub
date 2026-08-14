@@ -36,8 +36,8 @@ function ShowcasePage() {
         <div className="flex w-max min-w-0 whitespace-nowrap marquee will-change-transform [transform:translateZ(0)] group-hover:[animation-play-state:paused]">
           {[...MARQUEE_ITEMS, ...MARQUEE_ITEMS, ...MARQUEE_ITEMS, ...MARQUEE_ITEMS].map((t, i) => (
             <span key={i} className="mx-8 font-mono text-sm uppercase tracking-[0.4em] text-[var(--text-2)]">
-              <span className="text-[var(--accent-soft)]">◆</span>{" "}
-              <span className={i % 2 === 0 ? "text-[var(--text-1)]" : "text-[var(--accent-soft)]"}>{t}</span>
+              <span className="text-[var(--primary)]">◆</span>{" "}
+              <span className={i % 2 === 0 ? "text-[var(--text-1)]" : "text-[var(--primary)]"}>{t}</span>
             </span>
           ))}
         </div>
@@ -65,7 +65,7 @@ function ShowcasePage() {
         <div className="ds-grid-3">
           {CARDS.map(({ icon: Icon, title, desc }) => (
             <article key={title} tabIndex={0} className="ds-card ds-card-hover focus:outline-none">
-              <div className="grid h-11 w-11 place-items-center rounded-xl border border-[var(--border-1)] bg-white/[0.03] text-[var(--accent-soft)]">
+              <div className="grid h-11 w-11 place-items-center rounded-xl border border-[var(--border-1)] bg-white/[0.03] text-[var(--primary)]">
                 <Icon className="h-5 w-5" />
               </div>
               <h3 className="ds-h3 mt-4">{title}</h3>

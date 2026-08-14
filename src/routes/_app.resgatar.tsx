@@ -119,7 +119,7 @@ function RedeemPage() {
             saldo atual
           </div>
           <div className="mt-2 flex items-baseline gap-2">
-            <span className="text-4xl font-semibold tabular-nums text-[var(--accent-soft)]">
+            <span className="text-4xl font-semibold tabular-nums text-[var(--primary)]">
               {creds ? (orbs ?? "—").toLocaleString("pt-BR") : "—"}
             </span>
             <span className="ds-small">Orbs</span>
@@ -196,7 +196,7 @@ function RedeemPage() {
                 <Sparkles className="absolute right-1.5 top-1.5 h-3 w-3 text-white/60" />
                 {busy && (
                   <div className="absolute inset-0 grid place-items-center bg-[var(--bg)]/70">
-                    <Loader2 className="h-5 w-5 animate-spin text-[var(--accent-soft)]" />
+                    <Loader2 className="h-5 w-5 animate-spin text-[var(--primary)]" />
                   </div>
                 )}
               </div>

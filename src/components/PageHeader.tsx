@@ -21,7 +21,7 @@ export function PageHeader({ eyebrow, title, highlight, description, icon: Icon,
         <div className="min-w-0">
           {eyebrow && (
             <div className="ds-label">
-              {Icon && <Icon className="h-3 w-3 text-[var(--accent-soft)]" />}
+              {Icon && <Icon className="h-3 w-3 text-[var(--primary)]" />}
               {eyebrow}
             </div>
           )}
@@ -30,7 +30,7 @@ export function PageHeader({ eyebrow, title, highlight, description, icon: Icon,
             {highlight && (
               <>
                 {" "}
-                <span className="text-[var(--accent-soft)]">{highlight}</span>
+                <span className="text-[var(--primary)]">{highlight}</span>
               </>
             )}
           </h1>

@@ -88,8 +88,8 @@ function SpotifyGenPage() {
             <h2 className="ds-h3">Exclusivo VIP</h2>
             <p className="max-w-md ds-body">
               O gerador de links Spotify Premium Trimestral está disponível apenas para membros{" "}
-              <span className="text-[var(--accent-soft)]">Premium</span> ou{" "}
-              <span className="text-[var(--accent-soft)]">Boost</span>.
+              <span className="text-[var(--primary)]">Premium</span> ou{" "}
+              <span className="text-[var(--primary)]">Boost</span>.
             </p>
             <Link to="/hub" className={buttonClass("primary", "sm", "mt-2")}>
               <Sparkles className="h-3.5 w-3.5" />
