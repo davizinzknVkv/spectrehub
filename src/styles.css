@@ -718,8 +718,13 @@
 .ds-btn:disabled,
 .ds-btn[aria-disabled="true"] { opacity: 0.45; cursor: not-allowed; transform: none; }
 
-@utility ds-btn-sm { height: 32px; padding: 0 var(--sp-3); font-size: 0.7rem; }
-@utility ds-btn-lg { height: 48px; min-width: 220px; padding: 0 var(--sp-8); font-size: 0.85rem; }
+@utility ds-btn-sm { height: 32px; padding: 0 var(--sp-4); font-size: 0.7rem; }
+@utility ds-btn-lg { 
+  height: 52px; 
+  min-width: 200px; 
+  padding: 0 var(--sp-8); 
+  font-size: 0.85rem; 
+}
 
 @utility ds-btn-primary {
   background: var(--accent);
