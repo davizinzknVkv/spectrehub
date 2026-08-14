@@ -804,17 +804,16 @@ function ProductsSection() {
       <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8">
         <div className="max-w-2xl">
           <Reveal>
-            <h2 className="font-display text-4xl font-extrabold leading-[0.95] tracking-tighter text-white sm:text-6xl">
+            <h2 className="ds-h1">
               CADA SISTEMA É UM
               <br />
               MOTIVO PRO
               <br />
               JOGADOR FICAR.
-
             </h2>
           </Reveal>
           <Reveal delay={100}>
-            <p className="mt-6 text-[16px] text-[#8a8a8a]">
+            <p className="mt-8 ds-body max-w-xl text-[#8a8a8a]">
               Sistema que o jogador abre, entende na hora e volta pra usar. Todos desenhados, escritos e testados pela SPECTRE, e já rodando em servidor cheio agora.
             </p>
           </Reveal>
