@@ -376,7 +376,7 @@ function PlansTab({
         <Plus className="h-3.5 w-3.5" /> Novo plano
       </Button>
 
-      <div className="grid gap-4 md:grid-cols-2">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         {rows.map((row, i) => (
           <Card key={row.id ?? `new-${i}`} className="space-y-3">
             <div className="grid grid-cols-2 gap-3">
@@ -387,7 +387,7 @@ function PlansTab({
                 <Input value={row.price} onChange={(e) => update(i, { price: e.target.value })} />
               </Field>
             </div>
-            <div className="grid grid-cols-2 gap-3">
+            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
               <Field label="Período">
                 <Input value={row.period} onChange={(e) => update(i, { period: e.target.value })} />
               </Field>
@@ -407,7 +407,7 @@ function PlansTab({
                 onChange={(e) => update(i, { role_ids: parseCsv(e.target.value) })}
               />
             </Field>
-            <div className="grid grid-cols-3 gap-3">
+            <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
               <Field label="Ordem">
                 <Input
                   type="number"

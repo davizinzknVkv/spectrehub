@@ -79,7 +79,7 @@ export function MissionCard({
 
   return (
     <Card className={cn(
-      "group relative flex min-h-[140px] flex-col justify-between transition-all duration-300 !p-4 border-white/5 bg-[#050505] hover:bg-[#080808]",
+      "group relative flex min-h-[160px] flex-col justify-between transition-all duration-300 !p-4 border-white/5 bg-[#050505] hover:bg-[#080808] h-full",
       active ? "border-[#ff0055]/40" : "hover:border-white/10"
     )}>
       {quest.imageUrl && (
@@ -104,10 +104,10 @@ export function MissionCard({
           <div className="font-mono text-[9px] text-[#444] uppercase tracking-widest">#{quest.questId.slice(0, 8)}</div>
           {isOrb && <Sparkles className="h-3.5 w-3.5 text-amber-500 fill-amber-500/20" />}
         </div>
-        <h3 className="relative z-10 mt-2 line-clamp-1 text-[13px] font-black uppercase text-white tracking-tight group-hover:text-[#ff0055] transition-colors">
+        <h3 className="relative z-10 mt-2 line-clamp-2 text-[13px] font-black uppercase text-white tracking-tight group-hover:text-[#ff0055] transition-colors min-h-[2.4em] flex items-center">
           {quest.questName}
         </h3>
-        <p className="relative z-10 mt-1 line-clamp-1 font-mono text-[10px] text-[#555] uppercase">{quest.rewardText}</p>
+        <p className="relative z-10 mt-1 line-clamp-1 font-mono text-[10px] text-[#555] uppercase break-all">{quest.rewardText}</p>
       </div>
 
       <div className="relative z-10 mt-4">
@@ -158,19 +158,19 @@ export function CaptchaModal({
     <Modal
       title="ADVISOR"
       onClose={onCancel}
-      className="border-white/10 !rounded-none"
+      className="border-white/10 !rounded-none w-full max-w-lg mx-auto"
       actions={
-        <div className="flex w-full items-center justify-center gap-3">
+        <div className="flex flex-col sm:flex-row w-full items-center justify-center gap-3">
           <Button 
             variant="ghost" 
-            className="uppercase font-black text-xs tracking-widest" 
+            className="w-full sm:w-auto uppercase font-black text-xs tracking-widest order-2 sm:order-1" 
             onClick={onCancel}
           >
             CANCELAR
           </Button>
           <Button 
             variant="primary" 
-            className="ds-btn-lg min-w-[200px] uppercase font-black text-xs tracking-widest" 
+            className="w-full sm:w-auto ds-btn-lg min-w-[200px] uppercase font-black text-xs tracking-widest order-1 sm:order-2" 
             onClick={onSolved}
           >
             CONFIRMAR E INICIAR

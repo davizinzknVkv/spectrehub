@@ -31,7 +31,7 @@ function HistoryPage() {
         description="Salvo apenas neste navegador. Limpar o localStorage apaga o registro."
       />
 
-      <div className="ds-grid-4">
+      <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
         <StatCard label="Total" value={runs.length} accent={false} />
         <StatCard label="Concluídas" value={done} />
         <StatCard label="Falhas" value={failed} accent={false} />
