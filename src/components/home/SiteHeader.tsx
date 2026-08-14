@@ -63,32 +63,20 @@ export function SiteHeader({ guildInvite }: SiteHeaderProps) {
         </nav>
 
         <div className="hidden items-center gap-4 md:flex relative z-10">
-          <div className="flex flex-col items-end">
-            <span className="text-[13px] font-black text-white leading-none">euvictors2</span>
-            <span className="text-[10px] font-medium text-white/40 block">@euvictors2</span>
-          </div>
-          
-          <div className="relative h-9 w-9 overflow-hidden rounded-full border border-white/10 ring-2 ring-[#ff0055]/20">
-            <img 
-              src="https://cdn.discordapp.com/avatars/291666992642883584/a_6697475d4b5b48479e0a8d468e274b78.gif?size=1024" 
-              alt="Profile"
-              className="h-full w-full object-cover"
-            />
-          </div>
-
-          <div className="flex items-center gap-2 bg-white/5 border border-white/10 rounded-full px-3 py-1.5 ml-2 hover:bg-white/10 transition-colors cursor-pointer group/stats">
-            <div className="h-5 w-5 rounded-full bg-gradient-to-tr from-[#ff0055] to-[#7000ff] flex items-center justify-center shadow-lg shadow-[#ff0055]/20 group-hover/stats:scale-110 transition-transform">
-              <div className="h-2 w-2 rounded-full bg-white animate-pulse" />
-            </div>
-            <span className="text-[12px] font-black text-white tabular-nums tracking-tight">6.080</span>
-          </div>
-
           <Link 
             to="/hub" 
             className="flex items-center justify-center bg-white/5 hover:bg-white/10 text-white px-5 py-2 rounded-full font-black text-[12px] uppercase tracking-wider transition-all border border-white/10 hover:border-white/20 active:scale-95"
           >
-            Sair
+            Entrar
           </Link>
+          <a
+            href={guildInvite}
+            target="_blank"
+            rel="noreferrer"
+            className="flex items-center justify-center bg-[#ff0055] hover:bg-[#ff1a66] text-white px-5 py-2 rounded-full font-black text-[12px] uppercase tracking-wider transition-all shadow-lg shadow-[#ff0055]/20 active:scale-95"
+          >
+            Comunidade
+          </a>
         </div>
 
         <button
