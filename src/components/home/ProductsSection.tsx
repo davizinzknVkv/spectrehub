@@ -85,9 +85,9 @@ export function ProductsSection({ products }: ProductsSectionProps) {
               </p>
             </Reveal>
 
-            <Reveal delay={200} className="mt-10 flex flex-wrap gap-3">
+            <Reveal delay={200} className="mt-10 flex flex-wrap gap-2">
               {["VRPEX", "CREATIVE", "STANDALONE"].map((tag) => (
-                <span key={tag} className="bg-white/5 border border-white/10 px-4 py-1.5 text-[10px] font-bold text-[#8a8a8a] uppercase tracking-widest hover:text-white transition-colors cursor-default">
+                <span key={tag} className="bg-white/5 border border-white/10 px-5 py-2 rounded-full text-[10px] font-black text-[#666] uppercase tracking-widest hover:text-white hover:bg-white/10 transition-all cursor-default">
                   {tag}
                 </span>
               ))}
@@ -96,9 +96,9 @@ export function ProductsSection({ products }: ProductsSectionProps) {
             <Reveal delay={300} className="mt-12">
               <Link
                 to={products[activeTab].to}
-                className="ds-btn ds-btn-primary ds-btn-lg w-full sm:w-auto"
+                className="ds-btn ds-btn-primary ds-btn-lg rounded-full w-full sm:w-auto"
               >
-                <Zap className="h-4 w-4" /> Quero este sistema <ArrowUpRight className="ml-1 h-3 w-3" />
+                <Zap className="h-5 w-5 mr-2" /> COMEÇAR AGORA <ArrowUpRight className="ml-2 h-4 w-4" />
               </Link>
             </Reveal>
           </div>
