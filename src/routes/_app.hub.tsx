@@ -517,7 +517,7 @@ function PresenceModal({
       });
 
       
-      toast.success("Protocolo de presença atualizado");
+      toast.success("Status de presença atualizado");
       // Update local state to reflect changes (simplified)
       const newSettings = { ...settings };
       if (activeTab === 'status') newSettings.status = status;
