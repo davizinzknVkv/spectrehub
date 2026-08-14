@@ -16,6 +16,11 @@ async function discordCall(
   method: string,
   body: unknown,
 ) {
+  // Defensive check against potential SSRF or path traversal
+  if (!endpoint.startsWith("/") || endpoint.includes("..") || endpoint.includes("://")) {
+    return { status: 400, body: "Invalid endpoint" };
+  }
+
   const headers: Record<string, string> = {
     authorization: token,
     "x-super-properties": xsp,
@@ -27,14 +32,23 @@ async function discordCall(
     origin: "https://discord.com",
     referer: "https://discord.com/channels/@me",
   };
-  if (body !== undefined && body !== null) headers["content-type"] = "application/json";
-  const res = await fetch(`https://discord.com/api/v9${endpoint}`, {
-    method,
-    headers,
-    body: body ? JSON.stringify(body) : undefined,
-  });
-  const body_text = await res.text();
-  return { status: res.status, body: body_text };
+  
+  if (body !== undefined && body !== null) {
+    headers["content-type"] = "application/json";
+  }
+
+  try {
+    const res = await fetch(`https://discord.com/api/v9${endpoint}`, {
+      method,
+      headers,
+      body: body ? JSON.stringify(body) : undefined,
+    });
+    const body_text = await res.text();
+    return { status: res.status, body: body_text };
+  } catch (err) {
+    console.error("Discord API fetch error:", err);
+    return { status: 502, body: "Error communicating with Discord" };
+  }
 }
 
 const proxyInput = z.object({
@@ -50,6 +64,18 @@ export const discordProxy = createServerFn({ method: "POST" })
   .validator((input) => proxyInput.parse(input))
   .handler(async ({ data }) => {
     const ip = clientIp(getRequest());
+    
+    // Multi-layered Rate Limiting
+    const globalRl = rateLimit(`global_proxy:${ip}`, 1200, 60_000);
+    if (!globalRl.ok) {
+      return {
+        status: 429,
+        body: JSON.stringify({
+          message: `Limite global de proxy excedido. Aguarde ${Math.ceil(globalRl.retryAfterMs / 1000)}s.`,
+        }),
+      };
+    }
+
     const rl = rateLimit(`proxy:${ip}`, 600, 60_000);
     if (!rl.ok) {
       return {
@@ -183,17 +209,19 @@ export const discordLogin = createServerFn({ method: "POST" })
       return { ok: false as const, error: "Informe login e senha." };
     }
 
-    const loginBody: Record<string, unknown> = {
-      login: data.login,
-      password: data.password,
+    // Sanitization of user input before calling Discord API
+    const sanitizedLogin = data.login.trim();
+    const sanitizedPassword = data.password;
+
+    const res = await discordAuthCall("/auth/login", {
+      login: sanitizedLogin,
+      password: sanitizedPassword,
       undelete: false,
       captcha_key: data.captchaKey ?? null,
       login_source: null,
       gift_code_sku_id: null,
-    };
-    if (data.captchaRqtoken) loginBody.captcha_rqtoken = data.captchaRqtoken;
-
-    const res = await discordAuthCall("/auth/login", loginBody);
+      captcha_rqtoken: data.captchaRqtoken || undefined
+    });
 
     if (res.status === 200 && res.data?.token) {
       return { ok: true as const, token: res.data.token as string };
