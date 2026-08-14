@@ -165,7 +165,7 @@ function RedeemPage() {
 
       {/* Grid */}
       {creds && loadingOrbs && pageItems.length === 0 ? (
-        <section className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6">
+        <section className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-3 xl:grid-cols-4">
           {Array.from({ length: 12 }).map((_, i) => (
             <div key={i} className="ds-card aspect-[4/5] animate-pulse !p-0" />
           ))}
@@ -178,7 +178,7 @@ function RedeemPage() {
           action={q ? <Button variant="secondary" onClick={() => setQ("")}>Limpar busca</Button> : null}
         />
       ) : (
-        <section className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6">
+        <section className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-3 xl:grid-cols-4">
         {pageItems.map((it) => {
           const busy = busySku === it.skuId;
           return (
