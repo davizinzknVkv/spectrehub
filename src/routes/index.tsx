@@ -428,12 +428,13 @@ function SiteHeader() {
               </a>
             ))}
             <div className="mt-3 grid grid-cols-2 gap-2 border-t border-white/[0.07] pt-3">
-              <Link to="/hub" className="btn-ghost w-full" onClick={() => setOpen(false)}>
+              <Link to="/hub" className="ds-btn ds-btn-secondary w-full" onClick={() => setOpen(false)}>
                 Entrar
               </Link>
-              <a href={GUILD_INVITE} target="_blank" rel="noreferrer" className="btn-accent w-full">
+              <a href={GUILD_INVITE} target="_blank" rel="noreferrer" className="ds-btn ds-btn-primary w-full">
                 Discord
               </a>
+
             </div>
           </nav>
         </div>
