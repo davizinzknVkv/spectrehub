@@ -471,133 +471,129 @@ function SiteHeader() {
 
 function Hero() {
   return (
-    <section className="relative overflow-hidden px-4 pb-24 pt-20 sm:px-6 sm:pb-32 sm:pt-28 lg:px-8">
-      {/* grid + glow background */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 -z-10 opacity-[0.05] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_40%,transparent_100%)]"
-        style={{
-          backgroundImage:
-            "linear-gradient(to right, rgba(255,255,255,0.06) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.06) 1px, transparent 1px)",
-          backgroundSize: "40px 40px",
-        }}
-      />
-      <div
-        aria-hidden
-        className="pointer-events-none absolute left-1/2 top-[-14rem] -z-10 h-[32rem] w-[52rem] -translate-x-1/2 rounded-full bg-[#ff0055]/5 blur-[130px]"
-      />
+    <section className="relative overflow-hidden px-6 pb-24 pt-32 sm:pt-40 lg:pt-48">
+      <div className="mx-auto max-w-[1216px]">
+        <div className="grid grid-cols-1 items-center gap-20 lg:grid-cols-2">
+          <div className="max-w-xl">
+            <Reveal>
+              <span className="text-eyebrow font-semibold uppercase tracking-widest text-accent mb-6 block">
+                Plataforma de Elite
+              </span>
+            </Reveal>
 
-      <div className="mx-auto max-w-3xl text-center">
-        <Reveal>
-          <span className="inline-flex items-center gap-3 rounded-full border border-white/5 bg-white/[0.02] px-4 py-1.5 font-mono text-[9px] uppercase tracking-[0.3em] text-[#8a8a8a] backdrop-blur-md">
-            <span className="h-1 w-1 rounded-full bg-[#ff0055] shadow-[0_0_8px_#ff0055]" />
-            Inovação · Produto & Tecnologia
-          </span>
-        </Reveal>
+            <Reveal delay={80}>
+              <h1 className="font-display text-[52px] font-medium leading-[1.1] tracking-[0.01em] text-white sm:text-[64px] lg:text-[88px]">
+                Domine sua jornada digital.
+              </h1>
+            </Reveal>
 
-        <Reveal delay={80}>
-          <h1 className="mt-8 font-display text-[2.6rem] font-extrabold leading-[0.95] tracking-tighter text-white xs:text-[3.2rem] sm:text-7xl lg:text-[6rem]">
-            A SPECTRE
-            <br />
-            CRIA.
-            <br />
-            <span className="text-white">O MERCADO</span>
-            <br />
-            <span className="bg-gradient-to-b from-white to-white/40 bg-clip-text text-transparent">
-              COPIA.
-            </span>
-          </h1>
-        </Reveal>
+            <Reveal delay={160}>
+              <p className="mt-8 text-body-sm leading-relaxed text-fog sm:text-body">
+                Automatize quests, capture identidades raras e gerencie sua presença no Discord com a infraestrutura mais sofisticada do mercado.
+              </p>
+            </Reveal>
 
-        <Reveal delay={160}>
-          <p className="mx-auto mt-8 max-w-xl text-[16px] font-medium leading-relaxed text-[#8a8a8a] sm:text-lg">
-            Somos o estúdio por trás dos sistemas que o Discord brasileiro inteiro tenta imitar. Instalação em minutos, compatível com qualquer base, e performance que segura servidor lotado no horário de pico.
-          </p>
-        </Reveal>
-
-        <Reveal delay={240}>
-          <div className="mt-9 flex flex-wrap items-center justify-center gap-3">
-            <a href="#produtos" className="bg-[#ff0055] hover:bg-[#ff0055]/90 text-white font-bold py-4 px-8 rounded-sm uppercase tracking-wider transition-all hover:scale-[1.02] active:scale-95 flex items-center gap-2">
-              <ArrowRight className="h-4 w-4" /> Quero Usar o Spectre
-            </a>
-            <a href={GUILD_INVITE} target="_blank" rel="noreferrer" className="border border-white/10 bg-white/5 hover:bg-white/10 text-white font-bold py-4 px-8 rounded-sm uppercase tracking-wider transition-all flex items-center gap-2">
-              Ver os sistemas <ArrowRight className="rotate-90 h-4 w-4" />
-            </a>
-          </div>
-        </Reveal>
-
-        <Reveal delay={320}>
-          <div className="mt-20 flex items-center justify-between border-t border-white/5 pt-8 text-[10px] font-bold text-[#444] uppercase tracking-[0.2em]">
-            <span>SPECTRE HUB</span>
-            <span className="opacity-20">//</span>
-            <span>AGO/2026</span>
-            <span className="opacity-20">©</span>
-            <span>PROPERTY OF SPECTRE. ALL CREATIVE RIGHTS RESERVED.</span>
-          </div>
-        </Reveal>
-
-        <Reveal delay={360}>
-          <div className="mt-10 flex items-center justify-center gap-3">
-            <div className="flex -space-x-2">
-              {FALLBACK_MEMBERS.slice(0, 5).map((m) => (
-                <div
-                  key={m}
-                  className="h-7 w-7 overflow-hidden rounded-full border-2 border-[#050505] bg-white/10"
-                >
-                  <Avatar seed={m} />
+            <Reveal delay={240}>
+              <div className="mt-10 flex flex-col items-center gap-3 sm:flex-row">
+                <div className="relative w-full max-w-sm">
+                  <input
+                    type="email"
+                    placeholder="Seu e-mail profissional"
+                    className="w-full rounded-full border border-white/20 bg-transparent px-6 py-4 text-[14px] text-white placeholder:text-steel focus:border-white focus:outline-none"
+                  />
+                  <button className="absolute right-2 top-2 rounded-full bg-white px-6 py-2 text-[14px] font-medium text-black hover:opacity-90 transition-all">
+                    Começar
+                  </button>
                 </div>
-              ))}
-            </div>
-            <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-[#6f6f6f]">
-              comunidade ativa no discord
-            </p>
-          </div>
-        </Reveal>
-      </div>
+              </div>
+            </Reveal>
 
-      <Reveal delay={380}>
-        <div className="relative mx-auto mt-16 max-w-5xl">
-          <HeroPreview />
-          <div
-            aria-hidden
-            className="pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-[#050505] to-transparent"
-          />
+            <Reveal delay={320}>
+              <div className="mt-16 flex items-center gap-4">
+                <div className="flex -space-x-2">
+                  {FALLBACK_MEMBERS.slice(0, 4).map((m) => (
+                    <div
+                      key={m}
+                      className="h-8 w-8 overflow-hidden rounded-full border-2 border-obsidian bg-onyx"
+                    >
+                      <Avatar seed={m} />
+                    </div>
+                  ))}
+                </div>
+                <p className="text-[13px] text-mist font-medium">
+                  Junte-se a <span className="text-white">12.000+</span> membros ativos
+                </p>
+              </div>
+            </Reveal>
+          </div>
+
+          <Reveal delay={380} className="relative hidden lg:block">
+            <HeroPreview />
+          </Reveal>
         </div>
-      </Reveal>
+      </div>
     </section>
   );
 }
-
 
 function HeroPreview() {
   return (
     <div className="relative">
       <div
         aria-hidden
-        className="pointer-events-none absolute -inset-10 -z-10 rounded-[3rem] bg-[#818cf8]/10 blur-[90px]"
+        className="pointer-events-none absolute -inset-20 -z-10 rounded-full bg-copper/5 blur-[120px]"
       />
-      <div className="overflow-hidden rounded-2xl border border-white/[0.08] bg-[#0d0d0d]/90 shadow-[0_50px_120px_-60px_rgba(0,0,0,0.9)] backdrop-blur-xl">
-        <div className="flex items-center gap-3 border-b border-white/[0.06] px-4 py-3">
-          <div className="flex gap-1.5">
-            <span className="h-2.5 w-2.5 rounded-full bg-white/10" />
-            <span className="h-2.5 w-2.5 rounded-full bg-white/10" />
-            <span className="h-2.5 w-2.5 rounded-full bg-white/10" />
+      <div className="ds-card rounded-xl border border-white/[0.04] bg-onyx p-8 shadow-2xl">
+        <div className="mb-10 flex items-center justify-between">
+          <div>
+            <span className="text-eyebrow font-medium text-fog block mb-1">Status da Rede</span>
+            <div className="text-[32px] font-medium text-white tabular-nums tracking-tight">
+              142.842 <span className="text-[18px] text-mist font-normal">req/s</span>
+            </div>
           </div>
-          <div className="font-mono text-[10px] uppercase tracking-[0.25em] text-[#6f6f6f]">
-            hub / automation
+          <div className="h-10 w-10 rounded-full border border-slate bg-carbon flex items-center justify-center">
+            <Activity className="h-5 w-5 text-accent" />
           </div>
         </div>
 
-        <div className="grid grid-cols-[84px_1fr] gap-3 p-4">
-          <div className="space-y-2 rounded-xl border border-white/[0.05] bg-white/[0.02] p-2.5">
-            <div className="h-1.5 w-full rounded-full bg-[#818cf8]/70" />
-            {[80, 65, 72, 50, 60].map((w, i) => (
-              <div key={i} className="h-1.5 rounded-full bg-white/[0.08]" style={{ width: `${w}%` }} />
-            ))}
-          </div>
+        <div className="h-48 w-full">
+           <svg className="h-full w-full" viewBox="0 0 400 100" preserveAspectRatio="none">
+             <path
+               d="M0 80 Q 50 20, 100 70 T 200 40 T 300 80 T 400 20"
+               fill="none"
+               stroke="url(#gilded-gradient)"
+               strokeWidth="3"
+               strokeLinecap="round"
+             />
+             <defs>
+               <linearGradient id="gilded-gradient" x1="0" y1="0" x2="1" y2="0">
+                 <stop offset="0%" stopColor="#ae9357" />
+                 <stop offset="40%" stopColor="#fff0cc" />
+                 <stop offset="70%" stopColor="#ae9357" />
+                 <stop offset="100%" stopColor="rgba(189, 157, 79, 0)" />
+               </linearGradient>
+             </defs>
+           </svg>
+        </div>
 
-          <div className="space-y-2.5">
-            {[
+        <div className="mt-8 grid grid-cols-3 gap-4 border-t border-graphite pt-8">
+          <div>
+            <span className="text-[12px] font-medium text-ash block mb-1">Tempo de Resposta</span>
+            <span className="text-[16px] font-medium text-bone">14ms</span>
+          </div>
+          <div>
+            <span className="text-[12px] font-medium text-ash block mb-1">Uptime Global</span>
+            <span className="text-[16px] font-medium text-bone">99.98%</span>
+          </div>
+          <div>
+            <span className="text-[12px] font-medium text-ash block mb-1">Localização</span>
+            <span className="text-[16px] font-medium text-bone">São Paulo, BR</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
               { l: "Assistir trailer — Fortnite", p: 100 },
               { l: "Jogar 15 min — Valorant", p: 64 },
               { l: "Assistir highlights — LoL", p: 27 },
