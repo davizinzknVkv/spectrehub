@@ -35,10 +35,25 @@ export function Hero({ guildInvite, fallbackMembers }: HeroProps) {
         </Reveal>
 
         <Reveal delay={100} className="relative">
-          <div className="absolute top-1/2 -right-12 md:-right-24 -translate-y-1/2 w-32 md:w-64 opacity-20 pointer-events-none select-none animate-pulse">
+          <div className="absolute top-1/2 -right-12 md:-right-24 -translate-y-1/2 w-32 md:w-64 opacity-20 pointer-events-none select-none">
             <svg viewBox="0 0 100 60" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full">
-              <path d="M5 5L95 25L5 45L95 55" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-spectre-pink" />
-              <path d="M85 45L95 55L85 65" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-spectre-pink" />
+              <path 
+                d="M5 5L95 25L5 45L95 55" 
+                stroke="currentColor" 
+                strokeWidth="2" 
+                strokeLinecap="round" 
+                strokeLinejoin="round" 
+                className="text-spectre-pink animate-[dash_3s_ease-in-out_infinite]"
+                style={{ strokeDasharray: '200', strokeDashoffset: '200' }}
+              />
+              <path 
+                d="M85 45L95 55L85 65" 
+                stroke="currentColor" 
+                strokeWidth="2" 
+                strokeLinecap="round" 
+                strokeLinejoin="round" 
+                className="text-spectre-pink animate-pulse" 
+              />
             </svg>
           </div>
           <h1 className="font-display text-[clamp(2.5rem,10vw,8.5rem)] leading-[0.85] text-white uppercase italic tracking-tighter mb-8 break-words relative z-10 flex flex-col items-center">
