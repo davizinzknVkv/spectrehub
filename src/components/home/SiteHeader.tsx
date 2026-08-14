@@ -9,6 +9,7 @@ interface SiteHeaderProps {
 
 const NAV = [
   { href: "#produtos", label: "sistemas" },
+  { href: "#como-funciona", label: "método" },
   { href: "#planos", label: "planos" },
   { href: "#comunidade", label: "comunidade" },
 ];
