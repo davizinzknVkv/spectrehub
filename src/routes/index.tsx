@@ -309,7 +309,7 @@ function Index() {
   return (
     <div
       id="topo"
-      className="relative min-h-screen overflow-x-hidden bg-[#030303] font-sans text-[#f5f5f5] antialiased selection:bg-[#c5a059]/30"
+      className="relative min-h-screen overflow-x-hidden bg-[#030303] font-sans text-[#f5f5f5] antialiased selection:bg-[#ff0055]/30"
     >
       <div aria-hidden className="pointer-events-none fixed inset-0 -z-10">
         <div
@@ -550,7 +550,7 @@ function HeroPreview() {
     <div className="relative">
       <div
         aria-hidden
-        className="pointer-events-none absolute -inset-10 -z-10 rounded-[3rem] bg-[#c5a059]/10 blur-[90px]"
+        className="pointer-events-none absolute -inset-10 -z-10 rounded-[3rem] bg-[#ff0055]/10 blur-[90px]"
       />
       <div className="overflow-hidden rounded-2xl border border-white/[0.08] bg-[#0d0d0d]/90 shadow-[0_50px_120px_-60px_rgba(0,0,0,0.9)] backdrop-blur-xl">
         <div className="flex items-center gap-3 border-b border-white/[0.06] px-4 py-3">
@@ -566,7 +566,7 @@ function HeroPreview() {
 
         <div className="grid grid-cols-[84px_1fr] gap-3 p-4">
           <div className="space-y-2 rounded-xl border border-white/[0.05] bg-white/[0.02] p-2.5">
-            <div className="h-1.5 w-full rounded-full bg-[#c5a059]/70" />
+            <div className="h-1.5 w-full rounded-full bg-[#ff0055]/70" />
             {[80, 65, 72, 50, 60].map((w, i) => (
               <div key={i} className="h-1.5 rounded-full bg-white/[0.08]" style={{ width: `${w}%` }} />
             ))}
@@ -587,7 +587,7 @@ function HeroPreview() {
                   <span className="font-mono text-[#8a8a8a]">{q.p}%</span>
                 </div>
                 <div className="mt-2 h-1 overflow-hidden rounded-full bg-white/[0.06]">
-                  <div className="h-full rounded-full bg-[#c5a059]" style={{ width: `${q.p}%` }} />
+                  <div className="h-full rounded-full bg-[#ff0055]" style={{ width: `${q.p}%` }} />
                 </div>
               </div>
             ))}
@@ -596,8 +596,9 @@ function HeroPreview() {
               <svg viewBox="0 0 200 44" className="h-11 w-full" aria-hidden>
                 <defs>
                   <linearGradient id="spark" x1="0" x2="0" y1="0" y2="1">
-                    <stop offset="0%" stopColor="#c5a059" stopOpacity="0.35" />
-                    <stop offset="100%" stopColor="#c5a059" stopOpacity="0" />
+                    <stop offset="0%" stopColor="#ff0055" stopOpacity="0.35" />
+                    <stop offset="100%" stopColor="#ff0055" stopOpacity="0" />
+
                   </linearGradient>
                 </defs>
                 <path
@@ -607,7 +608,7 @@ function HeroPreview() {
                 <path
                   d="M0 32 L30 27 L60 29 L90 19 L120 23 L150 11 L180 15 L200 7"
                   fill="none"
-                  stroke="#c5a059"
+                  stroke="#ff0055"
                   strokeWidth="1.4"
                 />
               </svg>
@@ -621,7 +622,7 @@ function HeroPreview() {
           status
         </div>
         <div className="mt-1 flex items-center gap-2 text-xs font-semibold text-white">
-          <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-[#c5a059]" />
+          <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-[#ff0055]" />
           Rodando em background
         </div>
       </div>
@@ -765,7 +766,7 @@ function SocialProof() {
                <span>PRODUTOS DISPONÍVEIS</span>
              </div>
              <div className="flex items-center gap-3">
-               <span className="text-white text-2xl font-display tracking-tighter">{latency.toFixed(2)}<span className="text-[#c5a059]">ms</span></span>
+               <span className="text-white text-2xl font-display tracking-tighter">{latency.toFixed(2)}<span className="text-[#ff0055]">ms</span></span>
                <span>IMPACTO NO DISCORD</span>
              </div>
           </div>
@@ -812,7 +813,7 @@ function ProductsSection() {
               onClick={() => setActiveTab(i)}
               className={`px-6 py-2 text-[10px] font-bold uppercase tracking-widest border transition-all ${
                 activeTab === i
-                  ? "bg-[#c5a059] border-[#c5a059] text-white"
+                  ? "bg-[#ff0055] border-[#ff0055] text-white"
                   : "bg-white/5 border-white/10 text-[#8a8a8a] hover:bg-white/10"
               }`}
             >
@@ -823,7 +824,7 @@ function ProductsSection() {
 
         <div className="mt-12 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           <Reveal className="relative aspect-video bg-white/5 border border-white/10 overflow-hidden group">
-             <div className="absolute inset-0 bg-gradient-to-tr from-[#c5a059]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+             <div className="absolute inset-0 bg-gradient-to-tr from-[#ff0055]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
              <div className="absolute inset-0 flex items-center justify-center">
                 <div className="text-[10px] font-bold text-white/20 uppercase tracking-[0.4em]">Preview do Sistema</div>
              </div>
@@ -834,7 +835,7 @@ function ProductsSection() {
               <h3 className="font-display text-5xl font-extrabold tracking-tighter text-white uppercase">
                 SPECTRE {PRODUCTS[activeTab].name}
               </h3>
-              <span className="mt-2 block text-[10px] font-bold text-[#c5a059] uppercase tracking-widest">
+              <span className="mt-2 block text-[10px] font-bold text-[#ff0055] uppercase tracking-widest">
                 SPECTRE-{PRODUCTS[activeTab].id.toUpperCase()}
               </span>
             </Reveal>
@@ -854,10 +855,11 @@ function ProductsSection() {
             <Reveal delay={300} className="mt-12">
               <Link
                 to={PRODUCTS[activeTab].to}
-                className="bg-[#c5a059] hover:bg-[#c5a059]/90 text-white font-bold py-4 px-8 rounded-sm uppercase tracking-wider transition-all inline-flex items-center gap-2"
+                className="ds-btn ds-btn-primary ds-btn-lg"
               >
                 Quero este sistema <ArrowRight className="h-4 w-4" />
               </Link>
+
             </Reveal>
           </div>
         </div>
