@@ -300,7 +300,7 @@ function TopBar({ onOpenMenu, pathname }: { onOpenMenu: () => void; pathname: st
 
         <div className="flex items-center gap-3">
           <span
-            className={`h-1.5 w-1.5 ${creds ? "bg-[#7c3aed] pulse-dot" : "bg-amber-400"}`}
+            className={`h-1.5 w-1.5 ${creds ? "bg-[#ff0055] pulse-dot" : "bg-amber-400"}`}
             title={creds ? "conectado" : "desconectado"}
           />
           {creds && me ? (
@@ -354,7 +354,7 @@ function TopBar({ onOpenMenu, pathname }: { onOpenMenu: () => void; pathname: st
                   className="cursor-pointer focus:bg-white/5 focus:text-white"
                 >
                   <Link to="/hub" className="flex items-center gap-2">
-                    <LayoutDashboard className="h-4 w-4 text-[#7c3aed]" />
+                    <LayoutDashboard className="h-4 w-4 text-[#ff0055]" />
                     Dashboard
                   </Link>
                 </DropdownMenuItem>
@@ -363,7 +363,7 @@ function TopBar({ onOpenMenu, pathname }: { onOpenMenu: () => void; pathname: st
                   className="cursor-pointer focus:bg-white/5 focus:text-white"
                 >
                   <Link to="/settings" className="flex items-center gap-2">
-                    <KeyRound className="h-4 w-4 text-[#7c3aed]" />
+                    <KeyRound className="h-4 w-4 text-[#ff0055]" />
                     Login / Token
                   </Link>
                 </DropdownMenuItem>

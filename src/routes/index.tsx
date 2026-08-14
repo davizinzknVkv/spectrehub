@@ -1,9 +1,10 @@
 /**
  * Spectre Hub — Industrial Design System
  * 
- * Mix: BlackNetwork (Obsidian + Gold) & CoreNetwork (High Contrast + Industrial).
- * Theme: Midnight Obsidian (#030303), Gold Accent (#c5a059).
+ * Mix: BlackNetwork (Obsidian + Pink) & CoreNetwork (High Contrast + Industrial).
+ * Theme: Midnight Obsidian (#030303), Spectre Pink (#ff0055).
  */
+
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import {
