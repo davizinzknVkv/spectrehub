@@ -6,6 +6,7 @@
  */
 
 import { createFileRoute } from "@tanstack/react-router";
+import { useInView } from "@/components/home/hooks";
 import logoAsset from "@/assets/spectre-logo-nobg.png.asset.json";
 import { PRODUCTS, PLANS, REASONS } from "@/components/home/constants";
 import { SiteHeader } from "@/components/home/SiteHeader";
@@ -63,6 +64,8 @@ const FALLBACK_MEMBERS = [
 ];
 
 function Index() {
+  const [ref, inView] = useInView<HTMLDivElement>();
+
   return (
     <div
       id="topo"
@@ -81,10 +84,10 @@ function Index() {
 
       <SiteHeader guildInvite={GUILD_INVITE} />
 
-      <main>
+      <main ref={ref}>
         <Hero guildInvite={GUILD_INVITE} fallbackMembers={FALLBACK_MEMBERS} />
         
-        <div className="reveal-stagger">
+        <div className={`reveal-stagger ${inView ? 'is-visible' : ''}`}>
           <SocialProof widgetUrl={WIDGET_URL} products={PRODUCTS} />
           <ProductsSection products={PRODUCTS} />
           <ReasonsSection reasons={REASONS} />
