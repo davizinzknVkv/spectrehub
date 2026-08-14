@@ -4,7 +4,6 @@ import { toast } from "sonner";
 import { Clock, ArrowLeft } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import { PageHeader } from "@/components/PageHeader";
-import { Badge, EmptyState, buttonClass } from "@/components/ui/ds";
 
 type Props = {
   name: string;
@@ -13,10 +12,10 @@ type Props = {
   description?: string;
 };
 
-export function ComingSoon({ name, eyebrow = "status --soon", icon, description }: Props) {
+export function ComingSoon({ name, eyebrow = "status --offline", icon, description }: Props) {
   useEffect(() => {
-    toast.message(`${name} está em desenvolvimento`, {
-      description: "Estará disponível em breve.",
+    toast.message(`${name} em desenvolvimento`, {
+      description: "Recurso estará disponível em breve.",
     });
   }, [name]);
 
@@ -26,24 +25,23 @@ export function ComingSoon({ name, eyebrow = "status --soon", icon, description 
         eyebrow={eyebrow}
         icon={icon ?? Clock}
         title={name}
-        highlight="em breve"
-        description={description ?? `${name} está em desenvolvimento e estará disponível em breve.`}
+        highlight="Offline"
+        description={description ?? `${name} está em fase de calibração final.`}
       />
 
-      <EmptyState
-        icon={Clock}
-        title={`${name} está em desenvolvimento`}
-        description="Estamos finalizando essa ferramenta. Assim que estiver pronta, ela aparece aqui automaticamente."
-        action={
-          <div className="flex flex-col items-center gap-4">
-            <Badge variant="warning">em breve</Badge>
-            <Link to="/hub" className={buttonClass("secondary", "sm")}>
-              <ArrowLeft className="h-3.5 w-3.5" />
-              voltar ao dashboard
-            </Link>
-          </div>
-        }
-      />
+      <div className="py-20 text-center space-y-8 border border-dashed border-white/5 bg-white/[0.01]">
+         <div className="w-16 h-16 mx-auto flex items-center justify-center border border-white/10 bg-white/[0.02]">
+            <Clock className="w-8 h-8 text-white/20" />
+         </div>
+         <div className="space-y-2">
+            <h3 className="font-display text-xl text-white uppercase italic tracking-widest">Protocolo em Desenvolvimento</h3>
+            <p className="font-sans text-sm text-white/30 italic max-w-sm mx-auto">Esta ferramenta está sendo calibrada para garantir a melhor performance e segurança.</p>
+         </div>
+         <Link to="/hub" className="ds-btn ds-btn-secondary mx-auto !py-2 !px-8 !text-[9px]">
+            <ArrowLeft className="w-3.5 h-3.5 mr-2" />
+            Voltar ao Hub
+         </Link>
+      </div>
     </div>
   );
 }
