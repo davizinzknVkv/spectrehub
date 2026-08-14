@@ -165,7 +165,8 @@
   overflow: hidden;
   white-space: nowrap;
   min-width: fit-content;
-  clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+  clip-path: none;
+  border-radius: var(--radius-xl);
 
   &:disabled {
     opacity: 0.5;
@@ -216,7 +217,7 @@
     position: absolute;
     inset: 0;
     background: rgba(255, 255, 255, 0.08);
-    clip-path: polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px);
+    border-radius: var(--radius-xl);
     z-index: -2;
   }
 
@@ -225,7 +226,7 @@
     position: absolute;
     inset: 1px;
     background: #030303;
-    clip-path: polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px);
+    border-radius: var(--radius-xl);
     z-index: -1;
   }
 

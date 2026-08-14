@@ -28,9 +28,9 @@ export function Hero({ guildInvite, fallbackMembers }: HeroProps) {
 
       <div className="mx-auto max-w-3xl text-center">
         <Reveal>
-          <span className="inline-flex items-center gap-3 rounded-none border border-[#ff0055]/20 bg-[#ff0055]/5 px-5 py-2 font-mono text-[10px] uppercase tracking-[0.4em] text-[#ff0055] backdrop-blur-md">
-            <span className="h-1.5 w-1.5 animate-pulse bg-[#ff0055] shadow-[0_0_10px_#ff0055]" />
-            ESTADO DA ARTE · TECNOLOGIA DE ELITE
+          <span className="inline-flex items-center gap-3 rounded-full border border-[#ff0055]/30 bg-[#ff0055]/10 px-6 py-2.5 font-mono text-[11px] uppercase tracking-[0.45em] text-[#ff0055] backdrop-blur-xl shadow-[0_0_20px_rgba(255,0,85,0.15)]">
+            <span className="h-2 w-2 animate-pulse rounded-full bg-[#ff0055] shadow-[0_0_12px_#ff0055]" />
+            TECNOLOGIA DE ELITE
           </span>
         </Reveal>
 
@@ -49,18 +49,18 @@ export function Hero({ guildInvite, fallbackMembers }: HeroProps) {
         </Reveal>
 
         <Reveal delay={160}>
-          <p className="mx-auto mt-8 max-w-xl text-[16px] font-medium leading-relaxed text-[#8a8a8a] sm:text-lg">
-            O hub definitivo para automação e elite no Discord. Performance absoluta, segurança inabalável e a melhor experiência de usuário do mercado.
+          <p className="mx-auto mt-10 max-w-2xl text-[18px] font-medium leading-[1.6] text-[#999] sm:text-xl px-4">
+            O hub definitivo para automação de elite no Discord. Performance absoluta, infraestrutura inabalável e a experiência de usuário mais sofisticada do mercado.
           </p>
         </Reveal>
 
         <Reveal delay={240}>
           <div className="mt-9 flex flex-col items-center justify-center gap-4 sm:flex-row sm:flex-nowrap">
-            <a href="#produtos" className="ds-btn ds-btn-primary ds-btn-lg w-full sm:w-auto">
-              <span className="flex items-center gap-2 whitespace-nowrap"><ArrowRight className="h-4 w-4 shrink-0" /> QUERO USAR O SPECTRE</span>
+            <a href="#produtos" className="ds-btn ds-btn-primary ds-btn-lg rounded-full w-full sm:w-auto px-10">
+              <span className="flex items-center gap-2.5 whitespace-nowrap"><ArrowRight className="h-5 w-5 shrink-0" /> INICIAR EXPERIÊNCIA</span>
             </a>
-            <a href={guildInvite} target="_blank" rel="noreferrer" className="ds-btn ds-btn-secondary ds-btn-lg w-full sm:w-auto">
-              <span className="flex items-center gap-2 whitespace-nowrap">VER OS SISTEMAS <ArrowRight className="h-4 w-4 shrink-0 rotate-90" /></span>
+            <a href={guildInvite} target="_blank" rel="noreferrer" className="ds-btn ds-btn-secondary ds-btn-lg rounded-full w-full sm:w-auto px-10">
+              <span className="flex items-center gap-2.5 whitespace-nowrap">DOCUMENTAÇÃO <ArrowRight className="h-5 w-5 shrink-0 rotate-90" /></span>
             </a>
           </div>
         </Reveal>
