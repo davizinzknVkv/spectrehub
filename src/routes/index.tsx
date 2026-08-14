@@ -804,17 +804,16 @@ function ProductsSection() {
       <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8">
         <div className="max-w-2xl">
           <Reveal>
-            <h2 className="font-display text-4xl font-extrabold leading-[0.95] tracking-tighter text-white sm:text-6xl">
+            <h2 className="ds-h1">
               CADA SISTEMA É UM
               <br />
               MOTIVO PRO
               <br />
               JOGADOR FICAR.
-
             </h2>
           </Reveal>
           <Reveal delay={100}>
-            <p className="mt-6 text-[16px] text-[#8a8a8a]">
+            <p className="mt-8 ds-body max-w-xl text-[#8a8a8a]">
               Sistema que o jogador abre, entende na hora e volta pra usar. Todos desenhados, escritos e testados pela SPECTRE, e já rodando em servidor cheio agora.
             </p>
           </Reveal>
@@ -827,7 +826,7 @@ function ProductsSection() {
             <button
               key={p.id}
               onClick={() => setActiveTab(i)}
-              className={`px-6 py-2 text-[10px] font-bold uppercase tracking-widest border transition-all ${
+              className={`px-8 py-3 ds-label border transition-all ${
                 activeTab === i
                   ? "bg-[#ff0055] border-[#ff0055] text-white"
                   : "bg-white/5 border-white/10 text-[#8a8a8a] hover:bg-white/10"
@@ -863,17 +862,17 @@ function ProductsSection() {
                 <div className="flex h-8 w-8 items-center justify-center rounded-sm bg-[#ff0055] text-white">
                   <ChevronRight className="h-4 w-4" />
                 </div>
-                <h3 className="font-display text-5xl font-extrabold tracking-tighter text-white uppercase sm:text-6xl">
+                <h3 className="ds-h2">
                   {PRODUCTS[activeTab].name}
                 </h3>
               </div>
-              <span className="mt-2 block text-[10px] font-bold text-[#ff0055] uppercase tracking-widest">
+              <span className="mt-4 block ds-label text-[#ff0055]">
                 SPECTRE-{PRODUCTS[activeTab].id.toUpperCase()}
               </span>
             </Reveal>
 
             <Reveal delay={100}>
-              <p className="mt-8 text-lg font-medium leading-relaxed text-[#8a8a8a]">
+              <p className="mt-8 ds-body leading-relaxed text-[#8a8a8a]">
                 {PRODUCTS[activeTab].desc}
               </p>
             </Reveal>
