@@ -1,7 +1,13 @@
 import React from "react";
-import { Avatar as _Avatar } from "@/components/home/Avatar"; 
 
-// Using a seed-based generator to match original design
 export function Avatar({ seed }: { seed: string }) {
-  return <_Avatar seed={seed} />;
+  const url = `https://api.dicebear.com/7.x/identicon/svg?seed=${encodeURIComponent(seed)}`;
+  return (
+    <img
+      src={url}
+      alt=""
+      className="h-full w-full object-cover opacity-80"
+      loading="lazy"
+    />
+  );
 }
