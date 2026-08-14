@@ -65,13 +65,8 @@ const NAV_GROUPS = [
       { to: "/fake", label: "Foto Fake", icon: ImageIcon, soon: false },
     ],
   },
-  {
-    title: "Sistema",
-    items: [
-      { to: "/optimizer", label: "Spectre Optimizer", icon: Activity, soon: false },
-    ],
-  },
 ] as const;
+
 
 
 function AppLayout() {
