@@ -29,7 +29,7 @@ function OptimizerDashboard() {
     <div className="page-stack">
       <PageHeader
         title="SPECTRE OPTIMIZER"
-        subtitle="Maximum Performance. Zero Compromise."
+        description="Maximum Performance. Zero Compromise."
       />
 
       {/* Tabs */}
