@@ -507,7 +507,7 @@ function Hero() {
 
         <Reveal delay={240}>
           <div className="mt-9 flex flex-wrap items-center justify-center gap-3">
-            <a href="#produtos" className="bg-[#ff0055] hover:bg-[#ff0055]/90 text-white font-bold py-4 px-8 rounded-sm uppercase tracking-wider transition-all hover:scale-[1.02] active:scale-95 flex items-center gap-2">
+            <a href="#produtos" className="bg-[#c5a059] hover:bg-[#c5a059]/90 text-white font-bold py-4 px-8 rounded-sm uppercase tracking-wider transition-all hover:scale-[1.02] active:scale-95 flex items-center gap-2">
               <ArrowRight className="h-4 w-4" /> Quero Usar o Spectre
             </a>
             <a href={GUILD_INVITE} target="_blank" rel="noreferrer" className="border border-white/10 bg-white/5 hover:bg-white/10 text-white font-bold py-4 px-8 rounded-sm uppercase tracking-wider transition-all flex items-center gap-2">
@@ -779,7 +779,7 @@ function SocialProof() {
                <span>PRODUTOS DISPONÍVEIS</span>
              </div>
              <div className="flex items-center gap-3">
-               <span className="text-white text-2xl font-display tracking-tighter">{latency.toFixed(2)}<span className="text-[#ff0055]">ms</span></span>
+               <span className="text-white text-2xl font-display tracking-tighter">{latency.toFixed(2)}<span className="text-[#c5a059]">ms</span></span>
                <span>IMPACTO NO DISCORD</span>
              </div>
           </div>
@@ -826,7 +826,7 @@ function ProductsSection() {
               onClick={() => setActiveTab(i)}
               className={`px-6 py-2 text-[10px] font-bold uppercase tracking-widest border transition-all ${
                 activeTab === i
-                  ? "bg-[#ff0055] border-[#ff0055] text-white"
+                  ? "bg-[#c5a059] border-[#c5a059] text-white"
                   : "bg-white/5 border-white/10 text-[#8a8a8a] hover:bg-white/10"
               }`}
             >
@@ -837,7 +837,7 @@ function ProductsSection() {
 
         <div className="mt-12 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           <Reveal className="relative aspect-video bg-white/5 border border-white/10 overflow-hidden group">
-             <div className="absolute inset-0 bg-gradient-to-tr from-[#ff0055]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+             <div className="absolute inset-0 bg-gradient-to-tr from-[#c5a059]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
              <div className="absolute inset-0 flex items-center justify-center">
                 <div className="text-[10px] font-bold text-white/20 uppercase tracking-[0.4em]">Preview do Sistema</div>
              </div>
@@ -848,7 +848,7 @@ function ProductsSection() {
               <h3 className="font-display text-5xl font-extrabold tracking-tighter text-white uppercase">
                 SPECTRE {PRODUCTS[activeTab].name}
               </h3>
-              <span className="mt-2 block text-[10px] font-bold text-[#ff0055] uppercase tracking-widest">
+              <span className="mt-2 block text-[10px] font-bold text-[#c5a059] uppercase tracking-widest">
                 SPECTRE-{PRODUCTS[activeTab].id.toUpperCase()}
               </span>
             </Reveal>
@@ -868,7 +868,7 @@ function ProductsSection() {
             <Reveal delay={300} className="mt-12">
               <Link
                 to={PRODUCTS[activeTab].to}
-                className="bg-[#ff0055] hover:bg-[#ff0055]/90 text-white font-bold py-4 px-8 rounded-sm uppercase tracking-wider transition-all inline-flex items-center gap-2"
+                className="bg-[#c5a059] hover:bg-[#c5a059]/90 text-white font-bold py-4 px-8 rounded-sm uppercase tracking-wider transition-all inline-flex items-center gap-2"
               >
                 Quero este sistema <ArrowRight className="h-4 w-4" />
               </Link>
@@ -906,7 +906,7 @@ function ReasonsSection() {
             <Reveal key={r.title} delay={i * 100}>
               <div className="group">
                 <div className="flex items-center gap-3 mb-6">
-                   <div className="h-8 w-8 rounded-sm bg-white/5 border border-white/10 flex items-center justify-center text-[#ff0055] group-hover:bg-[#ff0055] group-hover:text-white transition-all">
+                   <div className="h-8 w-8 rounded-sm bg-white/5 border border-white/10 flex items-center justify-center text-[#c5a059] group-hover:bg-[#c5a059] group-hover:text-white transition-all">
                       <r.icon className="h-4 w-4" />
                    </div>
                    <span className="text-[10px] font-bold text-[#444] uppercase tracking-widest">{r.title}</span>
