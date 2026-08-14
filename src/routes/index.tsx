@@ -1498,9 +1498,11 @@ function SiteFooter() {
             <FooterCol
               title="HUB"
               links={[
+                { label: "Spectre Optimizer", href: "#optimizer" },
                 { label: "Sistemas", href: "#produtos" },
                 { label: "Por que HUB", href: "#recursos" },
                 { label: "Servidores", href: "#comunidade" },
+
               ]}
             />
             <FooterCol
