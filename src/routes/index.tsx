@@ -1,26 +1,8 @@
 /**
- * Antes de realizar qualquer ação, entenda o contexto e instrução recente do usuário, comando mais recente enviado por ele: ```txt
-## Restilização da Interface e Mudança de Nome do Site
-
-**Objetivo:**
-Restilizar completamente a interface do site e renomeá-lo de "Neighbord" para "Spectre Hub". O site deve se tornar a referência em UI para o nicho de "SI" (Sistemas de Informação ou similar).
-
-**Referência de UI:**
-O site `corenetwork.dev` servirá como inspiração principal para o novo design e experiência do usuário.
-
-**Requisitos:**
-1. **Identidade Visual:**
-   - Criar um novo logotipo e identidade visual para "Spectre Hub".
-   - Definir uma paleta de cores, tipografia e estilo de elementos visuais que transmitam profissionalismo, modernidade e autoridade.
-
-2. **Design da Interface (UI):**
-   - Redesenhar todas as páginas, focando em uma experiência intuitiva e premium.
-   - Adotar os princípios de `corenetwork.dev`: layout limpo, espaços em branco eficazes, tipografia hierarquizada e responsividade.
-
-3. **Conteúdo e Estrutura:**
-   - Adaptar o conteúdo para a nova identidade "Spectre Hub".
-   - Otimizar a navegação para autoridade e conversão.
-```
+ * Spectre Hub — Industrial Design System
+ * 
+ * Mix: BlackNetwork (Obsidian + Gold) & CoreNetwork (High Contrast + Industrial).
+ * Theme: Midnight Obsidian (#030303), Gold Accent (#c5a059).
  */
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
@@ -327,7 +309,7 @@ function Index() {
   return (
     <div
       id="topo"
-      className="relative min-h-screen overflow-x-hidden bg-[#030303] font-sans text-[#f5f5f5] antialiased"
+      className="relative min-h-screen overflow-x-hidden bg-[#030303] font-sans text-[#f5f5f5] antialiased selection:bg-[#c5a059]/30"
     >
       <div aria-hidden className="pointer-events-none fixed inset-0 -z-10">
         <div
@@ -393,7 +375,7 @@ function SiteHeader() {
             className="h-8 w-8 object-contain shrink-0"
           />
           <span className="truncate font-display text-[15px] xs:text-[16px] font-extrabold tracking-tighter text-white uppercase shrink-0">
-            Spectre<span className="opacity-40 ml-1 font-light">|</span><span className="text-[#ff0055] ml-1">HUB</span>
+            Spectre<span className="opacity-40 ml-1 font-light">|</span><span className="text-[#c5a059] ml-1">HUB</span>
           </span>
         </Link>
 
@@ -413,7 +395,7 @@ function SiteHeader() {
           <Link to="/hub" className="text-[11px] font-bold text-white border border-white/10 px-6 py-2 rounded-sm hover:bg-white/5 transition-all uppercase tracking-widest flex items-center gap-2">
             <ArrowRight className="h-3 w-3" /> Entrar
           </Link>
-          <a href={GUILD_INVITE} target="_blank" rel="noreferrer" className="text-[11px] font-bold text-white bg-[#ff0055] px-6 py-2 rounded-sm hover:bg-[#ff0055]/90 transition-all uppercase tracking-widest flex items-center gap-2">
+          <a href={GUILD_INVITE} target="_blank" rel="noreferrer" className="text-[11px] font-bold text-white bg-[#c5a059] px-6 py-2 rounded-sm hover:bg-[#c5a059]/90 transition-all uppercase tracking-widest flex items-center gap-2">
             <ArrowRight className="h-3 w-3" /> Abrir Ticket
           </a>
         </div>
@@ -474,13 +456,13 @@ function Hero() {
       />
       <div
         aria-hidden
-        className="pointer-events-none absolute left-1/2 top-[-14rem] -z-10 h-[32rem] w-[52rem] -translate-x-1/2 rounded-full bg-[#ff0055]/5 blur-[130px]"
+        className="pointer-events-none absolute left-1/2 top-[-14rem] -z-10 h-[32rem] w-[52rem] -translate-x-1/2 rounded-full bg-[#c5a059]/5 blur-[130px]"
       />
 
       <div className="mx-auto max-w-3xl text-center">
         <Reveal>
           <span className="inline-flex items-center gap-3 rounded-full border border-white/5 bg-white/[0.02] px-4 py-1.5 font-mono text-[9px] uppercase tracking-[0.3em] text-[#8a8a8a] backdrop-blur-md">
-            <span className="h-1 w-1 rounded-full bg-[#ff0055] shadow-[0_0_8px_#ff0055]" />
+            <span className="h-1 w-1 rounded-full bg-[#c5a059] shadow-[0_0_8px_#c5a059]" />
             Inovação · Produto & Tecnologia
           </span>
         </Reveal>
@@ -507,7 +489,7 @@ function Hero() {
 
         <Reveal delay={240}>
           <div className="mt-9 flex flex-wrap items-center justify-center gap-3">
-            <a href="#produtos" className="bg-[#ff0055] hover:bg-[#ff0055]/90 text-white font-bold py-4 px-8 rounded-sm uppercase tracking-wider transition-all hover:scale-[1.02] active:scale-95 flex items-center gap-2">
+            <a href="#produtos" className="bg-[#c5a059] hover:bg-[#c5a059]/90 text-white font-bold py-4 px-8 rounded-sm uppercase tracking-wider transition-all hover:scale-[1.02] active:scale-95 flex items-center gap-2">
               <ArrowRight className="h-4 w-4" /> Quero Usar o Spectre
             </a>
             <a href={GUILD_INVITE} target="_blank" rel="noreferrer" className="border border-white/10 bg-white/5 hover:bg-white/10 text-white font-bold py-4 px-8 rounded-sm uppercase tracking-wider transition-all flex items-center gap-2">
@@ -564,7 +546,7 @@ function HeroPreview() {
     <div className="relative">
       <div
         aria-hidden
-        className="pointer-events-none absolute -inset-10 -z-10 rounded-[3rem] bg-[#818cf8]/10 blur-[90px]"
+        className="pointer-events-none absolute -inset-10 -z-10 rounded-[3rem] bg-[#c5a059]/10 blur-[90px]"
       />
       <div className="overflow-hidden rounded-2xl border border-white/[0.08] bg-[#0d0d0d]/90 shadow-[0_50px_120px_-60px_rgba(0,0,0,0.9)] backdrop-blur-xl">
         <div className="flex items-center gap-3 border-b border-white/[0.06] px-4 py-3">
@@ -580,7 +562,7 @@ function HeroPreview() {
 
         <div className="grid grid-cols-[84px_1fr] gap-3 p-4">
           <div className="space-y-2 rounded-xl border border-white/[0.05] bg-white/[0.02] p-2.5">
-            <div className="h-1.5 w-full rounded-full bg-[#818cf8]/70" />
+            <div className="h-1.5 w-full rounded-full bg-[#c5a059]/70" />
             {[80, 65, 72, 50, 60].map((w, i) => (
               <div key={i} className="h-1.5 rounded-full bg-white/[0.08]" style={{ width: `${w}%` }} />
             ))}
@@ -601,7 +583,7 @@ function HeroPreview() {
                   <span className="font-mono text-[#8a8a8a]">{q.p}%</span>
                 </div>
                 <div className="mt-2 h-1 overflow-hidden rounded-full bg-white/[0.06]">
-                  <div className="h-full rounded-full bg-[#818cf8]" style={{ width: `${q.p}%` }} />
+                  <div className="h-full rounded-full bg-[#c5a059]" style={{ width: `${q.p}%` }} />
                 </div>
               </div>
             ))}
@@ -610,8 +592,8 @@ function HeroPreview() {
               <svg viewBox="0 0 200 44" className="h-11 w-full" aria-hidden>
                 <defs>
                   <linearGradient id="spark" x1="0" x2="0" y1="0" y2="1">
-                    <stop offset="0%" stopColor="#818cf8" stopOpacity="0.35" />
-                    <stop offset="100%" stopColor="#818cf8" stopOpacity="0" />
+                    <stop offset="0%" stopColor="#c5a059" stopOpacity="0.35" />
+                    <stop offset="100%" stopColor="#c5a059" stopOpacity="0" />
                   </linearGradient>
                 </defs>
                 <path
@@ -621,7 +603,7 @@ function HeroPreview() {
                 <path
                   d="M0 32 L30 27 L60 29 L90 19 L120 23 L150 11 L180 15 L200 7"
                   fill="none"
-                  stroke="#818cf8"
+                  stroke="#c5a059"
                   strokeWidth="1.4"
                 />
               </svg>
@@ -635,7 +617,7 @@ function HeroPreview() {
           status
         </div>
         <div className="mt-1 flex items-center gap-2 text-xs font-semibold text-white">
-          <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-[#818cf8]" />
+          <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-[#c5a059]" />
           Rodando em background
         </div>
       </div>
@@ -779,7 +761,7 @@ function SocialProof() {
                <span>PRODUTOS DISPONÍVEIS</span>
              </div>
              <div className="flex items-center gap-3">
-               <span className="text-white text-2xl font-display tracking-tighter">{latency.toFixed(2)}<span className="text-[#ff0055]">ms</span></span>
+               <span className="text-white text-2xl font-display tracking-tighter">{latency.toFixed(2)}<span className="text-[#c5a059]">ms</span></span>
                <span>IMPACTO NO DISCORD</span>
              </div>
           </div>
@@ -826,7 +808,7 @@ function ProductsSection() {
               onClick={() => setActiveTab(i)}
               className={`px-6 py-2 text-[10px] font-bold uppercase tracking-widest border transition-all ${
                 activeTab === i
-                  ? "bg-[#ff0055] border-[#ff0055] text-white"
+                  ? "bg-[#c5a059] border-[#c5a059] text-white"
                   : "bg-white/5 border-white/10 text-[#8a8a8a] hover:bg-white/10"
               }`}
             >
@@ -837,7 +819,7 @@ function ProductsSection() {
 
         <div className="mt-12 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           <Reveal className="relative aspect-video bg-white/5 border border-white/10 overflow-hidden group">
-             <div className="absolute inset-0 bg-gradient-to-tr from-[#ff0055]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+             <div className="absolute inset-0 bg-gradient-to-tr from-[#c5a059]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
              <div className="absolute inset-0 flex items-center justify-center">
                 <div className="text-[10px] font-bold text-white/20 uppercase tracking-[0.4em]">Preview do Sistema</div>
              </div>
@@ -848,7 +830,7 @@ function ProductsSection() {
               <h3 className="font-display text-5xl font-extrabold tracking-tighter text-white uppercase">
                 SPECTRE {PRODUCTS[activeTab].name}
               </h3>
-              <span className="mt-2 block text-[10px] font-bold text-[#ff0055] uppercase tracking-widest">
+              <span className="mt-2 block text-[10px] font-bold text-[#c5a059] uppercase tracking-widest">
                 SPECTRE-{PRODUCTS[activeTab].id.toUpperCase()}
               </span>
             </Reveal>
@@ -868,7 +850,7 @@ function ProductsSection() {
             <Reveal delay={300} className="mt-12">
               <Link
                 to={PRODUCTS[activeTab].to}
-                className="bg-[#ff0055] hover:bg-[#ff0055]/90 text-white font-bold py-4 px-8 rounded-sm uppercase tracking-wider transition-all inline-flex items-center gap-2"
+                className="bg-[#c5a059] hover:bg-[#c5a059]/90 text-white font-bold py-4 px-8 rounded-sm uppercase tracking-wider transition-all inline-flex items-center gap-2"
               >
                 Quero este sistema <ArrowRight className="h-4 w-4" />
               </Link>
@@ -906,7 +888,7 @@ function ReasonsSection() {
             <Reveal key={r.title} delay={i * 100}>
               <div className="group">
                 <div className="flex items-center gap-3 mb-6">
-                   <div className="h-8 w-8 rounded-sm bg-white/5 border border-white/10 flex items-center justify-center text-[#ff0055] group-hover:bg-[#ff0055] group-hover:text-white transition-all">
+                   <div className="h-8 w-8 rounded-sm bg-white/5 border border-white/10 flex items-center justify-center text-[#c5a059] group-hover:bg-[#c5a059] group-hover:text-white transition-all">
                       <r.icon className="h-4 w-4" />
                    </div>
                    <span className="text-[10px] font-bold text-[#444] uppercase tracking-widest">{r.title}</span>
@@ -949,13 +931,13 @@ function PlansSection() {
       <div className="mt-20 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         {PLANS.map((p, i) => (
           <Reveal key={p.name} delay={i * 100}>
-            <div className={`relative group border border-white/5 bg-white/[0.02] p-8 flex flex-col h-full transition-all hover:border-[#ff0055]/30 ${p.highlight ? 'ring-1 ring-[#ff0055]/50' : ''}`}>
+            <div className={`relative group border border-white/5 bg-white/[0.02] p-8 flex flex-col h-full transition-all hover:border-[#c5a059]/30 ${p.highlight ? 'ring-1 ring-[#c5a059]/50' : ''}`}>
               {p.highlight && (
-                <div className="absolute top-0 right-0 bg-[#ff0055] text-white text-[9px] font-bold px-3 py-1 uppercase tracking-widest">
+                <div className="absolute top-0 right-0 bg-[#c5a059] text-white text-[9px] font-bold px-3 py-1 uppercase tracking-widest">
                   Popular
                 </div>
               )}
-              <h3 className="text-[10px] font-bold text-[#ff0055] uppercase tracking-[0.3em] mb-4">{p.name}</h3>
+              <h3 className="text-[10px] font-bold text-[#c5a059] uppercase tracking-[0.3em] mb-4">{p.name}</h3>
               <div className="flex items-baseline gap-2 mb-8">
                 <span className="text-4xl font-display font-extrabold text-white tracking-tighter">{p.price}</span>
                 <span className="text-[10px] font-bold text-[#444] uppercase tracking-widest">/ {p.period}</span>
@@ -964,7 +946,7 @@ function PlansSection() {
               <div className="space-y-4 mb-10 flex-1">
                 {p.features.map(f => (
                   <div key={f} className="flex items-center gap-3">
-                    <Check className="h-3 w-3 text-[#ff0055]" />
+                    <Check className="h-3 w-3 text-[#c5a059]" />
                     <span className="text-xs font-medium text-[#8a8a8a]">{f}</span>
                   </div>
                 ))}
@@ -975,7 +957,7 @@ function PlansSection() {
                   Começar Grátis
                 </a>
               ) : (
-                <Link to="/hub" className={`text-center font-bold py-3 px-6 text-[11px] uppercase tracking-widest transition-all ${p.highlight ? 'bg-[#ff0055] text-white hover:bg-[#ff0055]/90' : 'bg-white/5 border border-white/10 text-white hover:bg-white/10'}`}>
+                <Link to="/hub" className={`text-center font-bold py-3 px-6 text-[11px] uppercase tracking-widest transition-all ${p.highlight ? 'bg-[#c5a059] text-white hover:bg-[#c5a059]/90' : 'bg-white/5 border border-white/10 text-white hover:bg-white/10'}`}>
                   {p.cta}
                 </Link>
               )}
@@ -1039,7 +1021,7 @@ function FreeSignup() {
                 "Informe o código no ticket. A staff libera o cargo Free na hora.",
               ].map((s, i) => (
                 <li key={s} className="flex gap-3 text-[13px] text-[#a0a0a0]">
-                  <span className="grid h-6 w-6 shrink-0 place-items-center rounded-md border border-white/[0.08] bg-white/[0.03] font-mono text-[10px] font-semibold text-[#818cf8]">
+                  <span className="grid h-6 w-6 shrink-0 place-items-center rounded-md border border-white/[0.08] bg-white/[0.03] font-mono text-[10px] font-semibold text-[#c5a059]">
                     {i + 1}
                   </span>
                   <span className="pt-0.5">{s}</span>
@@ -1060,7 +1042,7 @@ function FreeSignup() {
                     onChange={(e) => setName(e.target.value)}
                     maxLength={40}
                     required
-                    className="mt-2 w-full rounded-lg border border-white/[0.08] bg-white/[0.02] px-3 py-2.5 text-sm text-white outline-none transition placeholder:text-[#5a5a5a] focus:border-[#818cf8]/60"
+                    className="mt-2 w-full rounded-lg border border-white/[0.08] bg-white/[0.02] px-3 py-2.5 text-sm text-white outline-none transition placeholder:text-[#5a5a5a] focus:border-[#c5a059]/60"
                     placeholder="Ex: davizinzkn"
                   />
                 </label>
@@ -1073,7 +1055,7 @@ function FreeSignup() {
                     onChange={(e) => setDiscord(e.target.value)}
                     maxLength={40}
                     required
-                    className="mt-2 w-full rounded-lg border border-white/[0.08] bg-white/[0.02] px-3 py-2.5 text-sm text-white outline-none transition placeholder:text-[#5a5a5a] focus:border-[#818cf8]/60"
+                    className="mt-2 w-full rounded-lg border border-white/[0.08] bg-white/[0.02] px-3 py-2.5 text-sm text-white outline-none transition placeholder:text-[#5a5a5a] focus:border-[#c5a059]/60"
                     placeholder="@usuario"
                   />
                 </label>
@@ -1090,8 +1072,8 @@ function FreeSignup() {
                   <div className="font-mono text-[10px] uppercase tracking-[0.22em] text-[#6f6f6f]">
                     Seu código Free
                   </div>
-                  <div className="mt-2 flex items-center gap-2 rounded-lg border border-[#818cf8]/30 bg-[#818cf8]/[0.08] p-3">
-                    <code className="flex-1 font-mono text-lg font-bold tracking-[0.2em] text-[#c4b5fd]">
+                  <div className="mt-2 flex items-center gap-2 rounded-lg border border-[#c5a059]/30 bg-[#c5a059]/[0.08] p-3">
+                    <code className="flex-1 font-mono text-lg font-bold tracking-[0.2em] text-[#c5a059]">
                       {code}
                     </code>
                     <button
@@ -1100,7 +1082,7 @@ function FreeSignup() {
                       aria-label="Copiar código"
                       className="grid h-8 w-8 place-items-center rounded-md border border-white/10 bg-white/[0.04] text-[#a0a0a0] transition hover:text-white"
                     >
-                      {copied ? <Check className="h-4 w-4 text-[#818cf8]" /> : <Copy className="h-4 w-4" />}
+                      {copied ? <Check className="h-4 w-4 text-[#c5a059]" /> : <Copy className="h-4 w-4" />}
                     </button>
                   </div>
                 </div>
@@ -1195,7 +1177,7 @@ function CommunitySection() {
             {loop.slice(0, Math.ceil(loop.length / 2)).map((m, i) => (
               <div
                 key={`${m.id}-${i}`}
-                className="flex shrink-0 items-center gap-4 border border-white/5 bg-[#0a0a0a] py-3 pl-3 pr-8 transition-all hover:border-[#ff0055]/30"
+                className="flex shrink-0 items-center gap-4 border border-white/5 bg-[#0a0a0a] py-3 pl-3 pr-8 transition-all hover:border-[#c5a059]/30"
                 style={{
                   clipPath: "polygon(0 0, 92% 0, 100% 25%, 100% 100%, 8% 100%, 0% 75%)"
                 }}
@@ -1219,7 +1201,7 @@ function CommunitySection() {
             {loop.slice(Math.ceil(loop.length / 2)).map((m, i) => (
               <div
                 key={`${m.id}-${i}`}
-                className="flex shrink-0 items-center gap-4 border border-white/5 bg-[#0a0a0a] py-3 pl-3 pr-8 transition-all hover:border-[#ff0055]/30"
+                className="flex shrink-0 items-center gap-4 border border-white/5 bg-[#0a0a0a] py-3 pl-3 pr-8 transition-all hover:border-[#c5a059]/30"
                 style={{
                   clipPath: "polygon(0 0, 92% 0, 100% 25%, 100% 100%, 8% 100%, 0% 75%)"
                 }}
@@ -1242,8 +1224,8 @@ function CommunitySection() {
         <div className="mt-12 grid gap-6 lg:grid-cols-[1fr_380px] lg:items-center">
           <Reveal>
             <div className="border border-white/5 bg-[#0a0a0a] p-8 sm:p-10">
-              <div className="flex items-center gap-3 font-display text-[10px] font-bold uppercase tracking-[0.3em] text-[#ff0055]">
-                <span className="h-1.5 w-1.5 animate-pulse bg-[#ff0055]" /> Conexão Direta
+              <div className="flex items-center gap-3 font-display text-[10px] font-bold uppercase tracking-[0.3em] text-[#c5a059]">
+                <span className="h-1.5 w-1.5 animate-pulse bg-[#c5a059]" /> Conexão Direta
               </div>
               <h3 className="mt-6 font-display text-3xl font-extrabold tracking-tighter text-white sm:text-4xl">
                 SERVIDOR OFICIAL
@@ -1268,7 +1250,7 @@ function CommunitySection() {
                 href={GUILD_INVITE}
                 target="_blank"
                 rel="noreferrer"
-                className="mt-10 inline-flex items-center gap-3 bg-[#ff0055] px-8 py-4 font-display text-[11px] font-black uppercase tracking-[0.2em] text-white transition-all hover:bg-[#ff0055]/90"
+                className="mt-10 inline-flex items-center gap-3 bg-[#c5a059] px-8 py-4 font-display text-[11px] font-black uppercase tracking-[0.2em] text-white transition-all hover:bg-[#c5a059]/90"
               >
                 Entrar no Discord <ArrowRight className="h-4 w-4" />
               </a>
@@ -1304,7 +1286,7 @@ function MiniStat({
 }) {
   return (
     <div className="bg-[#0a0a0a] p-5">
-      <Icon className="h-4 w-4 text-[#ff0055]" />
+      <Icon className="h-4 w-4 text-[#c5a059]" />
       <div className="mt-4 truncate font-display text-lg font-black text-white">{value}</div>
       <div className="mt-1 font-display text-[9px] font-bold uppercase tracking-[0.2em] text-[#444]">
         {label}
@@ -1329,7 +1311,7 @@ function FinalCta() {
             Junte-se à elite e ative sua infraestrutura de automação hoje mesmo. Suporte direto com quem entende do assunto.
           </p>
           <div className="mt-12 flex flex-wrap items-center justify-center gap-4">
-            <a href={GUILD_INVITE} target="_blank" rel="noreferrer" className="bg-[#ff0055] text-white font-bold py-4 px-10 rounded-sm uppercase tracking-widest hover:bg-[#ff0055]/90 transition-all flex items-center gap-2">
+            <a href={GUILD_INVITE} target="_blank" rel="noreferrer" className="bg-[#c5a059] text-white font-bold py-4 px-10 rounded-sm uppercase tracking-widest hover:bg-[#c5a059]/90 transition-all flex items-center gap-2">
               <ArrowRight className="h-4 w-4" /> Abrir meu ticket agora
             </a>
             <Link to="/hub" className="bg-white/5 border border-white/10 text-white font-bold py-4 px-10 rounded-sm uppercase tracking-widest hover:bg-white/10 transition-all">
@@ -1359,7 +1341,7 @@ function SiteFooter() {
                 className="h-8 w-auto"
               />
               <span className="font-display text-[16px] font-extrabold tracking-tighter text-white uppercase">
-                Spectre<span className="opacity-40 ml-1.5 font-light">|</span><span className="text-[#ff0055] ml-1.5">HUB</span>
+                Spectre<span className="opacity-40 ml-1.5 font-light">|</span><span className="text-[#c5a059] ml-1.5">HUB</span>
               </span>
             </Link>
             <p className="mt-6 text-[10px] font-bold text-[#444] uppercase tracking-[0.2em] leading-loose">
