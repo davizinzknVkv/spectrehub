@@ -36,7 +36,7 @@ export function AdminNavLink() {
   if (!isAdmin) return null;
   return (
     <Link to="/admin" className="nav-item group">
-      <ShieldCheck className="h-[14px] w-[14px] shrink-0 text-[#c5a059]" />
+      <ShieldCheck className="h-[14px] w-[14px] shrink-0 text-[#7c3aed]" />
       Painel Admin
     </Link>
   );
