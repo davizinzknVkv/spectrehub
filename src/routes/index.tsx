@@ -137,18 +137,6 @@ function Index() {
   );
 }
 
-               <span className="text-white text-2xl font-display tracking-tighter">{latency.toFixed(2)}<span className="text-[#ff0055]">ms</span></span>
-               <span>IMPACTO NO DISCORD</span>
-             </div>
-          </div>
-          <div className="hidden lg:block">
-            PROPERTY OF SPECTRE. ALL CREATIVE RIGHTS RESERVED.
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
 
 /* ─────────────────────────── produtos ─────────────────────────── */
 
