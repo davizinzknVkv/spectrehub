@@ -38,7 +38,7 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
-const GUILD_ID = "1511467436543709184";
+const GUILD_ID = "1324600310286516255";
 const GUILD_INVITE = "https://discord.gg/JK7cC9je87";
 const WIDGET_URL = `https://discord.com/api/guilds/${GUILD_ID}/widget.json`;
 
