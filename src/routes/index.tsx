@@ -1409,9 +1409,8 @@ function SiteFooter() {
           <div className="flex items-center gap-8">
             <span>SPECTRE HUB</span>
             <span className="opacity-20">//</span>
-            <span>AGO/2026</span>
-            <span className="opacity-20">©</span>
             <span>PROPERTY OF SPECTRE. ALL CREATIVE RIGHTS RESERVED.</span>
+
           </div>
           <div className="flex items-center gap-2">
             CÓDIGO FONTE FORNECIDO POR <span className="text-[#666]">ISNOUU</span>
