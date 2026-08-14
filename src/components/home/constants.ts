@@ -152,7 +152,7 @@ export const REASONS: Reason[] = [
   {
     n: "01",
     icon: Gauge,
-    title: "Latência Ultra-Baixa",
+    title: "Latência Mínima",
     desc: "Execução distribuída que minimiza tempos de resposta e maximiza a taxa de sucesso nas operações.",
   },
   {

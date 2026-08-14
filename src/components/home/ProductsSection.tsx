@@ -80,9 +80,9 @@ export function ProductsSection({ products }: ProductsSectionProps) {
                  <div className={`font-display text-lg uppercase italic transition-colors ${activeTab === i ? "text-spectre-pink" : "text-white/60 group-hover:text-white"}`}>
                    {p.name}
                  </div>
-                 <div className="font-sans text-[10px] text-white/20 uppercase tracking-[0.2em] mt-1">
-                   Spectre System V4.0
-                 </div>
+                  <div className="font-sans text-[10px] text-white/20 uppercase tracking-[0.2em] mt-1">
+                    Spectre v4.0
+                  </div>
                </div>
                <div className={`w-10 h-10 border border-white/10 flex items-center justify-center transition-all ${activeTab === i ? "bg-spectre-pink border-spectre-pink text-white" : "text-white/20 group-hover:text-white group-hover:border-white/30"}`}>
                  <ArrowUpRight className="w-4 h-4" />

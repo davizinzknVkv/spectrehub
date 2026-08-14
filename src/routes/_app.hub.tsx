@@ -517,7 +517,7 @@ function PresenceModal({
       });
 
       
-      toast.success("Protocolo de presença atualizado");
+      toast.success("Status atualizado");
       // Update local state to reflect changes (simplified)
       const newSettings = { ...settings };
       if (activeTab === 'status') newSettings.status = status;
@@ -534,11 +534,12 @@ function PresenceModal({
 
   return (
     <Modal 
-      title="Presence Protocol" 
+      title="Status & Presence" 
       description="Gerencie como você aparece na rede Spectre"
       onClose={onClose}
       className="max-w-md"
     >
+
       <div className="space-y-6">
         {/* Tabs */}
         <div className="flex border-b border-white/5">
@@ -640,10 +641,11 @@ function PresenceModal({
                 <div className="flex items-center gap-3">
                   <Gamepad2 className="w-5 h-5 text-spectre-pink" />
                   <div>
-                    <div className="font-display text-[10px] text-white uppercase italic tracking-widest">Protocolo GameBridge</div>
+                    <div className="font-display text-[10px] text-white uppercase italic tracking-widest">Atividade Externa</div>
                     <div className="text-[8px] text-white/20 uppercase tracking-widest">Simula atividade de jogo</div>
                   </div>
                 </div>
+
                 <button 
                   onClick={() => setRichEnabled(!richEnabled)}
                   className={cn(
