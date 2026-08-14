@@ -59,7 +59,7 @@ export function PlanBanner({
       </div>
 
       {cooldownLeft > 0 && (
-        <div className="absolute bottom-0 left-0 h-[1px] bg-[#ff0055] transition-[width] duration-1000"
+        <div className="absolute bottom-0 left-0 h-[1px] bg-[#7c3aed] transition-[width] duration-1000"
              style={{ width: `${Math.min(100, (cooldownLeft / limits.cooldownMs) * 100)}%` }} />
       )}
     </div>
@@ -88,7 +88,7 @@ export function MissionCard({
   return (
     <Card className={cn(
       "group relative flex flex-col justify-between transition-all duration-300",
-      active ? "border-[#ff0055]/40 bg-[#ff0055]/5" : "hover:border-white/10"
+      active ? "border-[#7c3aed]/40 bg-[#7c3aed]/5" : "hover:border-white/10"
     )}>
       {quest.imageUrl && (
         <div className="absolute inset-0 z-0 opacity-20 transition-opacity group-hover:opacity-30">
@@ -103,7 +103,7 @@ export function MissionCard({
 
       {active && (
         <div className="absolute right-3 top-3 z-10">
-          <Loader2 className="h-4 w-4 animate-spin text-[#ff0055]" />
+          <Loader2 className="h-4 w-4 animate-spin text-[#7c3aed]" />
         </div>
       )}
 
@@ -112,19 +112,19 @@ export function MissionCard({
           <div className="ds-label text-[9px] text-slate-500 uppercase tracking-widest">#{quest.questId.slice(-8)}</div>
           {isOrb && <Sparkles className="h-3 w-3 text-amber-400" />}
         </div>
-        <h3 className="relative z-10 mt-2 line-clamp-2 text-sm font-bold text-white tracking-tight group-hover:text-[#ff0055] transition-colors">{quest.questName}</h3>
+        <h3 className="relative z-10 mt-2 line-clamp-2 text-sm font-bold text-white tracking-tight group-hover:text-[#7c3aed] transition-colors">{quest.questName}</h3>
         <p className="relative z-10 mt-1 line-clamp-2 text-[10px] leading-relaxed text-slate-500">{quest.rewardText}</p>
       </div>
 
       <div className="relative z-10 mt-4">
         {active ? (
           <div className="space-y-2">
-            <div className="flex items-center justify-between text-[9px] font-mono uppercase text-[#ff0055]">
+            <div className="flex items-center justify-between text-[9px] font-mono uppercase text-[#7c3aed]">
               <span>executando...</span>
               <span>{Math.round(p)}%</span>
             </div>
             <div className="h-1 overflow-hidden bg-white/5">
-              <div className="h-full bg-[#ff0055] transition-all duration-500" style={{ width: `${p}%` }} />
+              <div className="h-full bg-[#7c3aed] transition-all duration-500" style={{ width: `${p}%` }} />
             </div>
           </div>
         ) : (

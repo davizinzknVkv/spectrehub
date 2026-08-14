@@ -167,7 +167,7 @@ const PLANS = [
     name: "Free",
     price: "R$ 0",
     period: "para sempre",
-    cta: "Começar Grátis",
+    cta: "Acessar Gratuitamente",
     highlight: false,
     features: [
       "3 missões diárias",
@@ -180,7 +180,7 @@ const PLANS = [
     name: "Premium",
     price: "R$ 9,90",
     period: "acesso 30 dias",
-    cta: "Obter Acesso Premium",
+    cta: "Assinar Premium",
     highlight: true,
     features: [
       "Missões ilimitadas",
@@ -193,7 +193,7 @@ const PLANS = [
     name: "Lifetime",
     price: "R$ 39,90",
     period: "pagamento único",
-    cta: "Comprar Acesso Vitalício",
+    cta: "Garantir Vitalício",
     highlight: false,
     features: [
       "Benefícios Premium vitalícios",
@@ -206,7 +206,7 @@ const PLANS = [
     name: "Booster",
     price: "Grátis",
     period: "via server boost",
-    cta: "Impulsionar Servidor",
+    cta: "Dar Boost",
     highlight: false,
     features: [
       "Missões ilimitadas",
@@ -375,7 +375,7 @@ function SiteHeader() {
             className="h-8 w-8 object-contain shrink-0"
           />
           <span className="truncate font-display text-[15px] xs:text-[16px] font-extrabold tracking-tighter text-white uppercase shrink-0">
-            Spectre<span className="opacity-40 ml-1 font-light">|</span><span className="text-[#c5a059] ml-1">HUB</span>
+            Spectre<span className="opacity-40 ml-1 font-light">|</span><span className="text-[#7c3aed] ml-1">HUB</span>
           </span>
         </Link>
 
@@ -395,7 +395,7 @@ function SiteHeader() {
           <Link to="/hub" className="text-[11px] font-bold text-white border border-white/10 px-6 py-2 rounded-sm hover:bg-white/5 transition-all uppercase tracking-widest flex items-center gap-2">
             <ArrowRight className="h-3 w-3" /> Entrar
           </Link>
-          <a href={GUILD_INVITE} target="_blank" rel="noreferrer" className="text-[11px] font-bold text-white bg-[#c5a059] px-6 py-2 rounded-sm hover:bg-[#c5a059]/90 transition-all uppercase tracking-widest flex items-center gap-2">
+          <a href={GUILD_INVITE} target="_blank" rel="noreferrer" className="text-[11px] font-bold text-white bg-[#7c3aed] px-6 py-2 rounded-sm hover:bg-[#7c3aed]/90 transition-all uppercase tracking-widest flex items-center gap-2">
             <ArrowRight className="h-3 w-3" /> Abrir Ticket
           </a>
         </div>
@@ -456,13 +456,13 @@ function Hero() {
       />
       <div
         aria-hidden
-        className="pointer-events-none absolute left-1/2 top-[-14rem] -z-10 h-[32rem] w-[52rem] -translate-x-1/2 rounded-full bg-[#c5a059]/5 blur-[130px]"
+        className="pointer-events-none absolute left-1/2 top-[-14rem] -z-10 h-[32rem] w-[52rem] -translate-x-1/2 rounded-full bg-[#7c3aed]/5 blur-[130px]"
       />
 
       <div className="mx-auto max-w-3xl text-center">
         <Reveal>
           <span className="inline-flex items-center gap-3 rounded-full border border-white/5 bg-white/[0.02] px-4 py-1.5 font-mono text-[9px] uppercase tracking-[0.3em] text-[#8a8a8a] backdrop-blur-md">
-            <span className="h-1 w-1 rounded-full bg-[#c5a059] shadow-[0_0_8px_#c5a059]" />
+            <span className="h-1 w-1 rounded-full bg-[#7c3aed] shadow-[0_0_8px_#7c3aed]" />
             Inovação · Produto & Tecnologia
           </span>
         </Reveal>
@@ -483,14 +483,14 @@ function Hero() {
 
         <Reveal delay={160}>
           <p className="mx-auto mt-8 max-w-xl text-[16px] font-medium leading-relaxed text-[#8a8a8a] sm:text-lg">
-            Somos o estúdio por trás dos sistemas que o Discord brasileiro inteiro tenta imitar. Instalação em minutos, compatível com qualquer base, e performance que segura servidor lotado no horário de pico.
+            O hub definitivo para automação e elite no Discord. Performance absoluta, segurança inabalável e a melhor experiência de usuário do mercado.
           </p>
         </Reveal>
 
         <Reveal delay={240}>
           <div className="mt-9 flex flex-wrap items-center justify-center gap-3">
-            <a href="#produtos" className="bg-[#c5a059] hover:bg-[#c5a059]/90 text-white font-bold py-4 px-8 rounded-sm uppercase tracking-wider transition-all hover:scale-[1.02] active:scale-95 flex items-center gap-2">
-              <ArrowRight className="h-4 w-4" /> Quero Usar o Spectre
+            <a href="#produtos" className="bg-[#7c3aed] hover:bg-[#7c3aed]/90 text-white font-bold py-4 px-8 rounded-sm uppercase tracking-wider transition-all hover:scale-[1.02] active:scale-95 flex items-center gap-2">
+              <ArrowRight className="h-4 w-4" /> Quero usar o Spectre
             </a>
             <a href={GUILD_INVITE} target="_blank" rel="noreferrer" className="border border-white/10 bg-white/5 hover:bg-white/10 text-white font-bold py-4 px-8 rounded-sm uppercase tracking-wider transition-all flex items-center gap-2">
               Ver os sistemas <ArrowRight className="rotate-90 h-4 w-4" />

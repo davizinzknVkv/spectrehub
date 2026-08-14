@@ -48,21 +48,25 @@ const NAV_GROUPS = [
     items: [{ to: "/hub", label: "Dashboard", icon: LayoutDashboard, soon: false }],
   },
   {
-    title: "Ferramentas",
+    title: "Produtos",
     items: [
-      { to: "/missoes", label: "Missões", icon: Target, soon: false },
-      { to: "/farms", label: "Farms", icon: Tractor, soon: false },
-      { to: "/history", label: "Histórico", icon: History, soon: false },
-      { to: "/resgatar", label: "Resgatar Orbs", icon: Gift, soon: false },
+      { to: "/resgatar", label: "Meus Produtos", icon: Gift, soon: false },
     ],
   },
   {
-    title: "Utilitários",
+    title: "Ferramentas",
     items: [
-      { to: "/nicksgun", label: "Nicks-Gun", icon: Crosshair, soon: true },
-      { to: "/clone", label: "Clonar Discord", icon: Copy, soon: true },
-      { to: "/spotify", label: "Gerador Spotify", icon: Music, soon: true },
-      { to: "/fake", label: "Foto Fake", icon: ImageIcon, soon: false },
+      { to: "/missoes", label: "Missões", icon: Target, soon: false },
+      { to: "/farms", label: "Farms Automáticas", icon: Tractor, soon: false },
+      { to: "/nicksgun", label: "Nicks-Gun Sniper", icon: Crosshair, soon: false },
+      { to: "/clone", label: "Discord Tools", icon: Copy, soon: false },
+    ],
+  },
+  {
+    title: "Conta",
+    items: [
+      { to: "/settings", label: "Perfil & Segurança", icon: UserRound, soon: false },
+      { to: "/history", label: "Histórico Global", icon: History, soon: false },
     ],
   },
   {
@@ -72,6 +76,7 @@ const NAV_GROUPS = [
     ],
   },
 ] as const;
+
 
 
 function AppLayout() {
@@ -166,7 +171,7 @@ function SidebarBody({
           className="h-8 w-8 object-contain shrink-0"
         />
         <span className="truncate font-display text-[15px] font-extrabold tracking-tighter text-white uppercase">
-          Spectre<span className="opacity-40 ml-1.5 font-light">|</span><span className="text-[#c5a059] ml-1.5">HUB</span>
+          Spectre<span className="opacity-40 ml-1.5 font-light">|</span><span className="text-[#7c3aed] ml-1.5">HUB</span>
         </span>
       </Link>
 
@@ -189,14 +194,14 @@ function SidebarBody({
                   >
                     <Icon
                       className={`h-[14px] w-[14px] shrink-0 transition-colors ${
-                        active ? "text-[#c5a059]" : "text-[#52525b] group-hover:text-white"
+                        active ? "text-[#7c3aed]" : "text-[#52525b] group-hover:text-white"
                       }`}
                     />
                     <span className={active ? "font-bold text-white tracking-[-0.01em]" : "tracking-[-0.01em]"}>
                       {item.label}
                     </span>
                     {item.soon && (
-                      <span className="ml-auto rounded-none border border-[#c5a059]/20 bg-[#c5a059]/5 px-2 py-0.5 text-[8px] font-bold uppercase tracking-widest text-[#c5a059]">em breve</span>
+                      <span className="ml-auto rounded-none border border-[#7c3aed]/20 bg-[#7c3aed]/5 px-2 py-0.5 text-[8px] font-bold uppercase tracking-widest text-[#7c3aed]">em breve</span>
                     )}
                   </Link>
 
@@ -295,7 +300,7 @@ function TopBar({ onOpenMenu, pathname }: { onOpenMenu: () => void; pathname: st
 
         <div className="flex items-center gap-3">
           <span
-            className={`h-1.5 w-1.5 ${creds ? "bg-[#c5a059] pulse-dot" : "bg-amber-400"}`}
+            className={`h-1.5 w-1.5 ${creds ? "bg-[#7c3aed] pulse-dot" : "bg-amber-400"}`}
             title={creds ? "conectado" : "desconectado"}
           />
           {creds && me ? (
@@ -349,7 +354,7 @@ function TopBar({ onOpenMenu, pathname }: { onOpenMenu: () => void; pathname: st
                   className="cursor-pointer focus:bg-white/5 focus:text-white"
                 >
                   <Link to="/hub" className="flex items-center gap-2">
-                    <LayoutDashboard className="h-4 w-4 text-[#c5a059]" />
+                    <LayoutDashboard className="h-4 w-4 text-[#7c3aed]" />
                     Dashboard
                   </Link>
                 </DropdownMenuItem>
@@ -358,7 +363,7 @@ function TopBar({ onOpenMenu, pathname }: { onOpenMenu: () => void; pathname: st
                   className="cursor-pointer focus:bg-white/5 focus:text-white"
                 >
                   <Link to="/settings" className="flex items-center gap-2">
-                    <KeyRound className="h-4 w-4 text-[#c5a059]" />
+                    <KeyRound className="h-4 w-4 text-[#7c3aed]" />
                     Login / Token
                   </Link>
                 </DropdownMenuItem>
