@@ -62,6 +62,105 @@ export type Database = {
         }
         Relationships: []
       }
+      optimizer_features: {
+        Row: {
+          active: boolean
+          created_at: string | null
+          description: string
+          icon: string
+          id: string
+          sort: number
+          title: string
+        }
+        Insert: {
+          active?: boolean
+          created_at?: string | null
+          description: string
+          icon: string
+          id?: string
+          sort?: number
+          title: string
+        }
+        Update: {
+          active?: boolean
+          created_at?: string | null
+          description?: string
+          icon?: string
+          id?: string
+          sort?: number
+          title?: string
+        }
+        Relationships: []
+      }
+      optimizer_previews: {
+        Row: {
+          active: boolean
+          created_at: string | null
+          description: string
+          id: string
+          image_url: string
+          sort: number
+          title: string
+        }
+        Insert: {
+          active?: boolean
+          created_at?: string | null
+          description: string
+          id?: string
+          image_url: string
+          sort?: number
+          title: string
+        }
+        Update: {
+          active?: boolean
+          created_at?: string | null
+          description?: string
+          id?: string
+          image_url?: string
+          sort?: number
+          title?: string
+        }
+        Relationships: []
+      }
+      optimizer_settings: {
+        Row: {
+          active: boolean
+          badge: string
+          button_link: string
+          button_text: string
+          description: string
+          id: string
+          name: string
+          status: string
+          title: string
+          updated_at: string | null
+        }
+        Insert: {
+          active?: boolean
+          badge?: string
+          button_link?: string
+          button_text?: string
+          description?: string
+          id?: string
+          name?: string
+          status?: string
+          title?: string
+          updated_at?: string | null
+        }
+        Update: {
+          active?: boolean
+          badge?: string
+          button_link?: string
+          button_text?: string
+          description?: string
+          id?: string
+          name?: string
+          status?: string
+          title?: string
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
       quest_runs: {
         Row: {
           completed_at: string | null

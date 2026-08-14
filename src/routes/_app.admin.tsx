@@ -1,10 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useCallback, useEffect, useState } from "react";
 import { toast } from "sonner";
-import { ShieldCheck, Plus, Trash2, Save, RefreshCw, Lock } from "lucide-react";
+import { ShieldCheck, Plus, Trash2, Save, RefreshCw, Lock, Activity, Globe, Trash, Zap, Target, Gauge } from "lucide-react";
 
 import { PageHeader } from "@/components/PageHeader";
-import { Button, Input, Field, Card, EmptyState } from "@/components/ui/ds";
+import { Button, Input, Field, Card, EmptyState, TextArea } from "@/components/ui/ds";
 import { useQuestStore } from "@/lib/quest-store";
 import {
   checkAdmin,
@@ -13,7 +13,12 @@ import {
   adminSavePreview,
   adminSaveFeature,
   adminDeleteRow,
+  adminLoadOptimizer,
+  adminSaveOptimizerSettings,
+  adminSaveOptimizerFeature,
+  adminSaveOptimizerPreview,
 } from "@/lib/admin.functions";
+
 
 export const Route = createFileRoute("/_app/admin")({
   component: AdminPage,
@@ -61,12 +66,43 @@ type Feature = {
   sort: number;
 };
 
-const TABS = ["previas", "planos", "funcoes"] as const;
+type OptimizerSettings = {
+  id?: string;
+  name: string;
+  badge: string;
+  title: string;
+  description: string;
+  button_text: string;
+  button_link: string;
+  status: string;
+  active: boolean;
+};
+
+type OptimizerFeature = {
+  id?: string;
+  icon: string;
+  title: string;
+  description: string;
+  sort: number;
+  active: boolean;
+};
+
+type OptimizerPreview = {
+  id?: string;
+  image_url: string;
+  title: string;
+  description: string;
+  sort: number;
+  active: boolean;
+};
+
+const TABS = ["previas", "planos", "funcoes", "optimizer"] as const;
 type Tab = (typeof TABS)[number];
 const TAB_LABEL: Record<Tab, string> = {
   previas: "Prévias",
   planos: "Planos & Valores",
   funcoes: "Funções & Cargos",
+  optimizer: "Spectre Optimizer",
 };
 
 const csv = (a: string[]) => a.join(", ");
@@ -85,6 +121,11 @@ function AdminPage() {
   const [previews, setPreviews] = useState<Preview[]>([]);
   const [features, setFeatures] = useState<Feature[]>([]);
 
+  // Optimizer state
+  const [optSettings, setOptSettings] = useState<OptimizerSettings | null>(null);
+  const [optFeatures, setOptFeatures] = useState<OptimizerFeature[]>([]);
+  const [optPreviews, setOptPreviews] = useState<OptimizerPreview[]>([]);
+
   useEffect(() => {
     hydrate();
   }, [hydrate]);
@@ -93,11 +134,19 @@ function AdminPage() {
     if (!token) return;
     setLoading(true);
     try {
-      const data = await adminLoadAll({ data: { token } });
+      const [data, optData] = await Promise.all([
+        adminLoadAll({ data: { token } }),
+        adminLoadOptimizer({ data: { token } }),
+      ]);
       setPlans(data.plans as Plan[]);
       setPreviews(data.previews as Preview[]);
       setFeatures(data.features as Feature[]);
+
+      setOptSettings(optData.settings as OptimizerSettings);
+      setOptFeatures(optData.features as OptimizerFeature[]);
+      setOptPreviews(optData.previews as OptimizerPreview[]);
     } catch {
+
       toast.error("Não foi possível carregar os dados.");
     } finally {
       setLoading(false);
@@ -186,9 +235,292 @@ function AdminPage() {
       {tab === "funcoes" && (
         <FeaturesTab token={token} rows={features} setRows={setFeatures} reload={load} />
       )}
+      {tab === "optimizer" && (
+        <OptimizerTab
+          token={token}
+          settings={optSettings}
+          setSettings={setOptSettings}
+          features={optFeatures}
+          setFeatures={setOptFeatures}
+          previews={optPreviews}
+          setPreviews={setOptPreviews}
+          reload={load}
+        />
+      )}
     </div>
   );
 }
+
+/* ── Optimizer ───────────────────────────────────────────── */
+function OptimizerTab({
+  token,
+  settings,
+  setSettings,
+  features,
+  setFeatures,
+  previews,
+  setPreviews,
+  reload,
+}: {
+  token: string;
+  settings: OptimizerSettings | null;
+  setSettings: (s: OptimizerSettings) => void;
+  features: OptimizerFeature[];
+  setFeatures: (f: OptimizerFeature[]) => void;
+  previews: OptimizerPreview[];
+  setPreviews: (p: OptimizerPreview[]) => void;
+  reload: () => Promise<void>;
+}) {
+  const saveSettings = async () => {
+    if (!settings) return;
+    try {
+      await adminSaveOptimizerSettings({ data: { token, settings } });
+      toast.success("Configurações do Optimizer salvas.");
+      await reload();
+    } catch {
+      toast.error("Erro ao salvar configurações.");
+    }
+  };
+
+  const saveFeature = async (feature: OptimizerFeature) => {
+    try {
+      await adminSaveOptimizerFeature({ data: { token, feature } });
+      toast.success("Funcionalidade salva.");
+      await reload();
+    } catch {
+      toast.error("Erro ao salvar funcionalidade.");
+    }
+  };
+
+  const savePreview = async (preview: OptimizerPreview) => {
+    try {
+      await adminSaveOptimizerPreview({ data: { token, preview } });
+      toast.success("Prévia salva.");
+      await reload();
+    } catch {
+      toast.error("Erro ao salvar prévia.");
+    }
+  };
+
+  const removeRow = async (table: "optimizer_features" | "optimizer_previews", id?: string) => {
+    if (!id) {
+      if (table === "optimizer_features") setFeatures(features.filter(f => f.id !== id));
+      else setPreviews(previews.filter(p => p.id !== id));
+      return;
+    }
+    try {
+      await adminDeleteRow({ data: { token, table, id } });
+      toast.success("Item removido.");
+      await reload();
+    } catch {
+      toast.error("Erro ao remover item.");
+    }
+  };
+
+  return (
+    <div className="space-y-10">
+      {/* Settings section */}
+      <section className="space-y-4">
+        <div className="ds-h3 flex items-center gap-2">
+          <Activity className="h-5 w-5 text-[#ff0055]" /> Informações Principais
+        </div>
+        {settings && (
+          <Card className="space-y-4">
+            <div className="grid gap-4 md:grid-cols-2">
+              <Field label="Nome do Produto">
+                <Input value={settings.name} onChange={e => setSettings({ ...settings, name: e.target.value })} />
+              </Field>
+              <Field label="Badge (ex: EM BREVE)">
+                <Input value={settings.badge} onChange={e => setSettings({ ...settings, badge: e.target.value })} />
+              </Field>
+            </div>
+            <Field label="Título (Headline)">
+              <Input value={settings.title} onChange={e => setSettings({ ...settings, title: e.target.value })} />
+            </Field>
+            <Field label="Descrição Principal">
+              <TextArea value={settings.description} onChange={e => setSettings({ ...settings, description: e.target.value })} />
+            </Field>
+            <div className="grid gap-4 md:grid-cols-3">
+              <Field label="Texto do Botão">
+                <Input value={settings.button_text} onChange={e => setSettings({ ...settings, button_text: e.target.value })} />
+              </Field>
+              <Field label="Link do Botão">
+                <Input value={settings.button_link} onChange={e => setSettings({ ...settings, button_link: e.target.value })} />
+              </Field>
+              <Field label="Status do Produto">
+                <select
+                  className="ds-input"
+                  value={settings.status}
+                  onChange={e => setSettings({ ...settings, status: e.target.value })}
+                >
+                  <option value="Em breve">Em breve</option>
+                  <option value="Disponível">Disponível</option>
+                  <option value="Atualizando">Atualizando</option>
+                  <option value="Indisponível">Indisponível</option>
+                </select>
+              </Field>
+            </div>
+            <Button variant="primary" onClick={saveSettings}>
+              <Save className="h-3.5 w-3.5" /> Salvar Configurações
+            </Button>
+          </Card>
+        )}
+      </section>
+
+      {/* Features section */}
+      <section className="space-y-4">
+        <div className="flex items-center justify-between">
+          <div className="ds-h3 flex items-center gap-2">
+            <Zap className="h-5 w-5 text-[#ff0055]" /> Funcionalidades (Cards)
+          </div>
+          <Button
+            variant="secondary"
+            size="sm"
+            onClick={() => setFeatures([...features, { icon: "Zap", title: "Nova", description: "", sort: features.length, active: true }])}
+          >
+            <Plus className="h-3.5 w-3.5" /> Adicionar Card
+          </Button>
+        </div>
+        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+          {features.map((f, i) => (
+            <Card key={f.id ?? `f-${i}`} className="space-y-3">
+              <div className="grid grid-cols-2 gap-2">
+                <Field label="Ícone (Lucide)">
+                  <Input
+                    value={f.icon}
+                    onChange={e => {
+                      const newFeatures = [...features];
+                      newFeatures[i].icon = e.target.value;
+                      setFeatures(newFeatures);
+                    }}
+                    placeholder="Zap, Target, Gauge..."
+                  />
+                </Field>
+                <Field label="Ordem">
+                  <Input
+                    type="number"
+                    value={f.sort}
+                    onChange={e => {
+                      const newFeatures = [...features];
+                      newFeatures[i].sort = Number(e.target.value);
+                      setFeatures(newFeatures);
+                    }}
+                  />
+                </Field>
+              </div>
+              <Field label="Título">
+                <Input
+                  value={f.title}
+                  onChange={e => {
+                    const newFeatures = [...features];
+                    newFeatures[i].title = e.target.value;
+                    setFeatures(newFeatures);
+                  }}
+                />
+              </Field>
+              <Field label="Descrição">
+                <TextArea
+                  value={f.description}
+                  onChange={e => {
+                    const newFeatures = [...features];
+                    newFeatures[i].description = e.target.value;
+                    setFeatures(newFeatures);
+                  }}
+                />
+              </Field>
+              <div className="flex gap-2">
+                <Button variant="primary" size="sm" onClick={() => saveFeature(f)}>
+                  <Save className="h-3.5 w-3.5" />
+                </Button>
+                <Button variant="danger" size="sm" onClick={() => removeRow("optimizer_features", f.id)}>
+                  <Trash2 className="h-3.5 w-3.5" />
+                </Button>
+              </div>
+            </Card>
+          ))}
+        </div>
+      </section>
+
+      {/* Previews section */}
+      <section className="space-y-4">
+        <div className="flex items-center justify-between">
+          <div className="ds-h3 flex items-center gap-2">
+            <Globe className="h-5 w-5 text-[#ff0055]" /> Prévias Visuais (Screenshots)
+          </div>
+          <Button
+            variant="secondary"
+            size="sm"
+            onClick={() => setPreviews([...previews, { image_url: "", title: "", description: "", sort: previews.length, active: true }])}
+          >
+            <Plus className="h-3.5 w-3.5" /> Adicionar Screenshot
+          </Button>
+        </div>
+        <div className="grid gap-4 md:grid-cols-2">
+          {previews.map((p, i) => (
+            <Card key={p.id ?? `p-${i}`} className="space-y-3">
+              {p.image_url && (
+                <img src={p.image_url} alt="" className="aspect-video w-full border border-white/5 object-cover" />
+              )}
+              <Field label="URL da Imagem">
+                <Input
+                  value={p.image_url}
+                  onChange={e => {
+                    const newPreviews = [...previews];
+                    newPreviews[i].image_url = e.target.value;
+                    setPreviews(newPreviews);
+                  }}
+                  placeholder="https://..."
+                />
+              </Field>
+              <Field label="Título">
+                <Input
+                  value={p.title}
+                  onChange={e => {
+                    const newPreviews = [...previews];
+                    newPreviews[i].title = e.target.value;
+                    setPreviews(newPreviews);
+                  }}
+                />
+              </Field>
+              <Field label="Descrição">
+                <Input
+                  value={p.description}
+                  onChange={e => {
+                    const newPreviews = [...previews];
+                    newPreviews[i].description = e.target.value;
+                    setPreviews(newPreviews);
+                  }}
+                />
+              </Field>
+              <div className="grid grid-cols-2 gap-2">
+                <Field label="Ordem">
+                  <Input
+                    type="number"
+                    value={p.sort}
+                    onChange={e => {
+                      const newPreviews = [...previews];
+                      newPreviews[i].sort = Number(e.target.value);
+                      setPreviews(newPreviews);
+                    }}
+                  />
+                </Field>
+                <div className="flex items-end gap-2">
+                  <Button variant="primary" className="flex-1" onClick={() => savePreview(p)}>
+                    <Save className="h-3.5 w-3.5" /> Salvar
+                  </Button>
+                  <Button variant="danger" onClick={() => removeRow("optimizer_previews", p.id)}>
+                    <Trash2 className="h-3.5 w-3.5" />
+                  </Button>
+                </div>
+              </div>
+            </Card>
+          ))}
+        </div>
+      </section>
+    </div>
+  );
+}
+
 
 /* ── Prévias ─────────────────────────────────────────────── */
 function PreviewsTab({

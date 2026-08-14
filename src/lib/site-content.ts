@@ -24,6 +24,36 @@ export type SitePreview = {
   active: boolean;
 };
 
+export type OptimizerSettings = {
+  id: string;
+  name: string;
+  badge: string;
+  title: string;
+  description: string;
+  button_text: string;
+  button_link: string;
+  status: string;
+  active: boolean;
+};
+
+export type OptimizerFeature = {
+  id: string;
+  icon: string;
+  title: string;
+  description: string;
+  sort: number;
+  active: boolean;
+};
+
+export type OptimizerPreview = {
+  id: string;
+  image_url: string;
+  title: string;
+  description: string;
+  sort: number;
+  active: boolean;
+};
+
 /** Planos publicados pelo painel admin (leitura pública). */
 export function useSitePlans() {
   const [plans, setPlans] = useState<SitePlan[] | null>(null);
@@ -63,3 +93,30 @@ export function useSitePreviews() {
   }, []);
   return previews;
 }
+
+/** Configurações do Spectre Optimizer. */
+export function useOptimizerContent() {
+  const [settings, setSettings] = useState<OptimizerSettings | null>(null);
+  const [features, setFeatures] = useState<OptimizerFeature[]>([]);
+  const [previews, setPreviews] = useState<OptimizerPreview[]>([]);
+
+  useEffect(() => {
+    let alive = true;
+    Promise.all([
+      supabase.from("optimizer_settings").select("*").eq("active", true).single(),
+      supabase.from("optimizer_features").select("*").eq("active", true).order("sort"),
+      supabase.from("optimizer_previews").select("*").eq("active", true).order("sort"),
+    ]).then(([s, f, p]) => {
+      if (!alive) return;
+      if (s.data) setSettings(s.data as unknown as OptimizerSettings);
+      if (f.data) setFeatures(f.data as unknown as OptimizerFeature[]);
+      if (p.data) setPreviews(p.data as unknown as OptimizerPreview[]);
+    });
+    return () => {
+      alive = false;
+    };
+  }, []);
+
+  return { settings, features, previews };
+}
+

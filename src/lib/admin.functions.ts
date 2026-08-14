@@ -128,9 +128,94 @@ export const adminSaveFeature = createServerFn({ method: "POST" })
 
 /* ── Remoção genérica ───────────────────────────────────── */
 const deleteInput = tokenInput.extend({
-  table: z.enum(["site_plans", "site_previews", "site_features"]),
+  table: z.enum(["site_plans", "site_previews", "site_features", "optimizer_features", "optimizer_previews"]),
   id: z.string().uuid(),
 });
+
+/* ── Spectre Optimizer ───────────────────────────────────── */
+const optimizerSettingsInput = tokenInput.extend({
+  settings: z.object({
+    id: z.string().uuid().optional(),
+    name: z.string().min(1).max(60),
+    badge: z.string().max(30),
+    title: z.string().max(120),
+    description: z.string().max(500),
+    button_text: z.string().max(40),
+    button_link: z.string().url().max(600),
+    status: z.string().max(40),
+    active: z.boolean(),
+  }),
+});
+
+export const adminSaveOptimizerSettings = createServerFn({ method: "POST" })
+  .validator((raw) => optimizerSettingsInput.parse(raw))
+  .handler(async ({ data }) => {
+    await assertAdmin(data.token);
+    const db = await admin();
+    const { error } = await db.from("optimizer_settings").upsert(data.settings);
+    if (error) throw new Error(error.message);
+    return { ok: true as const };
+  });
+
+const optimizerFeatureInput = tokenInput.extend({
+  feature: z.object({
+    id: z.string().uuid().optional(),
+    icon: z.string().min(1).max(40),
+    title: z.string().min(1).max(60),
+    description: z.string().max(280),
+    sort: z.number().int().min(0).max(99),
+    active: z.boolean(),
+  }),
+});
+
+export const adminSaveOptimizerFeature = createServerFn({ method: "POST" })
+  .validator((raw) => optimizerFeatureInput.parse(raw))
+  .handler(async ({ data }) => {
+    await assertAdmin(data.token);
+    const db = await admin();
+    const { error } = await db.from("optimizer_features").upsert(data.feature);
+    if (error) throw new Error(error.message);
+    return { ok: true as const };
+  });
+
+const optimizerPreviewInput = tokenInput.extend({
+  preview: z.object({
+    id: z.string().uuid().optional(),
+    image_url: z.string().url().max(600),
+    title: z.string().max(80),
+    description: z.string().max(280),
+    sort: z.number().int().min(0).max(99),
+    active: z.boolean(),
+  }),
+});
+
+export const adminSaveOptimizerPreview = createServerFn({ method: "POST" })
+  .validator((raw) => optimizerPreviewInput.parse(raw))
+  .handler(async ({ data }) => {
+    await assertAdmin(data.token);
+    const db = await admin();
+    const { error } = await db.from("optimizer_previews").upsert(data.preview);
+    if (error) throw new Error(error.message);
+    return { ok: true as const };
+  });
+
+export const adminLoadOptimizer = createServerFn({ method: "POST" })
+  .validator((raw) => tokenInput.parse(raw))
+  .handler(async ({ data }) => {
+    await assertAdmin(data.token);
+    const db = await admin();
+    const [settings, features, previews] = await Promise.all([
+      db.from("optimizer_settings").select("*").single(),
+      db.from("optimizer_features").select("*").order("sort"),
+      db.from("optimizer_previews").select("*").order("sort"),
+    ]);
+    return {
+      settings: settings.data,
+      features: features.data ?? [],
+      previews: previews.data ?? [],
+    };
+  });
+
 
 export const adminDeleteRow = createServerFn({ method: "POST" })
   .validator((raw) => deleteInput.parse(raw))
