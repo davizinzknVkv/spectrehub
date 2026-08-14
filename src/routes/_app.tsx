@@ -29,6 +29,8 @@ import {
   Gift,
   Crosshair,
   UserRound,
+  Zap,
+  Activity,
 } from "lucide-react";
 import logoAsset from "@/assets/spectre-logo-nobg.png.asset.json";
 import { AdminNavLink } from "@/components/AdminNavLink";
@@ -61,6 +63,12 @@ const NAV_GROUPS = [
       { to: "/clone", label: "Clonar Discord", icon: Copy, soon: true },
       { to: "/spotify", label: "Gerador Spotify", icon: Music, soon: true },
       { to: "/fake", label: "Foto Fake", icon: ImageIcon, soon: false },
+    ],
+  },
+  {
+    title: "Sistema",
+    items: [
+      { to: "/optimizer", label: "Spectre Optimizer", icon: Activity, soon: false },
     ],
   },
 ] as const;
