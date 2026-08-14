@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Users, MessageSquare, Sparkles, ArrowRight } from "lucide-react";
 import { Reveal } from "./Reveal";
+import { Avatar } from "./Avatar";
 
 interface CommunitySectionProps {
   widgetUrl: string;
