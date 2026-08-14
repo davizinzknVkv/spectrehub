@@ -61,11 +61,11 @@ export function ProductsSection({ products }: ProductsSectionProps) {
              <button
                key={p.id}
                onClick={() => setActiveTab(i)}
-               className={`w-full text-left p-6 transition-all duration-300 border border-white/5 flex items-center justify-between group ${
-                 activeTab === i 
-                   ? "bg-spectre-pink/5 border-spectre-pink/30" 
-                   : "hover:bg-white/[0.02]"
-               }`}
+                className={`w-full text-left p-6 transition-all duration-300 border border-white/5 flex items-center justify-between group rounded-none ${
+                  activeTab === i 
+                    ? "bg-spectre-pink/5 border-spectre-pink/30" 
+                    : "hover:bg-white/[0.02]"
+                }`}
              >
                <div>
                  <div className={`font-display text-lg uppercase italic transition-colors ${activeTab === i ? "text-spectre-pink" : "text-white/60 group-hover:text-white"}`}>

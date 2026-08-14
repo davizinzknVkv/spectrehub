@@ -30,7 +30,7 @@ export function PlansSection({ plans }: PlansSectionProps) {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         {plans.map((p, i) => (
           <Reveal key={p.name} delay={i * 100} className="h-full">
-            <div className={`relative flex flex-col h-full p-8 border border-white/5 bg-obsidian-soft transition-all duration-500 hover:border-spectre-pink/40 group ${p.highlight ? 'border-spectre-pink/20 bg-spectre-pink/[0.02]' : ''}`}>
+            <div className={`relative flex flex-col h-full p-8 border border-white/5 bg-obsidian-soft transition-all duration-500 hover:border-spectre-pink/40 group rounded-none ${p.highlight ? 'border-spectre-pink/20 bg-spectre-pink/[0.02]' : ''}`}>
               {p.highlight && (
                 <div className="absolute top-0 right-0 bg-spectre-pink text-white text-[9px] font-display uppercase tracking-widest px-4 py-1 italic">
                   Popular
