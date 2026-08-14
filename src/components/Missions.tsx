@@ -158,19 +158,19 @@ export function CaptchaModal({
     <Modal
       title="ADVISOR"
       onClose={onCancel}
-      className="border-white/10 !rounded-none"
+      className="border-white/10 !rounded-none w-full max-w-lg mx-auto"
       actions={
-        <div className="flex w-full items-center justify-center gap-3">
+        <div className="flex flex-col sm:flex-row w-full items-center justify-center gap-3">
           <Button 
             variant="ghost" 
-            className="uppercase font-black text-xs tracking-widest" 
+            className="w-full sm:w-auto uppercase font-black text-xs tracking-widest order-2 sm:order-1" 
             onClick={onCancel}
           >
             CANCELAR
           </Button>
           <Button 
             variant="primary" 
-            className="ds-btn-lg min-w-[200px] uppercase font-black text-xs tracking-widest" 
+            className="w-full sm:w-auto ds-btn-lg min-w-[200px] uppercase font-black text-xs tracking-widest order-1 sm:order-2" 
             onClick={onSolved}
           >
             CONFIRMAR E INICIAR
