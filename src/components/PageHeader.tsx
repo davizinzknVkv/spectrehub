@@ -11,34 +11,38 @@ type Props = {
 };
 
 /**
- * Cabeçalho padrão de página: LABEL → TÍTULO → DESCRIÇÃO.
- * Usado por todas as abas do Hub para manter a mesma hierarquia.
+ * NGHC Design System - PageHeader
+ * Unified header for all Hub modules.
  */
 export function PageHeader({ eyebrow, title, highlight, description, icon: Icon, actions }: Props) {
   return (
-    <header className="fade-up relative pb-5 sm:pb-6">
-      <div className="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
+    <header className="relative pb-10 mb-8 border-b border-white/5">
+      <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
         <div className="min-w-0">
           {eyebrow && (
-            <div className="ds-label">
-              {Icon && <Icon className="h-3 w-3 text-[var(--primary)]" />}
-              {eyebrow}
+            <div className="flex items-center gap-2 mb-3">
+              {Icon && <Icon className="h-3 w-3 text-spectre-pink" />}
+              <span className="font-display text-[9px] uppercase tracking-[0.3em] text-white/30 italic">{eyebrow}</span>
             </div>
           )}
-          <h1 className="ds-h1 mt-2.5">
+          <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl text-white uppercase italic tracking-tighter leading-none">
             {title}
             {highlight && (
-              <>
-                {" "}
-                <span className="text-[var(--primary)]">{highlight}</span>
-              </>
+              <span className="text-spectre-pink"> {highlight}</span>
             )}
           </h1>
-          {description && <p className="ds-body mt-2.5 max-w-2xl">{description}</p>}
+          {description && (
+            <p className="mt-4 font-sans text-sm text-white/40 italic leading-relaxed max-w-2xl">
+              {description}
+            </p>
+          )}
         </div>
-        {actions && <div className="flex flex-wrap items-center gap-2">{actions}</div>}
+        {actions && (
+          <div className="flex flex-wrap items-center gap-3 pb-1">
+            {actions}
+          </div>
+        )}
       </div>
-      <div className="hairline absolute inset-x-0 bottom-0" aria-hidden />
     </header>
   );
 }
