@@ -1329,7 +1329,7 @@ function FinalCta() {
             Junte-se à elite e ative sua infraestrutura de automação hoje mesmo. Suporte direto com quem entende do assunto.
           </p>
           <div className="mt-12 flex flex-wrap items-center justify-center gap-4">
-            <a href={GUILD_INVITE} target="_blank" rel="noreferrer" className="bg-[#ff0055] text-white font-bold py-4 px-10 rounded-sm uppercase tracking-widest hover:bg-[#ff0055]/90 transition-all flex items-center gap-2">
+            <a href={GUILD_INVITE} target="_blank" rel="noreferrer" className="bg-[#c5a059] text-white font-bold py-4 px-10 rounded-sm uppercase tracking-widest hover:bg-[#c5a059]/90 transition-all flex items-center gap-2">
               <ArrowRight className="h-4 w-4" /> Abrir meu ticket agora
             </a>
             <Link to="/hub" className="bg-white/5 border border-white/10 text-white font-bold py-4 px-10 rounded-sm uppercase tracking-widest hover:bg-white/10 transition-all">
@@ -1359,7 +1359,7 @@ function SiteFooter() {
                 className="h-8 w-auto"
               />
               <span className="font-display text-[16px] font-extrabold tracking-tighter text-white uppercase">
-                Spectre<span className="opacity-40 ml-1.5 font-light">|</span><span className="text-[#ff0055] ml-1.5">HUB</span>
+                Spectre<span className="opacity-40 ml-1.5 font-light">|</span><span className="text-[#c5a059] ml-1.5">HUB</span>
               </span>
             </Link>
             <p className="mt-6 text-[10px] font-bold text-[#444] uppercase tracking-[0.2em] leading-loose">
