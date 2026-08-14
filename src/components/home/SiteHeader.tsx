@@ -9,10 +9,10 @@ interface SiteHeaderProps {
 }
 
 const NAV = [
-  { href: "#produtos", label: "Produtos" },
-  { href: "#recursos", label: "Recursos" },
-  { href: "#planos", label: "Planos" },
-  { href: "#comunidade", label: "Comunidade" },
+  { href: "#produtos", label: "produtos" },
+  { href: "#recursos", label: "recursos" },
+  { href: "#planos", label: "planos" },
+  { href: "#comunidade", label: "comunidade" },
 ];
 
 export function SiteHeader({ guildInvite }: SiteHeaderProps) {
