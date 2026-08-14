@@ -110,7 +110,7 @@ function AppLayout() {
         }}
       />
 
-      <div className="grid min-h-screen w-full grid-cols-1 lg:grid-cols-[236px_1fr]">
+      <div className="grid min-h-screen w-full grid-cols-1 lg:grid-cols-[236px_1fr] overflow-hidden">
         {/* Desktop sidebar */}
         <aside className="hidden border-r border-white/5 bg-[#050505] lg:sticky lg:top-0 lg:block lg:h-screen">
           <SidebarBody pathname={pathname} creds={creds} setCreds={setCreds} />

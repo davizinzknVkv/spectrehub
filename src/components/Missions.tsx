@@ -104,10 +104,10 @@ export function MissionCard({
           <div className="font-mono text-[9px] text-[#444] uppercase tracking-widest">#{quest.questId.slice(0, 8)}</div>
           {isOrb && <Sparkles className="h-3.5 w-3.5 text-amber-500 fill-amber-500/20" />}
         </div>
-        <h3 className="relative z-10 mt-2 line-clamp-1 text-[13px] font-black uppercase text-white tracking-tight group-hover:text-[#ff0055] transition-colors">
+        <h3 className="relative z-10 mt-2 line-clamp-2 text-[13px] font-black uppercase text-white tracking-tight group-hover:text-[#ff0055] transition-colors min-h-[2.4em] flex items-center">
           {quest.questName}
         </h3>
-        <p className="relative z-10 mt-1 line-clamp-1 font-mono text-[10px] text-[#555] uppercase">{quest.rewardText}</p>
+        <p className="relative z-10 mt-1 line-clamp-1 font-mono text-[10px] text-[#555] uppercase break-all">{quest.rewardText}</p>
       </div>
 
       <div className="relative z-10 mt-4">
