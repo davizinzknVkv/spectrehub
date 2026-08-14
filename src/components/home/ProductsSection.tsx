@@ -33,19 +33,16 @@ export function ProductsSection({ products }: ProductsSectionProps) {
       </div>
 
       <div className="mt-16">
-        <div className="flex flex-wrap gap-2 sm:gap-4">
+        <div className="flex flex-wrap gap-3">
           {products.map((p, i) => (
             <button
               key={p.id}
               onClick={() => setActiveTab(i)}
-              className={`px-6 sm:px-8 py-3 ds-label transition-all ${
+              className={`px-8 py-3 rounded-full text-[12px] font-black uppercase tracking-wider transition-all duration-300 ${
                 activeTab === i
-                  ? "bg-[#ff0055] text-white"
-                  : "bg-white/5 text-[#8a8a8a] hover:bg-white/10"
-              } border-none relative min-w-[140px]`}
-              style={{
-                clipPath: "polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px)"
-              }}
+                  ? "bg-[#ff0055] text-white shadow-[0_8px_20px_rgba(255,0,85,0.3)]"
+                  : "bg-white/5 text-[#666] hover:bg-white/10 hover:text-white"
+              } border border-white/5 relative min-w-[140px]`}
             >
               <span className="relative z-10 whitespace-nowrap">{p.name}</span>
             </button>
@@ -53,15 +50,15 @@ export function ProductsSection({ products }: ProductsSectionProps) {
         </div>
 
         <div className="mt-12 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-stretch overflow-hidden">
-          <Reveal className="relative min-h-[300px] sm:min-h-[400px] lg:min-h-[500px] bg-[#080808] border border-white/5 overflow-hidden group shadow-2xl">
-            <div className="absolute inset-0 bg-gradient-to-tr from-[#ff0055]/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
-            <div className="absolute inset-0 flex items-center justify-center p-8 lg:p-12">
-              <div className="relative w-full max-w-lg transition-transform duration-700 group-hover:scale-[1.02]">
-                <div className="absolute -inset-4 bg-[#ff0055] opacity-5 blur-[100px]" />
+          <Reveal className="relative min-h-[300px] sm:min-h-[400px] lg:min-h-[550px] bg-[#080808]/40 border border-white/10 rounded-[32px] overflow-hidden group shadow-2xl backdrop-blur-sm">
+            <div className="absolute inset-0 bg-gradient-to-tr from-[#ff0055]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-1000" />
+            <div className="absolute inset-0 flex items-center justify-center p-8 lg:p-16">
+              <div className="relative w-full max-w-lg transition-all duration-1000 group-hover:scale-[1.05]">
+                <div className="absolute -inset-10 bg-[#ff0055] opacity-10 blur-[120px]" />
                 <img
                   src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=2070&auto=format&fit=crop"
                   alt="Elite Interface"
-                  className="relative w-full grayscale contrast-125 brightness-90 border border-white/10"
+                  className="relative w-full grayscale contrast-[1.1] brightness-[0.85] rounded-2xl border border-white/20 shadow-2xl"
                 />
               </div>
             </div>
