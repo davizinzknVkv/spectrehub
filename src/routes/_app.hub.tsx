@@ -501,18 +501,21 @@ function PresenceModal({
     try {
       const { updatePresence } = await import("@/lib/presence.functions");
       await updatePresence({
-        token,
-        status: activeTab === 'status' ? status : undefined,
-        customStatus: activeTab === 'custom' ? {
-          text: customText,
-          emojiName: customEmoji || undefined
-        } : undefined,
-        richPresence: activeTab === 'rich' ? {
-          enabled: richEnabled,
-          name: richName,
-          details: richDetails
-        } : undefined
+        data: {
+          token,
+          status: activeTab === 'status' ? status : undefined,
+          customStatus: activeTab === 'custom' ? {
+            text: customText,
+            emojiName: customEmoji || undefined
+          } : undefined,
+          richPresence: activeTab === 'rich' ? {
+            enabled: richEnabled,
+            name: richName,
+            details: richDetails
+          } : undefined
+        }
       });
+
       
       toast.success("Protocolo de presença atualizado");
       // Update local state to reflect changes (simplified)
