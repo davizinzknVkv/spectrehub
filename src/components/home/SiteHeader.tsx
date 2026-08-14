@@ -95,7 +95,7 @@ export function SiteHeader({ guildInvite }: SiteHeaderProps) {
       </div>
 
       {open && (
-        <div className="border-t border-white/[0.07] bg-[#030303]/95 backdrop-blur-xl md:hidden">
+        <div className="absolute top-full left-4 right-4 mt-2 overflow-hidden rounded-3xl border border-white/[0.07] bg-[#030303]/95 backdrop-blur-xl md:hidden">
           <nav className="mx-auto flex max-w-7xl flex-col px-4 py-3 sm:px-6">
             {NAV.map((n) => (
               <a
