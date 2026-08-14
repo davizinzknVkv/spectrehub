@@ -20,41 +20,32 @@ export function PlanBanner({
   cooldownLeft: number;
 }) {
   return (
-    <div className="relative overflow-hidden rounded-none border border-white/5 bg-[#050505] p-5 backdrop-blur-xl">
+    <div className="relative overflow-hidden rounded-none border border-white/5 bg-[#050505] p-5">
       <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
-        <div>
-          <div className="flex items-center gap-2">
-            <span className="ds-label">plano ativo</span>
-            <Badge variant={plan === "premium" ? "accent" : plan === "boost" ? "accent" : "default"}>
-              {limits.label}
-            </Badge>
+        <div className="flex items-center gap-12">
+          <div className="space-y-1">
+            <div className="font-mono text-[9px] uppercase tracking-[0.2em] text-[#444]">PLANO ATIVO</div>
+            <div className="text-sm font-black uppercase tracking-tight text-white">{limits.label}</div>
           </div>
-          <div className="mt-2 flex flex-wrap items-baseline gap-4">
-            <div className="text-2xl font-bold tracking-tight text-white sm:text-3xl">
-              {remaining === Infinity ? "∞" : remaining}
-              <span className="ml-2 text-xs font-medium uppercase tracking-widest text-slate-500">
-                restantes hoje
-              </span>
+          
+          <div className="space-y-1">
+            <div className="font-mono text-[9px] uppercase tracking-[0.2em] text-[#444]">RESTANTES HOJE</div>
+            <div className="flex items-center gap-2">
+              <span className="text-xl font-black text-white">{remaining === Infinity ? "∞" : remaining}</span>
             </div>
           </div>
         </div>
 
-        <div className="flex flex-col items-end gap-1 text-right">
-          {cooldownText ? (
-            <>
-              <div className="font-mono text-[10px] uppercase tracking-widest text-[#ff0055]">
-                cooldown ativo
-              </div>
-              <div className="text-2xl font-bold tabular-nums text-white">{cooldownText}</div>
-            </>
-          ) : (
-            <>
-              <div className="font-mono text-[10px] uppercase tracking-widest text-[var(--ok)]">
-                pronto
-              </div>
-              <div className="text-2xl font-bold text-white tracking-tight">SISTEMA LIVRE</div>
-            </>
-          )}
+        <div className="flex flex-col items-end">
+          <div className="font-mono text-[9px] uppercase tracking-[0.2em] text-[#444]">
+            {cooldownText ? "COOLDOWN ATIVO" : "PRONTO"}
+          </div>
+          <div className={cn(
+            "text-xl font-black tracking-tighter",
+            cooldownText ? "text-[#ff0055]" : "text-white"
+          )}>
+            {cooldownText || "SISTEMA LIVRE"}
+          </div>
         </div>
       </div>
 
@@ -88,8 +79,8 @@ export function MissionCard({
 
   return (
     <Card className={cn(
-      "group relative flex flex-col justify-between transition-all duration-300",
-      active ? "border-[#ff0055]/40 bg-[#ff0055]/5" : "hover:border-white/10"
+      "group relative flex min-h-[140px] flex-col justify-between transition-all duration-300 !p-4 border-white/5 bg-[#050505] hover:bg-[#080808]",
+      active ? "border-[#ff0055]/40" : "hover:border-white/10"
     )}>
       {quest.imageUrl && (
         <div className="absolute inset-0 z-0 opacity-20 transition-opacity group-hover:opacity-30">

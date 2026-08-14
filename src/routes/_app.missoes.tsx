@@ -138,17 +138,19 @@ function MissoesPage() {
   return (
     <div className="page-stack">
       <PageHeader
-        eyebrow="quests --list"
+        eyebrow="QUESTS --LIST"
         icon={Target}
-        title="Missões"
-        highlight="disponíveis"
+        title="MISSÕES"
+        highlight="DISPONÍVEIS"
         description="Quests disponíveis do Discord. Complete para ganhar recompensas."
         actions={
-          running ? (
-            <Button variant="danger" size="sm" onClick={requestStop}>
-              ■ stop
-            </Button>
-          ) : null
+          <div className="flex items-center gap-2">
+            {running && (
+              <Button variant="danger" size="sm" onClick={requestStop}>
+                ■ stop
+              </Button>
+            )}
+          </div>
         }
       />
 
