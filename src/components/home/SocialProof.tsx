@@ -128,22 +128,22 @@ export function SocialProof({ widgetUrl, products: productsList }: SocialProofPr
   return (
     <section className="border-y border-white/[0.06] bg-black/40 backdrop-blur-sm">
       <div ref={ref} className="mx-auto max-w-7xl px-4 py-8 sm:px-6 sm:py-10 lg:px-8">
-        <div className="flex flex-wrap items-center justify-between gap-8 text-[10px] font-bold text-[#8a8a8a] uppercase tracking-[0.2em]">
-          <div className="flex items-center gap-10">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-8 text-[10px] font-bold text-[#8a8a8a] uppercase tracking-[0.2em]">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:flex md:items-center gap-6 sm:gap-10 lg:gap-16 w-full md:w-auto">
              <div className="flex items-center gap-3">
-               <span className="text-white text-2xl font-display tracking-tighter">{Math.round(membersCount)}+</span>
-               <span>MEMBROS NA COMUNIDADE</span>
+               <span className="text-white text-xl lg:text-2xl font-display tracking-tighter shrink-0">{Math.round(membersCount)}+</span>
+               <span className="leading-tight">MEMBROS NA COMUNIDADE</span>
              </div>
              <div className="flex items-center gap-3">
-               <span className="text-white text-2xl font-display tracking-tighter">{Math.round(productsCount)}</span>
-               <span>PRODUTOS DISPONÍVEIS</span>
+               <span className="text-white text-xl lg:text-2xl font-display tracking-tighter shrink-0">{Math.round(productsCount)}</span>
+               <span className="leading-tight">PRODUTOS DISPONÍVEIS</span>
              </div>
              <div className="flex items-center gap-3">
-               <span className="text-white text-2xl font-display tracking-tighter">{latencyCount.toFixed(2)}<span className="text-[#ff0055]">ms</span></span>
-               <span>IMPACTO NO DISCORD</span>
+               <span className="text-white text-xl lg:text-2xl font-display tracking-tighter shrink-0">{latencyCount.toFixed(2)}<span className="text-[#ff0055]">ms</span></span>
+               <span className="leading-tight">IMPACTO NO DISCORD</span>
              </div>
           </div>
-          <div className="hidden lg:block">
+          <div className="hidden lg:block whitespace-nowrap">
             PROPERTY OF SPECTRE. ALL CREATIVE RIGHTS RESERVED.
           </div>
         </div>

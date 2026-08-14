@@ -133,7 +133,7 @@ export function CommunitySection({ widgetUrl, guildId, guildInvite, fallbackMemb
           </div>
         </div>
 
-        <div className="mt-12 grid gap-6 lg:grid-cols-[1fr_380px] lg:items-center">
+        <div className="mt-12 grid gap-8 lg:grid-cols-[1fr_380px] lg:items-start">
           <Reveal>
             <div className="border border-white/5 bg-[#0a0a0a] p-8 sm:p-10">
               <div className="flex items-center gap-3 font-display text-[10px] font-bold uppercase tracking-[0.3em] text-[#ff0055]">
