@@ -9,23 +9,32 @@ interface FinalCtaProps {
 
 export function FinalCta({ guildInvite }: FinalCtaProps) {
   return (
-    <section className="relative overflow-hidden border-t border-white/5 py-32">
+    <section className="relative overflow-hidden border-t border-white/10 py-32 bg-[#030303]">
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 -z-10 opacity-[0.05] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_100%,#000_70%,transparent_100%)]"
+        style={{
+          backgroundImage:
+            "linear-gradient(to right, rgba(255,255,255,0.08) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.08) 1px, transparent 1px)",
+          backgroundSize: "64px 64px",
+        }}
+      />
       <Reveal>
-        <div className="mx-auto max-w-4xl px-4 text-center">
-          <h2 className="font-display text-5xl font-extrabold leading-[0.95] tracking-tighter text-white sm:text-8xl">
-            ABRA UM
+        <div className="mx-auto max-w-5xl px-4 text-center">
+          <h2 className="font-display text-6xl font-[900] leading-[0.85] tracking-tighter text-white sm:text-8xl lg:text-[9rem] uppercase italic">
+            DEFINA O
             <br />
-            TICKET!
+            NOVO <span className="text-[#ff0055]">PADRÃO.</span>
           </h2>
-          <p className="mx-auto mt-10 max-w-xl text-lg font-medium text-[#8a8a8a] leading-relaxed">
-            Junte-se à elite e ative sua infraestrutura de automação hoje mesmo. Suporte direto com quem entende do assunto.
+          <p className="mx-auto mt-12 max-w-2xl text-[18px] font-medium text-[#8a8a8a] leading-[1.6]">
+            Junte-se ao ecossistema SPECTRE e ative sua infraestrutura de automação hoje mesmo. Desenvolvido para quem busca performance sem compromissos.
           </p>
-          <div className="mt-12 flex flex-wrap items-center justify-center gap-4">
-            <a href={guildInvite} target="_blank" rel="noreferrer" className="ds-btn ds-btn-primary ds-btn-lg px-10 flex items-center gap-2">
-              <ArrowRight className="h-4 w-4" /> Abrir meu ticket agora
+          <div className="mt-16 flex flex-col items-center justify-center gap-4 sm:flex-row">
+            <a href={guildInvite} target="_blank" rel="noreferrer" className="ds-btn ds-btn-primary ds-btn-lg rounded-full px-12 flex items-center gap-3 w-full sm:w-auto shadow-2xl shadow-[#ff0055]/20">
+              <ArrowRight className="h-5 w-5" /> ABRIR TICKET AGORA
             </a>
-            <Link to="/hub" className="ds-btn ds-btn-secondary ds-btn-lg px-10">
-              Acessar painel
+            <Link to="/hub" className="ds-btn ds-btn-secondary ds-btn-lg rounded-full px-12 w-full sm:w-auto">
+              ACESSAR PAINEL
             </Link>
           </div>
         </div>

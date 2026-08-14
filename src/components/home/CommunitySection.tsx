@@ -112,12 +112,9 @@ export function CommunitySection({ widgetUrl, guildId, guildInvite, fallbackMemb
             {loop.slice(Math.ceil(loop.length / 2)).map((m, i) => (
               <div
                 key={`${m.id}-${i}`}
-                className="flex shrink-0 items-center gap-4 border border-white/5 bg-[#0a0a0a] py-3 pl-3 pr-8 transition-all hover:border-[#ff0055]/30"
-                style={{
-                  clipPath: "polygon(0 0, 92% 0, 100% 25%, 100% 100%, 8% 100%, 0% 75%)"
-                }}
+                className="flex shrink-0 items-center gap-4 border border-white/10 bg-[#080808]/60 backdrop-blur-sm py-4 pl-4 pr-10 transition-all duration-500 hover:border-[#ff0055]/50 hover:bg-[#0c0c0c]/80 rounded-full group"
               >
-                <div className="h-10 w-10 overflow-hidden bg-white/5">
+                <div className="h-12 w-12 overflow-hidden rounded-full bg-white/10 ring-2 ring-white/5 group-hover:ring-[#ff0055]/30 transition-all">
                   {m.avatar ? (
                     <img src={m.avatar} alt="" loading="lazy" className="h-full w-full object-cover grayscale" />
                   ) : (
