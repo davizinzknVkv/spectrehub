@@ -100,22 +100,23 @@ export function CommunitySection({ widgetUrl, guildId, guildInvite, fallbackMemb
           </Reveal>
         </div>
 
-        <Reveal className="relative bg-obsidian-soft border border-white/5 p-4 overflow-hidden group rounded-none">
-           <div className="absolute top-4 left-4 right-4 h-8 bg-black/40 border-b border-white/5 flex items-center px-4 gap-2 z-10">
-              <span className="w-2 h-2 rounded-full bg-spectre-pink/40" />
-              <span className="font-display text-[9px] text-white/40 uppercase italic tracking-widest">Discord Widget v2.0</span>
+        <Reveal className="relative bg-obsidian border border-white/10 p-4 overflow-hidden group rounded-none">
+           <div className="absolute top-4 left-4 right-4 h-10 bg-black/60 border border-white/5 flex items-center px-4 gap-3 z-10">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#ff0055] shadow-[0_0_10px_#ff0055]" />
+              <span className="font-display text-[10px] text-white/60 uppercase italic tracking-widest">Discord Widget v2.0</span>
            </div>
-           <div className="pt-12 h-[500px] overflow-hidden relative">
-             <div className="absolute inset-0 z-10 pointer-events-none bg-gradient-to-b from-transparent via-transparent to-obsidian-soft" />
-             <iframe
-                src={`https://discordapp.com/widget?id=${guildId}&theme=dark`}
+           <div className="pt-14 h-[500px] overflow-hidden relative">
+              <div className="absolute inset-0 z-10 pointer-events-none bg-gradient-to-b from-transparent via-transparent to-obsidian" />
+              <iframe
+                src={`https://discord.com/widget?id=${guildId}&theme=dark`}
                 width="100%"
-                height="600"
+                height="500"
                 title="Widget do Discord"
                 loading="lazy"
+                allowTransparency={true}
                 frameBorder={0}
                 sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"
-                className="grayscale opacity-40 hover:grayscale-0 hover:opacity-100 transition-all duration-700"
+                className="opacity-80 hover:opacity-100 transition-all duration-700 w-full h-full"
               />
            </div>
         </Reveal>
