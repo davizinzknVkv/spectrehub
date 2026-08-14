@@ -100,31 +100,47 @@ export function CommunitySection({ widgetUrl, guildId, guildInvite, fallbackMemb
           </Reveal>
         </div>
 
-        <Reveal className="relative bg-obsidian-soft border border-white/5 p-4 overflow-hidden group rounded-none">
-           <div className="absolute top-4 left-4 right-4 h-8 bg-black/40 border-b border-white/5 flex items-center px-4 gap-2 z-10">
-              <span className="w-2 h-2 rounded-full bg-spectre-pink/40" />
-              <span className="font-display text-[9px] text-white/40 uppercase italic tracking-widest">Discord Widget v2.0</span>
+        <Reveal className="relative bg-black border border-white/5 p-4 overflow-hidden group rounded-none shadow-[inset_0_0_50px_rgba(0,0,0,0.8)]">
+           <div className="absolute top-4 left-4 right-4 h-10 bg-[#080808] border border-white/5 flex items-center px-4 gap-3 z-20">
+              <div className="relative flex items-center justify-center">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#ff0055] animate-pulse" />
+                <span className="absolute w-3 h-3 rounded-full bg-[#ff0055]/20 animate-ping" />
+              </div>
+              <span className="font-display text-[9px] text-white/40 uppercase italic tracking-[0.3em]">DISCORD PROTOCOL V2.0</span>
+              <div className="ml-auto flex gap-1">
+                <div className="w-1 h-1 bg-white/10" />
+                <div className="w-1 h-1 bg-white/10" />
+                <div className="w-1 h-1 bg-[#ff0055]/40" />
+              </div>
            </div>
-           <div className="pt-12 h-[500px] overflow-hidden relative">
-             <div className="absolute inset-0 z-10 pointer-events-none bg-gradient-to-b from-transparent via-transparent to-obsidian-soft" />
-             <iframe
-                src={`https://discordapp.com/widget?id=${guildId}&theme=dark`}
+           <div className="pt-14 h-[500px] overflow-hidden relative bg-[#050505]">
+              <div className="absolute inset-0 z-10 pointer-events-none bg-gradient-to-b from-transparent via-transparent to-black" />
+              <iframe
+                src={`https://discord.com/widget?id=${guildId}&theme=dark`}
                 width="100%"
-                height="600"
+                height="500"
                 title="Widget do Discord"
                 loading="lazy"
+                allowTransparency={true}
                 frameBorder={0}
                 sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"
-                className="grayscale opacity-40 hover:grayscale-0 hover:opacity-100 transition-all duration-700"
+                className="opacity-70 group-hover:opacity-100 transition-all duration-700 w-full h-full filter contrast-[1.1] brightness-[0.9]"
               />
+           </div>
+           {/* Decorative Corner */}
+           <div className="absolute bottom-0 right-0 w-8 h-8 pointer-events-none">
+              <div className="absolute bottom-2 right-2 w-1 h-1 bg-[#ff0055]/30" />
+              <div className="absolute bottom-2 right-4 w-4 h-[1px] bg-[#ff0055]/20" />
+              <div className="absolute bottom-4 right-2 w-[1px] h-4 bg-[#ff0055]/20" />
            </div>
         </Reveal>
       </div>
 
       {/* Marquee Members */}
-      <div className="mt-32 pt-12 border-t border-white/5 overflow-hidden relative">
+      <div className="mt-32 pt-12 border-t border-white/5 overflow-hidden relative bg-[#050505]/50">
+        <div className="absolute inset-0 opacity-[0.03] pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle, #fff 1px, transparent 1px)', backgroundSize: '24px 24px' }} />
         <div className="mb-8 flex items-center gap-4">
-           <div className="font-display text-[9px] text-white uppercase italic tracking-[0.3em] whitespace-nowrap">
+           <div className="font-display text-[10px] text-spectre-pink uppercase italic tracking-[0.4em] whitespace-nowrap">
               USUÁRIOS QUE JÁ ESTÃO USANDO O Spectre Hub
            </div>
            <div className="h-px w-full bg-white/5" />
