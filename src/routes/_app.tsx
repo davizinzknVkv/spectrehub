@@ -66,9 +66,9 @@ const NAV_GROUPS = [
     ],
   },
   {
-    title: "Sistema",
+    title: "Suporte",
     items: [
-      { to: "/optimizer", label: "Spectre Optimizer", icon: Activity, soon: false },
+      { to: "/", label: "Página Inicial", icon: Activity, soon: false },
     ],
   },
 ] as const;
@@ -161,7 +161,7 @@ function SidebarBody({
           className="h-8 w-8 object-contain shrink-0"
         />
         <span className="truncate font-display text-[15px] font-extrabold tracking-tighter text-white uppercase">
-          Spectre<span className="opacity-40 ml-1.5 font-light">|</span><span className="text-[#ff0055] ml-1.5">HUB</span>
+          Spectre<span className="opacity-40 ml-1.5 font-light">|</span><span className="text-[#c5a059] ml-1.5">HUB</span>
         </span>
       </Link>
 
@@ -184,14 +184,14 @@ function SidebarBody({
                   >
                     <Icon
                       className={`h-[14px] w-[14px] shrink-0 transition-colors ${
-                        active ? "text-[#ff0055]" : "text-[#52525b] group-hover:text-white"
+                        active ? "text-[#c5a059]" : "text-[#52525b] group-hover:text-white"
                       }`}
                     />
                     <span className={active ? "font-bold text-white tracking-[-0.01em]" : "tracking-[-0.01em]"}>
                       {item.label}
                     </span>
                     {item.soon && (
-                      <span className="ml-auto rounded-none border border-[#ff0055]/20 bg-[#ff0055]/5 px-2 py-0.5 text-[8px] font-bold uppercase tracking-widest text-[#ff0055]">em breve</span>
+                      <span className="ml-auto rounded-none border border-[#c5a059]/20 bg-[#c5a059]/5 px-2 py-0.5 text-[8px] font-bold uppercase tracking-widest text-[#c5a059]">em breve</span>
                     )}
                   </Link>
 
@@ -290,7 +290,7 @@ function TopBar({ onOpenMenu, pathname }: { onOpenMenu: () => void; pathname: st
 
         <div className="flex items-center gap-3">
           <span
-            className={`h-1.5 w-1.5 ${creds ? "bg-[#ff0055] pulse-dot" : "bg-amber-400"}`}
+            className={`h-1.5 w-1.5 ${creds ? "bg-[#c5a059] pulse-dot" : "bg-amber-400"}`}
             title={creds ? "conectado" : "desconectado"}
           />
           {creds && me ? (
@@ -344,7 +344,7 @@ function TopBar({ onOpenMenu, pathname }: { onOpenMenu: () => void; pathname: st
                   className="cursor-pointer focus:bg-white/5 focus:text-white"
                 >
                   <Link to="/hub" className="flex items-center gap-2">
-                    <LayoutDashboard className="h-4 w-4 text-[#ff0055]" />
+                    <LayoutDashboard className="h-4 w-4 text-[#c5a059]" />
                     Dashboard
                   </Link>
                 </DropdownMenuItem>
@@ -353,7 +353,7 @@ function TopBar({ onOpenMenu, pathname }: { onOpenMenu: () => void; pathname: st
                   className="cursor-pointer focus:bg-white/5 focus:text-white"
                 >
                   <Link to="/settings" className="flex items-center gap-2">
-                    <KeyRound className="h-4 w-4 text-[#ff0055]" />
+                    <KeyRound className="h-4 w-4 text-[#c5a059]" />
                     Login / Token
                   </Link>
                 </DropdownMenuItem>
