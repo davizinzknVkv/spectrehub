@@ -16,7 +16,7 @@ export function SiteFooter({ guildInvite }: SiteFooterProps) {
               <img
                 src={logoAsset.url}
                 alt="Spectre Hub"
-                className="w-10 h-10 object-contain invert"
+                className="w-10 h-10 object-contain"
               />
               <span className="font-display text-2xl tracking-tighter text-white uppercase italic">
                 Spectre <span className="text-spectre-pink">Hub</span>
