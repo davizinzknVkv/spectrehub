@@ -76,5 +76,5 @@ export const updatePresence = createServerFn({ method: "POST" })
       console.log(`[Spectre Presence] Rich Presence requested for ${data.richPresence.name}`);
     }
 
-    return { ok: true, message: "Presence protocol updated." };
+    return { ok: true, message: "Status de presença atualizado." };
   });
