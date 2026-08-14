@@ -22,9 +22,9 @@ export function FinalCta({ guildInvite }: FinalCtaProps) {
       <Reveal>
         <div className="mx-auto max-w-5xl px-4 text-center">
           <h2 className="font-display text-6xl font-[900] leading-[0.85] tracking-tighter text-white sm:text-8xl lg:text-[9rem] uppercase italic">
-            DEFINA O
+            ELEVE O SEU
             <br />
-            NOVO <span className="text-[#ff0055]">PADRÃO.</span>
+            <span className="text-[#ff0055]">SERVIDOR.</span>
           </h2>
           <p className="mx-auto mt-12 max-w-2xl text-[18px] font-medium text-[#8a8a8a] leading-[1.6]">
             Junte-se ao ecossistema SPECTRE e ative sua infraestrutura de automação hoje mesmo. Desenvolvido para quem busca performance sem compromissos.

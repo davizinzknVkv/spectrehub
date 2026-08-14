@@ -14,9 +14,9 @@ export function PlansSection({ plans }: PlansSectionProps) {
       <div className="max-w-4xl">
         <Reveal>
           <h2 className="font-display text-[2.8rem] font-[900] leading-[0.9] tracking-tighter text-white sm:text-7xl lg:text-[5.5rem]">
-            PLANOS QUE
+            PLANOS &
             <br />
-            IMPULSIONAM.
+            ACESSO.
           </h2>
           <p className="mt-10 text-[18px] font-medium text-[#8a8a8a] leading-[1.6] max-w-xl px-1 border-l border-[#ff0055]/30 ml-1 pl-6">
             Estrutura flexível projetada para escalar conforme suas necessidades. Gerenciamento automático via Discord para máxima conveniência.
