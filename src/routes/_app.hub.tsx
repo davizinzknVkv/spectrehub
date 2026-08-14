@@ -178,8 +178,8 @@ function HubPage() {
                 <Skeleton className="w-16 h-4" />
               ) : (
                 badges.map(b => (
-                  <div key={b.id} title={b.description} className="w-5 h-5 opacity-40 hover:opacity-100 transition-opacity">
-                    <img src={`https://cdn.discordapp.com/badge-icons/${b.icon}.png`} alt="" className="w-full h-full object-contain invert" />
+                  <div key={b.id} title={b.description} className="w-5 h-5 opacity-80 hover:opacity-100 transition-opacity">
+                    <img src={`https://cdn.discordapp.com/badge-icons/${b.icon}.png`} alt="" className="w-full h-full object-contain" />
                   </div>
                 ))
               )}
