@@ -146,19 +146,10 @@ function RootComponent() {
         theme="dark"
         position="top-right"
         closeButton
-        gap={10}
+        gap={12}
         toastOptions={{
-          classNames: {
-            toast:
-              "!bg-[#0c0c0c] !border !border-white/[0.08] !text-white !rounded-[12px] !shadow-[0_18px_48px_-36px_rgba(0,0,0,0.95)] !px-4 !py-3 !text-[13px]",
-            description: "!text-[#a1a1aa] !text-[12px]",
-            actionButton: "!bg-[#818cf8] !text-[#0a0a12] !rounded-[8px]",
-            cancelButton: "!bg-white/[0.05] !text-[#a1a1aa] !rounded-[8px]",
-            success: "!text-[#34d399]",
-            error: "!text-[#f87171]",
-            warning: "!text-[#fbbf24]",
-            info: "!text-[#c4b5fd]",
-          },
+          className: "spectre-toast",
+          duration: 4000,
         }}
       />
     </QueryClientProvider>

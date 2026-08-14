@@ -110,11 +110,11 @@ function NicksGunPage() {
     await Promise.all(workers);
     setRunning(false);
     setCurrent("");
-    if (!stopRef.current) toast.success("Varredura concluída");
+    if (!stopRef.current) toast.success("Sniper Finalizado", { description: "Varredura de candidatos concluída." });
   }, [length, charset, startsWith, concurrency]);
 
-  const stop = useCallback(() => { stopRef.current = true; toast.message("Parando..."); }, []);
-  const copy = (text: string) => { navigator.clipboard.writeText(text).then(() => toast.success(`${text} copiado`)); };
+  const stop = useCallback(() => { stopRef.current = true; toast.info("Sniper Abortado", { description: "O protocolo foi interrompido pelo usuário." }); }, []);
+  const copy = (text: string) => { navigator.clipboard.writeText(text).then(() => toast.success("Username Copiado", { description: `@${text} pronto para uso.` })); };
 
   if (!creds) {
     return (
