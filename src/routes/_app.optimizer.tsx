@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { PageHeader, Section } from "@/components/ui/ds";
+import { PageHeader } from "@/components/PageHeader";
+import { Section } from "@/components/Section";
 import { 
   Activity, 
   Cpu, 
@@ -72,10 +73,10 @@ function OverviewSection() {
     <div className="space-y-8 animate-in fade-in slide-in-from-bottom-2 duration-500">
       {/* Real-time Stats */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-        <MetricCard id="cpu" label="CPU Usage" value="42%" status="optimal" icon={Cpu} />
-        <MetricCard id="ram" label="RAM Usage" value="6.4 GB" status="warning" icon={Database} />
-        <MetricCard id="temp" label="CPU Temp" value="54°C" status="optimal" icon={Thermometer} />
-        <MetricCard id="fps" label="Current FPS" value="144" status="optimal" icon={Gauge} />
+        <MetricCard label="CPU Usage" value="42%" status="optimal" icon={Cpu} />
+        <MetricCard label="RAM Usage" value="6.4 GB" status="warning" icon={Database} />
+        <MetricCard label="CPU Temp" value="54°C" status="optimal" icon={Thermometer} />
+        <MetricCard label="Current FPS" value="144" status="optimal" icon={Gauge} />
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
