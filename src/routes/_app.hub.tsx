@@ -51,6 +51,7 @@ export const Route = createFileRoute("/_app/hub")({
 
 function HubPage() {
   const creds = useQuestStore((s) => s.creds);
+  const plan = useQuestStore((s) => s.plan);
   const [user, setUser] = useState<any>(null);
   const [stats, setStats] = useState<{ total: number; friends: number } | null>(null);
   const [dmCount, setDmCount] = useState<number | null>(null);
@@ -60,6 +61,7 @@ function HubPage() {
   const [loading, setLoading] = useState(true);
   const [leavingAll, setLeavingAll] = useState(false);
   const [showGuilds, setShowGuilds] = useState(false);
+
 
   useEffect(() => {
     if (!creds) {
