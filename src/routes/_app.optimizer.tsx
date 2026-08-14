@@ -25,11 +25,14 @@ import { PageHeader } from "@/components/PageHeader";
 import { cn } from "@/lib/utils";
 import { createFileRoute } from "@tanstack/react-router";
 
+import { useOptimizerService } from "@/lib/optimizer/optimizer-service";
+
 export const Route = createFileRoute("/_app/optimizer")({
   component: OptimizerDashboard,
 });
 
 function OptimizerDashboard() {
+  useOptimizerService();
   const [activeTab, setActiveTab] = useState("overview");
 
   return (
