@@ -34,7 +34,7 @@ export function SiteHeader({ guildInvite }: SiteHeaderProps) {
           : "bg-transparent"
       }`}
     >
-      <div className="mx-auto flex h-20 max-w-7xl items-center justify-between gap-4 px-6 lg:px-12 bg-[#080808]/90 backdrop-blur-md rounded-2xl mt-4 border border-white/5 mx-4 sm:mx-6">
+      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-4 px-6 lg:px-12 bg-[#080808]/90 backdrop-blur-md rounded-full mt-4 border border-white/5 mx-4 sm:mx-6 shadow-2xl shadow-black/50">
         <Link to="/" className="flex min-w-0 items-center gap-2.5">
           <img
             src={logoAsset.url}
