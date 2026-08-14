@@ -20,41 +20,32 @@ export function PlanBanner({
   cooldownLeft: number;
 }) {
   return (
-    <div className="relative overflow-hidden rounded-none border border-white/5 bg-[#050505] p-5 backdrop-blur-xl">
+    <div className="relative overflow-hidden rounded-none border border-white/5 bg-[#050505] p-5">
       <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
-        <div>
-          <div className="flex items-center gap-2">
-            <span className="ds-label">plano ativo</span>
-            <Badge variant={plan === "premium" ? "accent" : plan === "boost" ? "accent" : "default"}>
-              {limits.label}
-            </Badge>
+        <div className="flex items-center gap-12">
+          <div className="space-y-1">
+            <div className="font-mono text-[9px] uppercase tracking-[0.2em] text-[#444]">PLANO ATIVO</div>
+            <div className="text-sm font-black uppercase tracking-tight text-white">{limits.label}</div>
           </div>
-          <div className="mt-2 flex flex-wrap items-baseline gap-4">
-            <div className="text-2xl font-bold tracking-tight text-white sm:text-3xl">
-              {remaining === Infinity ? "∞" : remaining}
-              <span className="ml-2 text-xs font-medium uppercase tracking-widest text-slate-500">
-                restantes hoje
-              </span>
+          
+          <div className="space-y-1">
+            <div className="font-mono text-[9px] uppercase tracking-[0.2em] text-[#444]">RESTANTES HOJE</div>
+            <div className="flex items-center gap-2">
+              <span className="text-xl font-black text-white">{remaining === Infinity ? "∞" : remaining}</span>
             </div>
           </div>
         </div>
 
-        <div className="flex flex-col items-end gap-1 text-right">
-          {cooldownText ? (
-            <>
-              <div className="font-mono text-[10px] uppercase tracking-widest text-[#ff0055]">
-                cooldown ativo
-              </div>
-              <div className="text-2xl font-bold tabular-nums text-white">{cooldownText}</div>
-            </>
-          ) : (
-            <>
-              <div className="font-mono text-[10px] uppercase tracking-widest text-[var(--ok)]">
-                pronto
-              </div>
-              <div className="text-2xl font-bold text-white tracking-tight">SISTEMA LIVRE</div>
-            </>
-          )}
+        <div className="flex flex-col items-end">
+          <div className="font-mono text-[9px] uppercase tracking-[0.2em] text-[#444]">
+            {cooldownText ? "COOLDOWN ATIVO" : "PRONTO"}
+          </div>
+          <div className={cn(
+            "text-xl font-black tracking-tighter",
+            cooldownText ? "text-[#ff0055]" : "text-white"
+          )}>
+            {cooldownText || "SISTEMA LIVRE"}
+          </div>
         </div>
       </div>
 
@@ -88,8 +79,8 @@ export function MissionCard({
 
   return (
     <Card className={cn(
-      "group relative flex flex-col justify-between transition-all duration-300",
-      active ? "border-[#ff0055]/40 bg-[#ff0055]/5" : "hover:border-white/10"
+      "group relative flex min-h-[140px] flex-col justify-between transition-all duration-300 !p-4 border-white/5 bg-[#050505] hover:bg-[#080808]",
+      active ? "border-[#ff0055]/40" : "hover:border-white/10"
     )}>
       {quest.imageUrl && (
         <div className="absolute inset-0 z-0 opacity-20 transition-opacity group-hover:opacity-30">
@@ -109,12 +100,14 @@ export function MissionCard({
       )}
 
       <div>
-        <div className="relative z-10 flex items-start justify-between gap-2">
-          <div className="ds-label text-[9px] text-slate-500 uppercase tracking-widest">#{quest.questId.slice(-8)}</div>
-          {isOrb && <Sparkles className="h-3 w-3 text-amber-400" />}
+        <div className="relative z-10 flex items-start justify-between">
+          <div className="font-mono text-[9px] text-[#444] uppercase tracking-widest">#{quest.questId.slice(0, 8)}</div>
+          {isOrb && <Sparkles className="h-3.5 w-3.5 text-amber-500 fill-amber-500/20" />}
         </div>
-        <h3 className="relative z-10 mt-2 line-clamp-2 text-sm font-bold text-white tracking-tight group-hover:text-[#ff0055] transition-colors">{quest.questName}</h3>
-        <p className="relative z-10 mt-1 line-clamp-2 text-[10px] leading-relaxed text-slate-500">{quest.rewardText}</p>
+        <h3 className="relative z-10 mt-2 line-clamp-1 text-[13px] font-black uppercase text-white tracking-tight group-hover:text-[#ff0055] transition-colors">
+          {quest.questName}
+        </h3>
+        <p className="relative z-10 mt-1 line-clamp-1 font-mono text-[10px] text-[#555] uppercase">{quest.rewardText}</p>
       </div>
 
       <div className="relative z-10 mt-4">
@@ -163,29 +156,48 @@ export function CaptchaModal({
 }) {
   return (
     <Modal
-      title="Verificação de Segurança"
+      title="ADVISOR"
       onClose={onCancel}
+      className="border-white/10 !rounded-none"
       actions={
-        <>
-          <Button variant="ghost" onClick={onCancel}>cancelar</Button>
-          <Button variant="primary" onClick={onSolved}>confirmar e iniciar</Button>
-        </>
+        <div className="flex w-full items-center justify-center gap-3">
+          <Button 
+            variant="ghost" 
+            className="uppercase font-black text-xs tracking-widest" 
+            onClick={onCancel}
+          >
+            CANCELAR
+          </Button>
+          <Button 
+            variant="primary" 
+            className="ds-btn-lg min-w-[200px] uppercase font-black text-xs tracking-widest" 
+            onClick={onSolved}
+          >
+            CONFIRMAR E INICIAR
+          </Button>
+        </div>
       }
     >
-      <div className="space-y-4">
-        <div className="flex items-start gap-3 rounded-none border border-amber-500/20 bg-amber-500/5 p-4">
-          <AlertTriangle className="h-5 w-5 shrink-0 text-amber-500" />
-          <div className="text-xs leading-relaxed text-amber-200/80">
-            {label || `Você está prestes a iniciar a missão "${quest?.questName}".`}
-            <br /><br />
-            Para evitar detecção, o Spectre Hub simula o comportamento humano. Certifique-se de que sua conta não está sendo usada em outro dispositivo no momento.
+      <div className="space-y-6">
+        <div className="relative overflow-hidden border border-amber-500/20 bg-amber-500/5 p-5">
+          <div className="flex items-start gap-4">
+            <AlertTriangle className="h-5 w-5 shrink-0 text-amber-500" />
+            <div className="text-xs leading-relaxed text-amber-200/80">
+              <span className="block mb-2 font-bold text-amber-500 uppercase tracking-widest">Aviso de Segurança</span>
+              {label || (
+                <>
+                  Você está prestes a iniciar a missão <span className="text-white font-bold">"{quest?.questName}"</span>.
+                </>
+              )}
+              <br /><br />
+              Para evitar detecção, o Spectre Hub simula o comportamento humano. Certifique-se de que sua conta não está sendo usada em outro dispositivo no momento.
+            </div>
           </div>
         </div>
         
-        <div className="rounded-none border border-white/5 bg-black/40 p-4 text-center">
-          <div className="ds-label mb-2">confirmação spectre-hub</div>
-
-          <div className="font-mono text-xl font-black tracking-tighter text-white">READY_TO_DEPLOY</div>
+        <div className="border border-white/5 bg-[#080808] p-6 text-center">
+          <div className="font-mono text-[9px] mb-3 uppercase tracking-[0.3em] text-[#444]">CONFIRMAÇÃO SPECTRE-HUB</div>
+          <div className="font-mono text-2xl font-black tracking-tighter text-white">READY_TO_DEPLOY</div>
         </div>
       </div>
     </Modal>
