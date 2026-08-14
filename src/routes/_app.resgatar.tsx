@@ -112,7 +112,7 @@ function RedeemPage() {
       />
 
       {/* Saldo */}
-      <Card className="flex flex-wrap items-center justify-between gap-4">
+      <Card className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
           <div className="ds-label">
             <Coins className="h-3.5 w-3.5" />

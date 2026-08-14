@@ -144,7 +144,7 @@ function SettingsPage() {
               />
             </Field>
 
-            <div className="flex flex-wrap items-center justify-between gap-3">
+            <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
               <Button type="submit" variant="primary" disabled={saving || !token}>
                 {saving ? "validando…" : "→ salvar & validar"}
               </Button>
@@ -266,7 +266,7 @@ function TokenTutorial() {
                   Na janela que abrir, clique em <b>Mais...</b> ou <b>Escolher outra pasta...</b> para
                   editar a URL.
                 </span>
-                <div className="grid grid-cols-2 gap-2">
+                <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
                   <img
                     src={step2.url}
                     alt="Passo 2"
