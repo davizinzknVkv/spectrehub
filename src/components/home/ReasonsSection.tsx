@@ -8,7 +8,7 @@ interface ReasonsSectionProps {
 
 export function ReasonsSection({ reasons }: ReasonsSectionProps) {
   return (
-    <section id="recursos" className="mx-auto max-w-7xl px-4 py-24 sm:px-6 sm:py-32 lg:px-8">
+    <section id="recursos" className="mx-auto max-w-7xl px-4 py-24 sm:px-6 sm:py-32 lg:px-8 reveal-item">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
         <Reveal>
           <h2 className="font-display text-[2.8rem] font-[900] leading-[0.9] tracking-tighter text-white sm:text-7xl lg:text-[5.5rem]">

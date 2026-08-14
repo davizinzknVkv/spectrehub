@@ -41,7 +41,7 @@ export function FreeSignup({ guildInvite }: FreeSignupProps) {
   }
 
   return (
-    <section id="free" className="mx-auto max-w-7xl px-4 py-20 sm:px-6 sm:py-28 lg:px-8">
+    <section id="free" className="mx-auto max-w-7xl px-4 py-20 sm:px-6 sm:py-28 lg:px-8 reveal-item">
       <Reveal>
         <div className="grid gap-12 rounded-[40px] border border-white/10 bg-[#080808]/40 p-8 backdrop-blur-xl md:grid-cols-[1.1fr_0.9fr] md:p-16 shadow-2xl">
           <div>
