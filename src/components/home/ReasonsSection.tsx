@@ -6,7 +6,7 @@ interface ReasonsSectionProps {
   reasons: Reason[];
 }
 
-export function ReasonsSection({ reasons }: reasonsSectionProps) {
+export function ReasonsSection({ reasons }: ReasonsSectionProps) {
   return (
     <section id="recursos" className="mx-auto max-w-7xl px-4 py-24 sm:px-6 lg:px-8">
       <div className="grid grid-cols-1 lg:grid-cols-[450px_1fr] gap-20 items-start">
@@ -25,7 +25,7 @@ export function ReasonsSection({ reasons }: reasonsSectionProps) {
         </Reveal>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-px bg-white/5 border border-white/5">
-          {reasons.map((r, i) => (
+          {reasons.map((r: Reason, i: number) => (
             <Reveal key={r.title} delay={i * 100}>
               <div className="bg-obsidian p-10 h-full border border-transparent hover:border-spectre-pink/20 transition-all duration-500 group">
                 <div className="mb-8 w-12 h-12 border border-white/10 flex items-center justify-center text-white group-hover:bg-spectre-pink group-hover:border-spectre-pink transition-all duration-500">
