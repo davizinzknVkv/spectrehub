@@ -55,13 +55,12 @@ export function Hero({ guildInvite, fallbackMembers }: HeroProps) {
         </Reveal>
 
         <Reveal delay={240}>
-          <div className="mt-9 flex flex-wrap items-center justify-center gap-4 sm:flex-nowrap">
-            <a href="#produtos" className="ds-btn ds-btn-primary ds-btn-lg">
-              <span className="flex items-center gap-2"><ArrowRight className="h-4 w-4 shrink-0" /> QUERO USAR O SPECTRE</span>
+          <div className="mt-9 flex flex-col items-center justify-center gap-4 sm:flex-row sm:flex-nowrap">
+            <a href="#produtos" className="ds-btn ds-btn-primary ds-btn-lg w-full sm:w-auto">
+              <span className="flex items-center gap-2 whitespace-nowrap"><ArrowRight className="h-4 w-4 shrink-0" /> QUERO USAR O SPECTRE</span>
             </a>
-
-            <a href={guildInvite} target="_blank" rel="noreferrer" className="ds-btn ds-btn-secondary ds-btn-lg">
-              <span className="flex items-center gap-2">VER OS SISTEMAS <ArrowRight className="h-4 w-4 shrink-0 rotate-90" /></span>
+            <a href={guildInvite} target="_blank" rel="noreferrer" className="ds-btn ds-btn-secondary ds-btn-lg w-full sm:w-auto">
+              <span className="flex items-center gap-2 whitespace-nowrap">VER OS SISTEMAS <ArrowRight className="h-4 w-4 shrink-0 rotate-90" /></span>
             </a>
           </div>
         </Reveal>
