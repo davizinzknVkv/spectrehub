@@ -91,8 +91,13 @@ import { Reveal } from "@/components/home/Reveal";
 import { SiteHeader } from "@/components/home/SiteHeader";
 import { Hero } from "@/components/home/Hero";
 import { SocialProof } from "@/components/home/SocialProof";
-
-import { Avatar } from "@/components/home/Avatar";
+import { ProductsSection } from "@/components/home/ProductsSection";
+import { ReasonsSection } from "@/components/home/ReasonsSection";
+import { PlansSection } from "@/components/home/PlansSection";
+import { FreeSignup } from "@/components/home/FreeSignup";
+import { CommunitySection } from "@/components/home/CommunitySection";
+import { FinalCta } from "@/components/home/FinalCta";
+import { SiteFooter } from "@/components/home/SiteFooter";
 
 /* ─────────────────────────── page ─────────────────────────── */
 
