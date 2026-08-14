@@ -821,10 +821,14 @@ function ProductsSection() {
                   ? "bg-[#ff0055] border-[#ff0055] text-white"
                   : "bg-white/5 border-white/10 text-[#8a8a8a] hover:bg-white/10"
               }`}
+              style={{
+                clipPath: "polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px)"
+              }}
             >
               {p.name}
             </button>
           ))}
+
         </div>
 
         <div className="mt-12 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
