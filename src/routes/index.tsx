@@ -862,17 +862,17 @@ function ProductsSection() {
                 <div className="flex h-8 w-8 items-center justify-center rounded-sm bg-[#ff0055] text-white">
                   <ChevronRight className="h-4 w-4" />
                 </div>
-                <h3 className="font-display text-5xl font-extrabold tracking-tighter text-white uppercase sm:text-6xl">
+                <h3 className="ds-h2">
                   {PRODUCTS[activeTab].name}
                 </h3>
               </div>
-              <span className="mt-2 block text-[10px] font-bold text-[#ff0055] uppercase tracking-widest">
+              <span className="mt-4 block ds-label text-[#ff0055]">
                 SPECTRE-{PRODUCTS[activeTab].id.toUpperCase()}
               </span>
             </Reveal>
 
             <Reveal delay={100}>
-              <p className="mt-8 text-lg font-medium leading-relaxed text-[#8a8a8a]">
+              <p className="mt-8 ds-body leading-relaxed text-[#8a8a8a]">
                 {PRODUCTS[activeTab].desc}
               </p>
             </Reveal>
