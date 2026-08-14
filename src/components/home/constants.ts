@@ -1,4 +1,4 @@
-import { Zap, Gauge, Target, Tag, ShieldCheck, Music4 } from "lucide-react";
+import { Zap, Gauge, Target, Tag, ShieldCheck, Music4, Sparkles, LifeBuoy } from "lucide-react";
 
 export type Product = {
   id: string;
