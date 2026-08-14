@@ -83,7 +83,7 @@ export function MissionCard({
       active ? "border-[#ff0055]/40" : "hover:border-white/10"
     )}>
       {quest.imageUrl && (
-        <div className="absolute inset-0 z-0 opacity-20 transition-opacity group-hover:opacity-30">
+        <div className="absolute inset-0 z-0 overflow-hidden opacity-20 transition-opacity group-hover:opacity-30">
           <img
             src={quest.imageUrl}
             alt=""
