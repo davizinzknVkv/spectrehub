@@ -1,12 +1,13 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
-import { Copy, Server, ArrowRight, CheckCircle2, AlertCircle } from "lucide-react";
+import { useState, useEffect } from "react";
+import { Copy, Server, ArrowRight, CheckCircle2, AlertCircle, ChevronDown, Search } from "lucide-react";
 import { useQuestStore } from "@/lib/quest-store";
 import { PageHeader } from "@/components/PageHeader";
 import { Button, Card, Badge } from "@/components/ui/ds";
 import { toast } from "sonner";
 import { useServerFn } from "@tanstack/react-start";
-import { cloneServer } from "@/lib/cloner.functions";
+import { cloneServer, getGuilds } from "@/lib/cloner.functions";
+import * as Popover from "@radix-ui/react-popover";
 
 export const Route = createFileRoute("/_app/clone")({
   head: () => ({ meta: [{ title: "Discord Tools — Spectre Hub" }] }),
@@ -17,8 +18,32 @@ function ClonePage() {
   const creds = useQuestStore((s) => s.creds);
   const [originId, setOriginId] = useState("");
   const [destId, setDestId] = useState("");
+  const [guilds, setGuilds] = useState<any[]>([]);
+  const [loadingGuilds, setLoadingGuilds] = useState(false);
   const [loading, setLoading] = useState(false);
   const runClone = useServerFn(cloneServer);
+  const fetchGuilds = useServerFn(getGuilds);
+
+  useEffect(() => {
+    if (creds?.token) {
+      loadGuilds();
+    }
+  }, [creds?.token]);
+
+  const loadGuilds = async () => {
+    if (!creds?.token) return;
+    setLoadingGuilds(true);
+    try {
+      const res = await fetchGuilds({ data: { token: creds.token } });
+      if (res.ok) {
+        setGuilds(res.guilds || []);
+      }
+    } catch (err) {
+      console.error("Failed to load guilds", err);
+    } finally {
+      setLoadingGuilds(false);
+    }
+  };
 
   const handleClone = async () => {
     if (!creds?.token) {
@@ -78,17 +103,14 @@ function ClonePage() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 relative">
               <div className="space-y-4">
-                <label className="font-display text-[9px] uppercase tracking-widest text-white/40 italic block px-1">ID Origem (Fonte)</label>
-                <div className="relative group">
-                  <Server className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-white/20 group-focus-within:text-spectre-pink transition-colors" />
-                  <input 
-                    type="text"
-                    value={originId}
-                    onChange={(e) => setOriginId(e.target.value.replace(/\D/g, ""))}
-                    placeholder="Ex: 123456789..."
-                    className="w-full bg-obsidian border border-white/10 p-4 pl-12 font-mono text-xs text-white focus:outline-none focus:border-spectre-pink/50 transition-all"
-                  />
-                </div>
+                <label className="font-display text-[9px] uppercase tracking-widest text-white/40 italic block px-1">Servidor Origem (Fonte)</label>
+                <GuildSelector 
+                  value={originId} 
+                  onChange={setOriginId} 
+                  guilds={guilds} 
+                  loading={loadingGuilds}
+                  placeholder="Selecione o servidor de origem..."
+                />
               </div>
 
               <div className="hidden md:flex absolute left-1/2 top-[60%] -translate-x-1/2 -translate-y-1/2 w-8 h-8 items-center justify-center bg-obsidian border border-white/10 z-10">
@@ -96,17 +118,14 @@ function ClonePage() {
               </div>
 
               <div className="space-y-4">
-                <label className="font-display text-[9px] uppercase tracking-widest text-white/40 italic block px-1">ID Destino (Alvo)</label>
-                <div className="relative group">
-                  <Server className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-white/20 group-focus-within:text-spectre-pink transition-colors" />
-                  <input 
-                    type="text"
-                    value={destId}
-                    onChange={(e) => setDestId(e.target.value.replace(/\D/g, ""))}
-                    placeholder="Ex: 987654321..."
-                    className="w-full bg-obsidian border border-white/10 p-4 pl-12 font-mono text-xs text-white focus:outline-none focus:border-spectre-pink/50 transition-all"
-                  />
-                </div>
+                <label className="font-display text-[9px] uppercase tracking-widest text-white/40 italic block px-1">Servidor Destino (Alvo)</label>
+                <GuildSelector 
+                  value={destId} 
+                  onChange={setDestId} 
+                  guilds={guilds} 
+                  loading={loadingGuilds}
+                  placeholder="Selecione o servidor de destino..."
+                />
               </div>
             </div>
 
@@ -187,5 +206,101 @@ function ClonePage() {
         </aside>
       </div>
     </div>
+  );
+}
+
+function GuildSelector({ 
+  value, 
+  onChange, 
+  guilds, 
+  loading, 
+  placeholder 
+}: { 
+  value: string; 
+  onChange: (v: string) => void; 
+  guilds: any[]; 
+  loading: boolean;
+  placeholder: string;
+}) {
+  const [open, setOpen] = useState(false);
+  const [search, setSearch] = useState("");
+  const selectedGuild = guilds.find(g => g.id === value);
+
+  const filteredGuilds = guilds.filter(g => 
+    g.name.toLowerCase().includes(search.toLowerCase()) || 
+    g.id.includes(search)
+  );
+
+  return (
+    <Popover.Root open={open} onOpenChange={setOpen}>
+      <Popover.Trigger asChild>
+        <button className="w-full bg-obsidian border border-white/10 p-4 font-mono text-xs text-white flex items-center justify-between group focus:border-spectre-pink/50 transition-all text-left">
+          <div className="flex items-center gap-3 overflow-hidden">
+            <Server className={`w-4 h-4 flex-shrink-0 ${selectedGuild ? 'text-spectre-pink' : 'text-white/20'}`} />
+            <span className={`truncate ${!selectedGuild ? 'text-white/30' : ''}`}>
+              {selectedGuild ? selectedGuild.name : placeholder}
+            </span>
+          </div>
+          <ChevronDown className={`w-4 h-4 text-white/20 group-hover:text-white/40 transition-transform ${open ? 'rotate-180' : ''}`} />
+        </button>
+      </Popover.Trigger>
+      
+      <Popover.Portal>
+        <Popover.Content 
+          className="z-[100] w-[var(--radix-popover-trigger-width)] bg-obsidian border border-white/10 shadow-2xl animate-in fade-in zoom-in-95 duration-200"
+          align="start"
+          sideOffset={4}
+        >
+          <div className="p-2 border-b border-white/5 flex items-center gap-2">
+            <Search className="w-3 h-3 text-white/20" />
+            <input 
+              className="bg-transparent border-none outline-none text-[10px] text-white placeholder:text-white/20 w-full font-mono"
+              placeholder="Pesquisar servidor..."
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              autoFocus
+            />
+          </div>
+          
+          <div className="max-h-[240px] overflow-y-auto custom-scrollbar">
+            {loading ? (
+              <div className="p-4 text-center">
+                <div className="w-4 h-4 border-2 border-spectre-pink/20 border-t-spectre-pink animate-spin mx-auto mb-2" />
+                <span className="text-[8px] uppercase tracking-widest text-white/20">Carregando...</span>
+              </div>
+            ) : filteredGuilds.length === 0 ? (
+              <div className="p-4 text-center text-[8px] uppercase tracking-widest text-white/20">
+                Nenhum servidor encontrado
+              </div>
+            ) : (
+              filteredGuilds.map((guild: any) => (
+                <button
+                  key={guild.id}
+                  onClick={() => {
+                    onChange(guild.id);
+                    setOpen(false);
+                  }}
+                  className={`w-full p-3 flex items-center gap-3 hover:bg-white/5 transition-colors text-left group ${value === guild.id ? 'bg-spectre-pink/5' : ''}`}
+                >
+                  <div className="w-6 h-6 flex-shrink-0 bg-white/5 border border-white/10 flex items-center justify-center overflow-hidden">
+                    {guild.icon ? (
+                      <img src={`https://cdn.discordapp.com/icons/${guild.id}/${guild.icon}.png`} alt="" className="w-full h-full object-cover" />
+                    ) : (
+                      <span className="text-[8px] text-white/40">{guild.name[0]}</span>
+                    )}
+                  </div>
+                  <div className="flex flex-col overflow-hidden">
+                    <span className={`text-[10px] truncate font-display italic tracking-wider ${value === guild.id ? 'text-spectre-pink' : 'text-white'}`}>
+                      {guild.name}
+                    </span>
+                    <span className="text-[8px] font-mono text-white/20 truncate">{guild.id}</span>
+                  </div>
+                </button>
+              ))
+            )}
+          </div>
+        </Popover.Content>
+      </Popover.Portal>
+    </Popover.Root>
   );
 }
