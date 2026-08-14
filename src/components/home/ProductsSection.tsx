@@ -33,7 +33,7 @@ export function ProductsSection({ products }: ProductsSectionProps) {
         {/* Gallery / Preview */}
         <Reveal className="relative aspect-video lg:aspect-square bg-obsidian-soft border border-white/5 overflow-hidden group">
            <div className="absolute inset-0 bg-gradient-to-tr from-spectre-pink/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
-           <div className="absolute inset-0 flex items-center justify-center p-8 md:p-16">
+           <div className="absolute inset-0 flex items-center justify-center p-8 md:p-12">
              <div className="relative w-full h-full border border-white/10 bg-black/40 backdrop-blur-sm p-4 transition-transform duration-700 group-hover:scale-[1.02]">
                 <div className="w-full h-full bg-[#111] overflow-hidden relative">
                    {products[activeTab].id === "quests" ? (
@@ -49,13 +49,13 @@ export function ProductsSection({ products }: ProductsSectionProps) {
                         alt="Interface Preview" 
                      />
                    )}
-                   <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent" />
+                   <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60" />
                    
-                   <div className="absolute bottom-8 left-8 right-8">
-                      <div className="font-display text-4xl text-white uppercase italic mb-2 drop-shadow-lg">
+                   <div className="absolute bottom-6 left-6 right-6 z-10">
+                      <div className="font-display text-4xl text-white uppercase italic mb-2 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
                         {products[activeTab].name}
                       </div>
-                      <div className="font-sans text-white/70 text-sm max-w-md drop-shadow-md">
+                      <div className="font-sans text-white/80 text-sm max-w-md drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)] leading-tight">
                         {products[activeTab].desc}
                       </div>
                    </div>
