@@ -129,25 +129,25 @@ export function SocialProof({ widgetUrl, products: productsList }: SocialProofPr
   const latencyCount = useCountUp(stats.latency, inView);
 
   return (
-    <section className="border-y border-white/[0.06] bg-black/40 backdrop-blur-sm">
-      <div ref={ref} className="mx-auto max-w-7xl px-4 py-8 sm:px-6 sm:py-10 lg:px-8">
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-8 text-[10px] font-bold text-[#8a8a8a] uppercase tracking-[0.2em]">
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:flex md:items-center gap-6 sm:gap-10 lg:gap-16 w-full md:w-auto">
-             <div className="flex items-center gap-3">
-               <span className="text-white text-xl lg:text-2xl font-display tracking-tighter shrink-0">{Math.round(membersCount)}+</span>
-               <span className="leading-tight">MEMBROS NA COMUNIDADE</span>
+    <section className="border-y border-white/[0.08] bg-[#030303] relative z-10">
+      <div ref={ref} className="mx-auto max-w-7xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-12 text-[11px] font-black text-[#555] uppercase tracking-[0.25em]">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:flex md:items-center gap-10 sm:gap-16 lg:gap-24 w-full md:w-auto">
+             <div className="flex items-center gap-4 group">
+               <span className="text-white text-3xl lg:text-4xl font-display font-[900] tracking-tighter shrink-0 transition-transform group-hover:scale-110 duration-500">{Math.round(membersCount)}+</span>
+               <span className="leading-tight border-l border-white/10 pl-4 py-1">MEMBROS<br />ATIVOS</span>
              </div>
-             <div className="flex items-center gap-3">
-               <span className="text-white text-xl lg:text-2xl font-display tracking-tighter shrink-0">{Math.round(productsCount)}</span>
-               <span className="leading-tight">PRODUTOS DISPONÍVEIS</span>
+             <div className="flex items-center gap-4 group">
+               <span className="text-white text-3xl lg:text-4xl font-display font-[900] tracking-tighter shrink-0 transition-transform group-hover:scale-110 duration-500">{Math.round(productsCount)}</span>
+               <span className="leading-tight border-l border-white/10 pl-4 py-1">SISTEMAS<br />PROPRIETÁRIOS</span>
              </div>
-             <div className="flex items-center gap-3">
-               <span className="text-white text-xl lg:text-2xl font-display tracking-tighter shrink-0">{latencyCount.toFixed(2)}<span className="text-[#ff0055]">ms</span></span>
-               <span className="leading-tight">IMPACTO NO DISCORD</span>
+             <div className="flex items-center gap-4 group">
+               <span className="text-white text-3xl lg:text-4xl font-display font-[900] tracking-tighter shrink-0 transition-transform group-hover:scale-110 duration-500">{latencyCount.toFixed(2)}<span className="text-[#ff0055]">ms</span></span>
+               <span className="leading-tight border-l border-white/10 pl-4 py-1">TEMPO DE<br />EXECUÇÃO</span>
              </div>
           </div>
-          <div className="hidden lg:block whitespace-nowrap">
-            PROPERTY OF SPECTRE. ALL CREATIVE RIGHTS RESERVED.
+          <div className="hidden xl:block whitespace-nowrap opacity-30 font-mono text-[9px] tracking-[0.4em]">
+            SYSTEM_STATUS: OPTIMIZED // LATENCY: NOMINAL
           </div>
         </div>
       </div>
