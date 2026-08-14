@@ -58,7 +58,7 @@ function HubPage() {
           { icon: Crosshair, label: "Sniper", val: "Pronto", link: "/nicksgun" },
           { icon: Gift, label: "Orbs", val: "Consultar", link: "/resgatar" },
         ].map((item) => (
-          <Link to={item.link} key={item.label} className="ds-card ds-card-interactive flex flex-col p-6 group">
+          <Link to={item.link} key={item.label} className="ds-card p-6 border-white/5 bg-white/[0.02] flex flex-col group hover:border-spectre-pink/40 transition-all">
             <div className="flex justify-between items-start mb-4">
                <item.icon className="w-5 h-5 text-spectre-pink" />
                <span className="font-display text-[9px] uppercase tracking-widest text-white/20">{item.val}</span>
