@@ -50,7 +50,7 @@ export function SiteHeader({ guildInvite }: SiteHeaderProps) {
             />
           </div>
           <span className="truncate font-display text-[15px] xs:text-[16px] font-black tracking-tight text-white uppercase shrink-0">
-            SpectreHub
+            SPECTRE | HUB
           </span>
         </Link>
 
