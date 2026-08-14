@@ -112,7 +112,7 @@ function AppLayout() {
 
       <div className="grid min-h-screen w-full grid-cols-1 lg:grid-cols-[236px_1fr] overflow-hidden">
         {/* Desktop sidebar */}
-        <aside className="hidden border-r border-white/5 bg-[#050505] lg:sticky lg:top-0 lg:block lg:h-screen">
+        <aside className="hidden border-r border-white/5 bg-[#050505] lg:sticky lg:top-0 lg:block lg:h-screen lg:w-[236px]">
           <SidebarBody pathname={pathname} creds={creds} setCreds={setCreds} />
         </aside>
 
@@ -141,9 +141,9 @@ function AppLayout() {
         )}
 
         {/* Main */}
-        <main className="min-w-0">
+        <main className="min-w-0 flex flex-col w-full">
           <TopBar onOpenMenu={() => setMobileOpen(true)} pathname={pathname} />
-          <div className="mx-auto w-full max-w-6xl px-4 pb-14 pt-6 sm:px-8 sm:pt-8 lg:px-10 lg:pb-16 lg:pt-10 overflow-hidden">
+          <div className="flex-1 w-full max-w-6xl mx-auto px-4 pb-14 pt-6 sm:px-8 sm:pt-8 lg:px-10 lg:pb-16 lg:pt-10 overflow-hidden">
             <Outlet />
           </div>
         </main>
