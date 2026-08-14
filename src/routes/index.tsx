@@ -83,18 +83,21 @@ function Index() {
 
       <main>
         <Hero guildInvite={GUILD_INVITE} fallbackMembers={FALLBACK_MEMBERS} />
-        <SocialProof widgetUrl={WIDGET_URL} products={PRODUCTS} />
-        <ProductsSection products={PRODUCTS} />
-        <ReasonsSection reasons={REASONS} />
-        <PlansSection plans={PLANS} />
-        <FreeSignup guildInvite={GUILD_INVITE} />
-        <CommunitySection 
-          widgetUrl={WIDGET_URL} 
-          guildId={GUILD_ID} 
-          guildInvite={GUILD_INVITE} 
-          fallbackMembers={FALLBACK_MEMBERS} 
-        />
-        <FinalCta guildInvite={GUILD_INVITE} />
+        
+        <div className="reveal-stagger">
+          <SocialProof widgetUrl={WIDGET_URL} products={PRODUCTS} />
+          <ProductsSection products={PRODUCTS} />
+          <ReasonsSection reasons={REASONS} />
+          <PlansSection plans={PLANS} />
+          <FreeSignup guildInvite={GUILD_INVITE} />
+          <CommunitySection 
+            widgetUrl={WIDGET_URL} 
+            guildId={GUILD_ID} 
+            guildInvite={GUILD_INVITE} 
+            fallbackMembers={FALLBACK_MEMBERS} 
+          />
+          <FinalCta guildInvite={GUILD_INVITE} />
+        </div>
       </main>
 
       <SiteFooter guildInvite={GUILD_INVITE} />
