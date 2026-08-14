@@ -124,6 +124,11 @@ export function Input({ className, ...props }: InputHTMLAttributes<HTMLInputElem
   return <input className={cn("ds-input", className)} {...props} />;
 }
 
+export function TextArea({ className, ...props }: React.TextareaHTMLAttributes<HTMLTextAreaElement>) {
+  return <textarea className={cn("ds-input min-h-[80px] py-2", className)} {...props} />;
+}
+
+
 export function Field({
   label,
   hint,
