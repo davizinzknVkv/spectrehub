@@ -16,7 +16,7 @@ export const PRODUCTS: Product[] = [
     id: "quests",
     name: "Auto Quests",
     category: "Automação",
-    desc: "Automatize vendas e atendimentos com o SPECTRE TOTEM. Um sistema completo de autoatendimento, com estoque integrado, controle de faturamento, personalização individual e totens ilimitados.",
+    desc: "Execução massiva de missões oficiais do Discord. Coleta automatizada de Orbs e recompensas com sistema anti-detecção e cooldown inteligente.",
     status: "Estável",
     to: "/missoes",
     icon: Zap,
