@@ -158,7 +158,16 @@
   &:disabled {
     opacity: 0.5;
     cursor: not-allowed;
+    clip-path: none !important;
+    border-radius: 0 !important;
   }
+}
+
+@utility ds-btn-lg {
+  height: 4rem;
+  padding: 0 3rem;
+  font-size: 0.95rem;
+  min-width: 220px;
 }
 
 @utility ds-btn-primary {
