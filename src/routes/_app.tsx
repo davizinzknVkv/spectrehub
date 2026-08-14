@@ -344,7 +344,6 @@ function TopBar({ onOpenMenu, pathname }: { onOpenMenu: () => void; pathname: st
       {confirmLogout && (
         <Modal
           title="Encerrar Sessão"
-          description="Sua chave de acesso será removida deste terminal local."
           onClose={() => setConfirmLogout(false)}
           actions={
             <div className="flex gap-4 w-full">
@@ -360,14 +359,17 @@ function TopBar({ onOpenMenu, pathname }: { onOpenMenu: () => void; pathname: st
             </div>
           }
         >
-          <div className="flex items-center gap-4 border border-white/5 p-4 bg-white/[0.02]">
-            <div className="w-12 h-12 bg-white/5 overflow-hidden">
-               {avatarUrl && <img src={avatarUrl} alt="" className="w-full h-full object-cover grayscale" />}
+          <div className="space-y-6">
+            <div className="flex items-center gap-4 border border-white/5 p-4 bg-white/[0.02]">
+              <div className="w-12 h-12 bg-white/5 overflow-hidden">
+                 {avatarUrl && <img src={avatarUrl} alt="" className="w-full h-full object-cover grayscale" />}
+              </div>
+              <div>
+                <div className="font-display text-xs text-white uppercase italic tracking-widest">{me?.global_name || me?.username}</div>
+                <div className="font-sans text-[9px] text-white/20 uppercase tracking-[0.2em]">Verified Hub User</div>
+              </div>
             </div>
-            <div>
-              <div className="font-display text-xs text-white uppercase italic tracking-widest">{me?.global_name || me?.username}</div>
-              <div className="font-sans text-[9px] text-white/20 uppercase tracking-[0.2em]">Verified Hub User</div>
-            </div>
+            <p className="text-white/60 text-xs font-sans italic leading-relaxed">Sua chave de acesso será removida deste terminal local. Você precisará autenticar novamente para acessar os protocolos premium.</p>
           </div>
         </Modal>
       )}
