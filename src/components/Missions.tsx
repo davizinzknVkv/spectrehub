@@ -154,29 +154,48 @@ export function CaptchaModal({
 }) {
   return (
     <Modal
-      title="Verificação de Segurança"
+      title="ADVISOR"
       onClose={onCancel}
+      className="border-white/10 !rounded-none"
       actions={
-        <>
-          <Button variant="ghost" onClick={onCancel}>cancelar</Button>
-          <Button variant="primary" onClick={onSolved}>confirmar e iniciar</Button>
-        </>
+        <div className="flex w-full items-center justify-center gap-3">
+          <Button 
+            variant="ghost" 
+            className="uppercase font-black text-xs tracking-widest" 
+            onClick={onCancel}
+          >
+            CANCELAR
+          </Button>
+          <Button 
+            variant="primary" 
+            className="ds-btn-lg min-w-[200px] uppercase font-black text-xs tracking-widest" 
+            onClick={onSolved}
+          >
+            CONFIRMAR E INICIAR
+          </Button>
+        </div>
       }
     >
-      <div className="space-y-4">
-        <div className="flex items-start gap-3 rounded-none border border-amber-500/20 bg-amber-500/5 p-4">
-          <AlertTriangle className="h-5 w-5 shrink-0 text-amber-500" />
-          <div className="text-xs leading-relaxed text-amber-200/80">
-            {label || `Você está prestes a iniciar a missão "${quest?.questName}".`}
-            <br /><br />
-            Para evitar detecção, o Spectre Hub simula o comportamento humano. Certifique-se de que sua conta não está sendo usada em outro dispositivo no momento.
+      <div className="space-y-6">
+        <div className="relative overflow-hidden border border-amber-500/20 bg-amber-500/5 p-5">
+          <div className="flex items-start gap-4">
+            <AlertTriangle className="h-5 w-5 shrink-0 text-amber-500" />
+            <div className="text-xs leading-relaxed text-amber-200/80">
+              <span className="block mb-2 font-bold text-amber-500 uppercase tracking-widest">Aviso de Segurança</span>
+              {label || (
+                <>
+                  Você está prestes a iniciar a missão <span className="text-white font-bold">"{quest?.questName}"</span>.
+                </>
+              )}
+              <br /><br />
+              Para evitar detecção, o Spectre Hub simula o comportamento humano. Certifique-se de que sua conta não está sendo usada em outro dispositivo no momento.
+            </div>
           </div>
         </div>
         
-        <div className="rounded-none border border-white/5 bg-black/40 p-4 text-center">
-          <div className="ds-label mb-2">confirmação spectre-hub</div>
-
-          <div className="font-mono text-xl font-black tracking-tighter text-white">READY_TO_DEPLOY</div>
+        <div className="border border-white/5 bg-[#080808] p-6 text-center">
+          <div className="font-mono text-[9px] mb-3 uppercase tracking-[0.3em] text-[#444]">CONFIRMAÇÃO SPECTRE-HUB</div>
+          <div className="font-mono text-2xl font-black tracking-tighter text-white">READY_TO_DEPLOY</div>
         </div>
       </div>
     </Modal>
