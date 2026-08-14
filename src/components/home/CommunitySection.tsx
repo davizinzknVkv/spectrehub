@@ -70,9 +70,9 @@ export function CommunitySection({ widgetUrl, guildId, guildInvite, fallbackMemb
               <span className="h-2 w-2 rounded-full bg-[#ff0055] shadow-[0_0_10px_#ff0055]" /> ECOSSISTEMA
             </span>
             <h2 className="mt-8 font-display text-[2.8rem] font-[900] leading-[0.9] tracking-tighter text-white sm:text-7xl lg:text-[5.5rem] uppercase italic">
-            DOMÍNIO
+            JUNTE-SE
             <br />
-            ABSOLUTO.
+            À ELITE.
             </h2>
             <p className="mt-10 text-[18px] font-medium text-[#8a8a8a] leading-[1.6] max-w-xl">
               Suporte técnico de alta performance, atualizações em tempo real e uma comunidade ativa que define os novos padrões do mercado.

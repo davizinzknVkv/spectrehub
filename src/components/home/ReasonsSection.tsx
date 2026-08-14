@@ -12,11 +12,11 @@ export function ReasonsSection({ reasons }: ReasonsSectionProps) {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
         <Reveal>
           <h2 className="font-display text-[2.8rem] font-[900] leading-[0.9] tracking-tighter text-white sm:text-7xl lg:text-[5.5rem]">
-            INFRAESTRUTURA
+            A ESCOLHA
             <br />
-            DE ALTO
+            DAS ELITES
             <br />
-            PADRÃO.
+            NO DISCORD.
           </h2>
           <p className="mt-10 text-[18px] font-medium text-[#8a8a8a] leading-[1.6] max-w-md px-1 border-l border-[#ff0055]/30 ml-1 pl-6">
             A SPECTRE é onde a inovação acontece. Desenvolvemos ferramentas proprietárias, testadas sob estresse real, para garantir que você esteja sempre um passo à frente da concorrência.
