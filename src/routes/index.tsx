@@ -327,7 +327,7 @@ function Index() {
   return (
     <div
       id="topo"
-      className="relative min-h-screen overflow-x-hidden bg-[#030303] font-sans text-[#f5f5f5] antialiased"
+      className="relative min-h-screen overflow-x-hidden bg-[#030303] font-sans text-[#f5f5f5] antialiased selection:bg-[#c5a059]/30"
     >
       <div aria-hidden className="pointer-events-none fixed inset-0 -z-10">
         <div
@@ -393,7 +393,7 @@ function SiteHeader() {
             className="h-8 w-8 object-contain shrink-0"
           />
           <span className="truncate font-display text-[15px] xs:text-[16px] font-extrabold tracking-tighter text-white uppercase shrink-0">
-            Spectre<span className="opacity-40 ml-1 font-light">|</span><span className="text-[#ff0055] ml-1">HUB</span>
+            Spectre<span className="opacity-40 ml-1 font-light">|</span><span className="text-[#c5a059] ml-1">HUB</span>
           </span>
         </Link>
 
@@ -413,7 +413,7 @@ function SiteHeader() {
           <Link to="/hub" className="text-[11px] font-bold text-white border border-white/10 px-6 py-2 rounded-sm hover:bg-white/5 transition-all uppercase tracking-widest flex items-center gap-2">
             <ArrowRight className="h-3 w-3" /> Entrar
           </Link>
-          <a href={GUILD_INVITE} target="_blank" rel="noreferrer" className="text-[11px] font-bold text-white bg-[#ff0055] px-6 py-2 rounded-sm hover:bg-[#ff0055]/90 transition-all uppercase tracking-widest flex items-center gap-2">
+          <a href={GUILD_INVITE} target="_blank" rel="noreferrer" className="text-[11px] font-bold text-white bg-[#c5a059] px-6 py-2 rounded-sm hover:bg-[#c5a059]/90 transition-all uppercase tracking-widest flex items-center gap-2">
             <ArrowRight className="h-3 w-3" /> Abrir Ticket
           </a>
         </div>
@@ -474,13 +474,13 @@ function Hero() {
       />
       <div
         aria-hidden
-        className="pointer-events-none absolute left-1/2 top-[-14rem] -z-10 h-[32rem] w-[52rem] -translate-x-1/2 rounded-full bg-[#ff0055]/5 blur-[130px]"
+        className="pointer-events-none absolute left-1/2 top-[-14rem] -z-10 h-[32rem] w-[52rem] -translate-x-1/2 rounded-full bg-[#c5a059]/5 blur-[130px]"
       />
 
       <div className="mx-auto max-w-3xl text-center">
         <Reveal>
           <span className="inline-flex items-center gap-3 rounded-full border border-white/5 bg-white/[0.02] px-4 py-1.5 font-mono text-[9px] uppercase tracking-[0.3em] text-[#8a8a8a] backdrop-blur-md">
-            <span className="h-1 w-1 rounded-full bg-[#ff0055] shadow-[0_0_8px_#ff0055]" />
+            <span className="h-1 w-1 rounded-full bg-[#c5a059] shadow-[0_0_8px_#c5a059]" />
             Inovação · Produto & Tecnologia
           </span>
         </Reveal>

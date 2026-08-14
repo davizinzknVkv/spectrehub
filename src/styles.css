@@ -4,28 +4,10 @@
 
 @custom-variant dark (&:is(.dark *));
 
-/*
- * Design system definition.
- *
- * The @theme inline block maps CSS custom properties to Tailwind utility
- * classes (e.g. --color-primary -> bg-primary, text-primary).
- *
- * The :root and .dark blocks define the actual color values using oklch.
- * All colors MUST use oklch format.
- *
- * To add a new semantic color:
- * 1. Add the variable to :root (light value) and .dark (dark value)
- * 2. Register it in @theme inline as --color-<name>: var(--<name>)
- */
-
 @theme inline {
-  --font-sans:
-    "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
-  --font-display:
-    "Archivo Black", ui-sans-serif, system-ui, sans-serif;
-  --font-mono:
-    "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
-
+  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-display: "Archivo Black", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
 
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
@@ -71,14 +53,16 @@
   --color-ink: var(--ink);
   --color-ink-dim: var(--ink-dim);
   --color-ink-mute: var(--ink-mute);
-}
 
+  /* BlackNetwork & CoreNetwork Mix */
+  --color-black-gold: #c5a059;
+  --color-black-gold-dim: rgba(197, 160, 89, 0.2);
+}
 
 :root {
   --radius: 0px;
 
-  /* ── NGHC Design System — single source of truth ─────────────────── */
-  /* Backgrounds / surfaces */
+  /* BlackNetwork Inspired Palette */
   --bg: #030303;
   --bg-2: #050505;
   --surface-1: #080808;
@@ -90,22 +74,14 @@
   --text-2: #a1a1aa;
   --text-3: #52525b;
 
-  /* Borders */
-  --border-1: rgba(255, 255, 255, 0.04);
-  --border-2: rgba(255, 255, 255, 0.08);
+  /* Gold Accent (BlackNetwork) */
+  --accent-1: #c5a059;
+  --accent-2: #e0b46d;
+  --accent-soft: rgba(197, 160, 89, 0.15);
 
-  /* Accent (Spectre Pink) */
-  --accent-1: #ff0055;
-  --accent-2: #ff2d78;
-  --accent-soft: #ff4d94;
-
-  /* Optimizer Neon Palette */
-  --neon-purple: #a855f7;
-  --neon-blue: #3b82f6;
-  --neon-cyan: #06b6d4;
-  --neon-purple-glow: rgba(168, 85, 247, 0.5);
-  --neon-blue-glow: rgba(59, 130, 246, 0.5);
-  --neon-cyan-glow: rgba(6, 182, 212, 0.5);
+  /* CoreNetwork Neon Accents (Optional/Mixed) */
+  --neon-cyan: #00f2ff;
+  --neon-cyan-glow: rgba(0, 242, 255, 0.5);
 
   /* Feedback */
   --ok: #34d399;
