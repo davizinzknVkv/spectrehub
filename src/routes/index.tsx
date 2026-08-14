@@ -718,25 +718,28 @@ function SocialProof() {
   const latency = useCountUp(stats.latency, inView);
 
   return (
-    <section className="border-y border-white/[0.06] bg-black/40 backdrop-blur-sm">
-      <div ref={ref} className="mx-auto max-w-7xl px-4 py-8 sm:px-6 sm:py-10 lg:px-8">
-        <div className="flex flex-wrap items-center justify-between gap-8 text-[10px] font-bold text-[#8a8a8a] uppercase tracking-[0.2em]">
-          <div className="flex items-center gap-10">
-             <div className="flex items-center gap-3">
-               <span className="text-white text-2xl font-display tracking-tighter">{Math.round(members)}+</span>
-               <span>MEMBROS NA COMUNIDADE</span>
+    <section className="border-y border-graphite bg-onyx/50 backdrop-blur-md">
+      <div ref={ref} className="mx-auto max-w-[1216px] px-6 py-12">
+        <div className="flex flex-wrap items-center justify-between gap-12">
+          <div className="flex flex-wrap items-center gap-16">
+             <div className="flex flex-col gap-1">
+               <span className="text-[44px] font-display text-white tracking-tight leading-none">{Math.round(members).toLocaleString()}+</span>
+               <span className="text-eyebrow font-medium text-fog uppercase tracking-widest">Membros Elite</span>
              </div>
-             <div className="flex items-center gap-3">
-               <span className="text-white text-2xl font-display tracking-tighter">{Math.round(products)}</span>
-               <span>PRODUTOS DISPONÍVEIS</span>
+             <div className="flex flex-col gap-1">
+               <span className="text-[44px] font-display text-white tracking-tight leading-none">{Math.round(products)}</span>
+               <span className="text-eyebrow font-medium text-fog uppercase tracking-widest">Módulos Ativos</span>
              </div>
-             <div className="flex items-center gap-3">
-               <span className="text-white text-2xl font-display tracking-tighter">{latency.toFixed(2)}<span className="text-[#ff0055]">ms</span></span>
-               <span>IMPACTO NO DISCORD</span>
+             <div className="flex flex-col gap-1">
+               <span className="text-[44px] font-display text-white tracking-tight leading-none">
+                 {latency.toFixed(2)}
+                 <span className="text-accent ml-1 text-[24px]">ms</span>
+               </span>
+               <span className="text-eyebrow font-medium text-fog uppercase tracking-widest">Latência de Rede</span>
              </div>
           </div>
-          <div className="hidden lg:block">
-            PROPERTY OF SPECTRE. ALL CREATIVE RIGHTS RESERVED.
+          <div className="hidden text-eyebrow font-medium text-steel uppercase tracking-[0.2em] lg:block">
+            Spectre Hub © 2026
           </div>
         </div>
       </div>
@@ -750,82 +753,77 @@ function ProductsSection() {
   const [activeTab, setActiveTab] = useState(0);
 
   return (
-    <section id="produtos" className="mx-auto max-w-7xl px-4 py-24 sm:px-6 sm:py-32 lg:px-8">
-      <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8">
-        <div className="max-w-2xl">
-          <Reveal>
-            <h2 className="font-display text-4xl font-extrabold leading-[0.95] tracking-tighter text-white sm:text-6xl">
-              CADA SISTEMA É UM
-              <br />
-              MOTIVO PRO
-              <br />
-              JOGADOR FICAR.
-            </h2>
-          </Reveal>
-          <Reveal delay={100}>
-            <p className="mt-6 text-[16px] text-[#8a8a8a]">
-              Sistema que o jogador abre, entende na hora e volta pra usar. Todos desenhados, escritos e testados pela SPECTRE, e já rodando em servidor cheio agora.
-            </p>
-          </Reveal>
-        </div>
+    <section id="produtos" className="mx-auto max-w-[1216px] px-6 py-40">
+      <div className="text-center mb-24">
+        <Reveal>
+          <span className="text-eyebrow font-semibold uppercase tracking-widest text-accent mb-4 block">Catálogo de Sistemas</span>
+          <h2 className="font-display text-[44px] font-medium leading-[1.1] text-white sm:text-[64px]">
+            Soluções para quem<br />exige o extraordinário.
+          </h2>
+        </Reveal>
+        <Reveal delay={100}>
+          <p className="mx-auto mt-6 max-w-2xl text-body-sm text-fog">
+            Cada módulo é desenhado para oferecer performance máxima e facilidade absoluta de uso.
+          </p>
+        </Reveal>
       </div>
 
-      <div className="mt-16">
-        <div className="flex flex-wrap gap-2">
-          {PRODUCTS.map((p, i) => (
-            <button
-              key={p.id}
-              onClick={() => setActiveTab(i)}
-              className={`px-6 py-2 text-[10px] font-bold uppercase tracking-widest border transition-all ${
-                activeTab === i
-                  ? "bg-[#ff0055] border-[#ff0055] text-white"
-                  : "bg-white/5 border-white/10 text-[#8a8a8a] hover:bg-white/10"
-              }`}
-            >
-              {p.name}
-            </button>
-          ))}
-        </div>
+      <div className="flex flex-wrap justify-center gap-3 mb-16">
+        {PRODUCTS.map((p, i) => (
+          <button
+            key={p.id}
+            onClick={() => setActiveTab(i)}
+            className={`px-6 py-2 rounded-full text-[14px] font-medium border transition-all ${
+              activeTab === i
+                ? "bg-white border-white text-black"
+                : "bg-transparent border-white/10 text-fog hover:border-white/30"
+            }`}
+          >
+            {p.name}
+          </button>
+        ))}
+      </div>
 
-        <div className="mt-12 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-          <Reveal className="relative aspect-video bg-white/5 border border-white/10 overflow-hidden group">
-             <div className="absolute inset-0 bg-gradient-to-tr from-[#ff0055]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-             <div className="absolute inset-0 flex items-center justify-center">
-                <div className="text-[10px] font-bold text-white/20 uppercase tracking-[0.4em]">Preview do Sistema</div>
-             </div>
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+        <Reveal className="relative aspect-video rounded-xl border border-white/[0.04] bg-onyx overflow-hidden group">
+          <div className="absolute inset-0 bg-gradient-to-tr from-accent/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+          <div className="absolute inset-0 flex items-center justify-center">
+            <div className="text-eyebrow font-medium text-steel uppercase tracking-widest">Preview {PRODUCTS[activeTab].name}</div>
+          </div>
+        </Reveal>
+
+        <div>
+          <Reveal>
+            <span className="text-eyebrow font-semibold text-accent uppercase tracking-[0.2em] mb-4 block">
+              Módulo {PRODUCTS[activeTab].category}
+            </span>
+            <h3 className="font-display text-[44px] font-medium text-white leading-tight">
+              {PRODUCTS[activeTab].name}
+            </h3>
           </Reveal>
 
-          <div>
-            <Reveal>
-              <h3 className="font-display text-5xl font-extrabold tracking-tighter text-white uppercase">
-                SPECTRE {PRODUCTS[activeTab].name}
-              </h3>
-              <span className="mt-2 block text-[10px] font-bold text-[#ff0055] uppercase tracking-widest">
-                SPECTRE-{PRODUCTS[activeTab].id.toUpperCase()}
+          <Reveal delay={100}>
+            <p className="mt-8 text-body-sm text-fog leading-relaxed">
+              {PRODUCTS[activeTab].desc}
+            </p>
+          </Reveal>
+
+          <Reveal delay={200} className="mt-10 flex flex-wrap gap-2">
+            {["Premium Hub", "Latência Zero", "Sync Ativo"].map((f) => (
+              <span key={f} className="px-3 py-1 rounded-full border border-graphite text-[12px] font-medium text-mist uppercase tracking-wider">
+                {f}
               </span>
-            </Reveal>
+            ))}
+          </Reveal>
 
-            <Reveal delay={100}>
-              <p className="mt-8 text-lg font-medium text-[#8a8a8a] leading-relaxed">
-                {PRODUCTS[activeTab].desc}
-              </p>
-            </Reveal>
-
-            <Reveal delay={200} className="mt-10 flex flex-wrap gap-3">
-              <span className="px-4 py-1.5 bg-white/5 border border-white/10 text-[10px] font-bold text-white uppercase tracking-widest">VRPEX</span>
-              <span className="px-4 py-1.5 bg-white/5 border border-white/10 text-[10px] font-bold text-white uppercase tracking-widest">CREATIVE</span>
-              <span className="px-4 py-1.5 bg-white/5 border border-white/10 text-[10px] font-bold text-white uppercase tracking-widest">STANDALONE</span>
-            </Reveal>
-
-            <Reveal delay={300} className="mt-12">
-              <Link
-                to={PRODUCTS[activeTab].to}
-                className="bg-[#ff0055] hover:bg-[#ff0055]/90 text-white font-bold py-4 px-8 rounded-sm uppercase tracking-wider transition-all inline-flex items-center gap-2"
-              >
-                Quero este sistema <ArrowRight className="h-4 w-4" />
-              </Link>
-            </Reveal>
-          </div>
+          <Reveal delay={300} className="mt-12">
+            <Link
+              to={PRODUCTS[activeTab].to}
+              className="bg-white hover:opacity-90 text-black font-medium py-3 px-8 rounded-full transition-all inline-flex items-center gap-2 text-[14px]"
+            >
+              Conhecer Detalhes
+            </Link>
+          </Reveal>
         </div>
       </div>
     </section>
