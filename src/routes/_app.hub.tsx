@@ -246,7 +246,7 @@ function HubPage() {
               <h1 className="mt-4 text-4xl font-black leading-[1.05] tracking-tight xs:text-5xl sm:text-6xl md:text-7xl">
                 Maximize sua conta
                 <br />
-                <span className="text-[#c5a059]">em minutos.</span>
+                <span className="text-[#7c3aed]">em minutos.</span>
               </h1>
               <p className="mt-5 max-w-md text-sm leading-relaxed text-slate-400 sm:text-base">
                 Conecte sua conta e assuma o controle. Nossa infraestrutura automatiza as tarefas repetitivas para que você possa focar no que realmente importa. Segurança máxima com processamento local.
@@ -255,7 +255,7 @@ function HubPage() {
               <div className="mt-8 flex flex-wrap gap-3">
                 <Link
                   to="/settings"
-                  className="inline-flex items-center gap-2 rounded-none bg-[#c5a059] px-6 py-3 font-mono text-xs font-bold uppercase tracking-widest text-white shadow-lg shadow-[#c5a059]/20 transition hover:bg-[#c5a059]/90 hover:shadow-[#c5a059]/40"
+                  className="inline-flex items-center gap-2 rounded-none bg-[#7c3aed] px-6 py-3 font-mono text-xs font-bold uppercase tracking-widest text-white shadow-lg shadow-[#7c3aed]/20 transition hover:bg-[#7c3aed]/90 hover:shadow-[#7c3aed]/40"
                 >
                   Configurar token <ArrowRight className="h-3.5 w-3.5" />
                 </Link>

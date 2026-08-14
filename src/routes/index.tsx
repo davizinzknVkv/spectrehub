@@ -167,7 +167,7 @@ const PLANS = [
     name: "Free",
     price: "R$ 0",
     period: "para sempre",
-    cta: "Começar Grátis",
+    cta: "Acessar Gratuitamente",
     highlight: false,
     features: [
       "3 missões diárias",
@@ -180,7 +180,7 @@ const PLANS = [
     name: "Premium",
     price: "R$ 9,90",
     period: "acesso 30 dias",
-    cta: "Obter Acesso Premium",
+    cta: "Assinar Premium",
     highlight: true,
     features: [
       "Missões ilimitadas",
@@ -193,7 +193,7 @@ const PLANS = [
     name: "Lifetime",
     price: "R$ 39,90",
     period: "pagamento único",
-    cta: "Comprar Acesso Vitalício",
+    cta: "Garantir Vitalício",
     highlight: false,
     features: [
       "Benefícios Premium vitalícios",
@@ -206,7 +206,7 @@ const PLANS = [
     name: "Booster",
     price: "Grátis",
     period: "via server boost",
-    cta: "Impulsionar Servidor",
+    cta: "Dar Boost",
     highlight: false,
     features: [
       "Missões ilimitadas",
@@ -483,7 +483,7 @@ function Hero() {
 
         <Reveal delay={160}>
           <p className="mx-auto mt-8 max-w-xl text-[16px] font-medium leading-relaxed text-[#8a8a8a] sm:text-lg">
-            Somos o estúdio por trás dos sistemas que o Discord brasileiro inteiro tenta imitar. Instalação em minutos, compatível com qualquer base, e performance que segura servidor lotado no horário de pico.
+            O hub definitivo para automação e elite no Discord. Performance absoluta, segurança inabalável e a melhor experiência de usuário do mercado.
           </p>
         </Reveal>
 
