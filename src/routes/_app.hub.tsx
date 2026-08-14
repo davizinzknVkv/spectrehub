@@ -412,13 +412,13 @@ function HubPage() {
             <div className="flex gap-2">
               <button
                 onClick={copyId}
-                className="rounded-none border border-white/[0.09] bg-white/[0.02] px-3 py-1.5 font-mono text-[9px] font-bold uppercase tracking-[0.2em] text-slate-300 transition-all duration-200 hover:border-[#c5a059]/50 hover:bg-[#c5a059]/5 hover:text-[#c5a059]"
+                className="rounded-none border border-white/[0.09] bg-white/[0.02] px-3 py-1.5 font-mono text-[9px] font-bold uppercase tracking-[0.2em] text-slate-300 transition-all duration-200 hover:border-[#7c3aed]/50 hover:bg-[#7c3aed]/5 hover:text-[#7c3aed]"
               >
                 copiar id
               </button>
               <button
                 onClick={copyAvatar}
-                className="rounded-none border border-white/[0.09] bg-white/[0.02] px-3 py-1.5 font-mono text-[9px] font-bold uppercase tracking-[0.2em] text-slate-300 transition-all duration-200 hover:border-[#c5a059]/50 hover:bg-[#c5a059]/5 hover:text-[#c5a059]"
+                className="rounded-none border border-white/[0.09] bg-white/[0.02] px-3 py-1.5 font-mono text-[9px] font-bold uppercase tracking-[0.2em] text-slate-300 transition-all duration-200 hover:border-[#7c3aed]/50 hover:bg-[#7c3aed]/5 hover:text-[#7c3aed]"
               >
                 copiar foto
               </button>
@@ -426,7 +426,7 @@ function HubPage() {
                 href={`https://discord.com/users/${user?.id}`}
                 target="_blank"
                 rel="noreferrer"
-                className="rounded-none border border-white/[0.09] bg-white/[0.02] px-3 py-1.5 font-mono text-[9px] font-bold uppercase tracking-[0.2em] text-slate-300 transition-all duration-200 hover:border-[#c5a059]/50 hover:bg-[#c5a059]/5 hover:text-[#c5a059]"
+                className="rounded-none border border-white/[0.09] bg-white/[0.02] px-3 py-1.5 font-mono text-[9px] font-bold uppercase tracking-[0.2em] text-slate-300 transition-all duration-200 hover:border-[#7c3aed]/50 hover:bg-[#7c3aed]/5 hover:text-[#7c3aed]"
               >
                 abrir perfil
               </a>

@@ -490,7 +490,7 @@ function Hero() {
         <Reveal delay={240}>
           <div className="mt-9 flex flex-wrap items-center justify-center gap-3">
             <a href="#produtos" className="bg-[#7c3aed] hover:bg-[#7c3aed]/90 text-white font-bold py-4 px-8 rounded-sm uppercase tracking-wider transition-all hover:scale-[1.02] active:scale-95 flex items-center gap-2">
-              <ArrowRight className="h-4 w-4" /> Quero Usar o Spectre
+              <ArrowRight className="h-4 w-4" /> Quero usar o Spectre
             </a>
             <a href={GUILD_INVITE} target="_blank" rel="noreferrer" className="border border-white/10 bg-white/5 hover:bg-white/10 text-white font-bold py-4 px-8 rounded-sm uppercase tracking-wider transition-all flex items-center gap-2">
               Ver os sistemas <ArrowRight className="rotate-90 h-4 w-4" />
