@@ -28,17 +28,21 @@ export function SiteHeader({ guildInvite }: SiteHeaderProps) {
 
   return (
     <header
-      className={`sticky top-0 z-50 w-full transition-[background,border-color,backdrop-filter] duration-300 ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         scrolled
-          ? "bg-[#030303]/80 backdrop-blur-2xl"
-          : "bg-transparent"
+        ? "py-2"
+        : "py-4"
       }`}
     >
-      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-4 px-6 lg:px-8 bg-[#080808]/90 backdrop-blur-md rounded-full mt-4 border border-white/5 mx-4 sm:mx-6 shadow-2xl shadow-black/50 overflow-hidden relative group">
+      <div className={`mx-auto flex h-16 max-w-7xl items-center justify-between gap-4 px-6 lg:px-8 transition-all duration-500 ${
+        scrolled 
+          ? "bg-black/60 backdrop-blur-md rounded-full border border-white/10 shadow-2xl shadow-black/50 mx-4 sm:mx-6" 
+          : "bg-transparent border-transparent mx-4 sm:mx-6"
+      } relative group overflow-hidden`}>
         <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/[0.03] to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
         
         <Link to="/" className="flex min-w-0 items-center gap-2.5 relative z-10">
-          <div className="relative flex h-8 w-8 items-center justify-center rounded-full bg-white text-black shadow-lg">
+          <div className="relative flex h-8 w-8 items-center justify-center rounded-full bg-white text-black shadow-lg shrink-0">
             <img
               src={logoAsset.url}
               alt="Spectre Hub"
@@ -46,16 +50,16 @@ export function SiteHeader({ guildInvite }: SiteHeaderProps) {
             />
           </div>
           <span className="truncate font-display text-[15px] xs:text-[16px] font-black tracking-tight text-white uppercase shrink-0">
-            SpectreHub
+            SPECTRE | HUB
           </span>
         </Link>
 
-        <nav className="hidden items-center gap-8 md:flex relative z-10">
+        <nav className="hidden items-center gap-8 md:flex absolute left-1/2 -translate-x-1/2 z-10">
           {NAV.map((n) => (
             <a
               key={n.href}
               href={n.href}
-              className="text-[13px] font-bold text-white/60 transition-all duration-200 hover:text-white hover:scale-105"
+              className="text-[13px] font-bold text-white/70 transition-all duration-200 hover:text-white hover:scale-105"
             >
               {n.label}
             </a>
@@ -65,7 +69,7 @@ export function SiteHeader({ guildInvite }: SiteHeaderProps) {
         <div className="hidden items-center gap-4 md:flex relative z-10">
           <Link 
             to="/hub" 
-            className="flex items-center justify-center bg-white/5 hover:bg-white/10 text-white px-5 py-2 rounded-full font-black text-[12px] uppercase tracking-wider transition-all border border-white/10 hover:border-white/20 active:scale-95"
+            className="flex items-center justify-center bg-white/5 hover:bg-white/10 text-white px-6 py-2 rounded-full font-black text-[12px] uppercase tracking-wider transition-all border border-white/10 hover:border-white/20 active:scale-95 shadow-sm shadow-black/20"
           >
             Entrar
           </Link>
@@ -73,7 +77,7 @@ export function SiteHeader({ guildInvite }: SiteHeaderProps) {
             href={guildInvite}
             target="_blank"
             rel="noreferrer"
-            className="flex items-center justify-center bg-[#ff0055] hover:bg-[#ff1a66] text-white px-5 py-2 rounded-full font-black text-[12px] uppercase tracking-wider transition-all shadow-lg shadow-[#ff0055]/20 active:scale-95"
+            className="flex items-center justify-center bg-[#ff0055] hover:bg-[#ff1a66] text-white px-6 py-2 rounded-full font-black text-[12px] uppercase tracking-wider transition-all shadow-lg shadow-[#ff0055]/20 active:scale-95"
           >
             Comunidade
           </a>
@@ -91,7 +95,7 @@ export function SiteHeader({ guildInvite }: SiteHeaderProps) {
       </div>
 
       {open && (
-        <div className="border-t border-white/[0.07] bg-[#030303]/95 backdrop-blur-xl md:hidden">
+        <div className="absolute top-full left-4 right-4 mt-2 overflow-hidden rounded-3xl border border-white/[0.07] bg-[#030303]/95 backdrop-blur-xl md:hidden">
           <nav className="mx-auto flex max-w-7xl flex-col px-4 py-3 sm:px-6">
             {NAV.map((n) => (
               <a
