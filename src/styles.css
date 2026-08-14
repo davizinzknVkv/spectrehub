@@ -37,10 +37,11 @@
   /* Spectre Elite Palette */
   --color-obsidian: #030303;
   --color-obsidian-soft: #080808;
-  --color-spectre-purple: #7c3aed;
+  --color-spectre-pink: #ff0055;
   --color-spectre-magenta: #db2777;
   --color-spectre-cyan: #06b6d4;
   --color-spectre-gold: #c5a059;
+
 }
 
 :root {
@@ -57,12 +58,13 @@
   --border-soft: rgba(255, 255, 255, 0.03);
   
   /* Accents */
-  --primary: #7c3aed; /* Spectre Purple */
+  --primary: #ff0055; /* Spectre Pink / Industrial Red */
   --secondary: #111111;
   --muted: #111111;
   --muted-foreground: #a1a1aa;
-  --accent: #c5a059; /* Kept Gold for some elements, can switch to Purple */
+  --accent: #ff0055;
   --accent-foreground: #ffffff;
+
 
   /* Spacing */
   --sp-header: 4rem;
@@ -697,45 +699,65 @@
   gap: 0.5rem;
   height: 38px;
   padding: 0 var(--sp-4);
-  border-radius: var(--r-md);
-  border: 1px solid transparent;
-  font-size: 0.8125rem;
-  font-weight: 600;
-  line-height: 1;
-  white-space: nowrap;
-  transition: background var(--dur) ease, border-color var(--dur) ease,
-    color var(--dur) ease, transform var(--dur) var(--ease), opacity var(--dur) ease;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+  border: none;
+  transition: all 0.2s cubic-bezier(0.2, 0, 0, 1);
+  cursor: pointer;
+  position: relative;
 }
-.ds-btn:active { transform: translateY(1px); }
+.ds-btn:active { transform: translateY(1px) scale(0.98); }
 .ds-btn:disabled,
 .ds-btn[aria-disabled="true"] { opacity: 0.45; cursor: not-allowed; transform: none; }
-.ds-btn:focus-visible {
-  outline: none;
-  box-shadow: 0 0 0 2px var(--bg), 0 0 0 4px color-mix(in oklab, var(--accent-1) 55%, transparent);
-}
 
-@utility ds-btn-sm { height: 32px; padding: 0 var(--sp-3); font-size: 0.75rem; border-radius: var(--r-sm); }
-@utility ds-btn-lg { height: 44px; padding: 0 var(--sp-6); font-size: 0.875rem; }
+@utility ds-btn-sm { height: 32px; padding: 0 var(--sp-3); font-size: 0.7rem; }
+@utility ds-btn-lg { height: 48px; padding: 0 var(--sp-8); font-size: 0.85rem; }
 
 @utility ds-btn-primary {
-  background: var(--accent-1);
-  color: #0a0a12;
-  box-shadow: var(--accent-glow);
+  background: var(--accent);
+  color: #ffffff;
+  box-shadow: 0 0 20px -5px rgba(255, 0, 85, 0.4);
 }
-.ds-btn-primary:hover:not(:disabled) { background: color-mix(in oklab, var(--accent-1) 86%, #fff); }
+.ds-btn-primary:hover:not(:disabled) { 
+  background: #ff1a66;
+  box-shadow: 0 0 30px -5px rgba(255, 0, 85, 0.6);
+}
 
 @utility ds-btn-secondary {
-  background: transparent;
-  border-color: var(--border-1);
-  color: var(--text-1);
+  background: rgba(255, 255, 255, 0.05);
+  color: #ffffff;
+  position: relative;
 }
-.ds-btn-secondary:hover:not(:disabled) { background: rgb(255 255 255 / 0.04); border-color: var(--border-2); }
+.ds-btn-secondary::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  padding: 1px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.05));
+  clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+.ds-btn-secondary:hover:not(:disabled) { 
+  background: rgba(255, 255, 255, 0.1);
+}
 
 @utility ds-btn-ghost {
   background: transparent;
-  color: var(--text-2);
+  color: #a1a1aa;
 }
-.ds-btn-ghost:hover:not(:disabled) { background: rgb(255 255 255 / 0.04); color: var(--text-1); }
+.ds-btn-ghost:hover:not(:disabled) { 
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.03);
+}
+
 
 @utility ds-btn-danger {
   background: color-mix(in oklab, var(--danger) 14%, transparent);
