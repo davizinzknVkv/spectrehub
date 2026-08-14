@@ -1,6 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "@tanstack/react-router";
-import { X, Menu, LogIn, Search, Github, Twitter, Linkedin, ChevronDown, MessageSquare } from "lucide-react";
+import { X, Menu, LogIn, Search, Github, Twitter, Linkedin, ChevronDown, MessageSquare, Languages } from "lucide-react";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import logoAsset from "@/assets/spectre-logo-s.png.asset.json";
 
 interface SiteHeaderProps {
@@ -87,12 +95,34 @@ export function SiteHeader({ guildInvite }: SiteHeaderProps) {
             <a href="#" className="hover:text-white transition-colors"><Linkedin className="w-4 h-4" /></a>
           </div>
 
-          <div className="flex items-center gap-2 px-3 py-1.5 bg-black/40 border border-white/5 rounded-md text-white/60 hover:border-white/10 transition-colors cursor-pointer group">
-            <div className="w-4 h-4 rounded-full overflow-hidden border border-white/10">
-              <img src="https://flagcdn.com/w40/br.png" alt="BR" className="w-full h-full object-cover" />
-            </div>
-            <ChevronDown className="w-3 h-3 text-white/20 group-hover:text-white/40" />
-          </div>
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <div className="flex items-center gap-2 px-3 py-1.5 bg-black/40 border border-white/5 rounded-md text-white/60 hover:border-white/10 transition-colors cursor-pointer group">
+                <div className="w-4 h-4 rounded-full overflow-hidden border border-white/10">
+                  <img src="https://flagcdn.com/w40/br.png" alt="PT-BR" className="w-full h-full object-cover" />
+                </div>
+                <ChevronDown className="w-3 h-3 text-white/20 group-hover:text-white/40" />
+              </div>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end" className="w-48 bg-obsidian border-white/5 rounded-none text-white/60">
+              <DropdownMenuLabel className="font-display text-[9px] uppercase tracking-widest italic py-3 flex items-center gap-2">
+                <Languages className="w-3 h-3 text-spectre-pink" /> Selecionar Idioma
+              </DropdownMenuLabel>
+              <DropdownMenuSeparator className="bg-white/5" />
+              <DropdownMenuItem className="focus:bg-spectre-pink focus:text-white cursor-pointer py-2.5 rounded-none flex items-center gap-3">
+                <img src="https://flagcdn.com/w40/br.png" alt="" className="w-4 h-3 object-cover rounded-sm" />
+                <span className="font-display text-[10px] uppercase italic tracking-widest">Português</span>
+              </DropdownMenuItem>
+              <DropdownMenuItem className="focus:bg-spectre-pink focus:text-white cursor-pointer py-2.5 rounded-none flex items-center gap-3">
+                <img src="https://flagcdn.com/w40/us.png" alt="" className="w-4 h-3 object-cover rounded-sm" />
+                <span className="font-display text-[10px] uppercase italic tracking-widest">English</span>
+              </DropdownMenuItem>
+              <DropdownMenuItem className="focus:bg-spectre-pink focus:text-white cursor-pointer py-2.5 rounded-none flex items-center gap-3">
+                <img src="https://flagcdn.com/w40/es.png" alt="" className="w-4 h-3 object-cover rounded-sm" />
+                <span className="font-display text-[10px] uppercase italic tracking-widest">Español</span>
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
 
           <Link 
             to="/hub" 
