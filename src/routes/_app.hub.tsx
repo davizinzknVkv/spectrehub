@@ -340,7 +340,7 @@ function HubPage() {
       {welcomeOpen && <WelcomeTour onDismiss={closeWelcome} />}
 
       <section
-        className="fade-up relative overflow-hidden rounded-none border border-white/5 bg-[#050505] backdrop-blur-xl"
+        className="fade-up relative overflow-hidden rounded-none border border-white/5 bg-[#030303] backdrop-blur-xl"
         style={{ boxShadow: "0 18px 50px -40px rgba(0,0,0,0.9), inset 0 1px 0 rgba(255,255,255,0.03)" }}
       >
         <div
