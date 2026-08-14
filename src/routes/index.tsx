@@ -834,34 +834,29 @@ function ProductsSection() {
 
 function ReasonsSection() {
   return (
-    <section id="recursos" className="mx-auto max-w-7xl px-4 py-24 sm:px-6 sm:py-32 lg:px-8">
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+    <section id="recursos" className="mx-auto max-w-[1216px] px-6 py-40 border-t border-graphite">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-24 items-start">
         <Reveal>
-          <h2 className="font-display text-4xl font-extrabold leading-[0.95] tracking-tighter text-white sm:text-7xl">
-            POR QUE OS
-            <br />
-            GRANDES
-            <br />
-            ESCOLHEM A
-            <br />
-            SPECTRE.
+          <span className="text-eyebrow font-semibold uppercase tracking-widest text-accent mb-4 block">Diferenciais Elite</span>
+          <h2 className="font-display text-[44px] font-medium leading-[1.1] text-white sm:text-[64px]">
+            Infraestrutura de<br />nível industrial.
           </h2>
-          <p className="mt-8 text-lg font-medium text-[#8a8a8a] leading-relaxed max-w-md">
-            A SPECTRE não revende script de terceiro. Tudo nasce aqui dentro, é testado em servidor com jogador dentro e só chega até você quando aguenta o horário de pico. É por isso que o mercado copia, mas não alcança.
+          <p className="mt-10 text-body-sm text-fog leading-relaxed max-w-md">
+            A Spectre não apenas entrega software; entregamos soberania digital. Nossa stack é construída do zero para suportar as operações mais críticas do Discord.
           </p>
         </Reveal>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-12 gap-y-16">
           {REASONS.map((r, i) => (
             <Reveal key={r.title} delay={i * 100}>
-              <div className="group">
-                <div className="flex items-center gap-3 mb-6">
-                   <div className="h-8 w-8 rounded-sm bg-white/5 border border-white/10 flex items-center justify-center text-[#ff0055] group-hover:bg-[#ff0055] group-hover:text-white transition-all">
-                      <r.icon className="h-4 w-4" />
+              <div className="group border-l border-graphite pl-6 hover:border-accent transition-colors">
+                <div className="flex items-center gap-3 mb-4">
+                   <div className="h-10 w-10 rounded-full bg-onyx border border-graphite flex items-center justify-center text-accent group-hover:bg-accent group-hover:text-black transition-all">
+                      <r.icon className="h-5 w-5" />
                    </div>
-                   <span className="text-[10px] font-bold text-[#444] uppercase tracking-widest">{r.title}</span>
+                   <span className="text-eyebrow font-bold text-mist uppercase tracking-widest">{r.title}</span>
                 </div>
-                <p className="text-sm font-medium text-[#8a8a8a] leading-relaxed">
+                <p className="text-[15px] leading-relaxed text-fog">
                   {r.desc}
                 </p>
               </div>
