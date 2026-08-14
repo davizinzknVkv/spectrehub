@@ -69,7 +69,7 @@ export function SiteFooter({ guildInvite }: SiteFooterProps) {
             </p>
           </div>
 
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-12">
+          <div className="grid grid-cols-2 gap-12 sm:grid-cols-3">
             <FooterCol
               title="HUB"
               links={[
