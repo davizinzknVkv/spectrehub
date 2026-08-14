@@ -9,8 +9,10 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import {
   ArrowRight,
+  ArrowUpRight,
   Check,
   CheckCircle2,
+  ChevronRight,
   Copy,
   Gauge,
   Instagram,
@@ -26,6 +28,7 @@ import {
   Users,
   X,
   Zap,
+
 } from "lucide-react";
 import logoAsset from "@/assets/spectre-logo-nobg.png.asset.json";
 
