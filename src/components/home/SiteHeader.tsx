@@ -30,7 +30,7 @@ export function SiteHeader({ guildInvite }: SiteHeaderProps) {
     <header
       className={`sticky top-0 z-50 w-full transition-[background,border-color,backdrop-filter] duration-300 ${
         scrolled
-          ? "border-b border-white/[0.07] bg-[#030303]/80 backdrop-blur-xl"
+          ? "border-b border-white/[0.05] bg-[#030303]/90 backdrop-blur-2xl shadow-2xl"
           : "border-b border-transparent bg-transparent"
       }`}
     >

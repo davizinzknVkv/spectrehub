@@ -53,15 +53,15 @@ export function ProductsSection({ products }: ProductsSectionProps) {
         </div>
 
         <div className="mt-12 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-stretch">
-          <Reveal className="relative min-h-[300px] lg:min-h-[450px] bg-white/5 border border-white/10 overflow-hidden group">
-            <div className="absolute inset-0 bg-gradient-to-tr from-[#ff0055]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-            <div className="absolute inset-0 flex items-center justify-center p-6 lg:p-10">
-              <div className="relative w-full max-w-lg">
-                <div className="absolute -inset-2 rounded-xl bg-gradient-to-tr from-[#ff0055] to-transparent opacity-20 blur-2xl" />
+          <Reveal className="relative min-h-[350px] lg:min-h-[500px] bg-[#080808] border border-white/5 overflow-hidden group shadow-2xl">
+            <div className="absolute inset-0 bg-gradient-to-tr from-[#ff0055]/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+            <div className="absolute inset-0 flex items-center justify-center p-8 lg:p-12">
+              <div className="relative w-full max-w-lg transition-transform duration-700 group-hover:scale-[1.02]">
+                <div className="absolute -inset-4 bg-[#ff0055] opacity-5 blur-[100px]" />
                 <img
                   src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=2070&auto=format&fit=crop"
-                  alt="Laptop Preview"
-                  className="relative w-full rounded-lg border border-white/10 shadow-2xl"
+                  alt="Elite Interface"
+                  className="relative w-full grayscale contrast-125 brightness-90 border border-white/10"
                 />
               </div>
             </div>

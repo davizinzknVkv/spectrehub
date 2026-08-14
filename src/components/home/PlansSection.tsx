@@ -29,7 +29,7 @@ export function PlansSection({ plans }: PlansSectionProps) {
       <div className="mt-20 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         {plans.map((p, i) => (
           <Reveal key={p.name} delay={i * 100}>
-            <div className={`relative group border border-white/5 bg-white/[0.02] p-8 flex flex-col h-full transition-all hover:border-[#ff0055]/30 ${p.highlight ? 'ring-1 ring-[#ff0055]/50' : ''}`}>
+            <div className={`relative group border border-white/5 bg-white/[0.01] p-10 flex flex-col h-full transition-all duration-500 hover:border-[#ff0055]/40 hover:bg-white/[0.03] hover:-translate-y-2 ${p.highlight ? 'ring-1 ring-[#ff0055]/30 bg-white/[0.03]' : ''}`}>
               {p.highlight && (
                 <div className="absolute top-0 right-0 bg-[#ff0055] text-white text-[9px] font-bold px-3 py-1 uppercase tracking-widest">
                   Popular
