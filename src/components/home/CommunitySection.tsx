@@ -108,7 +108,7 @@ export function CommunitySection({ widgetUrl, guildId, guildInvite, fallbackMemb
            <div className="pt-12 h-[500px] overflow-hidden relative">
              <div className="absolute inset-0 z-10 pointer-events-none bg-gradient-to-b from-transparent via-transparent to-obsidian-soft" />
              <iframe
-                src={`https://discord.com/widget?id=${guildId}&theme=dark`}
+                src={`https://discordapp.com/widget?id=${guildId}&theme=dark`}
                 width="100%"
                 height="600"
                 title="Widget do Discord"
