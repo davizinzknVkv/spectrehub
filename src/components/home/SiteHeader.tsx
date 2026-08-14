@@ -28,13 +28,17 @@ export function SiteHeader({ guildInvite }: SiteHeaderProps) {
 
   return (
     <header
-      className={`sticky top-0 z-50 w-full transition-[background,border-color,backdrop-filter] duration-300 ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
-          ? "bg-[#030303]/80 backdrop-blur-2xl"
-          : "bg-transparent"
+          ? "bg-[#030303]/80 backdrop-blur-xl py-2"
+          : "bg-transparent py-4"
       }`}
     >
-      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-4 px-6 lg:px-8 bg-[#080808]/90 backdrop-blur-md rounded-full mt-4 border border-white/5 mx-4 sm:mx-6 shadow-2xl shadow-black/50 overflow-hidden relative group">
+      <div className={`mx-auto flex h-16 max-w-7xl items-center justify-between gap-4 px-6 lg:px-8 transition-all duration-300 ${
+        scrolled 
+          ? "bg-[#080808]/90 backdrop-blur-md rounded-full border border-white/5 shadow-2xl shadow-black/50" 
+          : "bg-transparent border-transparent"
+      } relative group`}>
         <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/[0.03] to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
         
         <Link to="/" className="flex min-w-0 items-center gap-2.5 relative z-10">
