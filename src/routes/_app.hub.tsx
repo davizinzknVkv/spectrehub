@@ -355,7 +355,7 @@ function HubPage() {
         </div>
 
         <div className="relative -mt-8 flex flex-col gap-4 px-5 pb-5 sm:-mt-10 sm:flex-row sm:items-end sm:gap-5 sm:px-7">
-          <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-xl border border-white/10 bg-[#080808] ring-4 ring-[#080808] sm:h-20 sm:w-20">
+          <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-xl border border-white/10 bg-[#030303] ring-4 ring-[#030303] sm:h-20 sm:w-20">
             {avatarUrl ? (
               <img
                 src={avatarUrl}
@@ -462,7 +462,7 @@ function HubPage() {
           </div>
 
           <div className="space-y-6">
-            <div className="rounded-none border border-white/5 bg-[#080808] p-6">
+            <div className="rounded-none border border-white/5 bg-[#030303] p-6">
               <div className="mb-6 flex items-center justify-between">
                 <div className="flex items-center gap-3">
                   <div className="grid h-8 w-8 place-items-center bg-[#c5a059]/10 text-[#c5a059]">
@@ -483,7 +483,7 @@ function HubPage() {
               </div>
             </div>
 
-            <div className="rounded-none border border-white/5 bg-[#080808] p-6">
+            <div className="rounded-none border border-white/5 bg-[#030303] p-6">
               <div className="mb-6 flex items-center gap-3">
                 <div className="grid h-8 w-8 place-items-center bg-[#c5a059]/10 text-[#c5a059]">
                   <ShieldCheck className="h-4 w-4" />
