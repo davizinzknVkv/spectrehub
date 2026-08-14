@@ -1,26 +1,8 @@
 /**
- * Antes de realizar qualquer ação, entenda o contexto e instrução recente do usuário, comando mais recente enviado por ele: ```txt
-## Restilização da Interface e Mudança de Nome do Site
-
-**Objetivo:**
-Restilizar completamente a interface do site e renomeá-lo de "Neighbord" para "Spectre Hub". O site deve se tornar a referência em UI para o nicho de "SI" (Sistemas de Informação ou similar).
-
-**Referência de UI:**
-O site `corenetwork.dev` servirá como inspiração principal para o novo design e experiência do usuário.
-
-**Requisitos:**
-1. **Identidade Visual:**
-   - Criar um novo logotipo e identidade visual para "Spectre Hub".
-   - Definir uma paleta de cores, tipografia e estilo de elementos visuais que transmitam profissionalismo, modernidade e autoridade.
-
-2. **Design da Interface (UI):**
-   - Redesenhar todas as páginas, focando em uma experiência intuitiva e premium.
-   - Adotar os princípios de `corenetwork.dev`: layout limpo, espaços em branco eficazes, tipografia hierarquizada e responsividade.
-
-3. **Conteúdo e Estrutura:**
-   - Adaptar o conteúdo para a nova identidade "Spectre Hub".
-   - Otimizar a navegação para autoridade e conversão.
-```
+ * Spectre Hub — Industrial Design System
+ * 
+ * Mix: BlackNetwork (Obsidian + Gold) & CoreNetwork (High Contrast + Industrial).
+ * Theme: Midnight Obsidian (#030303), Gold Accent (#c5a059).
  */
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
@@ -564,7 +546,7 @@ function HeroPreview() {
     <div className="relative">
       <div
         aria-hidden
-        className="pointer-events-none absolute -inset-10 -z-10 rounded-[3rem] bg-[#818cf8]/10 blur-[90px]"
+        className="pointer-events-none absolute -inset-10 -z-10 rounded-[3rem] bg-[#c5a059]/10 blur-[90px]"
       />
       <div className="overflow-hidden rounded-2xl border border-white/[0.08] bg-[#0d0d0d]/90 shadow-[0_50px_120px_-60px_rgba(0,0,0,0.9)] backdrop-blur-xl">
         <div className="flex items-center gap-3 border-b border-white/[0.06] px-4 py-3">
@@ -580,7 +562,7 @@ function HeroPreview() {
 
         <div className="grid grid-cols-[84px_1fr] gap-3 p-4">
           <div className="space-y-2 rounded-xl border border-white/[0.05] bg-white/[0.02] p-2.5">
-            <div className="h-1.5 w-full rounded-full bg-[#818cf8]/70" />
+            <div className="h-1.5 w-full rounded-full bg-[#c5a059]/70" />
             {[80, 65, 72, 50, 60].map((w, i) => (
               <div key={i} className="h-1.5 rounded-full bg-white/[0.08]" style={{ width: `${w}%` }} />
             ))}
@@ -601,7 +583,7 @@ function HeroPreview() {
                   <span className="font-mono text-[#8a8a8a]">{q.p}%</span>
                 </div>
                 <div className="mt-2 h-1 overflow-hidden rounded-full bg-white/[0.06]">
-                  <div className="h-full rounded-full bg-[#818cf8]" style={{ width: `${q.p}%` }} />
+                  <div className="h-full rounded-full bg-[#c5a059]" style={{ width: `${q.p}%` }} />
                 </div>
               </div>
             ))}
@@ -610,8 +592,8 @@ function HeroPreview() {
               <svg viewBox="0 0 200 44" className="h-11 w-full" aria-hidden>
                 <defs>
                   <linearGradient id="spark" x1="0" x2="0" y1="0" y2="1">
-                    <stop offset="0%" stopColor="#818cf8" stopOpacity="0.35" />
-                    <stop offset="100%" stopColor="#818cf8" stopOpacity="0" />
+                    <stop offset="0%" stopColor="#c5a059" stopOpacity="0.35" />
+                    <stop offset="100%" stopColor="#c5a059" stopOpacity="0" />
                   </linearGradient>
                 </defs>
                 <path
@@ -621,7 +603,7 @@ function HeroPreview() {
                 <path
                   d="M0 32 L30 27 L60 29 L90 19 L120 23 L150 11 L180 15 L200 7"
                   fill="none"
-                  stroke="#818cf8"
+                  stroke="#c5a059"
                   strokeWidth="1.4"
                 />
               </svg>
@@ -635,7 +617,7 @@ function HeroPreview() {
           status
         </div>
         <div className="mt-1 flex items-center gap-2 text-xs font-semibold text-white">
-          <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-[#818cf8]" />
+          <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-[#c5a059]" />
           Rodando em background
         </div>
       </div>
