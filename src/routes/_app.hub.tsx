@@ -269,18 +269,24 @@ function HubPage() {
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               {[
-                { label: "E-mail", val: user?.email || "N/A", icon: Mail },
-                { label: "Telefone", val: user?.phone || "Não Vinculado", icon: Phone },
+                { label: "E-mail", val: user?.email || "N/A", icon: Mail, mask: true },
+                { label: "Telefone", val: user?.phone || "Não Vinculado", icon: Phone, mask: user?.phone ? true : false },
                 { label: "MFA / 2FA", val: user?.mfa_enabled ? "Ativado" : "Desativado", icon: Lock, alert: !user?.mfa_enabled },
                 { label: "Criado em", val: user?.id ? new Date(parseInt(user.id) / 4194304 + 1420070400000).toLocaleDateString() : "N/A", icon: Calendar },
               ].map(info => (
-                <div key={info.label} className="flex gap-4 items-center">
+                <div key={info.label} className="flex gap-4 items-center group/info">
                   <div className={cn("w-10 h-10 flex items-center justify-center border border-white/5 bg-white/[0.01]", info.alert && "text-spectre-pink")}>
                     <info.icon className="w-4 h-4" />
                   </div>
                   <div>
                     <div className="text-[9px] uppercase tracking-widest text-white/20 mb-1">{info.label}</div>
-                    <div className={cn("font-display text-[11px] uppercase tracking-widest text-white", info.alert && "text-spectre-pink")}>{info.val}</div>
+                    <div className={cn(
+                      "font-display text-[11px] uppercase tracking-widest text-white transition-all duration-300", 
+                      info.alert && "text-spectre-pink",
+                      info.mask && "blur-[4px] group-hover/info:blur-0 select-none cursor-help"
+                    )}>
+                      {info.val}
+                    </div>
                   </div>
                 </div>
               ))}
