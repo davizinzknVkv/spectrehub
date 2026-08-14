@@ -117,7 +117,7 @@ function Index() {
         <div className="noise-overlay" />
       </div>
 
-      <SiteHeader />
+      <SiteHeader guildInvite={GUILD_INVITE} />
 
       <main>
         <Hero guildInvite={GUILD_INVITE} fallbackMembers={FALLBACK_MEMBERS} />
