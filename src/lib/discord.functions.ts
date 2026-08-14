@@ -50,6 +50,18 @@ export const discordProxy = createServerFn({ method: "POST" })
   .validator((input) => proxyInput.parse(input))
   .handler(async ({ data }) => {
     const ip = clientIp(getRequest());
+    
+    // Multi-layered Rate Limiting
+    const globalRl = rateLimit(`global_proxy:${ip}`, 1200, 60_000);
+    if (!globalRl.ok) {
+      return {
+        status: 429,
+        body: JSON.stringify({
+          message: `Limite global de proxy excedido. Aguarde ${Math.ceil(globalRl.retryAfterMs / 1000)}s.`,
+        }),
+      };
+    }
+
     const rl = rateLimit(`proxy:${ip}`, 600, 60_000);
     if (!rl.ok) {
       return {

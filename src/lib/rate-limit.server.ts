@@ -11,16 +11,28 @@ export function rateLimit(
 ): { ok: true } | { ok: false; retryAfterMs: number } {
   const now = Date.now();
   const b = buckets.get(key);
+  
   if (!b || b.resetAt <= now) {
     buckets.set(key, { count: 1, resetAt: now + windowMs });
-    // Opportunistic cleanup: sweep expired keys on writes so memory stays bounded
-    // without relying on setInterval (unsupported in Cloudflare Workers).
-    if (buckets.size > 500) {
-      for (const [k, v] of buckets) if (v.resetAt <= now) buckets.delete(k);
+    
+    // Memory leak protection: if the bucket map grows too large, 
+    // perform a targeted cleanup of expired keys.
+    if (buckets.size > 1000) {
+      const keysToDelete: string[] = [];
+      for (const [k, v] of buckets) {
+        if (v.resetAt <= now) keysToDelete.push(k);
+        if (keysToDelete.length > 100) break; // Throttle cleanup per call
+      }
+      keysToDelete.forEach(k => buckets.delete(k));
     }
+    
     return { ok: true };
   }
-  if (b.count >= limit) return { ok: false, retryAfterMs: b.resetAt - now };
+  
+  if (b.count >= limit) {
+    return { ok: false, retryAfterMs: b.resetAt - now };
+  }
+  
   b.count++;
   return { ok: true };
 }
