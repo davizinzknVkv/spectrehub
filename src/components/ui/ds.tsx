@@ -1,28 +1,16 @@
 /**
- * NGHC Design System — primitivos únicos de UI.
- * Toda página do Hub deve usar estes componentes em vez de estilos ad-hoc.
- * Apenas apresentação: nenhum componente aqui contém regra de negócio.
+ * NGHC Design System - Primitives
+ * Industrial, tactical, obsidian.
  */
 import type { ButtonHTMLAttributes, HTMLAttributes, InputHTMLAttributes, ReactNode } from "react";
 import type { LucideIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 /* ── Card ───────────────────────────────────────────────────────────── */
-type CardVariant = "default" | "interactive" | "highlighted";
-
-export function Card({
-  variant = "default",
-  className,
-  ...props
-}: HTMLAttributes<HTMLDivElement> & { variant?: CardVariant }) {
+export function Card({ className, ...props }: HTMLAttributes<HTMLDivElement>) {
   return (
     <div
-      className={cn(
-        "ds-card",
-        variant === "interactive" && "ds-card-interactive",
-        variant === "highlighted" && "ds-card-highlighted",
-        className,
-      )}
+      className={cn("ds-card border-white/5 bg-white/[0.02]", className)}
       {...props}
     />
   );
@@ -32,33 +20,25 @@ export function Card({
 export function StatCard({
   label,
   value,
-  hint,
   accent = true,
   icon: Icon,
   className,
 }: {
   label: string;
   value: ReactNode;
-  hint?: ReactNode;
   accent?: boolean;
   icon?: LucideIcon;
   className?: string;
 }) {
   return (
-    <div className={cn("ds-card ds-card-hover", className)}>
+    <div className={cn("ds-card p-6 border-white/5 bg-white/[0.02] space-y-2", className)}>
       <div className="flex items-center gap-2">
-        {Icon && <Icon className="h-3.5 w-3.5 text-[var(--primary)]" />}
-        <span className="ds-label truncate">{label}</span>
+        {Icon && <Icon className={cn("h-3.5 w-3.5", accent ? "text-spectre-pink" : "text-white/20")} />}
+        <span className="font-display text-[9px] uppercase tracking-widest text-white/30 italic">{label}</span>
       </div>
-      <div
-        className={cn(
-          "mt-3 truncate text-2xl font-semibold tabular-nums tracking-tight sm:text-3xl",
-          accent ? "text-[var(--primary)]" : "text-[var(--text-1)]",
-        )}
-      >
+      <div className={cn("font-display text-2xl italic tracking-tighter", accent ? "text-white" : "text-white/60")}>
         {value}
       </div>
-      {hint && <div className="mt-1.5 truncate ds-small">{hint}</div>}
     </div>
   );
 }
@@ -67,20 +47,8 @@ export function StatCard({
 type ButtonVariant = "primary" | "secondary" | "ghost" | "danger";
 type ButtonSize = "sm" | "md" | "lg";
 
-const BTN_VARIANT: Record<ButtonVariant, string> = {
-  primary: "ds-btn-primary",
-  secondary: "ds-btn-secondary",
-  ghost: "ds-btn-ghost",
-  danger: "ds-btn-danger",
-};
-const BTN_SIZE: Record<ButtonSize, string> = { sm: "ds-btn-sm", md: "", lg: "ds-btn-lg" };
-
-export function buttonClass(
-  variant: ButtonVariant = "secondary",
-  size: ButtonSize = "md",
-  className?: string,
-) {
-  return cn("ds-btn", BTN_VARIANT[variant], BTN_SIZE[size], className);
+export function buttonClass(variant: ButtonVariant = "secondary", size: ButtonSize = "md", className?: string) {
+  return cn("ds-btn", variant === "primary" ? "ds-btn-primary" : "ds-btn-secondary", size === "sm" && "!py-2 !px-4 !text-[8px]", size === "lg" && "ds-btn-lg", className);
 }
 
 export function Button({
@@ -91,72 +59,31 @@ export function Button({
 }: ButtonHTMLAttributes<HTMLButtonElement> & { variant?: ButtonVariant; size?: ButtonSize }) {
   return (
     <button 
-      className={cn(
-        buttonClass(variant, size, className),
-        "relative overflow-hidden active:scale-[0.98] transition-all duration-200",
-        variant === "primary" && "hover:shadow-[0_0_20px_-5px_var(--primary)]"
-      )} 
+      className={buttonClass(variant, size, className)} 
       {...props} 
     />
   );
 }
 
 /* ── Badge ──────────────────────────────────────────────────────────── */
-type BadgeVariant = "default" | "accent" | "success" | "warning" | "danger";
-const BADGE: Record<BadgeVariant, string> = {
-  default: "",
-  accent: "ds-badge-accent",
-  success: "ds-badge-success",
-  warning: "ds-badge-warning",
-  danger: "ds-badge-danger",
-};
-
-export function Badge({
-  variant = "default",
-  className,
-  ...props
-}: HTMLAttributes<HTMLSpanElement> & { variant?: BadgeVariant }) {
-  return <span className={cn("ds-badge", BADGE[variant], className)} {...props} />;
+export function Badge({ children, className }: { children: ReactNode; className?: string }) {
+  return (
+    <span className={cn("bg-spectre-pink/10 text-spectre-pink font-display text-[8px] uppercase tracking-widest px-2 py-0.5 italic border border-spectre-pink/20", className)}>
+      {children}
+    </span>
+  );
 }
 
 /* ── Input ──────────────────────────────────────────────────────────── */
 export function Input({ className, ...props }: InputHTMLAttributes<HTMLInputElement>) {
-  return <input className={cn("ds-input", className)} {...props} />;
+  return <input className={cn("w-full bg-white/[0.02] border border-white/5 py-3 px-4 font-display text-[10px] text-white italic uppercase tracking-widest outline-none focus:border-spectre-pink/20 transition-all", className)} {...props} />;
 }
 
-export function Field({
-  label,
-  hint,
-  children,
-  className,
-}: {
-  label: string;
-  hint?: ReactNode;
-  children: ReactNode;
-  className?: string;
-}) {
+export function Field({ label, children, className }: { label: string; children: ReactNode; className?: string }) {
   return (
-    <label className={cn("block", className)}>
-      <span className="ds-label">{label}</span>
-      <div className="mt-2">{children}</div>
-      {hint && <div className="mt-1.5 ds-small">{hint}</div>}
-    </label>
-  );
-}
-
-/* ── Skeleton ───────────────────────────────────────────────────────── */
-export function Skeleton({ className, ...props }: HTMLAttributes<HTMLDivElement>) {
-  return <div className={cn("ds-skeleton h-4 w-full", className)} {...props} />;
-}
-
-export function SkeletonCard({ lines = 3 }: { lines?: number }) {
-  return (
-    <div className="ds-card">
-      <Skeleton className="h-3 w-24" />
-      <Skeleton className="mt-4 h-7 w-2/3" />
-      {Array.from({ length: Math.max(0, lines - 1) }).map((_, i) => (
-        <Skeleton key={i} className="mt-2.5 h-3 w-full" />
-      ))}
+    <div className={className}>
+      <label className="font-display text-[9px] uppercase tracking-widest text-white/30 italic block mb-2">{label}</label>
+      {children}
     </div>
   );
 }
@@ -176,20 +103,17 @@ export function EmptyState({
   className?: string;
 }) {
   return (
-    <div
-      className={cn(
-        "ds-card flex flex-col items-center justify-center gap-3 py-12 text-center",
-        className,
-      )}
-    >
+    <div className={cn("ds-card p-12 text-center border-dashed border-white/5 bg-white/[0.01] space-y-6", className)}>
       {Icon && (
-        <span className="grid h-11 w-11 place-items-center rounded-xl border border-[var(--border-1)] bg-white/[0.03] text-[var(--primary)]">
-          <Icon className="h-5 w-5" />
-        </span>
+        <div className="w-16 h-16 mx-auto flex items-center justify-center border border-white/10 bg-white/[0.02]">
+           <Icon className="w-8 h-8 text-white/20" />
+        </div>
       )}
-      <div className="ds-h3">{title}</div>
-      {description && <p className="max-w-sm ds-body">{description}</p>}
-      {action && <div className="mt-1">{action}</div>}
+      <div className="space-y-2">
+         <h3 className="font-display text-xl text-white uppercase italic tracking-widest">{title}</h3>
+         {description && <p className="font-sans text-sm text-white/30 italic max-w-sm mx-auto">{description}</p>}
+      </div>
+      {action && <div>{action}</div>}
     </div>
   );
 }
@@ -197,36 +121,27 @@ export function EmptyState({
 /* ── Modal ──────────────────────────────────────────────────────────── */
 export function Modal({
   title,
-  description,
   onClose,
   children,
   actions,
   className,
 }: {
   title: string;
-  description?: ReactNode;
   onClose?: () => void;
   children?: ReactNode;
   actions?: ReactNode;
   className?: string;
 }) {
   return (
-    <div
-      className="ds-backdrop"
-      role="dialog"
-      aria-modal="true"
-      onClick={(e) => {
-        if (e.target === e.currentTarget) onClose?.();
-      }}
-    >
-      <div className={cn("ds-modal", className)}>
-        <div className="border-b border-[var(--border-1)] px-5 py-4">
-          <h2 className="ds-h3">{title}</h2>
-          {description && <p className="mt-1 ds-body">{description}</p>}
+    <div className="ds-backdrop flex items-center justify-center p-4 z-[999]" onClick={(e) => e.target === e.currentTarget && onClose?.()}>
+      <div className={cn("ds-card !p-0 w-full max-w-xl border-white/10 bg-obsidian overflow-hidden", className)}>
+        <div className="px-8 py-6 border-b border-white/5 flex justify-between items-center bg-white/[0.01]">
+          <h2 className="font-display text-sm uppercase tracking-widest text-white italic">{title}</h2>
+          <button onClick={onClose} className="text-white/20 hover:text-white transition-colors">×</button>
         </div>
-        {children && <div className="px-5 py-4">{children}</div>}
+        <div className="px-8 py-8">{children}</div>
         {actions && (
-          <div className="flex flex-wrap justify-end gap-2 border-t border-[var(--border-1)] px-5 py-4">
+          <div className="px-8 py-6 border-t border-white/5 bg-white/[0.01]">
             {actions}
           </div>
         )}
