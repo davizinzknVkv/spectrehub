@@ -42,6 +42,16 @@ export function ProductsSection({ products }: ProductsSectionProps) {
                        className="w-full h-full object-cover transition-all duration-700 group-hover:scale-105" 
                        alt={`${products[activeTab].name} Preview`} 
                      />
+                   ) : products[activeTab].status === "Em breve" ? (
+                     <div className="flex flex-col items-center gap-4 text-center p-8">
+                        <Zap className="w-12 h-12 text-spectre-pink/20 animate-pulse" />
+                        <div className="font-display text-2xl text-white/20 uppercase italic tracking-widest">
+                           Em Breve Novidades
+                        </div>
+                        <div className="text-[10px] text-white/10 uppercase tracking-[0.3em]">
+                           Protocolo em Desenvolvimento
+                        </div>
+                     </div>
                    ) : products[activeTab].id === "quests" ? (
                      <img 
                        src={questFlyer.url} 
