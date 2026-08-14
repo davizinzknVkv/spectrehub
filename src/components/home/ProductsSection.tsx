@@ -38,11 +38,11 @@ export function ProductsSection({ products }: ProductsSectionProps) {
             <button
               key={p.id}
               onClick={() => setActiveTab(i)}
-              className={`px-8 py-3 rounded-full text-[12px] font-black uppercase tracking-wider transition-all duration-300 ${
+              className={`ds-btn !min-w-[140px] !px-8 !py-3 ${
                 activeTab === i
-                  ? "bg-[#ff0055] text-white shadow-[0_8px_20px_rgba(255,0,85,0.3)]"
-                  : "bg-white/5 text-[#666] hover:bg-white/10 hover:text-white"
-              } border border-white/5 relative min-w-[140px]`}
+                  ? "ds-btn-primary shadow-[0_8px_20px_rgba(255,0,85,0.3)]"
+                  : "ds-btn-secondary"
+              } relative`}
             >
               <span className="relative z-10 whitespace-nowrap">{p.name}</span>
             </button>
@@ -96,7 +96,7 @@ export function ProductsSection({ products }: ProductsSectionProps) {
             <Reveal delay={300} className="mt-12">
               <Link
                 to={products[activeTab].to}
-                className="ds-btn ds-btn-primary ds-btn-lg rounded-full w-full sm:w-auto"
+                className="ds-btn ds-btn-primary ds-btn-lg w-full sm:w-auto"
               >
                 <Zap className="h-5 w-5 mr-2" /> COMEÇAR AGORA <ArrowUpRight className="ml-2 h-4 w-4" />
               </Link>

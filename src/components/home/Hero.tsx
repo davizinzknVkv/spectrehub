@@ -56,10 +56,10 @@ export function Hero({ guildInvite, fallbackMembers }: HeroProps) {
 
         <Reveal delay={240}>
           <div className="mt-9 flex flex-col items-center justify-center gap-4 sm:flex-row sm:flex-nowrap">
-            <a href="#produtos" className="ds-btn ds-btn-primary ds-btn-lg rounded-full w-full sm:w-auto px-10">
+            <a href="#produtos" className="ds-btn ds-btn-primary ds-btn-lg w-full sm:w-auto px-10">
               <span className="flex items-center gap-2.5 whitespace-nowrap"><ArrowRight className="h-5 w-5 shrink-0" /> INICIAR EXPERIÊNCIA</span>
             </a>
-            <a href={guildInvite} target="_blank" rel="noreferrer" className="ds-btn ds-btn-secondary ds-btn-lg rounded-full w-full sm:w-auto px-10">
+            <a href={guildInvite} target="_blank" rel="noreferrer" className="ds-btn ds-btn-secondary ds-btn-lg w-full sm:w-auto px-10">
               <span className="flex items-center gap-2.5 whitespace-nowrap">DOCUMENTAÇÃO <ArrowRight className="h-5 w-5 shrink-0 rotate-90" /></span>
             </a>
           </div>

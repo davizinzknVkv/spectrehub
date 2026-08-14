@@ -153,26 +153,32 @@
   align-items: center;
   justify-content: center;
   font-family: var(--font-display);
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   font-weight: 900;
   letter-spacing: 0.05em;
   text-transform: uppercase;
-  height: 3.5rem; /* 56px */
-  padding: 0 2.5rem; /* 40px */
-  transition: all 0.3s cubic-bezier(0.2, 0, 0, 1);
+  height: 3.25rem;
+  padding: 0 2rem;
+  transition: all 0.2s cubic-bezier(0.2, 0, 0, 1);
   cursor: pointer;
   position: relative;
   overflow: hidden;
   white-space: nowrap;
   min-width: fit-content;
-  clip-path: none;
-  border-radius: var(--radius-xl);
+  border: none;
+  /* Hexagonal/Clipped corner shape from reference */
+  clip-path: polygon(
+    0 8px,
+    8px 0,
+    100% 0,
+    100% calc(100% - 8px),
+    calc(100% - 8px) 100%,
+    0 100%
+  );
 
   &:disabled {
     opacity: 0.5;
     cursor: not-allowed;
-    clip-path: none !important;
-    border-radius: 0 !important;
   }
   
   & > * {
@@ -182,22 +188,20 @@
 }
 
 @utility ds-btn-lg {
-  height: 4rem;
-  padding: 0 3rem;
-  font-size: 0.95rem;
-  min-width: 220px;
+  height: 3.75rem;
+  padding: 0 2.5rem;
+  font-size: 0.9rem;
+  min-width: 200px;
 }
 
 @utility ds-btn-primary {
   background: var(--color-spectre-pink);
   color: #ffffff;
-  border: none;
-  box-shadow: 0 8px 30px -10px rgba(255, 0, 85, 0.4);
-
+  
   &:hover:not(:disabled) {
     background: #ff1a66;
     transform: translateY(-2px);
-    box-shadow: 0 12px 40px -8px rgba(255, 0, 85, 0.5);
+    filter: brightness(1.1);
   }
 
   &:active:not(:disabled) {
@@ -206,19 +210,17 @@
 }
 
 @utility ds-btn-secondary {
-  background: rgba(255, 255, 255, 0.05);
+  background: #080808;
   color: #ffffff;
-  border: none;
   position: relative;
-  z-index: 1;
 
+  /* Border simulation for clipped path */
   &::before {
     content: '';
     position: absolute;
     inset: 0;
-    background: rgba(255, 255, 255, 0.08);
-    border-radius: var(--radius-xl);
-    z-index: -2;
+    background: rgba(255, 255, 255, 0.1);
+    z-index: 0;
   }
 
   &::after {
@@ -226,12 +228,21 @@
     position: absolute;
     inset: 1px;
     background: #030303;
-    border-radius: var(--radius-xl);
-    z-index: -1;
+    z-index: 0;
+    clip-path: polygon(
+      0 7px,
+      7px 0,
+      calc(100% - 1px) 0,
+      calc(100% - 1px) calc(100% - 7px),
+      calc(100% - 7px) calc(100% - 1px),
+      0 calc(100% - 1px)
+    );
   }
 
   &:hover:not(:disabled) {
-    background: rgba(255, 255, 255, 0.1);
+    &::before {
+      background: rgba(255, 255, 255, 0.2);
+    }
     transform: translateY(-2px);
   }
 }
@@ -793,14 +804,21 @@
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  height: 38px;
-  padding: 0 var(--sp-4);
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.1em;
+  height: 3.25rem;
+  padding: 0 var(--sp-6);
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  font-weight: 900;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
-  clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+  clip-path: polygon(
+    0 8px,
+    8px 0,
+    100% 0,
+    100% calc(100% - 8px),
+    calc(100% - 8px) 100%,
+    0 100%
+  );
   border: none;
   transition: all 0.2s cubic-bezier(0.2, 0, 0, 1);
   cursor: pointer;
@@ -837,14 +855,23 @@
   content: "";
   position: absolute;
   inset: 0;
-  padding: 1px;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.05));
-  clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
-  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  pointer-events: none;
+  background: rgba(255, 255, 255, 0.1);
+  z-index: 0;
+}
+.ds-btn-secondary::after {
+  content: "";
+  position: absolute;
+  inset: 1px;
+  background: #030303;
+  z-index: 0;
+  clip-path: polygon(
+    0 7px,
+    7px 0,
+    calc(100% - 1px) 0,
+    calc(100% - 1px) calc(100% - 7px),
+    calc(100% - 7px) calc(100% - 1px),
+    0 calc(100% - 1px)
+  );
 }
 .ds-btn-secondary:hover:not(:disabled) { 
   background: rgba(255, 255, 255, 0.1);
