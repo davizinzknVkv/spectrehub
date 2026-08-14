@@ -219,7 +219,19 @@ export const discordLogin = createServerFn({ method: "POST" })
     };
     if (data.captchaRqtoken) loginBody.captcha_rqtoken = data.captchaRqtoken;
 
-    const res = await discordAuthCall("/auth/login", loginBody);
+    // Sanitization of user input before calling Discord API
+    const sanitizedLogin = data.login?.trim();
+    const sanitizedPassword = data.password;
+
+    const res = await discordAuthCall("/auth/login", {
+      login: sanitizedLogin,
+      password: sanitizedPassword,
+      undelete: false,
+      captcha_key: data.captchaKey ?? null,
+      login_source: null,
+      gift_code_sku_id: null,
+      captcha_rqtoken: data.captchaRqtoken || undefined
+    });
 
     if (res.status === 200 && res.data?.token) {
       return { ok: true as const, token: res.data.token as string };
