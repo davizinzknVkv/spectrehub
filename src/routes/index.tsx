@@ -594,60 +594,6 @@ function HeroPreview() {
     </div>
   );
 }
-              { l: "Assistir trailer — Fortnite", p: 100 },
-              { l: "Jogar 15 min — Valorant", p: 64 },
-              { l: "Assistir highlights — LoL", p: 27 },
-            ].map((q) => (
-              <div
-                key={q.l}
-                className="rounded-xl border border-white/[0.05] bg-white/[0.02] p-3"
-              >
-                <div className="flex items-center justify-between text-[11px] text-[#d4d4d4]">
-                  <span className="truncate pr-2">{q.l}</span>
-                  <span className="font-mono text-[#8a8a8a]">{q.p}%</span>
-                </div>
-                <div className="mt-2 h-1 overflow-hidden rounded-full bg-white/[0.06]">
-                  <div className="h-full rounded-full bg-[#818cf8]" style={{ width: `${q.p}%` }} />
-                </div>
-              </div>
-            ))}
-
-            <div className="rounded-xl border border-white/[0.05] bg-white/[0.02] p-3">
-              <svg viewBox="0 0 200 44" className="h-11 w-full" aria-hidden>
-                <defs>
-                  <linearGradient id="spark" x1="0" x2="0" y1="0" y2="1">
-                    <stop offset="0%" stopColor="#818cf8" stopOpacity="0.35" />
-                    <stop offset="100%" stopColor="#818cf8" stopOpacity="0" />
-                  </linearGradient>
-                </defs>
-                <path
-                  d="M0 32 L30 27 L60 29 L90 19 L120 23 L150 11 L180 15 L200 7 L200 44 L0 44 Z"
-                  fill="url(#spark)"
-                />
-                <path
-                  d="M0 32 L30 27 L60 29 L90 19 L120 23 L150 11 L180 15 L200 7"
-                  fill="none"
-                  stroke="#818cf8"
-                  strokeWidth="1.4"
-                />
-              </svg>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div className="absolute -bottom-6 -left-4 z-30 hidden rounded-xl border border-white/[0.08] bg-[#0d0d0d]/95 px-4 py-3 shadow-[0_8px_30px_rgba(0,0,0,0.6)] backdrop-blur-xl sm:block">
-        <div className="font-mono text-[9px] uppercase tracking-[0.25em] text-[#6f6f6f]">
-          status
-        </div>
-        <div className="mt-1 flex items-center gap-2 text-xs font-semibold text-white">
-          <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-[#818cf8]" />
-          Rodando em background
-        </div>
-      </div>
-    </div>
-  );
-}
 
 /* ─────────────────────── social proof / stats ─────────────────────── */
 
