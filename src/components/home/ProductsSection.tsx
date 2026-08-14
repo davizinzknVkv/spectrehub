@@ -35,8 +35,14 @@ export function ProductsSection({ products }: ProductsSectionProps) {
            <div className="absolute inset-0 bg-gradient-to-tr from-spectre-pink/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
            <div className="absolute inset-0 flex items-center justify-center p-8 md:p-12">
              <div className="relative w-full h-full border border-white/10 bg-black/40 backdrop-blur-sm p-4 transition-transform duration-700 group-hover:scale-[1.02]">
-                <div className="w-full h-full bg-[#111] overflow-hidden relative">
-                   {products[activeTab].id === "quests" ? (
+                <div className="w-full h-full bg-[#111] overflow-hidden relative flex items-center justify-center">
+                   {products[activeTab].previewUrl ? (
+                     <img 
+                       src={products[activeTab].previewUrl} 
+                       className="w-full h-full object-cover transition-all duration-700 group-hover:scale-105" 
+                       alt={`${products[activeTab].name} Preview`} 
+                     />
+                   ) : products[activeTab].id === "quests" ? (
                      <img 
                        src={questFlyer.url} 
                        className="w-full h-full object-cover transition-all duration-700 group-hover:scale-105" 
