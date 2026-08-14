@@ -52,10 +52,10 @@ export function ProductsSection({ products }: ProductsSectionProps) {
                    <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent" />
                    
                    <div className="absolute bottom-8 left-8 right-8">
-                      <div className="font-display text-4xl text-white uppercase italic mb-2">
+                      <div className="font-display text-4xl text-white uppercase italic mb-2 drop-shadow-lg">
                         {products[activeTab].name}
                       </div>
-                      <div className="font-sans text-white/40 text-sm max-w-md">
+                      <div className="font-sans text-white/70 text-sm max-w-md drop-shadow-md">
                         {products[activeTab].desc}
                       </div>
                    </div>
