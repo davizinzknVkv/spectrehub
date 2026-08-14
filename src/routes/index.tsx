@@ -1230,8 +1230,6 @@ function CommunitySection() {
     </section>
   );
 }
-  );
-}
 
 function MiniStat({
   icon: Icon,
@@ -1243,10 +1241,10 @@ function MiniStat({
   value: string;
 }) {
   return (
-    <div className="bg-[#0a0a0a] p-5">
-      <Icon className="h-4 w-4 text-[#ff0055]" />
-      <div className="mt-4 truncate font-display text-lg font-black text-white">{value}</div>
-      <div className="mt-1 font-display text-[9px] font-bold uppercase tracking-[0.2em] text-[#444]">
+    <div className="bg-obsidian p-5 rounded-xl border border-graphite">
+      <Icon className="h-4 w-4 text-accent" />
+      <div className="mt-4 truncate font-display text-[20px] font-medium text-white tracking-tight">{value}</div>
+      <div className="mt-1 text-eyebrow font-medium uppercase tracking-widest text-steel">
         {label}
       </div>
     </div>
@@ -1264,43 +1262,36 @@ function OptimizerSection() {
   };
 
   return (
-    <section id="optimizer" className="relative overflow-hidden border-t border-white/5 bg-[#030303] py-32">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <section id="optimizer" className="relative overflow-hidden border-t border-graphite bg-obsidian py-40">
+      <div className="mx-auto max-w-[1216px] px-6">
         <Reveal>
           <div className="text-center">
-            <span className="inline-flex items-center gap-2 rounded-full border border-[#ff0055]/20 bg-[#ff0055]/5 px-4 py-1.5 font-mono text-[9px] font-bold uppercase tracking-[0.3em] text-[#ff0055] backdrop-blur-md">
-              <span className="h-1 w-1 rounded-full bg-[#ff0055] shadow-[0_0_8px_#ff0055]" />
+            <span className="text-eyebrow font-semibold uppercase tracking-widest text-accent mb-6 block">
               {settings.badge}
             </span>
-            <h2 className="mt-8 font-display text-4xl font-extrabold leading-[0.95] tracking-tighter text-white sm:text-7xl">
+            <h2 className="font-display text-[44px] font-medium leading-[1.1] text-white sm:text-[64px]">
               {settings.name}
             </h2>
-            <p className="mx-auto mt-6 max-w-xl text-lg font-bold text-[#ff0055] uppercase tracking-wider">
-              {settings.title}
-            </p>
-            <p className="mx-auto mt-6 max-w-2xl text-base font-medium text-[#8a8a8a] leading-relaxed">
+            <p className="mx-auto mt-8 max-w-2xl text-body-sm text-fog">
               {settings.description}
             </p>
           </div>
         </Reveal>
 
         {/* Features Grid */}
-        <div className="mt-24 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-24 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {features.map((f, i) => {
             const Icon = IconMap[f.icon] || Zap;
             return (
               <Reveal key={f.id} delay={i * 100}>
-                <div className="group relative overflow-hidden bg-[#0a0a0a] p-8 transition-all hover:bg-[#0f0f0f]">
-                  <div className="flex items-start justify-between">
-                    <div className="grid h-12 w-12 place-items-center rounded-sm bg-white/[0.03] text-[#ff0055] transition-colors group-hover:bg-[#ff0055] group-hover:text-white">
-                      <Icon className="h-6 w-6" />
-                    </div>
+                <div className="group rounded-2xl border border-white/[0.04] bg-onyx/30 p-10 transition-all hover:border-accent/30">
+                  <div className="h-12 w-12 flex items-center justify-center rounded-full bg-obsidian border border-graphite text-accent group-hover:bg-accent group-hover:text-black transition-all">
+                    <Icon className="h-6 w-6" />
                   </div>
-                  <h3 className="mt-8 font-display text-xl font-black uppercase tracking-tight text-white">{f.title}</h3>
-                  <p className="mt-4 text-[13px] font-medium leading-relaxed text-[#666] group-hover:text-[#888] transition-colors">
+                  <h3 className="mt-8 font-display text-[24px] font-medium text-white tracking-tight">{f.title}</h3>
+                  <p className="mt-4 text-[14px] text-fog leading-relaxed">
                     {f.description}
                   </p>
-                  <div className="absolute bottom-0 left-0 h-[2px] w-0 bg-[#ff0055] transition-all duration-500 group-hover:w-full" />
                 </div>
               </Reveal>
             );
