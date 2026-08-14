@@ -1319,6 +1319,121 @@ function MiniStat({
   );
 }
 
+/* ─────────────────────────── optimizer ─────────────────────────── */
+
+function OptimizerSection() {
+  const { settings, features, previews } = useOptimizerContent();
+  if (!settings || !settings.active) return null;
+
+  const IconMap: Record<string, any> = {
+    Zap, Target, Gauge, Globe, Trash2, Activity, ShieldCheck, Sparkles, Users
+  };
+
+  return (
+    <section id="optimizer" className="relative overflow-hidden border-t border-white/5 bg-[#030303] py-32">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <Reveal>
+          <div className="text-center">
+            <span className="inline-flex items-center gap-2 rounded-full border border-[#ff0055]/20 bg-[#ff0055]/5 px-4 py-1.5 font-mono text-[9px] font-bold uppercase tracking-[0.3em] text-[#ff0055] backdrop-blur-md">
+              <span className="h-1 w-1 rounded-full bg-[#ff0055] shadow-[0_0_8px_#ff0055]" />
+              {settings.badge}
+            </span>
+            <h2 className="mt-8 font-display text-4xl font-extrabold leading-[0.95] tracking-tighter text-white sm:text-7xl">
+              {settings.name}
+            </h2>
+            <p className="mx-auto mt-6 max-w-xl text-lg font-bold text-[#ff0055] uppercase tracking-wider">
+              {settings.title}
+            </p>
+            <p className="mx-auto mt-6 max-w-2xl text-base font-medium text-[#8a8a8a] leading-relaxed">
+              {settings.description}
+            </p>
+          </div>
+        </Reveal>
+
+        {/* Features Grid */}
+        <div className="mt-24 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {features.map((f, i) => {
+            const Icon = IconMap[f.icon] || Zap;
+            return (
+              <Reveal key={f.id} delay={i * 100}>
+                <div className="group relative overflow-hidden bg-[#0a0a0a] p-8 transition-all hover:bg-[#0f0f0f]">
+                  <div className="flex items-start justify-between">
+                    <div className="grid h-12 w-12 place-items-center rounded-sm bg-white/[0.03] text-[#ff0055] transition-colors group-hover:bg-[#ff0055] group-hover:text-white">
+                      <Icon className="h-6 w-6" />
+                    </div>
+                  </div>
+                  <h3 className="mt-8 font-display text-xl font-black uppercase tracking-tight text-white">{f.title}</h3>
+                  <p className="mt-4 text-[13px] font-medium leading-relaxed text-[#666] group-hover:text-[#888] transition-colors">
+                    {f.description}
+                  </p>
+                  <div className="absolute bottom-0 left-0 h-[2px] w-0 bg-[#ff0055] transition-all duration-500 group-hover:w-full" />
+                </div>
+              </Reveal>
+            );
+          })}
+        </div>
+
+        {/* Previews Showcase */}
+        {previews.length > 0 && (
+          <div className="mt-32 space-y-20">
+            <Reveal>
+              <div className="text-center">
+                <h3 className="font-display text-2xl font-black uppercase tracking-tighter text-white sm:text-4xl">
+                  Conheça a interface do Spectre Optimizer
+                </h3>
+                <p className="mt-4 font-display text-[10px] font-bold uppercase tracking-[0.2em] text-[#444]">
+                  Veja algumas prévias da plataforma de alta performance
+                </p>
+              </div>
+            </Reveal>
+
+            <div className="grid gap-8">
+              {previews.map((p, i) => (
+                <Reveal key={p.id} delay={i * 150}>
+                  <div className="group relative overflow-hidden bg-[#0a0a0a] border border-white/5">
+                    <div className="aspect-[21/9] overflow-hidden">
+                      <img 
+                        src={p.image_url} 
+                        alt={p.title} 
+                        className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" 
+                      />
+                    </div>
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#030303] via-transparent to-transparent opacity-60" />
+                    <div className="absolute bottom-0 left-0 w-full p-8 lg:p-12">
+                      <h4 className="font-display text-xl font-black uppercase tracking-tight text-white sm:text-3xl">{p.title}</h4>
+                      <p className="mt-2 max-w-xl text-sm font-medium text-[#8a8a8a]">{p.description}</p>
+                    </div>
+                  </div>
+                </Reveal>
+              ))}
+            </div>
+          </div>
+        )}
+
+        <Reveal delay={200}>
+          <div className="mt-24 text-center">
+            <a 
+              href={settings.button_link} 
+              target="_blank" 
+              rel="noreferrer" 
+              className="group relative inline-flex items-center gap-3 bg-white px-10 py-5 text-[11px] font-black uppercase tracking-[0.3em] text-black transition-all hover:bg-[#ff0055] hover:text-white"
+            >
+              {settings.button_text}
+              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+            </a>
+            <div className="mt-8 flex items-center justify-center gap-6">
+              <span className="font-mono text-[9px] uppercase tracking-widest text-[#444]">
+                Status: <span className="text-[#ff0055]">{settings.status}</span>
+              </span>
+            </div>
+          </div>
+        </Reveal>
+      </div>
+    </section>
+  );
+}
+
+
 /* ─────────────────────────── cta final ─────────────────────────── */
 
 function FinalCta() {
