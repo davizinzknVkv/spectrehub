@@ -23,17 +23,40 @@ export function useInView<T extends Element>(threshold = 0.15): [React.RefObject
 
 export function useCountUp(target: number, run: boolean, duration = 1400) {
   const [value, setValue] = useState(0);
+  const targetRef = useRef(target);
+
   useEffect(() => {
-    if (!run) return;
+    targetRef.current = target;
+  }, [target]);
+
+  useEffect(() => {
+    if (!run) {
+      setValue(0);
+      return;
+    }
+    
     let raf = 0;
+    const initialValue = value;
     const start = performance.now();
+    
     const tick = (now: number) => {
-      const t = Math.min(1, (now - start) / duration);
-      setValue(target * (1 - Math.pow(1 - t, 3)));
-      if (t < 1) raf = requestAnimationFrame(tick);
+      const elapsed = now - start;
+      const t = Math.min(1, elapsed / duration);
+      // Ease out cubic
+      const progress = 1 - Math.pow(1 - t, 3);
+      const currentTarget = targetRef.current;
+      
+      setValue(initialValue + (currentTarget - initialValue) * progress);
+      
+      if (t < 1) {
+        raf = requestAnimationFrame(tick);
+      } else {
+        setValue(currentTarget);
+      }
     };
+    
     raf = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(raf);
-  }, [target, run, duration]);
+  }, [run, duration]); // Removido 'target' das dependências para evitar restarts abruptos
   return value;
 }
