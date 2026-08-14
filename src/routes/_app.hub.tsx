@@ -641,10 +641,11 @@ function PresenceModal({
                 <div className="flex items-center gap-3">
                   <Gamepad2 className="w-5 h-5 text-spectre-pink" />
                   <div>
-                    <div className="font-display text-[10px] text-white uppercase italic tracking-widest">Protocolo GameBridge</div>
+                    <div className="font-display text-[10px] text-white uppercase italic tracking-widest">Atividade Externa</div>
                     <div className="text-[8px] text-white/20 uppercase tracking-widest">Simula atividade de jogo</div>
                   </div>
                 </div>
+
                 <button 
                   onClick={() => setRichEnabled(!richEnabled)}
                   className={cn(
