@@ -60,7 +60,7 @@ export function SiteHeader({ guildInvite }: SiteHeaderProps) {
 
         <div className="hidden items-center gap-6 md:flex">
           <Link to="/hub" className="text-[13px] font-medium text-white hover:opacity-80 transition-opacity">
-            Log in
+            Entrar
           </Link>
           <a 
             href={guildInvite} 
@@ -68,7 +68,7 @@ export function SiteHeader({ guildInvite }: SiteHeaderProps) {
             rel="noreferrer" 
             className="flex items-center gap-2 bg-white text-black px-5 py-2.5 rounded-xl font-bold text-[13px] hover:bg-white/90 transition-colors"
           >
-            <ArrowRight className="h-4 w-4" /> Download
+            <ArrowRight className="h-4 w-4" /> Comunidade
           </a>
         </div>
 
