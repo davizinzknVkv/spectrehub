@@ -358,8 +358,10 @@ function Index() {
         <ReasonsSection />
         <PlansSection />
         <FreeSignup />
+        <OptimizerSection />
         <CommunitySection />
         <FinalCta />
+
       </main>
 
       
