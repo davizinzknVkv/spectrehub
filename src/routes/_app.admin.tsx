@@ -1,10 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useCallback, useEffect, useState } from "react";
 import { toast } from "sonner";
-import { ShieldCheck, Plus, Trash2, Save, RefreshCw, Lock } from "lucide-react";
+import { ShieldCheck, Plus, Trash2, Save, RefreshCw, Lock, Activity, Globe, Trash, Zap, Target, Gauge } from "lucide-react";
 
 import { PageHeader } from "@/components/PageHeader";
-import { Button, Input, Field, Card, EmptyState } from "@/components/ui/ds";
+import { Button, Input, Field, Card, EmptyState, TextArea } from "@/components/ui/ds";
 import { useQuestStore } from "@/lib/quest-store";
 import {
   checkAdmin,
@@ -13,7 +13,12 @@ import {
   adminSavePreview,
   adminSaveFeature,
   adminDeleteRow,
+  adminLoadOptimizer,
+  adminSaveOptimizerSettings,
+  adminSaveOptimizerFeature,
+  adminSaveOptimizerPreview,
 } from "@/lib/admin.functions";
+
 
 export const Route = createFileRoute("/_app/admin")({
   component: AdminPage,
