@@ -28,7 +28,7 @@ export function Hero({ guildInvite, fallbackMembers }: HeroProps) {
           <div className="inline-flex items-center gap-2 px-3 py-1 border border-spectre-pink/30 bg-spectre-pink/5 mb-8">
             <span className="w-1.5 h-1.5 rounded-full bg-spectre-pink animate-pulse" />
             <span className="font-display text-[10px] tracking-[0.3em] text-spectre-pink uppercase">
-              Tecnologia de Elite
+              Alta Tecnologia
             </span>
           </div>
         </Reveal>
