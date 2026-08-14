@@ -35,7 +35,7 @@ export function Hero({ guildInvite, fallbackMembers }: HeroProps) {
         </Reveal>
 
         <Reveal delay={80}>
-          <h1 className="mt-8 font-display text-[2.8rem] font-extrabold leading-[0.9] tracking-tighter text-white xs:text-[3.5rem] sm:text-7xl lg:text-[7rem]">
+          <h1 className="mt-8 font-display text-[2.4rem] font-extrabold leading-[0.9] tracking-tighter text-white xs:text-[3.2rem] sm:text-7xl lg:text-[7rem] break-words px-2">
             A SPECTRE
             <br />
             CRIA.
@@ -67,12 +67,16 @@ export function Hero({ guildInvite, fallbackMembers }: HeroProps) {
         </Reveal>
 
         <Reveal delay={320}>
-          <div className="mt-20 flex items-center justify-between border-t border-white/5 pt-8 text-[10px] font-bold text-[#444] uppercase tracking-[0.2em]">
-            <span>SPECTRE HUB</span>
-            <span className="opacity-20">//</span>
-            <span>AGO/2026</span>
-            <span className="opacity-20">©</span>
-            <span>PROPERTY OF SPECTRE. ALL CREATIVE RIGHTS RESERVED.</span>
+          <div className="mt-20 flex flex-wrap items-center justify-center sm:justify-between border-t border-white/5 pt-8 gap-4 text-[9px] font-bold text-[#444] uppercase tracking-[0.2em]">
+            <div className="flex items-center gap-3">
+              <span>SPECTRE HUB</span>
+              <span className="opacity-20">//</span>
+              <span>AGO/2026</span>
+            </div>
+            <div className="flex items-center gap-3">
+              <span className="opacity-20">©</span>
+              <span>PROPERTY OF SPECTRE. ALL RIGHTS RESERVED.</span>
+            </div>
           </div>
         </Reveal>
 
@@ -118,17 +122,17 @@ function HeroPreview() {
       <div className="overflow-hidden rounded-2xl border border-white/[0.08] bg-[#0d0d0d]/90 shadow-[0_50px_120px_-60px_rgba(0,0,0,0.9)] backdrop-blur-xl">
         <div className="flex items-center gap-3 border-b border-white/[0.06] px-4 py-3">
           <div className="flex gap-1.5">
-            <span className="h-2.5 w-2.5 rounded-full bg-white/10" />
-            <span className="h-2.5 w-2.5 rounded-full bg-white/10" />
-            <span className="h-2.5 w-2.5 rounded-full bg-white/10" />
+            <span className="h-2.5 w-2.5 rounded-full bg-white/10 shrink-0" />
+            <span className="h-2.5 w-2.5 rounded-full bg-white/10 shrink-0" />
+            <span className="h-2.5 w-2.5 rounded-full bg-white/10 shrink-0" />
           </div>
-          <div className="font-mono text-[10px] uppercase tracking-[0.25em] text-[#6f6f6f]">
+          <div className="font-mono text-[10px] uppercase tracking-[0.25em] text-[#6f6f6f] truncate">
             hub / automation
           </div>
         </div>
 
-        <div className="grid grid-cols-[84px_1fr] gap-3 p-4">
-          <div className="space-y-2 rounded-xl border border-white/[0.05] bg-white/[0.02] p-2.5">
+        <div className="grid grid-cols-1 xs:grid-cols-[84px_1fr] gap-3 p-4">
+          <div className="hidden xs:flex xs:flex-col space-y-2 rounded-xl border border-white/[0.05] bg-white/[0.02] p-2.5">
             <div className="h-1.5 w-full rounded-full bg-[#ff0055]/70" />
             {[80, 65, 72, 50, 60].map((w, i) => (
               <div key={i} className="h-1.5 rounded-full bg-white/[0.08]" style={{ width: `${w}%` }} />
