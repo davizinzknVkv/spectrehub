@@ -213,7 +213,7 @@ function FarmsPage() {
 
 function StatItem({ icon: Icon, label, value, sub, active }: any) {
   return (
-    <div className={`ds-card p-6 border-white/5 bg-white/[0.02] space-y-2 transition-all ${active ? 'border-spectre-pink/20' : ''}`}>
+    <div className={`ds-card p-6 border-white/5 bg-white/[0.02] space-y-2 transition-all hover:border-spectre-pink/40 ${active ? 'border-spectre-pink/20' : ''}`}>
         <div className="flex items-center gap-2">
             <Icon className={`w-3.5 h-3.5 ${active ? 'text-spectre-pink' : 'text-white/20'}`} />
             <span className="font-display text-[9px] uppercase tracking-widest text-white/30 italic">{label}</span>
