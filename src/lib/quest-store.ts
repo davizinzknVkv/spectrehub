@@ -42,7 +42,7 @@ const LAST_KEY = "discordhub.lastCompletedAt";
 function loadPlan(): Plan {
   if (typeof window === "undefined") return "free";
   const v = window.localStorage.getItem(PLAN_KEY);
-  return v === "premium" || v === "boost" ? v : "free";
+  return (v === "premium" || v === "boost" || v === "lifetime" || v === "beta") ? v : "free";
 }
 function loadLastCompleted(): number {
   if (typeof window === "undefined") return 0;
@@ -69,7 +69,7 @@ function loadRuns(): RunRecord[] {
   }
 }
 
-export type Plan = "free" | "premium" | "boost";
+export type Plan = "free" | "premium" | "boost" | "lifetime" | "beta";
 
 type State = {
   running: boolean;
