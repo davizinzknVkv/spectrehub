@@ -36,11 +36,19 @@ export function ProductsSection({ products }: ProductsSectionProps) {
            <div className="absolute inset-0 flex items-center justify-center p-8 md:p-16">
              <div className="relative w-full h-full border border-white/10 bg-black/40 backdrop-blur-sm p-4 transition-transform duration-700 group-hover:scale-[1.02]">
                 <div className="w-full h-full bg-[#111] overflow-hidden relative">
-                   <img 
-                      src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=2070&auto=format&fit=crop" 
-                      className="w-full h-full object-cover grayscale opacity-50 group-hover:opacity-80 group-hover:grayscale-0 transition-all duration-700" 
-                      alt="Interface Preview" 
-                   />
+                   {products[activeTab].id === "quests" ? (
+                     <img 
+                       src={questFlyer.url} 
+                       className="w-full h-full object-cover transition-all duration-700 group-hover:scale-105" 
+                       alt="Spectre Quests Flyer" 
+                     />
+                   ) : (
+                     <img 
+                        src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=2070&auto=format&fit=crop" 
+                        className="w-full h-full object-cover grayscale opacity-50 group-hover:opacity-80 group-hover:grayscale-0 transition-all duration-700" 
+                        alt="Interface Preview" 
+                     />
+                   )}
                    <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent" />
                    
                    <div className="absolute bottom-8 left-8 right-8">
