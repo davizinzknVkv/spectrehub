@@ -91,6 +91,15 @@ const PRODUCTS: Product[] = [
     icon: Zap,
   },
   {
+    id: "optimizer",
+    name: "Optimizer",
+    category: "Utilidades",
+    desc: "Maximize a performance do seu hardware. Ferramenta elite para limpeza de registros, otimização de CPU/RAM e redução drástica de latência em jogos e aplicações.",
+    status: "Beta",
+    to: "/hub",
+    icon: Gauge,
+  },
+  {
     id: "nicks",
     name: "Nicks-Gun",
     category: "Discord",
@@ -136,6 +145,7 @@ const PRODUCTS: Product[] = [
     icon: Music4,
   },
 ];
+
 
 const CATEGORIES = ["Todos", "Automação", "Discord", "Economia", "Utilidades"] as const;
 
