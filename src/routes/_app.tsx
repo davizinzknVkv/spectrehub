@@ -86,7 +86,7 @@ function AppLayout() {
   }, [pathname]);
 
   return (
-    <div className="min-h-screen bg-[#050505] text-slate-100 antialiased">
+    <div className="min-h-screen bg-obsidian text-bone antialiased">
       <div
         className="pointer-events-none fixed inset-0 -z-10 opacity-[0.03]"
         style={{
@@ -95,9 +95,9 @@ function AppLayout() {
         }}
       />
 
-      <div className="grid min-h-screen w-full grid-cols-1 lg:grid-cols-[236px_1fr]">
+      <div className="grid min-h-screen w-full grid-cols-1 lg:grid-cols-[240px_1fr]">
         {/* Desktop sidebar */}
-        <aside className="hidden border-r border-white/5 bg-[#050505] lg:sticky lg:top-0 lg:block lg:h-screen">
+        <aside className="hidden border-r border-graphite bg-obsidian lg:sticky lg:top-0 lg:block lg:h-screen">
           <SidebarBody pathname={pathname} creds={creds} setCreds={setCreds} />
         </aside>
 
@@ -149,24 +149,24 @@ function SidebarBody({
   const logoUrl = logoAsset.url;
   return (
     <div className="flex h-full flex-col">
-      <Link to="/" className="flex items-center gap-2.5 px-6 pb-6 pt-8">
+      <Link to="/" className="flex items-center gap-3 px-8 pb-10 pt-12">
         <img
           src={logoUrl}
           alt="Spectre Hub"
-          className="h-8 w-8 object-contain shrink-0"
+          className="h-8 w-8 object-contain shrink-0 brightness-110"
         />
-        <span className="truncate font-display text-[15px] font-extrabold tracking-tighter text-white uppercase">
-          Spectre<span className="opacity-40 ml-1.5 font-light">|</span><span className="text-[#ff0055] ml-1.5">HUB</span>
+        <span className="truncate font-display text-[20px] font-medium tracking-tight text-white">
+          Spectre Hub
         </span>
       </Link>
 
-      <div className="mx-6 h-px bg-white/5" aria-hidden />
-
-      <nav className="flex flex-col gap-5 px-3 py-5 lg:flex-1">
+      <nav className="flex flex-col gap-8 px-4 py-5 lg:flex-1">
         {NAV_GROUPS.map((group) => (
           <div key={group.title}>
-            <div className="ds-label px-4 pb-2 text-[9px] font-bold uppercase tracking-[0.25em] text-[#52525b]">{group.title}</div>
-            <div className="flex flex-col gap-0.5">
+            <div className="px-4 pb-3 text-eyebrow font-semibold uppercase tracking-widest text-steel">
+              {group.title}
+            </div>
+            <div className="flex flex-col gap-1">
               {group.items.map((item) => {
                 const Icon = item.icon;
                 const active = pathname === item.to;
@@ -174,22 +174,22 @@ function SidebarBody({
                   <Link
                     key={`${item.to}-${item.label}`}
                     to={item.to}
-                    data-active={active}
-                    className="nav-item group"
+                    className={`flex items-center gap-3 px-4 py-2.5 rounded-full transition-all text-[14px] font-medium ${
+                      active 
+                        ? "bg-onyx text-white border border-white/[0.04]" 
+                        : "text-fog hover:text-white hover:bg-white/[0.02]"
+                    }`}
                   >
                     <Icon
-                      className={`h-[14px] w-[14px] shrink-0 transition-colors ${
-                        active ? "text-[#ff0055]" : "text-[#52525b] group-hover:text-white"
+                      className={`h-[16px] w-[16px] shrink-0 ${
+                        active ? "text-accent" : "text-steel"
                       }`}
                     />
-                    <span className={active ? "font-bold text-white tracking-[-0.01em]" : "tracking-[-0.01em]"}>
-                      {item.label}
-                    </span>
+                    <span>{item.label}</span>
                     {item.soon && (
-                      <span className="ml-auto rounded-none border border-[#ff0055]/20 bg-[#ff0055]/5 px-2 py-0.5 text-[8px] font-bold uppercase tracking-widest text-[#ff0055]">em breve</span>
+                      <span className="ml-auto text-[10px] font-semibold text-accent/50 uppercase tracking-widest">Breve</span>
                     )}
                   </Link>
-
                 );
               })}
             </div>
@@ -197,11 +197,10 @@ function SidebarBody({
         ))}
       </nav>
 
-      <div className="mt-auto border-t border-white/[0.06] p-3">
+      <div className="mt-auto border-t border-graphite p-4 space-y-1">
         <AdminNavLink />
-        <a href={DISCORD_INVITE} target="_blank" rel="noreferrer" className="nav-item group">
-
-          <LifeBuoy className="h-[14px] w-[14px] shrink-0 text-[#444] group-hover:text-white transition-colors" />
+        <a href={DISCORD_INVITE} target="_blank" rel="noreferrer" className="flex items-center gap-3 px-4 py-2.5 rounded-full text-fog hover:text-white hover:bg-white/[0.02] text-[14px] font-medium transition-all">
+          <LifeBuoy className="h-[16px] w-[16px] shrink-0 text-steel" />
           Suporte Discord
         </a>
       </div>

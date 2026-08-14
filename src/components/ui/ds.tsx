@@ -93,8 +93,8 @@ export function Button({
     <button 
       className={cn(
         buttonClass(variant, size, className),
-        "relative overflow-hidden active:scale-[0.98] transition-all duration-200",
-        variant === "primary" && "hover:shadow-[0_0_20px_-5px_var(--accent-1)]"
+        "relative overflow-hidden active:scale-[0.98] transition-all duration-200 rounded-full",
+        variant === "primary" && "hover:opacity-90"
       )} 
       {...props} 
     />

@@ -19,193 +19,136 @@
  */
 
 @theme inline {
-  --font-sans:
-    "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
-  --font-display:
-    "Archivo Black", ui-sans-serif, system-ui, sans-serif;
-  --font-mono:
-    "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-display: "DM Serif Display", serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
 
+  --color-obsidian: #08080a;
+  --color-onyx: #040406;
+  --color-carbon: #121317;
+  --color-graphite: #1c1d22;
+  --color-slate: #2e3038;
+  --color-smoke: #464853;
+  --color-ash: #5e616e;
+  --color-steel: #777a88;
+  --color-fog: #9194a1;
+  --color-mist: #acafb9;
+  --color-silver: #c7c9d1;
+  --color-bone: #e2e3e9;
+  --color-paper-white: #ffffff;
+  --color-copper: #cc9166;
+  --color-gilded-gradient: #ae9357;
 
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 4px);
-  --radius-2xl: calc(var(--radius) + 8px);
-  --radius-3xl: calc(var(--radius) + 12px);
-  --radius-4xl: calc(var(--radius) + 16px);
+  --spacing-4: 4px;
+  --spacing-6: 6px;
+  --spacing-8: 8px;
+  --spacing-9: 9px;
+  --spacing-10: 10px;
+  --spacing-12: 12px;
+  --spacing-14: 14px;
+  --spacing-16: 16px;
+  --spacing-20: 20px;
+  --spacing-22: 22px;
+  --spacing-24: 24px;
+  --spacing-32: 32px;
+  --spacing-40: 40px;
+  --spacing-48: 48px;
+  --spacing-105: 105px;
+  --spacing-224: 224px;
 
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --color-card: var(--card);
-  --color-card-foreground: var(--card-foreground);
-  --color-popover: var(--popover);
-  --color-popover-foreground: var(--popover-foreground);
-  --color-primary: var(--primary);
-  --color-primary-foreground: var(--primary-foreground);
-  --color-secondary: var(--secondary);
-  --color-secondary-foreground: var(--secondary-foreground);
-  --color-muted: var(--muted);
-  --color-muted-foreground: var(--muted-foreground);
-  --color-accent: var(--accent);
-  --color-accent-foreground: var(--accent-foreground);
-  --color-destructive: var(--destructive);
-  --color-destructive-foreground: var(--destructive-foreground);
-  --color-border: var(--border);
-  --color-input: var(--input);
-  --color-ring: var(--ring);
-  --color-ring-offset-background: var(--background);
+  --radius-sm: 2px;
+  --radius-lg: 10px;
+  --radius-full: 9999px;
 
-  /* Cyber terminal palette — direct-access tokens */
-  --color-void: var(--void);
-  --color-surface: var(--surface);
-  --color-surface-2: var(--surface-2);
-  --color-line: var(--line);
-  --color-cyan: var(--cyan);
-  --color-cyan-dim: var(--cyan-dim);
-  --color-purple: var(--purple);
-  --color-purple-dim: var(--purple-dim);
-  --color-mint: var(--mint);
-  --color-amber: var(--amber);
-  --color-rose: var(--rose);
-  --color-ink: var(--ink);
-  --color-ink-dim: var(--ink-dim);
-  --color-ink-mute: var(--ink-mute);
+  --shadow-subtle: rgba(255, 255, 255, 0.2) 0px 0px 0px 1px;
+
+  /* Semantic mappings */
+  --color-background: var(--color-obsidian);
+  --color-foreground: var(--color-bone);
+  --color-primary: var(--color-paper-white);
+  --color-primary-foreground: #000000;
+  --color-accent: var(--color-copper);
+  --color-border: var(--color-graphite);
+  --color-card: var(--color-onyx);
+  --color-muted: var(--color-smoke);
+  --color-muted-foreground: var(--color-fog);
 }
 
-
 :root {
-  --radius: 0px;
+  --radius: 10px;
+  --font-ivy-presto: var(--font-display);
+  --font-inter: var(--font-sans);
 
-  /* ── NGHC Design System — single source of truth ─────────────────── */
-  /* Backgrounds / surfaces */
-  --bg: #030303;
-  --bg-2: #050505;
-  --surface-1: #080808;
-  --surface-3: #0c0c0c;
-  --surface-hover: #111111;
+  /* Type Scale Values */
+  --text-eyebrow: 13px;
+  --text-body-xs: 16px;
+  --text-body-sm: 18px;
+  --text-body: 20px;
+  --text-subheading: 24px;
+  --text-heading-sm: 44px;
+  --text-heading: 52px;
+  --text-heading-lg: 64px;
+  --text-display: 88px;
 
-  /* Text */
-  --text-1: #ffffff;
-  --text-2: #a1a1aa;
-  --text-3: #52525b;
+  --gradient-gilded: linear-gradient(103deg, rgb(174, 147, 87), rgb(255, 240, 204) 40%, rgb(174, 147, 87) 70%, rgba(189, 157, 79, 0));
 
-  /* Borders */
-  --border-1: rgba(255, 255, 255, 0.04);
-  --border-2: rgba(255, 255, 255, 0.08);
-
-  /* Accent (Spectre Pink) */
-  --accent-1: #ff0055;
-  --accent-2: #ff2d78;
-  --accent-soft: #ff4d94;
-
-  /* Optimizer Neon Palette */
-  --neon-purple: #a855f7;
-  --neon-blue: #3b82f6;
-  --neon-cyan: #06b6d4;
-  --neon-purple-glow: rgba(168, 85, 247, 0.5);
-  --neon-blue-glow: rgba(59, 130, 246, 0.5);
-  --neon-cyan-glow: rgba(6, 182, 212, 0.5);
-
-  /* Feedback */
+  /* Legacy NGHC compat variables (re-mapped to Slash tokens) */
+  --bg: var(--color-obsidian);
+  --bg-2: var(--color-onyx);
+  --surface-1: var(--color-carbon);
+  --surface-3: var(--color-graphite);
+  --surface-hover: var(--color-slate);
+  --text-1: var(--color-bone);
+  --text-2: var(--color-fog);
+  --text-3: var(--color-ash);
+  --border-1: var(--color-graphite);
+  --border-2: var(--color-slate);
+  --accent-1: var(--color-paper-white);
+  --accent-2: var(--color-copper);
+  --accent-soft: var(--color-mist);
   --ok: #34d399;
   --warn: #fbbf24;
   --danger: #f87171;
-
-  /* Spacing scale - responsivo */
-  --sp-1: 0.25rem;  --sp-2: 0.5rem;  --sp-3: 0.75rem; --sp-4: 1rem;
-  --sp-5: 1.25rem; --sp-6: 1.5rem; --sp-8: 2rem; --sp-10: 2.5rem;
-  --sp-12: 3rem; --sp-16: 4rem;
-
-  /* Radius scale - Sharp industrial edges */
-  --r-sm: 0px; --r-md: 0px; --r-lg: 0px; --r-xl: 0px;
-
-  /* Motion - Faster, more energetic feel */
-  --dur-fast: 100ms;
-  --dur: 200ms;
-  --dur-slow: 300ms;
-  --ease: cubic-bezier(0.16, 1, 0.3, 1);
-
-  /* Elevation (refined) */
-  --shadow-1: 0 1px 0 rgb(255 255 255 / 0.03) inset;
-  --shadow-2: 0 20px 48px -20px rgb(0 0 0 / 0.95);
-  --accent-glow: 0 4px 20px -10px color-mix(in oklab, var(--accent-1) 70%, transparent);
-
-  /* Legacy aliases (mantidos para não quebrar telas existentes) */
-  --void: #050505;
-  --surface: #0d0d0d;
-  --surface-2: #151515;
-  --line: rgb(255 255 255 / 0.08);
-  --blurple: var(--accent-1);
-  --blurple-soft: var(--accent-soft);
-  --cyan: var(--accent-1);
-  --cyan-dim: var(--accent-soft);
-  --purple: var(--accent-2);
-  --purple-dim: var(--accent-1);
-  --mint: var(--ok);
-  --amber: var(--warn);
-  --rose: var(--danger);
-  --ink: var(--text-1);
-  --ink-dim: var(--text-2);
-  --ink-mute: var(--text-3);
-
-
-
-  --background: var(--void);
-  --foreground: var(--ink);
-  --card: var(--surface);
-  --card-foreground: var(--ink);
-  --popover: var(--surface);
-  --popover-foreground: var(--ink);
-  --primary: var(--cyan);
-  --primary-foreground: oklch(0.14 0.02 240);
-  --secondary: var(--surface-2);
-  --secondary-foreground: var(--ink);
-  --muted: var(--surface-2);
-  --muted-foreground: var(--ink-mute);
-  --accent: var(--surface-2);
-  --accent-foreground: var(--cyan);
-  --destructive: var(--rose);
-  --destructive-foreground: var(--ink);
-  --border: var(--line);
-  --input: var(--surface-2);
-  --ring: var(--cyan);
-
-  /* Unified glass tokens — matching corenetwork.dev style */
-  --glass-bg: rgba(5, 5, 5, 0.4);
-  --glass-bg-strong: rgba(3, 3, 3, 0.8);
-  --glass-border: rgba(255, 255, 255, 0.05);
+  
+  --void: var(--color-obsidian);
+  --surface: var(--color-onyx);
+  --surface-2: var(--color-carbon);
+  --line: var(--color-graphite);
+  --blurple: var(--color-copper);
+  --ink: var(--color-bone);
+  --ink-dim: var(--color-fog);
+  --ink-mute: var(--color-ash);
+  
+  --glass-bg: rgba(8, 8, 10, 0.4);
+  --glass-bg-strong: rgba(4, 4, 6, 0.8);
+  --glass-border: var(--color-graphite);
   --glass-border-soft: rgba(255, 255, 255, 0.03);
-  --glass-shadow:
-    0 4px 32px -8px rgba(0, 0, 0, 0.9),
-    inset 0 1px 0 rgba(255, 255, 255, 0.02);
+  --glass-shadow: var(--shadow-subtle);
   --glass-blur: 12px;
-  --glass-radius: 0px;
-}
-
-
-
-.dark {
-  /* Reuses :root tokens — app is dark-first. */
+  --glass-radius: 10px;
 }
 
 @layer base {
   html,
   body {
-    background-color: var(--color-background);
-    color: var(--color-foreground);
+    background-color: var(--color-obsidian);
+    color: var(--color-bone);
     font-family: var(--font-sans);
-    font-feature-settings:
-      "ss01" on,
-      "cv11" on;
     -webkit-font-smoothing: antialiased;
+    letter-spacing: -0.013em;
   }
 
-  h1, h2, h3 {
+  h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-display);
     font-weight: 400;
-    letter-spacing: -0.03em;
+    color: var(--color-paper-white);
+    letter-spacing: 0.01em;
   }
+
+  p {
+    line-height: 1.56;
+  }
+}
 
   .font-black, .font-extrabold, .font-bold {
     letter-spacing: -0.02em;
@@ -1164,11 +1107,3 @@ textarea.ds-input { height: auto; padding: var(--sp-3); line-height: 1.6; }
   animation: spin-slow 8s linear infinite;
 }
 
-@utility pulse-dot {
-  animation: pulse-dot-key 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-}
-
-@keyframes pulse-dot-key {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.5; transform: scale(0.8); }
-}

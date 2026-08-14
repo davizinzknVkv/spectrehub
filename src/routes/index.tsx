@@ -82,11 +82,11 @@ const GUILD_INVITE = "https://discord.gg/JK7cC9je87";
 const WIDGET_URL = `https://discord.com/api/guilds/${GUILD_ID}/widget.json`;
 
 const NAV = [
-  { label: "Início", href: "#topo" },
+  { label: "Sistemas", href: "#produtos" },
   { label: "Optimizer", href: "#optimizer" },
-  { label: "Produtos", href: "#produtos" },
-  { label: "Recursos", href: "#recursos" },
-  { label: "Sobre", href: "#sobre" },
+  { label: "Vantagens", href: "#recursos" },
+  { label: "Planos", href: "#sobre" },
+  { label: "Free", href: "#free" },
   { label: "Comunidade", href: "#comunidade" },
 ];
 
@@ -335,7 +335,7 @@ function Index() {
   return (
     <div
       id="topo"
-      className="relative min-h-screen overflow-x-hidden bg-[#030303] font-sans text-[#f5f5f5] antialiased"
+      className="relative min-h-screen overflow-x-hidden bg-obsidian font-sans text-bone antialiased selection:bg-copper/40 selection:text-white"
     >
       <div aria-hidden className="pointer-events-none fixed inset-0 -z-10">
         <div
@@ -389,42 +389,42 @@ function SiteHeader() {
 
   return (
     <header
-      className={`sticky top-0 z-50 w-full transition-[background,border-color,backdrop-filter] duration-300 ${
+      className={`fixed top-0 z-50 w-full transition-all duration-300 ${
         scrolled
-          ? "border-b border-white/[0.07] bg-[#030303]/80 backdrop-blur-xl"
+          ? "border-b border-white/[0.04] bg-obsidian/80 backdrop-blur-xl"
           : "border-b border-transparent bg-transparent"
       }`}
     >
-      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8 overflow-hidden">
+      <div className="mx-auto flex h-16 max-w-[1216px] items-center justify-between gap-8 px-6 overflow-hidden">
         <Link to="/" className="flex min-w-0 items-center gap-2.5">
           <img
             src={logoAsset.url}
-            alt="Spectre Hub"
-            className="h-8 w-8 object-contain shrink-0"
+            alt="Spectre"
+            className="h-7 w-7 object-contain shrink-0"
           />
-          <span className="truncate font-display text-[15px] xs:text-[16px] font-extrabold tracking-tighter text-white uppercase shrink-0">
-            Spectre<span className="opacity-40 ml-1 font-light">|</span><span className="text-[#ff0055] ml-1">HUB</span>
+          <span className="truncate font-display text-[20px] font-medium tracking-tight text-white shrink-0">
+            Spectre
           </span>
         </Link>
 
-        <nav className="hidden items-center gap-10 md:flex">
+        <nav className="hidden items-center gap-6 md:flex">
           {NAV.map((n) => (
             <a
               key={n.href}
               href={n.href}
-              className="text-[11px] font-bold text-[#8a8a8a] transition-colors duration-200 hover:text-white uppercase tracking-[0.2em]"
+              className="text-[14px] font-medium text-fog transition-colors duration-200 hover:text-white"
             >
               {n.label}
             </a>
           ))}
         </nav>
 
-        <div className="hidden items-center gap-2 md:flex">
-          <Link to="/hub" className="text-[11px] font-bold text-white border border-white/10 px-6 py-2 rounded-sm hover:bg-white/5 transition-all uppercase tracking-widest flex items-center gap-2">
-            <ArrowRight className="h-3 w-3" /> Entrar
+        <div className="hidden items-center gap-4 md:flex">
+          <Link to="/hub" className="text-[14px] font-medium text-white px-4 py-2 border border-white/20 rounded-full hover:bg-white/5 transition-all">
+            Entrar
           </Link>
-          <a href={GUILD_INVITE} target="_blank" rel="noreferrer" className="text-[11px] font-bold text-white bg-[#ff0055] px-6 py-2 rounded-sm hover:bg-[#ff0055]/90 transition-all uppercase tracking-widest flex items-center gap-2">
-            <ArrowRight className="h-3 w-3" /> Abrir Ticket
+          <a href={GUILD_INVITE} target="_blank" rel="noreferrer" className="text-[14px] font-medium text-black bg-white px-6 py-2 rounded-full hover:opacity-90 transition-all">
+            Começar Agora
           </a>
         </div>
 
@@ -471,182 +471,124 @@ function SiteHeader() {
 
 function Hero() {
   return (
-    <section className="relative overflow-hidden px-4 pb-24 pt-20 sm:px-6 sm:pb-32 sm:pt-28 lg:px-8">
-      {/* grid + glow background */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 -z-10 opacity-[0.05] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_40%,transparent_100%)]"
-        style={{
-          backgroundImage:
-            "linear-gradient(to right, rgba(255,255,255,0.06) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.06) 1px, transparent 1px)",
-          backgroundSize: "40px 40px",
-        }}
-      />
-      <div
-        aria-hidden
-        className="pointer-events-none absolute left-1/2 top-[-14rem] -z-10 h-[32rem] w-[52rem] -translate-x-1/2 rounded-full bg-[#ff0055]/5 blur-[130px]"
-      />
+    <section className="relative overflow-hidden px-6 pb-24 pt-32 sm:pt-40 lg:pt-48">
+      <div className="mx-auto max-w-[1216px]">
+        <div className="grid grid-cols-1 items-center gap-20 lg:grid-cols-2">
+          <div className="max-w-xl">
+            <Reveal>
+              <span className="text-eyebrow font-semibold uppercase tracking-widest text-accent mb-6 block">
+                Plataforma de Elite
+              </span>
+            </Reveal>
 
-      <div className="mx-auto max-w-3xl text-center">
-        <Reveal>
-          <span className="inline-flex items-center gap-3 rounded-full border border-white/5 bg-white/[0.02] px-4 py-1.5 font-mono text-[9px] uppercase tracking-[0.3em] text-[#8a8a8a] backdrop-blur-md">
-            <span className="h-1 w-1 rounded-full bg-[#ff0055] shadow-[0_0_8px_#ff0055]" />
-            Inovação · Produto & Tecnologia
-          </span>
-        </Reveal>
+            <Reveal delay={80}>
+              <h1 className="font-display text-[52px] font-medium leading-[1.1] tracking-[0.01em] text-white sm:text-[64px] lg:text-[88px]">
+                Domine sua jornada digital.
+              </h1>
+            </Reveal>
 
-        <Reveal delay={80}>
-          <h1 className="mt-8 font-display text-[2.6rem] font-extrabold leading-[0.95] tracking-tighter text-white xs:text-[3.2rem] sm:text-7xl lg:text-[6rem]">
-            A SPECTRE
-            <br />
-            CRIA.
-            <br />
-            <span className="text-white">O MERCADO</span>
-            <br />
-            <span className="bg-gradient-to-b from-white to-white/40 bg-clip-text text-transparent">
-              COPIA.
-            </span>
-          </h1>
-        </Reveal>
+            <Reveal delay={160}>
+              <p className="mt-8 text-body-sm leading-relaxed text-fog sm:text-body">
+                Automatize quests, capture identidades raras e gerencie sua presença no Discord com a infraestrutura mais sofisticada do mercado.
+              </p>
+            </Reveal>
 
-        <Reveal delay={160}>
-          <p className="mx-auto mt-8 max-w-xl text-[16px] font-medium leading-relaxed text-[#8a8a8a] sm:text-lg">
-            Somos o estúdio por trás dos sistemas que o Discord brasileiro inteiro tenta imitar. Instalação em minutos, compatível com qualquer base, e performance que segura servidor lotado no horário de pico.
-          </p>
-        </Reveal>
-
-        <Reveal delay={240}>
-          <div className="mt-9 flex flex-wrap items-center justify-center gap-3">
-            <a href="#produtos" className="bg-[#ff0055] hover:bg-[#ff0055]/90 text-white font-bold py-4 px-8 rounded-sm uppercase tracking-wider transition-all hover:scale-[1.02] active:scale-95 flex items-center gap-2">
-              <ArrowRight className="h-4 w-4" /> Quero Usar o Spectre
-            </a>
-            <a href={GUILD_INVITE} target="_blank" rel="noreferrer" className="border border-white/10 bg-white/5 hover:bg-white/10 text-white font-bold py-4 px-8 rounded-sm uppercase tracking-wider transition-all flex items-center gap-2">
-              Ver os sistemas <ArrowRight className="rotate-90 h-4 w-4" />
-            </a>
-          </div>
-        </Reveal>
-
-        <Reveal delay={320}>
-          <div className="mt-20 flex items-center justify-between border-t border-white/5 pt-8 text-[10px] font-bold text-[#444] uppercase tracking-[0.2em]">
-            <span>SPECTRE HUB</span>
-            <span className="opacity-20">//</span>
-            <span>AGO/2026</span>
-            <span className="opacity-20">©</span>
-            <span>PROPERTY OF SPECTRE. ALL CREATIVE RIGHTS RESERVED.</span>
-          </div>
-        </Reveal>
-
-        <Reveal delay={360}>
-          <div className="mt-10 flex items-center justify-center gap-3">
-            <div className="flex -space-x-2">
-              {FALLBACK_MEMBERS.slice(0, 5).map((m) => (
-                <div
-                  key={m}
-                  className="h-7 w-7 overflow-hidden rounded-full border-2 border-[#050505] bg-white/10"
-                >
-                  <Avatar seed={m} />
+            <Reveal delay={240}>
+              <div className="mt-10 flex flex-col items-center gap-3 sm:flex-row">
+                <div className="relative w-full max-w-sm">
+                  <input
+                    type="email"
+                    placeholder="Seu e-mail profissional"
+                    className="w-full rounded-full border border-white/20 bg-transparent px-6 py-4 text-[14px] text-white placeholder:text-steel focus:border-white focus:outline-none"
+                  />
+                  <button className="absolute right-2 top-2 rounded-full bg-white px-6 py-2 text-[14px] font-medium text-black hover:opacity-90 transition-all">
+                    Começar
+                  </button>
                 </div>
-              ))}
-            </div>
-            <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-[#6f6f6f]">
-              comunidade ativa no discord
-            </p>
-          </div>
-        </Reveal>
-      </div>
+              </div>
+            </Reveal>
 
-      <Reveal delay={380}>
-        <div className="relative mx-auto mt-16 max-w-5xl">
-          <HeroPreview />
-          <div
-            aria-hidden
-            className="pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-[#050505] to-transparent"
-          />
+            <Reveal delay={320}>
+              <div className="mt-16 flex items-center gap-4">
+                <div className="flex -space-x-2">
+                  {FALLBACK_MEMBERS.slice(0, 4).map((m) => (
+                    <div
+                      key={m}
+                      className="h-8 w-8 overflow-hidden rounded-full border-2 border-obsidian bg-onyx"
+                    >
+                      <Avatar seed={m} />
+                    </div>
+                  ))}
+                </div>
+                <p className="text-[13px] text-mist font-medium">
+                  Junte-se a <span className="text-white">12.000+</span> membros ativos
+                </p>
+              </div>
+            </Reveal>
+          </div>
+
+          <Reveal delay={380} className="relative hidden lg:block">
+            <HeroPreview />
+          </Reveal>
         </div>
-      </Reveal>
+      </div>
     </section>
   );
 }
-
 
 function HeroPreview() {
   return (
     <div className="relative">
       <div
         aria-hidden
-        className="pointer-events-none absolute -inset-10 -z-10 rounded-[3rem] bg-[#818cf8]/10 blur-[90px]"
+        className="pointer-events-none absolute -inset-20 -z-10 rounded-full bg-copper/5 blur-[120px]"
       />
-      <div className="overflow-hidden rounded-2xl border border-white/[0.08] bg-[#0d0d0d]/90 shadow-[0_50px_120px_-60px_rgba(0,0,0,0.9)] backdrop-blur-xl">
-        <div className="flex items-center gap-3 border-b border-white/[0.06] px-4 py-3">
-          <div className="flex gap-1.5">
-            <span className="h-2.5 w-2.5 rounded-full bg-white/10" />
-            <span className="h-2.5 w-2.5 rounded-full bg-white/10" />
-            <span className="h-2.5 w-2.5 rounded-full bg-white/10" />
-          </div>
-          <div className="font-mono text-[10px] uppercase tracking-[0.25em] text-[#6f6f6f]">
-            hub / automation
-          </div>
-        </div>
-
-        <div className="grid grid-cols-[84px_1fr] gap-3 p-4">
-          <div className="space-y-2 rounded-xl border border-white/[0.05] bg-white/[0.02] p-2.5">
-            <div className="h-1.5 w-full rounded-full bg-[#818cf8]/70" />
-            {[80, 65, 72, 50, 60].map((w, i) => (
-              <div key={i} className="h-1.5 rounded-full bg-white/[0.08]" style={{ width: `${w}%` }} />
-            ))}
-          </div>
-
-          <div className="space-y-2.5">
-            {[
-              { l: "Assistir trailer — Fortnite", p: 100 },
-              { l: "Jogar 15 min — Valorant", p: 64 },
-              { l: "Assistir highlights — LoL", p: 27 },
-            ].map((q) => (
-              <div
-                key={q.l}
-                className="rounded-xl border border-white/[0.05] bg-white/[0.02] p-3"
-              >
-                <div className="flex items-center justify-between text-[11px] text-[#d4d4d4]">
-                  <span className="truncate pr-2">{q.l}</span>
-                  <span className="font-mono text-[#8a8a8a]">{q.p}%</span>
-                </div>
-                <div className="mt-2 h-1 overflow-hidden rounded-full bg-white/[0.06]">
-                  <div className="h-full rounded-full bg-[#818cf8]" style={{ width: `${q.p}%` }} />
-                </div>
-              </div>
-            ))}
-
-            <div className="rounded-xl border border-white/[0.05] bg-white/[0.02] p-3">
-              <svg viewBox="0 0 200 44" className="h-11 w-full" aria-hidden>
-                <defs>
-                  <linearGradient id="spark" x1="0" x2="0" y1="0" y2="1">
-                    <stop offset="0%" stopColor="#818cf8" stopOpacity="0.35" />
-                    <stop offset="100%" stopColor="#818cf8" stopOpacity="0" />
-                  </linearGradient>
-                </defs>
-                <path
-                  d="M0 32 L30 27 L60 29 L90 19 L120 23 L150 11 L180 15 L200 7 L200 44 L0 44 Z"
-                  fill="url(#spark)"
-                />
-                <path
-                  d="M0 32 L30 27 L60 29 L90 19 L120 23 L150 11 L180 15 L200 7"
-                  fill="none"
-                  stroke="#818cf8"
-                  strokeWidth="1.4"
-                />
-              </svg>
+      <div className="ds-card rounded-xl border border-white/[0.04] bg-onyx p-8 shadow-2xl">
+        <div className="mb-10 flex items-center justify-between">
+          <div>
+            <span className="text-eyebrow font-medium text-fog block mb-1">Status da Rede</span>
+            <div className="text-[32px] font-medium text-white tabular-nums tracking-tight">
+              142.842 <span className="text-[18px] text-mist font-normal">req/s</span>
             </div>
           </div>
+          <div className="h-10 w-10 rounded-full border border-slate bg-carbon flex items-center justify-center">
+            <Activity className="h-5 w-5 text-accent" />
+          </div>
         </div>
-      </div>
 
-      <div className="absolute -bottom-6 -left-4 z-30 hidden rounded-xl border border-white/[0.08] bg-[#0d0d0d]/95 px-4 py-3 shadow-[0_8px_30px_rgba(0,0,0,0.6)] backdrop-blur-xl sm:block">
-        <div className="font-mono text-[9px] uppercase tracking-[0.25em] text-[#6f6f6f]">
-          status
+        <div className="h-48 w-full">
+           <svg className="h-full w-full" viewBox="0 0 400 100" preserveAspectRatio="none">
+             <path
+               d="M0 80 Q 50 20, 100 70 T 200 40 T 300 80 T 400 20"
+               fill="none"
+               stroke="url(#gilded-gradient)"
+               strokeWidth="3"
+               strokeLinecap="round"
+             />
+             <defs>
+               <linearGradient id="gilded-gradient" x1="0" y1="0" x2="1" y2="0">
+                 <stop offset="0%" stopColor="#ae9357" />
+                 <stop offset="40%" stopColor="#fff0cc" />
+                 <stop offset="70%" stopColor="#ae9357" />
+                 <stop offset="100%" stopColor="rgba(189, 157, 79, 0)" />
+               </linearGradient>
+             </defs>
+           </svg>
         </div>
-        <div className="mt-1 flex items-center gap-2 text-xs font-semibold text-white">
-          <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-[#818cf8]" />
-          Rodando em background
+
+        <div className="mt-8 grid grid-cols-3 gap-4 border-t border-graphite pt-8">
+          <div>
+            <span className="text-[12px] font-medium text-ash block mb-1">Tempo de Resposta</span>
+            <span className="text-[16px] font-medium text-bone">14ms</span>
+          </div>
+          <div>
+            <span className="text-[12px] font-medium text-ash block mb-1">Uptime Global</span>
+            <span className="text-[16px] font-medium text-bone">99.98%</span>
+          </div>
+          <div>
+            <span className="text-[12px] font-medium text-ash block mb-1">Localização</span>
+            <span className="text-[16px] font-medium text-bone">São Paulo, BR</span>
+          </div>
         </div>
       </div>
     </div>
@@ -776,25 +718,28 @@ function SocialProof() {
   const latency = useCountUp(stats.latency, inView);
 
   return (
-    <section className="border-y border-white/[0.06] bg-black/40 backdrop-blur-sm">
-      <div ref={ref} className="mx-auto max-w-7xl px-4 py-8 sm:px-6 sm:py-10 lg:px-8">
-        <div className="flex flex-wrap items-center justify-between gap-8 text-[10px] font-bold text-[#8a8a8a] uppercase tracking-[0.2em]">
-          <div className="flex items-center gap-10">
-             <div className="flex items-center gap-3">
-               <span className="text-white text-2xl font-display tracking-tighter">{Math.round(members)}+</span>
-               <span>MEMBROS NA COMUNIDADE</span>
+    <section className="border-y border-graphite bg-onyx/50 backdrop-blur-md">
+      <div ref={ref} className="mx-auto max-w-[1216px] px-6 py-12">
+        <div className="flex flex-wrap items-center justify-between gap-12">
+          <div className="flex flex-wrap items-center gap-16">
+             <div className="flex flex-col gap-1">
+               <span className="text-[44px] font-display text-white tracking-tight leading-none">{Math.round(members).toLocaleString()}+</span>
+               <span className="text-eyebrow font-medium text-fog uppercase tracking-widest">Membros Elite</span>
              </div>
-             <div className="flex items-center gap-3">
-               <span className="text-white text-2xl font-display tracking-tighter">{Math.round(products)}</span>
-               <span>PRODUTOS DISPONÍVEIS</span>
+             <div className="flex flex-col gap-1">
+               <span className="text-[44px] font-display text-white tracking-tight leading-none">{Math.round(products)}</span>
+               <span className="text-eyebrow font-medium text-fog uppercase tracking-widest">Módulos Ativos</span>
              </div>
-             <div className="flex items-center gap-3">
-               <span className="text-white text-2xl font-display tracking-tighter">{latency.toFixed(2)}<span className="text-[#ff0055]">ms</span></span>
-               <span>IMPACTO NO DISCORD</span>
+             <div className="flex flex-col gap-1">
+               <span className="text-[44px] font-display text-white tracking-tight leading-none">
+                 {latency.toFixed(2)}
+                 <span className="text-accent ml-1 text-[24px]">ms</span>
+               </span>
+               <span className="text-eyebrow font-medium text-fog uppercase tracking-widest">Latência de Rede</span>
              </div>
           </div>
-          <div className="hidden lg:block">
-            PROPERTY OF SPECTRE. ALL CREATIVE RIGHTS RESERVED.
+          <div className="hidden text-eyebrow font-medium text-steel uppercase tracking-[0.2em] lg:block">
+            Spectre Hub © 2026
           </div>
         </div>
       </div>
@@ -808,82 +753,77 @@ function ProductsSection() {
   const [activeTab, setActiveTab] = useState(0);
 
   return (
-    <section id="produtos" className="mx-auto max-w-7xl px-4 py-24 sm:px-6 sm:py-32 lg:px-8">
-      <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8">
-        <div className="max-w-2xl">
-          <Reveal>
-            <h2 className="font-display text-4xl font-extrabold leading-[0.95] tracking-tighter text-white sm:text-6xl">
-              CADA SISTEMA É UM
-              <br />
-              MOTIVO PRO
-              <br />
-              JOGADOR FICAR.
-            </h2>
-          </Reveal>
-          <Reveal delay={100}>
-            <p className="mt-6 text-[16px] text-[#8a8a8a]">
-              Sistema que o jogador abre, entende na hora e volta pra usar. Todos desenhados, escritos e testados pela SPECTRE, e já rodando em servidor cheio agora.
-            </p>
-          </Reveal>
-        </div>
+    <section id="produtos" className="mx-auto max-w-[1216px] px-6 py-40">
+      <div className="text-center mb-24">
+        <Reveal>
+          <span className="text-eyebrow font-semibold uppercase tracking-widest text-accent mb-4 block">Catálogo de Sistemas</span>
+          <h2 className="font-display text-[44px] font-medium leading-[1.1] text-white sm:text-[64px]">
+            Soluções para quem<br />exige o extraordinário.
+          </h2>
+        </Reveal>
+        <Reveal delay={100}>
+          <p className="mx-auto mt-6 max-w-2xl text-body-sm text-fog">
+            Cada módulo é desenhado para oferecer performance máxima e facilidade absoluta de uso.
+          </p>
+        </Reveal>
       </div>
 
-      <div className="mt-16">
-        <div className="flex flex-wrap gap-2">
-          {PRODUCTS.map((p, i) => (
-            <button
-              key={p.id}
-              onClick={() => setActiveTab(i)}
-              className={`px-6 py-2 text-[10px] font-bold uppercase tracking-widest border transition-all ${
-                activeTab === i
-                  ? "bg-[#ff0055] border-[#ff0055] text-white"
-                  : "bg-white/5 border-white/10 text-[#8a8a8a] hover:bg-white/10"
-              }`}
-            >
-              {p.name}
-            </button>
-          ))}
-        </div>
+      <div className="flex flex-wrap justify-center gap-3 mb-16">
+        {PRODUCTS.map((p, i) => (
+          <button
+            key={p.id}
+            onClick={() => setActiveTab(i)}
+            className={`px-6 py-2 rounded-full text-[14px] font-medium border transition-all ${
+              activeTab === i
+                ? "bg-white border-white text-black"
+                : "bg-transparent border-white/10 text-fog hover:border-white/30"
+            }`}
+          >
+            {p.name}
+          </button>
+        ))}
+      </div>
 
-        <div className="mt-12 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-          <Reveal className="relative aspect-video bg-white/5 border border-white/10 overflow-hidden group">
-             <div className="absolute inset-0 bg-gradient-to-tr from-[#ff0055]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-             <div className="absolute inset-0 flex items-center justify-center">
-                <div className="text-[10px] font-bold text-white/20 uppercase tracking-[0.4em]">Preview do Sistema</div>
-             </div>
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+        <Reveal className="relative aspect-video rounded-xl border border-white/[0.04] bg-onyx overflow-hidden group">
+          <div className="absolute inset-0 bg-gradient-to-tr from-accent/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+          <div className="absolute inset-0 flex items-center justify-center">
+            <div className="text-eyebrow font-medium text-steel uppercase tracking-widest">Preview {PRODUCTS[activeTab].name}</div>
+          </div>
+        </Reveal>
+
+        <div>
+          <Reveal>
+            <span className="text-eyebrow font-semibold text-accent uppercase tracking-[0.2em] mb-4 block">
+              Módulo {PRODUCTS[activeTab].category}
+            </span>
+            <h3 className="font-display text-[44px] font-medium text-white leading-tight">
+              {PRODUCTS[activeTab].name}
+            </h3>
           </Reveal>
 
-          <div>
-            <Reveal>
-              <h3 className="font-display text-5xl font-extrabold tracking-tighter text-white uppercase">
-                SPECTRE {PRODUCTS[activeTab].name}
-              </h3>
-              <span className="mt-2 block text-[10px] font-bold text-[#ff0055] uppercase tracking-widest">
-                SPECTRE-{PRODUCTS[activeTab].id.toUpperCase()}
+          <Reveal delay={100}>
+            <p className="mt-8 text-body-sm text-fog leading-relaxed">
+              {PRODUCTS[activeTab].desc}
+            </p>
+          </Reveal>
+
+          <Reveal delay={200} className="mt-10 flex flex-wrap gap-2">
+            {["Premium Hub", "Latência Zero", "Sync Ativo"].map((f) => (
+              <span key={f} className="px-3 py-1 rounded-full border border-graphite text-[12px] font-medium text-mist uppercase tracking-wider">
+                {f}
               </span>
-            </Reveal>
+            ))}
+          </Reveal>
 
-            <Reveal delay={100}>
-              <p className="mt-8 text-lg font-medium text-[#8a8a8a] leading-relaxed">
-                {PRODUCTS[activeTab].desc}
-              </p>
-            </Reveal>
-
-            <Reveal delay={200} className="mt-10 flex flex-wrap gap-3">
-              <span className="px-4 py-1.5 bg-white/5 border border-white/10 text-[10px] font-bold text-white uppercase tracking-widest">VRPEX</span>
-              <span className="px-4 py-1.5 bg-white/5 border border-white/10 text-[10px] font-bold text-white uppercase tracking-widest">CREATIVE</span>
-              <span className="px-4 py-1.5 bg-white/5 border border-white/10 text-[10px] font-bold text-white uppercase tracking-widest">STANDALONE</span>
-            </Reveal>
-
-            <Reveal delay={300} className="mt-12">
-              <Link
-                to={PRODUCTS[activeTab].to}
-                className="bg-[#ff0055] hover:bg-[#ff0055]/90 text-white font-bold py-4 px-8 rounded-sm uppercase tracking-wider transition-all inline-flex items-center gap-2"
-              >
-                Quero este sistema <ArrowRight className="h-4 w-4" />
-              </Link>
-            </Reveal>
-          </div>
+          <Reveal delay={300} className="mt-12">
+            <Link
+              to={PRODUCTS[activeTab].to}
+              className="bg-white hover:opacity-90 text-black font-medium py-3 px-8 rounded-full transition-all inline-flex items-center gap-2 text-[14px]"
+            >
+              Conhecer Detalhes
+            </Link>
+          </Reveal>
         </div>
       </div>
     </section>
@@ -894,34 +834,29 @@ function ProductsSection() {
 
 function ReasonsSection() {
   return (
-    <section id="recursos" className="mx-auto max-w-7xl px-4 py-24 sm:px-6 sm:py-32 lg:px-8">
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+    <section id="recursos" className="mx-auto max-w-[1216px] px-6 py-40 border-t border-graphite">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-24 items-start">
         <Reveal>
-          <h2 className="font-display text-4xl font-extrabold leading-[0.95] tracking-tighter text-white sm:text-7xl">
-            POR QUE OS
-            <br />
-            GRANDES
-            <br />
-            ESCOLHEM A
-            <br />
-            SPECTRE.
+          <span className="text-eyebrow font-semibold uppercase tracking-widest text-accent mb-4 block">Diferenciais Elite</span>
+          <h2 className="font-display text-[44px] font-medium leading-[1.1] text-white sm:text-[64px]">
+            Infraestrutura de<br />nível industrial.
           </h2>
-          <p className="mt-8 text-lg font-medium text-[#8a8a8a] leading-relaxed max-w-md">
-            A SPECTRE não revende script de terceiro. Tudo nasce aqui dentro, é testado em servidor com jogador dentro e só chega até você quando aguenta o horário de pico. É por isso que o mercado copia, mas não alcança.
+          <p className="mt-10 text-body-sm text-fog leading-relaxed max-w-md">
+            A Spectre não apenas entrega software; entregamos soberania digital. Nossa stack é construída do zero para suportar as operações mais críticas do Discord.
           </p>
         </Reveal>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-12 gap-y-16">
           {REASONS.map((r, i) => (
             <Reveal key={r.title} delay={i * 100}>
-              <div className="group">
-                <div className="flex items-center gap-3 mb-6">
-                   <div className="h-8 w-8 rounded-sm bg-white/5 border border-white/10 flex items-center justify-center text-[#ff0055] group-hover:bg-[#ff0055] group-hover:text-white transition-all">
-                      <r.icon className="h-4 w-4" />
+              <div className="group border-l border-graphite pl-6 hover:border-accent transition-colors">
+                <div className="flex items-center gap-3 mb-4">
+                   <div className="h-10 w-10 rounded-full bg-onyx border border-graphite flex items-center justify-center text-accent group-hover:bg-accent group-hover:text-black transition-all">
+                      <r.icon className="h-5 w-5" />
                    </div>
-                   <span className="text-[10px] font-bold text-[#444] uppercase tracking-widest">{r.title}</span>
+                   <span className="text-eyebrow font-bold text-mist uppercase tracking-widest">{r.title}</span>
                 </div>
-                <p className="text-sm font-medium text-[#8a8a8a] leading-relaxed">
+                <p className="text-[15px] leading-relaxed text-fog">
                   {r.desc}
                 </p>
               </div>
@@ -940,52 +875,51 @@ function ReasonsSection() {
 
 function PlansSection() {
   return (
-    <section id="sobre" className="mx-auto max-w-7xl px-4 py-24 sm:px-6 sm:py-32 lg:px-8">
-      <div className="max-w-4xl">
+    <section id="sobre" className="mx-auto max-w-[1216px] px-6 py-40 border-t border-graphite">
+      <div className="text-center mb-24">
         <Reveal>
-          <h2 className="font-display text-4xl font-extrabold leading-[0.95] tracking-tighter text-white sm:text-7xl">
-            SISTEMAS PARA
-            <br />
-            QUEM LEVA A
-            <br />
-            SÉRIO.
+          <span className="text-eyebrow font-semibold uppercase tracking-widest text-accent mb-4 block">Planos e Acesso</span>
+          <h2 className="font-display text-[44px] font-medium leading-[1.1] text-white sm:text-[64px]">
+            Acesso exclusivo para<br />operadores de elite.
           </h2>
-          <p className="mt-8 text-lg font-medium text-[#8a8a8a] leading-relaxed max-w-xl">
-            O plano é detectado pelo seu cargo no Discord — se expirar, o hub volta pro Free automaticamente.
+        </Reveal>
+        <Reveal delay={100}>
+          <p className="mx-auto mt-6 max-w-2xl text-body-sm text-fog">
+            O plano é detectado automaticamente pelo seu cargo no Discord. Sem atritos, sem interrupções.
           </p>
         </Reveal>
       </div>
 
-      <div className="mt-20 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         {PLANS.map((p, i) => (
           <Reveal key={p.name} delay={i * 100}>
-            <div className={`relative group border border-white/5 bg-white/[0.02] p-8 flex flex-col h-full transition-all hover:border-[#ff0055]/30 ${p.highlight ? 'ring-1 ring-[#ff0055]/50' : ''}`}>
+            <div className={`relative group rounded-xl border border-white/[0.04] bg-onyx/40 p-10 flex flex-col h-full transition-all hover:border-accent/30 ${p.highlight ? 'ring-1 ring-accent/20' : ''}`}>
               {p.highlight && (
-                <div className="absolute top-0 right-0 bg-[#ff0055] text-white text-[9px] font-bold px-3 py-1 uppercase tracking-widest">
+                <div className="absolute top-0 right-10 -translate-y-1/2 bg-white text-black text-[10px] font-bold px-4 py-1 rounded-full uppercase tracking-widest">
                   Popular
                 </div>
               )}
-              <h3 className="text-[10px] font-bold text-[#ff0055] uppercase tracking-[0.3em] mb-4">{p.name}</h3>
-              <div className="flex items-baseline gap-2 mb-8">
-                <span className="text-4xl font-display font-extrabold text-white tracking-tighter">{p.price}</span>
-                <span className="text-[10px] font-bold text-[#444] uppercase tracking-widest">/ {p.period}</span>
+              <span className="text-eyebrow font-bold text-accent uppercase tracking-[0.2em] mb-4 block">{p.name}</span>
+              <div className="flex items-baseline gap-2 mb-10">
+                <span className="text-[44px] font-display font-medium text-white tracking-tight">{p.price}</span>
+                <span className="text-eyebrow font-medium text-steel uppercase tracking-widest">/ {p.period}</span>
               </div>
               
-              <div className="space-y-4 mb-10 flex-1">
+              <div className="space-y-5 mb-12 flex-1">
                 {p.features.map(f => (
-                  <div key={f} className="flex items-center gap-3">
-                    <Check className="h-3 w-3 text-[#ff0055]" />
-                    <span className="text-xs font-medium text-[#8a8a8a]">{f}</span>
+                  <div key={f} className="flex items-start gap-3">
+                    <Check className="h-4 w-4 text-accent mt-0.5" />
+                    <span className="text-[14px] text-fog leading-snug">{f}</span>
                   </div>
                 ))}
               </div>
 
               {p.name === "Free" ? (
-                <a href="#free" className="text-center bg-white/5 border border-white/10 text-white font-bold py-3 px-6 text-[11px] uppercase tracking-widest hover:bg-white/10 transition-all">
+                <a href="#free" className="text-center bg-transparent border border-white/10 text-white font-medium py-3 px-6 rounded-full text-[13px] uppercase tracking-widest hover:border-white/30 transition-all">
                   Começar Grátis
                 </a>
               ) : (
-                <Link to="/hub" className={`text-center font-bold py-3 px-6 text-[11px] uppercase tracking-widest transition-all ${p.highlight ? 'bg-[#ff0055] text-white hover:bg-[#ff0055]/90' : 'bg-white/5 border border-white/10 text-white hover:bg-white/10'}`}>
+                <Link to="/hub" className={`text-center font-medium py-3 px-6 rounded-full text-[13px] uppercase tracking-widest transition-all ${p.highlight ? 'bg-white text-black hover:opacity-90' : 'bg-transparent border border-white/10 text-white hover:border-white/30'}`}>
                   {p.cta}
                 </Link>
               )}
@@ -1034,96 +968,98 @@ function FreeSignup() {
   }
 
   return (
-    <section id="free" className="mx-auto max-w-7xl px-4 py-20 sm:px-6 sm:py-28 lg:px-8">
+    <section id="free" className="mx-auto max-w-[1216px] px-6 py-40 border-t border-graphite">
       <Reveal>
-        <div className="grid gap-10 rounded-2xl border border-white/[0.07] bg-[#030303]/70 p-7 backdrop-blur-xl md:grid-cols-[1.05fr_0.95fr] md:p-12">
+        <div className="grid gap-20 rounded-2xl border border-white/[0.04] bg-onyx/50 p-12 backdrop-blur-xl lg:grid-cols-2">
           <div>
-            <span className="eyebrow">Acesso Comunitário</span>
-            <h2 className="mt-4 font-display text-2xl font-extrabold tracking-[-0.03em] text-white sm:text-4xl">
-              Habilite seu Acesso Gratuito em Segundos.
+            <span className="text-eyebrow font-semibold uppercase tracking-widest text-accent mb-6 block">Acesso Comunitário</span>
+            <h2 className="font-display text-[44px] font-medium leading-[1.1] text-white">
+              Habilite seu acesso<br />gratuito agora.
             </h2>
-            <ol className="mt-8 space-y-4">
+            <div className="mt-12 space-y-6">
               {[
-                "Preencha o formulário — geramos um código único pra você.",
-                "Entre no servidor e abra um ticket no canal de suporte.",
-                "Informe o código no ticket. A staff libera o cargo Free na hora.",
+                { t: "Gere seu código único", d: "Preencha o formulário para validar sua identidade." },
+                { t: "Entre no servidor", d: "Abra um ticket em nosso canal de suporte oficial." },
+                { t: "Ative sua licença", d: "Informe o código e receba o cargo Free instantaneamente." },
               ].map((s, i) => (
-                <li key={s} className="flex gap-3 text-[13px] text-[#a0a0a0]">
-                  <span className="grid h-6 w-6 shrink-0 place-items-center rounded-md border border-white/[0.08] bg-white/[0.03] font-mono text-[10px] font-semibold text-[#818cf8]">
+                <div key={s.t} className="flex gap-5">
+                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-graphite bg-obsidian font-display text-[16px] text-white">
                     {i + 1}
                   </span>
-                  <span className="pt-0.5">{s}</span>
-                </li>
+                  <div>
+                    <h3 className="text-[16px] font-medium text-white mb-1">{s.t}</h3>
+                    <p className="text-[14px] text-fog leading-relaxed">{s.d}</p>
+                  </div>
+                </div>
               ))}
-            </ol>
+            </div>
           </div>
 
-          <div className="rounded-xl border border-white/[0.07] bg-white/[0.02] p-6">
+          <div className="rounded-xl border border-graphite bg-obsidian/50 p-10">
             {!code ? (
-              <form onSubmit={generate} className="space-y-4">
-                <label className="block">
-                  <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-[#6f6f6f]">
-                    Seu nome
-                  </span>
+              <form onSubmit={generate} className="space-y-6">
+                <div>
+                  <label className="text-eyebrow font-medium text-steel uppercase tracking-widest mb-3 block">
+                    Nome de Operador
+                  </label>
                   <input
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     maxLength={40}
                     required
-                    className="mt-2 w-full rounded-lg border border-white/[0.08] bg-white/[0.02] px-3 py-2.5 text-sm text-white outline-none transition placeholder:text-[#5a5a5a] focus:border-[#818cf8]/60"
-                    placeholder="Ex: davizinzkn"
+                    className="w-full rounded-full border border-graphite bg-transparent px-6 py-4 text-[14px] text-white outline-none transition placeholder:text-steel focus:border-white"
+                    placeholder="Ex: Ghost"
                   />
-                </label>
-                <label className="block">
-                  <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-[#6f6f6f]">
-                    Seu usuário do Discord
-                  </span>
+                </div>
+                <div>
+                  <label className="text-eyebrow font-medium text-steel uppercase tracking-widest mb-3 block">
+                    Discord ID / User
+                  </label>
                   <input
                     value={discord}
                     onChange={(e) => setDiscord(e.target.value)}
                     maxLength={40}
                     required
-                    className="mt-2 w-full rounded-lg border border-white/[0.08] bg-white/[0.02] px-3 py-2.5 text-sm text-white outline-none transition placeholder:text-[#5a5a5a] focus:border-[#818cf8]/60"
+                    className="w-full rounded-full border border-graphite bg-transparent px-6 py-4 text-[14px] text-white outline-none transition placeholder:text-steel focus:border-white"
                     placeholder="@usuario"
                   />
-                </label>
-                <button type="submit" className="btn-accent w-full py-3">
-                  Gerar meu código Free
+                </div>
+                <button type="submit" className="w-full bg-white hover:opacity-90 text-black font-medium py-4 px-6 rounded-full text-[14px] transition-all uppercase tracking-widest mt-4">
+                  Gerar Licença Free
                 </button>
-                <p className="text-[11px] leading-relaxed text-[#6f6f6f]">
-                  O código fica salvo no seu navegador para você abrir o ticket quando quiser.
+                <p className="text-[12px] text-steel text-center italic">
+                  * Licença válida para 1 dispositivo.
                 </p>
               </form>
             ) : (
-              <div className="space-y-4">
+              <div className="space-y-8">
                 <div>
-                  <div className="font-mono text-[10px] uppercase tracking-[0.22em] text-[#6f6f6f]">
-                    Seu código Free
-                  </div>
-                  <div className="mt-2 flex items-center gap-2 rounded-lg border border-[#818cf8]/30 bg-[#818cf8]/[0.08] p-3">
-                    <code className="flex-1 font-mono text-lg font-bold tracking-[0.2em] text-[#c4b5fd]">
+                  <span className="text-eyebrow font-medium text-steel uppercase tracking-widest mb-4 block">Sua Chave de Ativação</span>
+                  <div className="flex items-center gap-3 rounded-xl border border-accent/20 bg-accent/5 p-6">
+                    <code className="flex-1 font-mono text-[24px] font-medium tracking-wider text-accent">
                       {code}
                     </code>
                     <button
                       type="button"
                       onClick={copy}
-                      aria-label="Copiar código"
-                      className="grid h-8 w-8 place-items-center rounded-md border border-white/10 bg-white/[0.04] text-[#a0a0a0] transition hover:text-white"
+                      className="h-12 w-12 flex items-center justify-center rounded-full bg-accent text-black transition hover:opacity-90"
                     >
-                      {copied ? <Check className="h-4 w-4 text-[#818cf8]" /> : <Copy className="h-4 w-4" />}
+                      {copied ? <Check className="h-5 w-5" /> : <Copy className="h-5 w-5" />}
                     </button>
                   </div>
                 </div>
-                <p className="text-[13px] leading-relaxed text-[#8a8a8a]">
-                  Abra um ticket no servidor e cole esse código na primeira mensagem.
-                </p>
+                <div className="p-6 rounded-xl border border-graphite bg-onyx/30">
+                  <p className="text-[14px] text-fog leading-relaxed">
+                    Copie o código acima e abra um ticket em nosso Discord oficial para validação manual pela equipe Spectre.
+                  </p>
+                </div>
                 <a
                   href={GUILD_INVITE}
                   target="_blank"
                   rel="noreferrer"
-                  className="btn-accent w-full py-3"
+                  className="w-full bg-accent hover:opacity-90 text-black font-medium py-4 px-6 rounded-full text-[14px] flex items-center justify-center gap-3 transition-all uppercase tracking-widest"
                 >
-                  Ir pro servidor abrir ticket <ArrowRight className="h-4 w-4" />
+                  Ir para o Discord <ArrowRight className="h-4 w-4" />
                 </a>
                 <button
                   type="button"
@@ -1132,9 +1068,9 @@ function FreeSignup() {
                     setName("");
                     setDiscord("");
                   }}
-                  className="w-full font-mono text-[10px] uppercase tracking-[0.22em] text-[#6f6f6f] transition hover:text-white"
+                  className="w-full text-eyebrow font-medium text-steel uppercase tracking-widest hover:text-white transition-colors text-center"
                 >
-                  Gerar outro código
+                  Gerar nova licença
                 </button>
               </div>
             )}
@@ -1180,22 +1116,22 @@ function CommunitySection() {
   const loop = [...list, ...list];
 
   return (
-    <section id="comunidade" className="border-t border-white/[0.06] bg-white/[0.012]">
-      <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 sm:py-28 lg:px-8">
+    <section id="comunidade" className="border-t border-graphite bg-onyx/20 overflow-hidden">
+      <div className="mx-auto max-w-[1216px] px-6 py-40">
         <Reveal>
           <div className="max-w-2xl">
-            <span className="eyebrow">Ecossistema Exclusivo</span>
-            <h2 className="mt-4 font-display text-3xl font-extrabold tracking-[-0.03em] text-white sm:text-[2.6rem]">
-              Conecte-se com a Elite.
+            <span className="text-eyebrow font-semibold uppercase tracking-widest text-accent mb-4 block">Rede de Elite</span>
+            <h2 className="font-display text-[44px] font-medium leading-[1.1] text-white sm:text-[64px]">
+              Onde o impossível se<br />torna padrão.
             </h2>
-            <p className="mt-3 text-sm text-[#8a8a8a]">
-              Suporte por ticket, avisos de update, canais de farm e gente online o dia inteiro.
+            <p className="mt-8 text-body-sm text-fog leading-relaxed">
+              Junte-se a uma rede privada de operadores, desenvolvedores e entusiastas que definem o futuro do Discord.
             </p>
           </div>
         </Reveal>
 
         <div
-          className="relative mt-20 overflow-hidden"
+          className="relative mt-24 overflow-hidden"
           style={{
             maskImage: "linear-gradient(90deg, transparent, #000 15%, #000 85%, transparent)",
           }}
@@ -1205,19 +1141,16 @@ function CommunitySection() {
             {loop.slice(0, Math.ceil(loop.length / 2)).map((m, i) => (
               <div
                 key={`${m.id}-${i}`}
-                className="flex shrink-0 items-center gap-4 border border-white/5 bg-[#0a0a0a] py-3 pl-3 pr-8 transition-all hover:border-[#ff0055]/30"
-                style={{
-                  clipPath: "polygon(0 0, 92% 0, 100% 25%, 100% 100%, 8% 100%, 0% 75%)"
-                }}
+                className="flex shrink-0 items-center gap-3 rounded-full border border-white/[0.04] bg-obsidian py-2 pl-2 pr-6 transition-all hover:border-accent/30"
               >
-                <div className="h-10 w-10 overflow-hidden bg-white/5">
+                <div className="h-8 w-8 overflow-hidden rounded-full bg-onyx">
                   {m.avatar ? (
-                    <img src={m.avatar} alt="" loading="lazy" className="h-full w-full object-cover grayscale" />
+                    <img src={m.avatar} alt="" loading="lazy" className="h-full w-full object-cover grayscale opacity-60 hover:opacity-100 transition-opacity" />
                   ) : (
-                    <div className="h-full w-full bg-white/10" />
+                    <Avatar seed={m.name} />
                   )}
                 </div>
-                <span className="whitespace-nowrap font-display text-[11px] font-black uppercase tracking-[0.2em] text-white">
+                <span className="text-[13px] font-medium text-white tracking-tight">
                   {m.name}
                 </span>
               </div>
@@ -1229,19 +1162,16 @@ function CommunitySection() {
             {loop.slice(Math.ceil(loop.length / 2)).map((m, i) => (
               <div
                 key={`${m.id}-${i}`}
-                className="flex shrink-0 items-center gap-4 border border-white/5 bg-[#0a0a0a] py-3 pl-3 pr-8 transition-all hover:border-[#ff0055]/30"
-                style={{
-                  clipPath: "polygon(0 0, 92% 0, 100% 25%, 100% 100%, 8% 100%, 0% 75%)"
-                }}
+                className="flex shrink-0 items-center gap-3 rounded-full border border-white/[0.04] bg-obsidian py-2 pl-2 pr-6 transition-all hover:border-accent/30"
               >
-                <div className="h-10 w-10 overflow-hidden bg-white/5">
+                <div className="h-8 w-8 overflow-hidden rounded-full bg-onyx">
                   {m.avatar ? (
-                    <img src={m.avatar} alt="" loading="lazy" className="h-full w-full object-cover grayscale" />
+                    <img src={m.avatar} alt="" loading="lazy" className="h-full w-full object-cover grayscale opacity-60 hover:opacity-100 transition-opacity" />
                   ) : (
-                    <div className="h-full w-full bg-white/10" />
+                    <Avatar seed={m.name} />
                   )}
                 </div>
-                <span className="whitespace-nowrap font-display text-[11px] font-black uppercase tracking-[0.2em] text-white">
+                <span className="text-[13px] font-medium text-white tracking-tight">
                   {m.name}
                 </span>
               </div>
@@ -1249,43 +1179,41 @@ function CommunitySection() {
           </div>
         </div>
 
-        <div className="mt-12 grid gap-6 lg:grid-cols-[1fr_380px] lg:items-center">
+        <div className="mt-32 grid gap-12 lg:grid-cols-[1fr_400px] lg:items-center">
           <Reveal>
-            <div className="border border-white/5 bg-[#0a0a0a] p-8 sm:p-10">
-              <div className="flex items-center gap-3 font-display text-[10px] font-bold uppercase tracking-[0.3em] text-[#ff0055]">
-                <span className="h-1.5 w-1.5 animate-pulse bg-[#ff0055]" /> Conexão Direta
+            <div className="rounded-2xl border border-white/[0.04] bg-onyx/30 p-12">
+              <div className="flex items-center gap-3 text-eyebrow font-semibold text-accent uppercase tracking-widest mb-6">
+                <span className="h-2 w-2 rounded-full bg-accent animate-pulse" /> Sincronizado
               </div>
-              <h3 className="mt-6 font-display text-3xl font-extrabold tracking-tighter text-white sm:text-4xl">
-                SERVIDOR OFICIAL
-                <br />
-                NO DISCORD
+              <h3 className="font-display text-[32px] font-medium text-white leading-tight mb-6">
+                QG Central Spectre
               </h3>
-              <p className="mt-4 max-w-md text-xs font-medium leading-relaxed text-[#8a8a8a] uppercase tracking-wider">
-                Widget sincronizado em tempo real — entre, valide seu acesso e interaja com nossa comunidade.
+              <p className="text-body-sm text-fog leading-relaxed mb-10">
+                Acesse canais exclusivos de suporte prioritário, changelogs em tempo real e betas fechados de novos módulos.
               </p>
 
-              <div className="mt-10 grid grid-cols-2 gap-px bg-white/5 border border-white/5 sm:grid-cols-3">
+              <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 mb-12">
                 <MiniStat
                   icon={Users}
-                  label="online agora"
+                  label="Online agora"
                   value={presence !== null ? String(presence) : "—"}
                 />
-                <MiniStat icon={MessageSquare} label="suporte" value="Ticket" />
-                <MiniStat icon={Sparkles} label="cargos" value="Premium" />
+                <MiniStat icon={MessageSquare} label="Suporte 24/7" value="Live" />
+                <MiniStat icon={Sparkles} label="Benefícios" value="Elite" />
               </div>
 
               <a
                 href={GUILD_INVITE}
                 target="_blank"
                 rel="noreferrer"
-                className="mt-10 inline-flex items-center gap-3 bg-[#ff0055] px-8 py-4 font-display text-[11px] font-black uppercase tracking-[0.2em] text-white transition-all hover:bg-[#ff0055]/90"
+                className="inline-flex items-center gap-3 bg-white hover:opacity-90 px-10 py-4 rounded-full text-[14px] font-medium text-black transition-all uppercase tracking-widest"
               >
                 Entrar no Discord <ArrowRight className="h-4 w-4" />
               </a>
             </div>
           </Reveal>
 
-          <div className="mx-auto w-full max-w-[380px] border border-white/5 bg-[#0a0a0a] p-2">
+          <div className="mx-auto w-full max-w-[400px] rounded-2xl border border-white/[0.04] bg-obsidian p-4 shadow-2xl">
             <iframe
               src={`https://discord.com/widget?id=${GUILD_ID}&theme=dark`}
               width={350}
@@ -1294,7 +1222,7 @@ function CommunitySection() {
               loading="lazy"
               frameBorder={0}
               sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"
-              className="mx-auto block h-[480px] w-full grayscale contrast-125 brightness-90 transition-all hover:grayscale-0"
+              className="mx-auto block h-[480px] w-full grayscale opacity-70 contrast-125 brightness-75 transition-all hover:grayscale-0 hover:opacity-100"
             />
           </div>
         </div>
@@ -1313,10 +1241,10 @@ function MiniStat({
   value: string;
 }) {
   return (
-    <div className="bg-[#0a0a0a] p-5">
-      <Icon className="h-4 w-4 text-[#ff0055]" />
-      <div className="mt-4 truncate font-display text-lg font-black text-white">{value}</div>
-      <div className="mt-1 font-display text-[9px] font-bold uppercase tracking-[0.2em] text-[#444]">
+    <div className="bg-obsidian p-5 rounded-xl border border-graphite">
+      <Icon className="h-4 w-4 text-accent" />
+      <div className="mt-4 truncate font-display text-[20px] font-medium text-white tracking-tight">{value}</div>
+      <div className="mt-1 text-eyebrow font-medium uppercase tracking-widest text-steel">
         {label}
       </div>
     </div>
@@ -1334,43 +1262,36 @@ function OptimizerSection() {
   };
 
   return (
-    <section id="optimizer" className="relative overflow-hidden border-t border-white/5 bg-[#030303] py-32">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <section id="optimizer" className="relative overflow-hidden border-t border-graphite bg-obsidian py-40">
+      <div className="mx-auto max-w-[1216px] px-6">
         <Reveal>
           <div className="text-center">
-            <span className="inline-flex items-center gap-2 rounded-full border border-[#ff0055]/20 bg-[#ff0055]/5 px-4 py-1.5 font-mono text-[9px] font-bold uppercase tracking-[0.3em] text-[#ff0055] backdrop-blur-md">
-              <span className="h-1 w-1 rounded-full bg-[#ff0055] shadow-[0_0_8px_#ff0055]" />
+            <span className="text-eyebrow font-semibold uppercase tracking-widest text-accent mb-6 block">
               {settings.badge}
             </span>
-            <h2 className="mt-8 font-display text-4xl font-extrabold leading-[0.95] tracking-tighter text-white sm:text-7xl">
+            <h2 className="font-display text-[44px] font-medium leading-[1.1] text-white sm:text-[64px]">
               {settings.name}
             </h2>
-            <p className="mx-auto mt-6 max-w-xl text-lg font-bold text-[#ff0055] uppercase tracking-wider">
-              {settings.title}
-            </p>
-            <p className="mx-auto mt-6 max-w-2xl text-base font-medium text-[#8a8a8a] leading-relaxed">
+            <p className="mx-auto mt-8 max-w-2xl text-body-sm text-fog">
               {settings.description}
             </p>
           </div>
         </Reveal>
 
         {/* Features Grid */}
-        <div className="mt-24 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-24 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {features.map((f, i) => {
             const Icon = IconMap[f.icon] || Zap;
             return (
               <Reveal key={f.id} delay={i * 100}>
-                <div className="group relative overflow-hidden bg-[#0a0a0a] p-8 transition-all hover:bg-[#0f0f0f]">
-                  <div className="flex items-start justify-between">
-                    <div className="grid h-12 w-12 place-items-center rounded-sm bg-white/[0.03] text-[#ff0055] transition-colors group-hover:bg-[#ff0055] group-hover:text-white">
-                      <Icon className="h-6 w-6" />
-                    </div>
+                <div className="group rounded-2xl border border-white/[0.04] bg-onyx/30 p-10 transition-all hover:border-accent/30">
+                  <div className="h-12 w-12 flex items-center justify-center rounded-full bg-obsidian border border-graphite text-accent group-hover:bg-accent group-hover:text-black transition-all">
+                    <Icon className="h-6 w-6" />
                   </div>
-                  <h3 className="mt-8 font-display text-xl font-black uppercase tracking-tight text-white">{f.title}</h3>
-                  <p className="mt-4 text-[13px] font-medium leading-relaxed text-[#666] group-hover:text-[#888] transition-colors">
+                  <h3 className="mt-8 font-display text-[24px] font-medium text-white tracking-tight">{f.title}</h3>
+                  <p className="mt-4 text-[14px] text-fog leading-relaxed">
                     {f.description}
                   </p>
-                  <div className="absolute bottom-0 left-0 h-[2px] w-0 bg-[#ff0055] transition-all duration-500 group-hover:w-full" />
                 </div>
               </Reveal>
             );
@@ -1379,33 +1300,33 @@ function OptimizerSection() {
 
         {/* Previews Showcase */}
         {previews.length > 0 && (
-          <div className="mt-32 space-y-20">
+          <div className="mt-40 space-y-24">
             <Reveal>
               <div className="text-center">
-                <h3 className="font-display text-2xl font-black uppercase tracking-tighter text-white sm:text-4xl">
-                  Conheça a interface do Spectre Optimizer
+                <h3 className="font-display text-[32px] font-medium text-white tracking-tight">
+                  Interface de alta precisão.
                 </h3>
-                <p className="mt-4 font-display text-[10px] font-bold uppercase tracking-[0.2em] text-[#444]">
-                  Veja algumas prévias da plataforma de alta performance
+                <p className="mt-4 text-eyebrow font-medium uppercase tracking-widest text-steel">
+                  Explore o painel de controle do Spectre Optimizer
                 </p>
               </div>
             </Reveal>
 
-            <div className="grid gap-8">
+            <div className="grid gap-12">
               {previews.map((p, i) => (
                 <Reveal key={p.id} delay={i * 150}>
-                  <div className="group relative overflow-hidden bg-[#0a0a0a] border border-white/5">
+                  <div className="group relative overflow-hidden rounded-2xl border border-white/[0.04] bg-onyx/30 transition-all hover:border-accent/30">
                     <div className="aspect-[21/9] overflow-hidden">
                       <img 
                         src={p.image_url} 
                         alt={p.title} 
-                        className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" 
+                        className="h-full w-full object-cover grayscale opacity-50 transition-all duration-700 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-105" 
                       />
                     </div>
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#030303] via-transparent to-transparent opacity-60" />
-                    <div className="absolute bottom-0 left-0 w-full p-8 lg:p-12">
-                      <h4 className="font-display text-xl font-black uppercase tracking-tight text-white sm:text-3xl">{p.title}</h4>
-                      <p className="mt-2 max-w-xl text-sm font-medium text-[#8a8a8a]">{p.description}</p>
+                    <div className="absolute inset-0 bg-gradient-to-t from-obsidian via-transparent to-transparent opacity-80" />
+                    <div className="absolute bottom-0 left-0 w-full p-12">
+                      <h4 className="font-display text-[28px] font-medium text-white tracking-tight">{p.title}</h4>
+                      <p className="mt-4 max-w-xl text-body-sm text-fog leading-relaxed">{p.description}</p>
                     </div>
                   </div>
                 </Reveal>
@@ -1415,19 +1336,19 @@ function OptimizerSection() {
         )}
 
         <Reveal delay={200}>
-          <div className="mt-24 text-center">
+          <div className="mt-32 text-center">
             <a 
               href={settings.button_link} 
               target="_blank" 
               rel="noreferrer" 
-              className="group relative inline-flex items-center gap-3 bg-white px-10 py-5 text-[11px] font-black uppercase tracking-[0.3em] text-black transition-all hover:bg-[#ff0055] hover:text-white"
+              className="bg-white hover:opacity-90 text-black font-medium py-4 px-12 rounded-full text-[14px] transition-all uppercase tracking-widest inline-flex items-center gap-3"
             >
               {settings.button_text}
-              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+              <ArrowRight className="h-4 w-4" />
             </a>
-            <div className="mt-8 flex items-center justify-center gap-6">
-              <span className="font-mono text-[9px] uppercase tracking-widest text-[#444]">
-                Status: <span className="text-[#ff0055]">{settings.status}</span>
+            <div className="mt-10">
+              <span className="text-eyebrow font-medium uppercase tracking-widest text-steel">
+                Status do Sistema: <span className="text-accent">{settings.status}</span>
               </span>
             </div>
           </div>
@@ -1442,23 +1363,22 @@ function OptimizerSection() {
 
 function FinalCta() {
   return (
-    <section className="relative overflow-hidden border-t border-white/5 py-32">
+    <section className="relative overflow-hidden border-t border-graphite bg-onyx/20 py-40">
       <Reveal>
-        <div className="mx-auto max-w-4xl px-4 text-center">
-          <h2 className="font-display text-5xl font-extrabold leading-[0.95] tracking-tighter text-white sm:text-8xl">
-            ABRA UM
-            <br />
-            TICKET!
+        <div className="mx-auto max-w-[1216px] px-6 text-center">
+          <span className="text-eyebrow font-semibold uppercase tracking-widest text-accent mb-6 block">Inicie sua Jornada</span>
+          <h2 className="font-display text-[52px] font-medium leading-[1.1] text-white sm:text-[88px]">
+            Sua soberania<br />digital começa aqui.
           </h2>
-          <p className="mx-auto mt-10 max-w-xl text-lg font-medium text-[#8a8a8a] leading-relaxed">
-            Junte-se à elite e ative sua infraestrutura de automação hoje mesmo. Suporte direto com quem entende do assunto.
+          <p className="mx-auto mt-10 max-w-xl text-body-sm text-fog leading-relaxed">
+            Junte-se a milhares de operadores que confiam na infraestrutura Spectre para dominar o ecossistema digital.
           </p>
-          <div className="mt-12 flex flex-wrap items-center justify-center gap-4">
-            <a href={GUILD_INVITE} target="_blank" rel="noreferrer" className="bg-[#ff0055] text-white font-bold py-4 px-10 rounded-sm uppercase tracking-widest hover:bg-[#ff0055]/90 transition-all flex items-center gap-2">
-              <ArrowRight className="h-4 w-4" /> Abrir meu ticket agora
+          <div className="mt-16 flex flex-col items-center justify-center gap-6 sm:flex-row">
+            <a href={GUILD_INVITE} target="_blank" rel="noreferrer" className="w-full sm:w-auto bg-accent hover:opacity-90 text-black font-medium py-4 px-12 rounded-full text-[14px] uppercase tracking-widest transition-all inline-flex items-center justify-center gap-3">
+              Abrir Ticket no Discord <ArrowRight className="h-4 w-4" />
             </a>
-            <Link to="/hub" className="bg-white/5 border border-white/10 text-white font-bold py-4 px-10 rounded-sm uppercase tracking-widest hover:bg-white/10 transition-all">
-              Acessar painel
+            <Link to="/hub" className="w-full sm:w-auto bg-transparent border border-white/10 text-white font-medium py-4 px-12 rounded-full text-[14px] uppercase tracking-widest hover:border-white/30 transition-all inline-flex justify-center">
+              Acessar Hub Privado
             </Link>
           </div>
         </div>
@@ -1471,97 +1391,71 @@ function FinalCta() {
 
 function SiteFooter() {
   return (
-    <footer className="bg-[#050505] border-t border-white/5 pt-20 pb-10">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col lg:flex-row justify-between gap-16">
-          <div className="max-w-xs">
-            <Link to="/" className="flex items-center gap-2.5">
+    <footer className="bg-obsidian border-t border-graphite pt-32 pb-16">
+      <div className="mx-auto max-w-[1216px] px-6">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-24 items-start pb-20 border-b border-graphite">
+          <div>
+            <Link to="/" className="flex items-center gap-3 mb-10">
               <img
                 src={logoAsset.url}
                 alt="Spectre Hub"
-                width={32}
-                height={32}
-                className="h-8 w-auto"
+                className="h-10 w-10 brightness-110"
               />
-              <span className="font-display text-[16px] font-extrabold tracking-tighter text-white uppercase">
-                Spectre<span className="opacity-40 ml-1.5 font-light">|</span><span className="text-[#ff0055] ml-1.5">HUB</span>
-              </span>
+              <span className="font-display text-[24px] font-medium text-white tracking-tight">Spectre Hub</span>
             </Link>
-            <p className="mt-6 text-[10px] font-bold text-[#444] uppercase tracking-[0.2em] leading-loose">
-              INOVAÇÃO · PRODUTO & TECNOLOGIA
-              <br />
-              Feito por jogadores, para servidores que levam a sério.
+            <p className="text-body-sm text-fog max-w-sm leading-relaxed">
+              Desenvolvendo a infraestrutura para a elite do ecossistema Discord. Performance, segurança e exclusividade em cada linha de código.
             </p>
           </div>
 
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-12">
-            <FooterCol
-              title="HUB"
-              links={[
-                { label: "Spectre Optimizer", href: "#optimizer" },
-                { label: "Sistemas", href: "#produtos" },
-                { label: "Por que HUB", href: "#recursos" },
-                { label: "Servidores", href: "#comunidade" },
-
-              ]}
-            />
-            <FooterCol
-              title="CLIENTE"
-              links={[
-                { label: "Entrar", href: "/hub" },
-                { label: "Abrir ticket", href: GUILD_INVITE, external: true },
-              ]}
-            />
-            <FooterCol
-              title="COMUNIDADE"
-              links={[
-                { label: "Discord", href: GUILD_INVITE, external: true },
-              ]}
-            />
+            <div>
+              <h4 className="text-eyebrow font-bold text-white uppercase tracking-widest mb-8">Navegação</h4>
+              <ul className="space-y-4">
+                {["Produtos", "Recursos", "Sobre", "Comunidade"].map((l) => (
+                  <li key={l}>
+                    <a href={`#${l.toLowerCase()}`} className="text-[14px] text-fog hover:text-white transition-colors">
+                      {l}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div>
+              <h4 className="text-eyebrow font-bold text-white uppercase tracking-widest mb-8">Legal</h4>
+              <ul className="space-y-4">
+                {["Termos", "Privacidade", "Cookies"].map((l) => (
+                  <li key={l}>
+                    <button className="text-[14px] text-fog hover:text-white transition-colors">
+                      {l}
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div>
+              <h4 className="text-eyebrow font-bold text-white uppercase tracking-widest mb-8">Social</h4>
+              <ul className="space-y-4">
+                <li>
+                  <a href={GUILD_INVITE} target="_blank" rel="noreferrer" className="text-[14px] text-fog hover:text-white transition-colors">
+                    Discord
+                  </a>
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
 
-        <div className="mt-20 flex flex-col sm:flex-row items-center justify-between gap-6 text-[10px] font-bold text-[#444] uppercase tracking-[0.25em]">
+        <div className="mt-12 flex flex-col sm:flex-row justify-between items-center gap-8">
+          <p className="text-eyebrow font-medium text-steel uppercase tracking-widest">
+            © 2026 Spectre Hub. Todos os direitos reservados.
+          </p>
           <div className="flex items-center gap-8">
-            <span>SPECTRE HUB</span>
-            <span className="opacity-20">//</span>
-            <span>AGO/2026</span>
-            <span className="opacity-20">©</span>
-            <span>PROPERTY OF SPECTRE. ALL CREATIVE RIGHTS RESERVED.</span>
-          </div>
-          <div className="flex items-center gap-2">
-            CÓDIGO FONTE FORNECIDO POR <span className="text-[#666]">ISNOUU</span>
+            <span className="text-eyebrow font-medium text-steel uppercase tracking-widest">Inspirado em Slash System</span>
           </div>
         </div>
       </div>
     </footer>
-  );
-}
-
-function FooterCol({
-  title,
-  links,
-}: {
-  title: string;
-  links: Array<{ label: string; href: string; external?: boolean }>;
-}) {
-  return (
-    <div>
-      <h3 className="font-mono text-[10px] uppercase tracking-[0.25em] text-[#6f6f6f]">{title}</h3>
-      <ul className="mt-4 space-y-2.5">
-        {links.map((l) => (
-          <li key={l.label}>
-            <a
-              href={l.href}
-              {...(l.external ? { target: "_blank", rel: "noreferrer" } : {})}
-              className="text-[13px] text-[#a0a0a0] transition-colors duration-200 hover:text-white"
-            >
-              {l.label}
-            </a>
-          </li>
-        ))}
-      </ul>
-    </div>
   );
 }
 
