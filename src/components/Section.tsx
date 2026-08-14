@@ -20,7 +20,7 @@ export function Section({ eyebrow, title, description, icon: Icon, actions, chil
           <div className="min-w-0">
             {eyebrow && (
               <div className="ds-label">
-                {Icon && <Icon className="h-3 w-3 text-[var(--accent-soft)]" />}
+                {Icon && <Icon className="h-3 w-3 text-[var(--primary)]" />}
                 {eyebrow}
               </div>
             )}

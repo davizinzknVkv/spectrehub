@@ -235,7 +235,7 @@ function MissoesPage() {
             <div className="max-h-[360px] min-h-[200px] overflow-y-auto p-4 font-mono text-[12px] leading-6">
               {logs.length === 0 ? (
                 <div className="ds-small">
-                  <span className="text-[var(--accent-soft)]">›</span> aguardando eventos…
+                  <span className="text-[var(--primary)]">›</span> aguardando eventos…
                 </div>
               ) : (
                 logs.slice(-100).map((l) => (

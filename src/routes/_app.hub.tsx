@@ -246,8 +246,9 @@ function HubPage() {
               <h1 className="mt-4 text-4xl font-black leading-[1.05] tracking-tight xs:text-5xl sm:text-6xl md:text-7xl">
                 Maximize sua conta
                 <br />
-                <span className="text-[#7c3aed]">em minutos.</span>
+                <span className="text-[#ff0055]">em minutos.</span>
               </h1>
+
               <p className="mt-5 max-w-md text-sm leading-relaxed text-slate-400 sm:text-base">
                 Conecte sua conta e assuma o controle. Nossa infraestrutura automatiza as tarefas repetitivas para que você possa focar no que realmente importa. Segurança máxima com processamento local.
               </p>
@@ -255,10 +256,11 @@ function HubPage() {
               <div className="mt-8 flex flex-wrap gap-3">
                 <Link
                   to="/settings"
-                  className="inline-flex items-center gap-2 rounded-none bg-[#7c3aed] px-6 py-3 font-mono text-xs font-bold uppercase tracking-widest text-white shadow-lg shadow-[#7c3aed]/20 transition hover:bg-[#7c3aed]/90 hover:shadow-[#7c3aed]/40"
+                  className="ds-btn ds-btn-primary ds-btn-lg"
                 >
                   Configurar token <ArrowRight className="h-3.5 w-3.5" />
                 </Link>
+
                 <Link
                   to="/settings"
                   className="inline-flex items-center gap-2 rounded-md border border-[#818cf8]/40 bg-[#818cf8]/10 px-6 py-3 font-mono text-xs font-bold uppercase tracking-widest text-white backdrop-blur transition hover:border-[#818cf8]/70 hover:bg-[#818cf8]/20"
@@ -412,13 +414,13 @@ function HubPage() {
             <div className="flex gap-2">
               <button
                 onClick={copyId}
-                className="rounded-none border border-white/[0.09] bg-white/[0.02] px-3 py-1.5 font-mono text-[9px] font-bold uppercase tracking-[0.2em] text-slate-300 transition-all duration-200 hover:border-[#7c3aed]/50 hover:bg-[#7c3aed]/5 hover:text-[#7c3aed]"
+                className="ds-btn ds-btn-secondary ds-btn-sm"
               >
                 copiar id
               </button>
               <button
                 onClick={copyAvatar}
-                className="rounded-none border border-white/[0.09] bg-white/[0.02] px-3 py-1.5 font-mono text-[9px] font-bold uppercase tracking-[0.2em] text-slate-300 transition-all duration-200 hover:border-[#7c3aed]/50 hover:bg-[#7c3aed]/5 hover:text-[#7c3aed]"
+                className="ds-btn ds-btn-secondary ds-btn-sm"
               >
                 copiar foto
               </button>
@@ -426,10 +428,11 @@ function HubPage() {
                 href={`https://discord.com/users/${user?.id}`}
                 target="_blank"
                 rel="noreferrer"
-                className="rounded-none border border-white/[0.09] bg-white/[0.02] px-3 py-1.5 font-mono text-[9px] font-bold uppercase tracking-[0.2em] text-slate-300 transition-all duration-200 hover:border-[#7c3aed]/50 hover:bg-[#7c3aed]/5 hover:text-[#7c3aed]"
+                className="ds-btn ds-btn-secondary ds-btn-sm"
               >
                 abrir perfil
               </a>
+
             </div>
           </div>
         </div>
@@ -465,7 +468,8 @@ function HubPage() {
             <div className="rounded-none border border-white/5 bg-[#030303] p-6">
               <div className="mb-6 flex items-center justify-between">
                 <div className="flex items-center gap-3">
-                  <div className="grid h-8 w-8 place-items-center bg-[#c5a059]/10 text-[#c5a059]">
+                  <div className="grid h-8 w-8 place-items-center bg-[#ff0055]/10 text-[#ff0055]">
+
                     <Zap className="h-4 w-4" />
                   </div>
                   <div>
@@ -485,7 +489,8 @@ function HubPage() {
 
             <div className="rounded-none border border-white/5 bg-[#030303] p-6">
               <div className="mb-6 flex items-center gap-3">
-                <div className="grid h-8 w-8 place-items-center bg-[#c5a059]/10 text-[#c5a059]">
+                <div className="grid h-8 w-8 place-items-center bg-[#ff0055]/10 text-[#ff0055]">
+
                   <ShieldCheck className="h-4 w-4" />
                 </div>
                 <div>
@@ -501,7 +506,7 @@ function HubPage() {
 
             <div className="rounded-none border border-white/5 bg-[#030303] p-6">
               <div className="mb-6 flex items-center gap-3">
-                <div className="grid h-8 w-8 place-items-center bg-[#c5a059]/10 text-[#c5a059]">
+                <div className="grid h-8 w-8 place-items-center bg-[#ff0055]/10 text-[#ff0055]">
                   <UserRound className="h-4 w-4" />
                 </div>
                 <div>
@@ -514,10 +519,10 @@ function HubPage() {
                   <input 
                     type="text" 
                     placeholder="ID do usuário (deixe vazio para você)" 
-                    className="w-full rounded-none border border-white/5 bg-white/[0.02] px-4 py-2.5 font-mono text-xs text-white outline-none transition-colors focus:border-[#c5a059]/50 focus:bg-white/[0.04]"
+                    className="w-full rounded-none border border-white/5 bg-white/[0.02] px-4 py-2.5 font-mono text-xs text-white outline-none transition-colors focus:border-[#ff0055]/50 focus:bg-white/[0.04]"
                   />
                 </div>
-                <button className="w-full bg-[#c5a059] py-2.5 font-mono text-[10px] font-bold uppercase tracking-[0.25em] text-white transition-opacity hover:opacity-90">
+                <button className="ds-btn ds-btn-primary w-full">
                   buscar perfil
                 </button>
               </div>
@@ -552,7 +557,7 @@ function HubPage() {
               </div>
               <div className="h-1.5 w-full bg-white/5 rounded-full overflow-hidden">
                 <div 
-                  className="h-full bg-[#c5a059] transition-all duration-500" 
+                  className="h-full bg-[#ff0055] transition-all duration-500" 
                   style={{ width: limits.daily === Infinity ? '100%' : `${(runsCount / limits.daily) * 100}%` }}
                 />
               </div>
@@ -562,9 +567,9 @@ function HubPage() {
             </div>
           </div>
 
-          <div className="group relative overflow-hidden rounded-xl border border-[#c5a059]/20 bg-[#c5a059]/5 p-6 transition-all hover:border-[#c5a059]/40">
+          <div className="group relative overflow-hidden rounded-xl border border-[#ff0055]/20 bg-[#ff0055]/5 p-6 transition-all hover:border-[#ff0055]/40">
             <div className="relative z-10">
-              <div className="flex items-center gap-2 text-[#c5a059] mb-2">
+              <div className="flex items-center gap-2 text-[#ff0055] mb-2">
                 <Gift className="h-4 w-4" />
                 <span className="font-mono text-[10px] font-bold uppercase tracking-widest">resgatar orbs</span>
               </div>
@@ -573,7 +578,7 @@ function HubPage() {
               </p>
               <Link
                 to="/resgatar"
-                className="inline-flex w-full items-center justify-center gap-2 rounded-none bg-[#c5a059] py-2 font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-white transition-transform hover:scale-[1.02]"
+                className="ds-btn ds-btn-primary w-full"
               >
                 abrir loja <ArrowRight className="h-3 w-3" />
               </Link>
@@ -602,10 +607,10 @@ function QuickAction({ to, icon: Icon, title, sub }: { to: string; icon: any; ti
   return (
     <Link 
       to={to} 
-      className="group flex items-center justify-between border border-white/5 bg-white/[0.02] p-4 transition-all hover:border-[#c5a059]/30 hover:bg-white/[0.04]"
+      className="group flex items-center justify-between border border-white/5 bg-white/[0.02] p-4 transition-all hover:border-[#ff0055]/30 hover:bg-white/[0.04]"
     >
       <div className="flex items-center gap-4">
-        <div className="grid h-10 w-10 place-items-center border border-white/5 bg-white/[0.03] text-slate-400 group-hover:text-[#c5a059]">
+        <div className="grid h-10 w-10 place-items-center border border-white/5 bg-white/[0.03] text-slate-400 group-hover:text-[#ff0055]">
           <Icon className="h-5 w-5" />
         </div>
         <div className="min-w-0">
@@ -613,7 +618,7 @@ function QuickAction({ to, icon: Icon, title, sub }: { to: string; icon: any; ti
           <div className="truncate text-[9px] text-slate-500">{sub}</div>
         </div>
       </div>
-      <ArrowRight className="h-3.5 w-3.5 text-slate-700 transition-transform group-hover:translate-x-1 group-hover:text-[#c5a059]" />
+      <ArrowRight className="h-3.5 w-3.5 text-slate-700 transition-transform group-hover:translate-x-1 group-hover:text-[#ff0055]" />
     </Link>
   );
 }
@@ -630,12 +635,12 @@ function InfoField({ icon: Icon, label, value, sensitive, accent }: { icon?: any
       <div className="flex items-center justify-between">
         <span className={cn(
           "font-mono text-sm tracking-tight",
-          accent ? "text-[#c5a059] font-bold" : "text-white"
+          accent ? "text-[#ff0055] font-bold" : "text-white"
         )}>
           {display}
         </span>
         {sensitive && (
-          <button onClick={() => setRevealed(!revealed)} className="text-[9px] font-bold uppercase tracking-widest text-[#c5a059] hover:underline">
+          <button onClick={() => setRevealed(!revealed)} className="text-[9px] font-bold uppercase tracking-widest text-[#ff0055] hover:underline">
             {revealed ? "ocultar" : "ver"}
           </button>
         )}

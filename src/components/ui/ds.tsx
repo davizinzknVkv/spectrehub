@@ -47,13 +47,13 @@ export function StatCard({
   return (
     <div className={cn("ds-card ds-card-hover", className)}>
       <div className="flex items-center gap-2">
-        {Icon && <Icon className="h-3.5 w-3.5 text-[var(--accent-soft)]" />}
+        {Icon && <Icon className="h-3.5 w-3.5 text-[var(--primary)]" />}
         <span className="ds-label truncate">{label}</span>
       </div>
       <div
         className={cn(
           "mt-3 truncate text-2xl font-semibold tabular-nums tracking-tight sm:text-3xl",
-          accent ? "text-[var(--accent-soft)]" : "text-[var(--text-1)]",
+          accent ? "text-[var(--primary)]" : "text-[var(--text-1)]",
         )}
       >
         {value}
@@ -94,7 +94,7 @@ export function Button({
       className={cn(
         buttonClass(variant, size, className),
         "relative overflow-hidden active:scale-[0.98] transition-all duration-200",
-        variant === "primary" && "hover:shadow-[0_0_20px_-5px_var(--accent-1)]"
+        variant === "primary" && "hover:shadow-[0_0_20px_-5px_var(--primary)]"
       )} 
       {...props} 
     />
@@ -183,7 +183,7 @@ export function EmptyState({
       )}
     >
       {Icon && (
-        <span className="grid h-11 w-11 place-items-center rounded-xl border border-[var(--border-1)] bg-white/[0.03] text-[var(--accent-soft)]">
+        <span className="grid h-11 w-11 place-items-center rounded-xl border border-[var(--border-1)] bg-white/[0.03] text-[var(--primary)]">
           <Icon className="h-5 w-5" />
         </span>
       )}

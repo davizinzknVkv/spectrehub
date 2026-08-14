@@ -109,7 +109,7 @@ function ClonePage() {
                   className="h-10 w-10 shrink-0 rounded-md border border-[var(--border-1)] object-cover"
                 />
               ) : (
-                <div className="grid h-10 w-10 shrink-0 place-items-center rounded-md border border-[var(--border-1)] bg-[var(--elevated)] text-[11px] font-semibold text-[var(--accent-soft)]">
+                <div className="grid h-10 w-10 shrink-0 place-items-center rounded-md border border-[var(--border-1)] bg-[var(--elevated)] text-[11px] font-semibold text-[var(--primary)]">
                   {initials || "?"}
                 </div>
               )}
@@ -121,7 +121,7 @@ function ClonePage() {
               </div>
               <button
                 onClick={() => toast.info("Clonagem em breve 🚀")}
-                className="grid h-8 w-8 place-items-center rounded-md border border-[color-mix(in_oklab,var(--accent-1)_34%,transparent)] bg-[color-mix(in_oklab,var(--accent-1)_10%,transparent)] text-[var(--accent-soft)] hover:bg-[color-mix(in_oklab,var(--accent-1)_18%,transparent)]"
+                className="grid h-8 w-8 place-items-center rounded-md border border-[color-mix(in_oklab,var(--primary)_34%,transparent)] bg-[color-mix(in_oklab,var(--primary)_10%,transparent)] text-[var(--primary)] hover:bg-[color-mix(in_oklab,var(--primary)_18%,transparent)]"
                 title="Clonar"
               >
                 <Copy className="h-3.5 w-3.5" />

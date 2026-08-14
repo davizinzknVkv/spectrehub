@@ -163,14 +163,14 @@ function FarmsPage() {
         <Section eyebrow="run --progress" title="Progresso da run">
           <Card>
             <div className="flex items-center justify-between">
-              <span className="ds-label text-[var(--accent-soft)]">progresso</span>
+              <span className="ds-label text-[var(--primary)]">progresso</span>
               <span className="ds-small tabular-nums">
                 {progress.current}/{progress.total}
               </span>
             </div>
             <div className="mt-2 h-2 overflow-hidden rounded-full bg-white/5">
               <div
-                className="h-full bg-[var(--accent-1)] transition-all"
+                className="h-full bg-[var(--primary)] transition-all"
                 style={{
                   width: `${Math.min(100, (progress.current / Math.max(1, progress.total)) * 100)}%`,
                 }}
@@ -206,7 +206,7 @@ function FarmsPage() {
       <section className="grid gap-4 lg:grid-cols-[1fr_1.2fr]">
         <Card>
           <div className="ds-label mb-3">
-            <span className="text-[var(--accent-soft)]">◆</span> estatísticas
+            <span className="text-[var(--primary)]">◆</span> estatísticas
           </div>
           <dl className="space-y-2 ds-body">
             <Row k="Total de runs" v={String(runs.length)} />
@@ -221,7 +221,7 @@ function FarmsPage() {
                   : "—"
               }
             />
-            <Row k="Plano ativo" v={limits.label} tone="text-[var(--accent-soft)]" />
+            <Row k="Plano ativo" v={limits.label} tone="text-[var(--primary)]" />
             <Row k="Cooldown" v={`${limits.cooldownMs / 60000}m`} />
           </dl>
         </Card>
@@ -229,7 +229,7 @@ function FarmsPage() {
         <Card>
           <div className="mb-3 flex items-center justify-between">
             <div className="ds-label">
-              <span className="text-[var(--accent-soft)]">◆</span> histórico recente
+              <span className="text-[var(--primary)]">◆</span> histórico recente
             </div>
             <span className="ds-small">últimas {Math.min(10, runs.length)}</span>
           </div>
@@ -270,14 +270,14 @@ function FarmsPage() {
       <Card>
         <div className="mb-3 flex items-center justify-between">
           <div className="flex items-center gap-2 ds-label">
-            <Terminal className="h-3.5 w-3.5 text-[var(--accent-soft)]" /> logs
+            <Terminal className="h-3.5 w-3.5 text-[var(--primary)]" /> logs
           </div>
           <span className="ds-small">{logs.length} eventos</span>
         </div>
         <div className="max-h-72 overflow-auto rounded-md border border-[var(--border-1)] bg-black/40 p-3 font-mono text-[12px] leading-relaxed">
           {logs.length === 0 ? (
             <div className="text-[var(--text-3)]">
-              <span className="text-[var(--accent-soft)]">›</span> Nenhum log ainda
+              <span className="text-[var(--primary)]">›</span> Nenhum log ainda
             </div>
           ) : (
             logs

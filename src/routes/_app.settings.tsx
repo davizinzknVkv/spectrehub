@@ -183,7 +183,7 @@ function TabButton({
       type="button"
       className={`flex items-center justify-center gap-2 rounded-[var(--r-sm)] px-3 py-2 text-[11px] font-semibold uppercase tracking-widest transition ${
         active
-          ? "bg-[var(--accent-1)] text-[#0a0a12]"
+          ? "bg-[var(--primary)] text-[#0a0a12]"
           : "text-[var(--text-3)] hover:bg-white/[0.04] hover:text-[var(--text-1)]"
       }`}
     >
@@ -217,7 +217,7 @@ function TokenTutorial() {
   return (
     <details className="group rounded-[var(--r-md)] border border-[var(--border-1)] bg-[var(--surface-1)]/60 open:bg-[var(--surface-1)]">
       <summary className="flex cursor-pointer items-center gap-2 px-4 py-3 text-[12px] font-semibold uppercase tracking-widest text-[var(--text-2)] hover:text-[var(--text-1)]">
-        <BookOpen className="h-3.5 w-3.5 text-[var(--accent-soft)]" />
+        <BookOpen className="h-3.5 w-3.5 text-[var(--primary)]" />
         como pegar meu token?
         <span className="ml-auto text-[10px] text-[var(--text-3)] transition group-open:rotate-180">
           ▾
@@ -226,7 +226,7 @@ function TokenTutorial() {
 
       <div className="space-y-6 border-t border-[var(--border-1)] px-4 py-4">
         <div className="space-y-1">
-          <div className="ds-label text-[var(--accent-soft)]">
+          <div className="ds-label text-[var(--primary)]">
             método rápido — favorito (bookmarklet)
           </div>
           <p className="ds-small">
@@ -239,7 +239,7 @@ function TokenTutorial() {
         <div className="space-y-6">
           <div className="space-y-3">
             <div className="flex gap-3">
-              <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[var(--accent-1)] text-[10px] font-bold text-[#0a0a12]">
+              <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[var(--primary)] text-[10px] font-bold text-[#0a0a12]">
                 1
               </span>
               <div className="space-y-2 flex-1">
@@ -258,7 +258,7 @@ function TokenTutorial() {
 
           <div className="space-y-3">
             <div className="flex gap-3">
-              <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[var(--accent-1)] text-[10px] font-bold text-[#0a0a12]">
+              <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[var(--primary)] text-[10px] font-bold text-[#0a0a12]">
                 2
               </span>
               <div className="space-y-2 flex-1">
@@ -284,7 +284,7 @@ function TokenTutorial() {
 
           <div className="space-y-3">
             <div className="flex gap-3">
-              <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[var(--accent-1)] text-[10px] font-bold text-[#0a0a12]">
+              <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[var(--primary)] text-[10px] font-bold text-[#0a0a12]">
                 3
               </span>
               <div className="space-y-2 flex-1">
@@ -303,7 +303,7 @@ function TokenTutorial() {
 
           <div className="space-y-3">
             <div className="flex gap-3">
-              <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[var(--accent-1)] text-[10px] font-bold text-[#0a0a12]">
+              <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[var(--primary)] text-[10px] font-bold text-[#0a0a12]">
                 4
               </span>
               <div className="space-y-2 flex-1">
@@ -339,7 +339,7 @@ function TokenTutorial() {
               </Button>
             </div>
           </div>
-          <pre className="max-h-32 overflow-auto whitespace-pre-wrap break-all font-mono text-[10px] leading-relaxed text-[var(--accent-soft)]">
+          <pre className="max-h-32 overflow-auto whitespace-pre-wrap break-all font-mono text-[10px] leading-relaxed text-[var(--primary)]">
             {showCode ? TOKEN_BOOKMARKLET : maskCode(TOKEN_BOOKMARKLET)}
           </pre>
         </div>
@@ -355,7 +355,7 @@ function TokenTutorial() {
               2. Menu esquerdo: <b>Storage → Local storage → https://discord.com</b>.
             </li>
             <li>
-              3. Procure a chave <code className="font-mono text-[var(--accent-soft)]">token</code> e
+              3. Procure a chave <code className="font-mono text-[var(--primary)]">token</code> e
               copie o valor (sem as aspas).
             </li>
           </ol>
@@ -374,7 +374,7 @@ function TokenTutorial() {
         {/* FAQ & Security Section */}
         <div className="mt-8 grid gap-4 border-t border-[var(--border-1)] pt-6 sm:grid-cols-2">
           <div className="space-y-3">
-            <div className="flex items-center gap-2 text-[var(--accent-soft)]">
+            <div className="flex items-center gap-2 text-[var(--primary)]">
               <HelpCircle className="h-4 w-4" />
               <span className="ds-label !text-inherit">FAQ — Perguntas Frequentes</span>
             </div>
@@ -407,14 +407,14 @@ function TokenTutorial() {
             </div>
             <ul className="space-y-2 ds-small text-[var(--text-3)]">
               <li className="flex gap-2">
-                <Lock className="mt-0.5 h-3 w-3 shrink-0 text-[var(--accent-soft)]" />
+                <Lock className="mt-0.5 h-3 w-3 shrink-0 text-[var(--primary)]" />
                 <span>
                   <b>Acesso Total:</b> Seu token dá acesso total à sua conta. Nunca o envie para
                   ninguém, nem para o suporte do Spectre Hub.
                 </span>
               </li>
               <li className="flex gap-2">
-                <Lock className="mt-0.5 h-3 w-3 shrink-0 text-[var(--accent-soft)]" />
+                <Lock className="mt-0.5 h-3 w-3 shrink-0 text-[var(--primary)]" />
                 <span>
                   <b>Onde guardar:</b> Se for salvar fora daqui, use um gerenciador de senhas (Bitwarden,
                   1Password) ou um arquivo criptografado.
@@ -572,7 +572,7 @@ function EmailLoginForm({ onLogged }: { onLogged: () => void }) {
               <button
                 type="button"
                 onClick={() => setShowPw((v) => !v)}
-                className="ds-small uppercase tracking-widest transition hover:text-[var(--accent-soft)]"
+                className="ds-small uppercase tracking-widest transition hover:text-[var(--primary)]"
               >
                 {showPw ? "ocultar" : "mostrar"}
               </button>
@@ -591,9 +591,9 @@ function EmailLoginForm({ onLogged }: { onLogged: () => void }) {
       ) : (
         <div className="space-y-3">
           <div className="flex items-start gap-3 rounded-[var(--r-md)] border border-[var(--border-1)] bg-white/[0.02] p-3">
-            <ShieldCheck className="mt-0.5 h-4 w-4 shrink-0 text-[var(--accent-soft)]" />
+            <ShieldCheck className="mt-0.5 h-4 w-4 shrink-0 text-[var(--primary)]" />
             <div className="min-w-0">
-              <div className="ds-label text-[var(--accent-soft)]">protocolo 2fa ativado</div>
+              <div className="ds-label text-[var(--primary)]">protocolo 2fa ativado</div>
               <p className="mt-1 ds-small">
                 Esta conta exige um segundo fator de autenticação. Insira o código gerado pelo seu dispositivo de segurança.
               </p>
@@ -618,7 +618,7 @@ function EmailLoginForm({ onLogged }: { onLogged: () => void }) {
                     }}
                     className={`flex-1 rounded-[var(--r-sm)] px-3 py-1.5 text-[10px] font-semibold uppercase tracking-widest transition ${
                       active
-                        ? "bg-[var(--accent-1)] text-[#0a0a12]"
+                        ? "bg-[var(--primary)] text-[#0a0a12]"
                         : "text-[var(--text-3)] hover:bg-white/[0.04] hover:text-[var(--text-1)]"
                     }`}
                   >
@@ -715,8 +715,8 @@ function EmailLoginForm({ onLogged }: { onLogged: () => void }) {
 
       {/* etapa 2: captcha exigido pelo Discord (hCaptcha) — renderizado sozinho */}
       {!mfaTicket && discordCaptcha && (
-        <div className="space-y-2 rounded-[var(--r-md)] border border-[color-mix(in_oklab,var(--accent-1)_28%,transparent)] bg-[color-mix(in_oklab,var(--accent-1)_5%,transparent)] p-3">
-          <div className="ds-label text-[var(--accent-soft)]">captcha do discord</div>
+        <div className="space-y-2 rounded-[var(--r-md)] border border-[color-mix(in_oklab,var(--primary)_28%,transparent)] bg-[color-mix(in_oklab,var(--primary)_5%,transparent)] p-3">
+          <div className="ds-label text-[var(--primary)]">captcha do discord</div>
           <Hcaptcha
             key={discordCaptcha.sitekey + (discordCaptcha.rqdata ?? "")}
             sitekey={discordCaptcha.sitekey}
@@ -755,7 +755,7 @@ function EmailLoginForm({ onLogged }: { onLogged: () => void }) {
 
       <p className="ds-small">
         Se o Discord pedir captcha, resolva o desafio acima. Como alternativa,
-        use a aba <span className="text-[var(--accent-soft)]">Token</span>.
+        use a aba <span className="text-[var(--primary)]">Token</span>.
       </p>
 
     </form>
