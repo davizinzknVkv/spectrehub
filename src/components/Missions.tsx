@@ -182,7 +182,7 @@ export function CaptchaModal({
         </div>
         
         <div className="rounded-none border border-white/5 bg-black/40 p-4 text-center">
-          <div className="ds-label mb-2">confirmação spectre-hub</div>
+          <div className="ds-label mb-2">confirmação spectre-core</div>
           <div className="font-mono text-xl font-black tracking-tighter text-white">READY_TO_DEPLOY</div>
         </div>
       </div>
