@@ -83,11 +83,13 @@ const WIDGET_URL = `https://discord.com/api/guilds/${GUILD_ID}/widget.json`;
 
 const NAV = [
   { label: "Início", href: "#topo" },
+  { label: "Optimizer", href: "#optimizer" },
   { label: "Produtos", href: "#produtos" },
   { label: "Recursos", href: "#recursos" },
   { label: "Sobre", href: "#sobre" },
   { label: "Comunidade", href: "#comunidade" },
 ];
+
 
 type Product = {
   id: string;
