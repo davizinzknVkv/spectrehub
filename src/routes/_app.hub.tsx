@@ -331,7 +331,7 @@ function HubPage() {
               <div className="space-y-2">
                 <div className="text-[9px] uppercase tracking-widest text-white/30">Plano Atual</div>
                 <div className="font-display text-3xl text-white italic tracking-tighter uppercase leading-none">
-                  {loading ? <Skeleton className="h-8 w-24" /> : "Premium"}
+                  {loading ? <Skeleton className="h-8 w-24" /> : plan.toUpperCase()}
                 </div>
               </div>
 
