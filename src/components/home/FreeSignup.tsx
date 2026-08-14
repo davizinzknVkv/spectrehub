@@ -49,11 +49,11 @@ export function FreeSignup({ guildInvite }: FreeSignupProps) {
               <span className="h-2 w-2 rounded-full bg-[#ff0055] shadow-[0_0_10px_#ff0055]" /> COMUNIDADE
             </span>
             <h2 className="mt-8 font-display text-3xl font-[900] leading-[1] tracking-tighter text-white sm:text-5xl lg:text-6xl uppercase">
-              COMECE SUA
-              <br />
-              JORNADA
-              <br />
-              GRATUITA.
+            COMECE SUA
+            <br />
+            JORNADA
+            <br />
+            GRATUITA.
             </h2>
             <ol className="mt-12 space-y-6">
               {[
