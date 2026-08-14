@@ -33,27 +33,27 @@ export function ProductsSection({ products }: ProductsSectionProps) {
       </div>
 
       <div className="mt-16">
-        <div className="flex flex-wrap gap-2">
+        <div className="flex flex-wrap gap-2 sm:gap-4">
           {products.map((p, i) => (
             <button
               key={p.id}
               onClick={() => setActiveTab(i)}
-              className={`px-4 sm:px-8 py-3 ds-label transition-all ${
+              className={`px-6 sm:px-8 py-3 ds-label transition-all ${
                 activeTab === i
                   ? "bg-[#ff0055] text-white"
                   : "bg-white/5 text-[#8a8a8a] hover:bg-white/10"
-              } ds-btn-secondary border-none`}
+              } border-none relative min-w-[140px]`}
               style={{
                 clipPath: "polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px)"
               }}
             >
-              {p.name}
+              <span className="relative z-10 whitespace-nowrap">{p.name}</span>
             </button>
           ))}
         </div>
 
-        <div className="mt-12 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-stretch">
-          <Reveal className="relative min-h-[350px] lg:min-h-[500px] bg-[#080808] border border-white/5 overflow-hidden group shadow-2xl">
+        <div className="mt-12 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-stretch overflow-hidden">
+          <Reveal className="relative min-h-[300px] sm:min-h-[400px] lg:min-h-[500px] bg-[#080808] border border-white/5 overflow-hidden group shadow-2xl">
             <div className="absolute inset-0 bg-gradient-to-tr from-[#ff0055]/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
             <div className="absolute inset-0 flex items-center justify-center p-8 lg:p-12">
               <div className="relative w-full max-w-lg transition-transform duration-700 group-hover:scale-[1.02]">
