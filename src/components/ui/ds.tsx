@@ -93,8 +93,8 @@ export function Button({
     <button 
       className={cn(
         buttonClass(variant, size, className),
-        "relative overflow-hidden active:scale-[0.98] transition-all duration-200 rounded-full",
-        variant === "primary" && "hover:opacity-90"
+        "relative overflow-hidden active:scale-[0.98] transition-all duration-200",
+        variant === "primary" && "hover:shadow-[0_0_20px_-5px_var(--accent-1)]"
       )} 
       {...props} 
     />
@@ -123,11 +123,6 @@ export function Badge({
 export function Input({ className, ...props }: InputHTMLAttributes<HTMLInputElement>) {
   return <input className={cn("ds-input", className)} {...props} />;
 }
-
-export function TextArea({ className, ...props }: React.TextareaHTMLAttributes<HTMLTextAreaElement>) {
-  return <textarea className={cn("ds-input min-h-[80px] py-2", className)} {...props} />;
-}
-
 
 export function Field({
   label,
