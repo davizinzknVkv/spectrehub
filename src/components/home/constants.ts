@@ -9,6 +9,7 @@ export type Product = {
   price?: string;
   to: string;
   icon: any;
+  previewUrl?: string;
 };
 
 export const PRODUCTS: Product[] = [
@@ -20,6 +21,7 @@ export const PRODUCTS: Product[] = [
     status: "Estável",
     to: "/missoes",
     icon: Zap,
+    previewUrl: "/mnt/documents/auto-quests-preview.png"
   },
   {
     id: "optimizer",
@@ -29,6 +31,7 @@ export const PRODUCTS: Product[] = [
     status: "Beta",
     to: "/hub",
     icon: Gauge,
+    previewUrl: "/mnt/documents/hub-preview.png"
   },
   {
     id: "nicks",
@@ -38,6 +41,7 @@ export const PRODUCTS: Product[] = [
     status: "Beta",
     to: "/nicksgun",
     icon: Target,
+    previewUrl: "/mnt/documents/nicksgun-preview.png"
   },
   {
     id: "orbs",
@@ -47,6 +51,7 @@ export const PRODUCTS: Product[] = [
     status: "Estável",
     to: "/resgatar",
     icon: Tag,
+    previewUrl: "/mnt/documents/login-preview.png"
   },
   {
     id: "farms",
@@ -56,6 +61,7 @@ export const PRODUCTS: Product[] = [
     status: "Estável",
     to: "/farms",
     icon: Gauge,
+    previewUrl: "/mnt/documents/auto-quests-preview.png"
   },
   {
     id: "control",
@@ -65,6 +71,7 @@ export const PRODUCTS: Product[] = [
     status: "Estável",
     to: "/clone",
     icon: ShieldCheck,
+    previewUrl: "/mnt/documents/hub-preview.png"
   },
   {
     id: "presence",
@@ -74,6 +81,7 @@ export const PRODUCTS: Product[] = [
     status: "Estável",
     to: "/spotify",
     icon: Music4,
+    previewUrl: "/mnt/documents/hub-preview.png"
   },
 ];
 
