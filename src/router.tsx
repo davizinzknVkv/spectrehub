@@ -20,11 +20,10 @@ export const getRouter = () => {
     routeTree,
     context: { queryClient },
     scrollRestoration: true,
-    // Preload route chunks + loader data on link hover/focus so navigation
-    // feels instant. Router keeps freshness delegated to TanStack Query.
     defaultPreload: "intent",
     defaultPreloadDelay: 50,
     defaultPreloadStaleTime: 0,
+    defaultViewTransition: true,
   });
 
   return router;
