@@ -12,12 +12,12 @@ export function Hero({ guildInvite, fallbackMembers }: HeroProps) {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20 px-4">
       {/* Background patterns */}
-      <div className="absolute inset-0 z-0">
+      <div className="absolute inset-0 z-0 overflow-hidden">
         <div 
-          className="absolute inset-0 opacity-[0.03]"
+          className="absolute inset-0 opacity-[0.05]"
           style={{
-            backgroundImage: `linear-gradient(#fff 1px, transparent 1px), linear-gradient(90deg, #fff 1px, transparent 1px)`,
-            backgroundSize: '80px 80px'
+            backgroundImage: `radial-gradient(circle at 1px 1px, #fff 1px, transparent 0)`,
+            backgroundSize: '32px 32px'
           }}
         />
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-spectre-pink/5 rounded-full blur-[160px]" />
@@ -33,8 +33,14 @@ export function Hero({ guildInvite, fallbackMembers }: HeroProps) {
           </div>
         </Reveal>
 
-        <Reveal delay={100}>
-          <h1 className="font-display text-[clamp(2.5rem,10vw,8.5rem)] leading-[0.85] text-white uppercase italic tracking-tighter mb-8 break-words">
+        <Reveal delay={100} className="relative">
+          <div className="absolute top-1/2 -right-12 md:-right-24 -translate-y-1/2 w-32 md:w-64 opacity-20 pointer-events-none select-none animate-pulse">
+            <svg viewBox="0 0 100 60" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full">
+              <path d="M5 5L95 25L5 45L95 55" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-spectre-pink" />
+              <path d="M85 45L95 55L85 65" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-spectre-pink" />
+            </svg>
+          </div>
+          <h1 className="font-display text-[clamp(2.5rem,10vw,8.5rem)] leading-[0.85] text-white uppercase italic tracking-tighter mb-8 break-words relative z-10">
             SPECTRE HUB <br />
             <span className="text-spectre-pink">DOMINA</span> O <br />
             MERCADO.
