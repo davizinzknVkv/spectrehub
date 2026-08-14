@@ -826,7 +826,7 @@ function ProductsSection() {
             <button
               key={p.id}
               onClick={() => setActiveTab(i)}
-              className={`px-8 py-3 ds-label border transition-all ${
+              className={`px-4 sm:px-8 py-3 ds-label border transition-all ${
                 activeTab === i
                   ? "bg-[#ff0055] border-[#ff0055] text-white"
                   : "bg-white/5 border-white/10 text-[#8a8a8a] hover:bg-white/10"
