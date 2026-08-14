@@ -12,96 +12,83 @@ export function ProductsSection({ products }: ProductsSectionProps) {
   const [activeTab, setActiveTab] = useState(0);
 
   return (
-    <section id="produtos" className="mx-auto max-w-7xl px-4 py-24 sm:px-6 sm:py-32 lg:px-8 reveal-item">
-      <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8">
-        <div className="max-w-2xl">
+    <section id="produtos" className="mx-auto max-w-7xl px-4 py-24 sm:px-6 lg:px-8">
+      <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-20">
+        <div className="max-w-3xl">
           <Reveal>
-            <h2 className="ds-h1">
-              CADA SISTEMA É UM
-              <br />
-              MOTIVO PRO
-              <br />
-              JOGADOR FICAR.
+            <div className="font-display text-[10px] tracking-[0.3em] text-spectre-pink uppercase mb-4 flex items-center gap-2">
+               <span className="w-8 h-px bg-spectre-pink/30" />
+               Ecosistema
+            </div>
+            <h2 className="font-display text-[2.5rem] md:text-[4.5rem] leading-[0.9] text-white uppercase italic tracking-tighter">
+              A SPECTRE CRIA.<br />
+              <span className="text-white/30">O MERCADO COPIA.</span>
             </h2>
-          </Reveal>
-          <Reveal delay={100}>
-            <p className="mt-8 ds-body max-w-xl text-[#8a8a8a]">
-              Sistema que o jogador abre, entende na hora e volta pra usar. Todos desenhados, escritos e testados pela SPECTRE, e já rodando em servidor cheio agora.
-            </p>
           </Reveal>
         </div>
       </div>
 
-      <div className="mt-16">
-        <div className="flex flex-wrap gap-3">
-          {products.map((p, i) => (
-            <button
-              key={p.id}
-              onClick={() => setActiveTab(i)}
-              className={`ds-btn !min-w-[140px] !px-8 !py-3 ${
-                activeTab === i
-                  ? "ds-btn-primary shadow-[0_8px_20px_rgba(255,0,85,0.3)]"
-                  : "ds-btn-secondary"
-              } relative`}
-            >
-              <span className="relative z-10 whitespace-nowrap">{p.name}</span>
-            </button>
-          ))}
-        </div>
-
-        <div className="mt-12 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-stretch overflow-hidden">
-          <Reveal className="relative min-h-[300px] sm:min-h-[400px] lg:min-h-[550px] bg-[#080808]/40 border border-white/10 rounded-[32px] overflow-hidden group shadow-2xl backdrop-blur-sm">
-            <div className="absolute inset-0 bg-gradient-to-tr from-[#ff0055]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-1000" />
-            <div className="absolute inset-0 flex items-center justify-center p-8 lg:p-16">
-              <div className="relative w-full max-w-lg transition-all duration-1000 group-hover:scale-[1.05]">
-                <div className="absolute -inset-10 bg-[#ff0055] opacity-10 blur-[120px]" />
-                <img
-                  src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=2070&auto=format&fit=crop"
-                  alt="Elite Interface"
-                  className="relative w-full grayscale contrast-[1.1] brightness-[0.85] rounded-2xl border border-white/20 shadow-2xl"
-                />
-              </div>
-            </div>
-          </Reveal>
-
-          <div className="relative flex flex-col justify-center py-4">
-            <Reveal>
-              <div className="flex items-center gap-3">
-                <div className="flex h-8 w-8 items-center justify-center rounded-sm bg-[#ff0055] text-white">
-                  <ChevronRight className="h-4 w-4" />
+      <div className="grid grid-cols-1 lg:grid-cols-[1fr_400px] gap-12 items-start">
+        {/* Gallery / Preview */}
+        <Reveal className="relative aspect-video lg:aspect-square bg-obsidian-soft border border-white/5 overflow-hidden group">
+           <div className="absolute inset-0 bg-gradient-to-tr from-spectre-pink/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+           <div className="absolute inset-0 flex items-center justify-center p-8 md:p-16">
+             <div className="relative w-full h-full border border-white/10 bg-black/40 backdrop-blur-sm p-4 transition-transform duration-700 group-hover:scale-[1.02]">
+                <div className="w-full h-full bg-[#111] overflow-hidden relative">
+                   <img 
+                      src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=2070&auto=format&fit=crop" 
+                      className="w-full h-full object-cover grayscale opacity-50 group-hover:opacity-80 group-hover:grayscale-0 transition-all duration-700" 
+                      alt="Interface Preview" 
+                   />
+                   <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent" />
+                   
+                   <div className="absolute bottom-8 left-8 right-8">
+                      <div className="font-display text-4xl text-white uppercase italic mb-2">
+                        {products[activeTab].name}
+                      </div>
+                      <div className="font-sans text-white/40 text-sm max-w-md">
+                        {products[activeTab].desc}
+                      </div>
+                   </div>
                 </div>
-                <h3 className="ds-h2">
-                  {products[activeTab].name}
-                </h3>
-              </div>
-              <span className="mt-4 block ds-label text-[#ff0055]">
-                SPECTRE-{products[activeTab].id.toUpperCase()}
-              </span>
-            </Reveal>
+             </div>
+           </div>
+        </Reveal>
 
-            <Reveal delay={100}>
-              <p className="mt-8 ds-body leading-relaxed text-[#8a8a8a]">
-                {products[activeTab].desc}
-              </p>
-            </Reveal>
-
-            <Reveal delay={200} className="mt-10 flex flex-wrap gap-2">
-              {["VRPEX", "CREATIVE", "STANDALONE"].map((tag) => (
-                <span key={tag} className="bg-white/5 border border-white/10 px-5 py-2 rounded-full text-[10px] font-black text-[#666] uppercase tracking-widest hover:text-white hover:bg-white/10 transition-all cursor-default">
-                  {tag}
-                </span>
-              ))}
-            </Reveal>
-
-            <Reveal delay={300} className="mt-12">
-              <Link
-                to={products[activeTab].to}
-                className="ds-btn ds-btn-primary ds-btn-lg w-full sm:w-auto"
-              >
-                <Zap className="h-5 w-5 mr-2" /> COMEÇAR AGORA <ArrowUpRight className="ml-2 h-4 w-4" />
-              </Link>
-            </Reveal>
-          </div>
+        {/* List / Tabs */}
+        <div className="space-y-2">
+           {products.map((p, i) => (
+             <button
+               key={p.id}
+               onClick={() => setActiveTab(i)}
+               className={`w-full text-left p-6 transition-all duration-300 border border-white/5 flex items-center justify-between group ${
+                 activeTab === i 
+                   ? "bg-spectre-pink/5 border-spectre-pink/30" 
+                   : "hover:bg-white/[0.02]"
+               }`}
+             >
+               <div>
+                 <div className={`font-display text-lg uppercase italic transition-colors ${activeTab === i ? "text-spectre-pink" : "text-white/60 group-hover:text-white"}`}>
+                   {p.name}
+                 </div>
+                 <div className="font-sans text-[10px] text-white/20 uppercase tracking-[0.2em] mt-1">
+                   Spectre System V4.0
+                 </div>
+               </div>
+               <div className={`w-10 h-10 border border-white/10 flex items-center justify-center transition-all ${activeTab === i ? "bg-spectre-pink border-spectre-pink text-white" : "text-white/20 group-hover:text-white group-hover:border-white/30"}`}>
+                 <ArrowUpRight className="w-4 h-4" />
+               </div>
+             </button>
+           ))}
+           
+           <Reveal delay={200} className="mt-8">
+             <Link
+               to={products[activeTab].to}
+               className="ds-btn ds-btn-primary w-full"
+             >
+               Garantir Acesso Agora
+             </Link>
+           </Reveal>
         </div>
       </div>
     </section>
