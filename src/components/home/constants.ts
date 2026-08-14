@@ -174,5 +174,3 @@ export const REASONS: Reason[] = [
     desc: "Suporte especializado e atualizações constantes para garantir que suas automações nunca fiquem obsoletas.",
   },
 ];
-
-import { Sparkles, LifeBuoy } from "lucide-react";
