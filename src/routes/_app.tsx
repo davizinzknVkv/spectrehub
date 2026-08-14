@@ -91,7 +91,12 @@ function AppLayout() {
   }, [pathname]);
 
   return (
-    <div className="min-h-screen bg-[#050505] text-slate-100 antialiased">
+    <div className="min-h-screen bg-[#030303] text-slate-100 antialiased">
+      <div className="aurora-bg">
+        <div className="grid-overlay" />
+        <div className="noise-overlay" />
+      </div>
+
       <div
         className="pointer-events-none fixed inset-0 -z-10 opacity-[0.03]"
         style={{

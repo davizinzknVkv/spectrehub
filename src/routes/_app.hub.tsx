@@ -340,7 +340,7 @@ function HubPage() {
       {welcomeOpen && <WelcomeTour onDismiss={closeWelcome} />}
 
       <section
-        className="fade-up relative overflow-hidden rounded-none border border-white/5 bg-[#050505] backdrop-blur-xl"
+        className="fade-up relative overflow-hidden rounded-none border border-white/5 bg-[#030303] backdrop-blur-xl"
         style={{ boxShadow: "0 18px 50px -40px rgba(0,0,0,0.9), inset 0 1px 0 rgba(255,255,255,0.03)" }}
       >
         <div
@@ -355,7 +355,7 @@ function HubPage() {
         </div>
 
         <div className="relative -mt-8 flex flex-col gap-4 px-5 pb-5 sm:-mt-10 sm:flex-row sm:items-end sm:gap-5 sm:px-7">
-          <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-xl border border-white/10 bg-[#080808] ring-4 ring-[#080808] sm:h-20 sm:w-20">
+          <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-xl border border-white/10 bg-[#030303] ring-4 ring-[#030303] sm:h-20 sm:w-20">
             {avatarUrl ? (
               <img
                 src={avatarUrl}
@@ -462,7 +462,7 @@ function HubPage() {
           </div>
 
           <div className="space-y-6">
-            <div className="rounded-none border border-white/5 bg-[#080808] p-6">
+            <div className="rounded-none border border-white/5 bg-[#030303] p-6">
               <div className="mb-6 flex items-center justify-between">
                 <div className="flex items-center gap-3">
                   <div className="grid h-8 w-8 place-items-center bg-[#c5a059]/10 text-[#c5a059]">
@@ -483,7 +483,7 @@ function HubPage() {
               </div>
             </div>
 
-            <div className="rounded-none border border-white/5 bg-[#080808] p-6">
+            <div className="rounded-none border border-white/5 bg-[#030303] p-6">
               <div className="mb-6 flex items-center gap-3">
                 <div className="grid h-8 w-8 place-items-center bg-[#c5a059]/10 text-[#c5a059]">
                   <ShieldCheck className="h-4 w-4" />
@@ -499,7 +499,7 @@ function HubPage() {
               </div>
             </div>
 
-            <div className="rounded-none border border-white/5 bg-[#080808] p-6">
+            <div className="rounded-none border border-white/5 bg-[#030303] p-6">
               <div className="mb-6 flex items-center gap-3">
                 <div className="grid h-8 w-8 place-items-center bg-[#c5a059]/10 text-[#c5a059]">
                   <UserRound className="h-4 w-4" />
@@ -525,7 +525,7 @@ function HubPage() {
           </div>
 
           {stats.bio && (
-            <div className="rounded-none border border-white/5 bg-[#080808] p-6">
+            <div className="rounded-none border border-white/5 bg-[#030303] p-6">
               <div className="mb-4 flex items-center gap-2">
                 <History className="h-3 w-3 text-slate-600" />
                 <h3 className="font-mono text-[10px] uppercase tracking-[0.3em] text-slate-500">sobre / bio</h3>
@@ -538,7 +538,7 @@ function HubPage() {
         </div>
 
         <div className="space-y-6">
-          <div className="rounded-xl border border-white/5 bg-[#080808] p-6">
+          <div className="rounded-xl border border-white/5 bg-[#030303] p-6">
             <div className="flex items-center justify-between mb-4">
               <h3 className="font-mono text-[10px] uppercase tracking-[0.3em] text-slate-500">quest status</h3>
               <Badge variant={orbQuests > 0 ? "accent" : "default"}>
@@ -587,7 +587,7 @@ function HubPage() {
 
 function StatCard({ icon: Icon, label, value, hint }: { icon?: any; label: string; value: string; hint: string; tone: string }) {
   return (
-    <div className="rounded-none border border-white/5 bg-[#080808] p-4 transition-colors hover:border-white/10">
+    <div className="rounded-none border border-white/5 bg-[#030303] p-4 transition-colors hover:border-white/10">
       <div className="flex items-center gap-2 mb-1">
         {Icon && <Icon className="h-3 w-3 text-slate-600" />}
         <div className="font-mono text-[9px] uppercase tracking-widest text-slate-500">{label}</div>
