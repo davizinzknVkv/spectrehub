@@ -232,10 +232,6 @@
   background-size: 40px 40px;
 }
 
-    grid-template-columns: 1fr;
-    gap: 1rem;
-  }
-}
 
 @utility card-grid-sm {
   display: grid;
