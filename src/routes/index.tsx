@@ -89,16 +89,7 @@ const FALLBACK_MEMBERS = [
 import { useInView, useCountUp } from "@/components/home/hooks";
 import { Reveal } from "@/components/home/Reveal";
 
-function Avatar({ seed }: { seed: string }) {
-  return (
-    <img
-      src={`https://api.dicebear.com/9.x/adventurer/svg?seed=${encodeURIComponent(seed)}&backgroundType=gradientLinear`}
-      alt=""
-      className="h-full w-full object-cover"
-      loading="lazy"
-    />
-  );
-}
+import { Avatar } from "@/components/home/Avatar";
 
 /* ─────────────────────────── page ─────────────────────────── */
 
