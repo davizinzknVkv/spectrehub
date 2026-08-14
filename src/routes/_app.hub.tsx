@@ -146,7 +146,7 @@ function HubPage() {
     return (
       <div className="pt-20 text-center space-y-8">
         <img src={logoAsset.url} alt="Logo" className="w-24 h-24 mx-auto invert opacity-50" />
-        <h1 className="font-display text-4xl uppercase tracking-tighter text-white">Terminal Offline</h1>
+        <h1 className="font-display text-4xl uppercase tracking-tighter text-white">Offline</h1>
         <p className="text-white/40 max-w-sm mx-auto font-sans">Conecte sua conta no portal de segurança para desbloquear o acesso total ao Spectre Hub.</p>
         <Link to="/settings" className="ds-btn ds-btn-primary mx-auto">Vincular Conta</Link>
       </div>
@@ -369,7 +369,7 @@ function HubPage() {
             <div className="relative z-10 space-y-6">
               <div className="flex items-center gap-2 text-spectre-pink">
                 <ShieldCheck className="w-4 h-4" />
-                <span className="font-display text-[9px] uppercase tracking-widest italic font-bold">Protocolo Spectre</span>
+                <span className="font-display text-[9px] uppercase tracking-widest italic font-bold">Spectre</span>
               </div>
               
               <div className="space-y-2">
@@ -381,7 +381,7 @@ function HubPage() {
 
               <div className="pt-4 border-t border-white/10 space-y-4">
                 <div className="flex justify-between items-center">
-                  <span className="text-[9px] uppercase tracking-widest text-white/40">Status do Terminal</span>
+                  <span className="text-[9px] uppercase tracking-widest text-white/40">Status</span>
                   <span className="font-mono text-[9px] text-spectre-pink shadow-[0_0_8px_#ff0055]">ONLINE</span>
                 </div>
                 <div className="flex justify-between items-center">
