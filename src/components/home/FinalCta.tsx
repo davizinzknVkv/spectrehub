@@ -9,7 +9,7 @@ interface FinalCtaProps {
 
 export function FinalCta({ guildInvite }: FinalCtaProps) {
   return (
-    <section className="relative overflow-hidden border-t border-white/10 py-32 bg-[#030303]">
+    <section className="relative overflow-hidden border-t border-white/10 py-32 bg-[#030303] reveal-item">
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0 -z-10 opacity-[0.05] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_100%,#000_70%,transparent_100%)]"

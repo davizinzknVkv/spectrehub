@@ -62,7 +62,7 @@ export function CommunitySection({ widgetUrl, guildId, guildInvite, fallbackMemb
   const loop = [...list, ...list];
 
   return (
-    <section id="comunidade" className="border-t border-white/[0.08] bg-[#030303]">
+    <section id="comunidade" className="border-t border-white/[0.08] bg-[#030303] reveal-item">
       <div className="mx-auto max-w-7xl px-4 py-24 sm:px-6 sm:py-32 lg:px-8">
         <Reveal>
           <div className="max-w-3xl">
