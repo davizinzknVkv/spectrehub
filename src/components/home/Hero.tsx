@@ -79,9 +79,10 @@ export function Hero({ guildInvite, fallbackMembers }: HeroProps) {
            <div className="flex items-center gap-4">
              <div className="flex -space-x-3">
                {fallbackMembers.slice(0, 3).map((m, i) => (
-                 <div key={i} className="w-8 h-8 rounded-full border-2 border-background overflow-hidden bg-white/5">
-                   <Avatar seed={m} />
-                 </div>
+                  <div key={i} className="w-8 h-8 rounded-full border border-white/10 overflow-hidden bg-black flex items-center justify-center p-0.5 relative group">
+                    <div className="absolute inset-0 bg-gradient-to-tr from-spectre-pink/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                    <Avatar seed={m} />
+                  </div>
                ))}
              </div>
              <span className="font-display text-[10px] tracking-[0.2em] uppercase text-white/60">Comunidade Ativa</span>
