@@ -95,7 +95,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { src: "https://challenges.cloudflare.com/turnstile/v0/api.js", async: true, defer: true },
     ],
     links: [
-      { rel: "icon", type: "image/jpeg", href: "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/3368de80-f40b-4cfb-a8d0-35f51889b021.jpg" },
+      { rel: "icon", type: "image/png", href: "/__l5e/assets-v1/b2e1853f-1d75-474b-9b72-71a4c9ef4f24/spectre-logo-nobg.png" },
       { rel: "stylesheet", href: appCss },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
