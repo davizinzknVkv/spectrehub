@@ -171,7 +171,7 @@ function SidebarBody({
           className="h-8 w-8 object-contain shrink-0"
         />
         <span className="truncate font-display text-[15px] font-extrabold tracking-tighter text-white uppercase">
-          Spectre<span className="opacity-40 ml-1.5 font-light">|</span><span className="text-[#7c3aed] ml-1.5">HUB</span>
+          Spectre<span className="opacity-40 ml-1.5 font-light">|</span><span className="text-[#ff0055] ml-1.5">HUB</span>
         </span>
       </Link>
 
@@ -194,14 +194,14 @@ function SidebarBody({
                   >
                     <Icon
                       className={`h-[14px] w-[14px] shrink-0 transition-colors ${
-                        active ? "text-[#7c3aed]" : "text-[#52525b] group-hover:text-white"
+                        active ? "text-[#ff0055]" : "text-[#52525b] group-hover:text-white"
                       }`}
                     />
                     <span className={active ? "font-bold text-white tracking-[-0.01em]" : "tracking-[-0.01em]"}>
                       {item.label}
                     </span>
                     {item.soon && (
-                      <span className="ml-auto rounded-none border border-[#7c3aed]/20 bg-[#7c3aed]/5 px-2 py-0.5 text-[8px] font-bold uppercase tracking-widest text-[#7c3aed]">em breve</span>
+                      <span className="ml-auto rounded-none border border-[#ff0055]/20 bg-[#ff0055]/5 px-2 py-0.5 text-[8px] font-bold uppercase tracking-widest text-[#ff0055]">em breve</span>
                     )}
                   </Link>
 

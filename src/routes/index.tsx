@@ -375,7 +375,7 @@ function SiteHeader() {
             className="h-8 w-8 object-contain shrink-0"
           />
           <span className="truncate font-display text-[15px] xs:text-[16px] font-extrabold tracking-tighter text-white uppercase shrink-0">
-            Spectre<span className="opacity-40 ml-1 font-light">|</span><span className="text-[#7c3aed] ml-1">HUB</span>
+            Spectre<span className="opacity-40 ml-1 font-light">|</span><span className="text-[#ff0055] ml-1">HUB</span>
           </span>
         </Link>
 
@@ -392,11 +392,13 @@ function SiteHeader() {
         </nav>
 
         <div className="hidden items-center gap-2 md:flex">
-          <Link to="/hub" className="text-[11px] font-bold text-white border border-white/10 px-6 py-2 rounded-sm hover:bg-white/5 transition-all uppercase tracking-widest flex items-center gap-2">
-            <ArrowRight className="h-3 w-3" /> Entrar
+          <Link to="/hub" className="ds-btn ds-btn-secondary">
+            <ArrowRight className="h-3.5 w-3.5" /> Entrar
+
           </Link>
-          <a href={GUILD_INVITE} target="_blank" rel="noreferrer" className="text-[11px] font-bold text-white bg-[#7c3aed] px-6 py-2 rounded-sm hover:bg-[#7c3aed]/90 transition-all uppercase tracking-widest flex items-center gap-2">
-            <ArrowRight className="h-3 w-3" /> Abrir Ticket
+          <a href={GUILD_INVITE} target="_blank" rel="noreferrer" className="ds-btn ds-btn-primary">
+            <ArrowRight className="h-3.5 w-3.5" /> Abrir Ticket
+
           </a>
         </div>
 
@@ -456,13 +458,13 @@ function Hero() {
       />
       <div
         aria-hidden
-        className="pointer-events-none absolute left-1/2 top-[-14rem] -z-10 h-[32rem] w-[52rem] -translate-x-1/2 rounded-full bg-[#7c3aed]/5 blur-[130px]"
+        className="pointer-events-none absolute left-1/2 top-[-14rem] -z-10 h-[32rem] w-[52rem] -translate-x-1/2 rounded-full bg-[#ff0055]/5 blur-[130px]"
       />
 
       <div className="mx-auto max-w-3xl text-center">
         <Reveal>
           <span className="inline-flex items-center gap-3 rounded-full border border-white/5 bg-white/[0.02] px-4 py-1.5 font-mono text-[9px] uppercase tracking-[0.3em] text-[#8a8a8a] backdrop-blur-md">
-            <span className="h-1 w-1 rounded-full bg-[#7c3aed] shadow-[0_0_8px_#7c3aed]" />
+            <span className="h-1 w-1 rounded-full bg-[#ff0055] shadow-[0_0_8px_#ff0055]" />
             Inovação · Produto & Tecnologia
           </span>
         </Reveal>
@@ -489,12 +491,14 @@ function Hero() {
 
         <Reveal delay={240}>
           <div className="mt-9 flex flex-wrap items-center justify-center gap-3">
-            <a href="#produtos" className="bg-[#7c3aed] hover:bg-[#7c3aed]/90 text-white font-bold py-4 px-8 rounded-sm uppercase tracking-wider transition-all hover:scale-[1.02] active:scale-95 flex items-center gap-2">
+            <a href="#produtos" className="ds-btn ds-btn-primary ds-btn-lg">
               <ArrowRight className="h-4 w-4" /> Quero usar o Spectre
             </a>
-            <a href={GUILD_INVITE} target="_blank" rel="noreferrer" className="border border-white/10 bg-white/5 hover:bg-white/10 text-white font-bold py-4 px-8 rounded-sm uppercase tracking-wider transition-all flex items-center gap-2">
+
+            <a href={GUILD_INVITE} target="_blank" rel="noreferrer" className="ds-btn ds-btn-secondary ds-btn-lg">
               Ver os sistemas <ArrowRight className="rotate-90 h-4 w-4" />
             </a>
+
           </div>
         </Reveal>
 
