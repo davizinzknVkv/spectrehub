@@ -125,7 +125,7 @@ function Index() {
       <SiteHeader guildInvite={GUILD_INVITE} />
 
       <main>
-        <Hero />
+        <Hero guildInvite={GUILD_INVITE} fallbackMembers={FALLBACK_MEMBERS} />
         <SocialProof widgetUrl={WIDGET_URL} products={PRODUCTS} />
         <ProductsSection products={PRODUCTS} />
         <ReasonsSection reasons={REASONS} />
