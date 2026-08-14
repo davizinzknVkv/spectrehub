@@ -1,7 +1,7 @@
 /**
  * Spectre Hub — Industrial Design System
  * 
- * Mix: BlackNetwork (Obsidian + Pink) & CoreNetwork (High Contrast + Industrial).
+ * Mix: BlackNetwork (Obsidian + Pink) & HubNetwork (High Contrast + Industrial).
  * Theme: Midnight Obsidian (#030303), Spectre Pink (#ff0055).
  */
 
@@ -506,7 +506,7 @@ function Hero() {
 
         <Reveal delay={320}>
           <div className="mt-20 flex items-center justify-between border-t border-white/5 pt-8 text-[10px] font-bold text-[#444] uppercase tracking-[0.2em]">
-            <span>SPECTRE REBIRTH</span>
+            <span>SPECTRE HUB</span>
             <span className="opacity-20">//</span>
             <span>AGO/2026</span>
             <span className="opacity-20">©</span>
@@ -562,7 +562,7 @@ function HeroPreview() {
             <span className="h-2.5 w-2.5 rounded-full bg-white/10" />
           </div>
           <div className="font-mono text-[10px] uppercase tracking-[0.25em] text-[#6f6f6f]">
-            core / automation
+            hub / automation
           </div>
         </div>
 
@@ -1361,10 +1361,10 @@ function SiteFooter() {
 
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-12">
             <FooterCol
-              title="CORE"
+              title="HUB"
               links={[
                 { label: "Sistemas", href: "#produtos" },
-                { label: "Por que CORE", href: "#recursos" },
+                { label: "Por que HUB", href: "#recursos" },
                 { label: "Servidores", href: "#comunidade" },
               ]}
             />
