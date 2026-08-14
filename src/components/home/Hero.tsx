@@ -35,14 +35,14 @@ export function Hero({ guildInvite, fallbackMembers }: HeroProps) {
         </Reveal>
 
         <Reveal delay={80}>
-          <h1 className="mt-8 font-display text-[2.8rem] font-[900] leading-[0.85] tracking-tighter text-white xs:text-[3.8rem] sm:text-7xl lg:text-[8rem] break-words px-2 uppercase italic overflow-wrap-anywhere">
+          <h1 className="mt-10 font-display text-[2.8rem] font-[900] leading-[0.82] tracking-tighter text-white xs:text-[4.5rem] sm:text-[6.5rem] lg:text-[10rem] break-words px-2 uppercase italic overflow-wrap-anywhere">
             A SPECTRE
             <br />
             CRIA.
             <br />
             <span className="text-[#ff0055]">O MERCADO</span>
             <br />
-            <span className="text-white opacity-90">
+            <span className="text-white opacity-[0.85]">
               COPIA.
             </span>
           </h1>
