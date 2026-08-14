@@ -841,12 +841,12 @@ function ProductsSection() {
 
         </div>
 
-        <div className="mt-12 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-          <Reveal className="relative aspect-video bg-white/5 border border-white/10 overflow-hidden group">
+        <div className="mt-12 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-stretch">
+          <Reveal className="relative min-h-[300px] lg:min-h-[450px] bg-white/5 border border-white/10 overflow-hidden group">
             <div className="absolute inset-0 bg-gradient-to-tr from-[#ff0055]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-            <div className="absolute inset-0 flex items-center justify-center p-4">
+            <div className="absolute inset-0 flex items-center justify-center p-6 lg:p-10">
               <div className="relative w-full max-w-lg">
-                <div className="absolute -inset-1 rounded-xl bg-gradient-to-tr from-[#ff0055] to-transparent opacity-20 blur-xl" />
+                <div className="absolute -inset-2 rounded-xl bg-gradient-to-tr from-[#ff0055] to-transparent opacity-20 blur-2xl" />
                 <img
                   src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=2070&auto=format&fit=crop"
                   alt="Laptop Preview"
@@ -856,7 +856,7 @@ function ProductsSection() {
             </div>
           </Reveal>
 
-          <div className="relative">
+          <div className="relative flex flex-col justify-center py-4">
             <Reveal>
               <div className="flex items-center gap-3">
                 <div className="flex h-8 w-8 items-center justify-center rounded-sm bg-[#ff0055] text-white">
