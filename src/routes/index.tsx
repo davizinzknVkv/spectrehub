@@ -82,11 +82,11 @@ const GUILD_INVITE = "https://discord.gg/JK7cC9je87";
 const WIDGET_URL = `https://discord.com/api/guilds/${GUILD_ID}/widget.json`;
 
 const NAV = [
-  { label: "Produtos", href: "#produtos" },
+  { label: "Sistemas", href: "#produtos" },
   { label: "Optimizer", href: "#optimizer" },
-  { label: "Recursos", href: "#recursos" },
-  { label: "Preços", href: "#preços" },
-  { label: "Sobre", href: "#sobre" },
+  { label: "Vantagens", href: "#recursos" },
+  { label: "Planos", href: "#sobre" },
+  { label: "Free", href: "#free" },
   { label: "Comunidade", href: "#comunidade" },
 ];
 
