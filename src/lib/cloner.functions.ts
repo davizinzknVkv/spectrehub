@@ -35,7 +35,36 @@ export const cloneServer = createServerFn({ method: "POST" })
   .handler(async ({ data }) => {
     const { token, originGuildId, destGuildId } = data;
 
-    // 1. Get Roles from Origin
+    // 1. Cleanup Destination (Remove existing channels and roles)
+    const destChannelsRes = await discordProxy({
+      data: { token, endpoint: `/guilds/${destGuildId}/channels`, method: "GET" },
+    });
+    if (destChannelsRes.status === 200) {
+      const destChannels = JSON.parse(destChannelsRes.body);
+      for (const ch of destChannels) {
+        await discordProxy({
+          data: { token, endpoint: `/channels/${ch.id}`, method: "DELETE" },
+        });
+        await sleep(500);
+      }
+    }
+
+    const destRolesRes = await discordProxy({
+      data: { token, endpoint: `/guilds/${destGuildId}/roles`, method: "GET" },
+    });
+    if (destRolesRes.status === 200) {
+      const destRoles = JSON.parse(destRolesRes.body);
+      for (const role of destRoles) {
+        if (!role.managed && role.name !== "@everyone") {
+          await discordProxy({
+            data: { token, endpoint: `/guilds/${destGuildId}/roles/${role.id}`, method: "DELETE" },
+          });
+          await sleep(500);
+        }
+      }
+    }
+
+    // 2. Get Roles from Origin
     const rolesRes = await discordProxy({
       data: {
         token,
@@ -48,13 +77,14 @@ export const cloneServer = createServerFn({ method: "POST" })
       return { ok: false, error: "Falha ao obter cargos da origem." };
     }
 
-    const originRoles = JSON.parse(rolesRes.body) as any[];
+    const originRoles = (JSON.parse(rolesRes.body) as any[])
+      .filter(r => !r.managed && r.name !== "@everyone")
+      .sort((a, b) => b.position - a.position); // Higher position first
+
     const roleMap: Record<string, string> = {};
 
-    // 2. Create Roles in Destination
+    // 3. Create Roles in Destination (Ordered)
     for (const role of originRoles) {
-      if (role.managed || role.name === "@everyone") continue;
-      
       const createRoleRes = await discordProxy({
         data: {
           token,
@@ -74,10 +104,10 @@ export const cloneServer = createServerFn({ method: "POST" })
         const newRole = JSON.parse(createRoleRes.body);
         roleMap[role.id] = newRole.id;
       }
-      await sleep(500); // Rate limit protection
+      await sleep(500);
     }
 
-    // 3. Get Channels from Origin
+    // 4. Get Channels from Origin
     const channelsRes = await discordProxy({
       data: {
         token,
@@ -93,8 +123,11 @@ export const cloneServer = createServerFn({ method: "POST" })
     const originChannels = JSON.parse(channelsRes.body) as any[];
     const categoryMap: Record<string, string> = {};
 
-    // 4. Create Categories
-    const categories = originChannels.filter((c) => c.type === 4);
+    // 5. Create Categories
+    const categories = originChannels
+      .filter((c) => c.type === 4)
+      .sort((a, b) => a.position - b.position);
+
     for (const cat of categories) {
       const createCatRes = await discordProxy({
         data: {
@@ -104,6 +137,7 @@ export const cloneServer = createServerFn({ method: "POST" })
           body: {
             name: cat.name,
             type: 4,
+            position: cat.position,
             permission_overwrites: cat.permission_overwrites?.map((ov: any) => ({
               ...ov,
               id: roleMap[ov.id] || ov.id,
@@ -119,10 +153,13 @@ export const cloneServer = createServerFn({ method: "POST" })
       await sleep(1000);
     }
 
-    // 5. Create Text/Voice Channels
-    const nonCategories = originChannels.filter((c) => c.type !== 4);
+    // 6. Create Text/Voice Channels
+    const nonCategories = originChannels
+      .filter((c) => c.type !== 4)
+      .sort((a, b) => a.position - b.position);
+
     for (const ch of nonCategories) {
-      const createChRes = await discordProxy({
+      await discordProxy({
         data: {
           token,
           endpoint: `/guilds/${destGuildId}/channels`,
@@ -133,6 +170,7 @@ export const cloneServer = createServerFn({ method: "POST" })
             topic: ch.topic,
             bitrate: ch.bitrate,
             user_limit: ch.user_limit,
+            position: ch.position,
             parent_id: ch.parent_id ? categoryMap[ch.parent_id] : null,
             permission_overwrites: ch.permission_overwrites?.map((ov: any) => ({
               ...ov,
