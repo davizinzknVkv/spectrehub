@@ -1,10 +1,3 @@
-/**
- * Spectre Hub — Industrial Design System
- * 
- * Mix: BlackNetwork (Obsidian + Pink) & HubNetwork (High Contrast + Industrial).
- * Theme: Midnight Obsidian (#030303), Spectre Pink (#ff0055).
- */
-
 import { createFileRoute } from "@tanstack/react-router";
 import { useInView } from "@/components/home/hooks";
 import logoAsset from "@/assets/spectre-logo-nobg.png.asset.json";
@@ -32,11 +25,11 @@ export const Route = createFileRoute("/")({
       { property: "og:title", content: TITLE },
       { property: "og:description", content: DESCRIPTION },
       { property: "og:type", content: "website" },
-      { property: "og:url", content: "https://neighbordhubdc.lovable.app/" },
+      { property: "og:url", content: "https://spectrehub.lovable.app/" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [
-      { rel: "canonical", href: "https://neighbordhubdc.lovable.app/" },
+      { rel: "canonical", href: "https://spectrehub.lovable.app/" },
       { rel: "preload", as: "image", href: logoAsset.url, fetchPriority: "high" },
       { rel: "preconnect", href: "https://discord.com" },
       { rel: "preconnect", href: "https://cdn.discordapp.com", crossOrigin: "anonymous" },
@@ -64,43 +57,41 @@ const FALLBACK_MEMBERS = [
 ];
 
 function Index() {
-  const [ref, inView] = useInView<HTMLDivElement>();
+  const [ref] = useInView<HTMLDivElement>();
 
   return (
     <div
       id="topo"
-      className="relative min-h-screen overflow-x-hidden bg-[#030303] font-sans text-[#f5f5f5] antialiased selection:bg-[#ff0055]/30"
+      className="relative min-h-screen overflow-x-hidden bg-obsidian font-sans text-white antialiased selection:bg-spectre-pink/30"
     >
-      <div aria-hidden className="pointer-events-none fixed inset-0 -z-10">
+      {/* Global Background Grid */}
+      <div className="fixed inset-0 z-0 pointer-events-none opacity-[0.02]">
         <div
-          className="absolute inset-0 opacity-[0.05]"
+          className="absolute inset-0"
           style={{
             backgroundImage: `linear-gradient(#fff 1px, transparent 1px), linear-gradient(90deg, #fff 1px, transparent 1px)`,
-            backgroundSize: '64px 64px'
+            backgroundSize: '40px 40px'
           }}
         />
-        <div className="absolute inset-0 bg-[#030303]/60 backdrop-blur-[120px]" />
       </div>
 
       <SiteHeader guildInvite={GUILD_INVITE} />
 
-      <main ref={ref}>
+      <main ref={ref} className="relative z-10">
         <Hero guildInvite={GUILD_INVITE} fallbackMembers={FALLBACK_MEMBERS} />
         
-        <div className="reveal-stagger is-visible">
-          <SocialProof widgetUrl={WIDGET_URL} products={PRODUCTS} />
-          <ProductsSection products={PRODUCTS} />
-          <ReasonsSection reasons={REASONS} />
-          <PlansSection plans={PLANS} />
-          <FreeSignup guildInvite={GUILD_INVITE} />
-          <CommunitySection 
-            widgetUrl={WIDGET_URL} 
-            guildId={GUILD_ID} 
-            guildInvite={GUILD_INVITE} 
-            fallbackMembers={FALLBACK_MEMBERS} 
-          />
-          <FinalCta guildInvite={GUILD_INVITE} />
-        </div>
+        <SocialProof widgetUrl={WIDGET_URL} products={PRODUCTS} />
+        <ProductsSection products={PRODUCTS} />
+        <ReasonsSection reasons={REASONS} />
+        <PlansSection plans={PLANS} />
+        <FreeSignup guildInvite={GUILD_INVITE} />
+        <CommunitySection 
+          widgetUrl={WIDGET_URL} 
+          guildId={GUILD_ID} 
+          guildInvite={GUILD_INVITE} 
+          fallbackMembers={FALLBACK_MEMBERS} 
+        />
+        <FinalCta guildInvite={GUILD_INVITE} />
       </main>
 
       <SiteFooter guildInvite={GUILD_INVITE} />

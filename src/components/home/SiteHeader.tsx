@@ -1,7 +1,6 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "@tanstack/react-router";
-import { ArrowRight, X, Menu } from "lucide-react";
-import { useState, useEffect } from "react";
+import { X, Menu, LogIn } from "lucide-react";
 import logoAsset from "@/assets/spectre-logo-nobg.png.asset.json";
 
 interface SiteHeaderProps {
@@ -9,8 +8,7 @@ interface SiteHeaderProps {
 }
 
 const NAV = [
-  { href: "#produtos", label: "produtos" },
-  { href: "#recursos", label: "recursos" },
+  { href: "#produtos", label: "sistemas" },
   { href: "#planos", label: "planos" },
   { href: "#comunidade", label: "comunidade" },
 ];
@@ -20,102 +18,108 @@ export function SiteHeader({ guildInvite }: SiteHeaderProps) {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 12);
+    const onScroll = () => setScrolled(window.scrollY > 20);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   return (
-    <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        scrolled
-        ? "py-2"
-        : "py-4"
-      }`}
-    >
-      <div className={`mx-auto flex h-16 max-w-7xl items-center justify-between gap-4 px-6 lg:px-8 transition-all duration-500 ${
-        scrolled 
-          ? "bg-black/60 backdrop-blur-md rounded-full border border-white/10 shadow-2xl shadow-black/50 mx-4 sm:mx-6" 
-          : "bg-transparent border-transparent mx-4 sm:mx-6"
-      } relative group overflow-hidden`}>
-        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/[0.03] to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
-        
-        <Link to="/" className="flex min-w-0 items-center gap-2.5 relative z-10">
-          <div className="relative flex h-8 w-8 items-center justify-center rounded-full bg-white text-black shadow-lg shrink-0">
+    <header className="fixed top-0 left-0 right-0 z-50 px-4 py-6 md:px-8">
+      <div 
+        className={`mx-auto max-w-7xl flex items-center justify-between transition-all duration-700 ${
+          scrolled 
+            ? "bg-black/80 backdrop-blur-2xl px-6 py-3 border border-white/5 shadow-2xl" 
+            : "bg-transparent px-2 py-2"
+        }`}
+      >
+        {/* Logo */}
+        <Link to="/" className="flex items-center gap-3 group">
+          <div className="relative w-8 h-8 flex items-center justify-center">
             <img
               src={logoAsset.url}
               alt="Spectre Hub"
-              className="h-5 w-5 object-contain invert"
+              className="w-full h-full object-contain invert group-hover:scale-110 transition-transform duration-500"
             />
           </div>
-          <span className="truncate font-display text-[15px] xs:text-[16px] font-black tracking-tight text-white uppercase shrink-0">
-            SPECTRE | HUB
+          <span className="font-display text-lg tracking-tighter text-white uppercase italic hidden sm:block">
+            Spectre <span className="text-spectre-pink">Hub</span>
           </span>
         </Link>
 
-        <nav className="hidden items-center gap-8 md:flex absolute left-1/2 -translate-x-1/2 z-10">
+        {/* Desktop Nav */}
+        <nav className="hidden md:flex items-center gap-10">
           {NAV.map((n) => (
             <a
               key={n.href}
               href={n.href}
-              className="text-[13px] font-bold text-white/50 transition-all duration-300 hover:text-white hover:scale-110 tracking-widest uppercase"
+              className="font-display text-[10px] tracking-[0.3em] text-white/40 hover:text-white transition-colors uppercase italic"
             >
               {n.label}
             </a>
           ))}
         </nav>
 
-        <div className="hidden items-center gap-4 md:flex relative z-10">
+        {/* Actions */}
+        <div className="hidden md:flex items-center gap-6">
           <Link 
             to="/hub" 
-            className="ds-btn ds-btn-secondary !h-10 !px-6 !text-[12px]"
+            className="font-display text-[10px] tracking-[0.3em] text-white/40 hover:text-white transition-colors uppercase italic flex items-center gap-2"
           >
-            Entrar
+            <LogIn className="w-3 h-3" />
+            Painel
           </Link>
           <a
             href={guildInvite}
             target="_blank"
             rel="noreferrer"
-            className="ds-btn ds-btn-primary !h-10 !px-6 !text-[12px]"
+            className="ds-btn ds-btn-primary !py-2.5 !px-6 !text-[9px]"
           >
-            Comunidade
+            Acessar Discord
           </a>
         </div>
 
+        {/* Mobile Toggle */}
         <button
-          type="button"
-          onClick={() => setOpen((v) => !v)}
-          aria-label={open ? "Fechar menu" : "Abrir menu"}
-          aria-expanded={open}
-          className="grid h-10 w-10 shrink-0 place-items-center rounded-full border border-white/10 bg-white/[0.03] text-white transition hover:bg-white/[0.07] md:hidden relative z-10"
+          onClick={() => setOpen(!open)}
+          className="md:hidden text-white/60 hover:text-white transition-colors"
         >
-          {open ? <X className="h-4.5 w-4.5" /> : <Menu className="h-4.5 w-4.5" />}
+          {open ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
         </button>
       </div>
 
+      {/* Mobile Menu */}
       {open && (
-        <div className="absolute top-full left-4 right-4 mt-2 overflow-hidden rounded-3xl border border-white/[0.07] bg-[#030303]/95 backdrop-blur-xl md:hidden">
-          <nav className="mx-auto flex max-w-7xl flex-col px-4 py-3 sm:px-6">
+        <div className="absolute top-full left-4 right-4 mt-4 bg-obsidian-soft border border-white/5 p-8 md:hidden animate-in fade-in slide-in-from-top-4 duration-500">
+          <nav className="flex flex-col gap-6 mb-8">
             {NAV.map((n) => (
               <a
                 key={n.href}
                 href={n.href}
                 onClick={() => setOpen(false)}
-                className="rounded-lg px-2 py-3 text-sm font-medium text-[#a0a0a0] transition hover:bg-white/[0.04] hover:text-white"
+                className="font-display text-lg text-white uppercase italic tracking-widest"
               >
                 {n.label}
               </a>
             ))}
-            <div className="mt-3 grid grid-cols-2 gap-2 border-t border-white/[0.07] pt-3">
-              <Link to="/hub" className="ds-btn ds-btn-secondary w-full" onClick={() => setOpen(false)}>
-                Entrar
-              </Link>
-              <a href={guildInvite} target="_blank" rel="noreferrer" className="ds-btn ds-btn-primary w-full">
-                Discord
-              </a>
-            </div>
           </nav>
+          <div className="flex flex-col gap-4">
+             <Link 
+              to="/hub" 
+              className="ds-btn ds-btn-secondary w-full"
+              onClick={() => setOpen(false)}
+            >
+              Painel
+            </Link>
+            <a
+              href={guildInvite}
+              target="_blank"
+              rel="noreferrer"
+              className="ds-btn ds-btn-primary w-full"
+            >
+              Discord
+            </a>
+          </div>
         </div>
       )}
     </header>

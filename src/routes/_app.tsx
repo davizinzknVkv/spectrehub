@@ -23,13 +23,10 @@ import {
   Menu,
   X,
   Copy,
-  Music,
-  ImageIcon,
   Tractor,
   Gift,
   Crosshair,
   UserRound,
-  Zap,
   Activity,
 } from "lucide-react";
 import logoAsset from "@/assets/spectre-logo-nobg.png.asset.json";
@@ -96,23 +93,22 @@ function AppLayout() {
   }, [pathname]);
 
   return (
-    <div className="min-h-screen bg-[#030303] text-slate-100 antialiased">
-      <div className="aurora-bg">
-        <div className="grid-overlay" />
-        <div className="noise-overlay" />
+    <div className="min-h-screen bg-obsidian text-white antialiased">
+      {/* Background elements for Hub */}
+      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+         <div 
+            className="absolute inset-0 opacity-[0.02]"
+            style={{
+              backgroundImage: `linear-gradient(#fff 1px, transparent 1px), linear-gradient(90deg, #fff 1px, transparent 1px)`,
+              backgroundSize: '40px 40px'
+            }}
+          />
+          <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-spectre-pink/5 rounded-full blur-[140px] -translate-y-1/2 translate-x-1/2" />
       </div>
 
-      <div
-        className="pointer-events-none fixed inset-0 -z-10 opacity-[0.03]"
-        style={{
-          backgroundImage: `linear-gradient(#fff 1px, transparent 1px), linear-gradient(90deg, #fff 1px, transparent 1px)`,
-          backgroundSize: '40px 40px'
-        }}
-      />
-
-      <div className="grid min-h-screen w-full grid-cols-1 lg:grid-cols-[236px_1fr] overflow-hidden">
+      <div className="relative z-10 grid min-h-screen w-full grid-cols-1 lg:grid-cols-[250px_1fr] overflow-hidden">
         {/* Desktop sidebar */}
-        <aside className="hidden border-r border-white/5 bg-[#050505] lg:sticky lg:top-0 lg:block lg:h-screen lg:w-[236px]">
+        <aside className="hidden border-r border-white/5 bg-obsidian lg:sticky lg:top-0 lg:block lg:h-screen lg:w-[250px]">
           <SidebarBody pathname={pathname} creds={creds} setCreds={setCreds} />
         </aside>
 
@@ -120,19 +116,18 @@ function AppLayout() {
         {mobileOpen && (
           <>
             <div
-              className="fixed inset-0 z-40 bg-black/70 backdrop-blur-sm lg:hidden"
+              className="fixed inset-0 z-40 bg-black/80 backdrop-blur-md lg:hidden"
               onClick={() => setMobileOpen(false)}
               aria-hidden
             />
-            <aside className="fixed inset-y-0 left-0 z-50 w-[264px] border-r border-white/[0.08] bg-[#070707]/95 backdrop-blur-xl lg:hidden">
-              <div className="flex items-center justify-between border-b border-white/[0.06] px-4 py-3">
-                <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-slate-600">menu</span>
+            <aside className="fixed inset-y-0 left-0 z-50 w-[280px] border-r border-white/5 bg-obsidian lg:hidden">
+              <div className="flex items-center justify-between border-b border-white/5 px-6 py-5">
+                <span className="font-display text-[9px] uppercase tracking-[0.3em] text-white/40 italic">Menu Lateral</span>
                 <button
                   onClick={() => setMobileOpen(false)}
-                  aria-label="Fechar menu"
-                  className="rounded-md border border-white/[0.08] p-1.5 text-slate-400 transition hover:border-white/20 hover:text-white"
+                  className="text-white/40 hover:text-white transition-colors"
                 >
-                  <X className="h-4 w-4" />
+                  <X className="h-5 w-5" />
                 </button>
               </div>
               <SidebarBody pathname={pathname} creds={creds} setCreds={setCreds} />
@@ -140,7 +135,7 @@ function AppLayout() {
           </>
         )}
 
-        {/* Main */}
+        {/* Main Content Area */}
         <main className="min-w-0 flex flex-col w-full">
           <TopBar onOpenMenu={() => setMobileOpen(true)} pathname={pathname} />
           <div className="flex-1 w-full max-w-6xl mx-auto px-4 pb-14 pt-6 sm:px-8 sm:pt-8 lg:px-10 lg:pb-16 lg:pt-10 overflow-hidden">
@@ -154,8 +149,6 @@ function AppLayout() {
 
 function SidebarBody({
   pathname,
-  creds,
-  setCreds,
 }: {
   pathname: string;
   creds: unknown;
@@ -164,24 +157,22 @@ function SidebarBody({
   const logoUrl = logoAsset.url;
   return (
     <div className="flex h-full flex-col">
-      <Link to="/" className="flex items-center gap-2.5 px-6 pb-6 pt-8">
+      <Link to="/" className="flex items-center gap-3 px-8 pb-10 pt-10 group">
         <img
           src={logoUrl}
           alt="Spectre Hub"
-          className="h-8 w-8 object-contain shrink-0"
+          className="h-8 w-8 object-contain shrink-0 invert transition-transform duration-500 group-hover:scale-110"
         />
-        <span className="truncate font-display text-[15px] font-extrabold tracking-tighter text-white uppercase">
-          Spectre<span className="opacity-40 ml-1.5 font-light">|</span><span className="text-[#ff0055] ml-1.5">HUB</span>
+        <span className="font-display text-lg tracking-tighter text-white uppercase italic">
+          Spectre <span className="text-spectre-pink">Hub</span>
         </span>
       </Link>
 
-      <div className="mx-6 h-px bg-white/5" aria-hidden />
-
-      <nav className="flex flex-col gap-5 px-3 py-5 lg:flex-1">
+      <nav className="flex flex-col gap-8 px-4 py-2 lg:flex-1 overflow-y-auto">
         {NAV_GROUPS.map((group) => (
           <div key={group.title}>
-            <div className="ds-label px-4 pb-2 text-[9px] font-bold uppercase tracking-[0.25em] text-[#52525b]">{group.title}</div>
-            <div className="flex flex-col gap-0.5">
+            <div className="font-display px-4 pb-3 text-[9px] font-bold uppercase tracking-[0.3em] text-white/20 italic">{group.title}</div>
+            <div className="flex flex-col gap-1">
               {group.items.map((item) => {
                 const Icon = item.icon;
                 const active = pathname === item.to;
@@ -189,22 +180,24 @@ function SidebarBody({
                   <Link
                     key={`${item.to}-${item.label}`}
                     to={item.to}
-                    data-active={active}
-                    className="nav-item group"
+                    className={`flex items-center gap-3 px-4 py-2.5 transition-all duration-300 group border border-transparent ${
+                      active 
+                        ? "bg-spectre-pink/5 border-spectre-pink/20 text-white" 
+                        : "text-white/40 hover:text-white hover:bg-white/[0.02]"
+                    }`}
                   >
                     <Icon
-                      className={`h-[14px] w-[14px] shrink-0 transition-colors ${
-                        active ? "text-[#ff0055]" : "text-[#52525b] group-hover:text-white"
+                      className={`h-4 w-4 shrink-0 transition-colors ${
+                        active ? "text-spectre-pink" : "text-white/20 group-hover:text-white"
                       }`}
                     />
-                    <span className={active ? "font-bold text-white tracking-[-0.01em]" : "tracking-[-0.01em]"}>
+                    <span className="font-display text-[11px] uppercase tracking-widest italic">
                       {item.label}
                     </span>
                     {item.soon && (
-                      <span className="ml-auto rounded-none border border-[#ff0055]/20 bg-[#ff0055]/5 px-2 py-0.5 text-[8px] font-bold uppercase tracking-widest text-[#ff0055]">em breve</span>
+                      <span className="ml-auto bg-spectre-pink/10 text-spectre-pink text-[7px] font-display uppercase tracking-widest px-2 py-0.5 italic">beta</span>
                     )}
                   </Link>
-
                 );
               })}
             </div>
@@ -212,12 +205,16 @@ function SidebarBody({
         ))}
       </nav>
 
-      <div className="mt-auto border-t border-white/[0.06] p-3">
+      <div className="mt-auto border-t border-white/5 p-4 space-y-2">
         <AdminNavLink />
-        <a href={DISCORD_INVITE} target="_blank" rel="noreferrer" className="nav-item group">
-
-          <LifeBuoy className="h-[14px] w-[14px] shrink-0 text-[#444] group-hover:text-white transition-colors" />
-          Suporte Discord
+        <a 
+          href={DISCORD_INVITE} 
+          target="_blank" 
+          rel="noreferrer" 
+          className="flex items-center gap-3 px-4 py-2.5 text-white/40 hover:text-white transition-all group"
+        >
+          <LifeBuoy className="h-4 w-4 shrink-0 text-white/20 group-hover:text-white transition-colors" />
+          <span className="font-display text-[11px] uppercase tracking-widest italic">Suporte Discord</span>
         </a>
       </div>
     </div>
@@ -227,7 +224,6 @@ function SidebarBody({
 function TopBar({ onOpenMenu, pathname }: { onOpenMenu: () => void; pathname: string }) {
   const allItems = NAV_GROUPS.flatMap((g) => g.items as readonly { to: string; label: string }[]);
   const currentLabel = allItems.find((i) => i.to === pathname)?.label;
-
 
   const creds = useQuestStore((s) => s.creds);
   const setCreds = useQuestStore((s) => s.setCreds);
@@ -243,8 +239,6 @@ function TopBar({ onOpenMenu, pathname }: { onOpenMenu: () => void; pathname: st
     );
     return () => { cancelled = true; };
   }, [creds]);
-
-  const logoUrl = logoAsset.url;
 
   const avatarUrl = me?.id
     ? me.avatar
@@ -264,167 +258,121 @@ function TopBar({ onOpenMenu, pathname }: { onOpenMenu: () => void; pathname: st
 
   return (
     <div
-      className="sticky top-0 z-20 transition-[background-color,backdrop-filter,border-color] duration-300"
-      style={{
-        backgroundColor: scrolled ? "rgba(5,5,5,0.9)" : "transparent",
-        backdropFilter: scrolled ? "blur(12px)" : "none",
-        borderBottom: `1px solid ${scrolled ? "rgba(255,255,255,0.05)" : "transparent"}`,
-      }}
+      className={`sticky top-0 z-20 transition-all duration-500 border-b ${
+        scrolled 
+          ? "bg-black/80 backdrop-blur-xl border-white/5 py-3 px-6" 
+          : "bg-transparent border-transparent py-6 px-10"
+      }`}
     >
-      <div className="mx-auto flex w-full max-w-6xl items-center justify-between gap-3 px-4 py-3 sm:px-6 lg:px-10">
-
-        <div className="flex items-center gap-3">
+      <div className="mx-auto flex w-full max-w-6xl items-center justify-between gap-3">
+        <div className="flex items-center gap-4">
           <button
             onClick={onOpenMenu}
-            aria-label="Abrir menu"
-            className="grid h-9 w-9 place-items-center rounded-lg border border-white/[0.08] text-slate-400 transition hover:border-white/20 hover:text-white lg:hidden"
+            className="p-2 border border-white/5 text-white/40 hover:text-white transition-colors lg:hidden"
           >
-            <Menu className="h-4 w-4" />
+            <Menu className="h-5 w-5" />
           </button>
+          
+          <div className="hidden lg:block">
+            {currentLabel && (
+              <h1 className="font-display text-[10px] tracking-[0.4em] text-white/30 uppercase italic">
+                Painel <span className="text-spectre-pink mx-2">//</span> {currentLabel}
+              </h1>
+            )}
+          </div>
+
           <Link to="/" className="flex items-center gap-2 lg:hidden">
-            <div className="grid h-8 w-8 place-items-center rounded-lg border border-white/10 bg-white/[0.04]">
-              <img src={logoUrl} alt="Spectre Hub" className="h-6 w-6 object-contain" />
-            </div>
-            <span className="text-sm font-bold tracking-[-0.03em] uppercase text-white font-display">Spectre Hub</span>
+            <img src={logoAsset.url} alt="Spectre Hub" className="h-6 w-6 object-contain invert" />
+            <span className="font-display text-[10px] tracking-[0.2em] uppercase italic text-white">Hub</span>
           </Link>
-          <div className="hidden lg:block" />
         </div>
 
-        {currentLabel && (
-          <div className="hidden flex-1 justify-center md:flex">
-            <span className="font-display text-[10px] font-black uppercase tracking-[0.3em] text-[#444]">
-              {currentLabel}
+        <div className="flex items-center gap-6">
+          <div className="flex items-center gap-2">
+            <div className={`w-1.5 h-1.5 rounded-full ${creds ? 'bg-spectre-pink shadow-[0_0_8px_#ff0055]' : 'bg-white/20'}`} />
+            <span className="font-display text-[8px] tracking-[0.2em] text-white/20 uppercase italic hidden sm:block">
+              {creds ? 'Terminal Ativo' : 'Offline'}
             </span>
           </div>
-        )}
 
-        <div className="flex items-center gap-3">
-          <span
-            className={`h-1.5 w-1.5 ${creds ? "bg-[#ff0055] pulse-dot" : "bg-amber-400"}`}
-            title={creds ? "conectado" : "desconectado"}
-          />
           {creds && me ? (
             <DropdownMenu>
-              <DropdownMenuTrigger
-                className="group flex items-center gap-2.5 border border-white/5 bg-white/[0.02] py-1 pl-1 pr-3 transition hover:border-white/10 hover:bg-white/[0.05] focus:outline-none"
-              >
-                {avatarUrl ? (
-                  <img
-                    src={avatarUrl}
-                    alt=""
-                    width={28}
-                    height={28}
-                    className="h-7 w-7 rounded-none object-cover grayscale transition group-hover:grayscale-0"
-                  />
-                ) : (
-                  <div className="grid h-7 w-7 place-items-center rounded-full bg-white/5 text-slate-400">
-                    <UserRound className="h-3.5 w-3.5" />
-                  </div>
-                )}
-                <div className="hidden min-w-0 flex-col leading-tight sm:flex">
-                  <span className="truncate text-xs font-semibold text-white">
-                    {me.global_name || me.username}
-                  </span>
-                  <span className="truncate font-mono text-[10px] text-slate-500">
-                    @{me.username}
-                  </span>
+              <DropdownMenuTrigger className="flex items-center gap-3 p-1 border border-white/5 bg-white/[0.02] hover:border-spectre-pink/20 transition-all focus:outline-none pr-3">
+                <div className="w-8 h-8 bg-white/5 overflow-hidden">
+                   {avatarUrl ? (
+                    <img src={avatarUrl} alt="" className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all" />
+                  ) : (
+                    <div className="w-full h-full flex items-center justify-center text-white/20">
+                      <UserRound className="w-4 h-4" />
+                    </div>
+                  )}
+                </div>
+                <div className="text-left hidden sm:block">
+                   <div className="font-display text-[10px] text-white uppercase italic tracking-widest">{me.global_name || me.username}</div>
+                   <div className="font-sans text-[8px] text-white/20 uppercase tracking-[0.2em]">Discord Verified</div>
                 </div>
               </DropdownMenuTrigger>
-              <DropdownMenuContent
-                align="end"
-                sideOffset={8}
-                className="w-56 rounded-none border-white/5 bg-[#0a0a0a] text-[#a1a1aa] backdrop-blur-xl"
-              >
-                <DropdownMenuLabel className="flex items-center gap-2 py-2">
-                  {avatarUrl && (
-                    <img src={avatarUrl} alt="" className="h-8 w-8 rounded-none object-cover grayscale" />
-                  )}
-                  <div className="min-w-0 leading-tight">
-                    <div className="truncate text-sm font-semibold text-white">
-                      {me.global_name || me.username}
-                    </div>
-                    <div className="truncate font-mono text-[10px] text-slate-500">
-                      @{me.username}
-                    </div>
-                  </div>
-                </DropdownMenuLabel>
+              <DropdownMenuContent align="end" className="w-56 bg-obsidian border-white/5 rounded-none text-white/60">
+                <DropdownMenuLabel className="font-display text-[9px] uppercase tracking-widest italic py-4">Gerenciar Conta</DropdownMenuLabel>
                 <DropdownMenuSeparator className="bg-white/5" />
-                <DropdownMenuItem
-                  asChild
-                  className="cursor-pointer focus:bg-white/5 focus:text-white"
-                >
-                  <Link to="/hub" className="flex items-center gap-2">
-                    <LayoutDashboard className="h-4 w-4 text-[#ff0055]" />
-                    Dashboard
+                <DropdownMenuItem asChild className="focus:bg-spectre-pink focus:text-white cursor-pointer py-3 rounded-none">
+                  <Link to="/hub" className="flex items-center gap-2 font-display text-[10px] uppercase italic tracking-widest">
+                    <LayoutDashboard className="w-3.5 h-3.5" /> Dashboard
                   </Link>
                 </DropdownMenuItem>
-                <DropdownMenuItem
-                  asChild
-                  className="cursor-pointer focus:bg-white/5 focus:text-white"
-                >
-                  <Link to="/settings" className="flex items-center gap-2">
-                    <KeyRound className="h-4 w-4 text-[#ff0055]" />
-                    Login / Token
+                <DropdownMenuItem asChild className="focus:bg-spectre-pink focus:text-white cursor-pointer py-3 rounded-none">
+                  <Link to="/settings" className="flex items-center gap-2 font-display text-[10px] uppercase italic tracking-widest">
+                    <KeyRound className="w-3.5 h-3.5" /> Segurança
                   </Link>
                 </DropdownMenuItem>
                 <DropdownMenuSeparator className="bg-white/5" />
-                <DropdownMenuItem
-                  onClick={() => setConfirmLogout(true)}
-                  className="cursor-pointer text-rose-300 focus:bg-rose-500/10 focus:text-rose-200"
-                >
-                  <LogOut className="h-4 w-4" />
-                  Sair da conta
+                <DropdownMenuItem onClick={() => setConfirmLogout(true)} className="focus:bg-rose-600 focus:text-white cursor-pointer py-3 rounded-none">
+                   <span className="flex items-center gap-2 font-display text-[10px] uppercase italic tracking-widest">
+                     <LogOut className="w-3.5 h-3.5" /> Encerrar Sessão
+                   </span>
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
           ) : (
-            <span className="hidden font-display text-[10px] font-bold uppercase tracking-[0.2em] text-[#444] sm:inline">
-              desconectado
-            </span>
+            <Link to="/settings" className="ds-btn ds-btn-primary !py-2 !px-6 !text-[9px]">
+               Entrar
+            </Link>
           )}
-
-
         </div>
       </div>
 
       {confirmLogout && (
         <Modal
-          title="Sair da conta"
-          description="Seu token será removido deste navegador. Você poderá entrar novamente quando quiser."
+          title="Encerrar Sessão"
           onClose={() => setConfirmLogout(false)}
           actions={
-            <>
-              <Button variant="ghost" onClick={() => setConfirmLogout(false)}>
-                Cancelar
-              </Button>
-              <Button
-                variant="danger"
+            <div className="flex gap-4 w-full">
+              <button className="ds-btn ds-btn-secondary flex-1 py-3" onClick={() => setConfirmLogout(false)}>Cancelar</button>
+              <button 
+                className="ds-btn ds-btn-primary flex-1 py-3" 
                 onClick={() => {
-                  setConfirmLogout(false);
                   setCreds(null);
-                  toast.success("Sessão encerrada");
+                  setConfirmLogout(false);
+                  toast.success("Terminal desconectado");
                 }}
-              >
-                <LogOut className="h-4 w-4" />
-                Sair
-              </Button>
-            </>
+              >Sair</button>
+            </div>
           }
         >
-          <div className="flex items-center gap-3">
-            {avatarUrl && (
-              <img src={avatarUrl} alt="" className="h-10 w-10 rounded-none object-cover grayscale border border-white/10" />
-            )}
-            <div className="min-w-0 leading-tight">
-              <div className="truncate text-sm font-semibold text-white">
-                {me?.global_name || me?.username}
+          <div className="space-y-6">
+            <div className="flex items-center gap-4 border border-white/5 p-4 bg-white/[0.02]">
+              <div className="w-12 h-12 bg-white/5 overflow-hidden">
+                 {avatarUrl && <img src={avatarUrl} alt="" className="w-full h-full object-cover grayscale" />}
               </div>
-              <div className="truncate font-mono text-[11px] text-slate-500">@{me?.username}</div>
+              <div>
+                <div className="font-display text-xs text-white uppercase italic tracking-widest">{me?.global_name || me?.username}</div>
+                <div className="font-sans text-[9px] text-white/20 uppercase tracking-[0.2em]">Verified Hub User</div>
+              </div>
             </div>
+            <p className="text-white/60 text-xs font-sans italic leading-relaxed">Sua chave de acesso será removida deste terminal local. Você precisará autenticar novamente para acessar os protocolos premium.</p>
           </div>
         </Modal>
       )}
     </div>
   );
-
 }

@@ -10,21 +10,20 @@ import {
 } from "@/lib/quest-runner";
 import { useQuestStore, type Quest } from "@/lib/quest-store";
 import { PageHeader } from "@/components/PageHeader";
-import { Button, Badge, EmptyState as DSEmptyState } from "@/components/ui/ds";
-import { Target, KeyRound } from "lucide-react";
+import { Button } from "@/components/ui/ds";
+import { Target } from "lucide-react";
 import {
   CaptchaModal,
   MissionEmptyState as EmptyState,
   MissionCard,
   PlanBanner,
 } from "@/components/Missions";
+import logoAsset from "@/assets/spectre-logo-nobg.png.asset.json";
 
 export const Route = createFileRoute("/_app/missoes")({
   head: () => ({ meta: [{ title: "Missões — Spectre Hub" }] }),
   component: MissoesPage,
 });
-
-const LOG_ALLOWED_ID = "1217795750407442473";
 
 function MissoesPage() {
   const creds = useQuestStore((s) => s.creds);
@@ -35,45 +34,24 @@ function MissoesPage() {
   const running = useQuestStore((s) => s.running);
   const activeId = useQuestStore((s) => s.activeQuestId);
   const progress = useQuestStore((s) => s.progress);
-  const logs = useQuestStore((s) => s.logs);
   const plan = useQuestStore((s) => s.plan);
   const lastCompletedAt = useQuestStore((s) => s.lastCompletedAt);
   const runs = useQuestStore((s) => s.runs);
   const setPlan = useQuestStore((s) => s.setPlan);
   const requestStop = useQuestStore((s) => s.requestStop);
-  const clearLogs = useQuestStore((s) => s.clearLogs);
+  
   const [captchaFor, setCaptchaFor] = useState<Quest | null>(null);
   const [captchaAll, setCaptchaAll] = useState(false);
-  const [ownerId, setOwnerId] = useState<string | null>(null);
-  const logEnd = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    logEnd.current?.scrollIntoView({ behavior: "auto", block: "end" });
-  }, [logs]);
-
-  // Refresh plan while on this page
   useEffect(() => {
     if (!creds) return;
     const refresh = () => {
-      fetchUserPlan()
-        .then((p) => {
-          if (p === null) return;
-          setPlan(p);
-        })
-        .catch(() => {});
+      fetchUserPlan().then((p) => { if (p !== null) setPlan(p); }).catch(() => {});
     };
     refresh();
     const id = setInterval(refresh, 30_000);
     return () => clearInterval(id);
   }, [creds, setPlan]);
-
-  // Read user id once so we know whether to render the owner-only log
-  useEffect(() => {
-    if (!creds) return;
-    import("@/lib/quest-runner").then(({ fetchUserInfo }) =>
-      fetchUserInfo().then((u) => u && setOwnerId((u as { id?: string }).id ?? null)),
-    );
-  }, [creds]);
 
   const limits = PLAN_LIMITS[plan];
   const usedToday = useMemo(() => {
@@ -84,9 +62,11 @@ function MissoesPage() {
       (r) => r.status === "completed" && new Date(r.started_at).getTime() >= t,
     ).length;
   }, [runs]);
+  
   const remaining = limits.daily === Infinity ? Infinity : Math.max(0, limits.daily - usedToday);
   const cooldownEnd = lastCompletedAt + limits.cooldownMs;
   const [now, setNow] = useState(Date.now);
+  
   useEffect(() => {
     if (cooldownEnd <= Date.now()) return;
     const id = setInterval(() => {
@@ -96,11 +76,11 @@ function MissoesPage() {
     }, 1000);
     return () => clearInterval(id);
   }, [cooldownEnd]);
+
   const cooldownLeft = Math.max(0, cooldownEnd - now);
   const gateBlocked = remaining <= 0 || cooldownLeft > 0;
   const cooldownSecs = Math.ceil(cooldownLeft / 1000);
-  const cooldownText =
-    cooldownLeft > 0
+  const cooldownText = cooldownLeft > 0
       ? `${Math.floor(cooldownSecs / 60)}m${(cooldownSecs % 60).toString().padStart(2, "0")}s`
       : null;
 
@@ -109,7 +89,7 @@ function MissoesPage() {
     try {
       const q = await fetchAvailableQuests();
       setQuests(q);
-      useQuestStore.getState().log(`🎯 ${q.length} missão(ões) disponível(eis)`);
+      toast.success(`${q.length} missões localizadas.`);
     } catch (err) {
       toast.error(err instanceof Error ? err.message : "Erro ao carregar");
     } finally {
@@ -119,150 +99,97 @@ function MissoesPage() {
 
   if (!creds) {
     return (
-      <div className="mx-auto w-full max-w-xl">
-        <DSEmptyState
-          icon={KeyRound}
-          title="Nenhum token configurado"
-          description="Configure seu token do Discord (ou entre com email e senha) para carregar e executar missões."
-          action={
-            <Link to="/settings">
-              <Button variant="primary">→ configurar login</Button>
-            </Link>
-          }
-        />
+      <div className="pt-20 text-center space-y-8">
+        <img src={logoAsset.url} alt="Logo" className="w-24 h-24 mx-auto invert opacity-50" />
+        <h1 className="font-display text-4xl uppercase tracking-tighter text-white">Missões Bloqueadas</h1>
+        <p className="text-white/40 max-w-sm mx-auto font-sans italic">Para escanear e executar missões em sua conta, você deve estar autenticado no terminal.</p>
+        <Link to="/settings" className="ds-btn ds-btn-primary mx-auto">Vincular Conta</Link>
       </div>
     );
   }
 
-
   return (
     <div className="page-stack">
       <PageHeader
-        eyebrow="QUESTS --LIST"
+        eyebrow="quests --deploy"
         icon={Target}
-        title="MISSÕES"
-        highlight="DISPONÍVEIS"
-        description="Quests disponíveis do Discord. Complete para ganhar recompensas."
-        actions={
-          <div className="flex items-center gap-2">
-            {running && (
-              <Button variant="danger" size="sm" onClick={requestStop}>
-                ■ stop
-              </Button>
-            )}
-          </div>
-        }
+        title="Protocolo de"
+        highlight="Missões"
+        description="Execute missões oficiais do Discord e colete recompensas exclusivas automaticamente."
       />
 
+      <div className="grid grid-cols-1 lg:grid-cols-[1fr_350px] gap-8">
+        <div className="space-y-6">
+           <PlanBanner
+            plan={plan}
+            limits={limits}
+            usedToday={usedToday}
+            remaining={remaining}
+            cooldownText={cooldownText}
+            cooldownLeft={cooldownLeft}
+          />
 
-      <PlanBanner
-        plan={plan}
-        limits={limits}
-        usedToday={usedToday}
-        remaining={remaining}
-        cooldownText={cooldownText}
-        cooldownLeft={cooldownLeft}
-      />
-
-      <section className="min-w-0 space-y-4">
-        <div className="grid grid-cols-1 gap-3 sm:grid-cols-[minmax(0,1fr)_auto] sm:items-end">
-          <div className="min-w-0">
-            {quests.length > 0 && <span className="ds-label">{quests.length} disponíveis</span>}
+          <div className="flex justify-between items-center bg-white/[0.02] border border-white/5 p-4">
+             <div className="font-display text-[9px] uppercase tracking-widest text-white/30 italic">
+                {quests.length} Missões Disponíveis
+             </div>
+             <div className="flex gap-4">
+                <button 
+                  onClick={loadQuests}
+                  disabled={loadingQuests || running}
+                  className="ds-btn ds-btn-secondary !py-2 !px-6 !text-[9px]"
+                >
+                  {loadingQuests ? 'Sondando...' : 'Scan'}
+                </button>
+                <button 
+                  onClick={() => setCaptchaAll(true)}
+                  disabled={running || quests.length === 0 || gateBlocked}
+                  className="ds-btn ds-btn-primary !py-2 !px-6 !text-[9px]"
+                >
+                  Run All
+                </button>
+             </div>
           </div>
-          <div className="flex flex-wrap items-center gap-2 sm:justify-end">
-            <Button
-              variant="secondary"
-              size="sm"
-              onClick={loadQuests}
-              disabled={loadingQuests || running}
-            >
-              {loadingQuests ? "sondando…" : "→ scan missões"}
-            </Button>
-            <Button
-              variant="primary"
-              size="sm"
-              onClick={() => setCaptchaAll(true)}
-              disabled={running || quests.length === 0 || remaining <= 0}
-              title={remaining <= 0 ? `Limite diário do plano ${limits.label} atingido` : undefined}
-            >
-              ▶ run all
-            </Button>
-          </div>
-        </div>
 
-        {quests.length === 0 && !loadingQuests && <EmptyState onScan={loadQuests} />}
-        {loadingQuests && quests.length === 0 && (
-          <div className="grid grid-cols-[repeat(auto-fill,minmax(260px,1fr))] gap-4">
-            {Array.from({ length: 6 }).map((_, i) => (
-              <div key={i} className="ds-card aspect-[16/7] animate-pulse !p-0" />
+          {quests.length === 0 && !loadingQuests && <EmptyState onScan={loadQuests} />}
+          
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {quests.map((q) => (
+              <MissionCard
+                key={q.questId}
+                quest={q}
+                active={activeId === q.questId}
+                progress={activeId === q.questId ? progress : null}
+                disabled={running || gateBlocked}
+                gateHint={remaining <= 0 ? `Limite ${limits.label}` : cooldownText ? `Cooldown ${cooldownText}` : undefined}
+                onExec={() => setCaptchaFor(q)}
+              />
             ))}
           </div>
-        )}
-
-        <div className="grid grid-cols-[repeat(auto-fill,minmax(260px,1fr))] gap-4">
-          {quests.map((q) => (
-            <MissionCard
-              key={q.questId}
-              quest={q}
-              active={activeId === q.questId}
-              progress={activeId === q.questId ? progress : null}
-              disabled={running || gateBlocked}
-              gateHint={
-                remaining <= 0
-                  ? `Limite diário ${limits.label}`
-                  : cooldownText
-                    ? `Cooldown ${cooldownText}`
-                    : undefined
-              }
-              onExec={() => setCaptchaFor(q)}
-            />
-          ))}
         </div>
-      </section>
 
-      {ownerId === LOG_ALLOWED_ID && (
-        <section>
-          <div className="overflow-hidden rounded-xl border border-[var(--border-1)]" style={{ background: "#0c0c0c" }}>
-            <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[var(--border-1)] px-4 py-2.5">
-              <div className="flex min-w-0 items-center gap-2 ds-label">
-                <span className="truncate">spectre hub — log</span>
-              </div>
-              <div className="flex shrink-0 items-center gap-2">
-                <Badge variant={running ? "success" : "default"}>{running ? "live" : "idle"}</Badge>
-                <Button variant="ghost" size="sm" onClick={clearLogs}>
-                  clear
-                </Button>
-              </div>
-            </div>
-            <div className="max-h-[360px] min-h-[200px] overflow-y-auto p-4 font-mono text-[12px] leading-6">
-              {logs.length === 0 ? (
-                <div className="ds-small">
-                  <span className="text-[var(--primary)]">›</span> aguardando eventos…
+        <aside className="space-y-6">
+            <div className="ds-card p-6 border-white/5 bg-white/[0.02] space-y-4">
+                <div className="font-display text-[9px] uppercase tracking-widest text-white/30 italic">Terminal Log</div>
+                <div className="space-y-2 max-h-[500px] overflow-y-auto pr-2 custom-scrollbar font-mono text-[9px]">
+                   {useQuestStore.getState().logs.length === 0 ? (
+                       <p className="text-white/20 italic">Aguardando operação...</p>
+                   ) : (
+                       useQuestStore.getState().logs.slice().reverse().map(l => (
+                           <div key={l.id} className={`py-1 border-b border-white/[0.02] ${l.level === 'error' ? 'text-rose-500' : l.level === 'success' ? 'text-spectre-pink' : 'text-white/60'}`}>
+                               [{new Date(l.ts).toLocaleTimeString()}] {l.text}
+                           </div>
+                       ))
+                   )}
                 </div>
-              ) : (
-                logs.slice(-100).map((l) => (
-                  <div
-                    key={l.id}
-                    className={
-                      l.level === "error"
-                        ? "text-[var(--danger)]"
-                        : l.level === "success"
-                          ? "text-[var(--ok)]"
-                          : "text-[var(--text-2)]"
-                    }
-                  >
-                    <span className="mr-2 ds-small">
-                      {new Date(l.ts).toLocaleTimeString("pt-BR", { hour12: false })}
-                    </span>
-                    {l.text}
-                  </div>
-                ))
-              )}
-              <div ref={logEnd} />
+                {running && (
+                    <button onClick={requestStop} className="w-full ds-btn ds-btn-secondary !text-rose-500 hover:!bg-rose-500 hover:!text-white border-rose-500/20">
+                        Interromper Sequência
+                    </button>
+                )}
             </div>
-          </div>
-        </section>
-      )}
+        </aside>
+      </div>
 
       {captchaFor && (
         <CaptchaModal

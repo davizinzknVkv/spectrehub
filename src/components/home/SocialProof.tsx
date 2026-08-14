@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Users } from "lucide-react";
 import { useInView, useCountUp } from "./hooks";
 import { Product } from "./constants";
 
@@ -104,7 +103,6 @@ export function SocialProof({ widgetUrl, products: productsList }: SocialProofPr
       }
     };
 
-    // Só inicia o polling se estiver visível ou após o mount
     refresh();
     const iv = window.setInterval(refresh, STATS_TTL_MS);
     
@@ -129,26 +127,37 @@ export function SocialProof({ widgetUrl, products: productsList }: SocialProofPr
   const latencyCount = useCountUp(stats.latency, inView);
 
   return (
-    <section className="border-y border-white/[0.08] bg-[#030303] relative z-10 reveal-item">
-      <div ref={ref} className="mx-auto max-w-7xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8">
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-12 text-[11px] font-black text-[#555] uppercase tracking-[0.25em]">
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:flex md:items-center gap-10 sm:gap-16 lg:gap-24 w-full md:w-auto">
-             <div className="flex items-center gap-4 group">
-               <span className="text-white text-3xl lg:text-4xl font-display font-[900] tracking-tighter shrink-0 transition-transform group-hover:scale-110 duration-500">{Math.round(membersCount)}+</span>
-               <span className="leading-tight border-l border-white/10 pl-4 py-1">MEMBROS<br />ATIVOS</span>
-             </div>
-             <div className="flex items-center gap-4 group">
-               <span className="text-white text-3xl lg:text-4xl font-display font-[900] tracking-tighter shrink-0 transition-transform group-hover:scale-110 duration-500">{Math.round(productsCount)}</span>
-               <span className="leading-tight border-l border-white/10 pl-4 py-1">SISTEMAS<br />PROPRIETÁRIOS</span>
-             </div>
-             <div className="flex items-center gap-4 group">
-               <span className="text-white text-3xl lg:text-4xl font-display font-[900] tracking-tighter shrink-0 transition-transform group-hover:scale-110 duration-500">{latencyCount.toFixed(2)}<span className="text-[#ff0055]">ms</span></span>
-               <span className="leading-tight border-l border-white/10 pl-4 py-1">TEMPO DE<br />EXECUÇÃO</span>
-             </div>
-          </div>
-          <div className="hidden xl:block whitespace-nowrap opacity-30 font-mono text-[9px] tracking-[0.4em]">
-            SYSTEM_STATUS: OPTIMIZED // LATENCY: NOMINAL
-          </div>
+    <section className="bg-obsidian border-y border-white/5 relative z-10 overflow-hidden">
+      <div className="absolute inset-0 z-0 pointer-events-none opacity-20">
+         <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-spectre-pink/50 to-transparent" />
+      </div>
+
+      <div ref={ref} className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-px md:bg-white/5">
+           <div className="bg-obsidian flex flex-col items-center text-center p-8 group hover:bg-white/[0.02] transition-colors">
+              <span className="font-display text-4xl md:text-5xl text-white italic mb-2 tracking-tighter">
+                {Math.round(membersCount)}+
+              </span>
+              <span className="font-display text-[9px] tracking-[0.3em] text-white/30 uppercase italic group-hover:text-spectre-pink transition-colors">
+                Membros Ativos
+              </span>
+           </div>
+           <div className="bg-obsidian flex flex-col items-center text-center p-8 group hover:bg-white/[0.02] transition-colors">
+              <span className="font-display text-4xl md:text-5xl text-white italic mb-2 tracking-tighter">
+                {Math.round(productsCount)}
+              </span>
+              <span className="font-display text-[9px] tracking-[0.3em] text-white/30 uppercase italic group-hover:text-spectre-pink transition-colors">
+                Sistemas Elite
+              </span>
+           </div>
+           <div className="bg-obsidian flex flex-col items-center text-center p-8 group hover:bg-white/[0.02] transition-colors">
+              <span className="font-display text-4xl md:text-5xl text-white italic mb-2 tracking-tighter">
+                {latencyCount.toFixed(2)}<span className="text-spectre-pink not-italic text-2xl">ms</span>
+              </span>
+              <span className="font-display text-[9px] tracking-[0.3em] text-white/30 uppercase italic group-hover:text-spectre-pink transition-colors">
+                Latência Média
+              </span>
+           </div>
         </div>
       </div>
     </section>
