@@ -49,11 +49,11 @@ export function PlansSection({ plans }: PlansSectionProps) {
               </div>
 
               {p.name === "Free" ? (
-                <a href="#free" className="ds-btn ds-btn-secondary rounded-full w-full py-2">
+                <a href="#free" className="ds-btn ds-btn-secondary w-full py-2">
                   COMEÇAR AGORA
                 </a>
               ) : (
-                <Link to="/hub" className={p.highlight ? "ds-btn ds-btn-primary rounded-full w-full py-2" : "ds-btn ds-btn-secondary rounded-full w-full py-2"}>
+                <Link to="/hub" className={p.highlight ? "ds-btn ds-btn-primary w-full py-2" : "ds-btn ds-btn-secondary w-full py-2"}>
                   {p.cta.toUpperCase()}
                 </Link>
               )}

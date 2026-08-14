@@ -69,7 +69,7 @@ export function SiteHeader({ guildInvite }: SiteHeaderProps) {
         <div className="hidden items-center gap-4 md:flex relative z-10">
           <Link 
             to="/hub" 
-            className="flex items-center justify-center bg-white/5 hover:bg-white/10 text-white px-6 py-2 rounded-full font-black text-[12px] uppercase tracking-wider transition-all border border-white/10 hover:border-white/20 active:scale-95 shadow-sm shadow-black/20"
+            className="ds-btn ds-btn-secondary !h-10 !px-6 !text-[12px]"
           >
             Entrar
           </Link>
@@ -77,7 +77,7 @@ export function SiteHeader({ guildInvite }: SiteHeaderProps) {
             href={guildInvite}
             target="_blank"
             rel="noreferrer"
-            className="flex items-center justify-center bg-[#ff0055] hover:bg-[#ff1a66] text-white px-6 py-2 rounded-full font-black text-[12px] uppercase tracking-wider transition-all shadow-lg shadow-[#ff0055]/20 active:scale-95"
+            className="ds-btn ds-btn-primary !h-10 !px-6 !text-[12px]"
           >
             Comunidade
           </a>

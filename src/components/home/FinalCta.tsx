@@ -30,10 +30,10 @@ export function FinalCta({ guildInvite }: FinalCtaProps) {
             Junte-se ao ecossistema SPECTRE e ative sua infraestrutura de automação hoje mesmo. Desenvolvido para quem busca performance sem compromissos.
           </p>
           <div className="mt-16 flex flex-col items-center justify-center gap-4 sm:flex-row">
-            <a href={guildInvite} target="_blank" rel="noreferrer" className="ds-btn ds-btn-primary ds-btn-lg rounded-full px-12 flex items-center gap-3 w-full sm:w-auto shadow-2xl shadow-[#ff0055]/20">
+            <a href={guildInvite} target="_blank" rel="noreferrer" className="ds-btn ds-btn-primary ds-btn-lg px-12 flex items-center gap-3 w-full sm:w-auto shadow-2xl shadow-[#ff0055]/20">
               <ArrowRight className="h-5 w-5" /> ABRIR TICKET AGORA
             </a>
-            <Link to="/hub" className="ds-btn ds-btn-secondary ds-btn-lg rounded-full px-12 w-full sm:w-auto">
+            <Link to="/hub" className="ds-btn ds-btn-secondary ds-btn-lg px-12 w-full sm:w-auto">
               ACESSAR PAINEL
             </Link>
           </div>
