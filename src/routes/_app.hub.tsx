@@ -534,11 +534,12 @@ function PresenceModal({
 
   return (
     <Modal 
-      title="Presence Protocol" 
+      title="Status & Presence" 
       description="Gerencie como você aparece na rede Spectre"
       onClose={onClose}
       className="max-w-md"
     >
+
       <div className="space-y-6">
         {/* Tabs */}
         <div className="flex border-b border-white/5">
