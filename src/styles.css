@@ -207,6 +207,7 @@ body {
   font-family: var(--font-sans) !important;
   color: white !important;
   box-shadow: 0 20px 40px -20px rgba(0, 0, 0, 0.8) !important;
+  overflow: visible !important;
 }
 
 .spectre-toast [data-icon] {
@@ -232,14 +233,26 @@ body {
 }
 
 .spectre-toast [data-close-button] {
-  background: transparent !important;
-  border: none !important;
-  color: rgba(255, 255, 255, 0.2) !important;
-  transition: color 0.2s !important;
+  top: -8px !important;
+  right: -8px !important;
+  background: #080808 !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  color: white !important;
+  width: 20px !important;
+  height: 20px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border-radius: 0px !important;
+  opacity: 1 !important;
+  transition: all 0.2s !important;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.5) !important;
 }
 
 .spectre-toast [data-close-button]:hover {
-  color: #ff0055 !important;
+  background: #ff0055 !important;
+  border-color: #ff0055 !important;
+  transform: rotate(90deg) !important;
 }
 
 /* Toast Variants */
@@ -253,4 +266,13 @@ body {
 
 .spectre-toast[data-type="info"] {
   border-left: 2px solid rgba(255, 255, 255, 0.2) !important;
+}
+
+.spectre-toast[data-type="loading"] [data-icon] {
+  animation: spectre-spin 1s linear infinite;
+}
+
+@keyframes spectre-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }
