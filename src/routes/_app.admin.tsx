@@ -66,12 +66,43 @@ type Feature = {
   sort: number;
 };
 
-const TABS = ["previas", "planos", "funcoes"] as const;
+type OptimizerSettings = {
+  id?: string;
+  name: string;
+  badge: string;
+  title: string;
+  description: string;
+  button_text: string;
+  button_link: string;
+  status: string;
+  active: boolean;
+};
+
+type OptimizerFeature = {
+  id?: string;
+  icon: string;
+  title: string;
+  description: string;
+  sort: number;
+  active: boolean;
+};
+
+type OptimizerPreview = {
+  id?: string;
+  image_url: string;
+  title: string;
+  description: string;
+  sort: number;
+  active: boolean;
+};
+
+const TABS = ["previas", "planos", "funcoes", "optimizer"] as const;
 type Tab = (typeof TABS)[number];
 const TAB_LABEL: Record<Tab, string> = {
   previas: "Prévias",
   planos: "Planos & Valores",
   funcoes: "Funções & Cargos",
+  optimizer: "Spectre Optimizer",
 };
 
 const csv = (a: string[]) => a.join(", ");
@@ -90,6 +121,11 @@ function AdminPage() {
   const [previews, setPreviews] = useState<Preview[]>([]);
   const [features, setFeatures] = useState<Feature[]>([]);
 
+  // Optimizer state
+  const [optSettings, setOptSettings] = useState<OptimizerSettings | null>(null);
+  const [optFeatures, setOptFeatures] = useState<OptimizerFeature[]>([]);
+  const [optPreviews, setOptPreviews] = useState<OptimizerPreview[]>([]);
+
   useEffect(() => {
     hydrate();
   }, [hydrate]);
@@ -98,11 +134,19 @@ function AdminPage() {
     if (!token) return;
     setLoading(true);
     try {
-      const data = await adminLoadAll({ data: { token } });
+      const [data, optData] = await Promise.all([
+        adminLoadAll({ data: { token } }),
+        adminLoadOptimizer({ data: { token } }),
+      ]);
       setPlans(data.plans as Plan[]);
       setPreviews(data.previews as Preview[]);
       setFeatures(data.features as Feature[]);
+
+      setOptSettings(optData.settings as OptimizerSettings);
+      setOptFeatures(optData.features as OptimizerFeature[]);
+      setOptPreviews(optData.previews as OptimizerPreview[]);
     } catch {
+
       toast.error("Não foi possível carregar os dados.");
     } finally {
       setLoading(false);
