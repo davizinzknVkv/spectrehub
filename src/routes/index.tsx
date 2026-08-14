@@ -87,7 +87,7 @@ function Index() {
       <main ref={ref}>
         <Hero guildInvite={GUILD_INVITE} fallbackMembers={FALLBACK_MEMBERS} />
         
-        <div className={`reveal-stagger ${inView ? 'is-visible' : ''}`}>
+        <div className="reveal-stagger is-visible">
           <SocialProof widgetUrl={WIDGET_URL} products={PRODUCTS} />
           <ProductsSection products={PRODUCTS} />
           <ReasonsSection reasons={REASONS} />
