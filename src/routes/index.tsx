@@ -25,6 +25,7 @@ O site `corenetwork.dev` servirá como inspiração principal para o novo design
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import {
+  Activity,
   ArrowRight,
   Check,
   CheckCircle2,
@@ -46,6 +47,7 @@ import {
   X,
   Zap,
 } from "lucide-react";
+
 import logoAsset from "@/assets/spectre-logo-nobg.png.asset.json";
 import { useOptimizerContent } from "@/lib/site-content";
 
