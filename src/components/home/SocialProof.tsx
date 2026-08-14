@@ -133,7 +133,7 @@ export function SocialProof({ widgetUrl, products: productsList }: SocialProofPr
       </div>
 
       <div ref={ref} className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-px md:bg-white/5">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-12 md:gap-px md:bg-white/5 border border-white/5">
            <div className="bg-obsidian flex flex-col items-center text-center p-8 group hover:bg-white/[0.02] transition-colors rounded-none">
               <span className="font-display text-4xl md:text-5xl text-white italic mb-2 tracking-tighter">
                 {Math.round(membersCount)}+
@@ -156,6 +156,15 @@ export function SocialProof({ widgetUrl, products: productsList }: SocialProofPr
               </span>
               <span className="font-display text-[9px] tracking-[0.3em] text-white/30 uppercase italic group-hover:text-spectre-pink transition-colors">
                 Latência Média
+              </span>
+           </div>
+           <div className="bg-obsidian flex flex-col items-center text-center p-8 group hover:bg-white/[0.02] transition-colors rounded-none">
+              <div className="flex items-center gap-1 mb-2">
+                <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse shadow-[0_0_8px_rgba(34,197,94,0.5)]" />
+                <span className="font-display text-2xl text-white italic tracking-tighter">99.9%</span>
+              </div>
+              <span className="font-display text-[9px] tracking-[0.3em] text-white/30 uppercase italic group-hover:text-spectre-pink transition-colors">
+                Uptime Realtime
               </span>
            </div>
         </div>

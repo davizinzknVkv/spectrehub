@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useInView } from "@/components/home/hooks";
-import logoAsset from "@/assets/spectre-logo-nobg.png.asset.json";
+import logoAsset from "@/assets/spectre-logo-s.png.asset.json";
 import { PRODUCTS, PLANS, REASONS } from "@/components/home/constants";
 import { SiteHeader } from "@/components/home/SiteHeader";
 import { Hero } from "@/components/home/Hero";

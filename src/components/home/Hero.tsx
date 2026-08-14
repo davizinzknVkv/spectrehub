@@ -2,6 +2,7 @@ import React from "react";
 import { ArrowRight } from "lucide-react";
 import { Reveal } from "./Reveal";
 import { Avatar } from "./Avatar";
+import logoAsset from "@/assets/spectre-logo-s.png.asset.json";
 
 interface HeroProps {
   guildInvite: string;
@@ -40,8 +41,12 @@ export function Hero({ guildInvite, fallbackMembers }: HeroProps) {
               <path d="M85 45L95 55L85 65" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-spectre-pink" />
             </svg>
           </div>
-          <h1 className="font-display text-[clamp(2.5rem,10vw,8.5rem)] leading-[0.85] text-white uppercase italic tracking-tighter mb-8 break-words relative z-10">
-            SPECTRE HUB <br />
+          <h1 className="font-display text-[clamp(2.5rem,10vw,8.5rem)] leading-[0.85] text-white uppercase italic tracking-tighter mb-8 break-words relative z-10 flex flex-col items-center">
+            <div className="flex items-center gap-4 md:gap-8 justify-center">
+              <span>SPECTRE</span>
+              <img src={logoAsset.url} alt="" className="h-[0.7em] w-auto animate-pulse drop-shadow-[0_0_20px_rgba(255,0,85,0.4)]" />
+              <span>HUB</span>
+            </div>
             <span className="text-spectre-pink">DOMINA</span> O <br />
             MERCADO.
           </h1>
@@ -74,12 +79,13 @@ export function Hero({ guildInvite, fallbackMembers }: HeroProps) {
            <div className="flex items-center gap-4">
              <div className="flex -space-x-3">
                {fallbackMembers.slice(0, 3).map((m, i) => (
-                 <div key={i} className="w-8 h-8 rounded-full border-2 border-background overflow-hidden bg-white/5">
-                   <Avatar seed={m} />
-                 </div>
+                  <div key={i} className="w-8 h-8 rounded-full border border-white/10 overflow-hidden bg-black flex items-center justify-center p-0.5 relative group">
+                    <div className="absolute inset-0 bg-gradient-to-tr from-spectre-pink/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                    <Avatar seed={m} />
+                  </div>
                ))}
              </div>
-             <span className="font-display text-[10px] tracking-[0.2em] uppercase">Comunidade Ativa</span>
+             <span className="font-display text-[10px] tracking-[0.2em] uppercase text-white/60">Comunidade Ativa</span>
            </div>
         </div>
       </div>

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "@tanstack/react-router";
 import { X, Menu, LogIn, Search, Github, Twitter, Linkedin, ChevronDown, MessageSquare } from "lucide-react";
-import logoAsset from "@/assets/spectre-logo-nobg.png.asset.json";
+import logoAsset from "@/assets/spectre-logo-s.png.asset.json";
 
 interface SiteHeaderProps {
   guildInvite: string;
@@ -36,11 +36,11 @@ export function SiteHeader({ guildInvite }: SiteHeaderProps) {
       >
         {/* Logo */}
         <Link to="/" className="flex items-center gap-3 group">
-          <div className="relative w-8 h-8 flex items-center justify-center">
+          <div className="relative w-10 h-10 flex items-center justify-center">
             <img
               src={logoAsset.url}
               alt="Spectre Hub"
-              className="w-full h-full object-contain invert group-hover:scale-110 transition-transform duration-500"
+              className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500 drop-shadow-[0_0_8px_rgba(255,0,85,0.3)]"
             />
           </div>
           <span className="font-display text-lg tracking-tighter text-white uppercase italic hidden sm:block">

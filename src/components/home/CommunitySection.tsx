@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Users, MessageSquare, Sparkles, ArrowRight } from "lucide-react";
 import { Reveal } from "./Reveal";
+import { Avatar } from "./Avatar";
 
 interface CommunitySectionProps {
   widgetUrl: string;
@@ -150,8 +151,8 @@ export function CommunitySection({ widgetUrl, guildId, guildInvite, fallbackMemb
         <div className="flex w-max gap-8 animate-marquee">
           {loop.map((m, i) => (
             <div key={`${m.id}-${i}`} className="flex items-center gap-3 opacity-20 hover:opacity-100 transition-opacity duration-300">
-               <div className="w-8 h-8 rounded-full border border-white/10 bg-white/5 overflow-hidden">
-                  {m.avatar ? <img src={m.avatar} alt="" className="w-full h-full object-cover grayscale" /> : <div className="w-full h-full" />}
+               <div className="w-8 h-8 rounded-full border border-white/10 bg-black overflow-hidden flex items-center justify-center p-0.5">
+                  {m.avatar ? <img src={m.avatar} alt="" className="w-full h-full object-cover grayscale brightness-125" /> : <Avatar seed={m.name} />}
                </div>
                <span className="font-display text-[10px] text-white uppercase italic tracking-[0.2em]">{m.name}</span>
             </div>

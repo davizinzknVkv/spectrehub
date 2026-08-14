@@ -29,7 +29,7 @@ import {
   UserRound,
   Activity,
 } from "lucide-react";
-import logoAsset from "@/assets/spectre-logo-nobg.png.asset.json";
+import logoAsset from "@/assets/spectre-logo-s.png.asset.json";
 import { AdminNavLink } from "@/components/AdminNavLink";
 
 
@@ -161,7 +161,7 @@ function SidebarBody({
         <img
           src={logoUrl}
           alt="Spectre Hub"
-          className="h-8 w-8 object-contain shrink-0 invert transition-transform duration-500 group-hover:scale-110"
+          className="h-10 w-10 object-contain shrink-0 transition-transform duration-500 group-hover:scale-110 drop-shadow-[0_0_8px_rgba(255,0,85,0.3)]"
         />
         <span className="font-display text-lg tracking-tighter text-white uppercase italic">
           Spectre <span className="text-spectre-pink">Hub</span>
@@ -282,7 +282,7 @@ function TopBar({ onOpenMenu, pathname }: { onOpenMenu: () => void; pathname: st
           </div>
 
           <Link to="/" className="flex items-center gap-2 lg:hidden">
-            <img src={logoAsset.url} alt="Spectre Hub" className="h-6 w-6 object-contain invert" />
+            <img src={logoAsset.url} alt="Spectre Hub" className="h-7 w-7 object-contain drop-shadow-[0_0_8px_rgba(255,0,85,0.3)]" />
             <span className="font-display text-[10px] tracking-[0.2em] uppercase italic text-white">Hub</span>
           </Link>
         </div>
