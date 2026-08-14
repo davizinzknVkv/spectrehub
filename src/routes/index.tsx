@@ -87,6 +87,7 @@ const FALLBACK_MEMBERS = [
 /* ─────────────────────────── helpers ─────────────────────────── */
 
 import { useInView, useCountUp } from "@/components/home/hooks";
+import { Reveal } from "@/components/home/Reveal";
 
 function Avatar({ seed }: { seed: string }) {
   return (
