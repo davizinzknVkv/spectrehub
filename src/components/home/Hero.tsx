@@ -34,7 +34,7 @@ export function Hero({ guildInvite, fallbackMembers }: HeroProps) {
         </Reveal>
 
         <Reveal delay={100}>
-          <h1 className="font-display text-[clamp(2.5rem,12vw,10rem)] leading-[0.85] text-white uppercase italic tracking-tighter mb-8 break-words">
+          <h1 className="font-display text-[clamp(2.5rem,10vw,8.5rem)] leading-[0.85] text-white uppercase italic tracking-tighter mb-8 break-words">
             SPECTRE HUB <br />
             <span className="text-spectre-pink">DOMINA</span> O <br />
             MERCADO.

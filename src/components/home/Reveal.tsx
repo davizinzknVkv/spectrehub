@@ -14,7 +14,7 @@ export function Reveal({
   return (
     <div
       ref={ref}
-      className={`reveal ${inView ? "is-visible" : ""} ${className}`}
+      className={`reveal ${inView ? "is-visible" : "opacity-0 translate-y-8"} ${className}`}
       style={{ transitionDelay: `${delay}ms` }}
     >
       {children}
