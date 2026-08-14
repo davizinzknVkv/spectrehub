@@ -833,45 +833,59 @@ function ProductsSection() {
 
         <div className="mt-12 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           <Reveal className="relative aspect-video bg-white/5 border border-white/10 overflow-hidden group">
-             <div className="absolute inset-0 bg-gradient-to-tr from-[#ff0055]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-             <div className="absolute inset-0 flex items-center justify-center">
-                <div className="text-[10px] font-bold text-white/20 uppercase tracking-[0.4em]">Preview do Sistema</div>
-             </div>
+            <div className="absolute inset-0 bg-gradient-to-tr from-[#ff0055]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+            <div className="absolute inset-0 flex items-center justify-center p-4">
+              <div className="relative w-full max-w-lg">
+                <div className="absolute -inset-1 rounded-xl bg-gradient-to-tr from-[#ff0055] to-transparent opacity-20 blur-xl" />
+                <img
+                  src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=2070&auto=format&fit=crop"
+                  alt="Laptop Preview"
+                  className="relative w-full rounded-lg border border-white/10 shadow-2xl"
+                />
+              </div>
+            </div>
           </Reveal>
 
-          <div>
+          <div className="relative">
             <Reveal>
-              <h3 className="font-display text-5xl font-extrabold tracking-tighter text-white uppercase">
-                SPECTRE {PRODUCTS[activeTab].name}
-              </h3>
+              <div className="flex items-center gap-3">
+                <div className="flex h-8 w-8 items-center justify-center rounded-sm bg-[#ff0055] text-white">
+                  <ChevronRight className="h-4 w-4" />
+                </div>
+                <h3 className="font-display text-5xl font-extrabold tracking-tighter text-white uppercase sm:text-6xl">
+                  {PRODUCTS[activeTab].name}
+                </h3>
+              </div>
               <span className="mt-2 block text-[10px] font-bold text-[#ff0055] uppercase tracking-widest">
                 SPECTRE-{PRODUCTS[activeTab].id.toUpperCase()}
               </span>
             </Reveal>
 
             <Reveal delay={100}>
-              <p className="mt-8 text-lg font-medium text-[#8a8a8a] leading-relaxed">
+              <p className="mt-8 text-lg font-medium leading-relaxed text-[#8a8a8a]">
                 {PRODUCTS[activeTab].desc}
               </p>
             </Reveal>
 
             <Reveal delay={200} className="mt-10 flex flex-wrap gap-3">
-              <span className="px-4 py-1.5 bg-white/5 border border-white/10 text-[10px] font-bold text-white uppercase tracking-widest">VRPEX</span>
-              <span className="px-4 py-1.5 bg-white/5 border border-white/10 text-[10px] font-bold text-white uppercase tracking-widest">CREATIVE</span>
-              <span className="px-4 py-1.5 bg-white/5 border border-white/10 text-[10px] font-bold text-white uppercase tracking-widest">STANDALONE</span>
+              {["VRPEX", "CREATIVE", "STANDALONE"].map((tag) => (
+                <span key={tag} className="bg-white/5 border border-white/10 px-4 py-1.5 text-[10px] font-bold text-[#8a8a8a] uppercase tracking-widest hover:text-white transition-colors cursor-default">
+                  {tag}
+                </span>
+              ))}
             </Reveal>
 
             <Reveal delay={300} className="mt-12">
               <Link
                 to={PRODUCTS[activeTab].to}
-                className="ds-btn ds-btn-primary ds-btn-lg"
+                className="ds-btn ds-btn-primary ds-btn-lg w-full sm:w-auto"
               >
-                Quero este sistema <ArrowRight className="h-4 w-4" />
+                <Zap className="h-4 w-4" /> Quero este sistema <ArrowUpRight className="ml-1 h-3 w-3" />
               </Link>
-
             </Reveal>
           </div>
         </div>
+
       </div>
     </section>
   );
