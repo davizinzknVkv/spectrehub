@@ -895,7 +895,7 @@ function ReasonsSection() {
             <Reveal key={r.title} delay={i * 100}>
               <div className="group">
                 <div className="flex items-center gap-3 mb-6">
-                   <div className="h-8 w-8 rounded-sm bg-white/5 border border-white/10 flex items-center justify-center text-[#c5a059] group-hover:bg-[#c5a059] group-hover:text-white transition-all">
+                   <div className="h-8 w-8 rounded-sm bg-white/5 border border-white/10 flex items-center justify-center text-[#ff0055] group-hover:bg-[#ff0055] group-hover:text-white transition-all">
                       <r.icon className="h-4 w-4" />
                    </div>
                    <span className="text-[10px] font-bold text-[#444] uppercase tracking-widest">{r.title}</span>
@@ -938,13 +938,13 @@ function PlansSection() {
       <div className="mt-20 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         {PLANS.map((p, i) => (
           <Reveal key={p.name} delay={i * 100}>
-            <div className={`relative group border border-white/5 bg-white/[0.02] p-8 flex flex-col h-full transition-all hover:border-[#c5a059]/30 ${p.highlight ? 'ring-1 ring-[#c5a059]/50' : ''}`}>
+            <div className={`relative group border border-white/5 bg-white/[0.02] p-8 flex flex-col h-full transition-all hover:border-[#ff0055]/30 ${p.highlight ? 'ring-1 ring-[#ff0055]/50' : ''}`}>
               {p.highlight && (
-                <div className="absolute top-0 right-0 bg-[#c5a059] text-white text-[9px] font-bold px-3 py-1 uppercase tracking-widest">
+                <div className="absolute top-0 right-0 bg-[#ff0055] text-white text-[9px] font-bold px-3 py-1 uppercase tracking-widest">
                   Popular
                 </div>
               )}
-              <h3 className="text-[10px] font-bold text-[#c5a059] uppercase tracking-[0.3em] mb-4">{p.name}</h3>
+              <h3 className="text-[10px] font-bold text-[#ff0055] uppercase tracking-[0.3em] mb-4">{p.name}</h3>
               <div className="flex items-baseline gap-2 mb-8">
                 <span className="text-4xl font-display font-extrabold text-white tracking-tighter">{p.price}</span>
                 <span className="text-[10px] font-bold text-[#444] uppercase tracking-widest">/ {p.period}</span>
@@ -953,7 +953,7 @@ function PlansSection() {
               <div className="space-y-4 mb-10 flex-1">
                 {p.features.map(f => (
                   <div key={f} className="flex items-center gap-3">
-                    <Check className="h-3 w-3 text-[#c5a059]" />
+                    <Check className="h-3 w-3 text-[#ff0055]" />
                     <span className="text-xs font-medium text-[#8a8a8a]">{f}</span>
                   </div>
                 ))}
@@ -964,7 +964,7 @@ function PlansSection() {
                   Começar Grátis
                 </a>
               ) : (
-                <Link to="/hub" className={`text-center font-bold py-3 px-6 text-[11px] uppercase tracking-widest transition-all ${p.highlight ? 'bg-[#c5a059] text-white hover:bg-[#c5a059]/90' : 'bg-white/5 border border-white/10 text-white hover:bg-white/10'}`}>
+                <Link to="/hub" className={`text-center font-bold py-3 px-6 text-[11px] uppercase tracking-widest transition-all ${p.highlight ? 'bg-[#ff0055] text-white hover:bg-[#ff0055]/90' : 'bg-white/5 border border-white/10 text-white hover:bg-white/10'}`}>
                   {p.cta}
                 </Link>
               )}
@@ -1028,7 +1028,7 @@ function FreeSignup() {
                 "Informe o código no ticket. A staff libera o cargo Free na hora.",
               ].map((s, i) => (
                 <li key={s} className="flex gap-3 text-[13px] text-[#a0a0a0]">
-                  <span className="grid h-6 w-6 shrink-0 place-items-center rounded-md border border-white/[0.08] bg-white/[0.03] font-mono text-[10px] font-semibold text-[#c5a059]">
+                  <span className="grid h-6 w-6 shrink-0 place-items-center rounded-md border border-white/[0.08] bg-white/[0.03] font-mono text-[10px] font-semibold text-[#ff0055]">
                     {i + 1}
                   </span>
                   <span className="pt-0.5">{s}</span>
@@ -1049,7 +1049,7 @@ function FreeSignup() {
                     onChange={(e) => setName(e.target.value)}
                     maxLength={40}
                     required
-                    className="mt-2 w-full rounded-lg border border-white/[0.08] bg-white/[0.02] px-3 py-2.5 text-sm text-white outline-none transition placeholder:text-[#5a5a5a] focus:border-[#c5a059]/60"
+                    className="mt-2 w-full rounded-lg border border-white/[0.08] bg-white/[0.02] px-3 py-2.5 text-sm text-white outline-none transition placeholder:text-[#5a5a5a] focus:border-[#ff0055]/60"
                     placeholder="Ex: davizinzkn"
                   />
                 </label>
@@ -1062,7 +1062,7 @@ function FreeSignup() {
                     onChange={(e) => setDiscord(e.target.value)}
                     maxLength={40}
                     required
-                    className="mt-2 w-full rounded-lg border border-white/[0.08] bg-white/[0.02] px-3 py-2.5 text-sm text-white outline-none transition placeholder:text-[#5a5a5a] focus:border-[#c5a059]/60"
+                    className="mt-2 w-full rounded-lg border border-white/[0.08] bg-white/[0.02] px-3 py-2.5 text-sm text-white outline-none transition placeholder:text-[#5a5a5a] focus:border-[#ff0055]/60"
                     placeholder="@usuario"
                   />
                 </label>
@@ -1079,8 +1079,8 @@ function FreeSignup() {
                   <div className="font-mono text-[10px] uppercase tracking-[0.22em] text-[#6f6f6f]">
                     Seu código Free
                   </div>
-                  <div className="mt-2 flex items-center gap-2 rounded-lg border border-[#c5a059]/30 bg-[#c5a059]/[0.08] p-3">
-                    <code className="flex-1 font-mono text-lg font-bold tracking-[0.2em] text-[#c5a059]">
+                  <div className="mt-2 flex items-center gap-2 rounded-lg border border-[#ff0055]/30 bg-[#ff0055]/[0.08] p-3">
+                    <code className="flex-1 font-mono text-lg font-bold tracking-[0.2em] text-[#ff0055]">
                       {code}
                     </code>
                     <button
@@ -1089,7 +1089,7 @@ function FreeSignup() {
                       aria-label="Copiar código"
                       className="grid h-8 w-8 place-items-center rounded-md border border-white/10 bg-white/[0.04] text-[#a0a0a0] transition hover:text-white"
                     >
-                      {copied ? <Check className="h-4 w-4 text-[#c5a059]" /> : <Copy className="h-4 w-4" />}
+                      {copied ? <Check className="h-4 w-4 text-[#ff0055]" /> : <Copy className="h-4 w-4" />}
                     </button>
                   </div>
                 </div>
@@ -1184,7 +1184,7 @@ function CommunitySection() {
             {loop.slice(0, Math.ceil(loop.length / 2)).map((m, i) => (
               <div
                 key={`${m.id}-${i}`}
-                className="flex shrink-0 items-center gap-4 border border-white/5 bg-[#0a0a0a] py-3 pl-3 pr-8 transition-all hover:border-[#c5a059]/30"
+                className="flex shrink-0 items-center gap-4 border border-white/5 bg-[#0a0a0a] py-3 pl-3 pr-8 transition-all hover:border-[#ff0055]/30"
                 style={{
                   clipPath: "polygon(0 0, 92% 0, 100% 25%, 100% 100%, 8% 100%, 0% 75%)"
                 }}
@@ -1208,7 +1208,7 @@ function CommunitySection() {
             {loop.slice(Math.ceil(loop.length / 2)).map((m, i) => (
               <div
                 key={`${m.id}-${i}`}
-                className="flex shrink-0 items-center gap-4 border border-white/5 bg-[#0a0a0a] py-3 pl-3 pr-8 transition-all hover:border-[#c5a059]/30"
+                className="flex shrink-0 items-center gap-4 border border-white/5 bg-[#0a0a0a] py-3 pl-3 pr-8 transition-all hover:border-[#ff0055]/30"
                 style={{
                   clipPath: "polygon(0 0, 92% 0, 100% 25%, 100% 100%, 8% 100%, 0% 75%)"
                 }}
@@ -1231,8 +1231,8 @@ function CommunitySection() {
         <div className="mt-12 grid gap-6 lg:grid-cols-[1fr_380px] lg:items-center">
           <Reveal>
             <div className="border border-white/5 bg-[#0a0a0a] p-8 sm:p-10">
-              <div className="flex items-center gap-3 font-display text-[10px] font-bold uppercase tracking-[0.3em] text-[#c5a059]">
-                <span className="h-1.5 w-1.5 animate-pulse bg-[#c5a059]" /> Conexão Direta
+              <div className="flex items-center gap-3 font-display text-[10px] font-bold uppercase tracking-[0.3em] text-[#ff0055]">
+                <span className="h-1.5 w-1.5 animate-pulse bg-[#ff0055]" /> Conexão Direta
               </div>
               <h3 className="mt-6 font-display text-3xl font-extrabold tracking-tighter text-white sm:text-4xl">
                 SERVIDOR OFICIAL
@@ -1257,7 +1257,7 @@ function CommunitySection() {
                 href={GUILD_INVITE}
                 target="_blank"
                 rel="noreferrer"
-                className="mt-10 inline-flex items-center gap-3 bg-[#c5a059] px-8 py-4 font-display text-[11px] font-black uppercase tracking-[0.2em] text-white transition-all hover:bg-[#c5a059]/90"
+                className="mt-10 inline-flex items-center gap-3 bg-[#ff0055] px-8 py-4 font-display text-[11px] font-black uppercase tracking-[0.2em] text-white transition-all hover:bg-[#ff0055]/90"
               >
                 Entrar no Discord <ArrowRight className="h-4 w-4" />
               </a>
@@ -1293,7 +1293,7 @@ function MiniStat({
 }) {
   return (
     <div className="bg-[#0a0a0a] p-5">
-      <Icon className="h-4 w-4 text-[#c5a059]" />
+      <Icon className="h-4 w-4 text-[#ff0055]" />
       <div className="mt-4 truncate font-display text-lg font-black text-white">{value}</div>
       <div className="mt-1 font-display text-[9px] font-bold uppercase tracking-[0.2em] text-[#444]">
         {label}
@@ -1318,7 +1318,7 @@ function FinalCta() {
             Junte-se à elite e ative sua infraestrutura de automação hoje mesmo. Suporte direto com quem entende do assunto.
           </p>
           <div className="mt-12 flex flex-wrap items-center justify-center gap-4">
-            <a href={GUILD_INVITE} target="_blank" rel="noreferrer" className="bg-[#c5a059] text-white font-bold py-4 px-10 rounded-sm uppercase tracking-widest hover:bg-[#c5a059]/90 transition-all flex items-center gap-2">
+            <a href={GUILD_INVITE} target="_blank" rel="noreferrer" className="bg-[#ff0055] text-white font-bold py-4 px-10 rounded-sm uppercase tracking-widest hover:bg-[#ff0055]/90 transition-all flex items-center gap-2">
               <ArrowRight className="h-4 w-4" /> Abrir meu ticket agora
             </a>
             <Link to="/hub" className="bg-white/5 border border-white/10 text-white font-bold py-4 px-10 rounded-sm uppercase tracking-widest hover:bg-white/10 transition-all">
@@ -1348,7 +1348,7 @@ function SiteFooter() {
                 className="h-8 w-auto"
               />
               <span className="font-display text-[16px] font-extrabold tracking-tighter text-white uppercase">
-                Spectre<span className="opacity-40 ml-1.5 font-light">|</span><span className="text-[#c5a059] ml-1.5">HUB</span>
+                Spectre<span className="opacity-40 ml-1.5 font-light">|</span><span className="text-[#ff0055] ml-1.5">HUB</span>
               </span>
             </Link>
             <p className="mt-6 text-[10px] font-bold text-[#444] uppercase tracking-[0.2em] leading-loose">
