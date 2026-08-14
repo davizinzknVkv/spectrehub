@@ -1107,3 +1107,11 @@ textarea.ds-input { height: auto; padding: var(--sp-3); line-height: 1.6; }
   animation: spin-slow 8s linear infinite;
 }
 
+@utility pulse-dot {
+  animation: pulse-dot-key 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse-dot-key {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(0.8); }
+}
