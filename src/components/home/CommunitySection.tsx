@@ -139,7 +139,7 @@ export function CommunitySection({ widgetUrl, guildId, guildInvite, fallbackMemb
       {/* Marquee Members */}
       <div className="mt-32 pt-12 border-t border-white/5 overflow-hidden relative">
         <div className="mb-8 flex items-center gap-4">
-           <div className="font-display text-[9px] text-white uppercase italic tracking-[0.3em] whitespace-nowrap">
+           <div className="font-display text-[10px] text-spectre-pink uppercase italic tracking-[0.4em] whitespace-nowrap">
               USUÁRIOS QUE JÁ ESTÃO USANDO O Spectre Hub
            </div>
            <div className="h-px w-full bg-white/5" />
