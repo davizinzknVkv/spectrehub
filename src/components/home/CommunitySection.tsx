@@ -95,7 +95,7 @@ export function CommunitySection({ widgetUrl, guildId, guildInvite, fallbackMemb
               rel="noreferrer"
               className="ds-btn ds-btn-primary px-12"
             >
-              Entrar no Discord
+              Quero Usar o Spectre
             </a>
           </Reveal>
         </div>
