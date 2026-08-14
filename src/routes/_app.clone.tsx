@@ -137,7 +137,7 @@ function ClonePage() {
                 <h4 className="font-display text-[9px] uppercase tracking-widest italic font-bold">Importante</h4>
              </div>
              <ul className="space-y-3 text-[10px] text-white/40 uppercase tracking-[0.15em] font-sans italic leading-relaxed">
-                <li>• O Bot/Token deve ter permissão de "Gerenciar Servidor" em ambos os IDs.</li>
+                <li>• O Bot/Token deve ter permissão de "Gerenciar Servidor" apenas no servidor que vai receber.</li>
                 <li>• Serão copiados: Cargos, Categorias, Canais de Texto e Voz.</li>
                 <li>• Mensagens e membros não são transferidos por este protocolo.</li>
                 <li>• O processo pode levar tempo dependendo da complexidade do servidor.</li>
