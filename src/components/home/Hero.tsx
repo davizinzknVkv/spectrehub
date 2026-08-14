@@ -28,21 +28,21 @@ export function Hero({ guildInvite, fallbackMembers }: HeroProps) {
 
       <div className="mx-auto max-w-3xl text-center">
         <Reveal>
-          <span className="inline-flex items-center gap-3 rounded-full border border-white/5 bg-white/[0.02] px-4 py-1.5 font-mono text-[9px] uppercase tracking-[0.3em] text-[#8a8a8a] backdrop-blur-md">
-            <span className="h-1 w-1 rounded-full bg-[#ff0055] shadow-[0_0_8px_#ff0055]" />
-            Inovação · Produto & Tecnologia
+          <span className="inline-flex items-center gap-3 rounded-none border border-[#ff0055]/20 bg-[#ff0055]/5 px-5 py-2 font-mono text-[10px] uppercase tracking-[0.4em] text-[#ff0055] backdrop-blur-md">
+            <span className="h-1.5 w-1.5 animate-pulse bg-[#ff0055] shadow-[0_0_10px_#ff0055]" />
+            ESTADO DA ARTE · TECNOLOGIA DE ELITE
           </span>
         </Reveal>
 
         <Reveal delay={80}>
-          <h1 className="mt-8 font-display text-[2.6rem] font-extrabold leading-[0.95] tracking-tighter text-white xs:text-[3.2rem] sm:text-7xl lg:text-[6rem]">
+          <h1 className="mt-8 font-display text-[2.8rem] font-extrabold leading-[0.9] tracking-tighter text-white xs:text-[3.5rem] sm:text-7xl lg:text-[7rem]">
             A SPECTRE
             <br />
             CRIA.
             <br />
-            <span className="text-white">O MERCADO</span>
+            <span className="text-[#ff0055]">O MERCADO</span>
             <br />
-            <span className="bg-gradient-to-b from-white to-white/40 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-b from-white to-white/20 bg-clip-text text-transparent">
               COPIA.
             </span>
           </h1>
