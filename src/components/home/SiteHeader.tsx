@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "@tanstack/react-router";
-import { X, Menu, LogIn } from "lucide-react";
+import { X, Menu, LogIn, Search, Github, Twitter, Linkedin, ChevronDown } from "lucide-react";
 import logoAsset from "@/assets/spectre-logo-nobg.png.asset.json";
 
 interface SiteHeaderProps {
@@ -49,35 +49,58 @@ export function SiteHeader({ guildInvite }: SiteHeaderProps) {
         </Link>
 
         {/* Desktop Nav */}
-        <nav className="hidden md:flex items-center gap-10">
-          {NAV.map((n) => (
-            <a
-              key={n.href}
-              href={n.href}
-              className="font-display text-[10px] tracking-[0.3em] text-white/40 hover:text-white transition-colors uppercase italic"
-            >
-              {n.label}
-            </a>
-          ))}
-        </nav>
+        <div className="hidden md:flex items-center gap-8 flex-1 justify-center max-w-2xl px-8">
+          {/* Search Bar (image-80.png) */}
+          <div className="flex-1 relative group max-w-[300px]">
+            <div className="absolute inset-y-0 left-3 flex items-center pointer-events-none">
+              <Search className="w-3.5 h-3.5 text-white/20 group-hover:text-white/40 transition-colors" />
+            </div>
+            <input 
+              type="text" 
+              placeholder="Buscar" 
+              className="w-full bg-black/40 border border-white/5 py-1.5 pl-9 pr-12 text-[11px] text-white/60 placeholder:text-white/20 focus:outline-none focus:border-spectre-pink/30 focus:bg-black/60 transition-all rounded-md"
+            />
+            <div className="absolute inset-y-0 right-2 flex items-center">
+              <span className="text-[9px] text-white/20 border border-white/10 px-1 py-0.5 rounded bg-white/[0.02]">Ctrl K</span>
+            </div>
+          </div>
 
-        {/* Actions */}
+          <nav className="flex items-center gap-8">
+            {NAV.map((n) => (
+              <a
+                key={n.href}
+                href={n.href}
+                className="font-display text-[10px] tracking-[0.3em] text-white/40 hover:text-white transition-colors uppercase italic"
+              >
+                {n.label}
+              </a>
+            ))}
+          </nav>
+        </div>
+
+        {/* Actions & Socials (image-81.png) */}
         <div className="hidden md:flex items-center gap-6">
+          <div className="flex items-center gap-4 text-white/40 pr-6 border-r border-white/5">
+            <a href="#" className="hover:text-white transition-colors"><MessageSquare className="w-4 h-4" /></a>
+            <a href="#" className="hover:text-white transition-colors"><Github className="w-4 h-4" /></a>
+            <a href="#" className="hover:text-white transition-colors"><Twitter className="w-4 h-4" /></a>
+            <a href="#" className="hover:text-white transition-colors"><Linkedin className="w-4 h-4" /></a>
+          </div>
+
+          <div className="flex items-center gap-2 px-3 py-1.5 bg-black/40 border border-white/5 rounded-md text-white/60 hover:border-white/10 transition-colors cursor-pointer group">
+            <div className="w-4 h-4 rounded-full overflow-hidden border border-white/10">
+              <img src="https://flagcdn.com/w40/br.png" alt="BR" className="w-full h-full object-cover" />
+            </div>
+            <ChevronDown className="w-3 h-3 text-white/20 group-hover:text-white/40" />
+          </div>
+
           <Link 
             to="/hub" 
-            className="font-display text-[10px] tracking-[0.3em] text-white/40 hover:text-white transition-colors uppercase italic flex items-center gap-2"
+            className="ds-btn ds-btn-primary !py-2 !px-5 !text-[9px] flex items-center gap-2"
           >
             <LogIn className="w-3 h-3" />
-            Painel
+            Acessar Spectre
           </Link>
-          <a
-            href={guildInvite}
-            target="_blank"
-            rel="noreferrer"
-            className="ds-btn ds-btn-primary !py-2.5 !px-6 !text-[9px]"
-          >
-            Quero Usar o Spectre
-          </a>
         </div>
 
         {/* Mobile Toggle */}
