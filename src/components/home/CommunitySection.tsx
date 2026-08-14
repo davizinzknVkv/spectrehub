@@ -62,18 +62,20 @@ export function CommunitySection({ widgetUrl, guildId, guildInvite, fallbackMemb
   const loop = [...list, ...list];
 
   return (
-    <section id="comunidade" className="border-t border-white/[0.06] bg-white/[0.012]">
-      <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 sm:py-28 lg:px-8">
+    <section id="comunidade" className="border-t border-white/[0.08] bg-[#030303]">
+      <div className="mx-auto max-w-7xl px-4 py-24 sm:px-6 sm:py-32 lg:px-8">
         <Reveal>
-          <div className="max-w-2xl">
-            <span className="inline-flex items-center gap-2 font-mono text-[9px] uppercase tracking-[0.3em] text-[#ff0055]">
-              <span className="h-1 w-1 bg-[#ff0055]" /> Ecossistema Exclusivo
+          <div className="max-w-3xl">
+            <span className="inline-flex items-center gap-3 font-mono text-[10px] uppercase tracking-[0.45em] text-[#ff0055] font-black">
+              <span className="h-2 w-2 rounded-full bg-[#ff0055] shadow-[0_0_10px_#ff0055]" /> ECOSSISTEMA
             </span>
-            <h2 className="mt-4 font-display text-3xl font-extrabold tracking-[-0.03em] text-white sm:text-[2.6rem]">
-              Conecte-se com a Elite.
+            <h2 className="mt-8 font-display text-[2.8rem] font-[900] leading-[0.9] tracking-tighter text-white sm:text-7xl lg:text-[5.5rem] uppercase italic">
+              JUNTE-SE
+              <br />
+              À ELITE.
             </h2>
-            <p className="mt-3 text-sm text-[#8a8a8a]">
-              Suporte por ticket, avisos de update, canais de farm e gente online o dia inteiro.
+            <p className="mt-10 text-[18px] font-medium text-[#8a8a8a] leading-[1.6] max-w-xl">
+              Suporte técnico de alta performance, atualizações em tempo real e uma comunidade ativa que define os novos padrões do mercado.
             </p>
           </div>
         </Reveal>
@@ -89,12 +91,9 @@ export function CommunitySection({ widgetUrl, guildId, guildInvite, fallbackMemb
             {loop.slice(0, Math.ceil(loop.length / 2)).map((m, i) => (
               <div
                 key={`${m.id}-${i}`}
-                className="flex shrink-0 items-center gap-4 border border-white/5 bg-[#0a0a0a] py-3 pl-3 pr-8 transition-all hover:border-[#ff0055]/30"
-                style={{
-                  clipPath: "polygon(0 0, 92% 0, 100% 25%, 100% 100%, 8% 100%, 0% 75%)"
-                }}
+                className="flex shrink-0 items-center gap-4 border border-white/10 bg-[#080808]/60 backdrop-blur-sm py-4 pl-4 pr-10 transition-all duration-500 hover:border-[#ff0055]/50 hover:bg-[#0c0c0c]/80 rounded-full group"
               >
-                <div className="h-10 w-10 overflow-hidden bg-white/5">
+                <div className="h-12 w-12 overflow-hidden rounded-full bg-white/10 ring-2 ring-white/5 group-hover:ring-[#ff0055]/30 transition-all">
                   {m.avatar ? (
                     <img src={m.avatar} alt="" loading="lazy" className="h-full w-full object-cover grayscale" />
                   ) : (
