@@ -137,7 +137,8 @@ export function CommunitySection({ widgetUrl, guildId, guildInvite, fallbackMemb
       </div>
 
       {/* Marquee Members */}
-      <div className="mt-32 pt-12 border-t border-white/5 overflow-hidden relative">
+      <div className="mt-32 pt-12 border-t border-white/5 overflow-hidden relative bg-[#050505]/50">
+        <div className="absolute inset-0 opacity-[0.03] pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle, #fff 1px, transparent 1px)', backgroundSize: '24px 24px' }} />
         <div className="mb-8 flex items-center gap-4">
            <div className="font-display text-[10px] text-spectre-pink uppercase italic tracking-[0.4em] whitespace-nowrap">
               USUÁRIOS QUE JÁ ESTÃO USANDO O Spectre Hub
