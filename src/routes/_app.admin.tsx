@@ -89,7 +89,7 @@ function AdminPage() {
       setPreviews(data.previews as Preview[]);
       setFeatures(data.features as Feature[]);
     } catch {
-      toast.error("Falha na sincronização.");
+      toast.error("Falha na Sincronização", { description: "Não foi possível carregar os dados do terminal." });
     } finally {
       setLoading(false);
     }
@@ -153,7 +153,7 @@ function PreviewsTab({ token, rows, setRows, reload, loading }: any) {
   const save = async (row: Preview) => {
     try {
       await adminSavePreview({ data: { token, preview: row } });
-      toast.success("Build salva.");
+      toast.success("Commit Realizado", { description: "As alterações foram salvas com sucesso." });
       await reload();
     } catch { toast.error("Falha no commit."); }
   };
@@ -215,7 +215,7 @@ function PlansTab({ token, rows, setRows, reload }: any) {
   const save = async (row: Plan) => {
     try {
       await adminSavePlan({ data: { token, plan: row } });
-      toast.success("Plano sincronizado.");
+      toast.success("Plano Sincronizado", { description: "Alterações de nível enviadas para o sistema." });
       await reload();
     } catch { toast.error("Erro no deploy."); }
   };
@@ -269,7 +269,7 @@ function FeaturesTab({ token, rows, setRows, reload }: any) {
   const save = async (row: Feature) => {
     try {
       await adminSaveFeature({ data: { token, feature: row } });
-      toast.success("Protocolo atualizado.");
+      toast.success("Protocolo Atualizado", { description: "Configurações de função salvas." });
       await reload();
     } catch { toast.error("Falha na atualização."); }
   };

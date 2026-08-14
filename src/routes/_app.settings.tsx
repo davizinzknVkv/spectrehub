@@ -42,7 +42,7 @@ function SettingsPage() {
       setCreds({ token: token.trim() });
       const user = await fetchUserInfoDetailed();
       if (!user.ok) throw new Error("Token inválido ou expirado");
-      toast.success(`Conectado como ${user.data.username}`);
+      toast.success("Acesso Validado", { description: `Conectado como ${user.data.username}` });
     } catch (err) {
       toast.error(err instanceof Error ? err.message : "Falha ao validar");
     } finally {
@@ -131,7 +131,7 @@ function SettingsPage() {
                 setCreds(null);
                 setToken("");
                 setConfirmDisconnect(false);
-                toast.success("Terminal limpo.");
+                toast.success("Sessão Encerrada", { description: "Terminal limpo e desconectado." });
               }}>Encerrar</button>
             </div>
           }
