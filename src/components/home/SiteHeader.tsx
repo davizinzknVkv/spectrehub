@@ -30,11 +30,11 @@ export function SiteHeader({ guildInvite }: SiteHeaderProps) {
     <header
       className={`sticky top-0 z-50 w-full transition-[background,border-color,backdrop-filter] duration-300 ${
         scrolled
-          ? "border-b border-[#ff0055] bg-[#030303]/90 backdrop-blur-2xl shadow-[0_0_20px_rgba(255,0,85,0.1)]"
-          : "border-b border-[#ff0055] bg-[#030303]"
+          ? "bg-[#030303]/80 backdrop-blur-2xl"
+          : "bg-transparent"
       }`}
     >
-      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8 overflow-hidden">
+      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-4 px-6 lg:px-12 bg-[#080808]/90 backdrop-blur-md rounded-full mt-4 border border-white/5 mx-4 sm:mx-6 shadow-2xl shadow-black/50">
         <Link to="/" className="flex min-w-0 items-center gap-2.5">
           <img
             src={logoAsset.url}
@@ -46,24 +46,29 @@ export function SiteHeader({ guildInvite }: SiteHeaderProps) {
           </span>
         </Link>
 
-        <nav className="hidden items-center gap-10 md:flex">
+        <nav className="hidden items-center gap-8 md:flex">
           {NAV.map((n) => (
             <a
               key={n.href}
               href={n.href}
-              className="text-[11px] font-bold text-[#8a8a8a] transition-colors duration-200 hover:text-white uppercase tracking-[0.2em]"
+              className="text-[13px] font-medium text-[#8a8a8a] transition-colors duration-200 hover:text-white"
             >
               {n.label}
             </a>
           ))}
         </nav>
 
-        <div className="hidden items-center gap-2 md:flex">
-          <Link to="/hub" className="ds-btn ds-btn-secondary">
-            <ArrowRight className="h-3.5 w-3.5" /> Entrar
+        <div className="hidden items-center gap-6 md:flex">
+          <Link to="/hub" className="text-[13px] font-medium text-white hover:opacity-80 transition-opacity">
+            Log in
           </Link>
-          <a href={guildInvite} target="_blank" rel="noreferrer" className="ds-btn ds-btn-primary">
-            <ArrowRight className="h-3.5 w-3.5" /> Abrir Ticket
+          <a 
+            href={guildInvite} 
+            target="_blank" 
+            rel="noreferrer" 
+            className="flex items-center gap-2 bg-white text-black px-5 py-2.5 rounded-xl font-bold text-[13px] hover:bg-white/90 transition-colors"
+          >
+            <ArrowRight className="h-4 w-4" /> Download
           </a>
         </div>
 
