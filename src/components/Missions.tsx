@@ -79,7 +79,7 @@ export function MissionCard({
 
   return (
     <Card className={cn(
-      "group relative flex min-h-[140px] flex-col justify-between transition-all duration-300 !p-4 border-white/5 bg-[#050505] hover:bg-[#080808]",
+      "group relative flex min-h-[160px] flex-col justify-between transition-all duration-300 !p-4 border-white/5 bg-[#050505] hover:bg-[#080808] h-full",
       active ? "border-[#ff0055]/40" : "hover:border-white/10"
     )}>
       {quest.imageUrl && (

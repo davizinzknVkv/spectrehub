@@ -55,7 +55,7 @@ export function Hero({ guildInvite, fallbackMembers }: HeroProps) {
         </Reveal>
 
         <Reveal delay={240}>
-          <div className="mt-9 flex flex-wrap items-center justify-center gap-4">
+          <div className="mt-9 flex flex-wrap items-center justify-center gap-4 sm:flex-nowrap">
             <a href="#produtos" className="ds-btn ds-btn-primary ds-btn-lg">
               <span className="flex items-center gap-2"><ArrowRight className="h-4 w-4 shrink-0" /> QUERO USAR O SPECTRE</span>
             </a>

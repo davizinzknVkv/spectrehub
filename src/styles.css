@@ -115,6 +115,8 @@
   transition: all 0.4s cubic-bezier(0.2, 0, 0, 1);
   position: relative;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
 
   &:hover {
     border-color: rgba(255, 0, 85, 0.2);
@@ -149,6 +151,8 @@
   cursor: pointer;
   position: relative;
   overflow: hidden;
+  white-space: nowrap;
+  min-width: fit-content;
   clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
 
   &:disabled {
