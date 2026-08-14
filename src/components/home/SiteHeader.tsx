@@ -59,7 +59,7 @@ export function SiteHeader({ guildInvite }: SiteHeaderProps) {
             <a
               key={n.href}
               href={n.href}
-              className="text-[13px] font-bold text-white/70 transition-all duration-200 hover:text-white hover:scale-105"
+              className="text-[13px] font-bold text-white/50 transition-all duration-300 hover:text-white hover:scale-110 tracking-widest uppercase"
             >
               {n.label}
             </a>
