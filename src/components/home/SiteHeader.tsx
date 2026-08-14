@@ -63,9 +63,9 @@ export function SiteHeader({ guildInvite }: SiteHeaderProps) {
         </nav>
 
         <div className="hidden items-center gap-4 md:flex relative z-10">
-          <div className="flex items-center gap-2">
-            <span className="text-[13px] font-black text-white">euvictors2</span>
-            <span className="text-[10px] font-medium text-white/40 -mt-1 block">@euvictors2</span>
+          <div className="flex flex-col items-end">
+            <span className="text-[13px] font-black text-white leading-none">euvictors2</span>
+            <span className="text-[10px] font-medium text-white/40 block">@euvictors2</span>
           </div>
           
           <div className="relative h-9 w-9 overflow-hidden rounded-full border border-white/10 ring-2 ring-[#ff0055]/20">
