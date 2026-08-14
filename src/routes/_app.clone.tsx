@@ -60,7 +60,7 @@ function ClonePage() {
     <div className="page-stack">
       <PageHeader 
         title="Discord Tools" 
-        subtitle="Ferramentas avançadas de gestão e automação"
+        description="Ferramentas avançadas de gestão e automação"
       />
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
