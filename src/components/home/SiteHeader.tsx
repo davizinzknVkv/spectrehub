@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "@tanstack/react-router";
-import { X, Menu, LogIn, Search, Github, Twitter, Linkedin, ChevronDown } from "lucide-react";
+import { X, Menu, LogIn, Search, Github, Twitter, Linkedin, ChevronDown, MessageSquare } from "lucide-react";
 import logoAsset from "@/assets/spectre-logo-nobg.png.asset.json";
 
 interface SiteHeaderProps {
