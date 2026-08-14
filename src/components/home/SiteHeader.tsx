@@ -54,12 +54,12 @@ export function SiteHeader({ guildInvite }: SiteHeaderProps) {
           </span>
         </Link>
 
-        <nav className="hidden items-center gap-8 md:flex relative z-10">
+        <nav className="hidden items-center gap-8 md:flex absolute left-1/2 -translate-x-1/2 z-10">
           {NAV.map((n) => (
             <a
               key={n.href}
               href={n.href}
-              className="text-[13px] font-bold text-white/60 transition-all duration-200 hover:text-white hover:scale-105"
+              className="text-[13px] font-bold text-white/70 transition-all duration-200 hover:text-white hover:scale-105"
             >
               {n.label}
             </a>
