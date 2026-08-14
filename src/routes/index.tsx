@@ -70,13 +70,13 @@ function Index() {
     >
       <div aria-hidden className="pointer-events-none fixed inset-0 -z-10">
         <div
-          className="absolute inset-0 opacity-[0.03]"
+          className="absolute inset-0 opacity-[0.05]"
           style={{
             backgroundImage: `linear-gradient(#fff 1px, transparent 1px), linear-gradient(90deg, #fff 1px, transparent 1px)`,
-            backgroundSize: '40px 40px'
+            backgroundSize: '64px 64px'
           }}
         />
-        <div className="absolute inset-0 bg-[#030303]/40 backdrop-blur-[100px]" />
+        <div className="absolute inset-0 bg-[#030303]/60 backdrop-blur-[120px]" />
       </div>
 
       <SiteHeader guildInvite={GUILD_INVITE} />

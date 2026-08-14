@@ -43,64 +43,68 @@ export function FreeSignup({ guildInvite }: FreeSignupProps) {
   return (
     <section id="free" className="mx-auto max-w-7xl px-4 py-20 sm:px-6 sm:py-28 lg:px-8">
       <Reveal>
-        <div className="grid gap-10 rounded-2xl border border-white/[0.07] bg-[#030303]/70 p-7 backdrop-blur-xl md:grid-cols-[1.05fr_0.95fr] md:p-12">
+        <div className="grid gap-12 rounded-[40px] border border-white/10 bg-[#080808]/40 p-8 backdrop-blur-xl md:grid-cols-[1.1fr_0.9fr] md:p-16 shadow-2xl">
           <div>
-            <span className="inline-flex items-center gap-2 font-mono text-[9px] uppercase tracking-[0.3em] text-[#ff0055]">
-              <span className="h-1 w-1 bg-[#ff0055]" /> Acesso Comunitário
+            <span className="inline-flex items-center gap-3 font-mono text-[10px] uppercase tracking-[0.4em] text-[#ff0055] font-black">
+              <span className="h-2 w-2 rounded-full bg-[#ff0055] shadow-[0_0_10px_#ff0055]" /> COMUNIDADE
             </span>
-            <h2 className="mt-4 font-display text-2xl font-extrabold tracking-[-0.03em] text-white sm:text-4xl">
-              Habilite seu Acesso Gratuito em Segundos.
+            <h2 className="mt-8 font-display text-3xl font-[900] leading-[1] tracking-tighter text-white sm:text-5xl lg:text-6xl uppercase">
+              COMECE SUA
+              <br />
+              JORNADA
+              <br />
+              GRATUITA.
             </h2>
-            <ol className="mt-8 space-y-4">
+            <ol className="mt-12 space-y-6">
               {[
-                "Preencha o formulário — geramos um código único pra você.",
-                "Entre no servidor e abra um ticket no canal de suporte.",
-                "Informe o código no ticket. A staff libera o cargo Free na hora.",
+                "Preencha os dados e gere seu identificador único.",
+                "Junte-se ao nosso ecossistema oficial no Discord.",
+                "Autentique-se via suporte para liberar suas ferramentas."
               ].map((s, i) => (
-                <li key={s} className="flex gap-3 text-[13px] text-[#a0a0a0]">
-                  <span className="grid h-6 w-6 shrink-0 place-items-center rounded-md border border-white/[0.08] bg-white/[0.03] font-mono text-[10px] font-semibold text-[#ff0055]">
+                <li key={s} className="flex gap-5 text-[15px] font-medium text-white/60 leading-tight">
+                  <span className="grid h-10 w-10 shrink-0 place-items-center rounded-full border border-white/10 bg-white/5 font-display text-[14px] font-black text-white shadow-sm">
                     {i + 1}
                   </span>
-                  <span className="pt-0.5">{s}</span>
+                  <span className="pt-2">{s}</span>
                 </li>
               ))}
             </ol>
           </div>
 
-          <div className="rounded-xl border border-white/[0.07] bg-white/[0.02] p-6">
+          <div className="rounded-[32px] border border-white/10 bg-white/[0.03] p-8 sm:p-10 shadow-inner">
             {!code ? (
-              <form onSubmit={generate} className="space-y-4">
-                <label className="block">
-                  <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-[#6f6f6f]">
-                    Seu nome
+              <form onSubmit={generate} className="space-y-6">
+                <div className="space-y-2">
+                  <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-white/40 font-black">
+                    IDENTIFICAÇÃO
                   </span>
                   <input
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     maxLength={40}
                     required
-                    className="mt-2 w-full rounded-lg border border-white/[0.08] bg-white/[0.02] px-3 py-2.5 text-sm text-white outline-none transition placeholder:text-[#5a5a5a] focus:border-[#ff0055]/60"
-                    placeholder="Ex: davizinzkn"
+                    className="w-full rounded-2xl border border-white/10 bg-black/40 px-5 py-4 text-sm text-white outline-none transition-all duration-300 placeholder:text-white/20 focus:border-[#ff0055]/50 focus:ring-1 focus:ring-[#ff0055]/50"
+                    placeholder="Seu nome ou apelido"
                   />
-                </label>
-                <label className="block">
-                  <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-[#6f6f6f]">
-                    Seu usuário do Discord
+                </div>
+                <div className="space-y-2">
+                  <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-white/40 font-black">
+                    USUÁRIO DISCORD
                   </span>
                   <input
                     value={discord}
                     onChange={(e) => setDiscord(e.target.value)}
                     maxLength={40}
                     required
-                    className="mt-2 w-full rounded-lg border border-white/[0.08] bg-white/[0.02] px-3 py-2.5 text-sm text-white outline-none transition placeholder:text-[#5a5a5a] focus:border-[#ff0055]/60"
+                    className="w-full rounded-2xl border border-white/10 bg-black/40 px-5 py-4 text-sm text-white outline-none transition-all duration-300 placeholder:text-white/20 focus:border-[#ff0055]/50 focus:ring-1 focus:ring-[#ff0055]/50"
                     placeholder="@usuario"
                   />
-                </label>
-                <button type="submit" className="ds-btn ds-btn-primary w-full py-3">
-                  Gerar meu código Free
+                </div>
+                <button type="submit" className="ds-btn ds-btn-primary rounded-full w-full py-2 shadow-xl shadow-[#ff0055]/20">
+                  GERAR CÓDIGO DE ACESSO
                 </button>
-                <p className="text-[11px] leading-relaxed text-[#6f6f6f]">
-                  O código fica salvo no seu navegador para você abrir o ticket quando quiser.
+                <p className="text-[11px] leading-relaxed text-white/30 text-center font-medium">
+                  Seus dados são processados localmente e criptografados.
                 </p>
               </form>
             ) : (
@@ -109,8 +113,8 @@ export function FreeSignup({ guildInvite }: FreeSignupProps) {
                   <div className="font-mono text-[10px] uppercase tracking-[0.22em] text-[#6f6f6f]">
                     Seu código Free
                   </div>
-                  <div className="mt-2 flex items-center gap-2 rounded-lg border border-[#ff0055]/30 bg-[#ff0055]/[0.08] p-3">
-                    <code className="flex-1 font-mono text-lg font-bold tracking-[0.2em] text-[#ff0055]">
+                  <div className="mt-4 flex items-center gap-2 rounded-2xl border border-[#ff0055]/30 bg-[#ff0055]/[0.08] p-5 shadow-inner">
+                    <code className="flex-1 font-mono text-2xl font-black tracking-[0.2em] text-[#ff0055]">
                       {code}
                     </code>
                     <button
@@ -130,9 +134,9 @@ export function FreeSignup({ guildInvite }: FreeSignupProps) {
                   href={guildInvite}
                   target="_blank"
                   rel="noreferrer"
-                  className="ds-btn ds-btn-primary w-full py-3"
+                  className="ds-btn ds-btn-primary rounded-full w-full py-2 shadow-xl shadow-[#ff0055]/20"
                 >
-                  Ir pro servidor abrir ticket <ArrowRight className="h-4 w-4" />
+                  AUTENTICAR NO DISCORD <ArrowRight className="h-4 w-4 ml-2" />
                 </a>
                 <button
                   type="button"

@@ -46,49 +46,50 @@ function FooterCol({
 
 export function SiteFooter({ guildInvite }: SiteFooterProps) {
   return (
-    <footer className="bg-[#050505] border-t border-white/5 pt-20 pb-10">
+    <footer className="bg-[#030303] border-t border-white/10 pt-32 pb-16">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col lg:flex-row justify-between gap-16">
+        <div className="flex flex-col lg:flex-row justify-between gap-20">
           <div className="max-w-xs">
-            <Link to="/" className="flex items-center gap-2.5">
+            <Link to="/" className="flex items-center gap-3">
               <img
                 src={logoAsset.url}
                 alt="Spectre Hub"
-                width={32}
-                height={32}
-                className="h-8 w-auto"
+                width={36}
+                height={36}
+                className="h-9 w-auto"
               />
-              <span className="font-display text-[16px] font-extrabold tracking-tighter text-white uppercase">
-                Spectre<span className="opacity-40 ml-1.5 font-light">|</span><span className="text-[#ff0055] ml-1.5">HUB</span>
+              <span className="font-display text-[20px] font-[900] tracking-tighter text-white uppercase italic">
+                SPECTRE<span className="text-[#ff0055]">HUB</span>
               </span>
             </Link>
-            <p className="mt-6 text-[10px] font-bold text-[#444] uppercase tracking-[0.2em] leading-loose">
-              INOVAÇÃO · PRODUTO & TECNOLOGIA
+            <p className="mt-10 text-[11px] font-black text-white/30 uppercase tracking-[0.3em] leading-[1.8]">
+              DOMÍNIO E TECNOLOGIA
               <br />
-              Feito por jogadores, para servidores que levam a sério.
+              FEITO POR ELITES, PARA SERVIDORES QUE BUSCAM A PERFEIÇÃO.
             </p>
           </div>
 
           <div className="grid grid-cols-2 gap-12 sm:grid-cols-3">
             <FooterCol
-              title="HUB"
+              title="SISTEMA"
               links={[
                 { label: "Sistemas", href: "#produtos" },
-                { label: "Por que HUB", href: "#recursos" },
-                { label: "Servidores", href: "#comunidade" },
+                { label: "Recursos", href: "#recursos" },
+                { label: "Planos", href: "#planos" },
               ]}
             />
             <FooterCol
-              title="CLIENTE"
+              title="PAINEL"
               links={[
                 { label: "Entrar", href: "/hub" },
-                { label: "Abrir ticket", href: guildInvite, external: true },
+                { label: "Comunidade", href: guildInvite, external: true },
               ]}
             />
             <FooterCol
-              title="COMUNIDADE"
+              title="LEGAL"
               links={[
-                { label: "Discord", href: guildInvite, external: true },
+                { label: "Privacidade", href: "#" },
+                { label: "Termos", href: "#" },
               ]}
             />
           </div>
