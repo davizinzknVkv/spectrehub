@@ -29,7 +29,7 @@ export function PlansSection({ plans }: PlansSectionProps) {
       <div className="mt-20 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         {plans.map((p, i) => (
           <Reveal key={p.name} delay={i * 100}>
-            <div className={`relative group border border-white/5 bg-white/[0.01] p-10 flex flex-col h-full transition-all duration-500 hover:border-[#ff0055]/40 hover:bg-white/[0.03] hover:-translate-y-2 ${p.highlight ? 'ring-1 ring-[#ff0055]/30 bg-white/[0.03]' : ''}`}>
+            <div className={`relative group border border-white/5 bg-white/[0.01] p-10 flex flex-col h-full transition-all duration-500 hover:border-[#ff0055]/40 hover:bg-white/[0.03] hover:-translate-y-2 ${p.highlight ? 'ring-1 ring-[#ff0055]/30 bg-white/[0.03]' : ''}`} style={{ clipPath: "polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px)" }}>
               {p.highlight && (
                 <div className="absolute top-0 right-0 bg-[#ff0055] text-white text-[9px] font-bold px-3 py-1 uppercase tracking-widest">
                   Popular
@@ -51,11 +51,11 @@ export function PlansSection({ plans }: PlansSectionProps) {
               </div>
 
               {p.name === "Free" ? (
-                <a href="#free" className="text-center bg-white/5 border border-white/10 text-white font-bold py-3 px-6 text-[11px] uppercase tracking-widest hover:bg-white/10 transition-all">
+                <a href="#free" className="ds-btn ds-btn-secondary w-full">
                   Começar Grátis
                 </a>
               ) : (
-                <Link to="/hub" className={`text-center font-bold py-3 px-6 text-[11px] uppercase tracking-widest transition-all ${p.highlight ? 'bg-[#ff0055] text-white hover:bg-[#ff0055]/90' : 'bg-white/5 border border-white/10 text-white hover:bg-white/10'}`}>
+                <Link to="/hub" className={p.highlight ? "ds-btn ds-btn-primary w-full" : "ds-btn ds-btn-secondary w-full"}>
                   {p.cta}
                 </Link>
               )}
