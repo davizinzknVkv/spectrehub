@@ -56,7 +56,7 @@ function ClonePage() {
     }
 
     setLoading(true);
-    toast.info("Iniciando clonagem... Isso pode levar alguns minutos.");
+    toast.loading("Iniciando clonagem...", { description: "Isso pode levar alguns minutos." });
 
     try {
       const res = await runClone({
