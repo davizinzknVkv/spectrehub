@@ -875,52 +875,51 @@ function ReasonsSection() {
 
 function PlansSection() {
   return (
-    <section id="sobre" className="mx-auto max-w-7xl px-4 py-24 sm:px-6 sm:py-32 lg:px-8">
-      <div className="max-w-4xl">
+    <section id="sobre" className="mx-auto max-w-[1216px] px-6 py-40 border-t border-graphite">
+      <div className="text-center mb-24">
         <Reveal>
-          <h2 className="font-display text-4xl font-extrabold leading-[0.95] tracking-tighter text-white sm:text-7xl">
-            SISTEMAS PARA
-            <br />
-            QUEM LEVA A
-            <br />
-            SÉRIO.
+          <span className="text-eyebrow font-semibold uppercase tracking-widest text-accent mb-4 block">Planos e Acesso</span>
+          <h2 className="font-display text-[44px] font-medium leading-[1.1] text-white sm:text-[64px]">
+            Acesso exclusivo para<br />operadores de elite.
           </h2>
-          <p className="mt-8 text-lg font-medium text-[#8a8a8a] leading-relaxed max-w-xl">
-            O plano é detectado pelo seu cargo no Discord — se expirar, o hub volta pro Free automaticamente.
+        </Reveal>
+        <Reveal delay={100}>
+          <p className="mx-auto mt-6 max-w-2xl text-body-sm text-fog">
+            O plano é detectado automaticamente pelo seu cargo no Discord. Sem atritos, sem interrupções.
           </p>
         </Reveal>
       </div>
 
-      <div className="mt-20 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         {PLANS.map((p, i) => (
           <Reveal key={p.name} delay={i * 100}>
-            <div className={`relative group border border-white/5 bg-white/[0.02] p-8 flex flex-col h-full transition-all hover:border-[#ff0055]/30 ${p.highlight ? 'ring-1 ring-[#ff0055]/50' : ''}`}>
+            <div className={`relative group rounded-xl border border-white/[0.04] bg-onyx/40 p-10 flex flex-col h-full transition-all hover:border-accent/30 ${p.highlight ? 'ring-1 ring-accent/20' : ''}`}>
               {p.highlight && (
-                <div className="absolute top-0 right-0 bg-[#ff0055] text-white text-[9px] font-bold px-3 py-1 uppercase tracking-widest">
+                <div className="absolute top-0 right-10 -translate-y-1/2 bg-white text-black text-[10px] font-bold px-4 py-1 rounded-full uppercase tracking-widest">
                   Popular
                 </div>
               )}
-              <h3 className="text-[10px] font-bold text-[#ff0055] uppercase tracking-[0.3em] mb-4">{p.name}</h3>
-              <div className="flex items-baseline gap-2 mb-8">
-                <span className="text-4xl font-display font-extrabold text-white tracking-tighter">{p.price}</span>
-                <span className="text-[10px] font-bold text-[#444] uppercase tracking-widest">/ {p.period}</span>
+              <span className="text-eyebrow font-bold text-accent uppercase tracking-[0.2em] mb-4 block">{p.name}</span>
+              <div className="flex items-baseline gap-2 mb-10">
+                <span className="text-[44px] font-display font-medium text-white tracking-tight">{p.price}</span>
+                <span className="text-eyebrow font-medium text-steel uppercase tracking-widest">/ {p.period}</span>
               </div>
               
-              <div className="space-y-4 mb-10 flex-1">
+              <div className="space-y-5 mb-12 flex-1">
                 {p.features.map(f => (
-                  <div key={f} className="flex items-center gap-3">
-                    <Check className="h-3 w-3 text-[#ff0055]" />
-                    <span className="text-xs font-medium text-[#8a8a8a]">{f}</span>
+                  <div key={f} className="flex items-start gap-3">
+                    <Check className="h-4 w-4 text-accent mt-0.5" />
+                    <span className="text-[14px] text-fog leading-snug">{f}</span>
                   </div>
                 ))}
               </div>
 
               {p.name === "Free" ? (
-                <a href="#free" className="text-center bg-white/5 border border-white/10 text-white font-bold py-3 px-6 text-[11px] uppercase tracking-widest hover:bg-white/10 transition-all">
+                <a href="#free" className="text-center bg-transparent border border-white/10 text-white font-medium py-3 px-6 rounded-full text-[13px] uppercase tracking-widest hover:border-white/30 transition-all">
                   Começar Grátis
                 </a>
               ) : (
-                <Link to="/hub" className={`text-center font-bold py-3 px-6 text-[11px] uppercase tracking-widest transition-all ${p.highlight ? 'bg-[#ff0055] text-white hover:bg-[#ff0055]/90' : 'bg-white/5 border border-white/10 text-white hover:bg-white/10'}`}>
+                <Link to="/hub" className={`text-center font-medium py-3 px-6 rounded-full text-[13px] uppercase tracking-widest transition-all ${p.highlight ? 'bg-white text-black hover:opacity-90' : 'bg-transparent border border-white/10 text-white hover:border-white/30'}`}>
                   {p.cta}
                 </Link>
               )}
