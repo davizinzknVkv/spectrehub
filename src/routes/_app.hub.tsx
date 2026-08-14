@@ -158,7 +158,7 @@ function HubPage() {
                 <Skeleton className="w-full h-full" />
               ) : user?.avatar ? (
                 <img 
-                  src={`https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png?size=256`} 
+                  src={`https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.${user.avatar.startsWith('a_') ? 'gif' : 'png'}?size=256`} 
                   className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
                   alt={user.username}
                 />
