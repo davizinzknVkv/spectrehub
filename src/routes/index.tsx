@@ -1,26 +1,6 @@
 /**
- * Antes de realizar qualquer ação, entenda o contexto e instrução recente do usuário, comando mais recente enviado por ele: ```txt
-## Restilização da Interface e Mudança de Nome do Site
-
-**Objetivo:**
-Restilizar completamente a interface do site e renomeá-lo de "Neighbord" para "Spectre Hub". O site deve se tornar a referência em UI para o nicho de "SI" (Sistemas de Informação ou similar).
-
-**Referência de UI:**
-O site `corenetwork.dev` servirá como inspiração principal para o novo design e experiência do usuário.
-
-**Requisitos:**
-1. **Identidade Visual:**
-   - Criar um novo logotipo e identidade visual para "Spectre Hub".
-   - Definir uma paleta de cores, tipografia e estilo de elementos visuais que transmitam profissionalismo, modernidade e autoridade.
-
-2. **Design da Interface (UI):**
-   - Redesenhar todas as páginas, focando em uma experiência intuitiva e premium.
-   - Adotar os princípios de `corenetwork.dev`: layout limpo, espaços em branco eficazes, tipografia hierarquizada e responsividade.
-
-3. **Conteúdo e Estrutura:**
-   - Adaptar o conteúdo para a nova identidade "Spectre Hub".
-   - Otimizar a navegação para autoridade e conversão.
-```
+ * Spectre Hub — Elite Discord Automation & Identity Identity.
+ * Optimized for the Slash Design System: Obsidian aesthetics, pill-shaped UI, and high-contrast serifs.
  */
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
