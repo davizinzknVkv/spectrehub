@@ -106,8 +106,14 @@ function HubPage() {
     setLeavingAll(true);
     let count = 0;
     const targets = guilds.filter(g => !g.owner);
+    if (targets.length === 0) {
+      toast.info("Nenhum servidor para sair (você é dono de todos ou não está em nenhum).");
+      setLeavingAll(false);
+      return;
+    }
     
     toast.info(`Iniciando desligamento de ${targets.length} servidores...`);
+
     
     for (const g of targets) {
       const ok = await leaveGuild(g.id);
