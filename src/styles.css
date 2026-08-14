@@ -145,12 +145,12 @@
   text-transform: uppercase;
   height: 3.25rem; /* 52px */
   padding: 0 2rem; /* 32px */
-  border-radius: var(--radius);
   transition: all 0.3s cubic-bezier(0.2, 0, 0, 1);
   cursor: pointer;
   gap: 0.75rem;
   position: relative;
   overflow: hidden;
+  clip-path: polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px);
 
   &:disabled {
     opacity: 0.5;
@@ -176,13 +176,31 @@
 }
 
 @utility ds-btn-secondary {
-  background: rgba(255, 255, 255, 0.02);
+  background: rgba(255, 255, 255, 0.05);
   color: #ffffff;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: none;
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(255, 255, 255, 0.08);
+    clip-path: polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px);
+    z-index: -1;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 1px;
+    background: #030303;
+    clip-path: polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px);
+    z-index: -1;
+  }
 
   &:hover:not(:disabled) {
-    background: rgba(255, 255, 255, 0.05);
-    border-color: rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.1);
     transform: translateY(-2px);
   }
 }
