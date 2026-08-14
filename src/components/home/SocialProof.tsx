@@ -71,15 +71,11 @@ async function fetchLiveStats(url: string, signal: AbortSignal): Promise<Partial
 
 export function SocialProof({ widgetUrl, products: productsList }: SocialProofProps) {
   const [ref, inView] = useInView<HTMLDivElement>();
-  const [stats, setStats] = useState<StatsSnapshot>({ ...DEFAULT_STATS, products: productsList.length });
+  const [stats, setStats] = useState<StatsSnapshot>(() => {
+    const cached = readCache();
+    return cached ? { ...cached, products: productsList.length } : { ...DEFAULT_STATS, products: productsList.length };
+  });
   const inFlight = useRef<AbortController | null>(null);
-
-  useEffect(() => {
-    const snap = readCache();
-    if (snap) {
-      setStats({ ...snap, products: productsList.length });
-    }
-  }, [productsList.length]);
 
   useEffect(() => {
     let mounted = true;
@@ -100,24 +96,31 @@ export function SocialProof({ widgetUrl, products: productsList }: SocialProofPr
           writeCache(merged);
           return merged;
         });
-      } catch {
-        /* keep cache */
+      } catch (err) {
+        if (err instanceof Error && err.name === 'AbortError') return;
+        console.error("Failed to fetch live stats:", err);
       } finally {
         if (inFlight.current === ctrl) inFlight.current = null;
       }
     };
+
+    // Só inicia o polling se estiver visível ou após o mount
     refresh();
     const iv = window.setInterval(refresh, STATS_TTL_MS);
+    
     const onVis = () => {
       if (document.visibilityState === "visible") refresh();
     };
     document.addEventListener("visibilitychange", onVis);
+    
     return () => {
       mounted = false;
       window.clearInterval(iv);
       document.removeEventListener("visibilitychange", onVis);
-      inFlight.current?.abort();
-      inFlight.current = null;
+      if (inFlight.current) {
+        inFlight.current.abort();
+        inFlight.current = null;
+      }
     };
   }, [widgetUrl, productsList.length]);
 
