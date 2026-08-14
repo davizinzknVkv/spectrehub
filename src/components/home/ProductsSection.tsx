@@ -3,6 +3,7 @@ import { Link } from "@tanstack/react-router";
 import { ChevronRight, Zap, ArrowUpRight } from "lucide-react";
 import { Reveal } from "./Reveal";
 import { Product } from "./constants";
+import questFlyer from "@/assets/quest-flyer.png.asset.json";
 
 interface ProductsSectionProps {
   products: Product[];
