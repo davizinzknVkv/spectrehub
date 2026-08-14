@@ -82,10 +82,10 @@ const GUILD_INVITE = "https://discord.gg/JK7cC9je87";
 const WIDGET_URL = `https://discord.com/api/guilds/${GUILD_ID}/widget.json`;
 
 const NAV = [
-  { label: "Início", href: "#topo" },
-  { label: "Optimizer", href: "#optimizer" },
   { label: "Produtos", href: "#produtos" },
+  { label: "Optimizer", href: "#optimizer" },
   { label: "Recursos", href: "#recursos" },
+  { label: "Preços", href: "#preços" },
   { label: "Sobre", href: "#sobre" },
   { label: "Comunidade", href: "#comunidade" },
 ];
@@ -335,7 +335,7 @@ function Index() {
   return (
     <div
       id="topo"
-      className="relative min-h-screen overflow-x-hidden bg-obsidian font-sans text-bone antialiased"
+      className="relative min-h-screen overflow-x-hidden bg-obsidian font-sans text-bone antialiased selection:bg-copper/40 selection:text-white"
     >
       <div aria-hidden className="pointer-events-none fixed inset-0 -z-10">
         <div
@@ -389,42 +389,42 @@ function SiteHeader() {
 
   return (
     <header
-      className={`sticky top-0 z-50 w-full transition-[background,border-color,backdrop-filter] duration-300 ${
+      className={`fixed top-0 z-50 w-full transition-all duration-300 ${
         scrolled
-          ? "border-b border-white/[0.07] bg-[#030303]/80 backdrop-blur-xl"
+          ? "border-b border-white/[0.04] bg-obsidian/80 backdrop-blur-xl"
           : "border-b border-transparent bg-transparent"
       }`}
     >
-      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8 overflow-hidden">
+      <div className="mx-auto flex h-16 max-w-[1216px] items-center justify-between gap-8 px-6 overflow-hidden">
         <Link to="/" className="flex min-w-0 items-center gap-2.5">
           <img
             src={logoAsset.url}
-            alt="Spectre Hub"
-            className="h-8 w-8 object-contain shrink-0"
+            alt="Spectre"
+            className="h-7 w-7 object-contain shrink-0"
           />
-          <span className="truncate font-display text-[15px] xs:text-[16px] font-extrabold tracking-tighter text-white uppercase shrink-0">
-            Spectre<span className="opacity-40 ml-1 font-light">|</span><span className="text-[#ff0055] ml-1">HUB</span>
+          <span className="truncate font-display text-[20px] font-medium tracking-tight text-white shrink-0">
+            Spectre
           </span>
         </Link>
 
-        <nav className="hidden items-center gap-10 md:flex">
+        <nav className="hidden items-center gap-6 md:flex">
           {NAV.map((n) => (
             <a
               key={n.href}
               href={n.href}
-              className="text-[11px] font-bold text-[#8a8a8a] transition-colors duration-200 hover:text-white uppercase tracking-[0.2em]"
+              className="text-[14px] font-medium text-fog transition-colors duration-200 hover:text-white"
             >
               {n.label}
             </a>
           ))}
         </nav>
 
-        <div className="hidden items-center gap-2 md:flex">
-          <Link to="/hub" className="text-[11px] font-bold text-white border border-white/10 px-6 py-2 rounded-sm hover:bg-white/5 transition-all uppercase tracking-widest flex items-center gap-2">
-            <ArrowRight className="h-3 w-3" /> Entrar
+        <div className="hidden items-center gap-4 md:flex">
+          <Link to="/hub" className="text-[14px] font-medium text-white px-4 py-2 border border-white/20 rounded-full hover:bg-white/5 transition-all">
+            Entrar
           </Link>
-          <a href={GUILD_INVITE} target="_blank" rel="noreferrer" className="text-[11px] font-bold text-white bg-[#ff0055] px-6 py-2 rounded-sm hover:bg-[#ff0055]/90 transition-all uppercase tracking-widest flex items-center gap-2">
-            <ArrowRight className="h-3 w-3" /> Abrir Ticket
+          <a href={GUILD_INVITE} target="_blank" rel="noreferrer" className="text-[14px] font-medium text-black bg-white px-6 py-2 rounded-full hover:opacity-90 transition-all">
+            Começar Agora
           </a>
         </div>
 
