@@ -9,7 +9,9 @@ import {
   fetchGuilds, 
   fetchProfileBio, 
   fetchProfileBadges,
+  fetchUserSettings,
   leaveGuild,
+
   type Guild,
   type ProfileBadge
 } from "@/lib/quest-runner";
@@ -25,6 +27,8 @@ import {
   Sparkles, 
   Tractor, 
   Copy,
+  Gamepad2,
+
   Users,
   MessageSquare,
   Server,
@@ -61,6 +65,9 @@ function HubPage() {
   const [loading, setLoading] = useState(true);
   const [leavingAll, setLeavingAll] = useState(false);
   const [showGuilds, setShowGuilds] = useState(false);
+  const [showPresence, setShowPresence] = useState(false);
+  const [userSettings, setUserSettings] = useState<any>(null);
+
 
 
   useEffect(() => {
@@ -79,19 +86,23 @@ function HubPage() {
           setUser(u);
           
           // Parallel fetch for details
-          const [rel, dms, gld, b, bdg] = await Promise.all([
+          const [rel, dms, gld, b, bdg, stg] = await Promise.all([
             fetchRelationshipsCount(),
             fetchDMsCount(),
             fetchGuilds(),
             fetchProfileBio(u.id as string),
-            fetchProfileBadges(u.id as string)
+            fetchProfileBadges(u.id as string),
+            fetchUserSettings()
           ]);
+
 
           setStats(rel);
           setDmCount(dms);
           setGuilds(gld);
           setBio(b);
           setBadges(bdg);
+          setUserSettings(stg);
+
         }
       } catch (err) {
         console.error("Hub data load error:", err);
@@ -234,21 +245,46 @@ function HubPage() {
             { icon: Tractor, label: "Farms", val: "Idle", link: "/farms", desc: "Monitoramento em Tempo Real" },
             { icon: Crosshair, label: "Sniper", val: "Pronto", link: "/nicksgun", desc: "Nicks-Gun v4.2" },
             { icon: Gift, label: "Resgatar", val: "Shop", link: "/resgatar", desc: "Trocar Orbs por Itens" },
-          ].map((item) => (
-            <Link to={item.link} key={item.label} className="ds-card p-6 border-white/5 bg-white/[0.02] flex flex-col group hover:border-spectre-pink/40 transition-all overflow-hidden relative">
-              <div className="absolute -right-4 -bottom-4 opacity-5 group-hover:opacity-10 transition-opacity">
-                <item.icon className="w-24 h-24" />
+            { 
+              icon: Gamepad2, 
+              label: "Presence", 
+              val: userSettings?.status?.toUpperCase() || "OFFLINE", 
+              onClick: () => setShowPresence(true),
+              desc: "Status & Rich Presence" 
+            },
+
+          ].map((item: any) => {
+            const Content = (
+              <div className="ds-card p-6 border-white/5 bg-white/[0.02] flex flex-col group hover:border-spectre-pink/40 transition-all overflow-hidden relative h-full w-full text-left">
+                <div className="absolute -right-4 -bottom-4 opacity-5 group-hover:opacity-10 transition-opacity">
+                  <item.icon className="w-24 h-24" />
+                </div>
+                <div className="flex justify-between items-start mb-4 relative z-10">
+                   <item.icon className="w-5 h-5 text-spectre-pink" />
+                   <span className="font-display text-[9px] uppercase tracking-widest text-white/20">{item.val}</span>
+                </div>
+                <div className="relative z-10">
+                  <span className="font-display text-sm tracking-widest text-white uppercase italic block">{item.label}</span>
+                  <span className="text-[9px] text-white/30 uppercase tracking-widest font-sans italic">{item.desc}</span>
+                </div>
               </div>
-              <div className="flex justify-between items-start mb-4 relative z-10">
-                 <item.icon className="w-5 h-5 text-spectre-pink" />
-                 <span className="font-display text-[9px] uppercase tracking-widest text-white/20">{item.val}</span>
-              </div>
-              <div className="relative z-10">
-                <span className="font-display text-sm tracking-widest text-white uppercase italic block">{item.label}</span>
-                <span className="text-[9px] text-white/30 uppercase tracking-widest font-sans italic">{item.desc}</span>
-              </div>
-            </Link>
-          ))}
+            );
+
+            if (item.link) {
+              return (
+                <Link to={item.link} key={item.label} className="block transition-all">
+                  {Content}
+                </Link>
+              );
+            }
+
+            return (
+              <button key={item.label} onClick={item.onClick} className="block transition-all">
+                {Content}
+              </button>
+            );
+          })}
+
         </div>
       </section>
 
@@ -427,6 +463,242 @@ function HubPage() {
           </div>
         </Modal>
       )}
+      {/* Presence Modal */}
+      {showPresence && (
+        <PresenceModal 
+          settings={userSettings} 
+          onClose={() => setShowPresence(false)} 
+          onUpdate={(newSettings) => setUserSettings(newSettings)}
+        />
+      )}
     </div>
   );
 }
+
+function PresenceModal({ 
+  settings, 
+  onClose,
+  onUpdate 
+}: { 
+  settings: any; 
+  onClose: () => void;
+  onUpdate: (s: any) => void;
+}) {
+  const [activeTab, setActiveTab] = useState<'status' | 'custom' | 'rich'>('status');
+  const [status, setStatus] = useState(settings?.status || 'online');
+  const [customText, setCustomText] = useState(settings?.custom_status?.text || '');
+  const [customEmoji, setCustomEmoji] = useState(settings?.custom_status?.emoji_name || '');
+  const [richEnabled, setRichEnabled] = useState(false);
+  const [richName, setRichName] = useState('Spectre Hub');
+  const [richDetails, setRichDetails] = useState('Optimizing Discord');
+  const [loading, setLoading] = useState(false);
+  
+  const token = useQuestStore(s => s.creds?.token);
+
+  const handleSave = async () => {
+    if (!token) return;
+    setLoading(true);
+    try {
+      const { updatePresence } = await import("@/lib/presence.functions");
+      await updatePresence({
+        data: {
+          token,
+          status: activeTab === 'status' ? status : undefined,
+          customStatus: activeTab === 'custom' ? {
+            text: customText,
+            emojiName: customEmoji || undefined
+          } : undefined,
+          richPresence: activeTab === 'rich' ? {
+            enabled: richEnabled,
+            name: richName,
+            details: richDetails
+          } : undefined
+        }
+      });
+
+      
+      toast.success("Protocolo de presença atualizado");
+      // Update local state to reflect changes (simplified)
+      const newSettings = { ...settings };
+      if (activeTab === 'status') newSettings.status = status;
+      if (activeTab === 'custom') newSettings.custom_status = { text: customText, emoji_name: customEmoji };
+      onUpdate(newSettings);
+      
+      onClose();
+    } catch (err) {
+      toast.error("Erro ao atualizar presença");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <Modal 
+      title="Presence Protocol" 
+      description="Gerencie como você aparece na rede Spectre"
+      onClose={onClose}
+      className="max-w-md"
+    >
+      <div className="space-y-6">
+        {/* Tabs */}
+        <div className="flex border-b border-white/5">
+          {['status', 'custom', 'rich'].map((tab) => (
+            <button
+              key={tab}
+              onClick={() => setActiveTab(tab as any)}
+              className={cn(
+                "flex-1 py-3 font-display text-[9px] uppercase tracking-widest italic transition-all border-b-2",
+                activeTab === tab 
+                  ? "border-spectre-pink text-white bg-spectre-pink/5" 
+                  : "border-transparent text-white/20 hover:text-white/40"
+              )}
+            >
+              {tab === 'status' && 'Status'}
+              {tab === 'custom' && 'Custom Status'}
+              {tab === 'rich' && 'Rich Presence'}
+            </button>
+          ))}
+        </div>
+
+        <div className="min-h-[200px] py-4">
+          {activeTab === 'status' && (
+            <div className="space-y-4">
+              <div className="text-[9px] uppercase tracking-widest text-white/20 mb-4 italic">Selecione seu modo de visibilidade</div>
+              <div className="grid grid-cols-2 gap-3">
+                {['online', 'idle', 'dnd', 'invisible'].map((s) => (
+                  <button
+                    key={s}
+                    onClick={() => setStatus(s)}
+                    className={cn(
+                      "p-4 border border-white/5 bg-white/[0.01] flex items-center gap-3 group transition-all",
+                      status === s && "border-spectre-pink/40 bg-spectre-pink/5"
+                    )}
+                  >
+                    <div className={cn(
+                      "w-3 h-3 rounded-full",
+                      s === 'online' && "bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.5)]",
+                      s === 'idle' && "bg-yellow-500 shadow-[0_0_8px_rgba(234,179,8,0.5)]",
+                      s === 'dnd' && "bg-red-500 shadow-[0_0_8px_rgba(239,68,68,0.5)]",
+                      s === 'invisible' && "bg-white/20"
+                    )} />
+                    <span className={cn(
+                      "font-display text-[10px] uppercase tracking-widest italic",
+                      status === s ? "text-white" : "text-white/40"
+                    )}>{s}</span>
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {activeTab === 'custom' && (
+            <div className="space-y-6">
+              <div className="flex items-center justify-between">
+                <span className="text-[9px] uppercase tracking-widest text-white/20 italic">Ativar Status Customizado</span>
+                <button 
+                  onClick={() => setCustomText(customText ? '' : 'Spectre Hub User')}
+                  className={cn(
+                    "w-10 h-5 rounded-full relative transition-all duration-500",
+                    customText ? "bg-spectre-pink" : "bg-white/10"
+                  )}
+                >
+                  <div className={cn(
+                    "absolute top-1 w-3 h-3 bg-white transition-all duration-500",
+                    customText ? "left-6" : "left-1"
+                  )} />
+                </button>
+              </div>
+
+              <div className="space-y-4">
+                <div>
+                  <label className="font-display text-[9px] uppercase tracking-widest text-white/20 italic block mb-2">Texto do Status</label>
+                  <input 
+                    type="text" 
+                    value={customText}
+                    onChange={(e) => setCustomText(e.target.value)}
+                    placeholder="O que você está fazendo?"
+                    className="w-full bg-obsidian border border-white/5 p-4 font-sans text-xs text-white outline-none focus:border-spectre-pink/40 transition-all italic"
+                  />
+                </div>
+                <div>
+                  <label className="font-display text-[9px] uppercase tracking-widest text-white/20 italic block mb-2">Emoji (Nome ou ID)</label>
+                  <input 
+                    type="text" 
+                    value={customEmoji}
+                    onChange={(e) => setCustomEmoji(e.target.value)}
+                    placeholder="🚀 ou emoji_name"
+                    className="w-full bg-obsidian border border-white/5 p-4 font-sans text-xs text-white outline-none focus:border-spectre-pink/40 transition-all italic"
+                  />
+                </div>
+              </div>
+            </div>
+          )}
+
+          {activeTab === 'rich' && (
+            <div className="space-y-6">
+              <div className="flex items-center justify-between p-4 border border-spectre-pink/10 bg-spectre-pink/[0.02]">
+                <div className="flex items-center gap-3">
+                  <Gamepad2 className="w-5 h-5 text-spectre-pink" />
+                  <div>
+                    <div className="font-display text-[10px] text-white uppercase italic tracking-widest">Protocolo GameBridge</div>
+                    <div className="text-[8px] text-white/20 uppercase tracking-widest">Simula atividade de jogo</div>
+                  </div>
+                </div>
+                <button 
+                  onClick={() => setRichEnabled(!richEnabled)}
+                  className={cn(
+                    "w-10 h-5 rounded-full relative transition-all duration-500",
+                    richEnabled ? "bg-spectre-pink shadow-[0_0_10px_#ff0055]" : "bg-white/10"
+                  )}
+                >
+                  <div className={cn(
+                    "absolute top-1 w-3 h-3 bg-white transition-all duration-500",
+                    richEnabled ? "left-6" : "left-1"
+                  )} />
+                </button>
+              </div>
+
+              <div className={cn("space-y-4 transition-all duration-500", !richEnabled && "opacity-20 pointer-events-none grayscale")}>
+                <div>
+                  <label className="font-display text-[9px] uppercase tracking-widest text-white/20 italic block mb-2">Nome da Atividade</label>
+                  <input 
+                    type="text" 
+                    value={richName}
+                    onChange={(e) => setRichName(e.target.value)}
+                    className="w-full bg-obsidian border border-white/5 p-4 font-sans text-xs text-white outline-none focus:border-spectre-pink/40 italic"
+                  />
+                </div>
+                <div>
+                  <label className="font-display text-[9px] uppercase tracking-widest text-white/20 italic block mb-2">Detalhes</label>
+                  <input 
+                    type="text" 
+                    value={richDetails}
+                    onChange={(e) => setRichDetails(e.target.value)}
+                    className="w-full bg-obsidian border border-white/5 p-4 font-sans text-xs text-white outline-none focus:border-spectre-pink/40 italic"
+                  />
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
+
+        <div className="pt-4 flex gap-4">
+          <button 
+            onClick={onClose}
+            className="flex-1 ds-btn ds-btn-secondary py-3"
+          >
+            Cancelar
+          </button>
+          <button 
+            onClick={handleSave}
+            disabled={loading}
+            className="flex-1 ds-btn ds-btn-primary py-3"
+          >
+            {loading ? "Sincronizando..." : "Aplicar Mudanças"}
+          </button>
+        </div>
+      </div>
+    </Modal>
+  );
+}
+
