@@ -375,18 +375,19 @@ export async function runQuest(quest: Quest): Promise<boolean> {
 
 
   try {
-    if (!quest.isEnrolled) {
-      const enroll = await call(`/quests/${quest.questId}/enroll`, "POST", {
-        location: 11,
-        is_targeted: false,
-        metadata_raw: null,
-      });
-      if (enroll.status !== 200) {
-        s.log(`❌ Falha ao se inscrever (${enroll.status})`, "error");
-        logRun(quest, "failed", `enroll ${enroll.status}`);
-        return false;
-      }
-      s.log("✅ Inscrito na missão");
+    // Força a inscrição (enroll) em todas as missões para garantir que o progresso seja contado
+    const enroll = await call(`/quests/${quest.questId}/enroll`, "POST", {
+      location: 11,
+      is_targeted: false,
+      metadata_raw: null,
+    });
+    
+    if (enroll.status === 200) {
+      s.log("✅ Missão aceita com sucesso");
+    } else if (enroll.status === 403) {
+      s.log("ℹ️ Missão já aceita ou requer ação manual");
+    } else if (enroll.status !== 200) {
+      s.log(`⚠️ Alerta na inscrição (${enroll.status})`, "error");
     }
 
     let current = 0;
