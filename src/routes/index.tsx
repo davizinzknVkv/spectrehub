@@ -1391,71 +1391,97 @@ function FinalCta() {
 
 function SiteFooter() {
   return (
-    <footer className="bg-obsidian border-t border-graphite pt-32 pb-16">
-      <div className="mx-auto max-w-[1216px] px-6">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-24 items-start pb-20 border-b border-graphite">
-          <div>
-            <Link to="/" className="flex items-center gap-3 mb-10">
+    <footer className="bg-[#050505] border-t border-white/5 pt-20 pb-10">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="flex flex-col lg:flex-row justify-between gap-16">
+          <div className="max-w-xs">
+            <Link to="/" className="flex items-center gap-2.5">
               <img
                 src={logoAsset.url}
                 alt="Spectre Hub"
-                className="h-10 w-10 brightness-110"
+                width={32}
+                height={32}
+                className="h-8 w-auto"
               />
-              <span className="font-display text-[24px] font-medium text-white tracking-tight">Spectre Hub</span>
+              <span className="font-display text-[16px] font-extrabold tracking-tighter text-white uppercase">
+                Spectre<span className="opacity-40 ml-1.5 font-light">|</span><span className="text-[#ff0055] ml-1.5">HUB</span>
+              </span>
             </Link>
-            <p className="text-body-sm text-fog max-w-sm leading-relaxed">
-              Desenvolvendo a infraestrutura para a elite do ecossistema Discord. Performance, segurança e exclusividade em cada linha de código.
+            <p className="mt-6 text-[10px] font-bold text-[#444] uppercase tracking-[0.2em] leading-loose">
+              INOVAÇÃO · PRODUTO & TECNOLOGIA
+              <br />
+              Feito por jogadores, para servidores que levam a sério.
             </p>
           </div>
 
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-12">
-            <div>
-              <h4 className="text-eyebrow font-bold text-white uppercase tracking-widest mb-8">Navegação</h4>
-              <ul className="space-y-4">
-                {["Produtos", "Recursos", "Sobre", "Comunidade"].map((l) => (
-                  <li key={l}>
-                    <a href={`#${l.toLowerCase()}`} className="text-[14px] text-fog hover:text-white transition-colors">
-                      {l}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div>
-              <h4 className="text-eyebrow font-bold text-white uppercase tracking-widest mb-8">Legal</h4>
-              <ul className="space-y-4">
-                {["Termos", "Privacidade", "Cookies"].map((l) => (
-                  <li key={l}>
-                    <button className="text-[14px] text-fog hover:text-white transition-colors">
-                      {l}
-                    </button>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div>
-              <h4 className="text-eyebrow font-bold text-white uppercase tracking-widest mb-8">Social</h4>
-              <ul className="space-y-4">
-                <li>
-                  <a href={GUILD_INVITE} target="_blank" rel="noreferrer" className="text-[14px] text-fog hover:text-white transition-colors">
-                    Discord
-                  </a>
-                </li>
-              </ul>
-            </div>
+            <FooterCol
+              title="HUB"
+              links={[
+                { label: "Spectre Optimizer", href: "#optimizer" },
+                { label: "Sistemas", href: "#produtos" },
+                { label: "Por que HUB", href: "#recursos" },
+                { label: "Servidores", href: "#comunidade" },
+
+              ]}
+            />
+            <FooterCol
+              title="CLIENTE"
+              links={[
+                { label: "Entrar", href: "/hub" },
+                { label: "Abrir ticket", href: GUILD_INVITE, external: true },
+              ]}
+            />
+            <FooterCol
+              title="COMUNIDADE"
+              links={[
+                { label: "Discord", href: GUILD_INVITE, external: true },
+              ]}
+            />
           </div>
         </div>
 
-        <div className="mt-12 flex flex-col sm:flex-row justify-between items-center gap-8">
-          <p className="text-eyebrow font-medium text-steel uppercase tracking-widest">
-            © 2026 Spectre Hub. Todos os direitos reservados.
-          </p>
+        <div className="mt-20 flex flex-col sm:flex-row items-center justify-between gap-6 text-[10px] font-bold text-[#444] uppercase tracking-[0.25em]">
           <div className="flex items-center gap-8">
-            <span className="text-eyebrow font-medium text-steel uppercase tracking-widest">Inspirado em Slash System</span>
+            <span>SPECTRE HUB</span>
+            <span className="opacity-20">//</span>
+            <span>AGO/2026</span>
+            <span className="opacity-20">©</span>
+            <span>PROPERTY OF SPECTRE. ALL CREATIVE RIGHTS RESERVED.</span>
+          </div>
+          <div className="flex items-center gap-2">
+            CÓDIGO FONTE FORNECIDO POR <span className="text-[#666]">ISNOUU</span>
           </div>
         </div>
       </div>
     </footer>
+  );
+}
+
+function FooterCol({
+  title,
+  links,
+}: {
+  title: string;
+  links: Array<{ label: string; href: string; external?: boolean }>;
+}) {
+  return (
+    <div>
+      <h3 className="font-mono text-[10px] uppercase tracking-[0.25em] text-[#6f6f6f]">{title}</h3>
+      <ul className="mt-4 space-y-2.5">
+        {links.map((l) => (
+          <li key={l.label}>
+            <a
+              href={l.href}
+              {...(l.external ? { target: "_blank", rel: "noreferrer" } : {})}
+              className="text-[13px] text-[#a0a0a0] transition-colors duration-200 hover:text-white"
+            >
+              {l.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 }
 
