@@ -1,52 +1,49 @@
-# Planos: Free, Premium e Boost
+# Plan: Spectre Optimizer Implementation
 
-## Regras
+Add a comprehensive performance optimization module to the Spectre Hub platform, featuring a cyberpunk-themed dashboard, real-time monitoring, and system optimization tools.
 
-| Plano   | Missões/dia | Cooldown entre missões | Como ganha |
-|---------|-------------|------------------------|------------|
-| Free    | 3           | 10 min                 | padrão     |
-| Premium | ilimitado   | 3 min                  | cargo `1511469574422401275` |
-| Boost   | ilimitado   | 1 min                  | cargo `1511469585704947943` (server booster) |
+## User Review Required
 
-Se o usuário tiver os dois cargos, vale o **Boost** (menor cooldown).
+> [!IMPORTANT]
+> Since this is a web-based application, direct access to Windows system APIs (like clearing system cache or ending OS processes) is restricted by browser security sandboxes. The implementation will provide a professional UI and architecture ready for a local agent/bridge, and will use browser-available metrics (Memory, CPU cores, Network latency) for real-time data.
 
-## Como detectar o cargo
+## Proposed Changes
 
-Preciso do **ID do servidor** onde esses cargos existem pra checar via API do Discord:
+### 1. Design System & Branding
+- Define neon purple (`#a855f7`), neon blue (`#3b82f6`), and cyan (`#06b6d4`) tokens in `src/styles.css`.
+- Create glassmorphism card variants and "cyber-border" utilities.
+- Add `Zap` or `Cpu` icon to the sidebar navigation.
 
-```
-GET /users/@me/guilds/{GUILD_ID}/member  →  { roles: [...] }
-```
+### 2. Navigation & Routing
+- **Layout**: Update `src/routes/_app.tsx` to include "Spectre Optimizer" in a new "Performance" navigation group.
+- **New Routes**:
+    - `src/routes/_app.optimizer.tsx`: Main dashboard with stats, scan, and overview.
+    - `src/routes/_app.optimizer_.optimizations.tsx`: Detailed category-based optimization settings.
+    - `src/routes/_app.optimizer_.history.tsx`: Log of applied changes.
 
-Isso usa o próprio token do usuário (mesmo já usado no app). Sem o guild ID não dá pra verificar o cargo — me passa o ID do servidor que hospeda esses cargos.
+### 3. Core Components (`src/components/optimizer/`)
+- **MetricCard**: Real-time display for CPU, RAM, etc., with small sparkline charts.
+- **SystemScan**: An animated multi-step scan interface (Scanning -> Analyzing -> Optimizing -> Completed).
+- **OptimizationItem**: Toggleable items for Windows, Gaming, and Network tweaks.
+- **PerformanceScore**: A large gauge component displaying the 0-100 score.
+- **LiveMonitor**: Real-time charts for system resources.
 
-Enquanto isso, deixo `GUILD_ID` como constante no topo de `src/lib/quest-runner.ts` marcada com `// TODO: preencher`.
+### 4. Logic & State Management
+- **Store**: Create `src/lib/optimizer/optimizer-store.ts` using Zustand to manage scan states, applied optimizations, and history.
+- **Service Layer**: Implement `src/lib/optimizer/optimizer-service.ts` to handle the "Scan" logic and mock the system bridge communication.
 
-## Implementação
+### 5. Features Implementation
+- **Process & Startup Manager**: Professional table layouts with priority management (UI-only for OS processes, functional for app-specific state).
+- **Game Boost**: Game selection UI with resource allocation visualization.
+- **Restore Point**: UI for managing "snapshots" of settings before optimization.
 
-### 1. `src/lib/quest-runner.ts`
-- Adicionar `fetchUserPlan(): Promise<"free" | "premium" | "boost">` que chama `/guilds/{GUILD_ID}/member` e cruza `roles[]` com os IDs.
-- Exportar constantes `PLAN_LIMITS = { free: {daily:3, cooldownMs:600_000}, premium:{daily:Infinity, cooldownMs:180_000}, boost:{daily:Infinity, cooldownMs:60_000} }`.
+## Technical Details
 
-### 2. `src/lib/quest-store.ts`
-- Novo campo persistido `plan: "free"|"premium"|"boost"` (default `free`) + `setPlan`.
-- Adicionar seletor derivado `getUsageToday()`: conta `runs` com `status==="completed"` e `started_at` do dia atual.
-- Adicionar `getNextAllowedAt()`: `lastCompletedAt + cooldownMs`.
-- Bloquear `runQuest`/`runAll` se `usageToday >= dailyLimit` OU `Date.now() < nextAllowedAt` — retornar erro amigável.
+- **Visuals**: Tailwind v4 with CSS variables for dynamic neon glows. Framer Motion for smooth "scanning" transitions.
+- **Charts**: Use `recharts` (if available) or lightweight custom SVG charts for resource monitoring.
+- **Architecture**: Modular folder structure under `src/lib/optimizer` to keep logic separate from presentation.
 
-### 3. `src/routes/_app.hub.tsx`
-- Ao logar, chamar `fetchUserPlan()` e salvar no store.
-- Novo card "Plano" no grid principal mostrando badge (Free / Premium / Boost) + uso do dia (`2/3` ou `∞`) + countdown pro próximo run quando em cooldown.
-- Desabilitar botão "Completar" e "Run all" quando limite/cooldown ativos, com tooltip explicando.
-- Se `plan==="free"` e sem missões restantes, mostrar CTA "Faça boost/assine premium no servidor" com link pro Discord.
-
-### 4. UI do plano
-- Badge com cores: Free = `ink-mute`, Premium = `cyan`, Boost = `amber`.
-- Barra de cooldown animada usando o `pulse-dot`/gradiente já existentes (nada de token novo).
-
-## Fora de escopo
-- Sem persistência server-side de uso: a contagem diária vem do próprio `runs` já salvo no localStorage/Cloud. Se quiser reset à meia-noite server-side me avisa.
-- Sem pagamento embutido — quem quiser Premium/Boost precisa ter o cargo no servidor Discord.
-
-## Pergunta pra desbloquear
-**Qual o ID do servidor Discord onde ficam esses cargos?** Sem ele a verificação de cargo não roda.
+## Constraints & Assumptions
+- All "System" actions will trigger a professional "Administrator Permission Required" or "Agent Not Detected" modal if they require native privileges, as per the user's "Architecture for a local agent" requirement.
+- No existing routes or authentication flows will be modified.
+- The theme will strictly follow the Obsidian + Neon Pink/Purple/Blue palette.
