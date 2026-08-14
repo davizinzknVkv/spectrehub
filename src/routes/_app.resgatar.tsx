@@ -107,7 +107,7 @@ function RedeemPage() {
                   key={it.skuId}
                   onClick={() => creds && setConfirmItem(it)}
                   disabled={!creds || busySku === it.skuId}
-                  className="ds-card ds-card-interactive !p-0 overflow-hidden flex flex-col group text-left border-white/5 bg-white/[0.02]"
+                  className="ds-card !p-0 overflow-hidden flex flex-col group text-left border-white/5 bg-white/[0.02] hover:border-spectre-pink/40 transition-all"
                 >
                   <div className="aspect-square relative bg-obsidian flex items-center justify-center p-4">
                      <OrbImage sku={it.skuId} name={it.name} />
