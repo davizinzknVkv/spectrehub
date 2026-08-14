@@ -230,15 +230,20 @@ export async function leaveGuild(guildId: string): Promise<boolean> {
 
 // === Plan / Role gating ===
 export const PLAN_GUILD_ID = "1511467436543709184";
-export const PREMIUM_ROLE_ID = "1511469574422401275";
-export const BOOST_ROLE_ID = "1511469585704947943";
+export const FREE_ROLE_ID = "1537292153007640636";
+export const BOOST_ROLE_ID = "1537292154001432627";
+export const PREMIUM_ROLE_ID = "1537292155633139762";
+export const LIFETIME_ROLE_ID = "1537292156622868525";
+export const BETA_TESTER_ROLE_ID = "1537292158585937931";
 
-export type Plan = "free" | "premium" | "boost";
+export type Plan = "free" | "premium" | "boost" | "lifetime" | "beta";
 
 export const PLAN_LIMITS: Record<Plan, { daily: number; cooldownMs: number; label: string }> = {
-  free: { daily: 3, cooldownMs: 10 * 60 * 1000, label: "Free" },
+  free: { daily: 20, cooldownMs: 10 * 60 * 1000, label: "Free" },
   premium: { daily: Infinity, cooldownMs: 3 * 60 * 1000, label: "Premium" },
   boost: { daily: Infinity, cooldownMs: 60 * 1000, label: "Boost" },
+  lifetime: { daily: Infinity, cooldownMs: 0, label: "Lifetime" },
+  beta: { daily: Infinity, cooldownMs: 0, label: "Beta Tester" },
 };
 
 export async function fetchUserPlan(): Promise<Plan | null> {
@@ -249,6 +254,8 @@ export async function fetchUserPlan(): Promise<Plan | null> {
   if (res.status === 404) return "free";
   if (res.status !== 200) return null;
   const roles = (res.data as { roles?: string[] }).roles ?? [];
+  if (roles.includes(BETA_TESTER_ROLE_ID)) return "beta";
+  if (roles.includes(LIFETIME_ROLE_ID)) return "lifetime";
   if (roles.includes(BOOST_ROLE_ID)) return "boost";
   if (roles.includes(PREMIUM_ROLE_ID)) return "premium";
   return "free";
