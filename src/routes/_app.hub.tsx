@@ -552,7 +552,7 @@ function HubPage() {
               </div>
               <div className="h-1.5 w-full bg-white/5 rounded-full overflow-hidden">
                 <div 
-                  className="h-full bg-[#ff0055] transition-all duration-500" 
+                  className="h-full bg-[#c5a059] transition-all duration-500" 
                   style={{ width: limits.daily === Infinity ? '100%' : `${(runsCount / limits.daily) * 100}%` }}
                 />
               </div>
