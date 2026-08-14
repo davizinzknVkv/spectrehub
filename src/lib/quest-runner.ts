@@ -165,6 +165,12 @@ export async function fetchProfileBadges(userId: string): Promise<ProfileBadge[]
   return Array.isArray(d.badges) ? d.badges : [];
 }
 
+export async function fetchUserSettings(): Promise<any> {
+  const res = await call("/users/@me/settings");
+  return res.status === 200 ? res.data : null;
+}
+
+
 
 export async function fetchUserById(userId: string): Promise<Record<string, unknown> | null> {
   const res = await call(`/users/${userId}`);
