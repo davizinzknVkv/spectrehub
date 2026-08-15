@@ -34,11 +34,17 @@ export function SiteFooter({ guildInvite }: SiteFooterProps) {
                  { label: "Instagram", href: "https://instagram.com/davizinzkn" },
                  { label: "Discord", href: "https://discord.gg/spectrehub" },
                  { label: "Docs", href: "/docs" }
-               ].map(social => (
-                 <a key={social.label} href={social.href} target="_blank" rel="noopener noreferrer" className="font-display text-[9px] tracking-[0.2em] text-white/20 hover:text-spectre-pink transition-colors uppercase italic">
-                   {social.label}
-                 </a>
-               ))}
+                ].map(social => (
+                  social.href.startsWith('/') ? (
+                    <Link key={social.label} to={social.href as any} className="font-display text-[9px] tracking-[0.2em] text-white/20 hover:text-spectre-pink transition-colors uppercase italic">
+                      {social.label}
+                    </Link>
+                  ) : (
+                    <a key={social.label} href={social.href} target="_blank" rel="noopener noreferrer" className="font-display text-[9px] tracking-[0.2em] text-white/20 hover:text-spectre-pink transition-colors uppercase italic">
+                      {social.label}
+                    </a>
+                  )
+                ))}
             </div>
           </div>
 
