@@ -64,6 +64,17 @@
     "subtitle": "NOVO PADRÃO.",
     "description": "Junte-se ao ecossistema SPECTRE e ative sua infraestrutura de automação hoje mesmo. Desenvolvido para quem busca performance sem compromissos.",
     "accessDashboard": "Acessar Painel"
+  },
+  "community": {
+    "badge": "Sociedade",
+    "title": "JUNTE-SE",
+    "subtitle": "À ELITE.",
+    "description": "Suporte técnico de alta performance, atualizações em tempo real e uma comunidade ativa que define os novos padrões do mercado.",
+    "statOnline": "online agora",
+    "statSupport": "suporte",
+    "statRoles": "cargos",
+    "marqueeLabel": "USUÁRIOS QUE JÁ ESTÃO USANDO O Spectre Hub"
   }
 }
+
 

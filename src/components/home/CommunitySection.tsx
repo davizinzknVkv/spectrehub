@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Users, MessageSquare, Sparkles, ArrowRight } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import { Reveal } from "./Reveal";
 import { Avatar } from "./Avatar";
+
 
 interface CommunitySectionProps {
   widgetUrl: string;
@@ -33,8 +35,10 @@ function MiniStat({
 }
 
 export function CommunitySection({ widgetUrl, guildId, guildInvite, fallbackMembers }: CommunitySectionProps) {
+  const { t } = useTranslation();
   const [live, setLive] = useState<LiveMember[] | null>(null);
   const [presence, setPresence] = useState<number | null>(null);
+
 
   useEffect(() => {
     const ctrl = new AbortController();
@@ -69,26 +73,28 @@ export function CommunitySection({ widgetUrl, guildId, guildInvite, fallbackMemb
           <Reveal>
              <div className="font-display text-[10px] tracking-[0.3em] text-spectre-pink uppercase mb-4 flex items-center gap-2">
                <span className="w-8 h-px bg-spectre-pink/30" />
-               Sociedade
+               {t('community.badge')}
             </div>
             <h2 className="font-display text-[2rem] md:text-[3.5rem] leading-[0.9] text-white uppercase italic tracking-tighter mb-8">
-              JUNTE-SE <br />
-              <span className="text-white/30 text-[1.5rem] md:text-[2.5rem]">À ELITE.</span>
+              {t('community.title')} <br />
+              <span className="text-white/30 text-[1.5rem] md:text-[2.5rem]">{t('community.subtitle')}</span>
             </h2>
             <p className="text-white/40 text-sm leading-relaxed uppercase tracking-widest border-l border-spectre-pink/30 pl-6 mb-12 max-w-xl">
-              Suporte técnico de alta performance, atualizações em tempo real e uma comunidade ativa que define os novos padrões do mercado.
+              {t('community.description')}
             </p>
+
           </Reveal>
 
           <Reveal delay={200}>
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-px bg-white/5 border border-white/5 mb-12">
                <MiniStat
                   icon={Users}
-                  label="online agora"
+                  label={t('community.statOnline')}
                   value={presence !== null ? String(presence) : "—"}
                 />
-                <MiniStat icon={MessageSquare} label="suporte" value="Ticket" />
-                <MiniStat icon={Sparkles} label="cargos" value="Premium" />
+                <MiniStat icon={MessageSquare} label={t('community.statSupport')} value="Ticket" />
+                <MiniStat icon={Sparkles} label={t('community.statRoles')} value="Premium" />
+
             </div>
             <a
               href={guildInvite}
@@ -96,7 +102,7 @@ export function CommunitySection({ widgetUrl, guildId, guildInvite, fallbackMemb
               rel="noreferrer"
               className="ds-btn ds-btn-primary px-12"
             >
-              Quero Usar o Spectre
+              {t('common.getStarted')}
             </a>
           </Reveal>
         </div>
@@ -142,7 +148,7 @@ export function CommunitySection({ widgetUrl, guildId, guildInvite, fallbackMemb
         <div className="absolute inset-0 opacity-[0.03] pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle, #fff 1px, transparent 1px)', backgroundSize: '24px 24px' }} />
         <div className="mb-8 flex items-center gap-4">
            <div className="font-display text-[10px] text-spectre-pink uppercase italic tracking-[0.4em] whitespace-nowrap">
-              USUÁRIOS QUE JÁ ESTÃO USANDO O Spectre Hub
+              {t('community.marqueeLabel')}
            </div>
            <div className="h-px w-full bg-white/5" />
         </div>

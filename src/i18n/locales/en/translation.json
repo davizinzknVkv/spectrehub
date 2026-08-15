@@ -64,6 +64,17 @@
     "subtitle": "NEW STANDARD.",
     "description": "Join the SPECTRE ecosystem and activate your automation infrastructure today. Developed for those who seek performance without compromise.",
     "accessDashboard": "Access Dashboard"
+  },
+  "community": {
+    "badge": "Society",
+    "title": "JOIN",
+    "subtitle": "THE ELITE.",
+    "description": "High-performance technical support, real-time updates, and an active community that sets new market standards.",
+    "statOnline": "online now",
+    "statSupport": "support",
+    "statRoles": "roles",
+    "marqueeLabel": "USERS ALREADY USING Spectre Hub"
   }
 }
+
 
