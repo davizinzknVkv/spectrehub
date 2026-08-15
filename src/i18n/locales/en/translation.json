@@ -9,7 +9,6 @@
     "stable": "Stable",
     "beta": "Beta"
   },
-
   "nav": {
     "systems": "systems",
     "method": "method",
@@ -31,13 +30,59 @@
     "subtitle": "THE MARKET COPIES.",
     "cta": "Secure Access Now",
     "soon": "Coming Soon",
-    "soonDesc": "Protocol under Development"
+    "soonDesc": "Protocol under Development",
+    "quests": {
+      "name": "Auto Quests",
+      "desc": "Massive execution of official Discord missions. Automated collection of Orbs and rewards with anti-detection and smart cooldown system."
+    },
+    "optimizer": {
+      "name": "Optimizer",
+      "desc": "Maximize your hardware performance. Elite tool for registry cleanup, CPU/RAM optimization, and drastic reduction of latency in games and applications."
+    },
+    "nicks": {
+      "name": "Nicks-Gun",
+      "desc": "Master your identity. Advanced sniper to capture rare 2 and 3 letter usernames before everyone else."
+    },
+    "orbs": {
+      "name": "Redeem Orbs",
+      "desc": "Transform effort into reward. Direct access to the official catalog with optimized one-click redemption."
+    },
+    "farms": {
+      "name": "Auto Farms",
+      "desc": "Uninterrupted productivity. Continuous farm systems with anti-detection protection algorithms."
+    },
+    "control": {
+      "name": "Server Control",
+      "desc": "Total power over your account. Professional server management, cloning, and mass cleanup."
+    },
+    "presence": {
+      "name": "Presence Sync",
+      "desc": "Active identity. Synchronize your status and music while our tools work for you."
+    }
   },
   "reasons": {
     "badge": "Differentiation",
     "title": "HIGH-END",
     "subtitle": "INFRASTRUCTURE.",
-    "description": "SPECTRE is where innovation happens. We develop proprietary tools, tested under real stress, to ensure you are always one step ahead of the competition."
+    "description": "SPECTRE is where innovation happens. We develop proprietary tools, tested under real stress, to ensure you are always one step ahead of the competition.",
+    "items": {
+      "0": {
+        "title": "Minimum Latency",
+        "desc": "Distributed execution that minimizes response times and maximizes the success rate of operations."
+      },
+      "1": {
+        "title": "Bank-Level Security",
+        "desc": "Protection systems that emulate human behavior patterns, mitigating risks of detection by heuristics."
+      },
+      "2": {
+        "title": "Omnichannel",
+        "desc": "Centralize management of multiple fronts — quests, economy, and identity — in a single intuitive dashboard."
+      },
+      "3": {
+        "title": "Guaranteed SLA",
+        "desc": "Specialized support and constant updates to ensure your automations never become obsolete."
+      }
+    }
   },
   "plans": {
     "badge": "Investment",
@@ -46,7 +91,53 @@
     "description": "Choose the level of power your server deserves. Unwavering infrastructure on all plans.",
     "popular": "Popular",
     "perPeriod": "/ {{period}}",
-    "cta": "Start Now"
+    "cta": "Start Now",
+    "tiers": {
+      "free": {
+        "name": "Free",
+        "period": "forever",
+        "cta": "Access for Free",
+        "features": {
+          "0": "20 daily missions",
+          "1": "10 min cooldown",
+          "2": "Access to all quests",
+          "3": "Local statistics"
+        }
+      },
+      "premium": {
+        "name": "Premium",
+        "period": "30 days access",
+        "cta": "Subscribe Premium",
+        "features": {
+          "0": "Unlimited missions",
+          "1": "Reduced cooldown (3 min)",
+          "2": "Exclusive Premium role",
+          "3": "Priority support"
+        }
+      },
+      "lifetime": {
+        "name": "Lifetime",
+        "period": "one-time payment",
+        "cta": "Get Lifetime",
+        "features": {
+          "0": "Lifetime Premium benefits",
+          "1": "Permanent Discord role",
+          "2": "Zero monthly fees",
+          "3": "Early access to betas"
+        }
+      },
+      "booster": {
+        "name": "Booster",
+        "period": "via server boost",
+        "cta": "Boost Now",
+        "features": {
+          "0": "Unlimited missions",
+          "1": "Lowest system cooldown (1 min)",
+          "2": "Automatic Booster role",
+          "3": "VIP status in community"
+        }
+      }
+    }
   },
   "free": {
     "badge": "Community Access",
@@ -60,13 +151,6 @@
     "formSubmit": "Generate Identifier",
     "uniqueCode": "Your Unique Code",
     "generateNew": "Generate New Code"
-  },
-  "footer": {
-    "badge": "Next Step",
-    "title": "DEFINE THE",
-    "subtitle": "NEW STANDARD.",
-    "description": "Join the SPECTRE ecosystem and activate your automation infrastructure today. Developed for those who seek performance without compromise.",
-    "accessDashboard": "Access Dashboard"
   },
   "community": {
     "badge": "Society",
@@ -98,7 +182,3 @@
     "rights": "Spectre Hub © 2026. All rights reserved."
   }
 }
-
-
-
-
