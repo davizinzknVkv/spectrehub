@@ -15,9 +15,9 @@ export function ReasonsSection({ reasons }: ReasonsSectionProps) {
              <span className="w-8 h-px bg-spectre-pink/30" />
              Diferencial
           </div>
-          <h2 className="font-display text-[2.5rem] md:text-[4.5rem] leading-[0.9] text-white uppercase italic tracking-tighter mb-8">
+          <h2 className="font-display text-[2rem] md:text-[3.5rem] leading-[0.9] text-white uppercase italic tracking-tighter mb-8">
             INFRAESTRUTURA <br />
-            <span className="text-white/30 text-[2rem] md:text-[3.5rem]">DE ALTO PADRÃO.</span>
+            <span className="text-white/30 text-[1.5rem] md:text-[2.5rem]">DE ALTO PADRÃO.</span>
           </h2>
           <p className="text-white/40 text-sm leading-relaxed uppercase tracking-widest border-l border-spectre-pink/30 pl-6">
             A SPECTRE é onde a inovação acontece. Desenvolvemos ferramentas proprietárias, testadas sob estresse real, para garantir que você esteja sempre um passo à frente da concorrência.
