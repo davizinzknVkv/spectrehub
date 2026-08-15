@@ -1,4 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useTranslation } from "react-i18next";
+
 import { useInView } from "@/components/home/hooks";
 import logoAsset from "@/assets/spectre-logo-main.png.asset.json";
 import { PRODUCTS, PLANS, REASONS } from "@/components/home/constants";
@@ -57,7 +59,9 @@ const FALLBACK_MEMBERS = [
 ];
 
 function Index() {
+  const { t } = useTranslation();
   const [ref] = useInView<HTMLDivElement>();
+
 
   return (
     <div
