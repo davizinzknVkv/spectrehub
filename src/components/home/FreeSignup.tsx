@@ -59,7 +59,7 @@ export function FreeSignup({ guildInvite }: FreeSignupProps) {
 
             
             <div className="space-y-8">
-              [
+              {[
                 t('free.step1'),
                 t('free.step2'),
                 t('free.step3'),
