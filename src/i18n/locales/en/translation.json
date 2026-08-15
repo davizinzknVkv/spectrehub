@@ -5,8 +5,11 @@
     "getStarted": "I Want to Use Spectre",
     "selectLanguage": "Select Language",
     "loading": "Loading...",
-    "support": "Discord Support"
+    "support": "Discord Support",
+    "stable": "Stable",
+    "beta": "Beta"
   },
+
   "nav": {
     "systems": "systems",
     "method": "method",
