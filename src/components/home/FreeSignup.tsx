@@ -59,11 +59,12 @@ export function FreeSignup({ guildInvite }: FreeSignupProps) {
 
             
             <div className="space-y-8">
-              {[
-                "Preencha os dados e gere seu identificador único.",
-                "Junte-se ao nosso ecossistema oficial no Discord.",
-                "Autentique-se via suporte para liberar suas ferramentas."
+              [
+                t('free.step1'),
+                t('free.step2'),
+                t('free.step3'),
               ].map((s, i) => (
+
                 <div key={s} className="flex gap-6 group">
                    <div className="w-12 h-12 border border-white/10 bg-white/5 flex items-center justify-center font-display text-white italic transition-colors group-hover:border-spectre-pink/40 group-hover:text-spectre-pink shrink-0">
                      0{i + 1}
