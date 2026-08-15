@@ -28,7 +28,7 @@ i18n
   .use(initReactI18next)
   .init({
     resources,
-    lng: 'pt', // Force default language to PT to see if it works
+    lng: localStorage.getItem('i18nextLng') || 'pt',
     fallbackLng: 'pt',
     keySeparator: '.',
     nsSeparator: ':',
