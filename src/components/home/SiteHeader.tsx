@@ -10,6 +10,12 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import logoAsset from "@/assets/spectre-logo-main.png.asset.json";
+import brFlag from "@/assets/flags/brazil.png.asset.json";
+import usFlag from "@/assets/flags/usa.png.asset.json";
+import esFlag from "@/assets/flags/spain.png.asset.json";
+import deFlag from "@/assets/flags/germany.png.asset.json";
+import itFlag from "@/assets/flags/italy.png.asset.json";
+import ruFlag from "@/assets/flags/russia.png.asset.json";
 
 interface SiteHeaderProps {
   guildInvite: string;
@@ -99,7 +105,7 @@ export function SiteHeader({ guildInvite }: SiteHeaderProps) {
             <DropdownMenuTrigger asChild>
               <div className="flex items-center gap-2 px-3 py-1.5 bg-black/40 border border-white/5 rounded-md text-white/60 hover:border-white/10 transition-colors cursor-pointer group">
                 <div className="w-4 h-4 rounded-full overflow-hidden border border-white/10">
-                  <img src="https://flagcdn.com/w40/br.png" alt="PT-BR" className="w-full h-full object-cover" />
+                  <img src={brFlag.url} alt="PT-BR" className="w-full h-full object-cover" />
                 </div>
                 <ChevronDown className="w-3 h-3 text-white/20 group-hover:text-white/40" />
               </div>
@@ -110,16 +116,28 @@ export function SiteHeader({ guildInvite }: SiteHeaderProps) {
               </DropdownMenuLabel>
               <DropdownMenuSeparator className="bg-white/5" />
               <DropdownMenuItem className="focus:bg-spectre-pink focus:text-white cursor-pointer py-2.5 rounded-none flex items-center gap-3">
-                <img src="https://flagcdn.com/w40/br.png" alt="" className="w-4 h-3 object-cover rounded-sm" />
+                <img src={brFlag.url} alt="" className="w-4 h-3 object-cover rounded-sm" />
                 <span className="font-display text-[10px] uppercase italic tracking-widest">Português</span>
               </DropdownMenuItem>
               <DropdownMenuItem className="focus:bg-spectre-pink focus:text-white cursor-pointer py-2.5 rounded-none flex items-center gap-3">
-                <img src="https://flagcdn.com/w40/us.png" alt="" className="w-4 h-3 object-cover rounded-sm" />
+                <img src={usFlag.url} alt="" className="w-4 h-3 object-cover rounded-sm" />
                 <span className="font-display text-[10px] uppercase italic tracking-widest">English</span>
               </DropdownMenuItem>
               <DropdownMenuItem className="focus:bg-spectre-pink focus:text-white cursor-pointer py-2.5 rounded-none flex items-center gap-3">
-                <img src="https://flagcdn.com/w40/es.png" alt="" className="w-4 h-3 object-cover rounded-sm" />
+                <img src={esFlag.url} alt="" className="w-4 h-3 object-cover rounded-sm" />
                 <span className="font-display text-[10px] uppercase italic tracking-widest">Español</span>
+              </DropdownMenuItem>
+              <DropdownMenuItem className="focus:bg-spectre-pink focus:text-white cursor-pointer py-2.5 rounded-none flex items-center gap-3">
+                <img src={deFlag.url} alt="" className="w-4 h-3 object-cover rounded-sm" />
+                <span className="font-display text-[10px] uppercase italic tracking-widest">Deutsch</span>
+              </DropdownMenuItem>
+              <DropdownMenuItem className="focus:bg-spectre-pink focus:text-white cursor-pointer py-2.5 rounded-none flex items-center gap-3">
+                <img src={itFlag.url} alt="" className="w-4 h-3 object-cover rounded-sm" />
+                <span className="font-display text-[10px] uppercase italic tracking-widest">Italiano</span>
+              </DropdownMenuItem>
+              <DropdownMenuItem className="focus:bg-spectre-pink focus:text-white cursor-pointer py-2.5 rounded-none flex items-center gap-3">
+                <img src={ruFlag.url} alt="" className="w-4 h-3 object-cover rounded-sm" />
+                <span className="font-display text-[10px] uppercase italic tracking-widest">Русский</span>
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
