@@ -98,10 +98,10 @@ export function Hero({ guildInvite, fallbackMembers }: HeroProps) {
 
         <Reveal delay={300}>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6">
-            <a href="#produtos" className="ds-btn ds-btn-primary w-full sm:min-w-[280px]">
+            <a href="#produtos" className="ds-btn ds-btn-primary w-full sm:min-w-[240px]">
               {t('common.getStarted')}
             </a>
-            <Link to="/docs" className="ds-btn ds-btn-secondary w-full sm:min-w-[280px]">
+            <Link to="/docs" className="ds-btn ds-btn-secondary w-full sm:min-w-[240px]">
               {t('common.documentation')}
             </Link>
           </div>
