@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { ChevronRight, Zap, ArrowUpRight } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import { Reveal } from "./Reveal";
 import { Product } from "./constants";
 import questFlyer from "@/assets/quest-flyer.png.asset.json";
@@ -10,7 +11,9 @@ interface ProductsSectionProps {
 }
 
 export function ProductsSection({ products }: ProductsSectionProps) {
+  const { t } = useTranslation();
   const [activeTab, setActiveTab] = useState(0);
+
 
   return (
     <section id="produtos" className="mx-auto max-w-7xl px-4 py-24 sm:px-6 lg:px-8">
@@ -19,12 +22,13 @@ export function ProductsSection({ products }: ProductsSectionProps) {
           <Reveal>
             <div className="font-display text-[10px] tracking-[0.3em] text-spectre-pink uppercase mb-4 flex items-center gap-2">
                <span className="w-8 h-px bg-spectre-pink/30" />
-               Ecosistema
+               {t('products.badge')}
             </div>
             <h2 className="font-display text-[2rem] md:text-[3.5rem] leading-[0.9] text-white uppercase italic tracking-tighter">
-              A SPECTRE CRIA.<br />
-              <span className="text-white/30">O MERCADO COPIA.</span>
+              {t('products.title')}<br />
+              <span className="text-white/30">{t('products.subtitle')}</span>
             </h2>
+
           </Reveal>
         </div>
       </div>
@@ -46,11 +50,12 @@ export function ProductsSection({ products }: ProductsSectionProps) {
                      <div className="flex flex-col items-center gap-4 text-center p-8">
                         <Zap className="w-12 h-12 text-spectre-pink/20 animate-pulse" />
                         <div className="font-display text-2xl text-white/20 uppercase italic tracking-widest">
-                           Em Breve Novidades
+                           {t('products.soon')}
                         </div>
                         <div className="text-[10px] text-white/10 uppercase tracking-[0.3em]">
-                           Protocolo em Desenvolvimento
+                           {t('products.soonDesc')}
                         </div>
+
                      </div>
                    ) : products[activeTab].id === "quests" ? (
                      <img 
@@ -111,7 +116,7 @@ export function ProductsSection({ products }: ProductsSectionProps) {
                to={products[activeTab].to}
                className="ds-btn ds-btn-primary w-full"
              >
-               Garantir Acesso Agora
+               {t('products.cta')}
              </Link>
            </Reveal>
         </div>
