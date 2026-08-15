@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Check, Copy, ArrowRight } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import { Reveal } from "./Reveal";
 
 interface FreeSignupProps {
@@ -7,6 +8,8 @@ interface FreeSignupProps {
 }
 
 export function FreeSignup({ guildInvite }: FreeSignupProps) {
+  const { t } = useTranslation();
+
   const [name, setName] = useState("");
   const [discord, setDiscord] = useState("");
   const [code, setCode] = useState<string | null>(null);
@@ -47,12 +50,13 @@ export function FreeSignup({ guildInvite }: FreeSignupProps) {
           <div>
             <div className="font-display text-[10px] tracking-[0.3em] text-spectre-pink uppercase mb-4 flex items-center gap-2">
                <span className="w-8 h-px bg-spectre-pink/30" />
-               Acesso Comunitário
+               {t('free.badge')}
             </div>
             <h2 className="font-display text-[2rem] md:text-[3.5rem] leading-[0.9] text-white uppercase italic tracking-tighter mb-12">
-              JORNADA <br />
-              <span className="text-white/30 text-[1.5rem] md:text-[2.5rem]">GRATUITA.</span>
+              {t('free.title')} <br />
+              <span className="text-white/30 text-[1.5rem] md:text-[2.5rem]">{t('free.subtitle')}</span>
             </h2>
+
             
             <div className="space-y-8">
               {[
@@ -90,7 +94,7 @@ export function FreeSignup({ guildInvite }: FreeSignupProps) {
                     maxLength={40}
                     required
                     className="w-full bg-white/5 border border-white/10 px-6 py-4 text-xs text-white uppercase tracking-widest outline-none focus:border-spectre-pink/50 transition-all placeholder:text-white/10"
-                    placeholder="Seu nome"
+                    placeholder={t('free.formName')}
                   />
                 </div>
                 <div className="space-y-3">
@@ -103,18 +107,19 @@ export function FreeSignup({ guildInvite }: FreeSignupProps) {
                     maxLength={40}
                     required
                     className="w-full bg-white/5 border border-white/10 px-6 py-4 text-xs text-white uppercase tracking-widest outline-none focus:border-spectre-pink/50 transition-all placeholder:text-white/10"
-                    placeholder="@usuario"
+                    placeholder={t('free.formDiscord')}
                   />
                 </div>
                 <button type="submit" className="ds-btn ds-btn-primary w-full py-5 text-[10px]">
-                  Gerar Identificador
+                  {t('free.formSubmit')}
                 </button>
+
               </form>
             ) : (
               <div className="space-y-8">
                 <div>
                   <div className="font-display text-[9px] uppercase tracking-[0.3em] text-white/30 italic mb-4 text-center">
-                    Seu Código Único
+                    {t('free.uniqueCode')}
                   </div>
                   <div className="flex items-center gap-2 border border-spectre-pink/30 bg-spectre-pink/5 p-6">
                     <code className="flex-1 font-display text-2xl text-spectre-pink italic text-center tracking-widest">
@@ -136,7 +141,7 @@ export function FreeSignup({ guildInvite }: FreeSignupProps) {
                   rel="noreferrer"
                   className="ds-btn ds-btn-primary w-full py-5 text-[10px]"
                 >
-                  Quero Usar o Spectre
+                  {t('common.getStarted')}
                 </a>
                 
                 <button
@@ -144,7 +149,7 @@ export function FreeSignup({ guildInvite }: FreeSignupProps) {
                   onClick={() => setCode(null)}
                   className="w-full font-display text-[9px] uppercase tracking-[0.3em] text-white/20 hover:text-white transition-colors italic"
                 >
-                  Gerar Novo Código
+                  {t('free.generateNew')}
                 </button>
               </div>
             )}
