@@ -60,7 +60,23 @@ export function Hero({ guildInvite, fallbackMembers }: HeroProps) {
               />
             </svg>
           </div>
-          <h1 className="font-display text-[clamp(2rem,8vw,5rem)] leading-[0.9] text-white uppercase italic tracking-tighter mb-8 break-words relative z-10 flex flex-col items-center">
+          {/* Adicionando efeito extra no lado oposto para mais impacto */}
+          <div className="absolute top-1/4 -left-8 sm:-left-12 md:-left-24 -translate-y-1/2 w-20 sm:w-32 md:w-48 opacity-10 pointer-events-none select-none scale-x-[-1] rotate-12">
+            <svg viewBox="0 0 100 60" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full">
+              <path 
+                d="M5 5L95 25L5 45L95 55" 
+                stroke="currentColor" 
+                strokeWidth="1.5" 
+                strokeLinecap="round" 
+                strokeLinejoin="round" 
+                className="text-spectre-pink animate-[dash-reverse_4s_ease-in-out_infinite]"
+                style={{ strokeDasharray: '200', strokeDashoffset: '200' }}
+              />
+            </svg>
+          </div>
+          {/* Adicionando outro efeito no fundo para preencher o espaço */}
+          <div className="absolute bottom-1/4 right-0 w-64 h-64 bg-spectre-pink/5 rounded-full blur-[120px] pointer-events-none" />
+          <h1 className="font-display text-[clamp(1.8rem,7vw,4.5rem)] leading-[0.9] text-white uppercase italic tracking-tighter mb-8 break-words relative z-10 flex flex-col items-center">
             <div className="flex items-center gap-[0.3em] md:gap-[0.5em] justify-center flex-wrap">
               <span>{t('hero.title1')}</span>
               <img src={logoAsset.url} alt="" className="h-[0.8em] w-auto animate-pulse drop-shadow-[0_0_20px_rgba(255,0,85,0.4)]" />
