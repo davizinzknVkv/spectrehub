@@ -57,8 +57,7 @@ async function fetchLiveStats(url: string, signal: AbortSignal): Promise<Partial
     samples.push(performance.now() - t0);
     if (i === 0 && r.ok) {
       try {
-        const text = await r.text();
-        const j = JSON.parse(text) as { presence_count?: number };
+        const j = await r.json() as { presence_count?: number };
         if (typeof j.presence_count === "number" && j.presence_count > 0) {
           members = Math.max(100, j.presence_count);
         }
