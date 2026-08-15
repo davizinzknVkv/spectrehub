@@ -1,5 +1,6 @@
 import React from "react";
 import { ArrowRight } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import { Reveal } from "./Reveal";
 import { Avatar } from "./Avatar";
 import logoAsset from "@/assets/spectre-logo-main.png.asset.json";
@@ -10,6 +11,8 @@ interface HeroProps {
 }
 
 export function Hero({ guildInvite, fallbackMembers }: HeroProps) {
+  const { t } = useTranslation();
+
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20 px-4">
       {/* Background patterns */}
@@ -29,8 +32,9 @@ export function Hero({ guildInvite, fallbackMembers }: HeroProps) {
           <div className="inline-flex items-center gap-2 px-3 py-1 border border-spectre-pink/30 bg-spectre-pink/5 mb-8">
             <span className="w-1.5 h-1.5 rounded-full bg-spectre-pink animate-pulse" />
             <span className="font-display text-[10px] tracking-[0.3em] text-spectre-pink uppercase">
-              Alta Tecnologia
+              {t('hero.badge')}
             </span>
+
           </div>
         </Reveal>
 
@@ -58,29 +62,31 @@ export function Hero({ guildInvite, fallbackMembers }: HeroProps) {
           </div>
           <h1 className="font-display text-[clamp(2rem,8vw,6.5rem)] leading-[0.9] text-white uppercase italic tracking-tighter mb-6 break-words relative z-10 flex flex-col items-center">
             <div className="flex items-center gap-4 md:gap-6 justify-center">
-              <span>SPECTRE</span>
+              <span>{t('hero.title1')}</span>
               <img src={logoAsset.url} alt="" className="h-[0.7em] md:h-[0.8em] w-auto animate-pulse drop-shadow-[0_0_20px_rgba(255,0,85,0.4)]" />
-              <span>HUB</span>
+              <span>{t('hero.title2')}</span>
             </div>
-            <span className="text-spectre-pink">DOMINA</span> O <br />
-            MERCADO.
+            <span className="text-spectre-pink">{t('hero.subtitle1')}</span> {t('hero.subtitle2')}
           </h1>
+
         </Reveal>
 
         <Reveal delay={200}>
           <p className="max-w-2xl mx-auto text-white/50 text-base md:text-lg font-sans mb-10">
-            O hub definitivo para automação de elite no Discord. Performance absoluta, infraestrutura inabalável e a experiência de usuário mais sofisticada do mercado.
+            {t('hero.description')}
           </p>
+
         </Reveal>
 
         <Reveal delay={300}>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <a href="#produtos" className="ds-btn ds-btn-primary min-w-[240px]">
-              Quero Usar o Spectre
+              {t('common.getStarted')}
             </a>
             <a href={guildInvite} target="_blank" rel="noreferrer" className="ds-btn ds-btn-secondary min-w-[240px]">
-              Documentação
+              {t('common.documentation')}
             </a>
+
           </div>
         </Reveal>
 
@@ -100,7 +106,7 @@ export function Hero({ guildInvite, fallbackMembers }: HeroProps) {
                   </div>
                ))}
              </div>
-             <span className="font-display text-[10px] tracking-[0.2em] uppercase text-white/60">Comunidade Ativa</span>
+             <span className="font-display text-[10px] tracking-[0.2em] uppercase text-white/60">{t('hero.activeCommunity')}</span>
            </div>
         </div>
       </div>
