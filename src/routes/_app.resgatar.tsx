@@ -63,6 +63,9 @@ function ResgatarPage() {
         </div>
 
         <div className="max-w-7xl mx-auto relative z-10">
+          <div className="absolute -top-20 -left-20 w-64 h-64 bg-spectre-pink/5 rounded-full blur-[100px] pointer-events-none" />
+          <div className="absolute top-40 -right-20 w-80 h-80 bg-spectre-pink/5 rounded-full blur-[120px] pointer-events-none" />
+          
           <Reveal>
             <div className="text-center mb-16">
               <h1 className="font-display text-4xl md:text-6xl uppercase italic tracking-tighter mb-4">
@@ -117,7 +120,21 @@ function ResgatarPage() {
                     </button>
                   </div>
 
-                  {/* Aesthetic Corner */}
+                  {/* Aesthetic Corner - Hover Trail Effect */}
+                  <div className="absolute top-1/2 -right-8 w-32 opacity-0 group-hover:opacity-20 transition-opacity pointer-events-none select-none rotate-12">
+                    <svg viewBox="0 0 100 60" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full">
+                      <path 
+                        d="M5 5L95 25L5 45L95 55" 
+                        stroke="currentColor" 
+                        strokeWidth="2" 
+                        strokeLinecap="round" 
+                        strokeLinejoin="round" 
+                        className="text-spectre-pink animate-[dash_3s_ease-in-out_infinite]"
+                        style={{ strokeDasharray: '200', strokeDashoffset: '200' }}
+                      />
+                    </svg>
+                  </div>
+
                   <div className="absolute top-0 right-0 w-16 h-16 pointer-events-none opacity-0 group-hover:opacity-10 transition-opacity">
                     <product.icon className="w-full h-full text-spectre-pink -rotate-12 translate-x-4 -translate-y-4" />
                   </div>
