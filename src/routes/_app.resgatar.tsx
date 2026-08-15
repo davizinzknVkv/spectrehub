@@ -7,9 +7,6 @@ import {
   LayoutDashboard 
 } from "lucide-react";
 import { Reveal } from "@/components/home/Reveal";
-import logoAsset from "@/assets/spectre-logo-main.png.asset.json";
-import { SiteHeader } from "@/components/home/SiteHeader";
-import { SiteFooter } from "@/components/home/SiteFooter";
 
 export const Route = createFileRoute("/_app/resgatar")({
   component: ResgatarPage,
