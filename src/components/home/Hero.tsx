@@ -100,9 +100,9 @@ export function Hero({ guildInvite, fallbackMembers }: HeroProps) {
             <a href="#produtos" className="ds-btn ds-btn-primary w-full sm:min-w-[240px]">
               {t('common.getStarted')}
             </a>
-            <a href={guildInvite} target="_blank" rel="noreferrer" className="ds-btn ds-btn-secondary w-full sm:min-w-[240px]">
+            <Link to="/docs" className="ds-btn ds-btn-secondary w-full sm:min-w-[240px]">
               {t('common.documentation')}
-            </a>
+            </Link>
           </div>
         </Reveal>
 

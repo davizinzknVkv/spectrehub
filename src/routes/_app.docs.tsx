@@ -3,7 +3,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Book, Shield, Zap, Terminal, Code, Cpu, Globe, Lock, MessageSquare, ChevronRight } from "lucide-react";
 import { Reveal } from "@/components/home/Reveal";
 
-export const Route = createFileRoute("/_app/docs" as any)({
+export const Route = createFileRoute("/_app/docs")({
   component: DocsPage,
 });
 
