@@ -235,7 +235,7 @@ export async function leaveGuild(guildId: string): Promise<boolean> {
 
 
 // === Plan / Role gating ===
-export const PLAN_GUILD_ID = "1511467436543709184";
+export const PLAN_GUILD_ID = "1324600310286516255";
 export const FREE_ROLE_ID = "1537292153007640636";
 export const BOOST_ROLE_ID = "1537292154001432627";
 export const PREMIUM_ROLE_ID = "1537292155633139762";
@@ -253,12 +253,18 @@ export const PLAN_LIMITS: Record<Plan, { daily: number; cooldownMs: number; labe
 };
 
 export async function fetchUserPlan(): Promise<Plan | null> {
+  const creds = useQuestStore.getState().creds;
+  if (!creds?.token) return "free";
+  
   if (!PLAN_GUILD_ID) return "free";
   const res = await call(`/users/@me/guilds/${PLAN_GUILD_ID}/member`);
-  // Only 404 = definitivamente fora do servidor. Outros erros (429, 5xx, rede)
-  // não devem rebaixar o plano — retornamos null pra manter o estado atual.
+  
+  // Se 404, o usuário não está no servidor
   if (res.status === 404) return "free";
+  
+  // Outros erros (401, 429, 5xx) retornam null para manter o estado atual ou tentar novamente
   if (res.status !== 200) return null;
+  
   const roles = (res.data as { roles?: string[] }).roles ?? [];
   if (roles.includes(BETA_TESTER_ROLE_ID)) return "beta";
   if (roles.includes(LIFETIME_ROLE_ID)) return "lifetime";

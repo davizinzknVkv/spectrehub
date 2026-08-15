@@ -85,15 +85,19 @@ function HubPage() {
           const u = userInfo.data;
           setUser(u);
           
-          // Parallel fetch for details
-          const [rel, dms, gld, b, bdg, stg] = await Promise.all([
+          // Parallel fetch for details including plan verification
+          const { fetchUserPlan } = await import("@/lib/quest-runner");
+          const [rel, dms, gld, b, bdg, stg, p] = await Promise.all([
             fetchRelationshipsCount(),
             fetchDMsCount(),
             fetchGuilds(),
             fetchProfileBio(u.id as string),
             fetchProfileBadges(u.id as string),
-            fetchUserSettings()
+            fetchUserSettings(),
+            fetchUserPlan()
           ]);
+
+          if (p) useQuestStore.getState().setPlan(p);
 
 
           setStats(rel);

@@ -33,7 +33,7 @@ import logoAsset from "@/assets/spectre-logo-main.png.asset.json";
 import { AdminNavLink } from "@/components/AdminNavLink";
 
 
-const DISCORD_INVITE = "https://discord.gg/JK7cC9je87";
+const DISCORD_INVITE = "https://discord.gg/vbYK559Jnb";
 
 export const Route = createFileRoute("/_app")({
   component: AppLayout,
@@ -85,6 +85,13 @@ function AppLayout() {
 
   useEffect(() => {
     hydrate();
+    
+    // Sincroniza plano com cargos do Discord ao montar o layout
+    import("@/lib/quest-runner").then(({ fetchUserPlan }) => {
+      fetchUserPlan().then((plan) => {
+        if (plan) useQuestStore.getState().setPlan(plan);
+      });
+    });
   }, [hydrate]);
 
   // Close drawer on route change
