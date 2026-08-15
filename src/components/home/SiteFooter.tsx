@@ -29,9 +29,14 @@ export function SiteFooter({ guildInvite }: SiteFooterProps) {
               {t('footer.slogan')}
             </p>
             <div className="flex gap-4">
-               {["Twitter", "Discord", "Docs"].map(social => (
-                 <a key={social} href="#" className="font-display text-[9px] tracking-[0.2em] text-white/20 hover:text-spectre-pink transition-colors uppercase italic">
-                   {social}
+               {[
+                 { label: "YouTube", href: "https://youtube.com/@ODAVIZINZKN" },
+                 { label: "Instagram", href: "https://instagram.com/davizinzkn" },
+                 { label: "Discord", href: "https://discord.gg/spectrehub" },
+                 { label: "Docs", href: "#" }
+               ].map(social => (
+                 <a key={social.label} href={social.href} target="_blank" rel="noopener noreferrer" className="font-display text-[9px] tracking-[0.2em] text-white/20 hover:text-spectre-pink transition-colors uppercase italic">
+                   {social.label}
                  </a>
                ))}
             </div>
