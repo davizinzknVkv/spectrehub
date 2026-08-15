@@ -31,7 +31,7 @@ export function FinalCta({ guildInvite }: FinalCtaProps) {
             {t('footer.badge')}
             <span className="w-8 h-px bg-spectre-pink/30" />
           </div>
-          <h2 className="font-display text-[2.5rem] md:text-[5rem] lg:text-[8rem] leading-[0.85] text-white uppercase italic tracking-tighter mb-12">
+          <h2 className="font-display text-[clamp(2.5rem,8vw,8rem)] leading-[0.85] text-white uppercase italic tracking-tighter mb-12">
             {t('footer.title')} <br />
             <span className="text-spectre-pink">{t('footer.subtitle')}</span>
 
