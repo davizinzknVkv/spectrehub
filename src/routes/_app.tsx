@@ -85,6 +85,13 @@ function AppLayout() {
 
   useEffect(() => {
     hydrate();
+    
+    // Sincroniza plano com cargos do Discord ao montar o layout
+    import("@/lib/quest-runner").then(({ fetchUserPlan }) => {
+      fetchUserPlan().then((plan) => {
+        if (plan) useQuestStore.getState().setPlan(plan);
+      });
+    });
   }, [hydrate]);
 
   // Close drawer on route change
