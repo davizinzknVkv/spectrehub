@@ -110,10 +110,10 @@ export function SiteHeader({ guildInvite }: SiteHeaderProps) {
         {/* Actions & Socials (image-81.png) */}
         <div className="hidden md:flex items-center gap-6">
           <div className="flex items-center gap-4 text-white/40 pr-6 border-r border-white/5">
-            <a href="#" className="hover:text-white transition-colors"><MessageSquare className="w-4 h-4" /></a>
-            <a href="#" className="hover:text-white transition-colors"><Github className="w-4 h-4" /></a>
-            <a href="#" className="hover:text-white transition-colors"><Twitter className="w-4 h-4" /></a>
-            <a href="#" className="hover:text-white transition-colors"><Linkedin className="w-4 h-4" /></a>
+            <a href="https://discord.gg/spectrehub" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors"><MessageSquare className="w-4 h-4" /></a>
+            <a href="https://github.com/davizinzkn" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors"><Github className="w-4 h-4" /></a>
+            <a href="https://youtube.com/@ODAVIZINZKN" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors"><Twitter className="w-4 h-4" /></a>
+            <a href="https://instagram.com/davizinzkn" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors"><Linkedin className="w-4 h-4" /></a>
           </div>
 
           <DropdownMenu>
