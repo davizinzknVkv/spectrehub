@@ -25,7 +25,6 @@ i18n
     fallbackLng: 'pt',
     supportedLngs: ['pt', 'en', 'es', 'de', 'it', 'ru'],
     nonExplicitSupportedLngs: true,
-    preload: ['pt', 'en', 'es', 'de', 'it', 'ru'],
     interpolation: {
       escapeValue: false,
     },
@@ -38,10 +37,6 @@ i18n
     react: {
       useSuspense: false,
       bindI18n: 'languageChanged loaded',
-    },
-    parseMissingKeyHandler: (key) => {
-      const parts = key.split('.');
-      return parts[parts.length - 1];
     },
     detection: {
       order: ['localStorage', 'navigator'],
