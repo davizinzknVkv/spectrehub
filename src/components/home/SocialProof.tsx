@@ -125,7 +125,7 @@ export function SocialProof({ widgetUrl, products: productsList }: SocialProofPr
         inFlight.current = null;
       }
     };
-  }, [widgetUrl, productsList.length]);
+  }, [widgetUrl]); // removed productsList.length to prevent unnecessary cycles if it constant
 
   const membersCount = useCountUp(stats.members, inView, 1000);
   const productsCount = useCountUp(stats.products, inView, 1000);
