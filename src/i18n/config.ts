@@ -31,6 +31,7 @@ i18n
     fallbackLng: 'pt',
     supportedLngs: ['pt', 'en', 'es', 'de', 'it', 'ru'],
     nonExplicitSupportedLngs: true,
+    preload: ['pt', 'en', 'es', 'de', 'it', 'ru'],
     keySeparator: '.',
     nsSeparator: ':',
     interpolation: {
