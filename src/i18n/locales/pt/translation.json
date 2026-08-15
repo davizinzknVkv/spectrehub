@@ -78,8 +78,24 @@
     "statSystems": "Sistemas Elite",
     "statLatency": "Latência Média",
     "statUptime": "Uptime Realtime"
+  },
+  "footer": {
+    "badge": "Próximo Passo",
+    "title": "DEFINA O",
+    "subtitle": "NOVO PADRÃO.",
+    "description": "Junte-se ao ecossistema SPECTRE e ative sua infraestrutura de automação hoje mesmo. Desenvolvido para quem busca performance sem compromissos.",
+    "accessDashboard": "Acessar Painel",
+    "slogan": "A elite da automação para Discord. Desenvolvido para servidores que buscam domínio absoluto e performance inabalável.",
+    "navHome": "Início",
+    "navPlans": "Planos",
+    "navCommunity": "Comunidade",
+    "navDashboard": "Painel",
+    "legalPrivacy": "Privacidade",
+    "legalTerms": "Termos",
+    "rights": "Spectre Hub © 2026. Todos os direitos reservados."
   }
 }
+
 
 
 

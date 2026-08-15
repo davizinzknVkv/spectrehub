@@ -78,8 +78,24 @@
     "statSystems": "Elite Systems",
     "statLatency": "Average Latency",
     "statUptime": "Realtime Uptime"
+  },
+  "footer": {
+    "badge": "Next Step",
+    "title": "DEFINE THE",
+    "subtitle": "NEW STANDARD.",
+    "description": "Join the SPECTRE ecosystem and activate your automation infrastructure today. Developed for those who seek performance without compromise.",
+    "accessDashboard": "Access Dashboard",
+    "slogan": "The elite of Discord automation. Developed for servers seeking absolute dominance and unwavering performance.",
+    "navHome": "Home",
+    "navPlans": "Plans",
+    "navCommunity": "Community",
+    "navDashboard": "Dashboard",
+    "legalPrivacy": "Privacy",
+    "legalTerms": "Terms",
+    "rights": "Spectre Hub © 2026. All rights reserved."
   }
 }
+
 
 
 
