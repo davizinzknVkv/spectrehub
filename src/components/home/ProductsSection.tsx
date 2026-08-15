@@ -21,7 +21,7 @@ export function ProductsSection({ products }: ProductsSectionProps) {
                <span className="w-8 h-px bg-spectre-pink/30" />
                Ecosistema
             </div>
-            <h2 className="font-display text-[2.5rem] md:text-[4.5rem] leading-[0.9] text-white uppercase italic tracking-tighter">
+            <h2 className="font-display text-[2rem] md:text-[3.5rem] leading-[0.9] text-white uppercase italic tracking-tighter">
               A SPECTRE CRIA.<br />
               <span className="text-white/30">O MERCADO COPIA.</span>
             </h2>
