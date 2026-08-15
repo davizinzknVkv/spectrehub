@@ -25,6 +25,20 @@ export function ReasonsSection({ reasons }: ReasonsSectionProps) {
           <p className="text-white/40 text-sm leading-relaxed uppercase tracking-widest border-l border-spectre-pink/30 pl-6">
             {t('reasons.description')}
           </p>
+          
+          <div className="mt-12 opacity-20 pointer-events-none select-none hidden lg:block">
+            <svg viewBox="0 0 100 60" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-48">
+              <path 
+                d="M5 5L95 25L5 45L95 55" 
+                stroke="currentColor" 
+                strokeWidth="1" 
+                strokeLinecap="round" 
+                strokeLinejoin="round" 
+                className="text-spectre-pink animate-[dash_5s_linear_infinite]"
+                style={{ strokeDasharray: '200', strokeDashoffset: '200' }}
+              />
+            </svg>
+          </div>
 
         </Reveal>
 
