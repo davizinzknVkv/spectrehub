@@ -126,7 +126,9 @@ function RootShell({ children }: { children: ReactNode }) {
   const { i18n } = useTranslation();
   
   useEffect(() => {
-    document.documentElement.lang = i18n.language;
+    if (i18n.language) {
+      document.documentElement.lang = i18n.language;
+    }
   }, [i18n.language]);
 
   return (

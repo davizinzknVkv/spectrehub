@@ -62,11 +62,11 @@ export function Hero({ guildInvite, fallbackMembers }: HeroProps) {
           </div>
           <h1 className="font-display text-[clamp(2rem,8vw,6.5rem)] leading-[0.9] text-white uppercase italic tracking-tighter mb-6 break-words relative z-10 flex flex-col items-center">
             <div className="flex items-center gap-4 md:gap-6 justify-center">
-              <span>{t('hero.title1')}</span>
+              <span>{t('hero.title1', 'SPECTRE')}</span>
               <img src={logoAsset.url} alt="" className="h-[0.7em] md:h-[0.8em] w-auto animate-pulse drop-shadow-[0_0_20px_rgba(255,0,85,0.4)]" />
-              <span>{t('hero.title2')}</span>
+              <span>{t('hero.title2', 'HUB')}</span>
             </div>
-            <span className="text-spectre-pink">{t('hero.subtitle1')}</span> {t('hero.subtitle2')}
+            <span className="text-spectre-pink">{t('hero.subtitle1', 'DOMINA')}</span> {t('hero.subtitle2', ' O MERCADO.')}
           </h1>
 
         </Reveal>

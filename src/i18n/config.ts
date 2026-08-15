@@ -30,6 +30,7 @@ i18n
     resources,
     fallbackLng: 'pt',
     supportedLngs: ['pt', 'en', 'es', 'de', 'it', 'ru'],
+    nonExplicitSupportedLngs: true,
     keySeparator: '.',
     nsSeparator: ':',
     interpolation: {
