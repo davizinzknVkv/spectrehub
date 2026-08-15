@@ -164,41 +164,91 @@ export function SiteHeader({ guildInvite }: SiteHeaderProps) {
         </button>
       </div>
 
-      {/* Mobile Menu */}
-      {open && (
-        <div className="absolute top-full left-4 right-4 mt-4 bg-obsidian-soft border border-white/5 p-8 md:hidden animate-in fade-in slide-in-from-top-4 duration-500">
-          <nav className="flex flex-col gap-6 mb-8">
-            {NAV.map((n) => (
+      {/* Mobile Menu Overlay */}
+      <div 
+        className={`fixed inset-0 z-[60] bg-black/95 backdrop-blur-xl transition-all duration-500 md:hidden ${
+          open ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+        }`}
+      >
+        <div className="flex flex-col h-full p-8 pt-24">
+          <div className="flex justify-between items-center mb-12">
+             <div className="font-display text-[10px] tracking-[0.3em] text-spectre-pink uppercase flex items-center gap-2">
+               <span className="w-8 h-px bg-spectre-pink/30" />
+               Menu
+             </div>
+             <button onClick={() => setOpen(false)} className="w-10 h-10 border border-white/10 flex items-center justify-center">
+               <X className="w-5 h-5 text-white/40" />
+             </button>
+          </div>
+
+          <nav className="flex flex-col gap-8 mb-auto">
+            {NAV.map((n, i) => (
               <a
                 key={n.href}
                 href={n.href}
                 onClick={() => setOpen(false)}
-                className="font-display text-lg text-white uppercase italic tracking-widest"
+                className="font-display text-3xl text-white uppercase italic tracking-tighter hover:text-spectre-pink transition-colors"
+                style={{ transitionDelay: `${i * 50}ms` }}
               >
                 {n.label}
               </a>
             ))}
           </nav>
-          <div className="flex flex-col gap-4">
-             <Link 
-              to="/hub" 
-              className="ds-btn ds-btn-secondary w-full"
-              onClick={() => setOpen(false)}
-            >
-              Painel
-            </Link>
-            <a
-              href={guildInvite}
-              target="_blank"
-              rel="noreferrer"
-              className="ds-btn ds-btn-primary w-full"
-            >
-              {t('common.getStarted')}
-            </a>
 
+          <div className="grid grid-cols-2 gap-4 mt-12">
+            <div className="flex flex-col gap-4 col-span-2">
+               <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <div className="flex items-center justify-between w-full p-4 bg-white/5 border border-white/5 text-white/60">
+                    <div className="flex items-center gap-3">
+                      <img src={currentLang.flag} alt="" className="w-5 h-3 object-cover rounded-sm" />
+                      <span className="font-display text-[10px] uppercase italic tracking-widest">{currentLang.label}</span>
+                    </div>
+                    <ChevronDown className="w-4 h-4" />
+                  </div>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent className="w-[calc(100vw-4rem)] bg-obsidian border-white/5 rounded-none">
+                  {LANGUAGES.map((lang) => (
+                    <DropdownMenuItem 
+                      key={lang.code}
+                      onClick={async () => {
+                        await i18n.changeLanguage(lang.code);
+                        setOpen(false);
+                      }}
+                      className="focus:bg-spectre-pink focus:text-white py-4 flex items-center gap-3"
+                    >
+                      <img src={lang.flag} alt="" className="w-5 h-3 object-cover rounded-sm" />
+                      <span className="font-display text-[11px] uppercase italic tracking-widest">{lang.label}</span>
+                    </DropdownMenuItem>
+                  ))}
+                </DropdownMenuContent>
+              </DropdownMenu>
+
+              <Link 
+                to="/hub" 
+                className="ds-btn ds-btn-secondary w-full py-5 text-center"
+                onClick={() => setOpen(false)}
+              >
+                Dashboard
+              </Link>
+              <a
+                href={guildInvite}
+                target="_blank"
+                rel="noreferrer"
+                className="ds-btn ds-btn-primary w-full py-5 text-center"
+              >
+                {t('common.getStarted')}
+              </a>
+            </div>
+            
+            <div className="flex items-center gap-6 text-white/20 mt-8">
+              <a href="https://discord.gg/spectrehub" target="_blank" rel="noopener noreferrer"><MessageSquare className="w-5 h-5" /></a>
+              <a href="https://github.com/davizinzkn" target="_blank" rel="noopener noreferrer"><Github className="w-5 h-5" /></a>
+              <a href="https://instagram.com/davizinzkn" target="_blank" rel="noopener noreferrer"><Linkedin className="w-5 h-5" /></a>
+            </div>
           </div>
         </div>
-      )}
+      </div>
     </header>
   );
 }
