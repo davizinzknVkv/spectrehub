@@ -104,6 +104,12 @@ export function SiteHeader({ guildInvite }: SiteHeaderProps) {
                 {n.label}
               </a>
             ))}
+            <Link
+              to="/docs"
+              className="font-display text-[10px] tracking-[0.3em] text-white/40 hover:text-white transition-colors uppercase italic"
+            >
+              Docs
+            </Link>
           </nav>
         </div>
 

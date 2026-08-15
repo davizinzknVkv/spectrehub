@@ -1,5 +1,6 @@
 import React from "react";
 import { ArrowRight } from "lucide-react";
+import { Link } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
 import { Reveal } from "./Reveal";
 import { Avatar } from "./Avatar";
@@ -100,9 +101,9 @@ export function Hero({ guildInvite, fallbackMembers }: HeroProps) {
             <a href="#produtos" className="ds-btn ds-btn-primary w-full sm:min-w-[240px]">
               {t('common.getStarted')}
             </a>
-            <a href={guildInvite} target="_blank" rel="noreferrer" className="ds-btn ds-btn-secondary w-full sm:min-w-[240px]">
+            <Link to="/docs" className="ds-btn ds-btn-secondary w-full sm:min-w-[240px]">
               {t('common.documentation')}
-            </a>
+            </Link>
           </div>
         </Reveal>
 
