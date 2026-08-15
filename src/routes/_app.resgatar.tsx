@@ -49,7 +49,7 @@ const PRODUCTS = [
 
 function ResgatarPage() {
   return (
-    <div className="min-h-screen bg-[#030303] text-white selection:bg-spectre-pink/30 flex flex-col">
+    <div className="bg-[#030303] text-white selection:bg-spectre-pink/30 flex flex-col min-h-full">
       <main className="flex-1 relative z-10 py-12 px-4 sm:px-8">
         {/* Background Patterns */}
         <div className="absolute inset-0 z-0 pointer-events-none opacity-[0.05]">
