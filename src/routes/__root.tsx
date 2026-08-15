@@ -9,8 +9,11 @@ import {
 } from "@tanstack/react-router";
 import { useEffect, type ReactNode } from "react";
 import { Toaster } from "sonner";
-import '../i18n/config';
-import i18next from 'i18next';
+import i18n from '../i18n/config';
+if (typeof window !== 'undefined') {
+  (window as any).i18next = i18n;
+}
+
 import { useTranslation, I18nextProvider } from 'react-i18next';
 
 
@@ -150,7 +153,7 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <I18nextProvider i18n={i18next} defaultNS="translation">
+      <I18nextProvider i18n={i18n} defaultNS="translation">
       {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
       <div className="page-transition-wrapper">
         <Outlet />
