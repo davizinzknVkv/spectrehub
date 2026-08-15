@@ -9,7 +9,7 @@ import deTranslation from './locales/de/translation.json';
 import itTranslation from './locales/it/translation.json';
 import ruTranslation from './locales/ru/translation.json';
 
-const resources = {
+const resources: Record<string, any> = {
   pt: { translation: ptTranslation },
   en: { translation: enTranslation },
   es: { translation: esTranslation },
@@ -32,7 +32,7 @@ i18n
     interpolation: {
       escapeValue: false
     },
-    load: 'languageOnly', // Try to match 'pt' if 'pt-BR' is not found
+    load: 'languageOnly',
     detection: {
       order: ['querystring', 'cookie', 'localStorage', 'navigator', 'htmlTag'],
       caches: ['localStorage', 'cookie']
@@ -40,4 +40,5 @@ i18n
   });
 
 export default i18n;
+
 
