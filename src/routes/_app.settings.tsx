@@ -120,23 +120,91 @@ function SettingsPage() {
         </div>
       </div>
 
+      {/* Guia de Obtenção de Token */}
+      <div className="mx-auto w-full max-w-2xl mt-12 space-y-8">
+        <div className="flex items-center gap-4">
+           <div className="h-px flex-1 bg-white/5" />
+           <h2 className="font-display text-[10px] uppercase tracking-[0.4em] text-white/20 italic">Manual de Extração</h2>
+           <div className="h-px flex-1 bg-white/5" />
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="ds-card p-6 border-white/5 bg-white/[0.02]">
+            <div className="flex items-center gap-3 mb-6">
+              <div className="w-8 h-8 bg-spectre-pink/10 flex items-center justify-center text-spectre-pink font-display italic text-xs border border-spectre-pink/20">01</div>
+              <h3 className="font-display text-[11px] uppercase tracking-widest italic text-white">Método Bookmarklet</h3>
+            </div>
+            <p className="text-[10px] text-white/40 font-sans leading-relaxed mb-6 uppercase tracking-wider">
+              Arraste o botão abaixo para sua barra de favoritos, abra o Discord no navegador e clique no favorito para ver seu token.
+            </p>
+            <a 
+              href={TOKEN_BOOKMARKLET}
+              onClick={(e) => e.preventDefault()}
+              className="ds-btn ds-btn-primary w-full !py-3 !text-[9px] flex items-center gap-2 group cursor-grab active:cursor-grabbing"
+            >
+              <Star className="w-3 h-3 group-hover:rotate-45 transition-transform" />
+              SPECTRE TOKEN HELPER
+            </a>
+          </div>
+
+          <div className="ds-card p-6 border-white/5 bg-white/[0.02]">
+            <div className="flex items-center gap-3 mb-6">
+              <div className="w-8 h-8 bg-white/10 flex items-center justify-center text-white/40 font-display italic text-xs border border-white/10">02</div>
+              <h3 className="font-display text-[11px] uppercase tracking-widest italic text-white">Console (F12)</h3>
+            </div>
+            <div className="bg-black/40 border border-white/5 p-4 mb-4 font-mono text-[9px] text-spectre-pink/80 overflow-x-auto whitespace-nowrap">
+              {`(webpackChunkdiscord_app.push([[''],{},e=>{m=[];for(c in e.c)m.push(e.c[c])}]),m).find(m=>m?.exports?.default?.getToken!==void 0).exports.default.getToken()`}
+            </div>
+            <button 
+              onClick={() => {
+                navigator.clipboard.writeText(`(webpackChunkdiscord_app.push([[''],{},e=>{m=[];for(c in e.c)m.push(e.c[c])}]),m).find(m=>m?.exports?.default?.getToken!==void 0).exports.default.getToken()`);
+                toast.success("Código Copiado", { description: "Cole no console do Discord (F12)" });
+              }}
+              className="ds-btn ds-btn-secondary w-full !py-3 !text-[9px] flex items-center gap-2"
+            >
+              <Copy className="w-3 h-3" />
+              COPIAR SCRIPT CONSOLE
+            </button>
+          </div>
+        </div>
+
+        {/* Galeria Visual de Passos */}
+        <div className="grid grid-cols-2 sm:grid-cols-5 gap-4 opacity-40 hover:opacity-100 transition-opacity duration-700">
+           {[step1, step2, step3, step4, step5].map((s, i) => (
+             <div key={i} className="aspect-[4/3] border border-white/5 bg-white/5 overflow-hidden group cursor-zoom-in relative">
+                <img src={s.url} alt={`Passo ${i+1}`} className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-110" />
+                <div className="absolute inset-0 bg-spectre-pink/10 opacity-0 group-hover:opacity-100 transition-opacity" />
+                <div className="absolute bottom-1 left-1 font-display text-[8px] text-white/40 uppercase">Step 0{i+1}</div>
+             </div>
+           ))}
+        </div>
+      </div>
+
       {confirmDisconnect && (
         <Modal
-          title="Encerrar Sessão"
+          title="ENCERRAR SESSÃO"
           onClose={() => setConfirmDisconnect(false)}
           actions={
             <div className="flex gap-4 w-full">
-              <button className="ds-btn ds-btn-secondary flex-1" onClick={() => setConfirmDisconnect(false)}>Cancelar</button>
+              <button 
+                className="ds-btn ds-btn-secondary flex-1 border-spectre-pink/20" 
+                onClick={() => setConfirmDisconnect(false)}
+                style={{ color: '#ff0055', border: '1px solid rgba(255, 0, 85, 0.2)' }}
+              >
+                CANCELAR
+              </button>
               <button className="ds-btn ds-btn-primary flex-1" onClick={() => {
                 setCreds(null);
                 setToken("");
                 setConfirmDisconnect(false);
                 toast.success("Sessão Encerrada", { description: "Terminal limpo e desconectado." });
-              }}>Encerrar</button>
+              }}>ENCERRAR</button>
             </div>
           }
         >
-          <p className="text-white/60 text-sm font-sans">Tem certeza que deseja remover o acesso deste terminal? Você precisará validar o token novamente para entrar.</p>
+          <p className="text-white/40 text-xs font-sans italic leading-relaxed text-center sm:text-left">
+            Tem certeza que deseja remover o acesso deste terminal? Você precisará validar o token novamente para entrar.
+          </p>
         </Modal>
       )}
     </div>

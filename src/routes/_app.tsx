@@ -350,11 +350,17 @@ function TopBar({ onOpenMenu, pathname }: { onOpenMenu: () => void; pathname: st
 
       {confirmLogout && (
         <Modal
-          title="Encerrar Sessão"
+          title="ENCERRAR SESSÃO"
           onClose={() => setConfirmLogout(false)}
           actions={
             <div className="flex gap-4 w-full">
-              <button className="ds-btn ds-btn-secondary flex-1 py-3" onClick={() => setConfirmLogout(false)}>Cancelar</button>
+              <button 
+                className="ds-btn ds-btn-secondary flex-1 py-3 border-spectre-pink/20 hover:border-spectre-pink/40" 
+                onClick={() => setConfirmLogout(false)}
+                style={{ color: '#ff0055', border: '1px solid rgba(255, 0, 85, 0.2)' }}
+              >
+                CANCELAR
+              </button>
               <button 
                 className="ds-btn ds-btn-primary flex-1 py-3" 
                 onClick={() => {
@@ -362,21 +368,39 @@ function TopBar({ onOpenMenu, pathname }: { onOpenMenu: () => void; pathname: st
                   setConfirmLogout(false);
                   toast.success("Terminal desconectado");
                 }}
-              >Sair</button>
+              >
+                ENCERRAR
+              </button>
             </div>
           }
         >
           <div className="space-y-6">
-            <div className="flex items-center gap-4 border border-white/5 p-4 bg-white/[0.02]">
-              <div className="w-12 h-12 bg-white/5 overflow-hidden">
-                 {avatarUrl && <img src={avatarUrl} alt="" className="w-full h-full object-cover grayscale" />}
+            <div className="flex items-center gap-4 border border-white/5 p-4 bg-white/[0.02] relative group overflow-hidden">
+              {/* Profile Background Accent */}
+              <div className="absolute top-0 right-0 w-24 h-24 bg-spectre-pink/5 rounded-full blur-2xl -translate-y-1/2 translate-x-1/2" />
+              
+              <div className="w-14 h-14 bg-white/5 overflow-hidden border border-white/10 shrink-0">
+                 {avatarUrl ? (
+                   <img src={avatarUrl} alt="" className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" />
+                 ) : (
+                   <div className="w-full h-full flex items-center justify-center text-white/20">
+                     <UserRound className="w-6 h-6" />
+                   </div>
+                 )}
               </div>
-              <div>
-                <div className="font-display text-xs text-white uppercase italic tracking-widest">{me?.global_name || me?.username}</div>
-                <div className="font-sans text-[9px] text-white/20 uppercase tracking-[0.2em]">Verified Hub User</div>
+              <div className="min-w-0">
+                <div className="font-display text-sm text-white uppercase italic tracking-widest truncate">
+                  {me?.global_name || me?.username || "Usuário Hub"}
+                </div>
+                <div className="font-sans text-[9px] text-white/20 uppercase tracking-[0.2em] flex items-center gap-2">
+                  <span className="w-1 h-1 rounded-full bg-spectre-pink animate-pulse" />
+                  Terminal Ativo #{me?.id?.slice(-4) || "0000"}
+                </div>
               </div>
             </div>
-            <p className="text-white/60 text-xs font-sans italic leading-relaxed">Sua chave de acesso será removida deste terminal local. Você precisará autenticar novamente para acessar os protocolos premium.</p>
+            <p className="text-white/40 text-xs font-sans italic leading-relaxed text-center sm:text-left">
+              Tem certeza que deseja remover o acesso deste terminal? Você precisará validar o token novamente para entrar.
+            </p>
           </div>
         </Modal>
       )}
