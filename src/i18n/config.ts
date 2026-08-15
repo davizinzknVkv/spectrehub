@@ -28,6 +28,7 @@ i18n
     interpolation: {
       escapeValue: false,
     },
+    defaultNS: 'translation',
     nsSeparator: ':',
     keySeparator: '.',
     returnEmptyString: false,

@@ -150,7 +150,7 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <I18nextProvider i18n={i18next}>
+      <I18nextProvider i18n={i18next} defaultNS="translation">
       {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
       <div className="page-transition-wrapper">
         <Outlet />
