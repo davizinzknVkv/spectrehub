@@ -10,6 +10,12 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import logoAsset from "@/assets/spectre-logo-main.png.asset.json";
+import brFlag from "@/assets/flags/brazil.png.asset.json";
+import usFlag from "@/assets/flags/usa.png.asset.json";
+import esFlag from "@/assets/flags/spain.png.asset.json";
+import deFlag from "@/assets/flags/germany.png.asset.json";
+import itFlag from "@/assets/flags/italy.png.asset.json";
+import ruFlag from "@/assets/flags/russia.png.asset.json";
 
 interface SiteHeaderProps {
   guildInvite: string;
