@@ -18,10 +18,10 @@ export function PlansSection({ plans }: PlansSectionProps) {
                Investimento
                <span className="w-8 h-px bg-spectre-pink/30" />
             </div>
-            <h2 className="font-display text-[3rem] md:text-[5rem] leading-[0.9] text-white uppercase italic tracking-tighter mb-6">
+            <h2 className="font-display text-[2.5rem] md:text-[4rem] leading-[0.9] text-white uppercase italic tracking-tighter mb-6">
               PREÇOS <span className="text-white/30">ELITE.</span>
             </h2>
-            <p className="text-white/50 text-lg">
+            <p className="text-white/50 text-base md:text-lg">
               Escolha o nível de poder que seu servidor merece. Infraestrutura inabalável em todos os planos.
             </p>
         </Reveal>
