@@ -1,4 +1,8 @@
 import { Zap, Gauge, Target, Tag, ShieldCheck, Music4, Sparkles, LifeBuoy } from "lucide-react";
+import autoQuestsAsset from "@/assets/auto-quests-preview.png.asset.json";
+import nicksGunAsset from "@/assets/nicksgun-preview.png.asset.json";
+import loginAsset from "@/assets/login-preview.png.asset.json";
+import hubAsset from "@/assets/hub-preview.png.asset.json";
 
 export type Product = {
   id: string;
@@ -21,7 +25,7 @@ export const PRODUCTS: Product[] = [
     status: "Estável",
     to: "/missoes",
     icon: Zap,
-    previewUrl: "/mnt/documents/auto-quests-preview.png"
+    previewUrl: autoQuestsAsset.url
   },
   {
     id: "optimizer",
@@ -31,7 +35,7 @@ export const PRODUCTS: Product[] = [
     status: "Em breve",
     to: "/hub",
     icon: Gauge,
-    previewUrl: "" // Removido para mostrar "Em breve"
+    previewUrl: ""
   },
   {
     id: "nicks",
@@ -41,7 +45,7 @@ export const PRODUCTS: Product[] = [
     status: "Beta",
     to: "/nicksgun",
     icon: Target,
-    previewUrl: "/mnt/documents/nicksgun-preview.png"
+    previewUrl: nicksGunAsset.url
   },
   {
     id: "orbs",
@@ -51,7 +55,7 @@ export const PRODUCTS: Product[] = [
     status: "Estável",
     to: "/resgatar",
     icon: Tag,
-    previewUrl: "/mnt/documents/login-preview.png"
+    previewUrl: loginAsset.url
   },
   {
     id: "farms",
@@ -61,7 +65,7 @@ export const PRODUCTS: Product[] = [
     status: "Estável",
     to: "/farms",
     icon: Gauge,
-    previewUrl: "/mnt/documents/auto-quests-preview.png"
+    previewUrl: autoQuestsAsset.url
   },
   {
     id: "control",
@@ -71,7 +75,7 @@ export const PRODUCTS: Product[] = [
     status: "Estável",
     to: "/clone",
     icon: ShieldCheck,
-    previewUrl: "/mnt/documents/hub-preview.png"
+    previewUrl: hubAsset.url
   },
   {
     id: "presence",
@@ -81,7 +85,7 @@ export const PRODUCTS: Product[] = [
     status: "Estável",
     to: "/spotify",
     icon: Music4,
-    previewUrl: "/mnt/documents/hub-preview.png"
+    previewUrl: hubAsset.url
   },
 ];
 
