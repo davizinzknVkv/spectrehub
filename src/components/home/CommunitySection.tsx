@@ -128,6 +128,7 @@ export function CommunitySection({ widgetUrl, guildId, guildInvite, fallbackMemb
                 height="500"
                 title="Widget do Discord"
                 loading="lazy"
+                // @ts-ignore
                 allowtransparency="true"
                 frameBorder={0}
                 sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"
