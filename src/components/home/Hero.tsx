@@ -60,7 +60,7 @@ export function Hero({ guildInvite, fallbackMembers }: HeroProps) {
               />
             </svg>
           </div>
-          <h1 className="font-display text-[clamp(2.5rem,10vw,6.5rem)] leading-[0.85] text-white uppercase italic tracking-tighter mb-8 break-words relative z-10 flex flex-col items-center">
+          <h1 className="font-display text-[clamp(2rem,8vw,5rem)] leading-[0.9] text-white uppercase italic tracking-tighter mb-8 break-words relative z-10 flex flex-col items-center">
             <div className="flex items-center gap-[0.3em] md:gap-[0.5em] justify-center flex-wrap">
               <span>{t('hero.title1')}</span>
               <img src={logoAsset.url} alt="" className="h-[0.8em] w-auto animate-pulse drop-shadow-[0_0_20px_rgba(255,0,85,0.4)]" />
