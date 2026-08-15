@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "@tanstack/react-router";
-import { X, Menu, LogIn, Search, Github, Twitter, Linkedin, ChevronDown, MessageSquare, Languages } from "lucide-react";
+import { X, Menu, LogIn, Search, Github, Youtube, Instagram, ChevronDown, MessageSquare, Languages } from "lucide-react";
 import { useTranslation } from 'react-i18next';
 import {
   DropdownMenu,
@@ -112,8 +112,8 @@ export function SiteHeader({ guildInvite }: SiteHeaderProps) {
           <div className="flex items-center gap-4 text-white/40 pr-6 border-r border-white/5">
             <a href="https://discord.gg/spectrehub" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors"><MessageSquare className="w-4 h-4" /></a>
             <a href="https://github.com/davizinzkn" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors"><Github className="w-4 h-4" /></a>
-            <a href="https://youtube.com/@ODAVIZINZKN" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors"><Twitter className="w-4 h-4" /></a>
-            <a href="https://instagram.com/davizinzkn" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors"><Linkedin className="w-4 h-4" /></a>
+            <a href="https://youtube.com/@ODAVIZINZKN" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors"><Youtube className="w-4 h-4" /></a>
+            <a href="https://instagram.com/davizinzkn" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors"><Instagram className="w-4 h-4" /></a>
           </div>
 
           <DropdownMenu>
@@ -244,7 +244,7 @@ export function SiteHeader({ guildInvite }: SiteHeaderProps) {
             <div className="flex items-center gap-6 text-white/20 mt-8">
               <a href="https://discord.gg/spectrehub" target="_blank" rel="noopener noreferrer"><MessageSquare className="w-5 h-5" /></a>
               <a href="https://github.com/davizinzkn" target="_blank" rel="noopener noreferrer"><Github className="w-5 h-5" /></a>
-              <a href="https://instagram.com/davizinzkn" target="_blank" rel="noopener noreferrer"><Linkedin className="w-5 h-5" /></a>
+              <a href="https://instagram.com/davizinzkn" target="_blank" rel="noopener noreferrer"><Instagram className="w-5 h-5" /></a>
             </div>
           </div>
         </div>
