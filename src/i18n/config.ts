@@ -28,6 +28,7 @@ i18n
   .use(initReactI18next)
   .init({
     resources,
+    lng: 'pt', // Force default language to PT to see if it works
     fallbackLng: 'pt',
     keySeparator: '.',
     nsSeparator: ':',
@@ -40,11 +41,8 @@ i18n
       caches: ['localStorage', 'cookie']
     },
     react: {
-      useSuspense: false // Avoid potential issues with TanStack Start SSR
+      useSuspense: false
     }
   });
 
 export default i18n;
-
-
-
