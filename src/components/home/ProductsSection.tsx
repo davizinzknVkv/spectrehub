@@ -75,10 +75,10 @@ export function ProductsSection({ products }: ProductsSectionProps) {
                    
                    <div className="absolute bottom-4 left-4 right-4 sm:bottom-6 sm:left-6 sm:right-6 z-10">
                       <div className="font-display text-2xl sm:text-4xl text-white uppercase italic mb-1 sm:mb-2 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
-                        {t(`products.${products[activeTab].id}.name`, products[activeTab].name)}
+                        {t(`products.${products[activeTab].id}.name`)}
                       </div>
                       <div className="font-sans text-white/80 text-[10px] sm:text-sm max-w-md drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)] leading-tight line-clamp-2 sm:line-clamp-none">
-                        {t(`products.${products[activeTab].id}.desc`, products[activeTab].desc)}
+                        {t(`products.${products[activeTab].id}.desc`)}
                       </div>
                    </div>
                 </div>
@@ -100,7 +100,7 @@ export function ProductsSection({ products }: ProductsSectionProps) {
              >
                <div>
                  <div className={`font-display text-lg uppercase italic transition-colors ${activeTab === i ? "text-spectre-pink" : "text-white/60 group-hover:text-white"}`}>
-                   {t(`products.${p.id}.name`, p.name)}
+                   {t(`products.${p.id}.name`)}
                  </div>
                   <div className="font-sans text-[10px] text-white/20 uppercase tracking-[0.2em] mt-1">
                     Spectre v4.0

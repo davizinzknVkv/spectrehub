@@ -9,8 +9,11 @@ import {
 } from "@tanstack/react-router";
 import { useEffect, type ReactNode } from "react";
 import { Toaster } from "sonner";
-import '../i18n/config';
-import i18next from 'i18next';
+import i18n from '../i18n/config';
+if (typeof window !== 'undefined') {
+  (window as any).i18next = i18n;
+}
+
 import { useTranslation, I18nextProvider } from 'react-i18next';
 
 
@@ -94,7 +97,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "twitter:description", content: "Domine o Discord com o Spectre Hub. Automação avançada, sniper de nicks e ferramentas de elite com tecnologia de ponta." },
       { property: "og:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/79e7fe18-9b3f-4c86-9466-b1659b463691" },
       { name: "twitter:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/79e7fe18-9b3f-4c86-9466-b1659b463691" },
-      { "httpEquiv": "Content-Security-Policy", content: "default-src 'self'; script-src 'self' 'unsafe-inline' https://challenges.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src * data:; connect-src *; frame-src *; style-src-elem 'self' 'unsafe-inline' https://fonts.googleapis.com; upgrade-insecure-requests;" },
+      { "httpEquiv": "Content-Security-Policy", content: "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://challenges.cloudflare.com https://cdn.gpteng.co; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src * data:; connect-src *; frame-src *; style-src-elem 'self' 'unsafe-inline' https://fonts.googleapis.com; upgrade-insecure-requests;" },
       { "httpEquiv": "X-Content-Type-Options", content: "nosniff" },
       { name: "referrer", content: "no-referrer-when-downgrade" }
     ],
@@ -150,7 +153,7 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <I18nextProvider i18n={i18next}>
+      <I18nextProvider i18n={i18n} defaultNS="translation">
       {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
       <div className="page-transition-wrapper">
         <Outlet />

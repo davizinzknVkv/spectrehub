@@ -1,4 +1,6 @@
 import i18n from 'i18next';
+
+
 import { initReactI18next } from 'react-i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
 
@@ -25,10 +27,10 @@ i18n
     fallbackLng: 'pt',
     supportedLngs: ['pt', 'en', 'es', 'de', 'it', 'ru'],
     nonExplicitSupportedLngs: true,
-    preload: ['pt', 'en', 'es', 'de', 'it', 'ru'],
     interpolation: {
       escapeValue: false,
     },
+    defaultNS: 'translation',
     nsSeparator: ':',
     keySeparator: '.',
     returnEmptyString: false,
@@ -39,14 +41,14 @@ i18n
       useSuspense: false,
       bindI18n: 'languageChanged loaded',
     },
-    parseMissingKeyHandler: (key) => {
-      const parts = key.split('.');
-      return parts[parts.length - 1];
-    },
     detection: {
       order: ['localStorage', 'navigator'],
       caches: ['localStorage'],
     }
   });
+
+if (typeof window !== 'undefined') {
+  (window as any).i18next = i18n;
+}
 
 export default i18n;

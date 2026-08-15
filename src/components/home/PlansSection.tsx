@@ -42,10 +42,10 @@ export function PlansSection({ plans }: PlansSectionProps) {
               )}
               
               <div className="mb-8">
-                <h3 className="font-display text-xl text-white uppercase italic mb-2">{t(`plans.tiers.${p.name.toLowerCase()}.name`, p.name)}</h3>
+                <h3 className="font-display text-xl text-white uppercase italic mb-2">{t(`plans.tiers.${p.name.toLowerCase()}.name`)}</h3>
                 <div className="flex items-baseline gap-1">
                   <span className="text-4xl font-display text-white italic">{p.price}</span>
-                  <span className="text-[10px] text-white/30 uppercase tracking-widest">/ {t(`plans.tiers.${p.name.toLowerCase()}.period`, p.period)}</span>
+                  <span className="text-[10px] text-white/30 uppercase tracking-widest">/ {t(`plans.tiers.${p.name.toLowerCase()}.period`)}</span>
                 </div>
               </div>
 
@@ -53,7 +53,7 @@ export function PlansSection({ plans }: PlansSectionProps) {
                 {p.features.map(f => (
                   <div key={f} className="flex items-center gap-3">
                     <div className="w-1 h-1 bg-spectre-pink/50 group-hover:bg-spectre-pink transition-colors" />
-                    <span className="text-xs font-sans text-white/50 group-hover:text-white/80 transition-colors uppercase tracking-wider">{t(`plans.tiers.${p.name.toLowerCase()}.features.${i}`, { defaultValue: f })}</span>
+                    <span className="text-xs font-sans text-white/50 group-hover:text-white/80 transition-colors uppercase tracking-wider">{t(`plans.tiers.${p.name.toLowerCase()}.features.${i}`)}</span>
                   </div>
                 ))}
               </div>
@@ -64,7 +64,7 @@ export function PlansSection({ plans }: PlansSectionProps) {
                 </a>
               ) : (
                 <Link to="/hub" className={`ds-btn w-full py-4 text-[10px] ${p.highlight ? 'ds-btn-primary' : 'ds-btn-secondary'}`}>
-                  {t(`plans.tiers.${p.name.toLowerCase()}.cta`, { defaultValue: p.cta })}
+                  {t(`plans.tiers.${p.name.toLowerCase()}.cta`)}
                 </Link>
               )}
             </div>
