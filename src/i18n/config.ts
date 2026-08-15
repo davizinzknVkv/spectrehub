@@ -29,6 +29,7 @@ i18n
   .init({
     resources,
     fallbackLng: 'pt',
+    supportedLngs: ['pt', 'en', 'es', 'de', 'it', 'ru'],
     interpolation: {
       escapeValue: false
     },
@@ -36,9 +37,13 @@ i18n
     detection: {
       order: ['querystring', 'cookie', 'localStorage', 'navigator', 'htmlTag'],
       caches: ['localStorage', 'cookie']
+    },
+    react: {
+      useSuspense: false // Avoid potential issues with TanStack Start SSR
     }
   });
 
 export default i18n;
+
 
 
