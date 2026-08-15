@@ -69,7 +69,7 @@ export function Hero({ guildInvite, fallbackMembers }: HeroProps) {
                 strokeWidth="1.5" 
                 strokeLinecap="round" 
                 strokeLinejoin="round" 
-                className="text-spectre-pink animate-[dash_4s_ease-in-out_infinite_reverse]"
+                className="text-spectre-pink animate-[dash-reverse_4s_ease-in-out_infinite]"
                 style={{ strokeDasharray: '200', strokeDashoffset: '200' }}
               />
             </svg>
