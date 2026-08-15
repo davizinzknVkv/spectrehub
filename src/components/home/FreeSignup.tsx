@@ -49,9 +49,9 @@ export function FreeSignup({ guildInvite }: FreeSignupProps) {
                <span className="w-8 h-px bg-spectre-pink/30" />
                Acesso Comunitário
             </div>
-            <h2 className="font-display text-[2.5rem] md:text-[4.5rem] leading-[0.9] text-white uppercase italic tracking-tighter mb-12">
+            <h2 className="font-display text-[2rem] md:text-[3.5rem] leading-[0.9] text-white uppercase italic tracking-tighter mb-12">
               JORNADA <br />
-              <span className="text-white/30 text-[2rem] md:text-[3.5rem]">GRATUITA.</span>
+              <span className="text-white/30 text-[1.5rem] md:text-[2.5rem]">GRATUITA.</span>
             </h2>
             
             <div className="space-y-8">
