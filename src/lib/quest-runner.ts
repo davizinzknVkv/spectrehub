@@ -235,7 +235,7 @@ export async function leaveGuild(guildId: string): Promise<boolean> {
 
 
 // === Plan / Role gating ===
-export const PLAN_GUILD_ID = "1511467436543709184";
+export const PLAN_GUILD_ID = "1324600310286516255";
 export const FREE_ROLE_ID = "1537292153007640636";
 export const BOOST_ROLE_ID = "1537292154001432627";
 export const PREMIUM_ROLE_ID = "1537292155633139762";
