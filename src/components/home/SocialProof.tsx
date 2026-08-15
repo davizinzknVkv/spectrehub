@@ -5,7 +5,7 @@ import { Product } from "./constants";
 
 
 const STATS_CACHE_KEY = "nghc:home-stats:v3";
-const STATS_TTL_MS = 60_000;
+const STATS_TTL_MS = 300_000; // Increased to 5 minutes to reduce impact
 
 type StatsSnapshot = { latency: number; members: number; products: number; ts: number };
 
@@ -126,9 +126,9 @@ export function SocialProof({ widgetUrl, products: productsList }: SocialProofPr
     };
   }, [widgetUrl, productsList.length]);
 
-  const membersCount = useCountUp(stats.members, inView);
-  const productsCount = useCountUp(stats.products, inView);
-  const latencyCount = useCountUp(stats.latency, inView);
+  const membersCount = useCountUp(stats.members, inView, 1000);
+  const productsCount = useCountUp(stats.products, inView, 1000);
+  const latencyCount = useCountUp(stats.latency, inView, 1000);
 
   return (
     <section className="bg-obsidian border-y border-white/5 relative z-10 overflow-hidden">
