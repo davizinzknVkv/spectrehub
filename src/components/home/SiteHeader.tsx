@@ -133,7 +133,9 @@ export function SiteHeader({ guildInvite }: SiteHeaderProps) {
               {LANGUAGES.map((lang) => (
                 <DropdownMenuItem 
                   key={lang.code}
-                  onClick={() => i18n.changeLanguage(lang.code)}
+                  onClick={() => {
+                    i18n.changeLanguage(lang.code);
+                  }}
                   className="focus:bg-spectre-pink focus:text-white cursor-pointer py-2.5 rounded-none flex items-center gap-3"
                 >
                   <img src={lang.flag} alt="" className="w-4 h-3 object-cover rounded-sm" />

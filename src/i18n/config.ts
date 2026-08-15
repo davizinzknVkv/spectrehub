@@ -28,8 +28,8 @@ i18n
   .use(initReactI18next)
   .init({
     resources,
-    lng: 'pt', // Force default language to PT to see if it works
     fallbackLng: 'pt',
+    supportedLngs: ['pt', 'en', 'es', 'de', 'it', 'ru'],
     keySeparator: '.',
     nsSeparator: ':',
     interpolation: {
