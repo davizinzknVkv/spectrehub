@@ -53,7 +53,7 @@ async function fetchLiveStats(url: string, signal: AbortSignal): Promise<Partial
   let members: number | undefined;
   for (let i = 0; i < 3; i++) {
     const t0 = performance.now();
-    const r = await fetch(url, { signal, cache: "no-store" });
+    const r = await fetch(url, { signal, cache: "no-store", mode: 'no-cors' });
     samples.push(performance.now() - t0);
     if (i === 0 && r.ok) {
       try {
