@@ -29,7 +29,8 @@ i18n
   .init({
     resources,
     fallbackLng: 'pt',
-    supportedLngs: ['pt', 'en', 'es', 'de', 'it', 'ru'],
+    keySeparator: '.',
+    nsSeparator: ':',
     interpolation: {
       escapeValue: false
     },
