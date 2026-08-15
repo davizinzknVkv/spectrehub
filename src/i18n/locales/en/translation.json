@@ -57,5 +57,13 @@
     "formSubmit": "Generate Identifier",
     "uniqueCode": "Your Unique Code",
     "generateNew": "Generate New Code"
+  },
+  "footer": {
+    "badge": "Next Step",
+    "title": "DEFINE THE",
+    "subtitle": "NEW STANDARD.",
+    "description": "Join the SPECTRE ecosystem and activate your automation infrastructure today. Developed for those who seek performance without compromise.",
+    "accessDashboard": "Access Dashboard"
   }
 }
+

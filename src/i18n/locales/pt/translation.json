@@ -57,5 +57,13 @@
     "formSubmit": "Gerar Identificador",
     "uniqueCode": "Seu Código Único",
     "generateNew": "Gerar Novo Código"
+  },
+  "footer": {
+    "badge": "Próximo Passo",
+    "title": "DEFINA O",
+    "subtitle": "NOVO PADRÃO.",
+    "description": "Junte-se ao ecossistema SPECTRE e ative sua infraestrutura de automação hoje mesmo. Desenvolvido para quem busca performance sem compromissos.",
+    "accessDashboard": "Acessar Painel"
   }
 }
+
