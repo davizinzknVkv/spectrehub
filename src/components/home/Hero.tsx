@@ -2,7 +2,7 @@ import React from "react";
 import { ArrowRight } from "lucide-react";
 import { Reveal } from "./Reveal";
 import { Avatar } from "./Avatar";
-import logoAsset from "@/assets/spectre-logo-s.png.asset.json";
+import logoAsset from "@/assets/spectre-logo-main.png.asset.json";
 
 interface HeroProps {
   guildInvite: string;
@@ -59,7 +59,7 @@ export function Hero({ guildInvite, fallbackMembers }: HeroProps) {
           <h1 className="font-display text-[clamp(2.5rem,10vw,8.5rem)] leading-[0.85] text-white uppercase italic tracking-tighter mb-8 break-words relative z-10 flex flex-col items-center">
             <div className="flex items-center gap-4 md:gap-8 justify-center">
               <span>SPECTRE</span>
-              <img src={logoAsset.url} alt="" className="h-[0.7em] w-auto animate-pulse drop-shadow-[0_0_20px_rgba(255,0,85,0.4)]" />
+              <img src={logoAsset.url} alt="" className="h-[0.8em] md:h-[0.9em] w-auto animate-pulse drop-shadow-[0_0_20px_rgba(255,0,85,0.4)]" />
               <span>HUB</span>
             </div>
             <span className="text-spectre-pink">DOMINA</span> O <br />

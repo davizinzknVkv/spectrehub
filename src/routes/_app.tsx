@@ -29,7 +29,7 @@ import {
   UserRound,
   Activity,
 } from "lucide-react";
-import logoAsset from "@/assets/spectre-logo-s.png.asset.json";
+import logoAsset from "@/assets/spectre-logo-main.png.asset.json";
 import { AdminNavLink } from "@/components/AdminNavLink";
 
 
