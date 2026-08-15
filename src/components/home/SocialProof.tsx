@@ -125,7 +125,7 @@ export function SocialProof({ widgetUrl, products: productsList }: SocialProofPr
         inFlight.current = null;
       }
     };
-  }, [widgetUrl, productsList]);
+  }, [widgetUrl, productsList.length]);
 
   const membersCount = useCountUp(stats.members, inView, 1000);
   const productsCount = useCountUp(stats.products, inView, 1000);
