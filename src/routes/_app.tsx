@@ -33,7 +33,7 @@ import logoAsset from "@/assets/spectre-logo-main.png.asset.json";
 import { AdminNavLink } from "@/components/AdminNavLink";
 
 
-const DISCORD_INVITE = "https://discord.gg/JK7cC9je87";
+const DISCORD_INVITE = "https://discord.gg/vbYK559Jnb";
 
 export const Route = createFileRoute("/_app")({
   component: AppLayout,
