@@ -71,9 +71,9 @@ export function CommunitySection({ widgetUrl, guildId, guildInvite, fallbackMemb
                <span className="w-8 h-px bg-spectre-pink/30" />
                Sociedade
             </div>
-            <h2 className="font-display text-[2.5rem] md:text-[4.5rem] leading-[0.9] text-white uppercase italic tracking-tighter mb-8">
+            <h2 className="font-display text-[2rem] md:text-[3.5rem] leading-[0.9] text-white uppercase italic tracking-tighter mb-8">
               JUNTE-SE <br />
-              <span className="text-white/30 text-[2rem] md:text-[3.5rem]">À ELITE.</span>
+              <span className="text-white/30 text-[1.5rem] md:text-[2.5rem]">À ELITE.</span>
             </h2>
             <p className="text-white/40 text-sm leading-relaxed uppercase tracking-widest border-l border-spectre-pink/30 pl-6 mb-12 max-w-xl">
               Suporte técnico de alta performance, atualizações em tempo real e uma comunidade ativa que define os novos padrões do mercado.

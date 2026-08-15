@@ -28,11 +28,11 @@ export function FinalCta({ guildInvite }: FinalCtaProps) {
             Próximo Passo
             <span className="w-8 h-px bg-spectre-pink/30" />
           </div>
-          <h2 className="font-display text-[3.5rem] md:text-[6rem] lg:text-[10rem] leading-[0.85] text-white uppercase italic tracking-tighter mb-12">
+          <h2 className="font-display text-[2.5rem] md:text-[5rem] lg:text-[8rem] leading-[0.85] text-white uppercase italic tracking-tighter mb-12">
             DEFINA O <br />
             <span className="text-spectre-pink">NOVO PADRÃO.</span>
           </h2>
-          <p className="mx-auto max-w-2xl text-white/40 text-lg md:text-xl font-sans mb-16 uppercase tracking-[0.1em]">
+          <p className="mx-auto max-w-2xl text-white/40 text-base md:text-lg font-sans mb-16 uppercase tracking-[0.1em]">
             Junte-se ao ecossistema SPECTRE e ative sua infraestrutura de automação hoje mesmo. Desenvolvido para quem busca performance sem compromissos.
           </p>
           
