@@ -42,10 +42,10 @@ export function PlansSection({ plans }: PlansSectionProps) {
               )}
               
               <div className="mb-8">
-                <h3 className="font-display text-xl text-white uppercase italic mb-2">{t(`plans.tiers.${p.name.toLowerCase()}.name`, { defaultValue: p.name })}</h3>
+                <h3 className="font-display text-xl text-white uppercase italic mb-2">{t(`plans.tiers.${p.name.toLowerCase()}.name`, p.name)}</h3>
                 <div className="flex items-baseline gap-1">
                   <span className="text-4xl font-display text-white italic">{p.price}</span>
-                  <span className="text-[10px] text-white/30 uppercase tracking-widest">/ {t(`plans.tiers.${p.name.toLowerCase()}.period`, { defaultValue: p.period })}</span>
+                  <span className="text-[10px] text-white/30 uppercase tracking-widest">/ {t(`plans.tiers.${p.name.toLowerCase()}.period`, p.period)}</span>
                 </div>
               </div>
 

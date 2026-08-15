@@ -30,8 +30,18 @@ i18n
     resources,
     fallbackLng: 'pt',
     supportedLngs: ['pt', 'en', 'es', 'de', 'it', 'ru'],
+    nonExplicitSupportedLngs: true,
+    preload: ['pt', 'en', 'es', 'de', 'it', 'ru'],
     keySeparator: '.',
     nsSeparator: ':',
+    returnEmptyString: false,
+    returnNull: false,
+    returnObjects: true,
+    joinArrays: ' ',
+    parseMissingKeyHandler: (key) => {
+      console.warn(`[i18n] Missing key: ${key}`);
+      return key.split('.').pop();
+    },
     interpolation: {
       escapeValue: false
     },

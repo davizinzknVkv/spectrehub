@@ -10,7 +10,8 @@ import {
 import { useEffect, type ReactNode } from "react";
 import { Toaster } from "sonner";
 import '../i18n/config';
-import { useTranslation } from 'react-i18next';
+import i18next from 'i18next';
+import { useTranslation, I18nextProvider } from 'react-i18next';
 
 
 import appCss from "../styles.css?url";
@@ -126,7 +127,9 @@ function RootShell({ children }: { children: ReactNode }) {
   const { i18n } = useTranslation();
   
   useEffect(() => {
-    document.documentElement.lang = i18n.language;
+    if (i18n.language) {
+      document.documentElement.lang = i18n.language;
+    }
   }, [i18n.language]);
 
   return (
@@ -148,6 +151,7 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
+      <I18nextProvider i18n={i18next}>
       {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
       <div className="page-transition-wrapper">
         <Outlet />
@@ -162,6 +166,7 @@ function RootComponent() {
           duration: 4000,
         }}
       />
+      </I18nextProvider>
     </QueryClientProvider>
 
   );

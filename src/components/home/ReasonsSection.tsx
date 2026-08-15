@@ -35,9 +35,9 @@ export function ReasonsSection({ reasons }: ReasonsSectionProps) {
                 <div className="mb-8 w-12 h-12 border border-white/10 flex items-center justify-center text-white group-hover:bg-spectre-pink group-hover:border-spectre-pink transition-all duration-500">
                   <r.icon className="w-5 h-5" />
                 </div>
-                <h3 className="font-display text-lg text-white uppercase italic mb-4">{t(`reasons.items.${i}.title`, { defaultValue: r.title })}</h3>
+                <h3 className="font-display text-lg text-white uppercase italic mb-4">{t(`reasons.items.${i}.title`, r.title)}</h3>
                 <p className="font-sans text-xs text-white/30 leading-relaxed uppercase tracking-wider">
-                  {t(`reasons.items.${i}.desc`, { defaultValue: r.desc })}
+                  {t(`reasons.items.${i}.desc`, r.desc)}
                 </p>
               </div>
             </Reveal>
