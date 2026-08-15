@@ -2,56 +2,50 @@ import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
 
-import ptTranslation from './locales/pt/translation.json';
-import enTranslation from './locales/en/translation.json';
-import esTranslation from './locales/es/translation.json';
-import deTranslation from './locales/de/translation.json';
-import itTranslation from './locales/it/translation.json';
-import ruTranslation from './locales/ru/translation.json';
-
-const resources: Record<string, any> = {
-  pt: { translation: ptTranslation },
-  en: { translation: enTranslation },
-  es: { translation: esTranslation },
-  de: { translation: deTranslation },
-  it: { translation: itTranslation },
-  ru: { translation: ruTranslation },
-};
-
-// Add aliases for common variations
-resources['pt-BR'] = resources.pt;
-resources['en-US'] = resources.en;
-resources['en-GB'] = resources.en;
+import ptJSON from './locales/pt/translation.json';
+import enJSON from './locales/en/translation.json';
+import esJSON from './locales/es/translation.json';
+import deJSON from './locales/de/translation.json';
+import itJSON from './locales/it/translation.json';
+import ruJSON from './locales/ru/translation.json';
 
 i18n
   .use(LanguageDetector)
   .use(initReactI18next)
   .init({
-    resources,
+    resources: {
+      pt: { translation: ptJSON },
+      en: { translation: enJSON },
+      es: { translation: esJSON },
+      de: { translation: deJSON },
+      it: { translation: itJSON },
+      ru: { translation: ruJSON }
+    },
+    lng: 'pt',
     fallbackLng: 'pt',
     supportedLngs: ['pt', 'en', 'es', 'de', 'it', 'ru'],
     nonExplicitSupportedLngs: true,
     preload: ['pt', 'en', 'es', 'de', 'it', 'ru'],
-    keySeparator: '.',
+    interpolation: {
+      escapeValue: false,
+    },
     nsSeparator: ':',
+    keySeparator: '.',
     returnEmptyString: false,
     returnNull: false,
     returnObjects: true,
     joinArrays: ' ',
-    parseMissingKeyHandler: (key) => {
-      console.warn(`[i18n] Missing key: ${key}`);
-      return key.split('.').pop();
-    },
-    interpolation: {
-      escapeValue: false
-    },
-    load: 'languageOnly',
-    detection: {
-      order: ['querystring', 'cookie', 'localStorage', 'navigator', 'htmlTag'],
-      caches: ['localStorage', 'cookie']
-    },
     react: {
-      useSuspense: false
+      useSuspense: false,
+      bindI18n: 'languageChanged loaded',
+    },
+    parseMissingKeyHandler: (key) => {
+      const parts = key.split('.');
+      return parts[parts.length - 1];
+    },
+    detection: {
+      order: ['localStorage', 'navigator'],
+      caches: ['localStorage'],
     }
   });
 
