@@ -73,8 +73,13 @@
     "statOnline": "online agora",
     "statSupport": "suporte",
     "statRoles": "cargos",
-    "marqueeLabel": "USUÁRIOS QUE JÁ ESTÃO USANDO O Spectre Hub"
+    "marqueeLabel": "USUÁRIOS QUE JÁ ESTÃO USANDO O Spectre Hub",
+    "statMembers": "Membros Ativos",
+    "statSystems": "Sistemas Elite",
+    "statLatency": "Latência Média",
+    "statUptime": "Uptime Realtime"
   }
 }
+
 
 

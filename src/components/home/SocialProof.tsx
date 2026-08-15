@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
+import { useTranslation } from "react-i18next";
 import { useInView, useCountUp } from "./hooks";
 import { Product } from "./constants";
+
 
 const STATS_CACHE_KEY = "nghc:home-stats:v3";
 const STATS_TTL_MS = 60_000;
@@ -69,7 +71,9 @@ async function fetchLiveStats(url: string, signal: AbortSignal): Promise<Partial
 }
 
 export function SocialProof({ widgetUrl, products: productsList }: SocialProofProps) {
+  const { t } = useTranslation();
   const [ref, inView] = useInView<HTMLDivElement>();
+
   const [stats, setStats] = useState<StatsSnapshot>(() => {
     const cached = readCache();
     return cached ? { ...cached, products: productsList.length } : { ...DEFAULT_STATS, products: productsList.length };
@@ -139,7 +143,7 @@ export function SocialProof({ widgetUrl, products: productsList }: SocialProofPr
                 {Math.round(membersCount)}+
               </span>
               <span className="font-display text-[9px] tracking-[0.3em] text-white/30 uppercase italic group-hover:text-spectre-pink transition-colors">
-                Membros Ativos
+                {t('community.statMembers')}
               </span>
            </div>
            <div className="bg-obsidian flex flex-col items-center text-center p-8 group hover:bg-white/[0.02] transition-colors rounded-none">
@@ -147,7 +151,7 @@ export function SocialProof({ widgetUrl, products: productsList }: SocialProofPr
                 {Math.round(productsCount)}
               </span>
               <span className="font-display text-[9px] tracking-[0.3em] text-white/30 uppercase italic group-hover:text-spectre-pink transition-colors">
-                Sistemas Elite
+                {t('community.statSystems')}
               </span>
            </div>
            <div className="bg-obsidian flex flex-col items-center text-center p-8 group hover:bg-white/[0.02] transition-colors rounded-none">
@@ -155,7 +159,7 @@ export function SocialProof({ widgetUrl, products: productsList }: SocialProofPr
                 {latencyCount.toFixed(2)}<span className="text-spectre-pink not-italic text-2xl">ms</span>
               </span>
               <span className="font-display text-[9px] tracking-[0.3em] text-white/30 uppercase italic group-hover:text-spectre-pink transition-colors">
-                Latência Média
+                {t('community.statLatency')}
               </span>
            </div>
            <div className="bg-obsidian flex flex-col items-center text-center p-8 group hover:bg-white/[0.02] transition-colors rounded-none">
@@ -164,7 +168,7 @@ export function SocialProof({ widgetUrl, products: productsList }: SocialProofPr
                 <span className="font-display text-2xl text-white italic tracking-tighter">99.9%</span>
               </div>
               <span className="font-display text-[9px] tracking-[0.3em] text-white/30 uppercase italic group-hover:text-spectre-pink transition-colors">
-                Uptime Realtime
+                {t('community.statUptime')}
               </span>
            </div>
         </div>
