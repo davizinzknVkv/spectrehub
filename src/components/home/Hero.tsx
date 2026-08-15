@@ -2,7 +2,7 @@ import React from "react";
 import { ArrowRight } from "lucide-react";
 import { Reveal } from "./Reveal";
 import { Avatar } from "./Avatar";
-import logoAsset from "@/assets/spectre-logo-s.png.asset.json";
+import logoAsset from "@/assets/spectre-logo-main.png.asset.json";
 
 interface HeroProps {
   guildInvite: string;

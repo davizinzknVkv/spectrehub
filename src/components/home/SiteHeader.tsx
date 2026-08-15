@@ -9,7 +9,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import logoAsset from "@/assets/spectre-logo-s.png.asset.json";
+import logoAsset from "@/assets/spectre-logo-main.png.asset.json";
 
 interface SiteHeaderProps {
   guildInvite: string;
