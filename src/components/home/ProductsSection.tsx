@@ -33,17 +33,18 @@ export function ProductsSection({ products }: ProductsSectionProps) {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-[1fr_400px] gap-12 items-start">
+      <div className="grid grid-cols-1 lg:grid-cols-[1fr_400px] gap-8 md:gap-12 items-start">
         {/* Gallery / Preview */}
-        <Reveal className="relative aspect-video lg:aspect-square bg-obsidian-soft border border-white/5 overflow-hidden group">
+        <Reveal className="relative aspect-[16/10] sm:aspect-video lg:aspect-square bg-obsidian-soft border border-white/5 overflow-hidden group w-full">
            <div className="absolute inset-0 bg-gradient-to-tr from-spectre-pink/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
-           <div className="absolute inset-0 flex items-center justify-center p-8 md:p-12">
-             <div className="relative w-full h-full border border-white/10 bg-black/40 backdrop-blur-sm p-4 transition-transform duration-700 group-hover:scale-[1.02]">
+           <div className="absolute inset-0 flex items-center justify-center p-4 sm:p-8 md:p-12">
+             <div className="relative w-full h-full border border-white/10 bg-black/40 backdrop-blur-sm p-2 sm:p-4 transition-transform duration-700 lg:group-hover:scale-[1.02]">
                 <div className="w-full h-full bg-[#111] overflow-hidden relative flex items-center justify-center">
                    {products[activeTab].previewUrl ? (
                      <img 
                        src={products[activeTab].previewUrl} 
-                       className="w-full h-full object-cover transition-all duration-700 group-hover:scale-105" 
+                       className="w-full h-full object-cover transition-all duration-700 lg:group-hover:scale-105" 
+                       loading="lazy"
                        alt={`${products[activeTab].name} Preview`} 
                      />
                    ) : products[activeTab].status === "Em breve" ? (
@@ -72,12 +73,11 @@ export function ProductsSection({ products }: ProductsSectionProps) {
                    )}
                    <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60" />
                    
-                   <div className="absolute bottom-6 left-6 right-6 z-10">
-                      <div className="font-display text-4xl text-white uppercase italic mb-2 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
+                   <div className="absolute bottom-4 left-4 right-4 sm:bottom-6 sm:left-6 sm:right-6 z-10">
+                      <div className="font-display text-2xl sm:text-4xl text-white uppercase italic mb-1 sm:mb-2 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
                         {t(`products.${products[activeTab].id}.name`, products[activeTab].name)}
-
                       </div>
-                      <div className="font-sans text-white/80 text-sm max-w-md drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)] leading-tight">
+                      <div className="font-sans text-white/80 text-[10px] sm:text-sm max-w-md drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)] leading-tight line-clamp-2 sm:line-clamp-none">
                         {t(`products.${products[activeTab].id}.desc`, products[activeTab].desc)}
                       </div>
                    </div>
@@ -92,11 +92,11 @@ export function ProductsSection({ products }: ProductsSectionProps) {
              <button
                key={p.id}
                onClick={() => setActiveTab(i)}
-                className={`w-full text-left p-6 transition-all duration-300 border border-white/5 flex items-center justify-between group rounded-none ${
-                  activeTab === i 
-                    ? "bg-spectre-pink/5 border-spectre-pink/30" 
-                    : "hover:bg-white/[0.02]"
-                }`}
+                 className={`w-full text-left p-4 sm:p-6 transition-all duration-300 border border-white/5 flex items-center justify-between group rounded-none min-h-[44px] ${
+                   activeTab === i 
+                     ? "bg-spectre-pink/5 border-spectre-pink/30" 
+                     : "hover:bg-white/[0.02]"
+                 }`}
              >
                <div>
                  <div className={`font-display text-lg uppercase italic transition-colors ${activeTab === i ? "text-spectre-pink" : "text-white/60 group-hover:text-white"}`}>

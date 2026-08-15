@@ -13,7 +13,7 @@ export function SiteFooter({ guildInvite }: SiteFooterProps) {
   return (
     <footer className="bg-obsidian pt-32 pb-16 border-t border-white/5">
       <div className="mx-auto max-w-7xl px-4 md:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-20 mb-24">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[1fr_auto] gap-12 lg:gap-20 mb-24">
           <div className="max-w-md">
             <Link to="/" className="flex items-center gap-3 mb-8">
               <img

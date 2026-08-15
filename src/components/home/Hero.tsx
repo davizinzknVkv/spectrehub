@@ -14,7 +14,7 @@ export function Hero({ guildInvite, fallbackMembers }: HeroProps) {
   const { t } = useTranslation();
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20 px-4">
+    <section className="relative min-h-[100dvh] flex items-center justify-center overflow-hidden pt-20 px-4 md:px-8">
       {/* Background patterns */}
       <div className="absolute inset-0 z-0 overflow-hidden">
         <div 
@@ -39,7 +39,7 @@ export function Hero({ guildInvite, fallbackMembers }: HeroProps) {
         </Reveal>
 
         <Reveal delay={100} className="relative">
-          <div className="absolute top-1/2 -right-12 md:-right-24 -translate-y-1/2 w-32 md:w-64 opacity-20 pointer-events-none select-none">
+          <div className="absolute top-1/2 -right-8 sm:-right-12 md:-right-24 -translate-y-1/2 w-20 sm:w-32 md:w-64 opacity-20 pointer-events-none select-none">
             <svg viewBox="0 0 100 60" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full">
               <path 
                 d="M5 5L95 25L5 45L95 55" 
@@ -60,13 +60,14 @@ export function Hero({ guildInvite, fallbackMembers }: HeroProps) {
               />
             </svg>
           </div>
-          <h1 className="font-display text-[clamp(2rem,8vw,6.5rem)] leading-[0.9] text-white uppercase italic tracking-tighter mb-6 break-words relative z-10 flex flex-col items-center">
-            <div className="flex items-center gap-4 md:gap-6 justify-center">
+          <h1 className="font-display text-[clamp(2.5rem,10vw,6.5rem)] leading-[0.85] text-white uppercase italic tracking-tighter mb-8 break-words relative z-10 flex flex-col items-center">
+            <div className="flex items-center gap-[0.3em] md:gap-[0.5em] justify-center flex-wrap">
               <span>{t('hero.title1', 'SPECTRE')}</span>
-              <img src={logoAsset.url} alt="" className="h-[0.7em] md:h-[0.8em] w-auto animate-pulse drop-shadow-[0_0_20px_rgba(255,0,85,0.4)]" />
+              <img src={logoAsset.url} alt="" className="h-[0.8em] w-auto animate-pulse drop-shadow-[0_0_20px_rgba(255,0,85,0.4)]" />
               <span>{t('hero.title2', 'HUB')}</span>
             </div>
-            <span className="text-spectre-pink">{t('hero.subtitle1', 'DOMINA')}</span> {t('hero.subtitle2', ' O MERCADO.')}
+            <span className="text-spectre-pink">{t('hero.subtitle1', 'DOMINA')}</span> 
+            <span className="inline-block">{t('hero.subtitle2', ' O MERCADO.')}</span>
           </h1>
 
         </Reveal>
@@ -79,14 +80,13 @@ export function Hero({ guildInvite, fallbackMembers }: HeroProps) {
         </Reveal>
 
         <Reveal delay={300}>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <a href="#produtos" className="ds-btn ds-btn-primary min-w-[240px]">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6">
+            <a href="#produtos" className="ds-btn ds-btn-primary w-full sm:min-w-[240px]">
               {t('common.getStarted')}
             </a>
-            <a href={guildInvite} target="_blank" rel="noreferrer" className="ds-btn ds-btn-secondary min-w-[240px]">
+            <a href={guildInvite} target="_blank" rel="noreferrer" className="ds-btn ds-btn-secondary w-full sm:min-w-[240px]">
               {t('common.documentation')}
             </a>
-
           </div>
         </Reveal>
 

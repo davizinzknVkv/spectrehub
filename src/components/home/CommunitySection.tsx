@@ -68,7 +68,7 @@ export function CommunitySection({ widgetUrl, guildId, guildInvite, fallbackMemb
 
   return (
     <section id="comunidade" className="mx-auto max-w-7xl px-4 py-24 sm:px-6 lg:px-8 border-t border-white/5">
-      <div className="grid grid-cols-1 lg:grid-cols-[1fr_450px] gap-20 items-start">
+      <div className="grid grid-cols-1 lg:grid-cols-[1fr_450px] gap-12 lg:gap-20 items-start">
         <div>
           <Reveal>
              <div className="font-display text-[10px] tracking-[0.3em] text-spectre-pink uppercase mb-4 flex items-center gap-2">
@@ -107,7 +107,7 @@ export function CommunitySection({ widgetUrl, guildId, guildInvite, fallbackMemb
           </Reveal>
         </div>
 
-        <Reveal className="relative bg-black border border-white/5 p-4 overflow-hidden group rounded-none shadow-[inset_0_0_50px_rgba(0,0,0,0.8)]">
+        <Reveal className="relative bg-black border border-white/5 p-4 overflow-hidden group rounded-none shadow-[inset_0_0_50px_rgba(0,0,0,0.8)] w-full max-w-full">
            <div className="absolute top-4 left-4 right-4 h-10 bg-[#080808] border border-white/5 flex items-center px-4 gap-3 z-20">
               <div className="relative flex items-center justify-center">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#ff0055] animate-pulse" />
@@ -120,7 +120,7 @@ export function CommunitySection({ widgetUrl, guildId, guildInvite, fallbackMemb
                 <div className="w-1 h-1 bg-[#ff0055]/40" />
               </div>
            </div>
-           <div className="pt-14 h-[500px] overflow-hidden relative bg-[#050505]">
+           <div className="pt-14 h-[350px] sm:h-[500px] overflow-hidden relative bg-[#050505]">
               <div className="absolute inset-0 z-10 pointer-events-none bg-gradient-to-b from-transparent via-transparent to-black" />
               <iframe
                 src={`https://discord.com/widget?id=${guildId}&theme=dark`}
