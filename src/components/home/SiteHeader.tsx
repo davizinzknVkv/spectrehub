@@ -135,7 +135,6 @@ export function SiteHeader({ guildInvite }: SiteHeaderProps) {
                   key={lang.code}
                   onClick={() => {
                     i18n.changeLanguage(lang.code);
-                    localStorage.setItem('i18nextLng', lang.code);
                   }}
                   className="focus:bg-spectre-pink focus:text-white cursor-pointer py-2.5 rounded-none flex items-center gap-3"
                 >

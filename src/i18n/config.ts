@@ -28,8 +28,8 @@ i18n
   .use(initReactI18next)
   .init({
     resources,
-    lng: localStorage.getItem('i18nextLng') || 'pt',
     fallbackLng: 'pt',
+    supportedLngs: ['pt', 'en', 'es', 'de', 'it', 'ru'],
     keySeparator: '.',
     nsSeparator: ':',
     interpolation: {
