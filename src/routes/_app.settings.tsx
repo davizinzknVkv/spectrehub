@@ -153,7 +153,7 @@ function SettingsPage() {
               <h3 className="font-display text-[11px] uppercase tracking-widest italic text-white">Console (F12)</h3>
             </div>
             <div className="bg-black/40 border border-white/5 p-4 mb-4 font-mono text-[9px] text-spectre-pink/80 overflow-x-auto whitespace-nowrap">
-              (webpackChunkdiscord_app.push([[''],{},e=&gt;{m=[];for(c in e.c)m.push(e.c[c])}]),m).find(m=&gt;m?.exports?.default?.getToken!==void 0).exports.default.getToken()
+              {`(webpackChunkdiscord_app.push([[''],{},e=>{m=[];for(c in e.c)m.push(e.c[c])}]),m).find(m=>m?.exports?.default?.getToken!==void 0).exports.default.getToken()`}
             </div>
             <button 
               onClick={() => {
