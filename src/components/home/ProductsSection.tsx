@@ -74,11 +74,11 @@ export function ProductsSection({ products }: ProductsSectionProps) {
                    
                    <div className="absolute bottom-6 left-6 right-6 z-10">
                       <div className="font-display text-4xl text-white uppercase italic mb-2 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
-                        {t(`products.${products[activeTab].id}.name`, { defaultValue: products[activeTab].name })}
+                        {t(`products.${products[activeTab].id}.name`, products[activeTab].name)}
 
                       </div>
                       <div className="font-sans text-white/80 text-sm max-w-md drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)] leading-tight">
-                        {t(`products.${products[activeTab].id}.desc`, { defaultValue: products[activeTab].desc })}
+                        {t(`products.${products[activeTab].id}.desc`, products[activeTab].desc)}
                       </div>
                    </div>
                 </div>
