@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "@tanstack/react-router";
+import { useTranslation } from "react-i18next";
 import logoAsset from "@/assets/spectre-logo-nobg.png.asset.json";
 
 interface SiteFooterProps {
@@ -7,6 +8,8 @@ interface SiteFooterProps {
 }
 
 export function SiteFooter({ guildInvite }: SiteFooterProps) {
+  const { t } = useTranslation();
+
   return (
     <footer className="bg-obsidian pt-32 pb-16 border-t border-white/5">
       <div className="mx-auto max-w-7xl px-4 md:px-8">
@@ -23,7 +26,7 @@ export function SiteFooter({ guildInvite }: SiteFooterProps) {
               </span>
             </Link>
             <p className="font-sans text-white/30 leading-relaxed text-sm uppercase tracking-widest mb-10">
-              A elite da automação para Discord. Desenvolvido para servidores que buscam domínio absoluto e performance inabalável.
+              {t('footer.slogan')}
             </p>
             <div className="flex gap-4">
                {["Twitter", "Discord", "Docs"].map(social => (
@@ -36,7 +39,7 @@ export function SiteFooter({ guildInvite }: SiteFooterProps) {
 
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-16 md:gap-24">
             <div>
-              <h3 className="font-display text-[10px] tracking-[0.3em] text-white uppercase italic mb-8">Sistemas</h3>
+              <h3 className="font-display text-[10px] tracking-[0.3em] text-white uppercase italic mb-8">{t('nav.systems')}</h3>
               <ul className="space-y-4">
                 {["Auto Quests", "Optimizer", "Nicks-Gun", "Farms"].map(item => (
                   <li key={item}>
@@ -48,21 +51,28 @@ export function SiteFooter({ guildInvite }: SiteFooterProps) {
             <div>
               <h3 className="font-display text-[10px] tracking-[0.3em] text-white uppercase italic mb-8">Navegação</h3>
               <ul className="space-y-4">
-                {["Início", "Planos", "Comunidade", "Painel"].map(item => (
-                  <li key={item}>
-                    <a href="#" className="font-sans text-xs text-white/30 hover:text-white transition-colors uppercase tracking-widest">{item}</a>
+                {[
+                  { label: t('footer.navHome'), href: "#topo" },
+                  { label: t('footer.navPlans'), href: "#planos" },
+                  { label: t('footer.navCommunity'), href: "#comunidade" },
+                  { label: t('footer.navDashboard'), href: "/hub" }
+                ].map(item => (
+                  <li key={item.label}>
+                    <a href={item.href} className="font-sans text-xs text-white/30 hover:text-white transition-colors uppercase tracking-widest">{item.label}</a>
                   </li>
                 ))}
               </ul>
+
             </div>
             <div className="col-span-2 sm:col-span-1">
               <h3 className="font-display text-[10px] tracking-[0.3em] text-white uppercase italic mb-8">Legal</h3>
               <ul className="space-y-4">
-                {["Privacidade", "Termos"].map(item => (
+                {[t('footer.legalPrivacy'), t('footer.legalTerms')].map(item => (
                   <li key={item}>
                     <a href="#" className="font-sans text-xs text-white/30 hover:text-white transition-colors uppercase tracking-widest">{item}</a>
                   </li>
                 ))}
+
               </ul>
             </div>
           </div>
@@ -70,7 +80,7 @@ export function SiteFooter({ guildInvite }: SiteFooterProps) {
 
         <div className="pt-8 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-6 opacity-20">
           <div className="font-display text-[9px] tracking-[0.2em] uppercase italic">
-             Spectre Hub &copy; 2026. Todos os direitos reservados.
+             {t('footer.rights')}
           </div>
           <div className="font-display text-[9px] tracking-[0.2em] uppercase italic">
              Property of Spectre Group

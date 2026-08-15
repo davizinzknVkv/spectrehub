@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "@tanstack/react-router";
 import { X, Menu, LogIn, Search, Github, Twitter, Linkedin, ChevronDown, MessageSquare, Languages } from "lucide-react";
+import { useTranslation } from 'react-i18next';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -10,6 +11,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import logoAsset from "@/assets/spectre-logo-main.png.asset.json";
+
 import brFlag from "@/assets/flags/brazil.png.asset.json";
 import usFlag from "@/assets/flags/usa.png.asset.json";
 import esFlag from "@/assets/flags/spain.png.asset.json";
@@ -21,16 +23,29 @@ interface SiteHeaderProps {
   guildInvite: string;
 }
 
-const NAV = [
-  { href: "#produtos", label: "sistemas" },
-  { href: "#como-funciona", label: "método" },
-  { href: "#planos", label: "planos" },
-  { href: "#comunidade", label: "comunidade" },
+const LANGUAGES = [
+  { code: 'pt', label: 'Português', flag: brFlag.url },
+  { code: 'en', label: 'English', flag: usFlag.url },
+  { code: 'es', label: 'Español', flag: esFlag.url },
+  { code: 'de', label: 'Deutsch', flag: deFlag.url },
+  { code: 'it', label: 'Italiano', flag: itFlag.url },
+  { code: 'ru', label: 'Русский', flag: ruFlag.url },
 ];
 
 export function SiteHeader({ guildInvite }: SiteHeaderProps) {
+  const { t, i18n } = useTranslation();
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+
+  const NAV = [
+    { href: "#produtos", label: t('nav.systems') },
+    { href: "#como-funciona", label: t('nav.method') },
+    { href: "#planos", label: t('nav.plans') },
+    { href: "#comunidade", label: t('nav.community') },
+  ];
+
+  const currentLang = LANGUAGES.find(l => l.code === i18n.language) || LANGUAGES[0];
+
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -105,40 +120,26 @@ export function SiteHeader({ guildInvite }: SiteHeaderProps) {
             <DropdownMenuTrigger asChild>
               <div className="flex items-center gap-2 px-3 py-1.5 bg-black/40 border border-white/5 rounded-md text-white/60 hover:border-white/10 transition-colors cursor-pointer group">
                 <div className="w-4 h-4 rounded-full overflow-hidden border border-white/10">
-                  <img src={brFlag.url} alt="PT-BR" className="w-full h-full object-cover" />
+                  <img src={currentLang.flag} alt={currentLang.label} className="w-full h-full object-cover" />
                 </div>
                 <ChevronDown className="w-3 h-3 text-white/20 group-hover:text-white/40" />
               </div>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end" className="w-48 bg-obsidian border-white/5 rounded-none text-white/60">
               <DropdownMenuLabel className="font-display text-[9px] uppercase tracking-widest italic py-3 flex items-center gap-2">
-                <Languages className="w-3 h-3 text-spectre-pink" /> Selecionar Idioma
+                <Languages className="w-3 h-3 text-spectre-pink" /> {t('common.selectLanguage')}
               </DropdownMenuLabel>
               <DropdownMenuSeparator className="bg-white/5" />
-              <DropdownMenuItem className="focus:bg-spectre-pink focus:text-white cursor-pointer py-2.5 rounded-none flex items-center gap-3">
-                <img src={brFlag.url} alt="" className="w-4 h-3 object-cover rounded-sm" />
-                <span className="font-display text-[10px] uppercase italic tracking-widest">Português</span>
-              </DropdownMenuItem>
-              <DropdownMenuItem className="focus:bg-spectre-pink focus:text-white cursor-pointer py-2.5 rounded-none flex items-center gap-3">
-                <img src={usFlag.url} alt="" className="w-4 h-3 object-cover rounded-sm" />
-                <span className="font-display text-[10px] uppercase italic tracking-widest">English</span>
-              </DropdownMenuItem>
-              <DropdownMenuItem className="focus:bg-spectre-pink focus:text-white cursor-pointer py-2.5 rounded-none flex items-center gap-3">
-                <img src={esFlag.url} alt="" className="w-4 h-3 object-cover rounded-sm" />
-                <span className="font-display text-[10px] uppercase italic tracking-widest">Español</span>
-              </DropdownMenuItem>
-              <DropdownMenuItem className="focus:bg-spectre-pink focus:text-white cursor-pointer py-2.5 rounded-none flex items-center gap-3">
-                <img src={deFlag.url} alt="" className="w-4 h-3 object-cover rounded-sm" />
-                <span className="font-display text-[10px] uppercase italic tracking-widest">Deutsch</span>
-              </DropdownMenuItem>
-              <DropdownMenuItem className="focus:bg-spectre-pink focus:text-white cursor-pointer py-2.5 rounded-none flex items-center gap-3">
-                <img src={itFlag.url} alt="" className="w-4 h-3 object-cover rounded-sm" />
-                <span className="font-display text-[10px] uppercase italic tracking-widest">Italiano</span>
-              </DropdownMenuItem>
-              <DropdownMenuItem className="focus:bg-spectre-pink focus:text-white cursor-pointer py-2.5 rounded-none flex items-center gap-3">
-                <img src={ruFlag.url} alt="" className="w-4 h-3 object-cover rounded-sm" />
-                <span className="font-display text-[10px] uppercase italic tracking-widest">Русский</span>
-              </DropdownMenuItem>
+              {LANGUAGES.map((lang) => (
+                <DropdownMenuItem 
+                  key={lang.code}
+                  onClick={() => i18n.changeLanguage(lang.code)}
+                  className="focus:bg-spectre-pink focus:text-white cursor-pointer py-2.5 rounded-none flex items-center gap-3"
+                >
+                  <img src={lang.flag} alt="" className="w-4 h-3 object-cover rounded-sm" />
+                  <span className="font-display text-[10px] uppercase italic tracking-widest">{lang.label}</span>
+                </DropdownMenuItem>
+              ))}
             </DropdownMenuContent>
           </DropdownMenu>
 
@@ -147,8 +148,9 @@ export function SiteHeader({ guildInvite }: SiteHeaderProps) {
             className="ds-btn ds-btn-primary !py-2 !px-5 !text-[9px] flex items-center gap-2"
           >
             <LogIn className="w-3 h-3" />
-            Acessar Spectre
+            {t('common.accessHub')}
           </Link>
+
         </div>
 
         {/* Mobile Toggle */}
@@ -189,8 +191,9 @@ export function SiteHeader({ guildInvite }: SiteHeaderProps) {
               rel="noreferrer"
               className="ds-btn ds-btn-primary w-full"
             >
-              Quero Usar o Spectre
+              {t('common.getStarted')}
             </a>
+
           </div>
         </div>
       )}

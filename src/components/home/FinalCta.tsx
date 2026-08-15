@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import { Reveal } from "./Reveal";
 
 interface FinalCtaProps {
@@ -8,6 +9,8 @@ interface FinalCtaProps {
 }
 
 export function FinalCta({ guildInvite }: FinalCtaProps) {
+  const { t } = useTranslation();
+
   return (
     <section className="relative overflow-hidden py-32 bg-obsidian border-t border-white/5">
       <div className="absolute inset-0 z-0">
@@ -25,15 +28,16 @@ export function FinalCta({ guildInvite }: FinalCtaProps) {
         <Reveal>
           <div className="font-display text-[10px] tracking-[0.3em] text-spectre-pink uppercase mb-8 justify-center flex items-center gap-2">
             <span className="w-8 h-px bg-spectre-pink/30" />
-            Próximo Passo
+            {t('footer.badge')}
             <span className="w-8 h-px bg-spectre-pink/30" />
           </div>
           <h2 className="font-display text-[2.5rem] md:text-[5rem] lg:text-[8rem] leading-[0.85] text-white uppercase italic tracking-tighter mb-12">
-            DEFINA O <br />
-            <span className="text-spectre-pink">NOVO PADRÃO.</span>
+            {t('footer.title')} <br />
+            <span className="text-spectre-pink">{t('footer.subtitle')}</span>
+
           </h2>
           <p className="mx-auto max-w-2xl text-white/40 text-base md:text-lg font-sans mb-16 uppercase tracking-[0.1em]">
-            Junte-se ao ecossistema SPECTRE e ative sua infraestrutura de automação hoje mesmo. Desenvolvido para quem busca performance sem compromissos.
+            {t('footer.description')}
           </p>
           
           <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
@@ -44,14 +48,14 @@ export function FinalCta({ guildInvite }: FinalCtaProps) {
               className="ds-btn ds-btn-primary min-w-[280px] py-5 shadow-2xl shadow-spectre-pink/20"
             >
               <span className="flex items-center gap-3">
-                Quero Usar o Spectre <ArrowRight className="w-5 h-5" />
+                {t('common.getStarted')} <ArrowRight className="w-5 h-5" />
               </span>
             </a>
             <Link 
               to="/hub" 
               className="ds-btn ds-btn-secondary min-w-[280px] py-5"
             >
-              Acessar Painel
+              {t('footer.accessDashboard')}
             </Link>
           </div>
         </Reveal>
