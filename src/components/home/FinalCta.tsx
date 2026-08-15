@@ -28,7 +28,7 @@ export function FinalCta({ guildInvite }: FinalCtaProps) {
             Próximo Passo
             <span className="w-8 h-px bg-spectre-pink/30" />
           </div>
-          <h2 className="font-display text-[3.5rem] md:text-[6rem] lg:text-[10rem] leading-[0.85] text-white uppercase italic tracking-tighter mb-12">
+          <h2 className="font-display text-[2.5rem] md:text-[5rem] lg:text-[8rem] leading-[0.85] text-white uppercase italic tracking-tighter mb-12">
             DEFINA O <br />
             <span className="text-spectre-pink">NOVO PADRÃO.</span>
           </h2>
