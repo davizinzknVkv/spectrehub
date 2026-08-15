@@ -100,7 +100,7 @@ export function ProductsSection({ products }: ProductsSectionProps) {
              >
                <div>
                  <div className={`font-display text-lg uppercase italic transition-colors ${activeTab === i ? "text-spectre-pink" : "text-white/60 group-hover:text-white"}`}>
-                   {t(`products.${p.id}.name`, { defaultValue: p.name })}
+                   {t(`products.${p.id}.name`, p.name)}
                  </div>
                   <div className="font-sans text-[10px] text-white/20 uppercase tracking-[0.2em] mt-1">
                     Spectre v4.0
