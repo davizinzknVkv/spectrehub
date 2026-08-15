@@ -68,7 +68,7 @@ export function Hero({ guildInvite, fallbackMembers }: HeroProps) {
         </Reveal>
 
         <Reveal delay={200}>
-          <p className="max-w-2xl mx-auto text-white/50 text-lg md:text-xl font-sans mb-12">
+          <p className="max-w-2xl mx-auto text-white/50 text-base md:text-lg font-sans mb-10">
             O hub definitivo para automação de elite no Discord. Performance absoluta, infraestrutura inabalável e a experiência de usuário mais sofisticada do mercado.
           </p>
         </Reveal>
