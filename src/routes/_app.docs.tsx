@@ -52,9 +52,9 @@ function DocsPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-[#030303] text-white flex flex-col lg:flex-row">
+    <div className="min-h-screen bg-[#030303] text-white flex flex-col lg:flex-row w-full overflow-hidden">
       {/* Sidebar */}
-      <aside className="w-full lg:w-[280px] border-r border-white/5 bg-[#080808] flex flex-col h-screen sticky top-0">
+      <aside className="w-full lg:w-[280px] border-r border-white/5 bg-[#080808] flex flex-col h-screen lg:sticky lg:top-0 shrink-0">
         <div className="p-6 flex items-center justify-between border-b border-white/5">
           <Link to="/" className="flex items-center gap-2 group">
             <img src={logoAsset.url} alt="Spectre" className="h-8 w-8 object-contain drop-shadow-[0_0_8px_rgba(255,0,85,0.3)] transition-transform group-hover:scale-110" />

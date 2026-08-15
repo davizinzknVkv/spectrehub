@@ -53,9 +53,7 @@ const PRODUCTS = [
 function ResgatarPage() {
   return (
     <div className="min-h-screen bg-[#030303] text-white selection:bg-spectre-pink/30 flex flex-col">
-      <SiteHeader guildInvite="https://discord.gg/vbYK559Jnb" />
-
-      <main className="flex-1 relative z-10 pt-32 pb-24 px-4 sm:px-8">
+      <main className="flex-1 relative z-10 py-12 px-4 sm:px-8">
         {/* Background Patterns */}
         <div className="absolute inset-0 z-0 pointer-events-none opacity-[0.05]">
           <div
@@ -132,8 +130,6 @@ function ResgatarPage() {
           </div>
         </div>
       </main>
-
-      <SiteFooter guildInvite="https://discord.gg/vbYK559Jnb" />
     </div>
   );
 }
