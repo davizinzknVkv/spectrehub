@@ -1,0 +1,61 @@
+{
+  "common": {
+    "accessHub": "Access Spectre",
+    "documentation": "Documentation",
+    "getStarted": "I Want to Use Spectre",
+    "selectLanguage": "Select Language",
+    "loading": "Loading...",
+    "support": "Discord Support"
+  },
+  "nav": {
+    "systems": "systems",
+    "method": "method",
+    "plans": "plans",
+    "community": "community"
+  },
+  "hero": {
+    "badge": "High Technology",
+    "title1": "SPECTRE",
+    "title2": "HUB",
+    "subtitle1": "DOMINATES",
+    "subtitle2": " THE MARKET.",
+    "description": "The definitive hub for elite Discord automation. Absolute performance, unwavering infrastructure, and the most sophisticated user experience on the market.",
+    "activeCommunity": "Active Community"
+  },
+  "products": {
+    "badge": "Ecosystem",
+    "title": "SPECTRE CREATES.",
+    "subtitle": "THE MARKET COPIES.",
+    "cta": "Secure Access Now",
+    "soon": "Coming Soon",
+    "soonDesc": "Protocol under Development"
+  },
+  "reasons": {
+    "badge": "Differentiation",
+    "title": "HIGH-END",
+    "subtitle": "INFRASTRUCTURE.",
+    "description": "SPECTRE is where innovation happens. We develop proprietary tools, tested under real stress, to ensure you are always one step ahead of the competition."
+  },
+  "plans": {
+    "badge": "Investment",
+    "title": "ELITE",
+    "subtitle": "PRICING.",
+    "description": "Choose the level of power your server deserves. Unwavering infrastructure on all plans.",
+    "popular": "Popular",
+    "perPeriod": "/ {{period}}",
+    "cta": "Start Now"
+  },
+  "free": {
+    "badge": "Community Access",
+    "title": "FREE",
+    "subtitle": "JOURNEY.",
+    "step1": "Fill in the data and generate your unique identifier.",
+    "step2": "Join our official ecosystem on Discord.",
+    "step3": "Authenticate via support to release your tools.",
+    "formName": "Your name",
+    "formDiscord": "@username",
+    "formSubmit": "Generate Identifier",
+    "uniqueCode": "Your Unique Code",
+    "generateNew": "Generate New Code"
+  }
+}

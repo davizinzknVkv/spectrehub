@@ -1,0 +1,61 @@
+{
+  "common": {
+    "accessHub": "Acessar Spectre",
+    "documentation": "Documentação",
+    "getStarted": "Quero Usar o Spectre",
+    "selectLanguage": "Selecionar Idioma",
+    "loading": "Carregando...",
+    "support": "Suporte Discord"
+  },
+  "nav": {
+    "systems": "sistemas",
+    "method": "método",
+    "plans": "planos",
+    "community": "comunidade"
+  },
+  "hero": {
+    "badge": "Alta Tecnologia",
+    "title1": "SPECTRE",
+    "title2": "HUB",
+    "subtitle1": "DOMINA",
+    "subtitle2": " O MERCADO.",
+    "description": "O hub definitivo para automação de elite no Discord. Performance absoluta, infraestrutura inabalável e a experiência de usuário mais sofisticada do mercado.",
+    "activeCommunity": "Comunidade Ativa"
+  },
+  "products": {
+    "badge": "Ecossistema",
+    "title": "A SPECTRE CRIA.",
+    "subtitle": "O MERCADO COPIA.",
+    "cta": "Garantir Acesso Agora",
+    "soon": "Em Breve Novidades",
+    "soonDesc": "Protocolo em Desenvolvimento"
+  },
+  "reasons": {
+    "badge": "Diferencial",
+    "title": "INFRAESTRUTURA",
+    "subtitle": "DE ALTO PADRÃO.",
+    "description": "A SPECTRE é onde a inovação acontece. Desenvolvemos ferramentas proprietárias, testadas sob estresse real, para garantir que você esteja sempre um passo à frente da concorrência."
+  },
+  "plans": {
+    "badge": "Investimento",
+    "title": "PREÇOS",
+    "subtitle": "ELITE.",
+    "description": "Escolha o nível de poder que seu servidor merece. Infraestrutura inabalável em todos os planos.",
+    "popular": "Popular",
+    "perPeriod": "/ {{period}}",
+    "cta": "Começar Agora"
+  },
+  "free": {
+    "badge": "Acesso Comunitário",
+    "title": "JORNADA",
+    "subtitle": "GRATUITA.",
+    "step1": "Preencha os dados e gere seu identificador único.",
+    "step2": "Junte-se ao nosso ecossistema oficial no Discord.",
+    "step3": "Autentique-se via suporte para liberar suas ferramentas.",
+    "formName": "Seu nome",
+    "formDiscord": "@usuario",
+    "formSubmit": "Gerar Identificador",
+    "uniqueCode": "Seu Código Único",
+    "generateNew": "Gerar Novo Código"
+  }
+}
