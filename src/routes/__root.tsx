@@ -95,8 +95,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { property: "og:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/79e7fe18-9b3f-4c86-9466-b1659b463691" },
       { name: "twitter:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/79e7fe18-9b3f-4c86-9466-b1659b463691" },
       { "httpEquiv": "Content-Security-Policy", content: "default-src 'self'; script-src 'self' 'unsafe-inline' https://challenges.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src * data:; connect-src *; frame-src 'self' https://challenges.cloudflare.com; style-src-elem 'self' 'unsafe-inline' https://fonts.googleapis.com; upgrade-insecure-requests;" },
-      { "http-equiv": "X-Frame-Options", content: "DENY" },
-      { "http-equiv": "X-Content-Type-Options", content: "nosniff" },
+      { "httpEquiv": "X-Content-Type-Options", content: "nosniff" },
       { name: "referrer", content: "no-referrer-when-downgrade" }
     ],
     scripts: [
