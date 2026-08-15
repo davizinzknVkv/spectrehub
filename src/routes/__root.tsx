@@ -94,7 +94,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "twitter:description", content: "Domine o Discord com o Spectre Hub. Automação avançada, sniper de nicks e ferramentas de elite com tecnologia de ponta." },
       { property: "og:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/79e7fe18-9b3f-4c86-9466-b1659b463691" },
       { name: "twitter:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/79e7fe18-9b3f-4c86-9466-b1659b463691" },
-      { "httpEquiv": "Content-Security-Policy", content: "default-src 'self'; script-src 'self' 'unsafe-inline' https://challenges.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src * data:; connect-src *; frame-src 'self' https://challenges.cloudflare.com; style-src-elem 'self' 'unsafe-inline' https://fonts.googleapis.com; upgrade-insecure-requests;" },
+      { "httpEquiv": "Content-Security-Policy", content: "default-src 'self'; script-src 'self' 'unsafe-inline' https://challenges.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src * data:; connect-src *; frame-src *; style-src-elem 'self' 'unsafe-inline' https://fonts.googleapis.com; upgrade-insecure-requests;" },
       { "httpEquiv": "X-Content-Type-Options", content: "nosniff" },
       { name: "referrer", content: "no-referrer-when-downgrade" }
     ],
