@@ -1,0 +1,132 @@
+{
+  "common": {
+    "accessHub": "Spectre aufrufen",
+    "documentation": "Dokumentation",
+    "getStarted": "Ich möchte Spectre nutzen",
+    "selectLanguage": "Sprache wählen",
+    "loading": "Laden...",
+    "support": "Discord Support",
+    "stable": "Stabil",
+    "beta": "Beta"
+  },
+  "nav": {
+    "systems": "Systeme",
+    "method": "Methode",
+    "plans": "Pläne",
+    "community": "Community"
+  },
+  "hero": {
+    "badge": "Hochtechnologie",
+    "title1": "SPECTRE",
+    "title2": "HUB",
+    "subtitle1": "DOMINIERT",
+    "subtitle2": " DEN MARKT.",
+    "description": "Das ultimative Hub für Elite-Discord-Automatisierung. Absolute Performance, unerschütterliche Infrastruktur und die anspruchsvollste Benutzererfahrung auf dem Markt.",
+    "activeCommunity": "Aktive Community"
+  },
+  "products": {
+    "badge": "Ökosystem",
+    "title": "SPECTRE ERSCHAFFT.",
+    "subtitle": "DER MARKT KOPIERT.",
+    "cta": "Jetzt Zugang sichern",
+    "soon": "Demnächst",
+    "soonDesc": "Protokoll in Entwicklung",
+    "quests": {
+      "name": "Auto Quests",
+      "desc": "Massive Ausführung offizieller Discord-Missionen. Automatisierte Sammlung von Orbs und Belohnungen mit Anti-Erkennungs-System und intelligentem Cooldown."
+    },
+    "optimizer": {
+      "name": "Optimizer",
+      "desc": "Maximieren Sie Ihre Hardware-Leistung. Elite-Tool zur Registerbereinigung, CPU/RAM-Optimierung und drastischen Reduzierung der Latenz in Spielen und Anwendungen."
+    },
+    "nicks": {
+      "name": "Nicks-Gun",
+      "desc": "Meistern Sie Ihre Identität. Fortgeschrittener Sniper, um seltene 2- und 3-Buchstaben-Benutzernamen vor allen anderen zu sichern."
+    },
+    "orbs": {
+      "name": "Orbs einlösen",
+      "desc": "Verwandeln Sie Anstrengung in Belohnung. Direkter Zugang zum offiziellen Katalog mit optimierter Einlösung per Klick."
+    },
+    "farms": {
+      "name": "Auto Farms",
+      "desc": "Ununterbrochene Produktivität. Kontinuierliche Farmsysteme mit Anti-Erkennungsschutz-Algorithmen."
+    },
+    "control": {
+      "name": "Server Control",
+      "desc": "Volle Kontrolle über Ihr Konto. Professionelle Serververwaltung, Klonen und Massenbereinigung."
+    },
+    "presence": {
+      "name": "Presence Sync",
+      "desc": "Aktive Identität. Synchronisieren Sie Ihren Status und Ihre Musik, während unsere Tools für Sie arbeiten."
+    }
+  },
+  "reasons": {
+    "badge": "Unterscheidungsmerkmal",
+    "title": "HOCHWERTIGE",
+    "subtitle": "INFRASTRUKTUR.",
+    "description": "SPECTRE ist der Ort, an dem Innovation stattfindet. Wir entwickeln eigene Tools, die unter realem Stress getestet wurden, um sicherzustellen, dass Sie der Konkurrenz immer einen Schritt voraus sind.",
+    "items": {
+      "0": { "title": "Minimale Latenz", "desc": "Verteilte Ausführung, die Reaktionszeiten minimiert und die Erfolgsrate bei Operationen maximiert." },
+      "1": { "title": "Banken-Niveau Sicherheit", "desc": "Schutzsysteme, die menschliche Verhaltensmuster emulieren und das Risiko einer Erkennung durch Heuristik mindern." },
+      "2": { "title": "Omnichannel", "desc": "Zentralisieren Sie die Verwaltung mehrerer Fronten – Quests, Wirtschaft und Identität – in einem einzigen intuitiven Dashboard." },
+      "3": { "title": "Garantierte SLA", "desc": "Spezialisierter Support und ständige Updates, um sicherzustellen, dass Ihre Automatisierungen nie veralten." }
+    }
+  },
+  "plans": {
+    "badge": "Investition",
+    "title": "ELITE",
+    "subtitle": "PREISE.",
+    "description": "Wählen Sie die Leistungsstufe, die Ihr Server verdient. Unerschütterliche Infrastruktur in allen Plänen.",
+    "popular": "Beliebt",
+    "perPeriod": "/ {{period}}",
+    "cta": "Jetzt starten",
+    "tiers": {
+      "free": { "name": "Free", "period": "für immer", "cta": "Kostenlos zugreifen", "features": { "0": "20 tägliche Missionen", "1": "10 Min. Cooldown", "2": "Zugang zu allen Quests", "3": "Lokale Statistiken" } },
+      "premium": { "name": "Premium", "period": "30 Tage Zugang", "cta": "Premium abonnieren", "features": { "0": "Unbegrenzte Missionen", "1": "Reduzierter Cooldown (3 Min.)", "2": "Exklusive Premium-Rolle", "3": "Priorisierter Support" } },
+      "lifetime": { "name": "Lifetime", "period": "Einmalzahlung", "cta": "Lifetime sichern", "features": { "0": "Lebenslange Premium-Vorteile", "1": "Permanente Discord-Rolle", "2": "Keine monatlichen Gebühren", "3": "Frühzeitiger Zugang zu Betas" } },
+      "booster": { "name": "Booster", "period": "via Server Boost", "cta": "Boosten", "features": { "0": "Unbegrenzte Missionen", "1": "Niedrigster System-Cooldown (1 Min.)", "2": "Automatische Booster-Rolle", "3": "VIP-Status in der Community" } }
+    }
+  },
+  "free": {
+    "badge": "Community-Zugang",
+    "title": "KOSTENLOSE",
+    "subtitle": "REISE.",
+    "step1": "Daten ausfüllen und eindeutige Kennung generieren.",
+    "step2": "Treten Sie unserem offiziellen Ökosystem auf Discord bei.",
+    "step3": "Authentifizieren Sie sich via Support, um Ihre Tools freizuschalten.",
+    "formName": "Ihr Name",
+    "formDiscord": "@benutzername",
+    "formSubmit": "Kennung generieren",
+    "uniqueCode": "Ihr eindeutiger Code",
+    "generateNew": "Neuen Code generieren"
+  },
+  "community": {
+    "badge": "Gesellschaft",
+    "title": "WERDE TEIL",
+    "subtitle": "DER ELITE.",
+    "description": "Hochleistungs-Techniksupport, Echtzeit-Updates und eine aktive Community, die neue Marktstandards setzt.",
+    "statOnline": "jetzt online",
+    "statSupport": "Support",
+    "statRoles": "Rollen",
+    "marqueeLabel": "NUTZER, DIE Spectre Hub BEREITS NUTZEN",
+    "statMembers": "Aktive Mitglieder",
+    "statSystems": "Elite-Systeme",
+    "statLatency": "Durchschn. Latenz",
+    "statUptime": "Echtzeit-Uptime"
+  },
+  "footer": {
+    "badge": "Nächster Schritt",
+    "title": "DEFINIERE DEN",
+    "subtitle": "NEUEN STANDARD.",
+    "description": "Treten Sie dem SPECTRE-Ökosystem bei und aktivieren Sie noch heute Ihre Automatisierungsinfrastruktur. Entwickelt für diejenigen, die Leistung ohne Kompromisse suchen.",
+    "accessDashboard": "Dashboard aufrufen",
+    "slogan": "Die Elite der Discord-Automatisierung. Entwickelt für Server, die absolute Dominanz und unerschütterliche Leistung suchen.",
+    "navHome": "Startseite",
+    "navPlans": "Pläne",
+    "navCommunity": "Community",
+    "navDashboard": "Dashboard",
+    "legalPrivacy": "Datenschutz",
+    "legalTerms": "AGB",
+    "rights": "Spectre Hub © 2026. Alle Rechte vorbehalten."
+  }
+}
