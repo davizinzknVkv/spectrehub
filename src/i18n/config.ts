@@ -1,7 +1,5 @@
 import i18n from 'i18next';
-if (typeof window !== 'undefined') {
-  (window as any).i18next = i18n;
-}
+
 
 import { initReactI18next } from 'react-i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
@@ -48,5 +46,9 @@ i18n
       caches: ['localStorage'],
     }
   });
+
+if (typeof window !== 'undefined') {
+  (window as any).i18next = i18n;
+}
 
 export default i18n;
