@@ -232,6 +232,28 @@ export async function leaveGuild(guildId: string): Promise<boolean> {
   return res.status >= 200 && res.status < 300;
 }
 
+export type Relationship = {
+  id: string;
+  type: number; // 1 = amigo, 2 = bloqueado, 3 = pendente recebido, 4 = pendente enviado
+  user?: { id: string; username: string; global_name?: string | null; avatar: string | null };
+};
+
+export async function fetchRelationships(): Promise<Relationship[]> {
+  const res = await call("/users/@me/relationships");
+  if (res.status !== 200 || !Array.isArray(res.data)) return [];
+  return res.data as Relationship[];
+}
+
+export async function removeRelationship(userId: string): Promise<boolean> {
+  const res = await call(`/users/@me/relationships/${userId}`, "DELETE");
+  return res.status >= 200 && res.status < 300;
+}
+
+export async function closeDMChannel(channelId: string): Promise<boolean> {
+  const res = await call(`/channels/${channelId}`, "DELETE");
+  return res.status >= 200 && res.status < 300;
+}
+
 
 
 // === Plan / Role gating ===
