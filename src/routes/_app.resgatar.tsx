@@ -110,7 +110,7 @@ function ResgatarPage() {
 
                   <div className="mt-auto pt-6 border-t border-white/5 flex gap-4">
                     <button 
-                      className={`ds-btn ds-btn-primary flex-1 !py-3 !text-[10px] ${product.status !== 'Ativo' && 'opacity-50 cursor-not-allowed filter grayscale'}`}
+                      className={`ds-btn ds-btn-primary flex-1 !py-3 !text-[10px] ${product.status !== 'Ativo' ? 'opacity-50 cursor-not-allowed filter grayscale' : ''}`}
                       disabled={product.status !== 'Ativo'}
                     >
                       ACESSAR TERMINAL

@@ -97,6 +97,21 @@
   overflow: visible;
   will-change: transform, filter;
   clip-path: polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px);
+
+  /* New border implementation for clip-path */
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    padding: 1px;
+    background: rgba(255, 255, 255, 0.1);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+    -webkit-mask-composite: destination-out;
+    pointer-events: none;
+    z-index: 1;
+    clip-path: polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px);
+  }
 }
 
 @utility ds-btn-primary {
@@ -105,11 +120,19 @@
   border: none;
   
   &::before {
+    background: rgba(255, 255, 255, 0.2);
+  }
+
+  &::after {
     content: '';
     position: absolute;
-    inset: 0;
-    background: linear-gradient(45deg, rgba(255, 255, 255, 0.15), transparent);
-    pointer-events: none;
+    top: 0;
+    right: 0;
+    width: 6px;
+    height: 6px;
+    background: white;
+    box-shadow: 0 0 10px white;
+    z-index: 2;
   }
 
   @media (hover: hover) {
