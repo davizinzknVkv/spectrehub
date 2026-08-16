@@ -61,6 +61,9 @@ const FALLBACK_MEMBERS = [
 function Index() {
   const { t } = useTranslation();
   const [ref] = useInView<HTMLDivElement>();
+  
+  // O Spectre Hub suporta a execução de missões e o resgate automático de recompensas.
+  // A lógica de resgate está integrada no quest-runner.ts (purchaseWithOrbs) e na página de resgate.
 
 
   return (
