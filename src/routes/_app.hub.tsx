@@ -11,6 +11,10 @@ import {
   fetchProfileBadges,
   fetchUserSettings,
   leaveGuild,
+  fetchDMChannels,
+  closeDMChannel,
+  fetchRelationships,
+  removeRelationship,
 
   type Guild,
   type ProfileBadge
@@ -41,7 +45,9 @@ import {
   LogOut,
   ChevronRight,
   ExternalLink,
-  ShieldCheck
+  ShieldCheck,
+  Trash2,
+  UserMinus
 } from "lucide-react";
 import { Button, Badge, Card, Modal, StatCard, Skeleton } from "@/components/ui/ds";
 import { Link } from "@tanstack/react-router";
@@ -67,6 +73,9 @@ function HubPage() {
   const [showGuilds, setShowGuilds] = useState(false);
   const [showPresence, setShowPresence] = useState(false);
   const [userSettings, setUserSettings] = useState<any>(null);
+  const [cleaningDms, setCleaningDms] = useState(false);
+  const [cleaningFriends, setCleaningFriends] = useState(false);
+  const [confirmAction, setConfirmAction] = useState<null | "dms" | "friends">(null);
 
 
 
@@ -144,6 +153,55 @@ function HubPage() {
     // Refresh
     const gld = await fetchGuilds();
     setGuilds(gld);
+  };
+
+  const handleClearDMs = async () => {
+    setConfirmAction(null);
+    setCleaningDms(true);
+    try {
+      const channels = await fetchDMChannels();
+      if (channels.length === 0) {
+        toast.info("Nenhuma conversa aberta para fechar.");
+        return;
+      }
+      toast.info(`Fechando ${channels.length} conversas...`);
+      let count = 0;
+      for (const c of channels) {
+        if (await closeDMChannel(c.id)) count++;
+        await new Promise((r) => setTimeout(r, 600));
+      }
+      toast.success(`${count} conversas fechadas.`);
+      setDmCount(await fetchDMsCount());
+    } catch {
+      toast.error("Falha ao limpar as conversas.");
+    } finally {
+      setCleaningDms(false);
+    }
+  };
+
+  const handleRemoveFriends = async () => {
+    setConfirmAction(null);
+    setCleaningFriends(true);
+    try {
+      const rels = await fetchRelationships();
+      const targets = rels.filter((r) => r.type === 1);
+      if (targets.length === 0) {
+        toast.info("Nenhuma amizade encontrada.");
+        return;
+      }
+      toast.info(`Removendo ${targets.length} amizades...`);
+      let count = 0;
+      for (const r of targets) {
+        if (await removeRelationship(r.id)) count++;
+        await new Promise((res) => setTimeout(res, 600));
+      }
+      toast.success(`${count} amizades removidas.`);
+      setStats(await fetchRelationshipsCount());
+    } catch {
+      toast.error("Falha ao remover as amizades.");
+    } finally {
+      setCleaningFriends(false);
+    }
   };
 
   if (!creds) {
@@ -361,6 +419,41 @@ function HubPage() {
               </button>
             </div>
           </section>
+
+          {/* Limpeza da Conta */}
+          <section className="ds-card p-8 border-white/5 bg-white/[0.02]">
+            <div className="flex items-center justify-between mb-8">
+              <div className="flex items-center gap-2">
+                <Trash2 className="w-3.5 h-3.5 text-spectre-pink" />
+                <h3 className="font-display text-[10px] uppercase tracking-widest text-white italic">Limpeza da Conta</h3>
+              </div>
+              <span className="font-mono text-[9px] text-white/20 uppercase tracking-widest">
+                {dmCount ?? 0} DMS / {stats?.friends ?? 0} AMIGOS
+              </span>
+            </div>
+
+            <div className="flex flex-col sm:flex-row gap-4">
+              <button
+                onClick={() => setConfirmAction("dms")}
+                disabled={cleaningDms}
+                className="flex-1 ds-btn ds-btn-secondary flex items-center justify-center gap-3"
+              >
+                <MessageSquare className="w-3.5 h-3.5" />
+                {cleaningDms ? "Limpando..." : "Limpar Conversas"}
+              </button>
+              <button
+                onClick={() => setConfirmAction("friends")}
+                disabled={cleaningFriends}
+                className="flex-1 ds-btn ds-btn-primary flex items-center justify-center gap-3"
+              >
+                <UserMinus className="w-3.5 h-3.5" />
+                {cleaningFriends ? "Removendo..." : "Remover Amizades"}
+              </button>
+            </div>
+            <p className="mt-4 text-[10px] text-white/30 font-sans italic">
+              Estas ações são permanentes e podem levar alguns minutos dependendo do volume.
+            </p>
+          </section>
         </div>
 
         {/* Sidebar: Premium Stats & Plan */}
@@ -474,6 +567,42 @@ function HubPage() {
           onClose={() => setShowPresence(false)} 
           onUpdate={(newSettings) => setUserSettings(newSettings)}
         />
+      )}
+      {/* Confirmação de Limpeza */}
+      {confirmAction && (
+        <Modal
+          title={confirmAction === "dms" ? "Limpar Conversas" : "Remover Amizades"}
+          description={
+            confirmAction === "dms"
+              ? `Todas as suas conversas abertas (${dmCount ?? 0}) serão fechadas.`
+              : `Todos os seus amigos (${stats?.friends ?? 0}) serão removidos da sua lista.`
+          }
+          onClose={() => setConfirmAction(null)}
+          className="max-w-md"
+        >
+          <div className="space-y-6">
+            <div className="flex items-start gap-3 p-4 border border-spectre-pink/20 bg-spectre-pink/5">
+              <ShieldAlert className="w-4 h-4 text-spectre-pink shrink-0 mt-0.5" />
+              <p className="text-[11px] text-white/60 font-sans italic">
+                Esta ação é permanente e não pode ser desfeita. O processo é feito lentamente para proteger sua conta.
+              </p>
+            </div>
+            <div className="flex flex-col sm:flex-row gap-4">
+              <button
+                onClick={() => setConfirmAction(null)}
+                className="flex-1 ds-btn ds-btn-secondary text-center"
+              >
+                Cancelar
+              </button>
+              <button
+                onClick={confirmAction === "dms" ? handleClearDMs : handleRemoveFriends}
+                className="flex-1 ds-btn ds-btn-primary text-center"
+              >
+                Confirmar
+              </button>
+            </div>
+          </div>
+        </Modal>
       )}
     </div>
   );
