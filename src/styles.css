@@ -98,19 +98,29 @@
   will-change: transform, filter;
   clip-path: polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px);
 
-  /* New border implementation for clip-path */
+  /* Internal border using pseudo-element */
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 1px;
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    pointer-events: none;
+    z-index: 1;
+    clip-path: polygon(11.5px 0, 100% 0, 100% calc(100% - 11.5px), calc(100% - 11.5px) 100%, 0 100%, 0 11.5px);
+  }
+
+  /* Pink Corner Accent */
   &::before {
     content: '';
     position: absolute;
-    inset: 0;
-    padding: 1px;
-    background: rgba(255, 255, 255, 0.1);
-    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    mask-composite: exclude;
-    -webkit-mask-composite: destination-out;
-    pointer-events: none;
-    z-index: 1;
-    clip-path: polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px);
+    top: 0;
+    right: 0;
+    width: 6px;
+    height: 6px;
+    background: var(--color-spectre-pink);
+    box-shadow: 0 0 10px var(--color-spectre-pink);
+    z-index: 2;
   }
 }
 
@@ -129,35 +139,11 @@
 }
 
 @utility ds-btn-secondary {
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(10px);
-  color: white;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  
-  &:hover { 
-    background: rgba(255, 255, 255, 0.1);
-    border-color: var(--color-spectre-pink);
-    color: var(--color-spectre-pink);
-  }
-}
-
-@utility ds-btn-secondary {
   background: rgba(0, 0, 0, 0.6);
   backdrop-filter: blur(10px);
   color: white;
   border: 1px solid rgba(255, 255, 255, 0.08);
   
-  &::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 4px;
-    height: 4px;
-    background: var(--color-spectre-pink);
-    box-shadow: 0 0 8px var(--color-spectre-pink);
-  }
-
   &:hover { 
     background: rgba(255, 255, 255, 0.05);
     border-color: var(--color-spectre-pink);
