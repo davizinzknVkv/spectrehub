@@ -332,6 +332,16 @@ body {
   to { transform: rotate(360deg); }
 }
 
+@keyframes scanline {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(200%); }
+}
+
+.animate-scanline {
+  animation: scanline 3s linear infinite;
+}
+
+
 @keyframes dash {
   from {
     stroke-dashoffset: 200;
