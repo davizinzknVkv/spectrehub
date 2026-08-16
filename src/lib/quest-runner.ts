@@ -383,6 +383,44 @@ function logRun(quest: Quest, status: RunRecord["status"], error_message: string
   });
 }
 
+/** Resgata a recompensa de uma missão direto pelo site (sem abrir o Discord). */
+export async function claimQuestReward(questId: string, questName = "missão"): Promise<boolean> {
+  const s = useQuestStore.getState();
+  const attempts: Array<[string, Record<string, unknown>]> = [
+    [`/quests/${questId}/claim-reward`, { platform: 3, location: 18 }],
+    [`/quests/${questId}/claim-reward`, { platform: 0 }],
+    [`/quests/${questId}/claim`, {}],
+  ];
+  for (const [path, body] of attempts) {
+    const res = await call(path, "POST", body);
+    if (res.status >= 200 && res.status < 300) {
+      s.log(`🎁 Recompensa resgatada: ${questName}`, "success");
+      return true;
+    }
+    if (res.status === 429) {
+      await sleep(jitter(6000));
+      continue;
+    }
+    if (res.status === 404 || res.status === 400) continue;
+  }
+  s.log(`⚠️ Não foi possível resgatar automaticamente: ${questName}`, "error");
+  return false;
+}
+
+/** Tenta resgatar as recompensas de todas as missões concluídas/listadas. */
+export async function claimAllRewards(quests: Quest[]): Promise<number> {
+  const s = useQuestStore.getState();
+  s.log(`🎁 Resgatando recompensas de ${quests.length} missão(ões)...`);
+  let ok = 0;
+  for (const q of quests) {
+    if (await claimQuestReward(q.questId, q.questName)) ok++;
+    await sleep(jitter(1500, 1000));
+  }
+  s.log(`✅ ${ok} recompensa(s) resgatada(s).`, ok > 0 ? "success" : "error");
+  return ok;
+}
+
+
 export async function runQuest(quest: Quest): Promise<boolean> {
   const s = useQuestStore.getState();
 
@@ -496,6 +534,8 @@ export async function runQuest(quest: Quest): Promise<boolean> {
 
     s.setProgress({ current: quest.target, total: quest.target });
     s.log(`✅ Concluída: ${quest.questName} — ${quest.rewardText}`, "success");
+    await claimQuestReward(quest.questId, quest.questName);
+
     logRun(quest, "completed");
     s.markCompleted();
     return true;
