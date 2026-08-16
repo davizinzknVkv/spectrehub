@@ -369,38 +369,46 @@ function TopBar({ onOpenMenu, pathname }: { onOpenMenu: () => void; pathname: st
                   toast.success("Terminal desconectado");
                 }}
               >
-                ENCERRAR
+                SAIR
               </button>
             </div>
           }
         >
           <div className="space-y-6">
-            <div className="flex items-center gap-4 border border-white/5 p-4 bg-white/[0.02] relative group overflow-hidden">
-              {/* Profile Background Accent */}
-              <div className="absolute top-0 right-0 w-24 h-24 bg-spectre-pink/5 rounded-full blur-2xl -translate-y-1/2 translate-x-1/2" />
-              
-              <div className="w-14 h-14 bg-white/5 overflow-hidden border border-white/10 shrink-0">
-                 {avatarUrl ? (
-                   <img src={avatarUrl} alt="" className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" />
-                 ) : (
-                   <div className="w-full h-full flex items-center justify-center text-white/20">
-                     <UserRound className="w-6 h-6" />
-                   </div>
-                 )}
-              </div>
-              <div className="min-w-0">
-                <div className="font-display text-sm text-white uppercase italic tracking-widest truncate">
-                  {me?.global_name || me?.username || "Usuário Hub"}
+            <div className="flex flex-col items-center gap-6 py-4">
+              <div className="relative group">
+                {/* Profile Glow */}
+                <div className="absolute inset-0 bg-spectre-pink/20 rounded-full blur-2xl group-hover:bg-spectre-pink/30 transition-colors duration-500" />
+                
+                <div className="relative w-24 h-24 bg-obsidian border-2 border-spectre-pink/30 overflow-hidden shrink-0 group-hover:border-spectre-pink transition-colors duration-500 shadow-[0_0_20px_rgba(255,0,85,0.2)]">
+                   {avatarUrl ? (
+                     <img src={avatarUrl} alt="" className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 scale-110 group-hover:scale-100" />
+                   ) : (
+                     <div className="w-full h-full flex items-center justify-center text-white/20">
+                       <UserRound className="w-10 h-10" />
+                     </div>
+                   )}
+                   {/* Scanline Effect */}
+                   <div className="absolute inset-0 pointer-events-none bg-gradient-to-b from-transparent via-white/[0.05] to-transparent h-1/2 w-full animate-scanline" />
                 </div>
-                <div className="font-sans text-[9px] text-white/20 uppercase tracking-[0.2em] flex items-center gap-2">
-                  <span className="w-1 h-1 rounded-full bg-spectre-pink animate-pulse" />
-                  Terminal Ativo #{me?.id?.slice(-4) || "0000"}
+              </div>
+
+              <div className="text-center space-y-2">
+                <div className="font-display text-xl text-white uppercase italic tracking-[0.2em]">
+                  {me?.global_name || me?.username || "Usuário"}
+                </div>
+                <div className="font-sans text-[10px] text-spectre-pink uppercase tracking-[0.3em] flex items-center justify-center gap-2">
+                  <span className="w-1.5 h-1.5 rounded-full bg-spectre-pink shadow-[0_0_8px_#ff0055] animate-pulse" />
+                  ID: {me?.id || "0000"}
                 </div>
               </div>
             </div>
-            <p className="text-white/40 text-xs font-sans italic leading-relaxed text-center sm:text-left">
-              Tem certeza que deseja remover o acesso deste terminal? Você precisará validar o token novamente para entrar.
-            </p>
+
+            <div className="relative border-t border-white/5 pt-6 text-center">
+              <p className="text-white/40 text-[11px] font-sans italic leading-relaxed uppercase tracking-widest">
+                Deseja desconectar este terminal da comunidade <span className="text-white">ratinho's community 18k</span>?
+              </p>
+            </div>
           </div>
         </Modal>
       )}
