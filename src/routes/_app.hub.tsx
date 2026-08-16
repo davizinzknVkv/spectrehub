@@ -568,6 +568,42 @@ function HubPage() {
           onUpdate={(newSettings) => setUserSettings(newSettings)}
         />
       )}
+      {/* Confirmação de Limpeza */}
+      {confirmAction && (
+        <Modal
+          title={confirmAction === "dms" ? "Limpar Conversas" : "Remover Amizades"}
+          description={
+            confirmAction === "dms"
+              ? `Todas as suas conversas abertas (${dmCount ?? 0}) serão fechadas.`
+              : `Todos os seus amigos (${stats?.friends ?? 0}) serão removidos da sua lista.`
+          }
+          onClose={() => setConfirmAction(null)}
+          className="max-w-md"
+        >
+          <div className="space-y-6">
+            <div className="flex items-start gap-3 p-4 border border-spectre-pink/20 bg-spectre-pink/5">
+              <ShieldAlert className="w-4 h-4 text-spectre-pink shrink-0 mt-0.5" />
+              <p className="text-[11px] text-white/60 font-sans italic">
+                Esta ação é permanente e não pode ser desfeita. O processo é feito lentamente para proteger sua conta.
+              </p>
+            </div>
+            <div className="flex flex-col sm:flex-row gap-4">
+              <button
+                onClick={() => setConfirmAction(null)}
+                className="flex-1 ds-btn ds-btn-secondary text-center"
+              >
+                Cancelar
+              </button>
+              <button
+                onClick={confirmAction === "dms" ? handleClearDMs : handleRemoveFriends}
+                className="flex-1 ds-btn ds-btn-primary text-center"
+              >
+                Confirmar
+              </button>
+            </div>
+          </div>
+        </Modal>
+      )}
     </div>
   );
 }
