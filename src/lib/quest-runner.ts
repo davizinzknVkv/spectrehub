@@ -496,6 +496,8 @@ export async function runQuest(quest: Quest): Promise<boolean> {
 
     s.setProgress({ current: quest.target, total: quest.target });
     s.log(`✅ Concluída: ${quest.questName} — ${quest.rewardText}`, "success");
+    await claimQuestReward(quest.questId, quest.questName);
+
     logRun(quest, "completed");
     s.markCompleted();
     return true;
