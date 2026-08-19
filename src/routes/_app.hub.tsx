@@ -17,7 +17,9 @@ import {
   removeRelationship,
 
   type Guild,
-  type ProfileBadge
+  type ProfileBadge,
+  type DMChannel,
+  type Relationship
 } from "@/lib/quest-runner";
 import { PageHeader } from "@/components/PageHeader";
 import { 
@@ -65,12 +67,16 @@ function HubPage() {
   const [user, setUser] = useState<any>(null);
   const [stats, setStats] = useState<{ total: number; friends: number } | null>(null);
   const [dmCount, setDmCount] = useState<number | null>(null);
+  const [dmChannels, setDmChannels] = useState<DMChannel[]>([]);
+  const [relationships, setRelationships] = useState<Relationship[]>([]);
   const [guilds, setGuilds] = useState<Guild[]>([]);
   const [bio, setBio] = useState<string | null>(null);
   const [badges, setBadges] = useState<ProfileBadge[]>([]);
   const [loading, setLoading] = useState(true);
   const [leavingAll, setLeavingAll] = useState(false);
   const [showGuilds, setShowGuilds] = useState(false);
+  const [showDMs, setShowDMs] = useState(false);
+  const [showFriends, setShowFriends] = useState(false);
   const [showPresence, setShowPresence] = useState(false);
   const [userSettings, setUserSettings] = useState<any>(null);
   const [cleaningDms, setCleaningDms] = useState(false);
@@ -111,6 +117,8 @@ function HubPage() {
 
           setStats(rel);
           setDmCount(dms);
+          setDmChannels(await fetchDMChannels());
+          setRelationships(await fetchRelationships());
           setGuilds(gld);
           setBio(b);
           setBadges(bdg);
@@ -172,6 +180,7 @@ function HubPage() {
       }
       toast.success(`${count} conversas fechadas.`);
       setDmCount(await fetchDMsCount());
+      setDmChannels(await fetchDMChannels());
     } catch {
       toast.error("Falha ao limpar as conversas.");
     } finally {
@@ -197,6 +206,7 @@ function HubPage() {
       }
       toast.success(`${count} amizades removidas.`);
       setStats(await fetchRelationshipsCount());
+      setRelationships(await fetchRelationships());
     } catch {
       toast.error("Falha ao remover as amizades.");
     } finally {
@@ -434,20 +444,20 @@ function HubPage() {
 
             <div className="flex flex-col sm:flex-row gap-4">
               <button
-                onClick={() => setConfirmAction("dms")}
+                onClick={() => setShowDMs(true)}
                 disabled={cleaningDms}
                 className="flex-1 ds-btn ds-btn-secondary flex items-center justify-center gap-3"
               >
                 <MessageSquare className="w-3.5 h-3.5" />
-                {cleaningDms ? "Limpando..." : "Limpar Conversas"}
+                {cleaningDms ? "Limpando..." : "Listar Conversas"}
               </button>
               <button
-                onClick={() => setConfirmAction("friends")}
+                onClick={() => setShowFriends(true)}
                 disabled={cleaningFriends}
                 className="flex-1 ds-btn ds-btn-primary flex items-center justify-center gap-3"
               >
                 <UserMinus className="w-3.5 h-3.5" />
-                {cleaningFriends ? "Removendo..." : "Remover Amizades"}
+                {cleaningFriends ? "Removendo..." : "Listar Amigos"}
               </button>
             </div>
             <p className="mt-4 text-[10px] text-white/30 font-sans italic">
@@ -557,6 +567,132 @@ function HubPage() {
                 </div>
               </div>
             ))}
+          </div>
+        </Modal>
+      )}
+      {/* DM List Modal */}
+      {showDMs && (
+        <Modal 
+          title="Conversas Abertas" 
+          onClose={() => setShowDMs(false)}
+          className="max-w-2xl"
+        >
+          <div className="space-y-4 max-h-[60vh] overflow-y-auto pr-2 custom-scrollbar">
+            <div className="flex justify-end mb-4">
+              <button 
+                onClick={() => { setShowDMs(false); setConfirmAction("dms"); }}
+                className="ds-btn ds-btn-primary !py-2 !px-4 !text-[9px]"
+              >
+                Fechar Todas as DMs
+              </button>
+            </div>
+            {dmChannels.length === 0 ? (
+              <p className="text-center py-8 text-white/20 font-display text-[10px] uppercase tracking-widest italic">Nenhuma conversa encontrada</p>
+            ) : dmChannels.map(c => {
+              const recipient = c.recipients?.[0];
+              const name = c.name || recipient?.global_name || recipient?.username || "Conversa em Grupo";
+              const avatar = recipient?.avatar ? `https://cdn.discordapp.com/avatars/${recipient.id}/${recipient.avatar}.png` : null;
+              
+              return (
+                <div key={c.id} className="flex items-center justify-between p-4 bg-white/[0.02] border border-white/5 group hover:border-spectre-pink/20 transition-all">
+                  <div className="flex items-center gap-4">
+                    <div className="w-10 h-10 bg-obsidian border border-white/10 flex items-center justify-center overflow-hidden">
+                      {avatar ? (
+                        <img src={avatar} className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all" alt="" />
+                      ) : (
+                        <div className="w-full h-full flex items-center justify-center text-white/20">
+                          <MessageSquare className="w-4 h-4" />
+                        </div>
+                      )}
+                    </div>
+                    <div>
+                      <div className="font-display text-[11px] text-white uppercase italic tracking-widest">{name}</div>
+                      <div className="font-mono text-[8px] text-white/20 uppercase">
+                        {c.type === 1 ? "DM Direta" : "Grupo"} <span className="mx-2">//</span> {c.id}
+                      </div>
+                    </div>
+                  </div>
+                  <button 
+                    onClick={async () => {
+                      if (confirm(`Fechar esta conversa?`)) {
+                        const ok = await closeDMChannel(c.id);
+                        if (ok) {
+                          toast.success(`Conversa fechada`);
+                          setDmChannels(dmChannels.filter(x => x.id !== c.id));
+                          setDmCount(prev => prev !== null ? prev - 1 : 0);
+                        }
+                      }
+                    }}
+                    className="text-[9px] uppercase tracking-widest text-spectre-pink opacity-40 hover:opacity-100 transition-opacity italic font-bold"
+                  >
+                    Fechar
+                  </button>
+                </div>
+              );
+            })}
+          </div>
+        </Modal>
+      )}
+      {/* Friends List Modal */}
+      {showFriends && (
+        <Modal 
+          title="Lista de Amigos" 
+          onClose={() => setShowFriends(false)}
+          className="max-w-2xl"
+        >
+          <div className="space-y-4 max-h-[60vh] overflow-y-auto pr-2 custom-scrollbar">
+            <div className="flex justify-end mb-4">
+              <button 
+                onClick={() => { setShowFriends(false); setConfirmAction("friends"); }}
+                className="ds-btn ds-btn-primary !py-2 !px-4 !text-[9px]"
+              >
+                Remover Todos os Amigos
+              </button>
+            </div>
+            {relationships.filter(r => r.type === 1).length === 0 ? (
+              <p className="text-center py-8 text-white/20 font-display text-[10px] uppercase tracking-widest italic">Nenhuma amizade encontrada</p>
+            ) : relationships.filter(r => r.type === 1).map(r => {
+              const u = r.user;
+              const name = u?.global_name || u?.username || "Usuário Desconhecido";
+              const avatar = u?.avatar ? `https://cdn.discordapp.com/avatars/${u.id}/${u.avatar}.png` : null;
+              
+              return (
+                <div key={r.id} className="flex items-center justify-between p-4 bg-white/[0.02] border border-white/5 group hover:border-spectre-pink/20 transition-all">
+                  <div className="flex items-center gap-4">
+                    <div className="w-10 h-10 bg-obsidian border border-white/10 flex items-center justify-center overflow-hidden">
+                      {avatar ? (
+                        <img src={avatar} className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all" alt="" />
+                      ) : (
+                        <div className="w-full h-full flex items-center justify-center text-white/20">
+                          <UserRound className="w-4 h-4" />
+                        </div>
+                      )}
+                    </div>
+                    <div>
+                      <div className="font-display text-[11px] text-white uppercase italic tracking-widest">{name}</div>
+                      <div className="font-mono text-[8px] text-white/20 uppercase">
+                        {u?.username} <span className="mx-2">//</span> {r.id}
+                      </div>
+                    </div>
+                  </div>
+                  <button 
+                    onClick={async () => {
+                      if (confirm(`Remover amizade com ${name}?`)) {
+                        const ok = await removeRelationship(r.id);
+                        if (ok) {
+                          toast.success(`Amizade removida`);
+                          setRelationships(relationships.filter(x => x.id !== r.id));
+                          setStats(prev => prev ? { ...prev, friends: prev.friends - 1 } : null);
+                        }
+                      }
+                    }}
+                    className="text-[9px] uppercase tracking-widest text-spectre-pink opacity-40 hover:opacity-100 transition-opacity italic font-bold"
+                  >
+                    Remover
+                  </button>
+                </div>
+              );
+            })}
           </div>
         </Modal>
       )}
