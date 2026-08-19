@@ -7,6 +7,7 @@ import {
   PLAN_LIMITS,
   runAll,
   runQuest,
+  claimAllRewards,
 } from "@/lib/quest-runner";
 import { useQuestStore, type Quest } from "@/lib/quest-store";
 import { PageHeader } from "@/components/PageHeader";
