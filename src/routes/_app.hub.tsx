@@ -180,6 +180,7 @@ function HubPage() {
       }
       toast.success(`${count} conversas fechadas.`);
       setDmCount(await fetchDMsCount());
+      setDmChannels(await fetchDMChannels());
     } catch {
       toast.error("Falha ao limpar as conversas.");
     } finally {
@@ -205,6 +206,7 @@ function HubPage() {
       }
       toast.success(`${count} amizades removidas.`);
       setStats(await fetchRelationshipsCount());
+      setRelationships(await fetchRelationships());
     } catch {
       toast.error("Falha ao remover as amizades.");
     } finally {
