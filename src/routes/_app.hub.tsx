@@ -17,7 +17,9 @@ import {
   removeRelationship,
 
   type Guild,
-  type ProfileBadge
+  type ProfileBadge,
+  type DMChannel,
+  type Relationship
 } from "@/lib/quest-runner";
 import { PageHeader } from "@/components/PageHeader";
 import { 
