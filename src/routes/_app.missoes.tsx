@@ -134,18 +134,25 @@ function MissoesPage() {
              <div className="font-display text-[9px] uppercase tracking-widest text-white/30 italic">
                 {quests.length} Missões Disponíveis
              </div>
-             <div className="flex gap-4">
+             <div className="flex gap-2 sm:gap-4 flex-wrap">
                 <button 
                   onClick={loadQuests}
                   disabled={loadingQuests || running}
-                  className="ds-btn ds-btn-secondary !py-2 !px-6 !text-[9px]"
+                  className="ds-btn ds-btn-secondary !py-2 !px-4 sm:!px-6 !text-[9px]"
                 >
                   {loadingQuests ? 'Sondando...' : 'Scan'}
                 </button>
                 <button 
+                  onClick={() => claimAllRewards(quests)}
+                  disabled={running || quests.length === 0}
+                  className="ds-btn ds-btn-secondary !py-2 !px-4 sm:!px-6 !text-[9px] !text-spectre-pink hover:!bg-spectre-pink/10"
+                >
+                  Resgatar Tudo
+                </button>
+                <button 
                   onClick={() => setCaptchaAll(true)}
                   disabled={running || quests.length === 0 || gateBlocked}
-                  className="ds-btn ds-btn-primary !py-2 !px-6 !text-[9px]"
+                  className="ds-btn ds-btn-primary !py-2 !px-4 sm:!px-6 !text-[9px]"
                 >
                   Run All
                 </button>
