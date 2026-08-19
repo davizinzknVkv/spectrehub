@@ -691,6 +691,7 @@ function HubPage() {
             })}
           </div>
         </Modal>
+      )}
       {/* Presence Modal */}
       {showPresence && (
         <PresenceModal 
