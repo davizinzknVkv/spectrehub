@@ -763,6 +763,7 @@ function HubPage() {
                 </div>
               );
             })}
+            </div>
           </div>
         </Modal>
       )}
