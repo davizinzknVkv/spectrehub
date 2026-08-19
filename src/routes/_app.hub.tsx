@@ -54,7 +54,7 @@ import {
 import { Button, Badge, Card, Modal, StatCard, Skeleton } from "@/components/ui/ds";
 import { Link } from "@tanstack/react-router";
 import logoAsset from "@/assets/spectre-logo-nobg.png.asset.json";
-import { cn } from "@/lib/utils";
+import { cn, getDiscordCreationDate, formatDiscordAccountAge } from "@/lib/utils";
 
 export const Route = createFileRoute("/_app/hub")({
   head: () => ({ meta: [{ title: "Hub — Spectre Hub" }] }),
@@ -84,9 +84,21 @@ function HubPage() {
   const [confirmAction, setConfirmAction] = useState<null | "dms" | "friends">(null);
 
   // Search filters
-  const [guildSearch, setGuildSearch] = useState("");
-  const [dmSearch, setDmSearch] = useState("");
-  const [friendSearch, setFriendSearch] = useState("");
+  const [guildSearch, setGuildSearch] = useState(() => localStorage.getItem("spectre_hub_guild_search") || "");
+  const [dmSearch, setDmSearch] = useState(() => localStorage.getItem("spectre_hub_dm_search") || "");
+  const [friendSearch, setFriendSearch] = useState(() => localStorage.getItem("spectre_hub_friend_search") || "");
+
+  useEffect(() => {
+    localStorage.setItem("spectre_hub_guild_search", guildSearch);
+  }, [guildSearch]);
+
+  useEffect(() => {
+    localStorage.setItem("spectre_hub_dm_search", dmSearch);
+  }, [dmSearch]);
+
+  useEffect(() => {
+    localStorage.setItem("spectre_hub_friend_search", friendSearch);
+  }, [friendSearch]);
 
   const filteredGuilds = useMemo(() => {
     return guilds.filter(g => g.name.toLowerCase().includes(guildSearch.toLowerCase()));
@@ -410,7 +422,8 @@ function HubPage() {
                 { label: "E-mail", val: user?.email || "N/A", icon: Mail, mask: true },
                 { label: "Telefone", val: user?.phone || "Não Vinculado", icon: Phone, mask: user?.phone ? true : false },
                 { label: "MFA / 2FA", val: user?.mfa_enabled ? "Ativado" : "Desativado", icon: Lock, alert: !user?.mfa_enabled },
-                { label: "Criado em", val: user?.id ? new Date(parseInt(user.id) / 4194304 + 1420070400000).toLocaleDateString() : "N/A", icon: Calendar },
+                { label: "Criado em", val: user?.id ? getDiscordCreationDate(user.id).toLocaleDateString('pt-BR') : "N/A", icon: Calendar },
+                { label: "Idade da Conta", val: user?.id ? formatDiscordAccountAge(user.id) : "N/A", icon: History },
               ].map(info => (
                 <div key={info.label} className="flex gap-4 items-center group/info">
                   <div className={cn("w-10 h-10 flex items-center justify-center border border-white/5 bg-white/[0.01]", info.alert && "text-spectre-pink")}>
@@ -742,6 +755,9 @@ function HubPage() {
                       <div className="font-display text-[11px] text-white uppercase italic tracking-widest">{name}</div>
                       <div className="font-mono text-[8px] text-white/20 uppercase">
                         {u?.username} <span className="mx-2">//</span> {r.id}
+                      </div>
+                      <div className="font-sans text-[7px] text-white/10 uppercase tracking-[0.2em] mt-1">
+                        {u?.id ? formatDiscordAccountAge(u.id) : ""}
                       </div>
                     </div>
                   </div>
