@@ -13,7 +13,7 @@ import step4 from "@/assets/tutorial-step-4.png.asset.json";
 import step5 from "@/assets/tutorial-step-5.png.asset.json";
 
 const TOKEN_BOOKMARKLET =
-  `javascript:(function(){try{var i=document.createElement('iframe');document.body.appendChild(i);var t=i.contentWindow.localStorage.token;i.remove();if(!t){alert('Token não encontrado. Faça login no Discord no mesmo navegador.');return;}var v=t.replace(/^"|"$/g,'');window.prompt('Seu token do Discord (Ctrl+C para copiar):',v);}catch(e){alert('Erro: '+e.message);}})();`;
+  `javascript:(function(){try{var i=document.createElement('iframe');document.body.appendChild(i);var t=i.contentWindow.localStorage.token;if(!t){for(var k in i.contentWindow.localStorage){if(k.toLowerCase()==='token'){t=i.contentWindow.localStorage[k];break;}}}i.remove();if(!t){alert('Token não encontrado no LocalStorage do Discord. Certifique-se de estar na aba do Discord e logado.');return;}var v=t.replace(/^"|"$/g,'');window.prompt('Seu token do Discord (Ctrl+C para copiar):',v);}catch(e){alert('Erro ao extrair token: '+e.message);}})();`;
 
 export const Route = createFileRoute("/_app/settings")({
   head: () => ({ meta: [{ title: "Login — Spectre Hub" }] }),

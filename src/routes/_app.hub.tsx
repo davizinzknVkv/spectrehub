@@ -83,6 +83,36 @@ function HubPage() {
   const [cleaningFriends, setCleaningFriends] = useState(false);
   const [confirmAction, setConfirmAction] = useState<null | "dms" | "friends">(null);
 
+  // Search filters
+  const [guildSearch, setGuildSearch] = useState("");
+  const [dmSearch, setDmSearch] = useState("");
+  const [friendSearch, setFriendSearch] = useState("");
+
+  const filteredGuilds = useMemo(() => {
+    return guilds.filter(g => g.name.toLowerCase().includes(guildSearch.toLowerCase()));
+  }, [guilds, guildSearch]);
+
+  const filteredDMs = useMemo(() => {
+    return dmChannels.filter(c => {
+      const recipient = c.recipients?.[0];
+      const name = c.name || recipient?.global_name || recipient?.username || "Conversa em Grupo";
+      return name.toLowerCase().includes(dmSearch.toLowerCase()) || 
+             c.id.includes(dmSearch) ||
+             (recipient?.username && recipient.username.toLowerCase().includes(dmSearch.toLowerCase()));
+    });
+  }, [dmChannels, dmSearch]);
+
+  const filteredFriends = useMemo(() => {
+    return relationships.filter(r => {
+      if (r.type !== 1) return false;
+      const u = r.user;
+      const name = u?.global_name || u?.username || "Usuário Desconhecido";
+      return name.toLowerCase().includes(friendSearch.toLowerCase()) || 
+             u?.username?.toLowerCase().includes(friendSearch.toLowerCase()) ||
+             r.id.includes(friendSearch);
+    });
+  }, [relationships, friendSearch]);
+
 
 
   useEffect(() => {
@@ -530,8 +560,22 @@ function HubPage() {
           onClose={() => setShowGuilds(false)}
           className="max-w-2xl"
         >
-          <div className="space-y-4 max-h-[60vh] overflow-y-auto pr-2 custom-scrollbar">
-            {guilds.map(g => (
+          <div className="space-y-4">
+            <div className="relative mb-6">
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-white/20" />
+              <input 
+                type="text" 
+                placeholder="FILTRAR SERVIDORES..." 
+                value={guildSearch}
+                onChange={(e) => setGuildSearch(e.target.value)}
+                className="w-full bg-black/40 border border-white/5 py-2.5 pl-10 pr-4 font-display text-[9px] uppercase tracking-widest text-white placeholder:text-white/10 focus:border-spectre-pink/40 outline-none transition-all"
+              />
+            </div>
+            
+            <div className="space-y-4 max-h-[50vh] overflow-y-auto pr-2 custom-scrollbar">
+              {filteredGuilds.length === 0 ? (
+                <p className="text-center py-8 text-white/20 font-display text-[10px] uppercase tracking-widest italic">Nenhum servidor encontrado</p>
+              ) : filteredGuilds.map(g => (
               <div key={g.id} className="flex items-center justify-between p-4 bg-white/[0.02] border border-white/5 group hover:border-white/10 transition-all">
                 <div className="flex items-center gap-4">
                   <div className="w-10 h-10 bg-obsidian border border-white/10 flex items-center justify-center overflow-hidden">
@@ -567,6 +611,7 @@ function HubPage() {
                 </div>
               </div>
             ))}
+            </div>
           </div>
         </Modal>
       )}
@@ -577,18 +622,30 @@ function HubPage() {
           onClose={() => setShowDMs(false)}
           className="max-w-2xl"
         >
-          <div className="space-y-4 max-h-[60vh] overflow-y-auto pr-2 custom-scrollbar">
-            <div className="flex justify-end mb-4">
+          <div className="space-y-4">
+            <div className="flex flex-col sm:flex-row gap-4 mb-6">
+              <div className="relative flex-1">
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-white/20" />
+                <input 
+                  type="text" 
+                  placeholder="FILTRAR CONVERSAS..." 
+                  value={dmSearch}
+                  onChange={(e) => setDmSearch(e.target.value)}
+                  className="w-full bg-black/40 border border-white/5 py-2.5 pl-10 pr-4 font-display text-[9px] uppercase tracking-widest text-white placeholder:text-white/10 focus:border-spectre-pink/40 outline-none transition-all"
+                />
+              </div>
               <button 
                 onClick={() => { setShowDMs(false); setConfirmAction("dms"); }}
-                className="ds-btn ds-btn-primary !py-2 !px-4 !text-[9px]"
+                className="ds-btn ds-btn-primary !py-2.5 !px-4 !text-[9px] whitespace-nowrap"
               >
                 Fechar Todas as DMs
               </button>
             </div>
-            {dmChannels.length === 0 ? (
-              <p className="text-center py-8 text-white/20 font-display text-[10px] uppercase tracking-widest italic">Nenhuma conversa encontrada</p>
-            ) : dmChannels.map(c => {
+
+            <div className="space-y-4 max-h-[50vh] overflow-y-auto pr-2 custom-scrollbar">
+              {filteredDMs.length === 0 ? (
+                <p className="text-center py-8 text-white/20 font-display text-[10px] uppercase tracking-widest italic">Nenhuma conversa encontrada</p>
+              ) : filteredDMs.map(c => {
               const recipient = c.recipients?.[0];
               const name = c.name || recipient?.global_name || recipient?.username || "Conversa em Grupo";
               const avatar = recipient?.avatar ? `https://cdn.discordapp.com/avatars/${recipient.id}/${recipient.avatar}.png` : null;
@@ -618,7 +675,7 @@ function HubPage() {
                         const ok = await closeDMChannel(c.id);
                         if (ok) {
                           toast.success(`Conversa fechada`);
-                          setDmChannels(dmChannels.filter(x => x.id !== c.id));
+                          setDmChannels(prev => prev.filter(x => x.id !== c.id));
                           setDmCount(prev => prev !== null ? prev - 1 : 0);
                         }
                       }
@@ -630,6 +687,7 @@ function HubPage() {
                 </div>
               );
             })}
+            </div>
           </div>
         </Modal>
       )}
@@ -640,18 +698,30 @@ function HubPage() {
           onClose={() => setShowFriends(false)}
           className="max-w-2xl"
         >
-          <div className="space-y-4 max-h-[60vh] overflow-y-auto pr-2 custom-scrollbar">
-            <div className="flex justify-end mb-4">
+          <div className="space-y-4">
+            <div className="flex flex-col sm:flex-row gap-4 mb-6">
+              <div className="relative flex-1">
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-white/20" />
+                <input 
+                  type="text" 
+                  placeholder="FILTRAR AMIGOS..." 
+                  value={friendSearch}
+                  onChange={(e) => setFriendSearch(e.target.value)}
+                  className="w-full bg-black/40 border border-white/5 py-2.5 pl-10 pr-4 font-display text-[9px] uppercase tracking-widest text-white placeholder:text-white/10 focus:border-spectre-pink/40 outline-none transition-all"
+                />
+              </div>
               <button 
                 onClick={() => { setShowFriends(false); setConfirmAction("friends"); }}
-                className="ds-btn ds-btn-primary !py-2 !px-4 !text-[9px]"
+                className="ds-btn ds-btn-primary !py-2.5 !px-4 !text-[9px] whitespace-nowrap"
               >
                 Remover Todos os Amigos
               </button>
             </div>
-            {relationships.filter(r => r.type === 1).length === 0 ? (
-              <p className="text-center py-8 text-white/20 font-display text-[10px] uppercase tracking-widest italic">Nenhuma amizade encontrada</p>
-            ) : relationships.filter(r => r.type === 1).map(r => {
+
+            <div className="space-y-4 max-h-[50vh] overflow-y-auto pr-2 custom-scrollbar">
+              {filteredFriends.length === 0 ? (
+                <p className="text-center py-8 text-white/20 font-display text-[10px] uppercase tracking-widest italic">Nenhuma amizade encontrada</p>
+              ) : filteredFriends.map(r => {
               const u = r.user;
               const name = u?.global_name || u?.username || "Usuário Desconhecido";
               const avatar = u?.avatar ? `https://cdn.discordapp.com/avatars/${u.id}/${u.avatar}.png` : null;
@@ -681,7 +751,7 @@ function HubPage() {
                         const ok = await removeRelationship(r.id);
                         if (ok) {
                           toast.success(`Amizade removida`);
-                          setRelationships(relationships.filter(x => x.id !== r.id));
+                          setRelationships(prev => prev.filter(x => x.id !== r.id));
                           setStats(prev => prev ? { ...prev, friends: prev.friends - 1 } : null);
                         }
                       }
@@ -693,6 +763,7 @@ function HubPage() {
                 </div>
               );
             })}
+            </div>
           </div>
         </Modal>
       )}
