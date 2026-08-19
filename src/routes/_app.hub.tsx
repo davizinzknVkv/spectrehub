@@ -611,6 +611,7 @@ function HubPage() {
                 </div>
               </div>
             ))}
+            </div>
           </div>
         </Modal>
       )}
@@ -686,6 +687,7 @@ function HubPage() {
                 </div>
               );
             })}
+            </div>
           </div>
         </Modal>
       )}
