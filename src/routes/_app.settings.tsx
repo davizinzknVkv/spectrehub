@@ -169,14 +169,31 @@ function SettingsPage() {
         </div>
 
         {/* Galeria Visual de Passos */}
-        <div className="grid grid-cols-2 sm:grid-cols-5 gap-4 opacity-40 hover:opacity-100 transition-opacity duration-700">
-           {[step1, step2, step3, step4, step5].map((s, i) => (
-             <div key={i} className="aspect-[4/3] border border-white/5 bg-white/5 overflow-hidden group cursor-zoom-in relative">
-                <img src={s.url} alt={`Passo ${i+1}`} className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-110" />
-                <div className="absolute inset-0 bg-spectre-pink/10 opacity-0 group-hover:opacity-100 transition-opacity" />
-                <div className="absolute bottom-1 left-1 font-display text-[8px] text-white/40 uppercase">Step 0{i+1}</div>
-             </div>
-           ))}
+        <div className="space-y-6">
+          <div className="flex items-center gap-4">
+             <div className="h-px w-8 bg-spectre-pink/30" />
+             <h4 className="font-display text-[9px] uppercase tracking-[0.2em] text-white/40 italic">Guia Visual de Configuração</h4>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-5 gap-4">
+             {[step1, step2, step3, step4, step5].map((s, i) => (
+               <div key={i} className="space-y-2 group">
+                  <div className="aspect-[4/3] border border-white/5 bg-white/5 overflow-hidden group-hover:border-spectre-pink/30 transition-all duration-500 relative">
+                     <img src={s.url} alt={`Passo ${i+1}`} className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-105" />
+                     <div className="absolute inset-0 bg-spectre-pink/5 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
+                  </div>
+                  <div className="flex items-center gap-2">
+                     <span className="font-display text-[8px] text-spectre-pink italic">0{i+1}</span>
+                     <span className="font-sans text-[7px] text-white/20 uppercase tracking-widest group-hover:text-white/40 transition-colors">
+                        {i === 0 && "Abrir Discord"}
+                        {i === 1 && "F12 / Inspecionar"}
+                        {i === 2 && "Aba Console"}
+                        {i === 3 && "Colar Script"}
+                        {i === 4 && "Copiar Token"}
+                     </span>
+                  </div>
+               </div>
+             ))}
+          </div>
         </div>
       </div>
 
