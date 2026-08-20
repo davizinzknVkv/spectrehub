@@ -386,24 +386,40 @@ function logRun(quest: Quest, status: RunRecord["status"], error_message: string
 /** Resgata a recompensa de uma missão direto pelo site (sem abrir o Discord). */
 export async function claimQuestReward(questId: string, questName = "missão"): Promise<boolean> {
   const s = useQuestStore.getState();
-  const attempts: Array<[string, Record<string, unknown>]> = [
-    [`/quests/${questId}/claim-reward`, { platform: 3, location: 18 }],
-    [`/quests/${questId}/claim-reward`, { platform: 0 }],
-    [`/quests/${questId}/claim`, {}],
+  // V1 e V2 do endpoint de claim do Discord, com e sem plataforma especificada
+  const attempts: Array<{ path: string; body: Record<string, unknown> }> = [
+    { path: `/quests/${questId}/claim`, body: {} },
+    { path: `/quests/${questId}/claim-reward`, body: { platform: 0 } }, // 0 = Desktop
+    { path: `/quests/${questId}/claim-reward`, body: { platform: 3, location: 18 } }, // 3 = Web
   ];
-  for (const [path, body] of attempts) {
-    const res = await call(path, "POST", body);
-    if (res.status >= 200 && res.status < 300) {
-      s.log(`🎁 Recompensa resgatada: ${questName}`, "success");
-      return true;
+
+  for (const attempt of attempts) {
+    try {
+      const res = await call(attempt.path, "POST", attempt.body);
+      
+      // 200 OK ou 204 No Content indicam sucesso no resgate
+      if (res.status >= 200 && res.status < 300) {
+        s.log(`🎁 Recompensa resgatada: ${questName}`, "success");
+        return true;
+      }
+      
+      // Se já foi resgatado, consideramos sucesso para a UI
+      const data = res.data as { message?: string; code?: number } | null;
+      if (res.status === 400 && (data?.message?.includes("already") || data?.code === 40003)) {
+        s.log(`ℹ️ Recompensa já estava resgatada: ${questName}`, "info");
+        return true;
+      }
+
+      if (res.status === 429) {
+        await sleep(jitter(3000));
+        continue;
+      }
+    } catch (e) {
+      console.error(`Erro ao tentar resgatar ${questId} via ${attempt.path}`, e);
     }
-    if (res.status === 429) {
-      await sleep(jitter(6000));
-      continue;
-    }
-    if (res.status === 404 || res.status === 400) continue;
   }
-  s.log(`⚠️ Não foi possível resgatar automaticamente: ${questName}`, "error");
+
+  s.log(`⚠️ Falha no resgate automático: ${questName}`, "error");
   return false;
 }
 
