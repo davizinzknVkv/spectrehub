@@ -62,6 +62,9 @@ function Index() {
   const { t } = useTranslation();
   const [ref] = useInView<HTMLDivElement>();
   
+  // como eu pego o json
+
+  
 
 
   return (
