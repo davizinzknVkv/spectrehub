@@ -152,19 +152,42 @@ function SettingsPage() {
               <div className="w-8 h-8 bg-white/10 flex items-center justify-center text-white/40 font-display italic text-xs border border-white/10">02</div>
               <h3 className="font-display text-[11px] uppercase tracking-widest italic text-white">Console (F12)</h3>
             </div>
-            <div className="bg-black/40 border border-white/5 p-4 mb-4 font-mono text-[9px] text-spectre-pink/80 overflow-x-auto whitespace-nowrap">
-              {`(webpackChunkdiscord_app.push([[''],{},e=>{m=[];for(c in e.c)m.push(e.c[c])}]),m).find(m=>m?.exports?.default?.getToken!==void 0).exports.default.getToken()`}
+            
+            <div className="space-y-4 mb-6">
+               <div className="space-y-2">
+                 <label className="block font-display text-[8px] uppercase tracking-widest text-white/30 italic">Extrair Token</label>
+                 <div className="bg-black/40 border border-white/5 p-4 font-mono text-[9px] text-spectre-pink/80 overflow-x-auto whitespace-nowrap">
+                   {`(webpackChunkdiscord_app.push([[''],{},e=>{m=[];for(c in e.c)m.push(e.c[c])}]),m).find(m=>m?.exports?.default?.getToken!==void 0).exports.default.getToken()`}
+                 </div>
+                 <button 
+                   onClick={() => {
+                     navigator.clipboard.writeText(`(webpackChunkdiscord_app.push([[''],{},e=>{m=[];for(c in e.c)m.push(e.c[c])}]),m).find(m=>m?.exports?.default?.getToken!==void 0).exports.default.getToken()`);
+                     toast.success("Código Copiado", { description: "Cole no console do Discord (F12)" });
+                   }}
+                   className="ds-btn ds-btn-secondary w-full !py-2 !text-[9px] flex items-center justify-center gap-2"
+                 >
+                   <Copy className="w-3 h-3" />
+                   COPIAR SCRIPT TOKEN
+                 </button>
+               </div>
+
+               <div className="space-y-2">
+                 <label className="block font-display text-[8px] uppercase tracking-widest text-white/30 italic">Interceptar Missões (F12)</label>
+                 <div className="bg-black/40 border border-white/5 p-4 font-mono text-[9px] text-spectre-pink/80 overflow-x-auto whitespace-nowrap">
+                   {`let old = XMLHttpRequest.prototype.open; XMLHttpRequest.prototype.open = function() { console.log('%c[Spectre] Interceptado:', 'color:#ff0055', arguments[1]); return old.apply(this, arguments); };`}
+                 </div>
+                 <button 
+                   onClick={() => {
+                     navigator.clipboard.writeText(`let old = XMLHttpRequest.prototype.open; XMLHttpRequest.prototype.open = function() { console.log('%c[Spectre] Interceptado:', 'color:#ff0055', arguments[1]); return old.apply(this, arguments); };`);
+                     toast.success("Código Copiado", { description: "Cole no console do Discord (F12)" });
+                   }}
+                   className="ds-btn ds-btn-secondary w-full !py-2 !text-[9px] flex items-center justify-center gap-2"
+                 >
+                   <Copy className="w-3 h-3" />
+                   COPIAR INTERCEPTADOR
+                 </button>
+               </div>
             </div>
-            <button 
-              onClick={() => {
-                navigator.clipboard.writeText(`(webpackChunkdiscord_app.push([[''],{},e=>{m=[];for(c in e.c)m.push(e.c[c])}]),m).find(m=>m?.exports?.default?.getToken!==void 0).exports.default.getToken()`);
-                toast.success("Código Copiado", { description: "Cole no console do Discord (F12)" });
-              }}
-              className="ds-btn ds-btn-secondary w-full !py-3 !text-[9px] flex items-center gap-2"
-            >
-              <Copy className="w-3 h-3" />
-              COPIAR SCRIPT CONSOLE
-            </button>
           </div>
         </div>
 
