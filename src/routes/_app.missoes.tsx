@@ -143,11 +143,18 @@ function MissoesPage() {
                   {loadingQuests ? 'Sondando...' : 'Scan'}
                 </button>
                 <button 
-                  onClick={() => claimAllRewards(quests)}
+                  onClick={async () => {
+                    useQuestStore.getState().setRunning(true);
+                    try {
+                      await claimAllRewards(quests);
+                    } finally {
+                      useQuestStore.getState().setRunning(false);
+                    }
+                  }}
                   disabled={running || quests.length === 0}
                   className="ds-btn ds-btn-secondary !py-2 !px-4 sm:!px-6 !text-[9px] !text-spectre-pink hover:!bg-spectre-pink/10"
                 >
-                  Resgatar Tudo
+                  {running ? 'Processando...' : 'Resgatar Tudo'}
                 </button>
                 <button 
                   onClick={() => setCaptchaAll(true)}
