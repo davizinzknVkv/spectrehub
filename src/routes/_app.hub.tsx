@@ -993,6 +993,7 @@ function PresenceModal({
           )}
 
           {activeTab === 'rich' && (
+            <div className="space-y-6">
               <div className="flex items-center justify-between p-5 bg-primary/5 border border-primary/20 rounded-xl">
                 <div className="flex items-center gap-4">
                   <Gamepad2 className="w-6 h-6 text-primary" />
