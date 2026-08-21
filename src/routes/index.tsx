@@ -75,7 +75,7 @@ function Index() {
   return (
     <div
       id="topo"
-      className="relative min-h-screen overflow-x-hidden bg-background font-sans text-foreground antialiased selection:bg-primary/30 flex flex-col"
+      className="relative min-h-screen bg-background font-sans text-foreground antialiased selection:bg-primary/30 flex flex-col"
     >
       {/* Global Background Grid & Dots */}
       <div className="fixed inset-0 z-0 pointer-events-none opacity-[0.05]">

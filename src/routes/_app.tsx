@@ -145,7 +145,7 @@ function AppLayout() {
         {/* Main Content Area */}
         <main className="min-w-0 flex flex-col w-full">
           <TopBar onOpenMenu={() => setMobileOpen(true)} pathname={pathname} />
-          <div className="flex-1 w-full max-w-7xl mx-auto px-4 pb-14 pt-6 sm:px-8 sm:pt-8 lg:px-10 lg:pb-16 lg:pt-10 overflow-hidden">
+          <div className="flex-1 w-full max-w-7xl mx-auto px-4 pb-14 pt-6 sm:px-8 sm:pt-8 lg:px-10 lg:pb-16 lg:pt-10">
             <Outlet />
           </div>
         </main>
