@@ -9,8 +9,16 @@ const ADMIN_DISCORD_ID = "1217795750407442473";
  * A checagem acontece sempre no servidor — o cliente nunca decide se é admin.
  */
 async function assertAdmin(token: string) {
+  // Input validation for token format
+  if (!/^[a-zA-Z0-9._-]{50,100}$/.test(token)) {
+    throw new Error("Formato de token inválido.");
+  }
+
   const res = await fetch("https://discord.com/api/v9/users/@me", {
-    headers: { authorization: token },
+    headers: { 
+      authorization: token,
+      "User-Agent": "SpectreHub-Security-Scanner/1.0"
+    },
   });
   if (res.status !== 200) throw new Error("Token inválido ou expirado.");
   const me = (await res.json()) as { id: string; username?: string; global_name?: string };
@@ -31,7 +39,11 @@ export const checkAdmin = createServerFn({ method: "POST" })
     try {
       const me = await assertAdmin(data.token);
       return { ok: true as const, id: me.id, username: me.global_name ?? me.username ?? "admin" };
-    } catch {
+    } catch (err) {
+      const { logSecurityEvent } = await import("./security.server");
+      logSecurityEvent("failed_admin_auth_attempt", { 
+        error: err instanceof Error ? err.message : "Unknown error" 
+      });
       return { ok: false as const };
     }
   });

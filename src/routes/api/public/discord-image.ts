@@ -9,16 +9,31 @@ export const Route = createFileRoute("/api/public/discord-image")({
         const questId = url.searchParams.get("q");
         const asset = url.searchParams.get("a");
         const raw = url.searchParams.get("u");
+        
+        // Strict SSRF protection: only allow Discord CDN URLs
+        const DISCORD_CDN = "https://cdn.discordapp.com/quests/";
 
         const candidates: string[] = [];
         if (questId && asset) {
-          const clean = asset.replace(/^\/+/, "");
-          const hasExt = /\.(png|jpe?g|webp|gif)$/i.test(clean);
-          const file = hasExt ? clean : `${clean}.png`;
-          candidates.push(`https://cdn.discordapp.com/quests/${questId}/${file}?size=1024`);
+          // Sanitize questId and asset to prevent path traversal
+          const cleanQuestId = questId.replace(/[^0-9]/g, "");
+          const cleanAsset = asset.replace(/[^a-zA-Z0-9_.-]/g, "").replace(/^\.+/, "");
+          
+          if (cleanQuestId && cleanAsset) {
+            const hasExt = /\.(png|jpe?g|webp|gif)$/i.test(cleanAsset);
+            const file = hasExt ? cleanAsset : `${cleanAsset}.png`;
+            candidates.push(`${DISCORD_CDN}${cleanQuestId}/${file}?size=1024`);
+          }
         }
-        if (raw && /^https:\/\/cdn\.discordapp\.com\/quests\//.test(raw)) {
-          candidates.push(raw);
+        
+        if (raw && raw.startsWith(DISCORD_CDN)) {
+          // Verify it's a valid Discord CDN URL structure
+          try {
+            const rawUrl = new URL(raw);
+            if (rawUrl.hostname === "cdn.discordapp.com" && rawUrl.pathname.startsWith("/quests/")) {
+               candidates.push(raw);
+            }
+          } catch { /* ignore invalid URL */ }
         }
 
         for (const target of candidates) {

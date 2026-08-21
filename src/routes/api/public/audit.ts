@@ -42,43 +42,31 @@ export const Route = createFileRoute('/api/public/audit')({
     handlers: {
       POST: async ({ request }) => {
         try {
-          const body = await request.json()
-          console.log('[Audit Request Received]:', body)
-          
+          const auth = request.headers.get('Authorization');
+          if (!auth || !auth.startsWith('Bearer ')) {
+            return new Response(JSON.stringify({ status: 'error', message: 'Unauthorized' }), {
+              status: 401,
+              headers: { 'Content-Type': 'application/json' }
+            });
+          }
+
+          // In a real scenario, we'd verify this token against our admin ID or a secret
+          // For now, we block access unless it's a trusted internal call
           return new Response(JSON.stringify({
-            status: 'success',
-            message: 'Auditoria iniciada com sucesso baseada nas novas diretrizes estruturadas.',
-            orchestration: {
-              main_agent: 'Lovable (Primary Orchestrator)',
-              sub_agents: [
-                'Agente de Análise de Código',
-                'Agente de Testes de Unidade/Integração',
-                'Agente de Análise de Desempenho',
-                'Agente de Análise de Banco de Dados',
-                'Agente de Verificação de Configuração',
-                'Agente de Documentação e Relatórios'
-              ],
-              steps: [
-                'Coleta de Informações Detalhadas',
-                'Criação de Sub-Agentes Especializados',
-                'Execução Coordenada da Auditoria',
-                'Proposta e Implementação de Correção',
-                'Validação via Testes Rigorosos',
-                'Geração de Relatório Final Estruturado'
-              ]
-            }
+            status: 'error',
+            message: 'Acesso restrito a administradores do sistema.'
           }), {
-            status: 200,
+            status: 403,
             headers: { 'Content-Type': 'application/json' }
-          })
+          });
         } catch (error) {
           return new Response(JSON.stringify({
             status: 'error',
-            message: error instanceof Error ? error.message : 'Unknown error'
+            message: 'Internal Server Error'
           }), {
-            status: 400,
+            status: 500,
             headers: { 'Content-Type': 'application/json' }
-          })
+          });
         }
       }
     }

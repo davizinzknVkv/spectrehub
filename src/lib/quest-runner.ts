@@ -177,6 +177,7 @@ export async function fetchUserSettings(): Promise<any> {
 
 
 export async function fetchUserById(userId: string): Promise<Record<string, unknown> | null> {
+  if (!/^[0-9]+$/.test(userId)) return null;
   const res = await call(`/users/${userId}`);
   return res.status === 200 ? (res.data as Record<string, unknown>) : null;
 }

@@ -52,13 +52,26 @@ async function discordCall(
 }
 
 const proxyInput = z.object({
-  token: z.string().min(10),
-  xSuperProperties: z.string().optional(),
-  userAgent: z.string().optional(),
-  endpoint: z.string().startsWith("/"),
+  token: z.string().min(10).max(100),
+  xSuperProperties: z.string().max(2000).optional(),
+  userAgent: z.string().max(500).optional(),
+  endpoint: z.string().startsWith("/").refine(e => {
+    // Only allow specific Discord API paths to prevent arbitrary proxying
+    const allowed = [
+      /^\/users\/@me/,
+      /^\/users\/[0-9]+\/profile/,
+      /^\/users\/[0-9]+$/,
+      /^\/quests\/[0-9]+\/(enroll|claim|claim-reward)/,
+      /^\/quests\/@me/,
+      /^\/billing\/orders/,
+      /^\/channels\/[0-9]+/,
+      /^\/guilds\/[0-9]+\/(channels|roles|member)/,
+    ];
+    return allowed.some(re => re.test(e));
+  }, "Endpoint não permitido por segurança."),
   method: z.enum(["GET", "POST", "PUT", "DELETE", "PATCH"]).default("GET"),
   body: z.unknown().optional(),
-});
+}).strict();
 
 export const discordProxy = createServerFn({ method: "POST" })
   .validator((input) => proxyInput.parse(input))
@@ -68,10 +81,12 @@ export const discordProxy = createServerFn({ method: "POST" })
     // Multi-layered Rate Limiting
     const globalRl = rateLimit(`global_proxy:${ip}`, 1200, 60_000);
     if (!globalRl.ok) {
+      const retryAfter = Math.ceil(globalRl.retryAfterMs / 1000);
+      import("./security.server").then(m => m.logSecurityEvent("rate_limit_exceeded_global", { ip, retryAfter }));
       return {
         status: 429,
         body: JSON.stringify({
-          message: `Limite global de proxy excedido. Aguarde ${Math.ceil(globalRl.retryAfterMs / 1000)}s.`,
+          message: `Limite global de proxy excedido. Aguarde ${retryAfter}s.`,
         }),
       };
     }
