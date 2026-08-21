@@ -234,16 +234,26 @@ function TopBar({ onOpenMenu, pathname }: { onOpenMenu: () => void; pathname: st
 
   const creds = useQuestStore((s) => s.creds);
   const setCreds = useQuestStore((s) => s.setCreds);
-  const [me, setMe] = useState<{ id?: string; username?: string; global_name?: string; avatar?: string | null } | null>(null);
+  const [me, setMe] = useState<{ id?: string; username?: string; global_name?: string; avatar?: string | null; banner?: string | null; banner_color?: string | null } | null>(null);
 
   useEffect(() => {
     if (!creds) { setMe(null); return; }
     let cancelled = false;
-    import("@/lib/quest-runner").then(({ fetchUserInfo }) =>
+    import("@/lib/quest-runner").then(({ fetchUserInfo, fetchProfile }) => {
       fetchUserInfo().then((u) => {
-        if (!cancelled && u) setMe(u as typeof me);
-      }).catch(() => {}),
-    );
+        if (!cancelled && u) {
+          fetchProfile(u.id as string).then((profile) => {
+            if (!cancelled) {
+              setMe({
+                ...(u as any),
+                banner: profile?.user?.banner,
+                banner_color: profile?.user?.banner_color,
+              });
+            }
+          });
+        }
+      }).catch(() => {});
+    });
     return () => { cancelled = true; };
   }, [creds]);
 
@@ -376,11 +386,29 @@ function TopBar({ onOpenMenu, pathname }: { onOpenMenu: () => void; pathname: st
         >
           <div className="space-y-6">
             <div className="flex flex-col items-center gap-6 py-4">
-              <div className="relative group">
-                {/* Profile Glow */}
-                <div className="absolute inset-0 bg-spectre-pink/20 rounded-full blur-2xl group-hover:bg-spectre-pink/30 transition-colors duration-500" />
-                
-                <div className="relative w-24 h-24 bg-obsidian border-2 border-spectre-pink/30 overflow-hidden shrink-0 group-hover:border-spectre-pink transition-colors duration-500 shadow-[0_0_20px_rgba(255,0,85,0.2)]">
+              <div className="relative group w-full flex flex-col items-center">
+                {/* Profile Banner */}
+                <div className="absolute top-0 left-0 w-full h-24 overflow-hidden border-x border-t border-white/5 bg-obsidian">
+                  {me?.banner ? (
+                    <img 
+                      src={`https://cdn.discordapp.com/banners/${me.id}/${me.banner}.png?size=600`} 
+                      alt="" 
+                      className="w-full h-full object-cover opacity-50 grayscale group-hover:grayscale-0 transition-all duration-700" 
+                    />
+                  ) : (
+                    <div 
+                      className="w-full h-full opacity-30" 
+                      style={{ backgroundColor: me?.banner_color || '#ff0055' }}
+                    />
+                  )}
+                  <div className="absolute inset-0 bg-gradient-to-t from-obsidian to-transparent" />
+                </div>
+
+                <div className="relative mt-12 group">
+                  {/* Profile Glow */}
+                  <div className="absolute inset-0 bg-spectre-pink/20 rounded-full blur-2xl group-hover:bg-spectre-pink/30 transition-colors duration-500" />
+                  
+                  <div className="relative w-24 h-24 bg-obsidian border-2 border-spectre-pink/30 overflow-hidden shrink-0 group-hover:border-spectre-pink transition-colors duration-500 shadow-[0_0_20px_rgba(255,0,85,0.2)]">
                    {avatarUrl ? (
                      <img src={avatarUrl} alt="" className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 scale-110 group-hover:scale-100" />
                    ) : (
