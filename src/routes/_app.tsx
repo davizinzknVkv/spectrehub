@@ -161,7 +161,7 @@ function SidebarBody({
 }) {
   const logoUrl = logoAsset.url;
   return (
-    <div className="flex h-full flex-col">
+    <div className="flex h-full flex-col lg:sticky lg:top-0 lg:h-screen">
       <Link to="/" className="flex items-center gap-3 px-8 pb-10 pt-10 group">
         <img
           src={logoUrl}
