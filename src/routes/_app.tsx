@@ -360,26 +360,25 @@ function TopBar({ onOpenMenu, pathname }: { onOpenMenu: () => void; pathname: st
 
       {confirmLogout && (
         <Modal
-          title="ENCERRAR SESSÃO"
+          title="Encerrar Sessão"
           onClose={() => setConfirmLogout(false)}
           actions={
-            <div className="flex gap-4 w-full">
+            <div className="flex gap-3 w-full">
               <button 
-                className="ds-btn ds-btn-secondary flex-1 py-3 border-spectre-pink/20 hover:border-spectre-pink/40" 
+                className="ds-btn ds-btn-secondary flex-1" 
                 onClick={() => setConfirmLogout(false)}
-                style={{ color: '#ff0055', border: '1px solid rgba(255, 0, 85, 0.2)' }}
               >
-                CANCELAR
+                Cancelar
               </button>
               <button 
-                className="ds-btn ds-btn-primary flex-1 py-3" 
+                className="ds-btn ds-btn-primary flex-1" 
                 onClick={() => {
                   setCreds(null);
                   setConfirmLogout(false);
                   toast.success("Terminal desconectado");
                 }}
               >
-                SAIR
+                Confirmar Saída
               </button>
             </div>
           }

@@ -15,22 +15,22 @@ export function Hero({ guildInvite, fallbackMembers }: HeroProps) {
   const { t } = useTranslation();
 
   return (
-    <section className="relative min-h-[100dvh] flex items-center justify-center overflow-hidden pt-20 px-4 md:px-8">
+    <section className="relative min-h-[100dvh] flex items-center justify-center overflow-hidden pt-20 px-4 md:px-8 bg-background">
       {/* Background patterns */}
       <div className="absolute inset-0 z-0 overflow-hidden">
         <div 
-          className="absolute inset-0 opacity-[0.05]"
+          className="absolute inset-0 opacity-[0.03]"
           style={{
-            backgroundImage: `radial-gradient(circle at 1px 1px, #fff 1px, transparent 0)`,
-            backgroundSize: '32px 32px'
+            backgroundImage: `linear-gradient(var(--color-border) 1px, transparent 1px), linear-gradient(90deg, var(--color-border) 1px, transparent 1px)`,
+            backgroundSize: '40px 40px'
           }}
         />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-spectre-pink/5 rounded-full blur-[160px]" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary/5 rounded-full blur-[160px]" />
       </div>
 
       <div className="relative z-10 w-full max-w-7xl mx-auto text-center">
         <Reveal>
-          <div className="inline-flex items-center gap-2 px-3 py-1 border border-spectre-pink/30 bg-spectre-pink/5 mb-8">
+          <div className="inline-flex items-center gap-2 px-3 py-1 border border-primary/20 bg-primary/5 rounded-full mb-8">
             <span className="w-1.5 h-1.5 rounded-full bg-spectre-pink animate-pulse" />
             <span className="font-display text-[10px] tracking-[0.3em] text-spectre-pink uppercase">
               {t('hero.badge')}
@@ -77,7 +77,7 @@ export function Hero({ guildInvite, fallbackMembers }: HeroProps) {
           </div>
           {/* Adicionando outro efeito no fundo para preencher o espaço */}
           <div className="absolute bottom-1/4 right-0 w-64 h-64 bg-spectre-pink/5 rounded-full blur-[120px] pointer-events-none" />
-          <h1 className="font-display text-[clamp(1.8rem,7vw,4.5rem)] leading-[0.9] text-white uppercase italic tracking-tighter mb-8 break-words relative z-10 flex flex-col items-center">
+          <h1 className="font-display text-[clamp(2.5rem,8vw,5rem)] leading-[0.95] text-foreground uppercase tracking-tighter mb-8 break-words relative z-10 flex flex-col items-center">
             <div className="flex items-center gap-[0.3em] md:gap-[0.5em] justify-center flex-wrap">
               <span>{t('hero.title1')}</span>
               <img src={logoAsset.url} alt="" className="h-[0.8em] w-auto animate-pulse drop-shadow-[0_0_20px_rgba(255,0,85,0.4)]" />
@@ -90,7 +90,7 @@ export function Hero({ guildInvite, fallbackMembers }: HeroProps) {
         </Reveal>
 
         <Reveal delay={200}>
-          <p className="max-w-2xl mx-auto text-white/50 text-base md:text-lg font-sans mb-10">
+          <p className="max-w-2xl mx-auto text-foreground-muted text-base md:text-lg font-sans mb-10 leading-relaxed">
             {t('hero.description')}
           </p>
 
