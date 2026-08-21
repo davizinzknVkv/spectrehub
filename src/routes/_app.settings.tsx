@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
+import { cn } from "@/lib/utils";
 import { useQuestStore } from "@/lib/quest-store";
 import { fetchUserInfoDetailed } from "@/lib/quest-runner";
 import { PageHeader } from "@/components/PageHeader";
