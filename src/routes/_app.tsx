@@ -418,6 +418,7 @@ function TopBar({ onOpenMenu, pathname }: { onOpenMenu: () => void; pathname: st
                    )}
                    {/* Scanline Effect */}
                    <div className="absolute inset-0 pointer-events-none bg-gradient-to-b from-transparent via-white/[0.05] to-transparent h-1/2 w-full animate-scanline" />
+                  </div>
                 </div>
               </div>
 
