@@ -501,7 +501,7 @@ function HubPage() {
                 {cleaningFriends ? "Removendo..." : "Listar Amigos"}
               </button>
             </div>
-            <p className="mt-4 text-[10px] text-white/30 font-sans italic">
+            <p className="mt-4 text-[11px] text-foreground-muted/50 font-sans font-medium uppercase tracking-wider">
               Estas ações são permanentes e podem levar alguns minutos dependendo do volume.
             </p>
           </section>
@@ -509,36 +509,36 @@ function HubPage() {
 
         {/* Sidebar: Premium Stats & Plan */}
         <aside className="space-y-8">
-          <section className="ds-card p-8 border-spectre-pink/20 bg-spectre-pink/5 relative overflow-hidden group">
+          <section className="ds-card !p-8 border-primary/20 bg-primary/5 relative overflow-hidden group rounded-xl">
             <div className="absolute -right-8 -top-8 opacity-5 rotate-12 group-hover:scale-110 transition-transform duration-700">
-              <Sparkles className="w-32 h-32 text-spectre-pink" />
+              <Sparkles className="w-32 h-32 text-primary" />
             </div>
             
             <div className="relative z-10 space-y-6">
-              <div className="flex items-center gap-2 text-spectre-pink">
+              <div className="flex items-center gap-2 text-primary">
                 <ShieldCheck className="w-4 h-4" />
-                <span className="font-display text-[9px] uppercase tracking-widest italic font-bold">Spectre</span>
+                <span className="font-sans text-[10px] font-bold uppercase tracking-widest">Spectre Tier</span>
               </div>
               
               <div className="space-y-2">
-                <div className="text-[9px] uppercase tracking-widest text-white/30">Plano Atual</div>
-                <div className="font-display text-3xl text-white italic tracking-tighter uppercase leading-none">
+                <div className="text-[10px] font-bold uppercase tracking-wider text-foreground-muted/50">Plano Atual</div>
+                <div className="font-display text-3xl text-foreground tracking-tight uppercase leading-none">
                   {loading ? <Skeleton className="h-8 w-24" /> : plan.toUpperCase()}
                 </div>
               </div>
 
               <div className="pt-4 border-t border-white/10 space-y-4">
                 <div className="flex justify-between items-center">
-                  <span className="text-[9px] uppercase tracking-widest text-white/40">Status</span>
-                  <span className="font-mono text-[9px] text-spectre-pink shadow-[0_0_8px_#ff0055]">ONLINE</span>
+                  <span className="text-[10px] font-bold uppercase tracking-wider text-foreground-muted/50">Status</span>
+                  <span className="font-mono text-[10px] font-bold text-primary shadow-[0_0_12px_rgba(255,0,85,0.4)]">ONLINE</span>
                 </div>
                 <div className="flex justify-between items-center">
-                  <span className="text-[9px] uppercase tracking-widest text-white/40">Encriptação</span>
-                  <span className="font-mono text-[9px] text-white">AES-256</span>
+                  <span className="text-[10px] font-bold uppercase tracking-wider text-foreground-muted/50">Encriptação</span>
+                  <span className="font-mono text-[10px] font-bold text-foreground">AES-256</span>
                 </div>
                 <div className="flex justify-between items-center">
-                  <span className="text-[9px] uppercase tracking-widest text-white/40">Prioridade</span>
-                  <span className="font-mono text-[9px] text-white">NÍVEL 4</span>
+                  <span className="text-[10px] font-bold uppercase tracking-wider text-foreground-muted/50">Prioridade</span>
+                  <span className="font-mono text-[10px] font-bold text-foreground">NÍVEL 4</span>
                 </div>
               </div>
 
@@ -546,17 +546,17 @@ function HubPage() {
             </div>
           </section>
 
-          <section className="ds-card p-6 border-white/5 bg-white/[0.02] space-y-4">
-            <h4 className="font-display text-[9px] uppercase tracking-widest text-white/30 italic">Atividade Recente</h4>
+          <section className="ds-card !p-6 border-border bg-card/30 rounded-xl space-y-4">
+            <h4 className="font-sans text-[10px] font-bold uppercase tracking-wider text-foreground-muted/50">Atividade Recente</h4>
             <div className="space-y-3">
               {[
                 { label: "Sniper Calibrado", time: "2m atrás" },
                 { label: "Orbs Sincronizados", time: "15m atrás" },
                 { label: "Login Realizado", time: "1h atrás" },
               ].map((act, i) => (
-                <div key={i} className="flex justify-between items-center border-b border-white/5 pb-2 last:border-0 last:pb-0">
-                  <span className="text-[10px] text-white/60 font-sans italic">{act.label}</span>
-                  <span className="text-[8px] font-mono text-white/20 uppercase">{act.time}</span>
+                <div key={i} className="flex justify-between items-center border-b border-border/20 pb-2 last:border-0 last:pb-0">
+                  <span className="text-[11px] text-foreground-muted font-medium uppercase tracking-wider">{act.label}</span>
+                  <span className="text-[9px] font-mono font-bold text-foreground-muted/30 uppercase">{act.time}</span>
                 </div>
               ))}
             </div>
