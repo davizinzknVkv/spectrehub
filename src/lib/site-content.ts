@@ -9,7 +9,6 @@ export type SitePlan = {
   cta: string;
   highlight: boolean;
   features: string[];
-  role_ids: string[];
   sort: number;
   active: boolean;
 };
@@ -30,7 +29,7 @@ export function useSitePlans() {
   useEffect(() => {
     let alive = true;
     supabase
-      .from("site_plans")
+      .from("site_plans_public" as any)
       .select("*")
       .eq("active", true)
       .order("sort")

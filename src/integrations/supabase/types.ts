@@ -340,7 +340,72 @@ export type Database = {
       }
     }
     Views: {
-      [_ in never]: never
+      site_features_public: {
+        Row: {
+          enabled: boolean | null
+          id: string | null
+          key: string | null
+          label: string | null
+          path: string | null
+          price: string | null
+          sort: number | null
+        }
+        Insert: {
+          enabled?: boolean | null
+          id?: string | null
+          key?: string | null
+          label?: string | null
+          path?: string | null
+          price?: string | null
+          sort?: number | null
+        }
+        Update: {
+          enabled?: boolean | null
+          id?: string | null
+          key?: string | null
+          label?: string | null
+          path?: string | null
+          price?: string | null
+          sort?: number | null
+        }
+        Relationships: []
+      }
+      site_plans_public: {
+        Row: {
+          active: boolean | null
+          cta: string | null
+          features: string[] | null
+          highlight: boolean | null
+          id: string | null
+          name: string | null
+          period: string | null
+          price: string | null
+          sort: number | null
+        }
+        Insert: {
+          active?: boolean | null
+          cta?: string | null
+          features?: string[] | null
+          highlight?: boolean | null
+          id?: string | null
+          name?: string | null
+          period?: string | null
+          price?: string | null
+          sort?: number | null
+        }
+        Update: {
+          active?: boolean | null
+          cta?: string | null
+          features?: string[] | null
+          highlight?: boolean | null
+          id?: string | null
+          name?: string | null
+          period?: string | null
+          price?: string | null
+          sort?: number | null
+        }
+        Relationships: []
+      }
     }
     Functions: {
       is_site_admin: { Args: { _user_id: string }; Returns: boolean }
