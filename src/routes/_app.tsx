@@ -385,44 +385,51 @@ function TopBar({ onOpenMenu, pathname }: { onOpenMenu: () => void; pathname: st
         >
           <div className="space-y-6">
             <div className="flex flex-col items-center gap-6 py-4">
-              <div className="relative group w-full flex flex-col items-center">
+              <div className="relative w-full flex flex-col items-center">
                 {/* Profile Banner */}
-                <div className="absolute top-0 left-0 w-full h-24 overflow-hidden border-x border-t border-white/5 bg-obsidian">
+                <div className="absolute top-0 left-0 w-full h-24 overflow-hidden rounded-t-lg border-x border-t border-border bg-background-secondary">
                   {me?.banner ? (
                     <img 
                       src={`https://cdn.discordapp.com/banners/${me.id}/${me.banner}.png?size=600`} 
                       alt="" 
-                      className="w-full h-full object-cover opacity-50 grayscale group-hover:grayscale-0 transition-all duration-700" 
+                      className="w-full h-full object-cover opacity-40 group-hover:opacity-100 transition-all duration-700" 
                     />
                   ) : (
                     <div 
-                      className="w-full h-full opacity-30" 
+                      className="w-full h-full opacity-20" 
                       style={{ backgroundColor: me?.banner_color || '#ff0055' }}
                     />
                   )}
-                  <div className="absolute inset-0 bg-gradient-to-t from-obsidian to-transparent" />
                 </div>
 
                 <div className="relative mt-12 group">
-                  {/* Profile Glow */}
-                  <div className="absolute inset-0 bg-spectre-pink/20 rounded-full blur-2xl group-hover:bg-spectre-pink/30 transition-colors duration-500" />
-                  
-                  <div className="relative w-24 h-24 bg-obsidian border-2 border-spectre-pink/30 overflow-hidden shrink-0 group-hover:border-spectre-pink transition-colors duration-500 shadow-[0_0_20px_rgba(255,0,85,0.2)]">
+                  <div className="relative w-24 h-24 bg-background border-2 border-border overflow-hidden rounded-full shrink-0 shadow-xl transition-transform duration-500 group-hover:scale-105">
                    {avatarUrl ? (
-                     <img src={avatarUrl} alt="" className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 scale-110 group-hover:scale-100" />
+                     <img src={avatarUrl} alt="" className="w-full h-full object-cover transition-all duration-700" />
                    ) : (
-                     <div className="w-full h-full flex items-center justify-center text-white/20">
+                     <div className="w-full h-full flex items-center justify-center text-foreground-muted">
                        <UserRound className="w-10 h-10" />
                      </div>
                    )}
-                   {/* Scanline Effect */}
-                   <div className="absolute inset-0 pointer-events-none bg-gradient-to-b from-transparent via-white/[0.05] to-transparent h-1/2 w-full animate-scanline" />
                   </div>
                 </div>
               </div>
 
-              <div className="text-center space-y-2">
-                <div className="font-display text-xl text-white uppercase italic tracking-[0.2em]">
+              <div className="text-center space-y-1">
+                <div className="font-display text-xl text-foreground uppercase tracking-widest">{me?.global_name || me?.username}</div>
+                <div className="font-sans text-xs text-foreground-muted uppercase tracking-widest">@{me?.username}</div>
+              </div>
+            </div>
+            
+            <p className="text-foreground-muted text-xs text-center leading-relaxed">
+              Deseja encerrar sua sessão atual no ecossistema Spectre Hub?
+            </p>
+          </div>
+        </Modal>
+      )}
+    </div>
+  );
+}
                   {me?.global_name || me?.username || "Usuário"}
                 </div>
                 <div className="font-sans text-[10px] text-spectre-pink uppercase tracking-[0.3em] flex items-center justify-center gap-2">
