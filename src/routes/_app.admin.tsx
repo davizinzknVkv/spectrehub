@@ -1,8 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useCallback, useEffect, useState } from "react";
 import { toast } from "sonner";
-import { ShieldCheck, Plus, Trash2, Save, RefreshCw, Lock, LayoutDashboard, Target, Zap } from "lucide-react";
-
+import { ShieldCheck, Plus, Trash2, Save, RefreshCw, Lock, LayoutDashboard, Target, Zap, Activity } from "lucide-react";
+import { cn } from "@/lib/utils";
 import { PageHeader } from "@/components/PageHeader";
 import { Button, Input, Modal } from "@/components/ui/ds";
 import { useQuestStore } from "@/lib/quest-store";
@@ -107,16 +107,20 @@ function AdminPage() {
 
   if (status === "denied") {
     return (
-      <div className="pt-20 text-center space-y-8">
-        <Lock className="w-16 h-16 mx-auto text-rose-500 opacity-50" />
-        <h1 className="font-display text-4xl uppercase tracking-tighter text-white italic">Acesso Restrito</h1>
-        <p className="text-white/40 max-w-sm mx-auto font-sans italic">Este terminal é exclusivo para a inteligência central do Spectre Hub.</p>
+      <div className="pt-20 text-center space-y-8 font-sans">
+        <div className="relative inline-block">
+          <Lock className="w-16 h-16 mx-auto text-primary opacity-50" />
+          <div className="absolute inset-0 bg-primary/20 blur-xl rounded-full" />
+        </div>
+        <h1 className="font-display text-4xl uppercase tracking-tighter text-foreground">Acesso Restrito</h1>
+        <p className="text-foreground-muted max-w-sm mx-auto italic">Este terminal é exclusivo para a inteligência central do Spectre Hub.</p>
+        <Button onClick={() => window.location.href = "/"} variant="secondary">Voltar ao Início</Button>
       </div>
     );
   }
 
   return (
-    <div className="page-stack">
+    <div className="page-stack max-w-6xl mx-auto font-sans">
       <PageHeader
         eyebrow="admin --root"
         icon={ShieldCheck}
@@ -125,21 +129,22 @@ function AdminPage() {
         description="Controle total sobre a infraestrutura, produtos e permissões do ecossistema Spectre."
       />
 
-      <div className="flex flex-wrap gap-px bg-white/5 border border-white/5 p-1 mb-8 max-w-md">
+      <div className="flex flex-wrap gap-2 p-1 mb-12 max-w-md bg-card/30 border border-border rounded-xl">
         {TABS.map((t) => (
           <button
             key={t}
             onClick={() => setTab(t)}
-            className={`flex-1 py-3 font-display text-[10px] uppercase tracking-widest italic transition-all ${
-              tab === t ? "bg-spectre-pink text-white" : "text-white/30 hover:text-white"
-            }`}
+            className={cn(
+              "flex-1 py-2 font-sans text-xs font-bold uppercase tracking-wider rounded-lg transition-all",
+              tab === t ? "bg-primary text-white shadow-lg shadow-primary/20" : "text-foreground-muted hover:text-foreground"
+            )}
           >
             {TAB_LABEL[t]}
           </button>
         ))}
       </div>
 
-      <div className="grid grid-cols-1 gap-8">
+      <div className="grid grid-cols-1 gap-8 pb-20">
         {tab === "previas" && <PreviewsTab token={token} rows={previews} setRows={setPreviews} reload={load} loading={loading} />}
         {tab === "planos" && <PlansTab token={token} rows={plans} setRows={setPlans} reload={load} loading={loading} />}
         {tab === "funcoes" && <FeaturesTab token={token} rows={features} setRows={setFeatures} reload={load} loading={loading} />}
@@ -166,42 +171,52 @@ function PreviewsTab({ token, rows, setRows, reload, loading }: any) {
 
   return (
     <div className="space-y-6">
-      <div className="flex justify-between items-center">
-         <div className="font-display text-[9px] uppercase tracking-widest text-white/30 italic">{rows.length} Entradas</div>
-         <button 
+      <div className="flex justify-between items-center px-2">
+         <div className="font-mono text-[10px] uppercase font-bold text-foreground-muted/50">{rows.length} Entradas no Sistema</div>
+         <Button 
            onClick={() => setRows([...rows, { product_id: "quests", title: "", description: "", image_url: "", sort: rows.length, active: true }])}
-           className="ds-btn ds-btn-secondary !py-2 !px-6 !text-[9px]"
-         >Novo Registro</button>
+           size="sm"
+         >Novo Registro</Button>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {rows.map((row: any, i: number) => (
-          <div key={row.id || i} className="ds-card p-6 border-white/5 bg-white/[0.02] space-y-4">
-             {row.image_url && <img src={row.image_url} alt="" className="aspect-video w-full object-cover grayscale opacity-50 border border-white/5 mb-4" />}
-             <div className="grid grid-cols-2 gap-4">
-                <div>
-                   <label className="font-display text-[8px] text-white/20 uppercase tracking-widest italic block mb-1">Product ID</label>
-                   <Input value={row.product_id} onChange={(e) => update(i, { product_id: e.target.value })} className="bg-black/40 border-white/5 text-xs font-mono" />
+          <div key={row.id || i} className="ds-card !p-6 border-border bg-card/30 rounded-xl space-y-4 hover:border-primary/20 transition-all">
+             <div className="aspect-video w-full overflow-hidden rounded-lg border border-border bg-background relative group">
+                {row.image_url ? (
+                  <img src={row.image_url} alt="" className="w-full h-full object-cover transition-transform group-hover:scale-105" />
+                ) : (
+                  <div className="w-full h-full flex items-center justify-center text-foreground-muted/20">
+                    <Activity className="w-8 h-8" />
+                  </div>
+                )}
+             </div>
+             <div className="grid grid-cols-2 gap-3">
+                <div className="space-y-1">
+                   <label className="text-[10px] font-bold text-foreground-muted uppercase tracking-wider">Product ID</label>
+                   <Input value={row.product_id} onChange={(e) => update(i, { product_id: e.target.value })} className="h-8 text-[11px] font-mono" />
                 </div>
-                <div>
-                   <label className="font-display text-[8px] text-white/20 uppercase tracking-widest italic block mb-1">Status</label>
-                   <select value={row.active ? "1" : "0"} onChange={(e) => update(i, { active: e.target.value === "1" })} className="w-full bg-black/40 border-white/5 py-2 px-3 font-display text-[9px] text-white italic outline-none">
+                <div className="space-y-1">
+                   <label className="text-[10px] font-bold text-foreground-muted uppercase tracking-wider">Status</label>
+                   <select value={row.active ? "1" : "0"} onChange={(e) => update(i, { active: e.target.value === "1" })} className="w-full h-8 bg-background border border-border rounded-md px-2 text-[11px] outline-none">
                       <option value="1">Ativo</option>
-                      <option value="0">Disabled</option>
+                      <option value="0">Desativado</option>
                    </select>
                 </div>
              </div>
-             <div>
-                <label className="font-display text-[8px] text-white/20 uppercase tracking-widest italic block mb-1">Título</label>
-                <Input value={row.title} onChange={(e) => update(i, { title: e.target.value })} className="bg-black/40 border-white/5 text-xs italic" />
+             <div className="space-y-1">
+                <label className="text-[10px] font-bold text-foreground-muted uppercase tracking-wider">Título do Produto</label>
+                <Input value={row.title} onChange={(e) => update(i, { title: e.target.value })} className="h-8 text-[11px]" />
              </div>
-             <div>
-                <label className="font-display text-[8px] text-white/20 uppercase tracking-widest italic block mb-1">Asset URL</label>
-                <Input value={row.image_url} onChange={(e) => update(i, { image_url: e.target.value })} className="bg-black/40 border-white/5 text-[10px] font-mono" />
+             <div className="space-y-1">
+                <label className="text-[10px] font-bold text-foreground-muted uppercase tracking-wider">Asset URL</label>
+                <Input value={row.image_url} onChange={(e) => update(i, { image_url: e.target.value })} className="h-8 text-[10px] font-mono" />
              </div>
-             <div className="flex gap-3 pt-2">
-                <button onClick={() => save(row)} className="ds-btn ds-btn-primary flex-1 !py-2 !text-[9px]">Commit</button>
-                <button onClick={() => remove(row)} className="ds-btn ds-btn-secondary !text-rose-500 border-rose-500/10 !py-2 !px-4"><Trash2 className="w-3.5 h-3.5" /></button>
+             <div className="flex gap-2 pt-2">
+                <Button onClick={() => save(row)} className="flex-1 h-8 text-[10px]">Commit</Button>
+                <Button onClick={() => remove(row)} variant="secondary" className="w-10 h-8 !p-0 text-primary border-primary/20 hover:bg-primary/5">
+                  <Trash2 className="w-3.5 h-3.5" />
+                </Button>
              </div>
           </div>
         ))}
@@ -228,34 +243,36 @@ function PlansTab({ token, rows, setRows, reload }: any) {
 
   return (
     <div className="space-y-6">
-      <div className="flex justify-between items-center">
-         <div className="font-display text-[9px] uppercase tracking-widest text-white/30 italic">{rows.length} Níveis Ativos</div>
-         <button 
+      <div className="flex justify-between items-center px-2">
+         <div className="font-mono text-[10px] uppercase font-bold text-foreground-muted/50">{rows.length} Níveis de Acesso</div>
+         <Button 
            onClick={() => setRows([...rows, { name: "New Tier", price: "0", period: "month", cta: "Unlock", highlight: false, features: ["20 missões diárias"], role_ids: [], sort: rows.length, active: true }])}
-           className="ds-btn ds-btn-secondary !py-2 !px-6 !text-[9px]"
-         >Novo Plano</button>
+           size="sm"
+         >Novo Plano</Button>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {rows.map((row: any, i: number) => (
-          <div key={row.id || i} className="ds-card p-6 border-white/5 bg-white/[0.02] space-y-4">
+          <div key={row.id || i} className="ds-card !p-8 border-border bg-card/30 rounded-xl space-y-6">
              <div className="grid grid-cols-2 gap-4">
-                <div>
-                   <label className="font-display text-[8px] text-white/20 uppercase tracking-widest italic block mb-1">Nome</label>
-                   <Input value={row.name} onChange={(e) => update(i, { name: e.target.value })} className="bg-black/40 border-white/5 text-xs font-bold uppercase italic" />
+                <div className="space-y-1">
+                   <label className="text-[10px] font-bold text-foreground-muted uppercase tracking-wider">Nome do Plano</label>
+                   <Input value={row.name} onChange={(e) => update(i, { name: e.target.value })} className="font-bold uppercase" />
                 </div>
-                <div>
-                   <label className="font-display text-[8px] text-white/20 uppercase tracking-widest italic block mb-1">Valor</label>
-                   <Input value={row.price} onChange={(e) => update(i, { price: e.target.value })} className="bg-black/40 border-white/5 text-xs text-spectre-pink font-bold" />
+                <div className="space-y-1">
+                   <label className="text-[10px] font-bold text-foreground-muted uppercase tracking-wider">Valor (R$)</label>
+                   <Input value={row.price} onChange={(e) => update(i, { price: e.target.value })} className="font-bold text-primary" />
                 </div>
              </div>
-             <div>
-                <label className="font-display text-[8px] text-white/20 uppercase tracking-widest italic block mb-1">Discord Roles (IDs)</label>
-                <Input value={csv(row.role_ids)} onChange={(e) => update(i, { role_ids: parseCsv(e.target.value) })} className="bg-black/40 border-white/5 text-[10px] font-mono" />
+             <div className="space-y-1">
+                <label className="text-[10px] font-bold text-foreground-muted uppercase tracking-wider">Discord Role IDs (CSV)</label>
+                <Input value={csv(row.role_ids)} onChange={(e) => update(i, { role_ids: parseCsv(e.target.value) })} className="font-mono text-[11px]" />
              </div>
              <div className="flex gap-3 pt-2">
-                <button onClick={() => save(row)} className="ds-btn ds-btn-primary flex-1 !py-2 !text-[9px]">Sincronizar</button>
-                <button onClick={() => remove(row)} className="ds-btn ds-btn-secondary !text-rose-500 border-rose-500/10 !py-2 !px-4"><Trash2 className="w-3.5 h-3.5" /></button>
+                <Button onClick={() => save(row)} className="flex-1">Sincronizar Plano</Button>
+                <Button onClick={() => remove(row)} variant="secondary" className="w-12 text-primary border-primary/20 hover:bg-primary/5">
+                  <Trash2 className="w-4 h-4" />
+                </Button>
              </div>
           </div>
         ))}
@@ -276,32 +293,33 @@ function FeaturesTab({ token, rows, setRows, reload }: any) {
 
   return (
     <div className="space-y-6">
-      <div className="font-display text-[9px] uppercase tracking-widest text-white/30 italic">{rows.length} Funções Mapeadas</div>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div className="font-mono text-[10px] uppercase font-bold text-foreground-muted/50 px-2">{rows.length} Funções Sistêmicas</div>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {rows.map((row: any, i: number) => (
-          <div key={row.id || i} className="ds-card p-6 border-white/5 bg-white/[0.02] space-y-4">
+          <div key={row.id || i} className="ds-card !p-8 border-border bg-card/30 rounded-xl space-y-6">
              <div className="flex justify-between items-start">
                 <div className="space-y-1">
-                   <div className="font-display text-xs text-white uppercase italic tracking-widest">{row.label}</div>
-                   <div className="font-mono text-[9px] text-white/20">{row.path}</div>
+                   <div className="font-bold text-foreground uppercase tracking-tight">{row.label}</div>
+                   <div className="font-mono text-[10px] text-foreground-muted">{row.path}</div>
                 </div>
-                <div className={`w-2 h-2 rounded-full ${row.enabled ? 'bg-spectre-pink shadow-[0_0_8px_#ff0055]' : 'bg-white/10'}`} />
+                <div className={cn(
+                  "w-2.5 h-2.5 rounded-full",
+                  row.enabled ? 'bg-primary shadow-[0_0_12px_rgba(255,0,85,0.4)]' : 'bg-foreground-muted/20'
+                )} />
              </div>
-             <div>
-                <label className="font-display text-[8px] text-white/20 uppercase tracking-widest italic block mb-1">Roles Permitidas (IDs)</label>
-                <Input value={csv(row.allowed_role_ids)} onChange={(e) => update(i, { allowed_role_ids: parseCsv(e.target.value) })} className="bg-black/40 border-white/5 text-[10px] font-mono" />
+             <div className="space-y-1">
+                <label className="text-[10px] font-bold text-foreground-muted uppercase tracking-wider">IDs com Acesso</label>
+                <Input value={csv(row.allowed_role_ids)} onChange={(e) => update(i, { allowed_role_ids: parseCsv(e.target.value) })} className="font-mono text-[11px]" />
              </div>
-             <div className="grid grid-cols-2 gap-4">
-                <div>
-                   <label className="font-display text-[8px] text-white/20 uppercase tracking-widest italic block mb-1">Status</label>
-                   <select value={row.enabled ? "1" : "0"} onChange={(e) => update(i, { enabled: e.target.value === "1" })} className="w-full bg-black/40 border-white/5 py-2 px-3 font-display text-[9px] text-white italic outline-none">
-                      <option value="1">Online</option>
-                      <option value="0">Offline</option>
+             <div className="grid grid-cols-2 gap-4 items-end">
+                <div className="space-y-1">
+                   <label className="text-[10px] font-bold text-foreground-muted uppercase tracking-wider">Disponibilidade</label>
+                   <select value={row.enabled ? "1" : "0"} onChange={(e) => update(i, { enabled: e.target.value === "1" })} className="w-full bg-background border border-border rounded-md py-2 px-3 text-xs outline-none">
+                      <option value="1">Online / Ativo</option>
+                      <option value="0">Offline / Manutenção</option>
                    </select>
                 </div>
-                <div className="flex items-end">
-                   <button onClick={() => save(row)} className="ds-btn ds-btn-primary w-full !py-2 !text-[9px]">Salvar</button>
-                </div>
+                <Button onClick={() => save(row)} className="w-full">Atualizar</Button>
              </div>
           </div>
         ))}
