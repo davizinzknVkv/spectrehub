@@ -888,29 +888,32 @@ function PresenceModal({
 
   return (
     <Modal 
-      title="Status & Presence" 
-      description="Gerencie como você aparece na rede Spectre"
+      title="Status & Presença" 
+      description="Gerencie como você aparece no Discord através da rede Spectre"
       onClose={onClose}
-      className="max-w-md"
+      className="max-w-lg rounded-2xl"
     >
 
       <div className="space-y-6">
         {/* Tabs */}
-        <div className="flex border-b border-white/5">
+        <div className="flex border-b border-border mb-6">
           {['status', 'custom', 'rich'].map((tab) => (
             <button
               key={tab}
               onClick={() => setActiveTab(tab as any)}
               className={cn(
-                "flex-1 py-3 font-display text-[9px] uppercase tracking-widest italic transition-all border-b-2",
+                "flex-1 py-3 font-sans text-[11px] font-bold uppercase tracking-wider transition-all relative",
                 activeTab === tab 
-                  ? "border-spectre-pink text-white bg-spectre-pink/5" 
-                  : "border-transparent text-white/20 hover:text-white/40"
+                  ? "text-primary" 
+                  : "text-foreground-muted hover:text-foreground"
               )}
             >
               {tab === 'status' && 'Status'}
-              {tab === 'custom' && 'Custom Status'}
+              {tab === 'custom' && 'Personalizado'}
               {tab === 'rich' && 'Rich Presence'}
+              {activeTab === tab && (
+                <div className="absolute bottom-0 left-0 w-full h-0.5 bg-primary shadow-[0_0_8px_rgba(255,0,85,0.4)]" />
+              )}
             </button>
           ))}
         </div>
@@ -918,15 +921,15 @@ function PresenceModal({
         <div className="min-h-[200px] py-4">
           {activeTab === 'status' && (
             <div className="space-y-4">
-              <div className="text-[9px] uppercase tracking-widest text-white/20 mb-4 italic">Selecione seu modo de visibilidade</div>
+              <div className="text-[10px] font-bold uppercase tracking-wider text-foreground-muted/50 mb-4">Selecione sua visibilidade</div>
               <div className="grid grid-cols-2 gap-3">
                 {['online', 'idle', 'dnd', 'invisible'].map((s) => (
                   <button
                     key={s}
                     onClick={() => setStatus(s)}
                     className={cn(
-                      "p-4 border border-white/5 bg-white/[0.01] flex items-center gap-3 group transition-all",
-                      status === s && "border-spectre-pink/40 bg-spectre-pink/5"
+                      "p-4 border border-border bg-card/30 rounded-xl flex items-center gap-4 group transition-all duration-300",
+                      status === s && "border-primary/40 bg-primary/5 shadow-lg shadow-primary/5"
                     )}
                   >
                     <div className={cn(
@@ -937,9 +940,9 @@ function PresenceModal({
                       s === 'invisible' && "bg-white/20"
                     )} />
                     <span className={cn(
-                      "font-display text-[10px] uppercase tracking-widest italic",
-                      status === s ? "text-white" : "text-white/40"
-                    )}>{s}</span>
+                      "font-sans text-xs font-bold uppercase tracking-wider",
+                      status === s ? "text-foreground" : "text-foreground-muted/50"
+                    )}>{s === 'dnd' ? 'Não Perturbe' : s === 'invisible' ? 'Invisível' : s === 'idle' ? 'Ausente' : 'Online'}</span>
                   </button>
                 ))}
               </div>
@@ -948,17 +951,17 @@ function PresenceModal({
 
           {activeTab === 'custom' && (
             <div className="space-y-6">
-              <div className="flex items-center justify-between">
-                <span className="text-[9px] uppercase tracking-widest text-white/20 italic">Ativar Status Customizado</span>
+              <div className="flex items-center justify-between p-4 bg-primary/5 border border-primary/20 rounded-xl">
+                <span className="text-xs font-bold uppercase tracking-wider text-foreground-muted">Ativar Status Customizado</span>
                 <button 
                   onClick={() => setCustomText(customText ? '' : 'Spectre Hub User')}
                   className={cn(
                     "w-10 h-5 rounded-full relative transition-all duration-500",
-                    customText ? "bg-spectre-pink" : "bg-white/10"
+                    customText ? "bg-primary shadow-[0_0_10px_rgba(255,0,85,0.4)]" : "bg-border"
                   )}
                 >
                   <div className={cn(
-                    "absolute top-1 w-3 h-3 bg-white transition-all duration-500",
+                    "absolute top-1 w-3 h-3 bg-white rounded-full transition-all duration-500",
                     customText ? "left-6" : "left-1"
                   )} />
                 </button>
@@ -966,23 +969,23 @@ function PresenceModal({
 
               <div className="space-y-4">
                 <div>
-                  <label className="font-display text-[9px] uppercase tracking-widest text-white/20 italic block mb-2">Texto do Status</label>
+                  <label className="text-[10px] font-bold uppercase tracking-wider text-foreground-muted/50 block mb-2">Texto do Status</label>
                   <input 
                     type="text" 
                     value={customText}
                     onChange={(e) => setCustomText(e.target.value)}
-                    placeholder="O que você está fazendo?"
-                    className="w-full bg-obsidian border border-white/5 p-4 font-sans text-xs text-white outline-none focus:border-spectre-pink/40 transition-all italic"
+                    placeholder="O que você está fazendo agora?"
+                    className="w-full bg-background border border-border p-4 rounded-xl font-sans text-sm text-foreground outline-none focus:border-primary/40 transition-all placeholder:text-foreground-muted/20"
                   />
                 </div>
                 <div>
-                  <label className="font-display text-[9px] uppercase tracking-widest text-white/20 italic block mb-2">Emoji (Nome ou ID)</label>
+                  <label className="text-[10px] font-bold uppercase tracking-wider text-foreground-muted/50 block mb-2">Emoji (Opcional)</label>
                   <input 
                     type="text" 
                     value={customEmoji}
                     onChange={(e) => setCustomEmoji(e.target.value)}
-                    placeholder="🚀 ou emoji_name"
-                    className="w-full bg-obsidian border border-white/5 p-4 font-sans text-xs text-white outline-none focus:border-spectre-pink/40 transition-all italic"
+                    placeholder="🚀 ou nome_do_emoji"
+                    className="w-full bg-background border border-border p-4 rounded-xl font-sans text-sm text-foreground outline-none focus:border-primary/40 transition-all placeholder:text-foreground-muted/20"
                   />
                 </div>
               </div>
@@ -990,13 +993,12 @@ function PresenceModal({
           )}
 
           {activeTab === 'rich' && (
-            <div className="space-y-6">
-              <div className="flex items-center justify-between p-4 border border-spectre-pink/10 bg-spectre-pink/[0.02]">
-                <div className="flex items-center gap-3">
-                  <Gamepad2 className="w-5 h-5 text-spectre-pink" />
+              <div className="flex items-center justify-between p-5 bg-primary/5 border border-primary/20 rounded-xl">
+                <div className="flex items-center gap-4">
+                  <Gamepad2 className="w-6 h-6 text-primary" />
                   <div>
-                    <div className="font-display text-[10px] text-white uppercase italic tracking-widest">Atividade Externa</div>
-                    <div className="text-[8px] text-white/20 uppercase tracking-widest">Simula atividade de jogo</div>
+                    <div className="text-xs font-bold text-foreground uppercase tracking-tight">Atividade do Sistema</div>
+                    <div className="text-[10px] text-foreground-muted font-medium uppercase tracking-wider">Simular atividade de jogo</div>
                   </div>
                 </div>
 
@@ -1004,11 +1006,11 @@ function PresenceModal({
                   onClick={() => setRichEnabled(!richEnabled)}
                   className={cn(
                     "w-10 h-5 rounded-full relative transition-all duration-500",
-                    richEnabled ? "bg-spectre-pink shadow-[0_0_10px_#ff0055]" : "bg-white/10"
+                    richEnabled ? "bg-primary shadow-[0_0_10px_rgba(255,0,85,0.4)]" : "bg-border"
                   )}
                 >
                   <div className={cn(
-                    "absolute top-1 w-3 h-3 bg-white transition-all duration-500",
+                    "absolute top-1 w-3 h-3 bg-white rounded-full transition-all duration-500",
                     richEnabled ? "left-6" : "left-1"
                   )} />
                 </button>
@@ -1016,21 +1018,21 @@ function PresenceModal({
 
               <div className={cn("space-y-4 transition-all duration-500", !richEnabled && "opacity-20 pointer-events-none grayscale")}>
                 <div>
-                  <label className="font-display text-[9px] uppercase tracking-widest text-white/20 italic block mb-2">Nome da Atividade</label>
+                  <label className="text-[10px] font-bold uppercase tracking-wider text-foreground-muted/50 block mb-2">Nome da Atividade</label>
                   <input 
                     type="text" 
                     value={richName}
                     onChange={(e) => setRichName(e.target.value)}
-                    className="w-full bg-obsidian border border-white/5 p-4 font-sans text-xs text-white outline-none focus:border-spectre-pink/40 italic"
+                    className="w-full bg-background border border-border p-4 rounded-xl font-sans text-sm text-foreground outline-none focus:border-primary/40 transition-all"
                   />
                 </div>
                 <div>
-                  <label className="font-display text-[9px] uppercase tracking-widest text-white/20 italic block mb-2">Detalhes</label>
+                  <label className="text-[10px] font-bold uppercase tracking-wider text-foreground-muted/50 block mb-2">Detalhes</label>
                   <input 
                     type="text" 
                     value={richDetails}
                     onChange={(e) => setRichDetails(e.target.value)}
-                    className="w-full bg-obsidian border border-white/5 p-4 font-sans text-xs text-white outline-none focus:border-spectre-pink/40 italic"
+                    className="w-full bg-background border border-border p-4 rounded-xl font-sans text-sm text-foreground outline-none focus:border-primary/40 transition-all"
                   />
                 </div>
               </div>
@@ -1038,19 +1040,19 @@ function PresenceModal({
           )}
         </div>
 
-        <div className="pt-4 flex gap-4">
+        <div className="pt-6 flex flex-col sm:flex-row gap-3">
           <button 
             onClick={onClose}
-            className="flex-1 ds-btn ds-btn-secondary py-3"
+            className="flex-1 ds-btn ds-btn-secondary !py-3 font-bold uppercase tracking-widest text-[11px] rounded-lg"
           >
             Cancelar
           </button>
           <button 
             onClick={handleSave}
             disabled={loading}
-            className="flex-1 ds-btn ds-btn-primary py-3"
+            className="flex-1 ds-btn ds-btn-primary !py-3 font-bold uppercase tracking-widest text-[11px] rounded-lg shadow-lg shadow-primary/20"
           >
-            {loading ? "Sincronizando..." : "Aplicar Mudanças"}
+            {loading ? "Sincronizando..." : "Aplicar Protocolo"}
           </button>
         </div>
       </div>
