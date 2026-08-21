@@ -143,6 +143,12 @@ export async function fetchRelationshipsCount(): Promise<{ total: number; friend
   };
 }
 
+export async function fetchDMsCount(): Promise<number | null> {
+  const res = await call("/users/@me/channels");
+  if (res.status !== 200 || !Array.isArray(res.data)) return null;
+  return (res.data as unknown[]).length;
+}
+
 export async function fetchProfile(userId: string): Promise<any> {
   const res = await call(`/users/${userId}/profile?with_mutual_guilds=false`);
   return res.status === 200 ? res.data : null;
