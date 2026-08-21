@@ -347,8 +347,8 @@ function HubPage() {
       {/* Restored Quick Actions Grid */}
       <section>
         <div className="flex items-center gap-2 mb-6">
-          <Sparkles className="w-3.5 h-3.5 text-spectre-pink" />
-          <h3 className="font-display text-[10px] uppercase tracking-[0.3em] text-white italic font-bold">Ações Rápidas</h3>
+          <Sparkles className="w-3.5 h-3.5 text-primary" />
+          <h3 className="font-sans text-xs font-bold uppercase tracking-wider text-foreground">Ações Rápidas</h3>
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -367,17 +367,17 @@ function HubPage() {
 
           ].map((item: any) => {
             const Content = (
-              <div className="ds-card p-6 border-white/5 bg-white/[0.02] flex flex-col group hover:border-spectre-pink/40 transition-all overflow-hidden relative h-full w-full text-left">
+              <div className="ds-card p-6 border-border bg-card/50 flex flex-col group hover:border-primary/40 transition-all overflow-hidden relative h-full w-full text-left rounded-xl">
                 <div className="absolute -right-4 -bottom-4 opacity-5 group-hover:opacity-10 transition-opacity">
                   <item.icon className="w-24 h-24" />
                 </div>
                 <div className="flex justify-between items-start mb-4 relative z-10">
-                   <item.icon className="w-5 h-5 text-spectre-pink" />
-                   <span className="font-display text-[9px] uppercase tracking-widest text-white/20">{item.val}</span>
+                   <item.icon className="w-5 h-5 text-primary" />
+                   <span className="font-sans text-[10px] font-bold uppercase tracking-wider text-foreground-muted/50">{item.val}</span>
                 </div>
                 <div className="relative z-10">
-                  <span className="font-display text-sm tracking-widest text-white uppercase italic block">{item.label}</span>
-                  <span className="text-[9px] text-white/30 uppercase tracking-widest font-sans italic">{item.desc}</span>
+                  <span className="font-sans text-sm font-bold text-foreground uppercase block">{item.label}</span>
+                  <span className="text-[11px] text-foreground-muted font-sans font-medium">{item.desc}</span>
                 </div>
               </div>
             );
@@ -404,13 +404,13 @@ function HubPage() {
       <div className="grid grid-cols-1 lg:grid-cols-[1fr_350px] gap-8">
         <div className="space-y-8">
           {/* User Bio and Security Info */}
-          <section className="ds-card p-8 border-white/5 bg-white/[0.02] space-y-8">
+          <section className="ds-card p-8 border-border bg-card/30 rounded-xl space-y-8">
             <div>
               <div className="flex items-center gap-2 mb-4">
-                <UserRound className="w-3.5 h-3.5 text-spectre-pink" />
-                <h3 className="font-display text-[10px] uppercase tracking-widest text-white italic">Informações da Conta</h3>
+                <UserRound className="w-3.5 h-3.5 text-primary" />
+                <h3 className="font-sans text-xs font-bold uppercase tracking-wider text-foreground">Informações da Conta</h3>
               </div>
-              <div className="p-4 bg-obsidian border border-white/5 font-sans text-xs text-white/40 italic leading-relaxed min-h-[60px]">
+              <div className="p-4 bg-background border border-border rounded-lg font-sans text-xs text-foreground-muted italic leading-relaxed min-h-[60px]">
                 {loading ? <Skeleton className="h-4 w-full" /> : bio || "Sem biografia definida."}
               </div>
             </div>
@@ -424,14 +424,14 @@ function HubPage() {
                 { label: "Idade da Conta", val: user?.id ? formatDiscordAccountAge(user.id) : "N/A", icon: History },
               ].map(info => (
                 <div key={info.label} className="flex gap-4 items-center group/info">
-                  <div className={cn("w-10 h-10 flex items-center justify-center border border-white/5 bg-white/[0.01]", info.alert && "text-spectre-pink")}>
+                  <div className={cn("w-10 h-10 flex items-center justify-center border border-border bg-background rounded-lg", info.alert && "text-primary")}>
                     <info.icon className="w-4 h-4" />
                   </div>
                   <div>
-                    <div className="text-[9px] uppercase tracking-widest text-white/20 mb-1">{info.label}</div>
+                    <div className="text-[10px] font-bold uppercase tracking-wider text-foreground-muted/50 mb-1">{info.label}</div>
                     <div className={cn(
-                      "font-display text-[11px] uppercase tracking-widest text-white transition-all duration-300", 
-                      info.alert && "text-spectre-pink",
+                      "font-sans text-[13px] font-semibold text-foreground transition-all duration-300", 
+                      info.alert && "text-primary",
                       info.mask && "blur-[4px] group-hover/info:blur-0 select-none cursor-help"
                     )}>
                       {info.val}
@@ -443,13 +443,13 @@ function HubPage() {
           </section>
 
           {/* Manage Servers Restored */}
-          <section className="ds-card p-8 border-white/5 bg-white/[0.02]">
+          <section className="ds-card p-8 border-border bg-card/30 rounded-xl">
             <div className="flex items-center justify-between mb-8">
               <div className="flex items-center gap-2">
-                <Server className="w-3.5 h-3.5 text-spectre-pink" />
-                <h3 className="font-display text-[10px] uppercase tracking-widest text-white italic">Gerenciar Servidores</h3>
+                <Server className="w-3.5 h-3.5 text-primary" />
+                <h3 className="font-sans text-xs font-bold uppercase tracking-wider text-foreground">Gerenciar Servidores</h3>
               </div>
-              <span className="font-mono text-[9px] text-white/20 uppercase tracking-widest">{guilds.length} Total</span>
+              <span className="font-mono text-[10px] text-foreground-muted/50 uppercase font-bold">{guilds.length} Total</span>
             </div>
             
             <div className="flex flex-col sm:flex-row gap-4">
@@ -472,13 +472,13 @@ function HubPage() {
           </section>
 
           {/* Limpeza da Conta */}
-          <section className="ds-card p-8 border-white/5 bg-white/[0.02]">
+          <section className="ds-card p-8 border-border bg-card/30 rounded-xl">
             <div className="flex items-center justify-between mb-8">
               <div className="flex items-center gap-2">
-                <Trash2 className="w-3.5 h-3.5 text-spectre-pink" />
-                <h3 className="font-display text-[10px] uppercase tracking-widest text-white italic">Limpeza da Conta</h3>
+                <Trash2 className="w-3.5 h-3.5 text-primary" />
+                <h3 className="font-sans text-xs font-bold uppercase tracking-wider text-foreground">Limpeza da Conta</h3>
               </div>
-              <span className="font-mono text-[9px] text-white/20 uppercase tracking-widest">
+              <span className="font-mono text-[10px] text-foreground-muted/50 uppercase font-bold">
                 {dmCount ?? 0} DMS / {stats?.friends ?? 0} AMIGOS
               </span>
             </div>
