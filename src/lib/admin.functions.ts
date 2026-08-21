@@ -39,7 +39,11 @@ export const checkAdmin = createServerFn({ method: "POST" })
     try {
       const me = await assertAdmin(data.token);
       return { ok: true as const, id: me.id, username: me.global_name ?? me.username ?? "admin" };
-    } catch {
+    } catch (err) {
+      const { logSecurityEvent } = await import("./security.server");
+      logSecurityEvent("failed_admin_auth_attempt", { 
+        error: err instanceof Error ? err.message : "Unknown error" 
+      });
       return { ok: false as const };
     }
   });
