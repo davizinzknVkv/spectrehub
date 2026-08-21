@@ -62,7 +62,12 @@ function Index() {
   const { t } = useTranslation();
   const [ref] = useInView<HTMLDivElement>();
   
-  // onde mostra o perfil do usuario coloca pra mostra o banner do perfil tb
+  /*
+    # REDESIGN COMPLETO — INTERFACE DARK PREMIUM
+    
+    Quero que você faça um redesign visual completo do meu site, estilizando TODAS as partes da interface sem alterar as funcionalidades existentes.
+    ... [Instructions elided for brevity, acting on redesign instructions provided by user] ...
+  */
 
   
 

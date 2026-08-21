@@ -100,22 +100,22 @@ function AppLayout() {
   }, [pathname]);
 
   return (
-    <div className="min-h-screen bg-obsidian text-white antialiased">
+    <div className="min-h-screen bg-background text-foreground antialiased selection:bg-primary/30">
       {/* Background elements for Hub */}
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-         <div 
-            className="absolute inset-0 opacity-[0.02]"
+          <div 
+            className="absolute inset-0 opacity-[0.03]"
             style={{
-              backgroundImage: `linear-gradient(#fff 1px, transparent 1px), linear-gradient(90deg, #fff 1px, transparent 1px)`,
-              backgroundSize: '40px 40px'
+              backgroundImage: `linear-gradient(var(--color-border) 1px, transparent 1px), linear-gradient(90deg, var(--color-border) 1px, transparent 1px)`,
+              backgroundSize: '32px 32px'
             }}
           />
-          <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-spectre-pink/5 rounded-full blur-[140px] -translate-y-1/2 translate-x-1/2" />
+          <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/2" />
       </div>
 
       <div className="relative z-10 grid min-h-screen w-full grid-cols-1 lg:grid-cols-[250px_1fr] overflow-hidden">
         {/* Desktop sidebar */}
-        <aside className="hidden border-r border-white/5 bg-obsidian lg:sticky lg:top-0 lg:block lg:h-screen lg:w-[250px]">
+        <aside className="hidden border-r border-border bg-background-secondary lg:sticky lg:top-0 lg:block lg:h-screen lg:w-[260px]">
           <SidebarBody pathname={pathname} creds={creds} setCreds={setCreds} />
         </aside>
 
@@ -127,7 +127,7 @@ function AppLayout() {
               onClick={() => setMobileOpen(false)}
               aria-hidden
             />
-            <aside className="fixed inset-y-0 left-0 z-50 w-[280px] border-r border-white/5 bg-obsidian lg:hidden">
+            <aside className="fixed inset-y-0 left-0 z-50 w-[280px] border-r border-border bg-background-secondary lg:hidden">
               <div className="flex items-center justify-between border-b border-white/5 px-6 py-5">
                 <span className="font-display text-[9px] uppercase tracking-[0.3em] text-white/40 italic">Menu Lateral</span>
                 <button
@@ -178,7 +178,7 @@ function SidebarBody({
       <nav className="flex flex-col gap-8 px-4 py-2 lg:flex-1 overflow-y-auto">
         {NAV_GROUPS.map((group) => (
           <div key={group.title}>
-            <div className="font-display px-4 pb-3 text-[9px] font-bold uppercase tracking-[0.3em] text-white/20 italic">{group.title}</div>
+            <div className="font-sans px-4 pb-2 text-[10px] font-bold uppercase tracking-wider text-foreground-muted/50">{group.title}</div>
             <div className="flex flex-col gap-1">
               {group.items.map((item) => {
                 const Icon = item.icon;
@@ -187,18 +187,18 @@ function SidebarBody({
                   <Link
                     key={`${item.to}-${item.label}`}
                     to={item.to}
-                    className={`flex items-center gap-3 px-4 py-2.5 transition-all duration-300 group border border-transparent ${
+                    className={`flex items-center gap-3 px-4 py-2 transition-all duration-200 group rounded-lg ${
                       active 
-                        ? "bg-spectre-pink/5 border-spectre-pink/20 text-white" 
-                        : "text-white/40 hover:text-white hover:bg-white/[0.02]"
+                        ? "bg-primary/10 text-foreground" 
+                        : "text-foreground-muted hover:text-foreground hover:bg-white/[0.03]"
                     }`}
                   >
                     <Icon
                       className={`h-4 w-4 shrink-0 transition-colors ${
-                        active ? "text-spectre-pink" : "text-white/20 group-hover:text-white"
+                        active ? "text-primary" : "text-foreground-muted group-hover:text-foreground"
                       }`}
                     />
-                    <span className="font-display text-[11px] uppercase tracking-widest italic">
+                    <span className="font-sans text-[13px] font-medium">
                       {item.label}
                     </span>
                     {item.soon && (

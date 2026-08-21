@@ -31,7 +31,7 @@ export function StatCard({
   className?: string;
 }) {
   return (
-    <div className={cn("ds-card p-6 border-white/5 bg-white/[0.02] space-y-2", className)}>
+    <div className={cn("ds-card p-6 border-border bg-card/50 backdrop-blur-sm space-y-2", className)}>
       <div className="flex items-center gap-2">
         {Icon && <Icon className={cn("h-3.5 w-3.5", accent ? "text-spectre-pink" : "text-white/20")} />}
         <span className="font-display text-[9px] uppercase tracking-widest text-white/30 italic">{label}</span>
@@ -68,7 +68,7 @@ export function Button({
 /* ── Badge ──────────────────────────────────────────────────────────── */
 export function Badge({ children, className, variant }: { children: ReactNode; className?: string; variant?: string }) {
   return (
-    <span className={cn("bg-spectre-pink/10 text-spectre-pink font-display text-[8px] uppercase tracking-widest px-2 py-0.5 italic border border-spectre-pink/20", className)}>
+    <span className={cn("bg-primary/10 text-primary font-sans text-[10px] font-medium uppercase tracking-wider px-2 py-0.5 rounded-full border border-primary/20", className)}>
       {children}
     </span>
   );
@@ -76,13 +76,13 @@ export function Badge({ children, className, variant }: { children: ReactNode; c
 
 /* ── Input ──────────────────────────────────────────────────────────── */
 export function Input({ className, ...props }: InputHTMLAttributes<HTMLInputElement>) {
-  return <input className={cn("w-full bg-white/[0.02] border border-white/5 py-3 px-4 font-display text-[10px] text-white italic uppercase tracking-widest outline-none focus:border-spectre-pink/20 transition-all", className)} {...props} />;
+  return <input className={cn("w-full bg-background-secondary border border-border py-3 px-4 font-sans text-sm text-foreground rounded-md outline-none focus:border-primary/50 focus:ring-1 focus:ring-primary/20 transition-all placeholder:text-foreground-muted/50", className)} {...props} />;
 }
 
 export function Field({ label, children, className, hint }: { label: string; children: ReactNode; className?: string; hint?: ReactNode }) {
   return (
     <div className={className}>
-      <label className="font-display text-[9px] uppercase tracking-widest text-white/30 italic block mb-2">{label}</label>
+      <label className="font-sans text-xs font-medium text-foreground-muted mb-2 block">{label}</label>
       {children}
       {hint && <div className="mt-1 font-sans text-[10px] text-white/20 italic">{hint}</div>}
     </div>
@@ -109,7 +109,7 @@ export function EmptyState({
   className?: string;
 }) {
   return (
-    <div className={cn("ds-card p-12 text-center border-dashed border-white/5 bg-white/[0.01] space-y-6", className)}>
+    <div className={cn("ds-card p-12 text-center border-dashed border-border bg-card/20 space-y-6", className)}>
       {Icon && (
         <div className="w-16 h-16 mx-auto flex items-center justify-center border border-white/10 bg-white/[0.02]">
            <Icon className="w-8 h-8 text-white/20" />
@@ -142,7 +142,7 @@ export function Modal({
 }) {
   return (
     <div className="ds-backdrop flex items-center justify-center p-4 z-[999]" onClick={(e) => e.target === e.currentTarget && onClose?.()}>
-      <div className={cn("ds-card !p-0 w-full max-w-xl border-white/10 bg-obsidian overflow-hidden", className)}>
+      <div className={cn("ds-card !p-0 w-full max-w-xl border-border bg-card shadow-2xl overflow-hidden", className)}>
         <div className="px-8 py-6 border-b border-white/5 flex justify-between items-center bg-white/[0.01]">
           <div className="min-w-0">
              <h2 className="font-display text-sm uppercase tracking-widest text-white italic truncate">{title}</h2>
