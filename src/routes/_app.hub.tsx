@@ -707,54 +707,54 @@ function HubPage() {
         <Modal 
           title="Lista de Amigos" 
           onClose={() => setShowFriends(false)}
-          className="max-w-2xl"
+          className="max-w-2xl rounded-2xl"
         >
           <div className="space-y-4">
             <div className="flex flex-col sm:flex-row gap-4 mb-6">
               <div className="relative flex-1">
-                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-white/20" />
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-foreground-muted/50" />
                 <input 
                   type="text" 
-                  placeholder="FILTRAR AMIGOS..." 
+                  placeholder="Filtrar amigos..." 
                   value={friendSearch}
                   onChange={(e) => setFriendSearch(e.target.value)}
-                  className="w-full bg-black/40 border border-white/5 py-2.5 pl-10 pr-4 font-display text-[9px] uppercase tracking-widest text-white placeholder:text-white/10 focus:border-spectre-pink/40 outline-none transition-all"
+                  className="w-full bg-background border border-border py-2.5 pl-10 pr-4 font-sans text-xs rounded-lg text-foreground placeholder:text-foreground-muted/30 focus:border-primary/40 outline-none transition-all"
                 />
               </div>
               <button 
                 onClick={() => { setShowFriends(false); setConfirmAction("friends"); }}
-                className="ds-btn ds-btn-primary !py-2.5 !px-4 !text-[9px] whitespace-nowrap"
+                className="ds-btn ds-btn-primary !py-2.5 !px-5 !text-[11px] font-bold rounded-lg whitespace-nowrap"
               >
-                Remover Todos os Amigos
+                Limpar Todos os Amigos
               </button>
             </div>
 
             <div className="space-y-4 max-h-[50vh] overflow-y-auto pr-2 custom-scrollbar">
               {filteredFriends.length === 0 ? (
-                <p className="text-center py-8 text-white/20 font-display text-[10px] uppercase tracking-widest italic">Nenhuma amizade encontrada</p>
+                <p className="text-center py-8 text-foreground-muted/30 font-sans text-xs font-medium uppercase tracking-widest">Nenhuma amizade encontrada</p>
               ) : filteredFriends.map(r => {
               const u = r.user;
               const name = u?.global_name || u?.username || "Usuário Desconhecido";
               const avatar = u?.avatar ? `https://cdn.discordapp.com/avatars/${u.id}/${u.avatar}.png` : null;
               
               return (
-                <div key={r.id} className="flex items-center justify-between p-4 bg-white/[0.02] border border-white/5 group hover:border-spectre-pink/20 transition-all">
+                <div key={r.id} className="flex items-center justify-between p-4 bg-card/30 border border-border group hover:border-primary/20 transition-all rounded-xl">
                   <div className="flex items-center gap-4">
-                    <div className="w-10 h-10 bg-obsidian border border-white/10 flex items-center justify-center overflow-hidden">
+                    <div className="w-10 h-10 bg-background border border-border rounded-lg flex items-center justify-center overflow-hidden">
                       {avatar ? (
-                        <img src={avatar} className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all" alt="" />
+                        <img src={avatar} className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" alt="" />
                       ) : (
-                        <div className="w-full h-full flex items-center justify-center text-white/20">
+                        <div className="w-full h-full flex items-center justify-center text-foreground-muted/20">
                           <UserRound className="w-4 h-4" />
                         </div>
                       )}
                     </div>
                     <div>
-                      <div className="font-display text-[11px] text-white uppercase italic tracking-widest">{name}</div>
-                      <div className="font-mono text-[8px] text-white/20 uppercase">
-                        {u?.username} <span className="mx-2">//</span> {r.id}
+                      <div className="font-sans text-[13px] font-bold text-foreground uppercase tracking-tight">{name}</div>
+                      <div className="font-mono text-[9px] font-bold text-foreground-muted/50 uppercase">
+                        {u?.username} <span className="mx-2 font-sans opacity-20">/</span> {r.id}
                       </div>
-                      <div className="font-sans text-[7px] text-white/10 uppercase tracking-[0.2em] mt-1">
+                      <div className="font-sans text-[9px] text-primary uppercase font-bold tracking-wider mt-1">
                         {u?.id ? formatDiscordAccountAge(u.id) : ""}
                       </div>
                     </div>
@@ -770,7 +770,7 @@ function HubPage() {
                         }
                       }
                     }}
-                    className="text-[9px] uppercase tracking-widest text-spectre-pink opacity-40 hover:opacity-100 transition-opacity italic font-bold"
+                    className="text-[10px] font-bold uppercase tracking-widest text-primary hover:text-foreground transition-colors"
                   >
                     Remover
                   </button>
@@ -799,27 +799,27 @@ function HubPage() {
               : `Todos os seus amigos (${stats?.friends ?? 0}) serão removidos da sua lista.`
           }
           onClose={() => setConfirmAction(null)}
-          className="max-w-md"
+          className="max-w-md rounded-2xl"
         >
           <div className="space-y-6">
-            <div className="flex items-start gap-3 p-4 border border-spectre-pink/20 bg-spectre-pink/5">
-              <ShieldAlert className="w-4 h-4 text-spectre-pink shrink-0 mt-0.5" />
-              <p className="text-[11px] text-white/60 font-sans italic">
-                Esta ação é permanente e não pode ser desfeita. O processo é feito lentamente para proteger sua conta.
+            <div className="flex items-start gap-4 p-5 border border-primary/20 bg-primary/5 rounded-xl">
+              <ShieldAlert className="w-5 h-5 text-primary shrink-0 mt-0.5" />
+              <p className="text-[12px] text-foreground-muted font-sans font-medium leading-relaxed">
+                Esta ação é permanente e não pode ser desfeita. O protocolo de segurança Spectre processa as remoções gradualmente para proteger a integridade da sua conta.
               </p>
             </div>
             <div className="flex flex-col sm:flex-row gap-4">
               <button
                 onClick={() => setConfirmAction(null)}
-                className="flex-1 ds-btn ds-btn-secondary text-center"
+                className="flex-1 ds-btn ds-btn-secondary text-center !py-3 rounded-lg"
               >
                 Cancelar
               </button>
               <button
                 onClick={confirmAction === "dms" ? handleClearDMs : handleRemoveFriends}
-                className="flex-1 ds-btn ds-btn-primary text-center"
+                className="flex-1 ds-btn ds-btn-primary text-center !py-3 rounded-lg font-bold"
               >
-                Confirmar
+                Confirmar Protocolo
               </button>
             </div>
           </div>
