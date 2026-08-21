@@ -269,36 +269,35 @@ function HubPage() {
 
   return (
     <div className="page-stack">
-      {/* Restored Rich Profile Header */}
-      <section className="relative overflow-hidden border border-white/5 bg-white/[0.02] p-8 sm:p-12">
-        <div className="absolute top-0 right-0 p-8 opacity-10 pointer-events-none">
+      <section className="relative overflow-hidden border border-border bg-card/30 rounded-xl p-8 sm:p-12">
+        <div className="absolute top-0 right-0 p-8 opacity-5 pointer-events-none">
           <img src={logoAsset.url} alt="" className="w-64 h-64 rotate-12" />
         </div>
         
         <div className="relative z-10 flex flex-col md:flex-row gap-8 items-start md:items-center">
           {/* Avatar Area */}
           <div className="relative group">
-            <div className="w-24 h-24 sm:w-32 sm:h-32 bg-obsidian border border-white/10 overflow-hidden relative">
+            <div className="w-24 h-24 sm:w-32 sm:h-32 bg-background border border-border overflow-hidden relative rounded-2xl shadow-2xl">
               {loading ? (
                 <Skeleton className="w-full h-full" />
               ) : user?.avatar ? (
                 <img 
                   src={`https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.${user.avatar.startsWith('a_') ? 'gif' : 'png'}?size=256`} 
-                  className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
+                  className="w-full h-full object-cover transition-all duration-700"
                   alt={user.username}
                 />
               ) : (
-                <div className="w-full h-full flex items-center justify-center font-display text-4xl text-white/20 uppercase italic">
+                <div className="w-full h-full flex items-center justify-center font-display text-4xl text-foreground-muted uppercase">
                   {user?.username?.slice(0, 2) || "??"}
                 </div>
               )}
               {/* Active Indicator */}
-              <div className="absolute bottom-1 right-1 w-4 h-4 bg-spectre-pink border-4 border-obsidian shadow-[0_0_8px_#ff0055]" />
+              <div className="absolute bottom-2 right-2 w-4 h-4 bg-primary border-4 border-background rounded-full shadow-[0_0_12px_rgba(255,0,85,0.4)]" />
             </div>
           </div>
 
-          <div className="space-y-4 flex-1">
-            <div className="flex flex-wrap gap-2 mb-2">
+          <div className="space-y-3 flex-1">
+            <div className="flex flex-wrap gap-2">
               {loading ? (
                 <Skeleton className="w-16 h-4" />
               ) : (
@@ -312,35 +311,34 @@ function HubPage() {
 
             <div>
               {loading ? (
-                <Skeleton className="h-12 w-64 mb-2" />
+                <Skeleton className="h-10 w-64 mb-2" />
               ) : (
-                <h2 className="font-display text-4xl sm:text-6xl text-white uppercase italic tracking-tighter leading-none">
+                <h2 className="font-display text-3xl sm:text-5xl text-foreground uppercase tracking-tight leading-none">
                   {user?.global_name || user?.username}
-                  <span className="text-[10px] ml-4 font-mono text-spectre-pink tracking-widest not-italic">#{user?.id}</span>
+                  <span className="text-xs ml-3 font-mono text-primary font-bold">#{user?.id}</span>
                 </h2>
               )}
               <div className="flex flex-wrap gap-6 mt-4">
                 <div className="flex items-center gap-2">
-                  <Server className="w-3.5 h-3.5 text-white/20" />
-                  <span className="font-display text-[10px] uppercase tracking-widest text-white italic">{loading ? "---" : guilds.length} <span className="text-white/20">Servidores</span></span>
+                  <Server className="w-3.5 h-3.5 text-foreground-muted" />
+                  <span className="font-sans text-xs font-semibold text-foreground">{loading ? "---" : guilds.length} <span className="text-foreground-muted font-normal">Servidores</span></span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <Users className="w-3.5 h-3.5 text-white/20" />
-                  <span className="font-display text-[10px] uppercase tracking-widest text-white italic">{loading ? "---" : (stats?.friends || 0)} <span className="text-white/20">Amigos</span></span>
+                  <Users className="w-3.5 h-3.5 text-foreground-muted" />
+                  <span className="font-sans text-xs font-semibold text-foreground">{loading ? "---" : (stats?.friends || 0)} <span className="text-foreground-muted font-normal">Amigos</span></span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <MessageSquare className="w-3.5 h-3.5 text-white/20" />
-                  <span className="font-display text-[10px] uppercase tracking-widest text-white italic">{loading ? "---" : (dmCount || 0)} <span className="text-white/20">DMs</span></span>
-
+                  <MessageSquare className="w-3.5 h-3.5 text-foreground-muted" />
+                  <span className="font-sans text-xs font-semibold text-foreground">{loading ? "---" : (dmCount || 0)} <span className="text-foreground-muted font-normal">DMs</span></span>
                 </div>
               </div>
             </div>
           </div>
           
           <div className="w-full md:w-auto flex flex-col gap-2">
-            <Link to="/settings" className="ds-btn ds-btn-secondary !py-2 !px-6 !text-[9px] w-full text-center">Configurações</Link>
-            <button onClick={handleLeaveAll} disabled={leavingAll} className="ds-btn ds-btn-primary !py-2 !px-6 !text-[9px] w-full text-center">
-              {leavingAll ? "Processando..." : "Limpar Conta"}
+            <Link to="/settings" className="ds-btn ds-btn-secondary w-full text-center">Configurações</Link>
+            <button onClick={handleLeaveAll} disabled={leavingAll} className="ds-btn ds-btn-primary w-full text-center">
+              {leavingAll ? "Processando..." : "Sair de Servidores"}
             </button>
           </div>
         </div>
