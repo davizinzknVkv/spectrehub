@@ -63,10 +63,186 @@ function Index() {
   const [ref] = useInView<HTMLDivElement>();
   
   /*
-    # REDESIGN COMPLETO — INTERFACE DARK PREMIUM
-    
-    Quero que você faça um redesign visual completo do meu site, estilizando TODAS as partes da interface sem alterar as funcionalidades existentes.
-    ... [Instructions elided for brevity, acting on redesign instructions provided by user] ...
+    # CORREÇÃO DO SCROLL E ESPAÇO VAZIO
+
+    Analise o layout completo da aplicação e corrija o problema visual mostrado na imagem de referência.
+
+    ## PROBLEMA
+
+    Ao fazer scroll vertical na página, aparece um **grande espaço vazio na parte inferior da interface**, exatamente como destacado na imagem.
+
+    Esse espaço não deveria existir.
+
+    Quero que o conteúdo termine naturalmente no final da página, sem criar uma área vazia adicional.
+
+    ## OBJETIVO
+
+    Corrigir completamente o comportamento do scroll sem alterar nenhuma funcionalidade existente.
+
+    Investigue principalmente:
+
+    * `height: 100vh`
+    * `min-height: 100vh`
+    * `height: 100%`
+    * `min-height`
+    * `padding-bottom`
+    * `margin-bottom`
+    * `padding` excessivo
+    * containers com altura fixa
+    * `position: absolute`
+    * `position: fixed`
+    * `overflow`
+    * `overflow-y`
+    * `calc(100vh - ...)`
+    * elementos com `bottom`
+    * wrappers internos da aplicação
+    * sidebar
+    * main content
+    * footer
+    * containers de dashboard
+    * grids e flex containers
+
+    ## CORREÇÃO
+
+    O layout deve seguir uma estrutura semelhante a:
+
+    ```css
+    html,
+    body {
+        min-height: 100%;
+        margin: 0;
+    }
+
+    body {
+        overflow-x: hidden;
+    }
+
+    #root,
+    .app {
+        min-height: 100vh;
+    }
+
+    .main-content {
+        min-height: 100vh;
+        height: auto;
+    }
+    ```
+
+    Não aplique exatamente esse código sem antes verificar a estrutura atual do projeto.
+
+    O objetivo é **corrigir a causa real**, não mascarar o problema.
+
+    ## SIDEBAR
+
+    A sidebar deve continuar ocupando toda a altura da tela, porém sem aumentar a altura total do documento.
+
+    Ela pode utilizar:
+
+    ```css
+    position: fixed;
+    height: 100vh;
+    ```
+
+    quando essa for a estrutura atual do projeto.
+
+    O conteúdo principal deve possuir o espaçamento lateral correspondente à sidebar sem gerar altura vertical adicional.
+
+    ## ÁREA PRINCIPAL
+
+    A área principal deve crescer conforme o conteúdo real.
+
+    Não criar uma altura artificial maior que o necessário.
+
+    Evitar estruturas como:
+
+    ```css
+    height: 200vh;
+    ```
+
+    ou:
+
+    ```css
+    min-height: calc(100vh + algum-valor);
+    ```
+
+    sem necessidade real.
+
+    ## SCROLL
+
+    O scroll vertical deve pertencer ao container correto.
+
+    Não permitir que:
+
+    * `body`
+    * `#root`
+    * `.app`
+    * `.main`
+    * sidebar
+    * content wrapper
+
+    criem scrolls duplicados sem necessidade.
+
+    Eliminar qualquer `overflow-y: scroll` ou `overflow: auto` que esteja causando espaço extra ou scroll duplicado.
+
+    ## RESPONSIVIDADE
+
+    Depois da correção, testar:
+
+    * Desktop
+    * Notebook
+    * Tablet
+    * Mobile
+
+    Em todas as resoluções, o conteúdo deve terminar exatamente onde termina a última seção real da página.
+
+    ## IMPORTANTE
+
+    Não remover conteúdo para esconder o espaço.
+
+    Não diminuir artificialmente o viewport.
+
+    Não utilizar hacks como:
+
+    ```css
+    margin-bottom: -100px;
+    ```
+
+    ```css
+    transform: translateY(...);
+    ```
+
+    ```css
+    position: relative;
+    bottom: ...;
+    ```
+
+    somente para esconder o problema.
+
+    Encontrar e corrigir a origem do overflow.
+
+    ## RESULTADO ESPERADO
+
+    Antes:
+
+    ```text
+    [ conteúdo ]
+    [ conteúdo ]
+    [ conteúdo ]
+    [ espaço vazio enorme ]
+    ```
+
+    Depois:
+
+    ```text
+    [ conteúdo ]
+    [ conteúdo ]
+    [ conteúdo ]
+    [ fim da página ]
+    ```
+
+    O scroll deve terminar exatamente no final do conteúdo existente, sem a faixa/espaço vazio mostrado na imagem.
+
+    Depois da implementação, revise todas as páginas do sistema porque o mesmo problema pode estar presente em outros layouts.
   */
 
   
