@@ -4,7 +4,19 @@ import { toast } from "sonner";
 import { useQuestStore } from "@/lib/quest-store";
 import { fetchUserInfoDetailed } from "@/lib/quest-runner";
 import { PageHeader } from "@/components/PageHeader";
-import { KeyRound, Mail, ShieldCheck, Copy, Star, BookOpen, Eye, EyeOff, HelpCircle, AlertTriangle, Lock, type LucideIcon } from "lucide-react";
+import { 
+  KeyRound, 
+  ShieldCheck, 
+  Copy, 
+  Star, 
+  Eye, 
+  EyeOff, 
+  Lock, 
+  User, 
+  Settings, 
+  Bell, 
+  Fingerprint 
+} from "lucide-react";
 import { Button, Input, Modal } from "@/components/ui/ds";
 import step1 from "@/assets/tutorial-step-1.png.asset.json";
 import step2 from "@/assets/tutorial-step-2.png.asset.json";
@@ -16,7 +28,7 @@ const TOKEN_BOOKMARKLET =
   `javascript:(function(){try{var i=document.createElement('iframe');document.body.appendChild(i);var t=i.contentWindow.localStorage.token;if(!t){for(var k in i.contentWindow.localStorage){if(k.toLowerCase()==='token'){t=i.contentWindow.localStorage[k];break;}}}i.remove();if(!t){alert('Token não encontrado no LocalStorage do Discord. Certifique-se de estar na aba do Discord e logado.');return;}var v=t.replace(/^"|"$/g,'');window.prompt('Seu token do Discord (Ctrl+C para copiar):',v);}catch(e){alert('Erro ao extrair token: '+e.message);}})();`;
 
 export const Route = createFileRoute("/_app/settings")({
-  head: () => ({ meta: [{ title: "Login — Spectre Hub" }] }),
+  head: () => ({ meta: [{ title: "Configurações — Spectre Hub" }] }),
   component: SettingsPage,
 });
 
@@ -26,7 +38,7 @@ function SettingsPage() {
   const creds = useQuestStore((s) => s.creds);
   const setCreds = useQuestStore((s) => s.setCreds);
 
-  const [tab, setTab] = useState<Tab>("email");
+  const [tab, setTab] = useState<Tab>("token");
   const [token, setToken] = useState("");
   const [saving, setSaving] = useState(false);
   const [show, setShow] = useState(false);
@@ -53,197 +65,203 @@ function SettingsPage() {
   const [confirmDisconnect, setConfirmDisconnect] = useState(false);
 
   return (
-    <div className="page-stack">
+    <div className="page-stack max-w-5xl mx-auto font-sans">
       <PageHeader
-        eyebrow="auth --gateway"
-        icon={KeyRound}
+        eyebrow="Configurações"
+        icon={Settings}
         title="Portal de"
-        highlight="Acesso"
-        description="Vincule sua conta para ativar os recursos premium. Seus dados são processados localmente e nunca são compartilhados."
+        highlight="Gerenciamento"
+        description="Controle sua conta, segurança e preferências de interface em um só lugar."
       />
 
-      <div className="mx-auto w-full max-w-xl space-y-6">
-        {creds && (
-          <div className="ds-card p-4 border-spectre-pink/20 bg-spectre-pink/5 flex justify-between items-center">
-             <div className="flex items-center gap-3">
-                <div className="w-2 h-2 rounded-full bg-spectre-pink shadow-[0_0_8px_#ff0055]" />
-                <span className="font-display text-[10px] uppercase tracking-widest italic text-white">Sessão Ativa Terminal</span>
-             </div>
-             <button onClick={() => setConfirmDisconnect(true)} className="text-[9px] uppercase tracking-widest text-spectre-pink hover:text-white transition-colors italic font-bold">Encerrar</button>
-          </div>
-        )}
-
-        <div className="grid grid-cols-2 gap-px bg-white/5 border border-white/5 p-1">
-           <button 
-             onClick={() => setTab("email")}
-             className={`py-3 font-display text-[10px] uppercase tracking-widest italic transition-all ${tab === 'email' ? 'bg-spectre-pink text-white' : 'text-white/40 hover:text-white'}`}
-           >Email</button>
-           <button 
-             onClick={() => setTab("token")}
-             className={`py-3 font-display text-[10px] uppercase tracking-widest italic transition-all ${tab === 'token' ? 'bg-spectre-pink text-white' : 'text-white/40 hover:text-white'}`}
-           >Token</button>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 pt-8">
+        {/* Sidebar de Categorias */}
+        <div className="space-y-2">
+           {[
+             { id: "geral", label: "Geral", icon: Settings, active: true },
+             { id: "conta", label: "Conta & Discord", icon: User },
+             { id: "seguranca", label: "Segurança", icon: Lock },
+             { id: "interface", label: "Interface", icon: Eye },
+             { id: "notificacoes", label: "Notificações", icon: Bell },
+           ].map(cat => (
+             <button 
+              key={cat.id} 
+              className={cn(
+                "w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-200 text-left font-medium text-sm",
+                cat.active ? "bg-primary/10 text-foreground" : "text-foreground-muted hover:text-foreground hover:bg-white/[0.03]"
+              )}
+             >
+               <cat.icon className={cn("w-4 h-4", cat.active ? "text-primary" : "text-foreground-muted")} />
+               {cat.label}
+             </button>
+           ))}
         </div>
 
-        <div className="ds-card p-8 border-white/5 bg-white/[0.02]">
-           {tab === 'email' ? (
-              <p className="text-white/40 text-center py-10 font-sans italic text-sm">Login por email indisponível neste terminal. Utilize o método de Token para acesso imediato.</p>
-           ) : (
-             <form onSubmit={save} className="space-y-6">
-                <div>
-                   <label className="block font-display text-[9px] uppercase tracking-widest text-white/40 mb-2 italic">Chave de Autorização</label>
-                   <Input 
-                      type={show ? "text" : "password"}
-                      value={token}
-                      onChange={(e) => setToken(e.target.value)}
-                      placeholder="MTIzNDU2..."
-                      className="bg-black/50 border-white/5 rounded-none font-mono text-xs"
-                   />
-                </div>
-                <div className="flex gap-4">
-                   <button type="submit" className="ds-btn ds-btn-primary flex-1" disabled={saving || !token}>
-                      {saving ? "Processando..." : "Validar Acesso"}
-                   </button>
-                   <button type="button" onClick={() => setShow(!show)} className="ds-btn ds-btn-secondary px-6">
-                      {show ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
-                   </button>
-                </div>
-             </form>
-           )}
-        </div>
-
-        <div className="border border-spectre-pink/20 bg-spectre-pink/5 p-4 space-y-2">
-            <div className="flex items-center gap-2 text-spectre-pink">
-                <ShieldCheck className="w-4 h-4" />
-                <span className="font-display text-[9px] uppercase tracking-widest italic font-bold">Aviso de Segurança</span>
+        {/* Conteúdo das Configurações */}
+        <div className="md:col-span-2 space-y-8">
+          {/* Sessão de Acesso */}
+          <section className="ds-card !p-8 border-border bg-card/30 rounded-xl space-y-6">
+            <div className="flex items-center gap-3 border-b border-border pb-6">
+              <KeyRound className="w-5 h-5 text-primary" />
+              <div>
+                <h3 className="font-sans text-base font-bold text-foreground">Acesso ao Terminal</h3>
+                <p className="text-xs text-foreground-muted">Gerencie sua chave de autorização do Discord.</p>
+              </div>
             </div>
-            <p className="text-[10px] text-white/60 leading-relaxed font-sans">O Spectre Hub não armazena suas credenciais em servidores externos. Toda a autenticação é mantida localmente em seu navegador. O uso de automação pode violar os termos do Discord.</p>
-        </div>
-      </div>
 
-      {/* Guia de Obtenção de Token */}
-      <div className="mx-auto w-full max-w-2xl mt-12 space-y-8">
-        <div className="flex items-center gap-4">
-           <div className="h-px flex-1 bg-white/5" />
-           <h2 className="font-display text-[10px] uppercase tracking-[0.4em] text-white/20 italic">Manual de Extração</h2>
-           <div className="h-px flex-1 bg-white/5" />
-        </div>
+            {creds && (
+              <div className="p-4 rounded-lg bg-primary/5 border border-primary/20 flex justify-between items-center">
+                 <div className="flex items-center gap-3">
+                    <div className="w-2 h-2 rounded-full bg-primary animate-pulse" />
+                    <span className="font-sans text-xs font-semibold text-foreground">Conexão Ativa</span>
+                 </div>
+                 <button onClick={() => setConfirmDisconnect(true)} className="text-xs font-bold text-primary hover:text-foreground transition-colors">Encerrar</button>
+              </div>
+            )}
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div className="ds-card p-6 border-white/5 bg-white/[0.02]">
-            <div className="flex items-center gap-3 mb-6">
-              <div className="w-8 h-8 bg-spectre-pink/10 flex items-center justify-center text-spectre-pink font-display italic text-xs border border-spectre-pink/20">01</div>
-              <h3 className="font-display text-[11px] uppercase tracking-widest italic text-white">Método Bookmarklet</h3>
+            <div className="grid grid-cols-2 gap-px bg-border rounded-lg overflow-hidden p-[1px]">
+               <button 
+                 onClick={() => setTab("email")}
+                 className={cn("py-2.5 font-sans text-xs font-bold transition-all", tab === 'email' ? 'bg-primary text-white' : 'bg-background-secondary text-foreground-muted hover:text-foreground')}
+               >E-mail</button>
+               <button 
+                 onClick={() => setTab("token")}
+                 className={cn("py-2.5 font-sans text-xs font-bold transition-all", tab === 'token' ? 'bg-primary text-white' : 'bg-background-secondary text-foreground-muted hover:text-foreground')}
+               >Token</button>
             </div>
-            <p className="text-[10px] text-white/40 font-sans leading-relaxed mb-6 uppercase tracking-wider">
-              Arraste o botão abaixo para sua barra de favoritos, abra o Discord no navegador e clique no favorito para ver seu token.
-            </p>
-            <a 
-              href={TOKEN_BOOKMARKLET}
-              onClick={(e) => e.preventDefault()}
-              className="ds-btn ds-btn-primary w-full !py-3 !text-[9px] flex items-center gap-2 group cursor-grab active:cursor-grabbing"
-            >
-              <Star className="w-3 h-3 group-hover:rotate-45 transition-transform" />
-              SPECTRE TOKEN HELPER
-            </a>
-          </div>
 
-          <div className="ds-card p-6 border-white/5 bg-white/[0.02]">
-            <div className="flex items-center gap-3 mb-6">
-              <div className="w-8 h-8 bg-white/10 flex items-center justify-center text-white/40 font-display italic text-xs border border-white/10">02</div>
-              <h3 className="font-display text-[11px] uppercase tracking-widest italic text-white">Console (F12)</h3>
+            {tab === 'email' ? (
+              <div className="text-center py-12 space-y-4">
+                <Lock className="w-12 h-12 text-foreground-muted/20 mx-auto" />
+                <p className="text-foreground-muted text-sm italic">O login via e-mail está temporariamente desabilitado para sua região. Por favor, utilize o método de Token.</p>
+              </div>
+            ) : (
+              <form onSubmit={save} className="space-y-6">
+                 <div className="space-y-2">
+                    <label className="text-xs font-bold text-foreground-muted uppercase tracking-wider">Chave de Autorização</label>
+                    <div className="relative">
+                      <Input 
+                         type={show ? "text" : "password"}
+                         value={token}
+                         onChange={(e) => setToken(e.target.value)}
+                         placeholder="Insira seu token do Discord..."
+                         className="pr-12"
+                      />
+                      <button 
+                        type="button" 
+                        onClick={() => setShow(!show)} 
+                        className="absolute right-4 top-1/2 -translate-y-1/2 text-foreground-muted hover:text-foreground transition-colors"
+                      >
+                        {show ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                      </button>
+                    </div>
+                 </div>
+                 <Button type="submit" variant="primary" className="w-full" disabled={saving || !token}>
+                    {saving ? "Validando..." : "Sincronizar Conta"}
+                 </Button>
+              </form>
+            )}
+          </section>
+
+          {/* Segurança & Privacidade */}
+          <section className="ds-card !p-8 border-border bg-card/30 rounded-xl space-y-6">
+            <div className="flex items-center gap-3 border-b border-border pb-6">
+              <ShieldCheck className="w-5 h-5 text-primary" />
+              <div>
+                <h3 className="font-sans text-base font-bold text-foreground">Segurança & Privacidade</h3>
+                <p className="text-xs text-foreground-muted">Seus dados são protegidos localmente.</p>
+              </div>
             </div>
             
-            <div className="space-y-4 mb-6">
-               <div className="space-y-2">
-                 <label className="block font-display text-[8px] uppercase tracking-widest text-white/30 italic">Extrair Token</label>
-                 <div className="bg-black/40 border border-white/5 p-4 font-mono text-[9px] text-spectre-pink/80 overflow-x-auto whitespace-nowrap">
-                   {`(webpackChunkdiscord_app.push([[''],{},e=>{m=[];for(c in e.c)m.push(e.c[c])}]),m).find(m=>m?.exports?.default?.getToken!==void 0).exports.default.getToken()`}
-                 </div>
-                 <button 
+            <div className="flex gap-4 p-4 rounded-lg bg-background border border-border">
+              <Fingerprint className="w-8 h-8 text-primary shrink-0" />
+              <p className="text-xs text-foreground-muted leading-relaxed">
+                O <span className="text-foreground font-semibold">Spectre Hub</span> utiliza criptografia AES-256 no armazenamento local. Suas credenciais nunca tocam nossos servidores, garantindo privacidade total.
+              </p>
+            </div>
+          </section>
+
+          {/* Manual de Extração */}
+          <section className="space-y-6">
+            <h3 className="font-sans text-sm font-bold uppercase tracking-widest text-foreground-muted/50 border-b border-border pb-4">Manual de Extração</h3>
+            
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="ds-card !p-6 border-border bg-card/20 rounded-xl space-y-4 hover:border-primary/20 transition-all">
+                <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center text-primary font-bold text-xs">01</div>
+                <h4 className="font-sans text-sm font-bold text-foreground">Bookmarklet Helper</h4>
+                <p className="text-xs text-foreground-muted leading-relaxed">Arraste para sua barra de favoritos e clique enquanto estiver no Discord.</p>
+                <a 
+                  href={TOKEN_BOOKMARKLET}
+                  onClick={(e) => e.preventDefault()}
+                  className="ds-btn ds-btn-primary w-full !text-xs rounded-lg cursor-grab active:cursor-grabbing gap-2"
+                >
+                  <Star className="w-3.5 h-3.5" />
+                  SPECTRE HELPER
+                </a>
+              </div>
+
+              <div className="ds-card !p-6 border-border bg-card/20 rounded-xl space-y-4 hover:border-primary/20 transition-all">
+                <div className="w-8 h-8 rounded-lg bg-foreground-muted/10 flex items-center justify-center text-foreground-muted font-bold text-xs">02</div>
+                <h4 className="font-sans text-sm font-bold text-foreground">Extração via Console</h4>
+                <p className="text-xs text-foreground-muted leading-relaxed">Utilize o script direto no console do desenvolvedor (F12).</p>
+                <button 
                    onClick={() => {
                      navigator.clipboard.writeText(`(webpackChunkdiscord_app.push([[''],{},e=>{m=[];for(c in e.c)m.push(e.c[c])}]),m).find(m=>m?.exports?.default?.getToken!==void 0).exports.default.getToken()`);
                      toast.success("Código Copiado", { description: "Cole no console do Discord (F12)" });
                    }}
-                   className="ds-btn ds-btn-secondary w-full !py-2 !text-[9px] flex items-center justify-center gap-2"
+                   className="ds-btn ds-btn-secondary w-full !text-xs rounded-lg gap-2"
                  >
-                   <Copy className="w-3 h-3" />
-                   COPIAR SCRIPT TOKEN
+                   <Copy className="w-3.5 h-3.5" />
+                   COPIAR SCRIPT
                  </button>
-               </div>
-
-               <div className="space-y-2">
-                 <label className="block font-display text-[8px] uppercase tracking-widest text-white/30 italic">Interceptar Missões (F12)</label>
-                 <div className="bg-black/40 border border-white/5 p-4 font-mono text-[9px] text-spectre-pink/80 overflow-x-auto whitespace-nowrap">
-                   {`let old = XMLHttpRequest.prototype.open; XMLHttpRequest.prototype.open = function() { console.log('%c[Spectre] Interceptado:', 'color:#ff0055', arguments[1]); return old.apply(this, arguments); };`}
-                 </div>
-                 <button 
-                   onClick={() => {
-                     navigator.clipboard.writeText(`let old = XMLHttpRequest.prototype.open; XMLHttpRequest.prototype.open = function() { console.log('%c[Spectre] Interceptado:', 'color:#ff0055', arguments[1]); return old.apply(this, arguments); };`);
-                     toast.success("Código Copiado", { description: "Cole no console do Discord (F12)" });
-                   }}
-                   className="ds-btn ds-btn-secondary w-full !py-2 !text-[9px] flex items-center justify-center gap-2"
-                 >
-                   <Copy className="w-3 h-3" />
-                   COPIAR INTERCEPTADOR
-                 </button>
-               </div>
+              </div>
             </div>
-          </div>
-        </div>
+          </section>
 
-        {/* Galeria Visual de Passos */}
-        <div className="space-y-6">
-          <div className="flex items-center gap-4">
-             <div className="h-px w-8 bg-spectre-pink/30" />
-             <h4 className="font-display text-[9px] uppercase tracking-[0.2em] text-white/40 italic">Guia Visual de Configuração</h4>
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-5 gap-4">
-             {[step1, step2, step3, step4, step5].map((s, i) => (
-               <div key={i} className="space-y-2 group">
-                  <div className="aspect-[4/3] border border-white/5 bg-white/5 overflow-hidden group-hover:border-spectre-pink/30 transition-all duration-500 relative">
-                     <img src={s.url} alt={`Passo ${i+1}`} className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-105" />
-                     <div className="absolute inset-0 bg-spectre-pink/5 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
+          {/* Guia Visual */}
+          <section className="space-y-6">
+             <h3 className="font-sans text-sm font-bold uppercase tracking-widest text-foreground-muted/50 border-b border-border pb-4">Guia Visual de Configuração</h3>
+             <div className="grid grid-cols-1 sm:grid-cols-5 gap-4">
+                {[step1, step2, step3, step4, step5].map((s, i) => (
+                  <div key={i} className="space-y-2 group">
+                     <div className="aspect-[4/3] border border-border bg-card/30 overflow-hidden rounded-lg group-hover:border-primary/50 transition-all duration-500">
+                        <img src={s.url} alt={`Passo ${i+1}`} className="w-full h-full object-cover grayscale opacity-50 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500" />
+                     </div>
+                     <div className="flex items-center gap-2">
+                        <span className="font-sans text-[10px] font-bold text-primary">0{i+1}</span>
+                        <span className="font-sans text-[9px] text-foreground-muted font-bold uppercase tracking-wider group-hover:text-foreground transition-colors">
+                           {i === 0 && "Abrir Discord"}
+                           {i === 1 && "F12 Console"}
+                           {i === 2 && "Aba Console"}
+                           {i === 3 && "Colar Script"}
+                           {i === 4 && "Pegar Token"}
+                        </span>
+                     </div>
                   </div>
-                  <div className="flex items-center gap-2">
-                     <span className="font-display text-[8px] text-spectre-pink italic">0{i+1}</span>
-                     <span className="font-sans text-[7px] text-white/20 uppercase tracking-widest group-hover:text-white/40 transition-colors">
-                        {i === 0 && "Abrir Discord"}
-                        {i === 1 && "F12 / Inspecionar"}
-                        {i === 2 && "Aba Console"}
-                        {i === 3 && "Colar Script"}
-                        {i === 4 && "Copiar Token"}
-                     </span>
-                  </div>
-               </div>
-             ))}
-          </div>
+                ))}
+             </div>
+          </section>
         </div>
       </div>
 
       {confirmDisconnect && (
         <Modal
-          title="ENCERRAR SESSÃO"
+          title="Encerrar Sessão"
           onClose={() => setConfirmDisconnect(false)}
           actions={
-            <div className="flex gap-4 w-full">
-              <button 
-                className="ds-btn ds-btn-secondary flex-1 border-spectre-pink/20" 
-                onClick={() => setConfirmDisconnect(false)}
-                style={{ color: '#ff0055', border: '1px solid rgba(255, 0, 85, 0.2)' }}
-              >
-                CANCELAR
-              </button>
+            <div className="flex gap-3 w-full">
+              <button className="ds-btn ds-btn-secondary flex-1" onClick={() => setConfirmDisconnect(false)}>Cancelar</button>
               <button className="ds-btn ds-btn-primary flex-1" onClick={() => {
                 setCreds(null);
                 setToken("");
                 setConfirmDisconnect(false);
-                toast.success("Sessão Encerrada", { description: "Terminal limpo e desconectado." });
-              }}>ENCERRAR</button>
+                toast.success("Sessão Encerrada");
+              }}>Confirmar</button>
             </div>
           }
         >
-          <p className="text-white/40 text-xs font-sans italic leading-relaxed text-center sm:text-left">
-            Tem certeza que deseja remover o acesso deste terminal? Você precisará validar o token novamente para entrar.
+          <p className="text-foreground-muted text-sm leading-relaxed text-center sm:text-left">
+            Tem certeza que deseja remover o acesso deste terminal? Você precisará validar seu token novamente na próxima visita.
           </p>
         </Modal>
       )}
