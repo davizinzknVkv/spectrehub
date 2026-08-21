@@ -149,10 +149,14 @@ export async function fetchDMsCount(): Promise<number | null> {
   return (res.data as unknown[]).length;
 }
 
-export async function fetchProfileBio(userId: string): Promise<string | null> {
+export async function fetchProfile(userId: string): Promise<any> {
   const res = await call(`/users/${userId}/profile?with_mutual_guilds=false`);
-  if (res.status !== 200) return null;
-  const d = res.data as { user_profile?: { bio?: string }; user?: { bio?: string } };
+  return res.status === 200 ? res.data : null;
+}
+
+export async function fetchProfileBio(userId: string): Promise<string | null> {
+  const d = await fetchProfile(userId);
+  if (!d) return null;
   return d.user_profile?.bio || d.user?.bio || null;
 }
 

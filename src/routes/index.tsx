@@ -62,7 +62,7 @@ function Index() {
   const { t } = useTranslation();
   const [ref] = useInView<HTMLDivElement>();
   
-  // como eu pego o json
+  // onde mostra o perfil do usuario coloca pra mostra o banner do perfil tb
 
   
 
