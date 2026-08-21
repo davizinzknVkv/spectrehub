@@ -113,9 +113,9 @@ function AppLayout() {
           <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/2" />
       </div>
 
-      <div className="relative z-10 grid min-h-screen w-full grid-cols-1 lg:grid-cols-[260px_1fr] overflow-hidden">
+      <div className="relative z-10 grid min-h-screen w-full lg:grid-cols-[260px_1fr] overflow-hidden">
         {/* Desktop sidebar */}
-        <aside className="hidden border-r border-border bg-background-secondary lg:sticky lg:top-0 lg:block lg:h-screen lg:w-[260px]">
+        <aside className="hidden border-r border-border bg-background-secondary lg:block lg:w-[260px]">
           <SidebarBody pathname={pathname} />
         </aside>
 
@@ -145,7 +145,7 @@ function AppLayout() {
         {/* Main Content Area */}
         <main className="min-w-0 flex flex-col w-full">
           <TopBar onOpenMenu={() => setMobileOpen(true)} pathname={pathname} />
-          <div className="flex-1 w-full max-w-7xl mx-auto px-4 pb-14 pt-6 sm:px-8 sm:pt-8 lg:px-10 lg:pb-16 lg:pt-10 overflow-hidden">
+          <div className="flex-1 w-full max-w-7xl mx-auto px-4 pb-14 pt-6 sm:px-8 sm:pt-8 lg:px-10 lg:pb-16 lg:pt-10">
             <Outlet />
           </div>
         </main>
@@ -161,7 +161,7 @@ function SidebarBody({
 }) {
   const logoUrl = logoAsset.url;
   return (
-    <div className="flex h-full flex-col">
+    <div className="flex h-full flex-col lg:sticky lg:top-0 lg:h-screen">
       <Link to="/" className="flex items-center gap-3 px-8 pb-10 pt-10 group">
         <img
           src={logoUrl}
