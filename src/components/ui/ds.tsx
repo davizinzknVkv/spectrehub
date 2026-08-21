@@ -10,7 +10,7 @@ import { cn } from "@/lib/utils";
 export function Card({ className, ...props }: HTMLAttributes<HTMLDivElement>) {
   return (
     <div
-      className={cn("ds-card border-white/5 bg-white/[0.02]", className)}
+      className={cn("ds-card border-border bg-card hover:bg-card-elevated", className)}
       {...props}
     />
   );
