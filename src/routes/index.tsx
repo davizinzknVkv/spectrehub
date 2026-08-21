@@ -62,7 +62,12 @@ function Index() {
   const { t } = useTranslation();
   const [ref] = useInView<HTMLDivElement>();
   
-  // onde mostra o perfil do usuario coloca pra mostra o banner do perfil tb
+  /*
+    # REDESIGN COMPLETO — INTERFACE DARK PREMIUM
+    
+    Quero que você faça um redesign visual completo do meu site, estilizando TODAS as partes da interface sem alterar as funcionalidades existentes.
+    ... [Instructions elided for brevity, acting on redesign instructions provided by user] ...
+  */
 
   
 
@@ -70,14 +75,14 @@ function Index() {
   return (
     <div
       id="topo"
-      className="relative min-h-screen overflow-x-hidden bg-obsidian font-sans text-white antialiased selection:bg-spectre-pink/30 flex flex-col"
+      className="relative min-h-screen overflow-x-hidden bg-background font-sans text-foreground antialiased selection:bg-primary/30 flex flex-col"
     >
       {/* Global Background Grid & Dots */}
       <div className="fixed inset-0 z-0 pointer-events-none opacity-[0.05]">
         <div
           className="absolute inset-0"
           style={{
-            backgroundImage: `radial-gradient(circle at 1px 1px, #fff 1px, transparent 0)`,
+            backgroundImage: `radial-gradient(circle at 1px 1px, currentColor 1px, transparent 0)`,
             backgroundSize: '32px 32px'
           }}
         />

@@ -269,36 +269,35 @@ function HubPage() {
 
   return (
     <div className="page-stack">
-      {/* Restored Rich Profile Header */}
-      <section className="relative overflow-hidden border border-white/5 bg-white/[0.02] p-8 sm:p-12">
-        <div className="absolute top-0 right-0 p-8 opacity-10 pointer-events-none">
+      <section className="relative overflow-hidden border border-border bg-card/30 rounded-xl p-8 sm:p-12">
+        <div className="absolute top-0 right-0 p-8 opacity-5 pointer-events-none">
           <img src={logoAsset.url} alt="" className="w-64 h-64 rotate-12" />
         </div>
         
         <div className="relative z-10 flex flex-col md:flex-row gap-8 items-start md:items-center">
           {/* Avatar Area */}
           <div className="relative group">
-            <div className="w-24 h-24 sm:w-32 sm:h-32 bg-obsidian border border-white/10 overflow-hidden relative">
+            <div className="w-24 h-24 sm:w-32 sm:h-32 bg-background border border-border overflow-hidden relative rounded-2xl shadow-2xl">
               {loading ? (
                 <Skeleton className="w-full h-full" />
               ) : user?.avatar ? (
                 <img 
                   src={`https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.${user.avatar.startsWith('a_') ? 'gif' : 'png'}?size=256`} 
-                  className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
+                  className="w-full h-full object-cover transition-all duration-700"
                   alt={user.username}
                 />
               ) : (
-                <div className="w-full h-full flex items-center justify-center font-display text-4xl text-white/20 uppercase italic">
+                <div className="w-full h-full flex items-center justify-center font-display text-4xl text-foreground-muted uppercase">
                   {user?.username?.slice(0, 2) || "??"}
                 </div>
               )}
               {/* Active Indicator */}
-              <div className="absolute bottom-1 right-1 w-4 h-4 bg-spectre-pink border-4 border-obsidian shadow-[0_0_8px_#ff0055]" />
+              <div className="absolute bottom-2 right-2 w-4 h-4 bg-primary border-4 border-background rounded-full shadow-[0_0_12px_rgba(255,0,85,0.4)]" />
             </div>
           </div>
 
-          <div className="space-y-4 flex-1">
-            <div className="flex flex-wrap gap-2 mb-2">
+          <div className="space-y-3 flex-1">
+            <div className="flex flex-wrap gap-2">
               {loading ? (
                 <Skeleton className="w-16 h-4" />
               ) : (
@@ -312,35 +311,34 @@ function HubPage() {
 
             <div>
               {loading ? (
-                <Skeleton className="h-12 w-64 mb-2" />
+                <Skeleton className="h-10 w-64 mb-2" />
               ) : (
-                <h2 className="font-display text-4xl sm:text-6xl text-white uppercase italic tracking-tighter leading-none">
+                <h2 className="font-display text-3xl sm:text-5xl text-foreground uppercase tracking-tight leading-none">
                   {user?.global_name || user?.username}
-                  <span className="text-[10px] ml-4 font-mono text-spectre-pink tracking-widest not-italic">#{user?.id}</span>
+                  <span className="text-xs ml-3 font-mono text-primary font-bold">#{user?.id}</span>
                 </h2>
               )}
               <div className="flex flex-wrap gap-6 mt-4">
                 <div className="flex items-center gap-2">
-                  <Server className="w-3.5 h-3.5 text-white/20" />
-                  <span className="font-display text-[10px] uppercase tracking-widest text-white italic">{loading ? "---" : guilds.length} <span className="text-white/20">Servidores</span></span>
+                  <Server className="w-3.5 h-3.5 text-foreground-muted" />
+                  <span className="font-sans text-xs font-semibold text-foreground">{loading ? "---" : guilds.length} <span className="text-foreground-muted font-normal">Servidores</span></span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <Users className="w-3.5 h-3.5 text-white/20" />
-                  <span className="font-display text-[10px] uppercase tracking-widest text-white italic">{loading ? "---" : (stats?.friends || 0)} <span className="text-white/20">Amigos</span></span>
+                  <Users className="w-3.5 h-3.5 text-foreground-muted" />
+                  <span className="font-sans text-xs font-semibold text-foreground">{loading ? "---" : (stats?.friends || 0)} <span className="text-foreground-muted font-normal">Amigos</span></span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <MessageSquare className="w-3.5 h-3.5 text-white/20" />
-                  <span className="font-display text-[10px] uppercase tracking-widest text-white italic">{loading ? "---" : (dmCount || 0)} <span className="text-white/20">DMs</span></span>
-
+                  <MessageSquare className="w-3.5 h-3.5 text-foreground-muted" />
+                  <span className="font-sans text-xs font-semibold text-foreground">{loading ? "---" : (dmCount || 0)} <span className="text-foreground-muted font-normal">DMs</span></span>
                 </div>
               </div>
             </div>
           </div>
           
           <div className="w-full md:w-auto flex flex-col gap-2">
-            <Link to="/settings" className="ds-btn ds-btn-secondary !py-2 !px-6 !text-[9px] w-full text-center">Configurações</Link>
-            <button onClick={handleLeaveAll} disabled={leavingAll} className="ds-btn ds-btn-primary !py-2 !px-6 !text-[9px] w-full text-center">
-              {leavingAll ? "Processando..." : "Limpar Conta"}
+            <Link to="/settings" className="ds-btn ds-btn-secondary w-full text-center">Configurações</Link>
+            <button onClick={handleLeaveAll} disabled={leavingAll} className="ds-btn ds-btn-primary w-full text-center">
+              {leavingAll ? "Processando..." : "Sair de Servidores"}
             </button>
           </div>
         </div>
@@ -349,8 +347,8 @@ function HubPage() {
       {/* Restored Quick Actions Grid */}
       <section>
         <div className="flex items-center gap-2 mb-6">
-          <Sparkles className="w-3.5 h-3.5 text-spectre-pink" />
-          <h3 className="font-display text-[10px] uppercase tracking-[0.3em] text-white italic font-bold">Ações Rápidas</h3>
+          <Sparkles className="w-3.5 h-3.5 text-primary" />
+          <h3 className="font-sans text-xs font-bold uppercase tracking-wider text-foreground">Ações Rápidas</h3>
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -369,17 +367,17 @@ function HubPage() {
 
           ].map((item: any) => {
             const Content = (
-              <div className="ds-card p-6 border-white/5 bg-white/[0.02] flex flex-col group hover:border-spectre-pink/40 transition-all overflow-hidden relative h-full w-full text-left">
+              <div className="ds-card p-6 border-border bg-card/50 flex flex-col group hover:border-primary/40 transition-all overflow-hidden relative h-full w-full text-left rounded-xl">
                 <div className="absolute -right-4 -bottom-4 opacity-5 group-hover:opacity-10 transition-opacity">
                   <item.icon className="w-24 h-24" />
                 </div>
                 <div className="flex justify-between items-start mb-4 relative z-10">
-                   <item.icon className="w-5 h-5 text-spectre-pink" />
-                   <span className="font-display text-[9px] uppercase tracking-widest text-white/20">{item.val}</span>
+                   <item.icon className="w-5 h-5 text-primary" />
+                   <span className="font-sans text-[10px] font-bold uppercase tracking-wider text-foreground-muted/50">{item.val}</span>
                 </div>
                 <div className="relative z-10">
-                  <span className="font-display text-sm tracking-widest text-white uppercase italic block">{item.label}</span>
-                  <span className="text-[9px] text-white/30 uppercase tracking-widest font-sans italic">{item.desc}</span>
+                  <span className="font-sans text-sm font-bold text-foreground uppercase block">{item.label}</span>
+                  <span className="text-[11px] text-foreground-muted font-sans font-medium">{item.desc}</span>
                 </div>
               </div>
             );
@@ -406,13 +404,13 @@ function HubPage() {
       <div className="grid grid-cols-1 lg:grid-cols-[1fr_350px] gap-8">
         <div className="space-y-8">
           {/* User Bio and Security Info */}
-          <section className="ds-card p-8 border-white/5 bg-white/[0.02] space-y-8">
+          <section className="ds-card p-8 border-border bg-card/30 rounded-xl space-y-8">
             <div>
               <div className="flex items-center gap-2 mb-4">
-                <UserRound className="w-3.5 h-3.5 text-spectre-pink" />
-                <h3 className="font-display text-[10px] uppercase tracking-widest text-white italic">Informações da Conta</h3>
+                <UserRound className="w-3.5 h-3.5 text-primary" />
+                <h3 className="font-sans text-xs font-bold uppercase tracking-wider text-foreground">Informações da Conta</h3>
               </div>
-              <div className="p-4 bg-obsidian border border-white/5 font-sans text-xs text-white/40 italic leading-relaxed min-h-[60px]">
+              <div className="p-4 bg-background border border-border rounded-lg font-sans text-xs text-foreground-muted italic leading-relaxed min-h-[60px]">
                 {loading ? <Skeleton className="h-4 w-full" /> : bio || "Sem biografia definida."}
               </div>
             </div>
@@ -426,14 +424,14 @@ function HubPage() {
                 { label: "Idade da Conta", val: user?.id ? formatDiscordAccountAge(user.id) : "N/A", icon: History },
               ].map(info => (
                 <div key={info.label} className="flex gap-4 items-center group/info">
-                  <div className={cn("w-10 h-10 flex items-center justify-center border border-white/5 bg-white/[0.01]", info.alert && "text-spectre-pink")}>
+                  <div className={cn("w-10 h-10 flex items-center justify-center border border-border bg-background rounded-lg", info.alert && "text-primary")}>
                     <info.icon className="w-4 h-4" />
                   </div>
                   <div>
-                    <div className="text-[9px] uppercase tracking-widest text-white/20 mb-1">{info.label}</div>
+                    <div className="text-[10px] font-bold uppercase tracking-wider text-foreground-muted/50 mb-1">{info.label}</div>
                     <div className={cn(
-                      "font-display text-[11px] uppercase tracking-widest text-white transition-all duration-300", 
-                      info.alert && "text-spectre-pink",
+                      "font-sans text-[13px] font-semibold text-foreground transition-all duration-300", 
+                      info.alert && "text-primary",
                       info.mask && "blur-[4px] group-hover/info:blur-0 select-none cursor-help"
                     )}>
                       {info.val}
@@ -445,13 +443,13 @@ function HubPage() {
           </section>
 
           {/* Manage Servers Restored */}
-          <section className="ds-card p-8 border-white/5 bg-white/[0.02]">
+          <section className="ds-card p-8 border-border bg-card/30 rounded-xl">
             <div className="flex items-center justify-between mb-8">
               <div className="flex items-center gap-2">
-                <Server className="w-3.5 h-3.5 text-spectre-pink" />
-                <h3 className="font-display text-[10px] uppercase tracking-widest text-white italic">Gerenciar Servidores</h3>
+                <Server className="w-3.5 h-3.5 text-primary" />
+                <h3 className="font-sans text-xs font-bold uppercase tracking-wider text-foreground">Gerenciar Servidores</h3>
               </div>
-              <span className="font-mono text-[9px] text-white/20 uppercase tracking-widest">{guilds.length} Total</span>
+              <span className="font-mono text-[10px] text-foreground-muted/50 uppercase font-bold">{guilds.length} Total</span>
             </div>
             
             <div className="flex flex-col sm:flex-row gap-4">
@@ -474,13 +472,13 @@ function HubPage() {
           </section>
 
           {/* Limpeza da Conta */}
-          <section className="ds-card p-8 border-white/5 bg-white/[0.02]">
+          <section className="ds-card p-8 border-border bg-card/30 rounded-xl">
             <div className="flex items-center justify-between mb-8">
               <div className="flex items-center gap-2">
-                <Trash2 className="w-3.5 h-3.5 text-spectre-pink" />
-                <h3 className="font-display text-[10px] uppercase tracking-widest text-white italic">Limpeza da Conta</h3>
+                <Trash2 className="w-3.5 h-3.5 text-primary" />
+                <h3 className="font-sans text-xs font-bold uppercase tracking-wider text-foreground">Limpeza da Conta</h3>
               </div>
-              <span className="font-mono text-[9px] text-white/20 uppercase tracking-widest">
+              <span className="font-mono text-[10px] text-foreground-muted/50 uppercase font-bold">
                 {dmCount ?? 0} DMS / {stats?.friends ?? 0} AMIGOS
               </span>
             </div>
@@ -503,7 +501,7 @@ function HubPage() {
                 {cleaningFriends ? "Removendo..." : "Listar Amigos"}
               </button>
             </div>
-            <p className="mt-4 text-[10px] text-white/30 font-sans italic">
+            <p className="mt-4 text-[11px] text-foreground-muted/50 font-sans font-medium uppercase tracking-wider">
               Estas ações são permanentes e podem levar alguns minutos dependendo do volume.
             </p>
           </section>
@@ -511,36 +509,36 @@ function HubPage() {
 
         {/* Sidebar: Premium Stats & Plan */}
         <aside className="space-y-8">
-          <section className="ds-card p-8 border-spectre-pink/20 bg-spectre-pink/5 relative overflow-hidden group">
+          <section className="ds-card !p-8 border-primary/20 bg-primary/5 relative overflow-hidden group rounded-xl">
             <div className="absolute -right-8 -top-8 opacity-5 rotate-12 group-hover:scale-110 transition-transform duration-700">
-              <Sparkles className="w-32 h-32 text-spectre-pink" />
+              <Sparkles className="w-32 h-32 text-primary" />
             </div>
             
             <div className="relative z-10 space-y-6">
-              <div className="flex items-center gap-2 text-spectre-pink">
+              <div className="flex items-center gap-2 text-primary">
                 <ShieldCheck className="w-4 h-4" />
-                <span className="font-display text-[9px] uppercase tracking-widest italic font-bold">Spectre</span>
+                <span className="font-sans text-[10px] font-bold uppercase tracking-widest">Spectre Tier</span>
               </div>
               
               <div className="space-y-2">
-                <div className="text-[9px] uppercase tracking-widest text-white/30">Plano Atual</div>
-                <div className="font-display text-3xl text-white italic tracking-tighter uppercase leading-none">
+                <div className="text-[10px] font-bold uppercase tracking-wider text-foreground-muted/50">Plano Atual</div>
+                <div className="font-display text-3xl text-foreground tracking-tight uppercase leading-none">
                   {loading ? <Skeleton className="h-8 w-24" /> : plan.toUpperCase()}
                 </div>
               </div>
 
               <div className="pt-4 border-t border-white/10 space-y-4">
                 <div className="flex justify-between items-center">
-                  <span className="text-[9px] uppercase tracking-widest text-white/40">Status</span>
-                  <span className="font-mono text-[9px] text-spectre-pink shadow-[0_0_8px_#ff0055]">ONLINE</span>
+                  <span className="text-[10px] font-bold uppercase tracking-wider text-foreground-muted/50">Status</span>
+                  <span className="font-mono text-[10px] font-bold text-primary shadow-[0_0_12px_rgba(255,0,85,0.4)]">ONLINE</span>
                 </div>
                 <div className="flex justify-between items-center">
-                  <span className="text-[9px] uppercase tracking-widest text-white/40">Encriptação</span>
-                  <span className="font-mono text-[9px] text-white">AES-256</span>
+                  <span className="text-[10px] font-bold uppercase tracking-wider text-foreground-muted/50">Encriptação</span>
+                  <span className="font-mono text-[10px] font-bold text-foreground">AES-256</span>
                 </div>
                 <div className="flex justify-between items-center">
-                  <span className="text-[9px] uppercase tracking-widest text-white/40">Prioridade</span>
-                  <span className="font-mono text-[9px] text-white">NÍVEL 4</span>
+                  <span className="text-[10px] font-bold uppercase tracking-wider text-foreground-muted/50">Prioridade</span>
+                  <span className="font-mono text-[10px] font-bold text-foreground">NÍVEL 4</span>
                 </div>
               </div>
 
@@ -548,17 +546,17 @@ function HubPage() {
             </div>
           </section>
 
-          <section className="ds-card p-6 border-white/5 bg-white/[0.02] space-y-4">
-            <h4 className="font-display text-[9px] uppercase tracking-widest text-white/30 italic">Atividade Recente</h4>
+          <section className="ds-card !p-6 border-border bg-card/30 rounded-xl space-y-4">
+            <h4 className="font-sans text-[10px] font-bold uppercase tracking-wider text-foreground-muted/50">Atividade Recente</h4>
             <div className="space-y-3">
               {[
                 { label: "Sniper Calibrado", time: "2m atrás" },
                 { label: "Orbs Sincronizados", time: "15m atrás" },
                 { label: "Login Realizado", time: "1h atrás" },
               ].map((act, i) => (
-                <div key={i} className="flex justify-between items-center border-b border-white/5 pb-2 last:border-0 last:pb-0">
-                  <span className="text-[10px] text-white/60 font-sans italic">{act.label}</span>
-                  <span className="text-[8px] font-mono text-white/20 uppercase">{act.time}</span>
+                <div key={i} className="flex justify-between items-center border-b border-border/20 pb-2 last:border-0 last:pb-0">
+                  <span className="text-[11px] text-foreground-muted font-medium uppercase tracking-wider">{act.label}</span>
+                  <span className="text-[9px] font-mono font-bold text-foreground-muted/30 uppercase">{act.time}</span>
                 </div>
               ))}
             </div>
@@ -571,36 +569,36 @@ function HubPage() {
         <Modal 
           title="Servidores Vinculados" 
           onClose={() => setShowGuilds(false)}
-          className="max-w-2xl"
+          className="max-w-2xl rounded-2xl"
         >
           <div className="space-y-4">
             <div className="relative mb-6">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-white/20" />
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-foreground-muted/50" />
               <input 
                 type="text" 
-                placeholder="FILTRAR SERVIDORES..." 
+                placeholder="Filtrar servidores..." 
                 value={guildSearch}
                 onChange={(e) => setGuildSearch(e.target.value)}
-                className="w-full bg-black/40 border border-white/5 py-2.5 pl-10 pr-4 font-display text-[9px] uppercase tracking-widest text-white placeholder:text-white/10 focus:border-spectre-pink/40 outline-none transition-all"
+                className="w-full bg-background border border-border py-2.5 pl-10 pr-4 font-sans text-xs rounded-lg text-foreground placeholder:text-foreground-muted/30 focus:border-primary/40 outline-none transition-all"
               />
             </div>
             
             <div className="space-y-4 max-h-[50vh] overflow-y-auto pr-2 custom-scrollbar">
               {filteredGuilds.length === 0 ? (
-                <p className="text-center py-8 text-white/20 font-display text-[10px] uppercase tracking-widest italic">Nenhum servidor encontrado</p>
+                <p className="text-center py-8 text-foreground-muted/30 font-sans text-xs font-medium uppercase tracking-widest">Nenhum servidor encontrado</p>
               ) : filteredGuilds.map(g => (
-              <div key={g.id} className="flex items-center justify-between p-4 bg-white/[0.02] border border-white/5 group hover:border-white/10 transition-all">
+              <div key={g.id} className="flex items-center justify-between p-4 bg-card/30 border border-border group hover:border-primary/20 transition-all rounded-xl">
                 <div className="flex items-center gap-4">
-                  <div className="w-10 h-10 bg-obsidian border border-white/10 flex items-center justify-center overflow-hidden">
+                  <div className="w-10 h-10 bg-background border border-border rounded-lg flex items-center justify-center overflow-hidden">
                     {g.icon ? (
-                      <img src={`https://cdn.discordapp.com/icons/${g.id}/${g.icon}.png`} className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all" alt="" />
+                      <img src={`https://cdn.discordapp.com/icons/${g.id}/${g.icon}.png`} className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" alt="" />
                     ) : (
-                      <span className="text-[10px] text-white/20 uppercase font-display">{g.name.slice(0, 2)}</span>
+                      <span className="text-[10px] text-foreground-muted font-bold uppercase">{g.name.slice(0, 2)}</span>
                     )}
                   </div>
                   <div>
-                    <div className="font-display text-[11px] text-white uppercase italic tracking-widest">{g.name}</div>
-                    <div className="font-mono text-[8px] text-white/20 uppercase">{g.id}</div>
+                    <div className="font-sans text-[13px] font-bold text-foreground uppercase tracking-tight">{g.name}</div>
+                    <div className="font-mono text-[9px] font-bold text-foreground-muted/50 uppercase">{g.id}</div>
                   </div>
                 </div>
                 <div className="flex items-center gap-3">
@@ -616,9 +614,9 @@ function HubPage() {
                           }
                         }
                       }}
-                      className="text-[9px] uppercase tracking-widest text-spectre-pink opacity-40 hover:opacity-100 transition-opacity italic font-bold"
+                      className="text-[10px] font-bold uppercase tracking-widest text-primary hover:text-foreground transition-colors"
                     >
-                      Remover
+                      Sair
                     </button>
                   )}
                 </div>
@@ -633,52 +631,52 @@ function HubPage() {
         <Modal 
           title="Conversas Abertas" 
           onClose={() => setShowDMs(false)}
-          className="max-w-2xl"
+          className="max-w-2xl rounded-2xl"
         >
           <div className="space-y-4">
             <div className="flex flex-col sm:flex-row gap-4 mb-6">
               <div className="relative flex-1">
-                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-white/20" />
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-foreground-muted/50" />
                 <input 
                   type="text" 
-                  placeholder="FILTRAR CONVERSAS..." 
+                  placeholder="Filtrar conversas..." 
                   value={dmSearch}
                   onChange={(e) => setDmSearch(e.target.value)}
-                  className="w-full bg-black/40 border border-white/5 py-2.5 pl-10 pr-4 font-display text-[9px] uppercase tracking-widest text-white placeholder:text-white/10 focus:border-spectre-pink/40 outline-none transition-all"
+                  className="w-full bg-background border border-border py-2.5 pl-10 pr-4 font-sans text-xs rounded-lg text-foreground placeholder:text-foreground-muted/30 focus:border-primary/40 outline-none transition-all"
                 />
               </div>
               <button 
                 onClick={() => { setShowDMs(false); setConfirmAction("dms"); }}
-                className="ds-btn ds-btn-primary !py-2.5 !px-4 !text-[9px] whitespace-nowrap"
+                className="ds-btn ds-btn-primary !py-2.5 !px-5 !text-[11px] font-bold rounded-lg whitespace-nowrap"
               >
-                Fechar Todas as DMs
+                Limpar Todas as DMs
               </button>
             </div>
 
             <div className="space-y-4 max-h-[50vh] overflow-y-auto pr-2 custom-scrollbar">
               {filteredDMs.length === 0 ? (
-                <p className="text-center py-8 text-white/20 font-display text-[10px] uppercase tracking-widest italic">Nenhuma conversa encontrada</p>
+                <p className="text-center py-8 text-foreground-muted/30 font-sans text-xs font-medium uppercase tracking-widest">Nenhuma conversa encontrada</p>
               ) : filteredDMs.map(c => {
               const recipient = c.recipients?.[0];
               const name = c.name || recipient?.global_name || recipient?.username || "Conversa em Grupo";
               const avatar = recipient?.avatar ? `https://cdn.discordapp.com/avatars/${recipient.id}/${recipient.avatar}.png` : null;
               
               return (
-                <div key={c.id} className="flex items-center justify-between p-4 bg-white/[0.02] border border-white/5 group hover:border-spectre-pink/20 transition-all">
+                <div key={c.id} className="flex items-center justify-between p-4 bg-card/30 border border-border group hover:border-primary/20 transition-all rounded-xl">
                   <div className="flex items-center gap-4">
-                    <div className="w-10 h-10 bg-obsidian border border-white/10 flex items-center justify-center overflow-hidden">
+                    <div className="w-10 h-10 bg-background border border-border rounded-lg flex items-center justify-center overflow-hidden">
                       {avatar ? (
-                        <img src={avatar} className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all" alt="" />
+                        <img src={avatar} className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" alt="" />
                       ) : (
-                        <div className="w-full h-full flex items-center justify-center text-white/20">
+                        <div className="w-full h-full flex items-center justify-center text-foreground-muted/20">
                           <MessageSquare className="w-4 h-4" />
                         </div>
                       )}
                     </div>
                     <div>
-                      <div className="font-display text-[11px] text-white uppercase italic tracking-widest">{name}</div>
-                      <div className="font-mono text-[8px] text-white/20 uppercase">
-                        {c.type === 1 ? "DM Direta" : "Grupo"} <span className="mx-2">//</span> {c.id}
+                      <div className="font-sans text-[13px] font-bold text-foreground uppercase tracking-tight">{name}</div>
+                      <div className="font-mono text-[9px] font-bold text-foreground-muted/50 uppercase">
+                        {c.type === 1 ? "DM Direta" : "Grupo"} <span className="mx-2 font-sans opacity-20">/</span> {c.id}
                       </div>
                     </div>
                   </div>
@@ -693,7 +691,7 @@ function HubPage() {
                         }
                       }
                     }}
-                    className="text-[9px] uppercase tracking-widest text-spectre-pink opacity-40 hover:opacity-100 transition-opacity italic font-bold"
+                    className="text-[10px] font-bold uppercase tracking-widest text-primary hover:text-foreground transition-colors"
                   >
                     Fechar
                   </button>
@@ -709,54 +707,54 @@ function HubPage() {
         <Modal 
           title="Lista de Amigos" 
           onClose={() => setShowFriends(false)}
-          className="max-w-2xl"
+          className="max-w-2xl rounded-2xl"
         >
           <div className="space-y-4">
             <div className="flex flex-col sm:flex-row gap-4 mb-6">
               <div className="relative flex-1">
-                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-white/20" />
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-foreground-muted/50" />
                 <input 
                   type="text" 
-                  placeholder="FILTRAR AMIGOS..." 
+                  placeholder="Filtrar amigos..." 
                   value={friendSearch}
                   onChange={(e) => setFriendSearch(e.target.value)}
-                  className="w-full bg-black/40 border border-white/5 py-2.5 pl-10 pr-4 font-display text-[9px] uppercase tracking-widest text-white placeholder:text-white/10 focus:border-spectre-pink/40 outline-none transition-all"
+                  className="w-full bg-background border border-border py-2.5 pl-10 pr-4 font-sans text-xs rounded-lg text-foreground placeholder:text-foreground-muted/30 focus:border-primary/40 outline-none transition-all"
                 />
               </div>
               <button 
                 onClick={() => { setShowFriends(false); setConfirmAction("friends"); }}
-                className="ds-btn ds-btn-primary !py-2.5 !px-4 !text-[9px] whitespace-nowrap"
+                className="ds-btn ds-btn-primary !py-2.5 !px-5 !text-[11px] font-bold rounded-lg whitespace-nowrap"
               >
-                Remover Todos os Amigos
+                Limpar Todos os Amigos
               </button>
             </div>
 
             <div className="space-y-4 max-h-[50vh] overflow-y-auto pr-2 custom-scrollbar">
               {filteredFriends.length === 0 ? (
-                <p className="text-center py-8 text-white/20 font-display text-[10px] uppercase tracking-widest italic">Nenhuma amizade encontrada</p>
+                <p className="text-center py-8 text-foreground-muted/30 font-sans text-xs font-medium uppercase tracking-widest">Nenhuma amizade encontrada</p>
               ) : filteredFriends.map(r => {
               const u = r.user;
               const name = u?.global_name || u?.username || "Usuário Desconhecido";
               const avatar = u?.avatar ? `https://cdn.discordapp.com/avatars/${u.id}/${u.avatar}.png` : null;
               
               return (
-                <div key={r.id} className="flex items-center justify-between p-4 bg-white/[0.02] border border-white/5 group hover:border-spectre-pink/20 transition-all">
+                <div key={r.id} className="flex items-center justify-between p-4 bg-card/30 border border-border group hover:border-primary/20 transition-all rounded-xl">
                   <div className="flex items-center gap-4">
-                    <div className="w-10 h-10 bg-obsidian border border-white/10 flex items-center justify-center overflow-hidden">
+                    <div className="w-10 h-10 bg-background border border-border rounded-lg flex items-center justify-center overflow-hidden">
                       {avatar ? (
-                        <img src={avatar} className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all" alt="" />
+                        <img src={avatar} className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" alt="" />
                       ) : (
-                        <div className="w-full h-full flex items-center justify-center text-white/20">
+                        <div className="w-full h-full flex items-center justify-center text-foreground-muted/20">
                           <UserRound className="w-4 h-4" />
                         </div>
                       )}
                     </div>
                     <div>
-                      <div className="font-display text-[11px] text-white uppercase italic tracking-widest">{name}</div>
-                      <div className="font-mono text-[8px] text-white/20 uppercase">
-                        {u?.username} <span className="mx-2">//</span> {r.id}
+                      <div className="font-sans text-[13px] font-bold text-foreground uppercase tracking-tight">{name}</div>
+                      <div className="font-mono text-[9px] font-bold text-foreground-muted/50 uppercase">
+                        {u?.username} <span className="mx-2 font-sans opacity-20">/</span> {r.id}
                       </div>
-                      <div className="font-sans text-[7px] text-white/10 uppercase tracking-[0.2em] mt-1">
+                      <div className="font-sans text-[9px] text-primary uppercase font-bold tracking-wider mt-1">
                         {u?.id ? formatDiscordAccountAge(u.id) : ""}
                       </div>
                     </div>
@@ -772,7 +770,7 @@ function HubPage() {
                         }
                       }
                     }}
-                    className="text-[9px] uppercase tracking-widest text-spectre-pink opacity-40 hover:opacity-100 transition-opacity italic font-bold"
+                    className="text-[10px] font-bold uppercase tracking-widest text-primary hover:text-foreground transition-colors"
                   >
                     Remover
                   </button>
@@ -801,27 +799,27 @@ function HubPage() {
               : `Todos os seus amigos (${stats?.friends ?? 0}) serão removidos da sua lista.`
           }
           onClose={() => setConfirmAction(null)}
-          className="max-w-md"
+          className="max-w-md rounded-2xl"
         >
           <div className="space-y-6">
-            <div className="flex items-start gap-3 p-4 border border-spectre-pink/20 bg-spectre-pink/5">
-              <ShieldAlert className="w-4 h-4 text-spectre-pink shrink-0 mt-0.5" />
-              <p className="text-[11px] text-white/60 font-sans italic">
-                Esta ação é permanente e não pode ser desfeita. O processo é feito lentamente para proteger sua conta.
+            <div className="flex items-start gap-4 p-5 border border-primary/20 bg-primary/5 rounded-xl">
+              <ShieldAlert className="w-5 h-5 text-primary shrink-0 mt-0.5" />
+              <p className="text-[12px] text-foreground-muted font-sans font-medium leading-relaxed">
+                Esta ação é permanente e não pode ser desfeita. O protocolo de segurança Spectre processa as remoções gradualmente para proteger a integridade da sua conta.
               </p>
             </div>
             <div className="flex flex-col sm:flex-row gap-4">
               <button
                 onClick={() => setConfirmAction(null)}
-                className="flex-1 ds-btn ds-btn-secondary text-center"
+                className="flex-1 ds-btn ds-btn-secondary text-center !py-3 rounded-lg"
               >
                 Cancelar
               </button>
               <button
                 onClick={confirmAction === "dms" ? handleClearDMs : handleRemoveFriends}
-                className="flex-1 ds-btn ds-btn-primary text-center"
+                className="flex-1 ds-btn ds-btn-primary text-center !py-3 rounded-lg font-bold"
               >
-                Confirmar
+                Confirmar Protocolo
               </button>
             </div>
           </div>
@@ -890,29 +888,32 @@ function PresenceModal({
 
   return (
     <Modal 
-      title="Status & Presence" 
-      description="Gerencie como você aparece na rede Spectre"
+      title="Status & Presença" 
+      description="Gerencie como você aparece no Discord através da rede Spectre"
       onClose={onClose}
-      className="max-w-md"
+      className="max-w-lg rounded-2xl"
     >
 
       <div className="space-y-6">
         {/* Tabs */}
-        <div className="flex border-b border-white/5">
+        <div className="flex border-b border-border mb-6">
           {['status', 'custom', 'rich'].map((tab) => (
             <button
               key={tab}
               onClick={() => setActiveTab(tab as any)}
               className={cn(
-                "flex-1 py-3 font-display text-[9px] uppercase tracking-widest italic transition-all border-b-2",
+                "flex-1 py-3 font-sans text-[11px] font-bold uppercase tracking-wider transition-all relative",
                 activeTab === tab 
-                  ? "border-spectre-pink text-white bg-spectre-pink/5" 
-                  : "border-transparent text-white/20 hover:text-white/40"
+                  ? "text-primary" 
+                  : "text-foreground-muted hover:text-foreground"
               )}
             >
               {tab === 'status' && 'Status'}
-              {tab === 'custom' && 'Custom Status'}
+              {tab === 'custom' && 'Personalizado'}
               {tab === 'rich' && 'Rich Presence'}
+              {activeTab === tab && (
+                <div className="absolute bottom-0 left-0 w-full h-0.5 bg-primary shadow-[0_0_8px_rgba(255,0,85,0.4)]" />
+              )}
             </button>
           ))}
         </div>
@@ -920,15 +921,15 @@ function PresenceModal({
         <div className="min-h-[200px] py-4">
           {activeTab === 'status' && (
             <div className="space-y-4">
-              <div className="text-[9px] uppercase tracking-widest text-white/20 mb-4 italic">Selecione seu modo de visibilidade</div>
+              <div className="text-[10px] font-bold uppercase tracking-wider text-foreground-muted/50 mb-4">Selecione sua visibilidade</div>
               <div className="grid grid-cols-2 gap-3">
                 {['online', 'idle', 'dnd', 'invisible'].map((s) => (
                   <button
                     key={s}
                     onClick={() => setStatus(s)}
                     className={cn(
-                      "p-4 border border-white/5 bg-white/[0.01] flex items-center gap-3 group transition-all",
-                      status === s && "border-spectre-pink/40 bg-spectre-pink/5"
+                      "p-4 border border-border bg-card/30 rounded-xl flex items-center gap-4 group transition-all duration-300",
+                      status === s && "border-primary/40 bg-primary/5 shadow-lg shadow-primary/5"
                     )}
                   >
                     <div className={cn(
@@ -939,9 +940,9 @@ function PresenceModal({
                       s === 'invisible' && "bg-white/20"
                     )} />
                     <span className={cn(
-                      "font-display text-[10px] uppercase tracking-widest italic",
-                      status === s ? "text-white" : "text-white/40"
-                    )}>{s}</span>
+                      "font-sans text-xs font-bold uppercase tracking-wider",
+                      status === s ? "text-foreground" : "text-foreground-muted/50"
+                    )}>{s === 'dnd' ? 'Não Perturbe' : s === 'invisible' ? 'Invisível' : s === 'idle' ? 'Ausente' : 'Online'}</span>
                   </button>
                 ))}
               </div>
@@ -950,17 +951,17 @@ function PresenceModal({
 
           {activeTab === 'custom' && (
             <div className="space-y-6">
-              <div className="flex items-center justify-between">
-                <span className="text-[9px] uppercase tracking-widest text-white/20 italic">Ativar Status Customizado</span>
+              <div className="flex items-center justify-between p-4 bg-primary/5 border border-primary/20 rounded-xl">
+                <span className="text-xs font-bold uppercase tracking-wider text-foreground-muted">Ativar Status Customizado</span>
                 <button 
                   onClick={() => setCustomText(customText ? '' : 'Spectre Hub User')}
                   className={cn(
                     "w-10 h-5 rounded-full relative transition-all duration-500",
-                    customText ? "bg-spectre-pink" : "bg-white/10"
+                    customText ? "bg-primary shadow-[0_0_10px_rgba(255,0,85,0.4)]" : "bg-border"
                   )}
                 >
                   <div className={cn(
-                    "absolute top-1 w-3 h-3 bg-white transition-all duration-500",
+                    "absolute top-1 w-3 h-3 bg-white rounded-full transition-all duration-500",
                     customText ? "left-6" : "left-1"
                   )} />
                 </button>
@@ -968,23 +969,23 @@ function PresenceModal({
 
               <div className="space-y-4">
                 <div>
-                  <label className="font-display text-[9px] uppercase tracking-widest text-white/20 italic block mb-2">Texto do Status</label>
+                  <label className="text-[10px] font-bold uppercase tracking-wider text-foreground-muted/50 block mb-2">Texto do Status</label>
                   <input 
                     type="text" 
                     value={customText}
                     onChange={(e) => setCustomText(e.target.value)}
-                    placeholder="O que você está fazendo?"
-                    className="w-full bg-obsidian border border-white/5 p-4 font-sans text-xs text-white outline-none focus:border-spectre-pink/40 transition-all italic"
+                    placeholder="O que você está fazendo agora?"
+                    className="w-full bg-background border border-border p-4 rounded-xl font-sans text-sm text-foreground outline-none focus:border-primary/40 transition-all placeholder:text-foreground-muted/20"
                   />
                 </div>
                 <div>
-                  <label className="font-display text-[9px] uppercase tracking-widest text-white/20 italic block mb-2">Emoji (Nome ou ID)</label>
+                  <label className="text-[10px] font-bold uppercase tracking-wider text-foreground-muted/50 block mb-2">Emoji (Opcional)</label>
                   <input 
                     type="text" 
                     value={customEmoji}
                     onChange={(e) => setCustomEmoji(e.target.value)}
-                    placeholder="🚀 ou emoji_name"
-                    className="w-full bg-obsidian border border-white/5 p-4 font-sans text-xs text-white outline-none focus:border-spectre-pink/40 transition-all italic"
+                    placeholder="🚀 ou nome_do_emoji"
+                    className="w-full bg-background border border-border p-4 rounded-xl font-sans text-sm text-foreground outline-none focus:border-primary/40 transition-all placeholder:text-foreground-muted/20"
                   />
                 </div>
               </div>
@@ -993,12 +994,12 @@ function PresenceModal({
 
           {activeTab === 'rich' && (
             <div className="space-y-6">
-              <div className="flex items-center justify-between p-4 border border-spectre-pink/10 bg-spectre-pink/[0.02]">
-                <div className="flex items-center gap-3">
-                  <Gamepad2 className="w-5 h-5 text-spectre-pink" />
+              <div className="flex items-center justify-between p-5 bg-primary/5 border border-primary/20 rounded-xl">
+                <div className="flex items-center gap-4">
+                  <Gamepad2 className="w-6 h-6 text-primary" />
                   <div>
-                    <div className="font-display text-[10px] text-white uppercase italic tracking-widest">Atividade Externa</div>
-                    <div className="text-[8px] text-white/20 uppercase tracking-widest">Simula atividade de jogo</div>
+                    <div className="text-xs font-bold text-foreground uppercase tracking-tight">Atividade do Sistema</div>
+                    <div className="text-[10px] text-foreground-muted font-medium uppercase tracking-wider">Simular atividade de jogo</div>
                   </div>
                 </div>
 
@@ -1006,11 +1007,11 @@ function PresenceModal({
                   onClick={() => setRichEnabled(!richEnabled)}
                   className={cn(
                     "w-10 h-5 rounded-full relative transition-all duration-500",
-                    richEnabled ? "bg-spectre-pink shadow-[0_0_10px_#ff0055]" : "bg-white/10"
+                    richEnabled ? "bg-primary shadow-[0_0_10px_rgba(255,0,85,0.4)]" : "bg-border"
                   )}
                 >
                   <div className={cn(
-                    "absolute top-1 w-3 h-3 bg-white transition-all duration-500",
+                    "absolute top-1 w-3 h-3 bg-white rounded-full transition-all duration-500",
                     richEnabled ? "left-6" : "left-1"
                   )} />
                 </button>
@@ -1018,21 +1019,21 @@ function PresenceModal({
 
               <div className={cn("space-y-4 transition-all duration-500", !richEnabled && "opacity-20 pointer-events-none grayscale")}>
                 <div>
-                  <label className="font-display text-[9px] uppercase tracking-widest text-white/20 italic block mb-2">Nome da Atividade</label>
+                  <label className="text-[10px] font-bold uppercase tracking-wider text-foreground-muted/50 block mb-2">Nome da Atividade</label>
                   <input 
                     type="text" 
                     value={richName}
                     onChange={(e) => setRichName(e.target.value)}
-                    className="w-full bg-obsidian border border-white/5 p-4 font-sans text-xs text-white outline-none focus:border-spectre-pink/40 italic"
+                    className="w-full bg-background border border-border p-4 rounded-xl font-sans text-sm text-foreground outline-none focus:border-primary/40 transition-all"
                   />
                 </div>
                 <div>
-                  <label className="font-display text-[9px] uppercase tracking-widest text-white/20 italic block mb-2">Detalhes</label>
+                  <label className="text-[10px] font-bold uppercase tracking-wider text-foreground-muted/50 block mb-2">Detalhes</label>
                   <input 
                     type="text" 
                     value={richDetails}
                     onChange={(e) => setRichDetails(e.target.value)}
-                    className="w-full bg-obsidian border border-white/5 p-4 font-sans text-xs text-white outline-none focus:border-spectre-pink/40 italic"
+                    className="w-full bg-background border border-border p-4 rounded-xl font-sans text-sm text-foreground outline-none focus:border-primary/40 transition-all"
                   />
                 </div>
               </div>
@@ -1040,19 +1041,19 @@ function PresenceModal({
           )}
         </div>
 
-        <div className="pt-4 flex gap-4">
+        <div className="pt-6 flex flex-col sm:flex-row gap-3">
           <button 
             onClick={onClose}
-            className="flex-1 ds-btn ds-btn-secondary py-3"
+            className="flex-1 ds-btn ds-btn-secondary !py-3 font-bold uppercase tracking-widest text-[11px] rounded-lg"
           >
             Cancelar
           </button>
           <button 
             onClick={handleSave}
             disabled={loading}
-            className="flex-1 ds-btn ds-btn-primary py-3"
+            className="flex-1 ds-btn ds-btn-primary !py-3 font-bold uppercase tracking-widest text-[11px] rounded-lg shadow-lg shadow-primary/20"
           >
-            {loading ? "Sincronizando..." : "Aplicar Mudanças"}
+            {loading ? "Sincronizando..." : "Aplicar Protocolo"}
           </button>
         </div>
       </div>

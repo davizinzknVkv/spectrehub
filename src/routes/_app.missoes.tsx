@@ -12,7 +12,8 @@ import {
 import { useQuestStore, type Quest } from "@/lib/quest-store";
 import { PageHeader } from "@/components/PageHeader";
 import { Button } from "@/components/ui/ds";
-import { Target } from "lucide-react";
+import { Target, Search, Sparkles, AlertCircle, Ban, Activity } from "lucide-react";
+import { cn } from "@/lib/utils";
 import {
   CaptchaModal,
   MissionEmptyState as EmptyState,
@@ -100,17 +101,20 @@ function MissoesPage() {
 
   if (!creds) {
     return (
-      <div className="pt-20 text-center space-y-8">
-        <img src={logoAsset.url} alt="Logo" className="w-24 h-24 mx-auto invert opacity-50" />
-        <h1 className="font-display text-4xl uppercase tracking-tighter text-white">Missões Bloqueadas</h1>
-        <p className="text-white/40 max-w-sm mx-auto font-sans italic">Para escanear e executar missões em sua conta, você deve estar autenticado no terminal.</p>
+      <div className="pt-20 text-center space-y-8 font-sans">
+        <div className="relative inline-block">
+          <Ban className="w-16 h-16 mx-auto text-primary opacity-50" />
+          <div className="absolute inset-0 bg-primary/20 blur-xl rounded-full" />
+        </div>
+        <h1 className="font-display text-4xl uppercase tracking-tighter text-foreground">Missões Bloqueadas</h1>
+        <p className="text-foreground-muted max-w-sm mx-auto italic">Para escanear e executar missões em sua conta, você deve estar autenticado no terminal.</p>
         <Link to="/settings" className="ds-btn ds-btn-primary mx-auto">Vincular Conta</Link>
       </div>
     );
   }
 
   return (
-    <div className="page-stack">
+    <div className="page-stack max-w-6xl mx-auto font-sans">
       <PageHeader
         eyebrow="quests --deploy"
         icon={Target}
@@ -119,7 +123,7 @@ function MissoesPage() {
         description="Execute missões oficiais do Discord e colete recompensas exclusivas automaticamente."
       />
 
-      <div className="grid grid-cols-1 lg:grid-cols-[1fr_350px] gap-8">
+      <div className="grid grid-cols-1 lg:grid-cols-[1fr_380px] gap-8 pb-20">
         <div className="space-y-6">
            <PlanBanner
             plan={plan}
@@ -130,17 +134,22 @@ function MissoesPage() {
             cooldownLeft={cooldownLeft}
           />
 
-          <div className="flex justify-between items-center bg-white/[0.02] border border-white/5 p-4">
-             <div className="font-display text-[9px] uppercase tracking-widest text-white/30 italic">
-                {quests.length} Missões Disponíveis
+          <div className="flex flex-col sm:flex-row justify-between items-center bg-card/30 border border-border p-6 rounded-xl gap-6">
+             <div className="flex flex-col">
+                <div className="font-sans text-xs font-bold uppercase tracking-wider text-foreground-muted/50">
+                  Estado do Terminal
+                </div>
+                <div className="font-sans text-[13px] font-semibold text-foreground">
+                  {quests.length} Missões Escaneadas
+                </div>
              </div>
-             <div className="flex gap-2 sm:gap-4 flex-wrap">
+             <div className="flex gap-2 sm:gap-3 flex-wrap w-full sm:w-auto">
                 <button 
                   onClick={loadQuests}
                   disabled={loadingQuests || running}
-                  className="ds-btn ds-btn-secondary !py-2 !px-4 sm:!px-6 !text-[9px]"
+                  className="ds-btn ds-btn-secondary flex-1 sm:flex-initial !py-2.5 !px-5 !text-[11px] font-bold rounded-lg"
                 >
-                  {loadingQuests ? 'Sondando...' : 'Scan'}
+                  {loadingQuests ? 'Escanear...' : 'Sondagem'}
                 </button>
                 <button 
                   onClick={async () => {
@@ -152,16 +161,16 @@ function MissoesPage() {
                     }
                   }}
                   disabled={running || quests.length === 0}
-                  className="ds-btn ds-btn-secondary !py-2 !px-4 sm:!px-6 !text-[9px] !text-spectre-pink hover:!bg-spectre-pink/10"
+                  className="ds-btn ds-btn-secondary flex-1 sm:flex-initial !py-2.5 !px-5 !text-[11px] font-bold !text-primary hover:!bg-primary/10 rounded-lg"
                 >
-                  {running ? 'Processando...' : 'Resgatar Tudo'}
+                  {running ? 'Processando...' : 'Auto-Claim'}
                 </button>
                 <button 
                   onClick={() => setCaptchaAll(true)}
                   disabled={running || quests.length === 0 || gateBlocked}
-                  className="ds-btn ds-btn-primary !py-2 !px-4 sm:!px-6 !text-[9px]"
+                  className="ds-btn ds-btn-primary flex-1 sm:flex-initial !py-2.5 !px-5 !text-[11px] font-bold rounded-lg"
                 >
-                  Run All
+                  Farm All
                 </button>
              </div>
           </div>
@@ -176,7 +185,7 @@ function MissoesPage() {
                 active={activeId === q.questId}
                 progress={activeId === q.questId ? progress : null}
                 disabled={running || gateBlocked}
-                gateHint={remaining <= 0 ? `Limite ${limits.label}` : cooldownText ? `Cooldown ${cooldownText}` : undefined}
+                gateHint={remaining <= 0 ? `Limite ${limits.label}` : cooldownText ? `Aguarde ${cooldownText}` : undefined}
                 onExec={() => setCaptchaFor(q)}
               />
             ))}
@@ -184,24 +193,46 @@ function MissoesPage() {
         </div>
 
         <aside className="space-y-6">
-            <div className="ds-card p-6 border-white/5 bg-white/[0.02] space-y-4">
-                <div className="font-display text-[9px] uppercase tracking-widest text-white/30 italic">Terminal Log</div>
-                <div className="space-y-2 max-h-[500px] overflow-y-auto pr-2 custom-scrollbar font-mono text-[9px]">
+            <div className="ds-card !p-6 border-border bg-card/30 rounded-xl space-y-6">
+                <div className="flex items-center justify-between border-b border-border pb-4">
+                  <div className="flex items-center gap-2">
+                    <Activity className="w-4 h-4 text-primary" />
+                    <h3 className="font-sans text-xs font-bold uppercase tracking-wider text-foreground">Terminal Log</h3>
+                  </div>
+                  <Sparkles className="w-3 h-3 text-primary animate-pulse" />
+                </div>
+                
+                <div className="space-y-3 max-h-[600px] overflow-y-auto pr-2 custom-scrollbar font-mono text-[10px]">
                    {useQuestStore.getState().logs.length === 0 ? (
-                       <p className="text-white/20 italic">Aguardando operação...</p>
+                       <p className="text-foreground-muted/30 italic">Aguardando operação...</p>
                    ) : (
                        useQuestStore.getState().logs.slice().reverse().map(l => (
-                           <div key={l.id} className={`py-1 border-b border-white/[0.02] ${l.level === 'error' ? 'text-rose-500' : l.level === 'success' ? 'text-spectre-pink' : 'text-white/60'}`}>
-                               [{new Date(l.ts).toLocaleTimeString()}] {l.text}
+                           <div key={l.id} className={cn(
+                             "py-2 border-b border-border/20 leading-relaxed",
+                             l.level === 'error' ? 'text-primary' : l.level === 'success' ? 'text-emerald-400' : 'text-foreground-muted'
+                           )}>
+                               <span className="opacity-30 mr-2">[{new Date(l.ts).toLocaleTimeString()}]</span> 
+                               {l.text}
                            </div>
                        ))
                    )}
                 </div>
+                
                 {running && (
-                    <button onClick={requestStop} className="w-full ds-btn ds-btn-secondary !text-rose-500 hover:!bg-rose-500 hover:!text-white border-rose-500/20">
+                    <button onClick={requestStop} className="w-full ds-btn ds-btn-secondary !text-primary hover:!bg-primary/10 border-primary/20 !py-3 rounded-lg font-bold text-xs uppercase tracking-widest">
                         Interromper Sequência
                     </button>
                 )}
+            </div>
+            
+            <div className="ds-card !p-6 border-border bg-primary/5 rounded-xl flex gap-4">
+              <AlertCircle className="w-5 h-5 text-primary shrink-0" />
+              <div>
+                <h4 className="font-sans text-xs font-bold uppercase tracking-wider text-foreground mb-1">Dica Spectre</h4>
+                <p className="text-[11px] text-foreground-muted leading-relaxed font-medium">
+                  Utilize o <span className="text-primary font-bold">Auto-Claim</span> após completar as missões para resgatar todas as recompensas instantaneamente.
+                </p>
+              </div>
             </div>
         </aside>
       </div>

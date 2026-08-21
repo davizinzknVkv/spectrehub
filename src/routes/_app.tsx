@@ -100,23 +100,23 @@ function AppLayout() {
   }, [pathname]);
 
   return (
-    <div className="min-h-screen bg-obsidian text-white antialiased">
+    <div className="min-h-screen bg-background text-foreground antialiased selection:bg-primary/30">
       {/* Background elements for Hub */}
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-         <div 
-            className="absolute inset-0 opacity-[0.02]"
+          <div 
+            className="absolute inset-0 opacity-[0.03]"
             style={{
-              backgroundImage: `linear-gradient(#fff 1px, transparent 1px), linear-gradient(90deg, #fff 1px, transparent 1px)`,
-              backgroundSize: '40px 40px'
+              backgroundImage: `linear-gradient(var(--color-border) 1px, transparent 1px), linear-gradient(90deg, var(--color-border) 1px, transparent 1px)`,
+              backgroundSize: '32px 32px'
             }}
           />
-          <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-spectre-pink/5 rounded-full blur-[140px] -translate-y-1/2 translate-x-1/2" />
+          <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/2" />
       </div>
 
-      <div className="relative z-10 grid min-h-screen w-full grid-cols-1 lg:grid-cols-[250px_1fr] overflow-hidden">
+      <div className="relative z-10 grid min-h-screen w-full grid-cols-1 lg:grid-cols-[260px_1fr] overflow-hidden">
         {/* Desktop sidebar */}
-        <aside className="hidden border-r border-white/5 bg-obsidian lg:sticky lg:top-0 lg:block lg:h-screen lg:w-[250px]">
-          <SidebarBody pathname={pathname} creds={creds} setCreds={setCreds} />
+        <aside className="hidden border-r border-border bg-background-secondary lg:sticky lg:top-0 lg:block lg:h-screen lg:w-[260px]">
+          <SidebarBody pathname={pathname} />
         </aside>
 
         {/* Mobile drawer */}
@@ -127,17 +127,17 @@ function AppLayout() {
               onClick={() => setMobileOpen(false)}
               aria-hidden
             />
-            <aside className="fixed inset-y-0 left-0 z-50 w-[280px] border-r border-white/5 bg-obsidian lg:hidden">
-              <div className="flex items-center justify-between border-b border-white/5 px-6 py-5">
-                <span className="font-display text-[9px] uppercase tracking-[0.3em] text-white/40 italic">Menu Lateral</span>
+            <aside className="fixed inset-y-0 left-0 z-50 w-[280px] border-r border-border bg-background-secondary lg:hidden">
+              <div className="flex items-center justify-between border-b border-border px-6 py-5">
+                <span className="font-sans text-[10px] font-bold uppercase tracking-wider text-foreground-muted/50">Menu Principal</span>
                 <button
                   onClick={() => setMobileOpen(false)}
-                  className="text-white/40 hover:text-white transition-colors"
+                  className="text-foreground-muted hover:text-foreground transition-colors"
                 >
                   <X className="h-5 w-5" />
                 </button>
               </div>
-              <SidebarBody pathname={pathname} creds={creds} setCreds={setCreds} />
+              <SidebarBody pathname={pathname} />
             </aside>
           </>
         )}
@@ -158,8 +158,6 @@ function SidebarBody({
   pathname,
 }: {
   pathname: string;
-  creds: unknown;
-  setCreds: (c: null) => void;
 }) {
   const logoUrl = logoAsset.url;
   return (
@@ -168,17 +166,17 @@ function SidebarBody({
         <img
           src={logoUrl}
           alt="Spectre Hub"
-          className="h-10 w-10 object-contain shrink-0 transition-transform duration-500 group-hover:scale-110 drop-shadow-[0_0_8px_rgba(255,0,85,0.3)]"
+          className="h-9 w-9 object-contain shrink-0 transition-transform duration-500 group-hover:scale-110"
         />
-        <span className="font-display text-lg tracking-tighter text-white uppercase italic">
-          Spectre <span className="text-spectre-pink">Hub</span>
+        <span className="font-display text-lg tracking-tighter text-foreground uppercase">
+          Spectre <span className="text-primary">Hub</span>
         </span>
       </Link>
 
       <nav className="flex flex-col gap-8 px-4 py-2 lg:flex-1 overflow-y-auto">
         {NAV_GROUPS.map((group) => (
           <div key={group.title}>
-            <div className="font-display px-4 pb-3 text-[9px] font-bold uppercase tracking-[0.3em] text-white/20 italic">{group.title}</div>
+            <div className="font-sans px-4 pb-2 text-[10px] font-bold uppercase tracking-wider text-foreground-muted/50">{group.title}</div>
             <div className="flex flex-col gap-1">
               {group.items.map((item) => {
                 const Icon = item.icon;
@@ -187,22 +185,22 @@ function SidebarBody({
                   <Link
                     key={`${item.to}-${item.label}`}
                     to={item.to}
-                    className={`flex items-center gap-3 px-4 py-2.5 transition-all duration-300 group border border-transparent ${
+                    className={`flex items-center gap-3 px-4 py-2 transition-all duration-200 group rounded-lg ${
                       active 
-                        ? "bg-spectre-pink/5 border-spectre-pink/20 text-white" 
-                        : "text-white/40 hover:text-white hover:bg-white/[0.02]"
+                        ? "bg-primary/10 text-foreground" 
+                        : "text-foreground-muted hover:text-foreground hover:bg-white/[0.03]"
                     }`}
                   >
                     <Icon
                       className={`h-4 w-4 shrink-0 transition-colors ${
-                        active ? "text-spectre-pink" : "text-white/20 group-hover:text-white"
+                        active ? "text-primary" : "text-foreground-muted group-hover:text-foreground"
                       }`}
                     />
-                    <span className="font-display text-[11px] uppercase tracking-widest italic">
+                    <span className="font-sans text-[13px] font-medium">
                       {item.label}
                     </span>
                     {item.soon && (
-                      <span className="ml-auto bg-spectre-pink/10 text-spectre-pink text-[7px] font-display uppercase tracking-widest px-2 py-0.5 italic">beta</span>
+                      <span className="ml-auto bg-primary/10 text-primary text-[8px] font-sans font-bold uppercase tracking-wider px-2 py-0.5 rounded-full">beta</span>
                     )}
                   </Link>
                 );
@@ -212,16 +210,16 @@ function SidebarBody({
         ))}
       </nav>
 
-      <div className="mt-auto border-t border-white/5 p-4 space-y-2">
+      <div className="mt-auto border-t border-border p-4 space-y-2">
         <AdminNavLink />
         <a 
           href={DISCORD_INVITE} 
           target="_blank" 
           rel="noreferrer" 
-          className="flex items-center gap-3 px-4 py-2.5 text-white/40 hover:text-white transition-all group"
+          className="flex items-center gap-3 px-4 py-2.5 text-foreground-muted hover:text-foreground transition-all group rounded-lg hover:bg-white/[0.03]"
         >
-          <LifeBuoy className="h-4 w-4 shrink-0 text-white/20 group-hover:text-white transition-colors" />
-          <span className="font-display text-[11px] uppercase tracking-widest italic">Suporte Discord</span>
+          <LifeBuoy className="h-4 w-4 shrink-0 text-foreground-muted group-hover:text-foreground transition-colors" />
+          <span className="font-sans text-[13px] font-medium">Suporte</span>
         </a>
       </div>
     </div>
@@ -275,9 +273,9 @@ function TopBar({ onOpenMenu, pathname }: { onOpenMenu: () => void; pathname: st
 
   return (
     <div
-      className={`sticky top-0 z-20 transition-all duration-500 border-b ${
+      className={`sticky top-0 z-20 transition-all duration-300 border-b ${
         scrolled 
-          ? "bg-black/80 backdrop-blur-xl border-white/5 py-3 px-6" 
+          ? "bg-background/80 backdrop-blur-xl border-border py-3 px-6" 
           : "bg-transparent border-transparent py-6 px-10"
       }`}
     >
@@ -285,73 +283,73 @@ function TopBar({ onOpenMenu, pathname }: { onOpenMenu: () => void; pathname: st
         <div className="flex items-center gap-4">
           <button
             onClick={onOpenMenu}
-            className="p-2 border border-white/5 text-white/40 hover:text-white transition-colors lg:hidden"
+            className="p-2 border border-border text-foreground-muted hover:text-foreground transition-colors lg:hidden rounded-lg"
           >
             <Menu className="h-5 w-5" />
           </button>
           
           <div className="hidden lg:block">
             {currentLabel && (
-              <h1 className="font-display text-[10px] tracking-[0.4em] text-white/30 uppercase italic">
-                Painel <span className="text-spectre-pink mx-2">//</span> {currentLabel}
+              <h1 className="font-sans text-[11px] font-bold tracking-wider text-foreground-muted uppercase">
+                Terminal <span className="text-primary/50 mx-2">/</span> {currentLabel}
               </h1>
             )}
           </div>
 
           <Link to="/" className="flex items-center gap-2 lg:hidden">
-            <img src={logoAsset.url} alt="Spectre Hub" className="h-7 w-7 object-contain drop-shadow-[0_0_8px_rgba(255,0,85,0.3)]" />
-            <span className="font-display text-[10px] tracking-[0.2em] uppercase italic text-white">Hub</span>
+            <img src={logoAsset.url} alt="Spectre Hub" className="h-7 w-7 object-contain" />
+            <span className="font-display text-[10px] tracking-wider uppercase text-foreground">Spectre</span>
           </Link>
         </div>
 
         <div className="flex items-center gap-6">
           <div className="flex items-center gap-2">
-            <div className={`w-1.5 h-1.5 rounded-full ${creds ? 'bg-spectre-pink shadow-[0_0_8px_#ff0055]' : 'bg-white/20'}`} />
-            <span className="font-display text-[8px] tracking-[0.2em] text-white/20 uppercase italic hidden sm:block">
-              {creds ? 'Terminal Ativo' : 'Offline'}
+            <div className={`w-1.5 h-1.5 rounded-full ${creds ? 'bg-primary shadow-[0_0_8px_#ff0055]' : 'bg-foreground-muted/20'}`} />
+            <span className="font-sans text-[9px] font-bold tracking-wider text-foreground-muted/30 uppercase hidden sm:block">
+              {creds ? 'Sistema Operacional' : 'Disconectado'}
             </span>
           </div>
 
           {creds && me ? (
             <DropdownMenu>
-              <DropdownMenuTrigger className="flex items-center gap-3 p-1 border border-white/5 bg-white/[0.02] hover:border-spectre-pink/20 transition-all focus:outline-none pr-3">
-                <div className="w-8 h-8 bg-white/5 overflow-hidden">
+              <DropdownMenuTrigger className="flex items-center gap-3 p-1 rounded-full border border-border bg-background-secondary hover:border-primary/20 transition-all focus:outline-none pr-3">
+                <div className="w-8 h-8 bg-background border border-border overflow-hidden rounded-full">
                    {avatarUrl ? (
-                    <img src={avatarUrl} alt="" className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all" />
+                    <img src={avatarUrl} alt="" className="w-full h-full object-cover" />
                   ) : (
-                    <div className="w-full h-full flex items-center justify-center text-white/20">
+                    <div className="w-full h-full flex items-center justify-center text-foreground-muted">
                       <UserRound className="w-4 h-4" />
                     </div>
                   )}
                 </div>
                 <div className="text-left hidden sm:block">
-                   <div className="font-display text-[10px] text-white uppercase italic tracking-widest">{me.global_name || me.username}</div>
-                   <div className="font-sans text-[8px] text-white/20 uppercase tracking-[0.2em]">Discord Verified</div>
+                   <div className="font-sans text-[11px] font-bold text-foreground leading-none">{me.global_name || me.username}</div>
+                   <div className="font-sans text-[9px] text-foreground-muted uppercase tracking-wider">Premium</div>
                 </div>
               </DropdownMenuTrigger>
-              <DropdownMenuContent align="end" className="w-56 bg-obsidian border-white/5 rounded-none text-white/60">
-                <DropdownMenuLabel className="font-display text-[9px] uppercase tracking-widest italic py-4">Gerenciar Conta</DropdownMenuLabel>
-                <DropdownMenuSeparator className="bg-white/5" />
-                <DropdownMenuItem asChild className="focus:bg-spectre-pink focus:text-white cursor-pointer py-3 rounded-none">
-                  <Link to="/hub" className="flex items-center gap-2 font-display text-[10px] uppercase italic tracking-widest">
-                    <LayoutDashboard className="w-3.5 h-3.5" /> Dashboard
+              <DropdownMenuContent align="end" className="w-56 bg-card border-border rounded-xl text-foreground-muted p-2">
+                <DropdownMenuLabel className="font-sans text-[10px] font-bold uppercase tracking-wider text-foreground-muted/50 px-3 py-2">Gerenciar Conta</DropdownMenuLabel>
+                <DropdownMenuSeparator className="bg-border my-1" />
+                <DropdownMenuItem asChild className="focus:bg-primary/10 focus:text-foreground cursor-pointer py-2 rounded-lg">
+                  <Link to="/hub" className="flex items-center gap-3 font-sans text-sm font-medium">
+                    <LayoutDashboard className="w-4 h-4 text-foreground-muted" /> Dashboard
                   </Link>
                 </DropdownMenuItem>
-                <DropdownMenuItem asChild className="focus:bg-spectre-pink focus:text-white cursor-pointer py-3 rounded-none">
-                  <Link to="/settings" className="flex items-center gap-2 font-display text-[10px] uppercase italic tracking-widest">
-                    <KeyRound className="w-3.5 h-3.5" /> Segurança
+                <DropdownMenuItem asChild className="focus:bg-primary/10 focus:text-foreground cursor-pointer py-2 rounded-lg">
+                  <Link to="/settings" className="flex items-center gap-3 font-sans text-sm font-medium">
+                    <KeyRound className="w-4 h-4 text-foreground-muted" /> Segurança
                   </Link>
                 </DropdownMenuItem>
-                <DropdownMenuSeparator className="bg-white/5" />
-                <DropdownMenuItem onClick={() => setConfirmLogout(true)} className="focus:bg-rose-600 focus:text-white cursor-pointer py-3 rounded-none">
-                   <span className="flex items-center gap-2 font-display text-[10px] uppercase italic tracking-widest">
-                     <LogOut className="w-3.5 h-3.5" /> Encerrar Sessão
+                <DropdownMenuSeparator className="bg-border my-1" />
+                <DropdownMenuItem onClick={() => setConfirmLogout(true)} className="focus:bg-rose-500/10 focus:text-rose-500 cursor-pointer py-2 rounded-lg">
+                   <span className="flex items-center gap-3 font-sans text-sm font-medium">
+                     <LogOut className="w-4 h-4" /> Encerrar Sessão
                    </span>
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
           ) : (
-            <Link to="/settings" className="ds-btn ds-btn-primary !py-2 !px-6 !text-[9px]">
+            <Link to="/settings" className="ds-btn ds-btn-primary !py-2 !px-5 !text-[11px] !min-height-0 h-9 rounded-full">
                Entrar
             </Link>
           )}
@@ -360,84 +358,70 @@ function TopBar({ onOpenMenu, pathname }: { onOpenMenu: () => void; pathname: st
 
       {confirmLogout && (
         <Modal
-          title="ENCERRAR SESSÃO"
+          title="Encerrar Sessão"
           onClose={() => setConfirmLogout(false)}
           actions={
-            <div className="flex gap-4 w-full">
+            <div className="flex gap-3 w-full">
               <button 
-                className="ds-btn ds-btn-secondary flex-1 py-3 border-spectre-pink/20 hover:border-spectre-pink/40" 
+                className="ds-btn ds-btn-secondary flex-1" 
                 onClick={() => setConfirmLogout(false)}
-                style={{ color: '#ff0055', border: '1px solid rgba(255, 0, 85, 0.2)' }}
               >
-                CANCELAR
+                Cancelar
               </button>
               <button 
-                className="ds-btn ds-btn-primary flex-1 py-3" 
+                className="ds-btn ds-btn-primary flex-1" 
                 onClick={() => {
                   setCreds(null);
                   setConfirmLogout(false);
                   toast.success("Terminal desconectado");
                 }}
               >
-                SAIR
+                Confirmar Saída
               </button>
             </div>
           }
         >
           <div className="space-y-6">
             <div className="flex flex-col items-center gap-6 py-4">
-              <div className="relative group w-full flex flex-col items-center">
+              <div className="relative w-full flex flex-col items-center">
                 {/* Profile Banner */}
-                <div className="absolute top-0 left-0 w-full h-24 overflow-hidden border-x border-t border-white/5 bg-obsidian">
+                <div className="absolute top-0 left-0 w-full h-24 overflow-hidden rounded-t-lg border-x border-t border-border bg-background-secondary">
                   {me?.banner ? (
                     <img 
                       src={`https://cdn.discordapp.com/banners/${me.id}/${me.banner}.png?size=600`} 
                       alt="" 
-                      className="w-full h-full object-cover opacity-50 grayscale group-hover:grayscale-0 transition-all duration-700" 
+                      className="w-full h-full object-cover opacity-40 transition-all duration-700" 
                     />
                   ) : (
                     <div 
-                      className="w-full h-full opacity-30" 
+                      className="w-full h-full opacity-20" 
                       style={{ backgroundColor: me?.banner_color || '#ff0055' }}
                     />
                   )}
-                  <div className="absolute inset-0 bg-gradient-to-t from-obsidian to-transparent" />
                 </div>
 
                 <div className="relative mt-12 group">
-                  {/* Profile Glow */}
-                  <div className="absolute inset-0 bg-spectre-pink/20 rounded-full blur-2xl group-hover:bg-spectre-pink/30 transition-colors duration-500" />
-                  
-                  <div className="relative w-24 h-24 bg-obsidian border-2 border-spectre-pink/30 overflow-hidden shrink-0 group-hover:border-spectre-pink transition-colors duration-500 shadow-[0_0_20px_rgba(255,0,85,0.2)]">
+                  <div className="relative w-24 h-24 bg-background border-2 border-border overflow-hidden rounded-full shrink-0 shadow-xl transition-transform duration-500 group-hover:scale-105">
                    {avatarUrl ? (
-                     <img src={avatarUrl} alt="" className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 scale-110 group-hover:scale-100" />
+                     <img src={avatarUrl} alt="" className="w-full h-full object-cover" />
                    ) : (
-                     <div className="w-full h-full flex items-center justify-center text-white/20">
+                     <div className="w-full h-full flex items-center justify-center text-foreground-muted">
                        <UserRound className="w-10 h-10" />
                      </div>
                    )}
-                   {/* Scanline Effect */}
-                   <div className="absolute inset-0 pointer-events-none bg-gradient-to-b from-transparent via-white/[0.05] to-transparent h-1/2 w-full animate-scanline" />
                   </div>
                 </div>
               </div>
 
-              <div className="text-center space-y-2">
-                <div className="font-display text-xl text-white uppercase italic tracking-[0.2em]">
-                  {me?.global_name || me?.username || "Usuário"}
-                </div>
-                <div className="font-sans text-[10px] text-spectre-pink uppercase tracking-[0.3em] flex items-center justify-center gap-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-spectre-pink shadow-[0_0_8px_#ff0055] animate-pulse" />
-                  ID: {me?.id || "0000"}
-                </div>
+              <div className="text-center space-y-1">
+                <div className="font-display text-xl text-foreground uppercase tracking-widest">{me?.global_name || me?.username}</div>
+                <div className="font-sans text-xs text-foreground-muted uppercase tracking-widest">@{me?.username}</div>
               </div>
             </div>
-
-            <div className="relative border-t border-white/5 pt-6 text-center">
-              <p className="text-white/40 text-[11px] font-sans italic leading-relaxed uppercase tracking-widest">
-                Deseja desconectar este terminal da comunidade <span className="text-white">ratinho's community 18k</span>?
-              </p>
-            </div>
+            
+            <p className="text-foreground-muted text-xs text-center leading-relaxed">
+              Deseja encerrar sua sessão atual no ecossistema Spectre Hub?
+            </p>
           </div>
         </Modal>
       )}
