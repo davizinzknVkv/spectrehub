@@ -29,7 +29,7 @@ export function useSitePlans() {
   useEffect(() => {
     let alive = true;
     supabase
-      .from("site_plans")
+      .from("site_plans_public" as any)
       .select("*")
       .eq("active", true)
       .order("sort")
