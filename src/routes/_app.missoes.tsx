@@ -12,7 +12,7 @@ import {
 import { useQuestStore, type Quest } from "@/lib/quest-store";
 import { PageHeader } from "@/components/PageHeader";
 import { Button } from "@/components/ui/ds";
-import { Target, Search, Sparkles, AlertCircle, Ban } from "lucide-react";
+import { Target, Search, Sparkles, AlertCircle, Ban, Activity } from "lucide-react";
 import { cn } from "@/lib/utils";
 import {
   CaptchaModal,
