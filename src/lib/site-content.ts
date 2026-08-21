@@ -9,7 +9,6 @@ export type SitePlan = {
   cta: string;
   highlight: boolean;
   features: string[];
-  role_ids: string[];
   sort: number;
   active: boolean;
 };
