@@ -61,9 +61,9 @@ const FALLBACK_MEMBERS = [
 
 function Index() {
   const { t } = useTranslation();
-  const [liveMembers, setLiveMembers] = import("react").then(m => m.useState<{ id: string; name: string; avatar: string | null }[]>([]));
+  const [liveMembers, setLiveMembers] = useState<{ id: string; name: string; avatar: string | null }[]>([]);
   
-  import("react").then(m => m.useEffect(() => {
+  useEffect(() => {
     const ctrl = new AbortController();
     fetch(WIDGET_URL, { signal: ctrl.signal })
       .then(r => r.ok ? r.json() : null)
@@ -78,12 +78,9 @@ function Index() {
       })
       .catch(() => {});
     return () => ctrl.abort();
-  }, []));
+  }, []);
   
   /* aki as imgs puxa da widget do discord */
-
-  
-
 
   return (
     <div
@@ -95,7 +92,11 @@ function Index() {
       <SiteHeader guildInvite={GUILD_INVITE} />
 
       <main className="relative z-10 flex-1">
-        <Hero guildInvite={GUILD_INVITE} fallbackMembers={FALLBACK_MEMBERS} />
+        <Hero 
+          guildInvite={GUILD_INVITE} 
+          fallbackMembers={FALLBACK_MEMBERS} 
+          liveMembers={liveMembers}
+        />
         
         <SocialProof widgetUrl={WIDGET_URL} products={PRODUCTS} />
         <div id="produtos">
