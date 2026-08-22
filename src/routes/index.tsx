@@ -1,19 +1,16 @@
 /* no perfil onde loga coloca isso tb */
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect } from "react";
-import { HeroSection } from "@/components/HeroSection";
-import { ReasonsSection } from "@/components/ReasonsSection";
-import { PlansSection } from "@/components/PlansSection";
-import { CommunitySection } from "@/components/CommunitySection";
-import { FinalCta } from "@/components/FinalCta";
-import { SiteFooter } from "@/components/SiteFooter";
-import { SiteHeader } from "@/components/SiteHeader";
+import { Hero } from "@/components/home/Hero";
+import { ReasonsSection } from "@/components/home/ReasonsSection";
+import { PlansSection } from "@/components/home/PlansSection";
+import { CommunitySection } from "@/components/home/CommunitySection";
+import { FinalCta } from "@/components/home/FinalCta";
+import { SiteFooter } from "@/components/home/SiteFooter";
+import { SiteHeader } from "@/components/home/SiteHeader";
 import { LenticularCarousel } from "@/components/ui/LenticularCarousel";
-import { FreeSignup } from "@/components/FreeSignup";
-import { MembersSection } from "@/components/MembersSection";
-import { FeaturesGrid } from "@/components/FeaturesGrid";
-import { LiveStatsRow } from "@/components/LiveStatsRow";
-import { useScrollToHash } from "@/hooks/use-scroll-to-hash";
+import { FreeSignup } from "@/components/home/FreeSignup";
+import { PRODUCTS } from "@/components/home/constants";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -30,8 +27,6 @@ export const Route = createFileRoute("/")({
 });
 
 function Index() {
-  useScrollToHash();
-
   useEffect(() => {
     // Add smooth scroll for anchor links
     document.documentElement.style.scrollBehavior = 'smooth';
@@ -45,12 +40,11 @@ function Index() {
       <SiteHeader />
       
       <main className="relative">
-        <HeroSection />
+        <Hero 
+          guildInvite="https://discord.gg/vbYK559Jnb"
+          fallbackMembers={["Spectre", "Spectre", "Spectre", "Spectre"]}
+        />
         
-        <div className="container mx-auto px-6 lg:px-12 -mt-16 sm:-mt-24 relative z-20">
-          <LiveStatsRow />
-        </div>
-
         <ReasonsSection />
         
         <div className="py-24 sm:py-32 overflow-hidden bg-background relative border-y border-border/5">
@@ -64,11 +58,9 @@ function Index() {
               </p>
             </div>
           </div>
-          <LenticularCarousel />
+          <LenticularCarousel items={PRODUCTS} />
         </div>
 
-        <FeaturesGrid />
-        
         <div className="py-24 sm:py-32 bg-background-secondary/30 relative">
           <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-[0.03] pointer-events-none" />
           <div className="container mx-auto px-6 lg:px-12">
@@ -105,8 +97,6 @@ function Index() {
           </div>
         </div>
 
-        <MembersSection />
-        
         <CommunitySection />
         
         <div className="relative border-y border-border/5">
