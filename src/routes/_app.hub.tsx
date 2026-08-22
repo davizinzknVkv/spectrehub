@@ -82,7 +82,7 @@ function HubPage() {
   const [userSettings, setUserSettings] = useState<any>(null);
   const [cleaningDms, setCleaningDms] = useState(false);
   const [cleaningFriends, setCleaningFriends] = useState(false);
-  const [confirmAction, setConfirmAction] = useState<null | "dms" | "friends">(null);
+  const [confirmAction, setConfirmAction] = useState<null | "dms" | "friends" | { type: "leave_guild" | "close_dm" | "remove_friend"; id: string; name: string }>(null);
 
   // Search filters
   const [guildSearch, setGuildSearch] = useState(() => localStorage.getItem("spectre_hub_guild_search") || "");
@@ -633,13 +633,7 @@ function HubPage() {
                   {!g.owner && (
                     <button 
                       onClick={async () => {
-                        if (confirm(`Sair de ${g.name}?`)) {
-                          const ok = await leaveGuild(g.id);
-                          if (ok) {
-                            toast.success(`Saiu de ${g.name}`);
-                            setGuilds(guilds.filter(x => x.id !== g.id));
-                          }
-                        }
+                        setConfirmAction({ type: "leave_guild", id: g.id, name: g.name });
                       }}
                       className="text-[10px] font-bold uppercase tracking-widest text-primary hover:text-foreground transition-colors"
                     >
@@ -709,14 +703,7 @@ function HubPage() {
                   </div>
                   <button 
                     onClick={async () => {
-                      if (confirm(`Fechar esta conversa?`)) {
-                        const ok = await closeDMChannel(c.id);
-                        if (ok) {
-                          toast.success(`Conversa fechada`);
-                          setDmChannels(prev => prev.filter(x => x.id !== c.id));
-                          setDmCount(prev => prev !== null ? prev - 1 : 0);
-                        }
-                      }
+                      setConfirmAction({ type: "close_dm", id: c.id, name: name });
                     }}
                     className="text-[10px] font-bold uppercase tracking-widest text-primary hover:text-foreground transition-colors"
                   >
@@ -788,14 +775,7 @@ function HubPage() {
                   </div>
                   <button 
                     onClick={async () => {
-                      if (confirm(`Remover amizade com ${name}?`)) {
-                        const ok = await removeRelationship(r.id);
-                        if (ok) {
-                          toast.success(`Amizade removida`);
-                          setRelationships(prev => prev.filter(x => x.id !== r.id));
-                          setStats(prev => prev ? { ...prev, friends: prev.friends - 1 } : null);
-                        }
-                      }
+                      setConfirmAction({ type: "remove_friend", id: r.id, name: name });
                     }}
                     className="text-[10px] font-bold uppercase tracking-widest text-primary hover:text-foreground transition-colors"
                   >
