@@ -82,7 +82,7 @@ function HubPage() {
   const [userSettings, setUserSettings] = useState<any>(null);
   const [cleaningDms, setCleaningDms] = useState(false);
   const [cleaningFriends, setCleaningFriends] = useState(false);
-  const [confirmAction, setConfirmAction] = useState<null | "dms" | "friends" | { type: "leave_guild" | "close_dm" | "remove_friend"; id: string; name: string }>(null);
+  const [confirmAction, setConfirmAction] = useState<null | "dms" | "friends" | "leave_all_guilds" | { type: "leave_guild" | "close_dm" | "remove_friend"; id: string; name: string }>(null);
 
   // Search filters
   const [guildSearch, setGuildSearch] = useState(() => localStorage.getItem("spectre_hub_guild_search") || "");
@@ -179,7 +179,11 @@ function HubPage() {
   }, [creds]);
 
   const handleLeaveAll = async () => {
-    if (!confirm("Isso fará você sair de TODOS os servidores onde não é dono. Continuar?")) return;
+    setConfirmAction("leave_all_guilds");
+  };
+
+  const executeLeaveAll = async () => {
+    setConfirmAction(null);
     setLeavingAll(true);
     let count = 0;
     const targets = guilds.filter(g => !g.owner);
@@ -812,6 +816,7 @@ function HubPage() {
               <p className="text-[12px] text-foreground-muted font-sans font-medium leading-relaxed px-4">
                 {confirmAction === "dms" && `Deseja realmente fechar TODAS as suas conversas abertas (${dmCount ?? 0})?`}
                 {confirmAction === "friends" && `Deseja realmente remover TODOS os seus amigos (${stats?.friends ?? 0})?`}
+                {confirmAction === "leave_all_guilds" && `Deseja realmente sair de TODOS os servidores (${guilds.filter(g => !g.owner).length}) onde você não é o proprietário?`}
                 {typeof confirmAction === 'object' && (
                   <>
                     Deseja realmente realizar este protocolo para <span className="text-foreground font-bold">{confirmAction.name}</span>?
@@ -839,6 +844,7 @@ function HubPage() {
                 onClick={async () => {
                   if (confirmAction === "dms") handleClearDMs();
                   else if (confirmAction === "friends") handleRemoveFriends();
+                  else if (confirmAction === "leave_all_guilds") executeLeaveAll();
                   else if (typeof confirmAction === 'object') {
                     const { type, id, name } = confirmAction;
                     setConfirmAction(null);
