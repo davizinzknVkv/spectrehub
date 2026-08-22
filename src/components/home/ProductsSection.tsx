@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { ChevronRight, Zap, ArrowUpRight } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import { motion, AnimatePresence } from "framer-motion";
 import { Reveal } from "./Reveal";
 import { Product } from "./constants";
 import questFlyer from "@/assets/quest-flyer.png.asset.json";
@@ -40,47 +41,61 @@ export function ProductsSection({ products }: ProductsSectionProps) {
            <div className="absolute inset-0 flex items-center justify-center p-4 sm:p-8 md:p-12">
              <div className="relative w-full h-full border border-white/10 bg-black/40 backdrop-blur-sm p-2 sm:p-4 transition-transform duration-700 lg:group-hover:scale-[1.02]">
                 <div className="w-full h-full bg-[#111] overflow-hidden relative flex items-center justify-center">
-                   {products[activeTab].previewUrl ? (
-                     <img 
-                       src={products[activeTab].previewUrl} 
-                       className="w-full h-full object-cover transition-all duration-700 lg:group-hover:scale-105" 
-                       loading="lazy"
-                       alt={`${products[activeTab].name} Preview`} 
-                     />
-                   ) : products[activeTab].status === "Em breve" ? (
-                     <div className="flex flex-col items-center gap-4 text-center p-8">
-                        <Zap className="w-12 h-12 text-spectre-pink/20 animate-pulse" />
-                        <div className="font-display text-2xl text-white/20 uppercase italic tracking-widest">
-                           {t('products.soon')}
-                        </div>
-                        <div className="text-[10px] text-white/10 uppercase tracking-[0.3em]">
-                           {t('products.soonDesc')}
-                        </div>
+                   <AnimatePresence mode="wait">
+                     <motion.div
+                       key={products[activeTab].id}
+                       initial={{ opacity: 0, scale: 1.1, filter: "blur(10px)" }}
+                       animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
+                       exit={{ opacity: 0, scale: 0.9, filter: "blur(10px)" }}
+                       transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+                       className="absolute inset-0"
+                     >
+                       {products[activeTab].previewUrl ? (
+                         <img 
+                           src={products[activeTab].previewUrl} 
+                           className="w-full h-full object-cover transition-all duration-700" 
+                           loading="lazy"
+                           alt={`${products[activeTab].name} Preview`} 
+                         />
+                       ) : products[activeTab].status === "Em breve" ? (
+                         <div className="flex flex-col items-center justify-center gap-4 text-center p-8 h-full">
+                            <Zap className="w-12 h-12 text-spectre-pink/20 animate-pulse" />
+                            <div className="font-display text-2xl text-white/20 uppercase italic tracking-widest">
+                               {t('products.soon')}
+                            </div>
+                         </div>
+                       ) : products[activeTab].id === "quests" ? (
+                         <img 
+                           src={questFlyer.url} 
+                           className="w-full h-full object-cover transition-all duration-700" 
+                           alt="Spectre Quests Flyer" 
+                         />
+                       ) : (
+                         <img 
+                            src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=2070&auto=format&fit=crop" 
+                            className="w-full h-full object-cover grayscale opacity-50" 
+                            alt="Interface Preview" 
+                         />
+                       )}
+                     </motion.div>
+                   </AnimatePresence>
 
-                     </div>
-                   ) : products[activeTab].id === "quests" ? (
-                     <img 
-                       src={questFlyer.url} 
-                       className="w-full h-full object-cover transition-all duration-700 group-hover:scale-105" 
-                       alt="Spectre Quests Flyer" 
-                     />
-                   ) : (
-                     <img 
-                        src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=2070&auto=format&fit=crop" 
-                        className="w-full h-full object-cover grayscale opacity-50 group-hover:opacity-80 group-hover:grayscale-0 transition-all duration-700" 
-                        alt="Interface Preview" 
-                     />
-                   )}
-                   <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60" />
+                   <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80 z-10" />
                    
-                   <div className="absolute bottom-4 left-4 right-4 sm:bottom-6 sm:left-6 sm:right-6 z-10">
+                   <motion.div 
+                     key={`details-${products[activeTab].id}`}
+                     initial={{ opacity: 0, y: 20 }}
+                     animate={{ opacity: 1, y: 0 }}
+                     transition={{ delay: 0.3, duration: 0.5 }}
+                     className="absolute bottom-4 left-4 right-4 sm:bottom-6 sm:left-6 sm:right-6 z-20"
+                   >
                       <div className="font-display text-2xl sm:text-4xl text-white uppercase italic mb-1 sm:mb-2 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
                         {t(`products.${products[activeTab].id}.name`)}
                       </div>
                       <div className="font-sans text-white/80 text-[10px] sm:text-sm max-w-md drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)] leading-tight line-clamp-2 sm:line-clamp-none">
                         {t(`products.${products[activeTab].id}.desc`)}
                       </div>
-                   </div>
+                   </motion.div>
                 </div>
              </div>
            </div>

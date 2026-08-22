@@ -1,5 +1,6 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
+import { motion } from "framer-motion";
 import { Reveal } from "./Reveal";
 import { Reason } from "./constants";
 
@@ -45,15 +46,19 @@ export function ReasonsSection({ reasons }: ReasonsSectionProps) {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-px bg-white/5 border border-white/5">
           {reasons.map((r: Reason, i: number) => (
             <Reveal key={r.title} delay={i * 100}>
-              <div className="bg-obsidian p-10 h-full border border-transparent hover:border-spectre-pink/20 transition-all duration-500 group rounded-none">
-                <div className="mb-8 w-12 h-12 border border-white/10 flex items-center justify-center text-white group-hover:bg-spectre-pink group-hover:border-spectre-pink transition-all duration-500">
+              <motion.div 
+                whileHover={{ y: -5, borderColor: "rgba(255, 0, 85, 0.3)" }}
+                className="bg-obsidian p-10 h-full border border-white/5 transition-all duration-500 group rounded-none relative overflow-hidden"
+              >
+                <div className="absolute inset-0 bg-gradient-to-br from-spectre-pink/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                <div className="mb-8 w-12 h-12 border border-white/10 flex items-center justify-center text-white group-hover:bg-spectre-pink group-hover:border-spectre-pink transition-all duration-500 relative z-10">
                   <r.icon className="w-5 h-5" />
                 </div>
-                <h3 className="font-display text-lg text-white uppercase italic mb-4">{t(`reasons.items.${i}.title`)}</h3>
-                <p className="font-sans text-xs text-white/30 leading-relaxed uppercase tracking-wider">
+                <h3 className="font-display text-lg text-white uppercase italic mb-4 relative z-10">{t(`reasons.items.${i}.title`)}</h3>
+                <p className="font-sans text-xs text-white/30 leading-relaxed uppercase tracking-wider relative z-10">
                   {t(`reasons.items.${i}.desc`)}
                 </p>
-              </div>
+              </motion.div>
             </Reveal>
           ))}
         </div>
