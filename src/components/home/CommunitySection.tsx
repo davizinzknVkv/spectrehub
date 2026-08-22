@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Users, MessageSquare, Sparkles, ArrowRight } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import { motion, AnimatePresence } from "framer-motion";
 import { Reveal } from "./Reveal";
 import { Avatar } from "./Avatar";
 
@@ -157,12 +158,20 @@ export function CommunitySection({ widgetUrl, guildId, guildInvite, fallbackMemb
         <div className="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-obsidian to-transparent z-10" />
         <div className="flex w-max gap-8 animate-marquee">
           {loop.map((m, i) => (
-            <div key={`${m.id}-${i}`} className="flex items-center gap-3 opacity-20 hover:opacity-100 transition-opacity duration-300">
-               <div className="w-8 h-8 rounded-full border border-white/10 bg-black overflow-hidden flex items-center justify-center p-0.5">
-                  {m.avatar ? <img src={m.avatar} alt="" className="w-full h-full object-cover grayscale brightness-125" /> : <Avatar seed={m.name} />}
+            <motion.div 
+              key={`${m.id}-${i}`} 
+              initial={{ opacity: 0, scale: 0.8 }}
+              whileInView={{ opacity: 0.2, scale: 1 }}
+              whileHover={{ opacity: 1, scale: 1.1, y: -5 }}
+              transition={{ duration: 0.3 }}
+              className="flex items-center gap-3 cursor-pointer group"
+            >
+               <div className="w-8 h-8 rounded-full border border-white/10 bg-black overflow-hidden flex items-center justify-center p-0.5 relative">
+                  <div className="absolute inset-0 bg-spectre-pink/20 opacity-0 group-hover:opacity-100 transition-opacity" />
+                  {m.avatar ? <img src={m.avatar} alt="" className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-300" /> : <Avatar seed={m.name} />}
                </div>
-               <span className="font-display text-[10px] text-white uppercase italic tracking-[0.2em]">{m.name}</span>
-            </div>
+               <span className="font-display text-[10px] text-white uppercase italic tracking-[0.2em] group-hover:text-spectre-pink transition-colors">{m.name}</span>
+            </motion.div>
           ))}
         </div>
       </div>

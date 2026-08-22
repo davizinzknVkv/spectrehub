@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "@tanstack/react-router";
 import { Check } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import { motion } from "framer-motion";
 import { Reveal } from "./Reveal";
 import { Plan } from "./constants";
 
@@ -34,7 +35,10 @@ export function PlansSection({ plans }: PlansSectionProps) {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-4">
         {plans.map((p, i) => (
           <Reveal key={p.name} delay={i * 100} className="h-full">
-            <div className={`relative flex flex-col h-full p-6 sm:p-8 border border-white/5 bg-obsidian-soft transition-all duration-500 lg:hover:border-spectre-pink/40 group rounded-none ${p.highlight ? 'border-spectre-pink/20 bg-spectre-pink/[0.02]' : ''}`}>
+            <motion.div 
+              whileHover={{ y: -10 }}
+              className={`relative flex flex-col h-full p-6 sm:p-8 border border-white/5 bg-obsidian-soft transition-all duration-500 lg:hover:border-spectre-pink/40 group rounded-none ${p.highlight ? 'border-spectre-pink/20 bg-spectre-pink/[0.02]' : ''}`}
+            >
               {p.highlight && (
                 <div className="absolute top-0 right-0 bg-spectre-pink text-white text-[9px] font-display uppercase tracking-widest px-4 py-1 italic">
                   {t('plans.popular')}
@@ -67,7 +71,7 @@ export function PlansSection({ plans }: PlansSectionProps) {
                   {t(`plans.tiers.${p.name.toLowerCase()}.cta`)}
                 </Link>
               )}
-            </div>
+            </motion.div>
           </Reveal>
         ))}
       </div>

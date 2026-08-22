@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { Users, Tractor, Zap, ShieldCheck } from "lucide-react";
+import { motion } from "framer-motion";
 import { useInView, useCountUp } from "./hooks";
 
 import { Product } from "./constants";
@@ -140,7 +141,13 @@ export function SocialProof({ widgetUrl, products: productsList }: SocialProofPr
 
       <div ref={ref} className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-px md:bg-white/5 border border-white/5 rounded-3xl overflow-hidden bg-white/[0.02]">
-           <div className="bg-obsidian flex flex-col items-center text-center p-12 group hover:bg-white/[0.04] transition-colors">
+           <motion.div 
+             initial={{ opacity: 0, y: 20 }}
+             whileInView={{ opacity: 1, y: 0 }}
+             viewport={{ once: true }}
+             transition={{ delay: 0.1 }}
+             className="bg-obsidian flex flex-col items-center text-center p-12 group hover:bg-white/[0.04] transition-colors"
+           >
               <div className="text-spectre-pink mb-6 opacity-50 group-hover:opacity-100 transition-opacity scale-125">
                 <Users className="w-6 h-6" />
               </div>
@@ -150,8 +157,14 @@ export function SocialProof({ widgetUrl, products: productsList }: SocialProofPr
               <span className="font-display text-[10px] tracking-[0.4em] text-white/30 uppercase italic group-hover:text-spectre-pink transition-colors font-bold">
                 {t('community.statMembers')}
               </span>
-           </div>
-           <div className="bg-obsidian flex flex-col items-center text-center p-12 group hover:bg-white/[0.04] transition-colors">
+           </motion.div>
+           <motion.div 
+             initial={{ opacity: 0, y: 20 }}
+             whileInView={{ opacity: 1, y: 0 }}
+             viewport={{ once: true }}
+             transition={{ delay: 0.2 }}
+             className="bg-obsidian flex flex-col items-center text-center p-12 group hover:bg-white/[0.04] transition-colors"
+           >
               <div className="text-spectre-pink mb-6 opacity-50 group-hover:opacity-100 transition-opacity scale-125">
                 <Tractor className="w-6 h-6" />
               </div>
@@ -161,8 +174,14 @@ export function SocialProof({ widgetUrl, products: productsList }: SocialProofPr
               <span className="font-display text-[10px] tracking-[0.4em] text-white/30 uppercase italic group-hover:text-spectre-pink transition-colors font-bold">
                 {t('community.statSystems')}
               </span>
-           </div>
-           <div className="bg-obsidian flex flex-col items-center text-center p-12 group hover:bg-white/[0.04] transition-colors">
+           </motion.div>
+           <motion.div 
+             initial={{ opacity: 0, y: 20 }}
+             whileInView={{ opacity: 1, y: 0 }}
+             viewport={{ once: true }}
+             transition={{ delay: 0.3 }}
+             className="bg-obsidian flex flex-col items-center text-center p-12 group hover:bg-white/[0.04] transition-colors"
+           >
               <div className="text-spectre-pink mb-6 opacity-50 group-hover:opacity-100 transition-opacity scale-125">
                 <Zap className="w-6 h-6" />
               </div>
@@ -172,8 +191,14 @@ export function SocialProof({ widgetUrl, products: productsList }: SocialProofPr
               <span className="font-display text-[10px] tracking-[0.4em] text-white/30 uppercase italic group-hover:text-spectre-pink transition-colors font-bold">
                 {t('community.statLatency')}
               </span>
-           </div>
-           <div className="bg-obsidian flex flex-col items-center text-center p-12 group hover:bg-white/[0.04] transition-colors">
+           </motion.div>
+           <motion.div 
+             initial={{ opacity: 0, y: 20 }}
+             whileInView={{ opacity: 1, y: 0 }}
+             viewport={{ once: true }}
+             transition={{ delay: 0.4 }}
+             className="bg-obsidian flex flex-col items-center text-center p-12 group hover:bg-white/[0.04] transition-colors"
+           >
               <div className="text-spectre-pink mb-6 opacity-50 group-hover:opacity-100 transition-opacity scale-125">
                 <ShieldCheck className="w-6 h-6" />
               </div>
@@ -184,7 +209,7 @@ export function SocialProof({ widgetUrl, products: productsList }: SocialProofPr
               <span className="font-display text-[10px] tracking-[0.4em] text-white/30 uppercase italic group-hover:text-spectre-pink transition-colors font-bold">
                 {t('community.statUptime')}
               </span>
-           </div>
+           </motion.div>
         </div>
 
 

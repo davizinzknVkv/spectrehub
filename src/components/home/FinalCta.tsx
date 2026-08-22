@@ -1,7 +1,7 @@
 import React from "react";
-import { Link } from "@tanstack/react-router";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Sparkles } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import { motion } from "framer-motion";
 import { Reveal } from "./Reveal";
 
 interface FinalCtaProps {
@@ -12,54 +12,44 @@ export function FinalCta({ guildInvite }: FinalCtaProps) {
   const { t } = useTranslation();
 
   return (
-    <section className="relative overflow-hidden py-16 bg-obsidian border-t border-white/5">
-      <div className="absolute inset-0 z-0">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-spectre-pink/10 rounded-full blur-[160px]" />
-        <div 
-          className="absolute inset-0 opacity-[0.02]"
-          style={{
-            backgroundImage: `linear-gradient(#fff 1px, transparent 1px), linear-gradient(90deg, #fff 1px, transparent 1px)`,
-            backgroundSize: '40px 40px'
-          }}
-        />
-      </div>
-
-      <div className="relative z-10 mx-auto max-w-5xl px-4 text-center">
-        <Reveal>
-          <div className="font-display text-[10px] tracking-[0.3em] text-spectre-pink uppercase mb-8 justify-center flex items-center gap-2">
-            <span className="w-8 h-px bg-spectre-pink/30" />
-            {t('footer.badge')}
-            <span className="w-8 h-px bg-spectre-pink/30" />
-          </div>
-          <h2 className="font-display text-[clamp(2.5rem,8vw,6rem)] leading-[0.85] text-white uppercase italic tracking-tighter mb-8">
-            {t('footer.title')} <br />
-            <span className="text-spectre-pink">{t('footer.subtitle')}</span>
-
-          </h2>
-          <p className="mx-auto max-w-2xl text-white/40 text-sm md:text-base font-sans mb-12 uppercase tracking-[0.1em]">
-            {t('footer.description')}
-          </p>
+    <section className="mx-auto max-w-7xl px-4 py-32 sm:px-6 lg:px-8 relative overflow-hidden">
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-spectre-pink/5 blur-[120px] rounded-full pointer-events-none" />
+      <Reveal>
+        <div className="bg-obsidian border border-white/5 p-12 md:p-24 text-center relative overflow-hidden group">
+          <motion.div 
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            className="absolute top-0 right-0 w-32 h-32 border-t-2 border-r-2 border-spectre-pink/20 m-4 pointer-events-none group-hover:border-spectre-pink/40 transition-colors"
+          />
+          <motion.div 
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            className="absolute bottom-0 left-0 w-32 h-32 border-b-2 border-l-2 border-spectre-pink/20 m-4 pointer-events-none group-hover:border-spectre-pink/40 transition-colors"
+          />
           
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <a 
+          <Sparkles className="w-12 h-12 text-spectre-pink mx-auto mb-8 animate-pulse" />
+          <h2 className="font-display text-[2.5rem] md:text-[5rem] leading-[0.85] text-white uppercase italic tracking-tighter mb-8 break-words">
+            {t('final.title')} <br />
+            <span className="text-spectre-pink">{t('final.subtitle')}</span>
+          </h2>
+          <p className="max-w-2xl mx-auto text-white/30 text-xs md:text-sm font-sans mb-12 uppercase tracking-[0.3em] leading-relaxed">
+            {t('final.description')}
+          </p>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
+            <motion.a 
+              whileHover={{ scale: 1.02, y: -2 }}
+              whileTap={{ scale: 0.98 }}
               href={guildInvite} 
               target="_blank" 
               rel="noreferrer" 
-              className="ds-btn ds-btn-primary min-w-[240px] !py-3 !text-[11px] !min-h-[44px] rounded-md shadow-2xl shadow-spectre-pink/20"
+              className="ds-btn ds-btn-primary w-full sm:w-auto sm:min-w-[280px] !py-4 !px-10 !text-[12px] rounded-xl flex items-center justify-center gap-3 group shadow-[0_0_30px_rgba(255,0,85,0.3)] hover:shadow-[0_0_50px_rgba(255,0,85,0.5)] transition-all"
             >
-              <span className="flex items-center gap-3">
-                {t('common.getStarted')} <ArrowRight className="w-4 h-4" />
-              </span>
-            </a>
-            <Link 
-              to="/hub" 
-              className="ds-btn ds-btn-secondary min-w-[240px] !py-3 !text-[11px] !min-h-[44px] rounded-md"
-            >
-              {t('footer.accessDashboard')}
-            </Link>
+              {t('common.getStarted')}
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-2 transition-transform" />
+            </motion.a>
           </div>
-        </Reveal>
-      </div>
+        </div>
+      </Reveal>
     </section>
   );
 }
