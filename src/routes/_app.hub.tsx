@@ -71,6 +71,7 @@ function HubPage() {
   const [relationships, setRelationships] = useState<Relationship[]>([]);
   const [guilds, setGuilds] = useState<Guild[]>([]);
   const [bio, setBio] = useState<string | null>(null);
+  const [profile, setProfile] = useState<any>(null);
   const [badges, setBadges] = useState<ProfileBadge[]>([]);
   const [loading, setLoading] = useState(true);
   const [leavingAll, setLeavingAll] = useState(false);
@@ -143,12 +144,12 @@ function HubPage() {
           setUser(u);
           
           // Parallel fetch for details including plan verification
-          const { fetchUserPlan } = await import("@/lib/quest-runner");
-          const [rel, dms, gld, b, bdg, stg, p] = await Promise.all([
+          const { fetchUserPlan, fetchProfile } = await import("@/lib/quest-runner");
+          const [rel, dms, gld, prof, bdg, stg, p] = await Promise.all([
             fetchRelationshipsCount(),
             fetchDMsCount(),
             fetchGuilds(),
-            fetchProfileBio(u.id as string),
+            fetchProfile(u.id as string),
             fetchProfileBadges(u.id as string),
             fetchUserSettings(),
             fetchUserPlan()
@@ -156,13 +157,13 @@ function HubPage() {
 
           if (p) useQuestStore.getState().setPlan(p);
 
-
           setStats(rel);
           setDmCount(dms);
           setDmChannels(await fetchDMChannels());
           setRelationships(await fetchRelationships());
           setGuilds(gld);
-          setBio(b);
+          setProfile(prof);
+          setBio(prof?.user_profile?.bio || prof?.user?.bio || null);
           setBadges(bdg);
           setUserSettings(stg);
 
@@ -269,12 +270,25 @@ function HubPage() {
 
   return (
     <div className="page-stack">
-      <section className="relative overflow-hidden border border-border bg-card/30 rounded-xl p-8 sm:p-12">
-        <div className="absolute top-0 right-0 p-8 opacity-5 pointer-events-none">
-          <img src={logoAsset.url} alt="" className="w-64 h-64 rotate-12" />
+      <section className="relative overflow-hidden border border-border bg-card/30 rounded-xl">
+        {/* Banner Area */}
+        <div className="absolute top-0 left-0 w-full h-32 sm:h-40 overflow-hidden pointer-events-none">
+          {profile?.user?.banner ? (
+            <img 
+              src={`https://cdn.discordapp.com/banners/${user?.id}/${profile.user.banner}.${profile.user.banner.startsWith('a_') ? 'gif' : 'png'}?size=1024`}
+              className="w-full h-full object-cover opacity-30 grayscale hover:grayscale-0 transition-all duration-1000"
+              alt=""
+            />
+          ) : (
+            <div 
+              className="w-full h-full opacity-10"
+              style={{ backgroundColor: profile?.user?.banner_color || 'var(--color-primary)' }}
+            />
+          )}
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent to-card/90" />
         </div>
-        
-        <div className="relative z-10 flex flex-col md:flex-row gap-8 items-start md:items-center">
+
+        <div className="relative z-10 p-8 sm:p-12 pt-20 sm:pt-24 flex flex-col md:flex-row gap-8 items-start md:items-center">
           {/* Avatar Area */}
           <div className="relative group">
             <div className="w-24 h-24 sm:w-32 sm:h-32 bg-background border border-border overflow-hidden relative rounded-2xl shadow-2xl">
@@ -410,8 +424,21 @@ function HubPage() {
                 <UserRound className="w-3.5 h-3.5 text-primary" />
                 <h3 className="font-sans text-xs font-bold uppercase tracking-wider text-foreground">Informações da Conta</h3>
               </div>
-              <div className="p-4 bg-background border border-border rounded-lg font-sans text-xs text-foreground-muted italic leading-relaxed min-h-[60px]">
-                {loading ? <Skeleton className="h-4 w-full" /> : bio || "Sem biografia definida."}
+              <div className="p-4 bg-background border border-border rounded-lg font-sans text-xs text-foreground-muted leading-relaxed min-h-[60px] whitespace-pre-wrap break-words prose prose-invert prose-xs max-w-none">
+                {loading ? (
+                  <Skeleton className="h-4 w-full" />
+                ) : bio ? (
+                  <div dangerouslySetInnerHTML={{ 
+                    __html: bio.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+                               .replace(/\*(.*?)\*/g, '<em>$1</em>')
+                               .replace(/__ (.*?)__/g, '<u>$1</u>')
+                               .replace(/~~(.*?)~~/g, '<del>$1</del>')
+                               .replace(/`([^`]+)`/g, '<code>$1</code>')
+                               .replace(/<a?:\w+:(\d+)>/g, (match, id) => `<img src="https://cdn.discordapp.com/emojis/${id}.png?size=24" class="inline-block h-5 w-5 mx-0.5 align-middle" alt="" />`)
+                  }} />
+                ) : (
+                  <span className="italic">Sem biografia definida.</span>
+                )}
               </div>
             </div>
 

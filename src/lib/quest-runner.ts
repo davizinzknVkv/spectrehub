@@ -157,7 +157,9 @@ export async function fetchProfile(userId: string): Promise<any> {
 export async function fetchProfileBio(userId: string): Promise<string | null> {
   const d = await fetchProfile(userId);
   if (!d) return null;
-  return d.user_profile?.bio || d.user?.bio || null;
+  
+  // A bio pode vir em vários lugares dependendo do nível de detalhe do endpoint
+  return d.user_profile?.bio || d.user?.bio || d.bio || null;
 }
 
 export type ProfileBadge = { id: string; description: string; icon: string; link?: string };
