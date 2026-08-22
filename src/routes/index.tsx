@@ -80,7 +80,7 @@ function Index() {
     return () => ctrl.abort();
   }, []);
   
-  /* aki as imgs puxa da widget do discord */
+  /* ainda esta assim e nao refez o rodape */
 
   return (
     <div
