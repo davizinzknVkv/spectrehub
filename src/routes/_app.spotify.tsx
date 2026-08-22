@@ -20,9 +20,31 @@ function SpotifyGenPage() {
   const [utmMedium, setUtmMedium] = useState("discord");
   const [utmCampaign, setUtmCampaign] = useState("spotify");
   const [links, setLinks] = useState<string[]>([]);
+  const [stock, setStock] = useState<number | null>(null);
   const [loading, setLoading] = useState(false);
   const genFn = useServerFn(generateSpotifyLinks);
   const plan = useQuestStore((s) => s.plan);
+  const { supabase } = await import("@/integrations/supabase/client");
+
+  useEffect(() => {
+    const fetchStock = async () => {
+      const { data } = await supabase
+        .from("spotify_links")
+        .select("stock")
+        .eq("active", true);
+      
+      if (data) {
+        const total = data.reduce((acc, curr) => acc + (curr.stock || 0), 0);
+        setStock(total);
+      }
+    };
+    fetchStock();
+    const sub = supabase
+      .channel("spotify_stock")
+      .on("postgres_changes", { event: "*", schema: "public", table: "spotify_links" }, () => fetchStock())
+      .subscribe();
+    return () => { supabase.removeChannel(sub); };
+  }, []);
 
   const handleGenerate = async () => {
     if (plan !== "premium" && plan !== "lifetime" && plan !== "beta") {
