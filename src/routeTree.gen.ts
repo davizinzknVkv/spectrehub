@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as DocsRouteImport } from './routes/docs'
 import { Route as AppRouteImport } from './routes/_app'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AppSpotifyRouteImport } from './routes/_app.spotify'
@@ -21,12 +22,16 @@ import { Route as AppHubRouteImport } from './routes/_app.hub'
 import { Route as AppHistoryRouteImport } from './routes/_app.history'
 import { Route as AppFarmsRouteImport } from './routes/_app.farms'
 import { Route as AppFakeRouteImport } from './routes/_app.fake'
-import { Route as AppDocsRouteImport } from './routes/_app.docs'
 import { Route as AppCloneRouteImport } from './routes/_app.clone'
 import { Route as AppAdminRouteImport } from './routes/_app.admin'
 import { Route as ApiPublicDiscordImageRouteImport } from './routes/api/public/discord-image'
 import { Route as ApiPublicAuditRouteImport } from './routes/api/public/audit'
 
+const DocsRoute = DocsRouteImport.update({
+  id: '/docs',
+  path: '/docs',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AppRoute = AppRouteImport.update({
   id: '/_app',
   getParentRoute: () => rootRouteImport,
@@ -86,11 +91,6 @@ const AppFakeRoute = AppFakeRouteImport.update({
   path: '/fake',
   getParentRoute: () => AppRoute,
 } as any)
-const AppDocsRoute = AppDocsRouteImport.update({
-  id: '/docs',
-  path: '/docs',
-  getParentRoute: () => AppRoute,
-} as any)
 const AppCloneRoute = AppCloneRouteImport.update({
   id: '/clone',
   path: '/clone',
@@ -114,9 +114,9 @@ const ApiPublicAuditRoute = ApiPublicAuditRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/docs': typeof DocsRoute
   '/admin': typeof AppAdminRoute
   '/clone': typeof AppCloneRoute
-  '/docs': typeof AppDocsRoute
   '/fake': typeof AppFakeRoute
   '/farms': typeof AppFarmsRoute
   '/history': typeof AppHistoryRoute
@@ -132,9 +132,9 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/docs': typeof DocsRoute
   '/admin': typeof AppAdminRoute
   '/clone': typeof AppCloneRoute
-  '/docs': typeof AppDocsRoute
   '/fake': typeof AppFakeRoute
   '/farms': typeof AppFarmsRoute
   '/history': typeof AppHistoryRoute
@@ -152,9 +152,9 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/_app': typeof AppRouteWithChildren
+  '/docs': typeof DocsRoute
   '/_app/admin': typeof AppAdminRoute
   '/_app/clone': typeof AppCloneRoute
-  '/_app/docs': typeof AppDocsRoute
   '/_app/fake': typeof AppFakeRoute
   '/_app/farms': typeof AppFarmsRoute
   '/_app/history': typeof AppHistoryRoute
@@ -172,9 +172,9 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/docs'
     | '/admin'
     | '/clone'
-    | '/docs'
     | '/fake'
     | '/farms'
     | '/history'
@@ -190,9 +190,9 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/docs'
     | '/admin'
     | '/clone'
-    | '/docs'
     | '/fake'
     | '/farms'
     | '/history'
@@ -209,9 +209,9 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/_app'
+    | '/docs'
     | '/_app/admin'
     | '/_app/clone'
-    | '/_app/docs'
     | '/_app/fake'
     | '/_app/farms'
     | '/_app/history'
@@ -229,12 +229,20 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AppRoute: typeof AppRouteWithChildren
+  DocsRoute: typeof DocsRoute
   ApiPublicAuditRoute: typeof ApiPublicAuditRoute
   ApiPublicDiscordImageRoute: typeof ApiPublicDiscordImageRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/docs': {
+      id: '/docs'
+      path: '/docs'
+      fullPath: '/docs'
+      preLoaderRoute: typeof DocsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/_app': {
       id: '/_app'
       path: ''
@@ -319,13 +327,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppFakeRouteImport
       parentRoute: typeof AppRoute
     }
-    '/_app/docs': {
-      id: '/_app/docs'
-      path: '/docs'
-      fullPath: '/docs'
-      preLoaderRoute: typeof AppDocsRouteImport
-      parentRoute: typeof AppRoute
-    }
     '/_app/clone': {
       id: '/_app/clone'
       path: '/clone'
@@ -360,7 +361,6 @@ declare module '@tanstack/react-router' {
 interface AppRouteChildren {
   AppAdminRoute: typeof AppAdminRoute
   AppCloneRoute: typeof AppCloneRoute
-  AppDocsRoute: typeof AppDocsRoute
   AppFakeRoute: typeof AppFakeRoute
   AppFarmsRoute: typeof AppFarmsRoute
   AppHistoryRoute: typeof AppHistoryRoute
@@ -376,7 +376,6 @@ interface AppRouteChildren {
 const AppRouteChildren: AppRouteChildren = {
   AppAdminRoute: AppAdminRoute,
   AppCloneRoute: AppCloneRoute,
-  AppDocsRoute: AppDocsRoute,
   AppFakeRoute: AppFakeRoute,
   AppFarmsRoute: AppFarmsRoute,
   AppHistoryRoute: AppHistoryRoute,
@@ -394,6 +393,7 @@ const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AppRoute: AppRouteWithChildren,
+  DocsRoute: DocsRoute,
   ApiPublicAuditRoute: ApiPublicAuditRoute,
   ApiPublicDiscordImageRoute: ApiPublicDiscordImageRoute,
 }
