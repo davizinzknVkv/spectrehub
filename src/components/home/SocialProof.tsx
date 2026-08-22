@@ -179,7 +179,7 @@ export function SocialProof({ widgetUrl, products: productsList }: SocialProofPr
               </div>
               <div className="flex items-center gap-1 mb-2 leading-none">
                 <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse shadow-[0_0_8px_rgba(34,197,94,0.5)]" />
-                <span className="font-display text-3xl md:text-4xl text-white italic tracking-tighter">99.9%</span>
+                <span className="font-display text-4xl md:text-5xl text-white italic tracking-tighter leading-none">99.9%</span>
               </div>
               <span className="font-display text-[9px] tracking-[0.3em] text-white/30 uppercase italic group-hover:text-spectre-pink transition-colors">
                 {t('community.statUptime')}

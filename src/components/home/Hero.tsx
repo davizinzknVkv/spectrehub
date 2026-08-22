@@ -117,9 +117,9 @@ export function Hero({ guildInvite, fallbackMembers }: HeroProps) {
         </Reveal>
 
         <div className="mt-16 pt-8 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-6 opacity-60">
-           <div className="flex items-center gap-3 font-display text-[9px] tracking-[0.2em] uppercase">
+           <div className="flex items-center gap-3 font-display text-[9px] tracking-[0.2em] uppercase transition-all duration-300 hover:text-white cursor-default">
              <span>Spectre Hub</span>
-             <span className="text-spectre-pink">//</span>
+             <span className="text-spectre-pink font-black">//</span>
              <span>AGO-2026</span>
            </div>
            
