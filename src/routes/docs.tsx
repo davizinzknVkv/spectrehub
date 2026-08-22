@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { 
   Shield, 
@@ -16,11 +16,17 @@ import {
   X,
   Target,
   ShieldCheck,
-  Music4
+  Music4,
+  Send,
+  Loader2,
+  Bot,
+  User
 } from "lucide-react";
 import logoAsset from "@/assets/spectre-logo-main.png.asset.json";
 import { cn } from "@/lib/utils";
 import { Reveal } from "@/components/home/Reveal";
+import { chatWithDocs } from "@/lib/docs-ai.functions";
+import { useServerFn } from "@tanstack/react-start";
 
 export const Route = createFileRoute("/docs")({
   component: DocsPage,
