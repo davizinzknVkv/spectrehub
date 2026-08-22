@@ -80,7 +80,7 @@ function Index() {
     return () => ctrl.abort();
   }, []);
   
-  /* REDESIGN DAS PRÉVIAS DAS FUNÇÕES — LENTICULAR CAROUSEL */
+  /* REDESIGN DA DOCUMENTAÇÃO — SITE PÚBLICO E INDEPENDENTE */
 
   return (
     <div
