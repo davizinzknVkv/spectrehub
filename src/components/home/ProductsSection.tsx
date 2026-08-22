@@ -36,7 +36,7 @@ export function ProductsSection({ products }: ProductsSectionProps) {
               EXPLORE OS <span className="text-white/20 italic">SISTEMAS</span>
             </h2>
             <p className="font-sans text-white/40 text-xs md:text-sm uppercase tracking-[0.2em] max-w-2xl mx-auto">
-              {t('reasons.description')}
+              A SPECTRE É ONDE A INOVAÇÃO ACONTECE. DESENVOLVEMOS FERRAMENTAS PROPRIETÁRIAS, TESTADAS SOB ESTRESSE REAL, PARA GARANTIR QUE VOCÊ ESTEJA SEMPRE UM PASSO À FRENTE DA CONCORRÊNCIA.
             </p>
           </Reveal>
         </div>

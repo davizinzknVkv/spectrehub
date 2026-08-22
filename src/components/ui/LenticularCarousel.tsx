@@ -111,7 +111,7 @@ const LenticularCard = ({
                 key={item.previewUrl}
                 src={item.previewUrl}
                 alt={item.name}
-                className="w-full h-full object-cover grayscale opacity-40 group-hover:grayscale-0 group-hover:opacity-60 transition-all duration-700"
+                className="w-full h-full object-cover grayscale opacity-40 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-700"
                 style={{ transform: "translateZ(-20px) scale(1.1)" }}
               />
             ) : (
