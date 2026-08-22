@@ -447,9 +447,37 @@ function TopBar({ onOpenMenu, pathname }: { onOpenMenu: () => void; pathname: st
               </div>
             </div>
             
-            <p className="text-foreground-muted text-[10px] text-center leading-relaxed uppercase tracking-widest opacity-50">
-              ID: {me?.id}
-            </p>
+            <div className="flex flex-col items-center gap-2">
+              <p className="text-foreground-muted text-[10px] text-center leading-relaxed uppercase tracking-widest opacity-50">
+                ID: {me?.id}
+              </p>
+              
+              <div className="flex gap-2 mt-2">
+                <button 
+                  onClick={() => {
+                    if (!avatarUrl) return;
+                    const highRes = avatarUrl.replace("?size=64", "?size=4096");
+                    navigator.clipboard.writeText(highRes);
+                    toast.success("Link do Avatar copiado!");
+                  }}
+                  className="ds-btn ds-btn-secondary !py-1 !px-3 !text-[9px] uppercase tracking-tighter flex items-center gap-2"
+                >
+                  <Copy className="w-3 h-3" /> Copiar Avatar
+                </button>
+                <button 
+                  onClick={() => {
+                    if (!me?.banner) return;
+                    const url = `https://cdn.discordapp.com/banners/${me.id}/${me.banner}.png?size=4096`;
+                    navigator.clipboard.writeText(url);
+                    toast.success("Link do Banner copiado!");
+                  }}
+                  className="ds-btn ds-btn-secondary !py-1 !px-3 !text-[9px] uppercase tracking-tighter flex items-center gap-2"
+                  disabled={!me?.banner}
+                >
+                  <Copy className="w-3 h-3" /> Copiar Banner
+                </button>
+              </div>
+            </div>
           </div>
         </Modal>
       )}
