@@ -62,7 +62,7 @@ function Index() {
   const { t } = useTranslation();
   const [ref] = useInView<HTMLDivElement>();
   
-  /* muda isso ta feio dms deixa algo bonito */
+  /* essa parte de açao rapida deixa com uma caixa igual a da parte de informaçao da conta */
 
   
 
