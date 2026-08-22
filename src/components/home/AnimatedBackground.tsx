@@ -17,7 +17,7 @@ export function AnimatedBackground() {
       <div 
         className="absolute inset-0 opacity-[0.05]"
         style={{
-          backgroundImage: `radial-gradient(circle at 1px 1px, var(--color-primary) 1px, transparent 0)`,
+          backgroundImage: `radial-gradient(circle at 1px 1px, var(--color-spectre-teal) 1px, transparent 0)`,
           backgroundSize: '32px 32px'
         }}
       />
