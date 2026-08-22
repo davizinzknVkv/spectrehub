@@ -62,7 +62,7 @@ function Index() {
   const { t } = useTranslation();
   const [ref] = useInView<HTMLDivElement>();
   
-  /* essa parte ai coloca em açoes rapida */
+  /* na parte de limpar é 2 coisa dm e amizade dai separa a parte de limpar amizade */
 
   
 
