@@ -1,4 +1,5 @@
-/* no perfil onde loga coloca isso tb */
+/* arruma isso nao dava isso [02:06:46]⚠️ Falha no resgate automático: Call of Duty: Modern Warfare 4
+[02:06:45]⚠️ Falha (403): Call of Duty: Modern Warfare 4 pode exigir conta do jogo vinculada. */
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect } from "react";
 import { Hero } from "@/components/home/Hero";
