@@ -1,3 +1,4 @@
+
 import { createFileRoute } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
 import { useState, useEffect } from "react";
@@ -80,7 +81,7 @@ function Index() {
     return () => ctrl.abort();
   }, []);
   
-  /* REDESIGN DAS PRÉVIAS DAS FUNÇÕES — LENTICULAR CAROUSEL */
+  /* REDESIGN DA DOCUMENTAÇÃO — SITE PÚBLICO E INDEPENDENTE */
 
   return (
     <div
