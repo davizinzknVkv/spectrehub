@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next";
 import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import { Reveal } from "./Reveal";
 import { Avatar } from "./Avatar";
-import logoAsset from "@/assets/spectre-logo-main.png.asset.json";
+import logoAsset from "@/assets/logo-spectre.png.asset.json";
 
 interface HeroProps {
   guildInvite: string;
@@ -36,9 +36,9 @@ export function Hero({ guildInvite, fallbackMembers, liveMembers = [] }: HeroPro
         className="relative z-10 w-full max-w-7xl mx-auto text-center"
       >
         <Reveal>
-          <div className="inline-flex items-center gap-2 px-4 py-2 border border-spectre-pink/20 bg-spectre-pink/5 rounded-full mb-8 backdrop-blur-sm">
-            <span className="w-2 h-2 rounded-full bg-spectre-pink animate-pulse" />
-            <span className="font-display text-[10px] tracking-[0.4em] text-spectre-pink uppercase font-black">
+          <div className="inline-flex items-center gap-2 px-4 py-2 border border-primary/20 bg-primary/5 rounded-full mb-8 backdrop-blur-sm">
+            <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
+            <span className="font-display text-[10px] tracking-[0.4em] text-primary uppercase font-black">
               {t('hero.badge')}
             </span>
           </div>
@@ -62,7 +62,7 @@ export function Hero({ guildInvite, fallbackMembers, liveMembers = [] }: HeroPro
               transition={{ delay: 0.8, duration: 1 }}
               className="flex flex-col md:flex-row items-center justify-center mt-2"
             >
-              <span className="text-spectre-pink italic underline decoration-white/10 decoration-2 underline-offset-8">{t('hero.subtitle1')}</span>
+              <span className="text-primary italic underline decoration-white/10 decoration-2 underline-offset-8">{t('hero.subtitle1')}</span>
               <span className="inline-block ml-[0.2em]">{t('hero.subtitle2')}</span>
             </motion.div>
           </motion.h1>
@@ -75,7 +75,7 @@ export function Hero({ guildInvite, fallbackMembers, liveMembers = [] }: HeroPro
                 strokeWidth="1.5" 
                 strokeLinecap="round" 
                 strokeLinejoin="round" 
-                className="text-spectre-pink"
+                className="text-primary"
                 initial={{ pathLength: 0, opacity: 0 }}
                 animate={{ pathLength: 1, opacity: 1 }}
                 transition={{ duration: 2, ease: "easeInOut", repeat: Infinity, repeatType: "reverse" }}
@@ -96,7 +96,7 @@ export function Hero({ guildInvite, fallbackMembers, liveMembers = [] }: HeroPro
               whileHover={{ scale: 1.02, y: -2 }}
               whileTap={{ scale: 0.98 }}
               href="#produtos" 
-              className="ds-btn ds-btn-primary w-full sm:w-auto sm:min-w-[280px] !py-4 !px-10 !text-[12px] !min-h-[56px] rounded-xl flex items-center justify-center gap-4 group shadow-[0_0_40px_rgba(255,0,85,0.4)] hover:shadow-[0_0_60px_rgba(255,0,85,0.6)] transition-all"
+              className="ds-btn ds-btn-primary w-full sm:w-auto sm:min-w-[280px] !py-4 !px-10 !text-[12px] !min-h-[56px] rounded-xl flex items-center justify-center gap-4 group shadow-[0_0_40px_rgba(77,160,158,0.4)] hover:shadow-[0_0_60px_rgba(77,160,158,0.6)] transition-all"
             >
               {t('common.getStarted')}
               <ArrowRight className="w-5 h-5 group-hover:translate-x-3 transition-transform duration-500" />
@@ -123,8 +123,8 @@ export function Hero({ guildInvite, fallbackMembers, liveMembers = [] }: HeroPro
 
         <div className="mt-20 pt-10 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-6 opacity-40">
            <div className="flex items-center gap-3 font-display text-[9px] tracking-[0.2em] uppercase transition-all duration-300 hover:text-white cursor-default">
-             <span>Spectre Hub</span>
-             <span className="text-spectre-pink font-black">//</span>
+             <span>SPECTRE</span>
+             <span className="text-primary font-black">//</span>
              <span>AGO-2026</span>
            </div>
            
@@ -136,7 +136,7 @@ export function Hero({ guildInvite, fallbackMembers, liveMembers = [] }: HeroPro
                     whileHover={{ y: -5, zIndex: 20 }}
                     className="w-10 h-10 rounded-full border-2 border-obsidian overflow-hidden bg-black flex items-center justify-center p-0.5 relative group cursor-pointer"
                   >
-                    <div className="absolute inset-0 bg-gradient-to-tr from-spectre-pink/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                    <div className="absolute inset-0 bg-gradient-to-tr from-primary/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
                     {m.avatar ? (
                       <img src={m.avatar} alt={m.name} className="w-full h-full object-cover" />
                     ) : (

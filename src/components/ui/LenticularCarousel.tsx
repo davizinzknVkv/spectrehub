@@ -87,7 +87,7 @@ const LenticularCard = ({
         {isActive && (
           <motion.div 
             style={{
-              background: `radial-gradient(circle at ${shineX}% ${shineY}%, rgba(255, 0, 85, 0.15) 0%, transparent 70%)`,
+              background: `radial-gradient(circle at ${shineX}% ${shineY}%, rgba(77, 160, 158, 0.15) 0%, transparent 70%)`,
               transform: "translateZ(50px)"
             }}
             className="absolute inset-0 z-10 pointer-events-none"
@@ -130,8 +130,8 @@ const LenticularCard = ({
              style={{ x: isActive ? textX : 0, y: isActive ? textY : 0, transform: "translateZ(30px)" }}
              className="flex items-center gap-2 mb-3"
           >
-            <div className="w-1.5 h-1.5 rounded-full bg-spectre-pink shadow-[0_0_8px_#ff0055]" />
-            <span className="font-display text-[9px] uppercase tracking-[0.2em] text-spectre-pink italic font-bold">
+            <div className="w-1.5 h-1.5 rounded-full bg-primary shadow-[0_0_8px_#4DA09E]" />
+            <span className="font-display text-[9px] uppercase tracking-[0.2em] text-primary italic font-bold">
               {item.category}
             </span>
             <span className="text-[8px] text-white/20 uppercase tracking-widest ml-auto">{item.status}</span>
@@ -168,8 +168,8 @@ const LenticularCard = ({
         </div>
 
         {/* Industrial Corner Decorator */}
-        <div className="absolute top-0 right-0 w-8 h-8 border-r border-t border-spectre-pink/20 z-30 pointer-events-none" />
-        <div className="absolute top-0 right-0 w-1.5 h-1.5 bg-spectre-pink z-30 pointer-events-none" />
+        <div className="absolute top-0 right-0 w-8 h-8 border-r border-t border-primary/20 z-30 pointer-events-none" />
+        <div className="absolute top-0 right-0 w-1.5 h-1.5 bg-primary z-30 pointer-events-none" />
       </motion.div>
     </motion.div>
   );
@@ -238,7 +238,7 @@ export function LenticularCarousel({
   return (
     <div className="relative w-full py-20 overflow-hidden" ref={containerRef}>
       {/* Background Glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-spectre-pink/5 blur-[120px] rounded-full pointer-events-none" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-primary/5 blur-[120px] rounded-full pointer-events-none" />
 
       {/* Carousel Container */}
       <div className="relative flex items-center justify-center min-h-[500px]">
@@ -274,13 +274,13 @@ export function LenticularCarousel({
         <div className="absolute top-1/2 left-0 right-0 -translate-y-1/2 flex justify-between px-4 sm:px-10 pointer-events-none">
           <button 
             onClick={prev}
-            className="w-12 h-12 bg-black/40 border border-white/5 backdrop-blur-md flex items-center justify-center text-white/40 hover:text-white hover:border-spectre-pink/30 transition-all pointer-events-auto"
+            className="w-12 h-12 bg-black/40 border border-white/5 backdrop-blur-md flex items-center justify-center text-white/40 hover:text-white hover:border-primary/30 transition-all pointer-events-auto"
           >
             <ChevronLeft className="w-6 h-6" />
           </button>
           <button 
             onClick={next}
-            className="w-12 h-12 bg-black/40 border border-white/5 backdrop-blur-md flex items-center justify-center text-white/40 hover:text-white hover:border-spectre-pink/30 transition-all pointer-events-auto"
+            className="w-12 h-12 bg-black/40 border border-white/5 backdrop-blur-md flex items-center justify-center text-white/40 hover:text-white hover:border-primary/30 transition-all pointer-events-auto"
           >
             <ChevronRight className="w-6 h-6" />
           </button>
@@ -296,7 +296,7 @@ export function LenticularCarousel({
               onClick={() => setActiveIndex(i)}
               className={`h-1 transition-all duration-500 ${
                 activeIndex === i 
-                  ? "w-8 bg-spectre-pink" 
+                  ? "w-8 bg-primary" 
                   : "w-2 bg-white/10 hover:bg-white/30"
               }`}
             />

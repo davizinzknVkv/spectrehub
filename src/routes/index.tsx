@@ -1,4 +1,4 @@
-/* Crie uma página de status do sistema para exibir a saúde do resgate automático e alertas quando houver falhas recorrentes. */
+/* SPECTRE Rebrand in progress: #4DA09E */
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect } from "react";
 import { Hero } from "@/components/home/Hero";
@@ -19,9 +19,9 @@ const WIDGET_URL = `https://discord.com/api/guilds/${GUILD_ID}/widget.json`;
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Spectre Hub — A Elite do Discord" },
+      { title: "SPECTRE — A Elite do Discord" },
       { name: "description", content: "O ecossistema mais avançado para automação e gestão de Discord." },
-      { property: "og:title", content: "Spectre Hub — A Elite do Discord" },
+      { property: "og:title", content: "SPECTRE — A Elite do Discord" },
       { property: "og:description", content: "O ecossistema mais avançado para automação e gestão de Discord." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" }

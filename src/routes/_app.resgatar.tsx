@@ -60,7 +60,7 @@ function ResgatarPage() {
                 MEUS <span className="text-primary">SISTEMAS</span>
               </h1>
               <p className="text-foreground-muted font-sans font-medium uppercase tracking-widest text-[11px] max-w-2xl mx-auto">
-                Gerencie seus protocolos ativos e acesse as ferramentas de elite do Spectre Hub.
+                Gerencie seus protocolos ativos e acesse as ferramentas de elite do SPECTRE.
               </p>
             </div>
           </Reveal>

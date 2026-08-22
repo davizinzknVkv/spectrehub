@@ -33,7 +33,7 @@ export function StatCard({
   return (
     <div className={cn("ds-card p-6 border-border bg-card/50 backdrop-blur-sm space-y-2", className)}>
       <div className="flex items-center gap-2">
-        {Icon && <Icon className={cn("h-3.5 w-3.5", accent ? "text-spectre-pink" : "text-white/20")} />}
+        {Icon && <Icon className={cn("h-3.5 w-3.5", accent ? "text-primary" : "text-white/20")} />}
         <span className="font-display text-[9px] uppercase tracking-widest text-white/30 italic">{label}</span>
       </div>
       <div className={cn("font-display text-2xl italic tracking-tighter", accent ? "text-white" : "text-white/60")}>

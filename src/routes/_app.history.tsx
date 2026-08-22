@@ -4,12 +4,12 @@ import { PageHeader } from "@/components/PageHeader";
 import { History, Target, Gift, Clock } from "lucide-react";
 
 export const Route = createFileRoute("/_app/history")({
-  head: () => ({ meta: [{ title: "Histórico — Spectre Hub" }] }),
+  head: () => ({ meta: [{ title: "Histórico — SPECTRE" }] }),
   component: HistoryPage,
 });
 
 const STATUS_MAP: Record<string, { label: string, color: string }> = {
-  completed: { label: "Sucesso", color: "text-spectre-pink" },
+  completed: { label: "Sucesso", color: "text-primary" },
   failed: { label: "Falha", color: "text-rose-500" },
   skipped: { label: "Ignorada", color: "text-amber-500" },
 };
@@ -31,7 +31,7 @@ function HistoryPage() {
 
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
         <StatItem label="Total de Runs" val={String(runs.length)} />
-        <StatItem label="Concluídas" val={String(done)} color="text-spectre-pink" />
+        <StatItem label="Concluídas" val={String(done)} color="text-primary" />
         <StatItem label="Interrompidas" val={String(failed)} color="text-rose-500" />
       </div>
 

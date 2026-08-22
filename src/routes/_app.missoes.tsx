@@ -23,7 +23,7 @@ import {
 import logoAsset from "@/assets/spectre-logo-nobg.png.asset.json";
 
 export const Route = createFileRoute("/_app/missoes")({
-  head: () => ({ meta: [{ title: "Missões — Spectre Hub" }] }),
+  head: () => ({ meta: [{ title: "Missões — SPECTRE" }] }),
   component: MissoesPage,
 });
 

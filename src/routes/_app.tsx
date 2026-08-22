@@ -30,7 +30,7 @@ import {
   Activity,
   Music,
 } from "lucide-react";
-import logoAsset from "@/assets/spectre-logo-main.png.asset.json";
+import logoAsset from "@/assets/logo-spectre.png.asset.json";
 import { AdminNavLink } from "@/components/AdminNavLink";
 
 
@@ -167,7 +167,7 @@ function SidebarBody({
       <Link to="/" className="flex items-center gap-3 px-8 pb-10 pt-10 group">
         <img
           src={logoUrl}
-          alt="Spectre Hub"
+          alt="SPECTRE"
           className="h-9 w-9 object-contain shrink-0 transition-transform duration-500 group-hover:scale-110"
         />
         <span className="font-display text-lg tracking-tighter text-foreground uppercase">
@@ -299,14 +299,14 @@ function TopBar({ onOpenMenu, pathname }: { onOpenMenu: () => void; pathname: st
           </div>
 
           <Link to="/" className="flex items-center gap-2 lg:hidden">
-            <img src={logoAsset.url} alt="Spectre Hub" className="h-7 w-7 object-contain" />
+            <img src={logoAsset.url} alt="SPECTRE" className="h-7 w-7 object-contain" />
             <span className="font-display text-[10px] tracking-wider uppercase text-foreground">Spectre</span>
           </Link>
         </div>
 
         <div className="flex items-center gap-6">
           <div className="flex items-center gap-2">
-            <div className={`w-1.5 h-1.5 rounded-full ${creds ? 'bg-primary shadow-[0_0_8px_#ff0055]' : 'bg-foreground-muted/20'}`} />
+            <div className={`w-1.5 h-1.5 rounded-full ${creds ? 'bg-primary shadow-[0_0_8px_#4DA09E]' : 'bg-foreground-muted/20'}`} />
             <span className="font-sans text-[9px] font-bold tracking-wider text-foreground-muted/30 uppercase hidden sm:block">
               {creds ? 'Sistema Operacional' : 'Disconectado'}
             </span>
@@ -397,7 +397,7 @@ function TopBar({ onOpenMenu, pathname }: { onOpenMenu: () => void; pathname: st
                   ) : (
                     <div 
                       className="w-full h-full opacity-20" 
-                      style={{ backgroundColor: me?.banner_color || '#ff0055' }}
+                      style={{ backgroundColor: me?.banner_color || '#4DA09E' }}
                     />
                   )}
                   {/* Banner Copy Button */}

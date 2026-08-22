@@ -21,15 +21,15 @@ export function SiteFooter({ guildInvite }: SiteFooterProps) {
           <div className="max-w-md">
             <Link to="/" className="flex items-center gap-3 mb-8 group">
               <div className="relative">
-                <div className="absolute inset-0 bg-spectre-pink/20 blur-lg rounded-full scale-0 group-hover:scale-150 transition-transform duration-500" />
+                <div className="absolute inset-0 bg-primary/20 blur-lg rounded-full scale-0 group-hover:scale-150 transition-transform duration-500" />
                 <img
                   src={logoAsset.url}
-                  alt="Spectre Hub"
+                  alt="SPECTRE"
                   className="w-12 h-12 object-contain relative z-10 transition-transform duration-500 group-hover:rotate-12"
                 />
               </div>
               <span className="font-display text-3xl tracking-tighter text-white uppercase italic">
-                Spectre <span className="text-spectre-pink">Hub</span>
+                Spectre <span className="text-primary">Hub</span>
               </span>
             </Link>
             <p className="font-sans text-white/30 leading-relaxed text-sm uppercase tracking-[0.2em] mb-10 max-w-xs">
@@ -46,7 +46,7 @@ export function SiteFooter({ guildInvite }: SiteFooterProps) {
                     href={social.href} 
                     target="_blank" 
                     rel="noopener noreferrer" 
-                    className="font-display text-[9px] tracking-[0.3em] text-white/20 hover:text-spectre-pink transition-all hover:translate-y-[-2px] uppercase italic border-b border-white/0 hover:border-spectre-pink/30 pb-1"
+                    className="font-display text-[9px] tracking-[0.3em] text-white/20 hover:text-primary transition-all hover:translate-y-[-2px] uppercase italic border-b border-white/0 hover:border-primary/30 pb-1"
                   >
                     {social.label}
                   </a>
@@ -55,15 +55,15 @@ export function SiteFooter({ guildInvite }: SiteFooterProps) {
           </div>
 
           <div>
-            <h3 className="font-display text-[11px] tracking-[0.4em] text-spectre-pink uppercase italic mb-8 flex items-center gap-2">
-              <span className="w-4 h-[1px] bg-spectre-pink/30" />
+            <h3 className="font-display text-[11px] tracking-[0.4em] text-primary uppercase italic mb-8 flex items-center gap-2">
+              <span className="w-4 h-[1px] bg-primary/30" />
               {t('nav.systems')}
             </h3>
             <ul className="space-y-4">
               {["AUTO QUESTS", "OPTIMIZER", "NICKS-GUN", "SERVER CONTROL"].map(item => (
                 <li key={item}>
                   <a href="#" className="font-display text-[10px] text-white/30 hover:text-white transition-colors uppercase tracking-[0.2em] italic flex items-center gap-2 group">
-                    <span className="w-1 h-1 bg-spectre-pink/0 group-hover:bg-spectre-pink transition-all" />
+                    <span className="w-1 h-1 bg-primary/0 group-hover:bg-primary transition-all" />
                     {item}
                   </a>
                 </li>

@@ -21,8 +21,8 @@ export const Route = createFileRoute("/_app/admin")({
   component: AdminPage,
   head: () => ({
     meta: [
-      { title: "Terminal Admin — Spectre Hub" },
-      { name: "description", content: "Painel de controle central do Spectre Hub." },
+      { title: "Terminal Admin — SPECTRE" },
+      { name: "description", content: "Painel de controle central do SPECTRE." },
     ],
   }),
 });
@@ -117,7 +117,7 @@ function AdminPage() {
           <div className="absolute inset-0 bg-primary/20 blur-xl rounded-full" />
         </div>
         <h1 className="font-display text-4xl uppercase tracking-tighter text-foreground">Acesso Restrito</h1>
-        <p className="text-foreground-muted max-w-sm mx-auto italic">Este terminal é exclusivo para a inteligência central do Spectre Hub.</p>
+        <p className="text-foreground-muted max-w-sm mx-auto italic">Este terminal é exclusivo para a inteligência central do SPECTRE.</p>
         <Button onClick={() => window.location.href = "/"} variant="secondary">Voltar ao Início</Button>
       </div>
     );

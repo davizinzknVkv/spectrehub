@@ -10,7 +10,7 @@ import { cloneServer, getGuilds } from "@/lib/cloner.functions";
 import * as Popover from "@radix-ui/react-popover";
 
 export const Route = createFileRoute("/_app/clone")({
-  head: () => ({ meta: [{ title: "Discord Tools — Spectre Hub" }] }),
+  head: () => ({ meta: [{ title: "Discord Tools — SPECTRE" }] }),
   component: ClonePage,
 });
 
@@ -92,7 +92,7 @@ function ClonePage() {
         <div className="lg:col-span-2 space-y-6">
           <Card className="p-8 border-white/5 bg-white/[0.02] space-y-8">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 flex items-center justify-center border border-spectre-pink/20 bg-spectre-pink/5 text-spectre-pink">
+              <div className="w-10 h-10 flex items-center justify-center border border-primary/20 bg-primary/5 text-primary">
                 <Copy className="w-5 h-5" />
               </div>
               <div>
@@ -151,7 +151,7 @@ function ClonePage() {
           </Card>
 
           <section className="ds-card p-6 border-white/5 bg-white/[0.02]">
-             <div className="flex items-center gap-2 mb-4 text-spectre-pink">
+             <div className="flex items-center gap-2 mb-4 text-primary">
                 <AlertCircle className="w-4 h-4" />
                 <h4 className="font-display text-[9px] uppercase tracking-widest italic font-bold">Importante</h4>
              </div>
@@ -186,20 +186,20 @@ function ClonePage() {
 
           <Card className="p-6 border-white/5 bg-white/[0.02] space-y-4">
             <div className="flex items-center gap-2">
-              <CheckCircle2 className="w-3.5 h-3.5 text-spectre-pink" />
+              <CheckCircle2 className="w-3.5 h-3.5 text-primary" />
               <h4 className="font-display text-[10px] uppercase tracking-widest text-white italic">Recursos Ativos</h4>
             </div>
             <div className="space-y-2">
               <div className="flex items-center gap-3">
-                <div className="w-1 h-1 bg-spectre-pink rounded-full" />
+                <div className="w-1 h-1 bg-primary rounded-full" />
                 <span className="text-[9px] uppercase text-white/60 tracking-wider">Cópia de Cargos</span>
               </div>
               <div className="flex items-center gap-3">
-                <div className="w-1 h-1 bg-spectre-pink rounded-full" />
+                <div className="w-1 h-1 bg-primary rounded-full" />
                 <span className="text-[9px] uppercase text-white/60 tracking-wider">Estrutura de Categorias</span>
               </div>
               <div className="flex items-center gap-3">
-                <div className="w-1 h-1 bg-spectre-pink rounded-full" />
+                <div className="w-1 h-1 bg-primary rounded-full" />
                 <span className="text-[9px] uppercase text-white/60 tracking-wider">Permissões Específicas</span>
               </div>
             </div>
@@ -235,9 +235,9 @@ function GuildSelector({
   return (
     <Popover.Root open={open} onOpenChange={setOpen}>
       <Popover.Trigger asChild>
-        <button className="w-full bg-obsidian border border-white/10 p-4 font-mono text-xs text-white flex items-center justify-between group focus:border-spectre-pink/50 transition-all text-left">
+        <button className="w-full bg-obsidian border border-white/10 p-4 font-mono text-xs text-white flex items-center justify-between group focus:border-primary/50 transition-all text-left">
           <div className="flex items-center gap-3 overflow-hidden">
-            <Server className={`w-4 h-4 flex-shrink-0 ${selectedGuild ? 'text-spectre-pink' : 'text-white/20'}`} />
+            <Server className={`w-4 h-4 flex-shrink-0 ${selectedGuild ? 'text-primary' : 'text-white/20'}`} />
             <span className={`truncate ${!selectedGuild ? 'text-white/30' : ''}`}>
               {selectedGuild ? selectedGuild.name : placeholder}
             </span>
@@ -266,7 +266,7 @@ function GuildSelector({
           <div className="max-h-[240px] overflow-y-auto custom-scrollbar">
             {loading ? (
               <div className="p-4 text-center">
-                <div className="w-4 h-4 border-2 border-spectre-pink/20 border-t-spectre-pink animate-spin mx-auto mb-2" />
+                <div className="w-4 h-4 border-2 border-primary/20 border-t-primary animate-spin mx-auto mb-2" />
                 <span className="text-[8px] uppercase tracking-widest text-white/20">Carregando...</span>
               </div>
             ) : filteredGuilds.length === 0 ? (
@@ -281,7 +281,7 @@ function GuildSelector({
                     onChange(guild.id);
                     setOpen(false);
                   }}
-                  className={`w-full p-3 flex items-center gap-3 hover:bg-white/5 transition-colors text-left group ${value === guild.id ? 'bg-spectre-pink/5' : ''}`}
+                  className={`w-full p-3 flex items-center gap-3 hover:bg-white/5 transition-colors text-left group ${value === guild.id ? 'bg-primary/5' : ''}`}
                 >
                   <div className="w-6 h-6 flex-shrink-0 bg-white/5 border border-white/10 flex items-center justify-center overflow-hidden">
                     {guild.icon ? (
@@ -291,7 +291,7 @@ function GuildSelector({
                     )}
                   </div>
                   <div className="flex flex-col overflow-hidden">
-                    <span className={`text-[10px] truncate font-display italic tracking-wider ${value === guild.id ? 'text-spectre-pink' : 'text-white'}`}>
+                    <span className={`text-[10px] truncate font-display italic tracking-wider ${value === guild.id ? 'text-primary' : 'text-white'}`}>
                       {guild.name}
                     </span>
                     <span className="text-[8px] font-mono text-white/20 truncate">{guild.id}</span>

@@ -21,14 +21,14 @@ export function PageHeader({ eyebrow, title, highlight, description, icon: Icon,
         <div className="min-w-0">
           {eyebrow && (
             <div className="flex items-center gap-2 mb-3">
-              {Icon && <Icon className="h-3 w-3 text-spectre-pink" />}
+              {Icon && <Icon className="h-3 w-3 text-primary" />}
               <span className="font-display text-[9px] uppercase tracking-[0.3em] text-white/30 italic">{eyebrow}</span>
             </div>
           )}
           <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl text-white uppercase italic tracking-tighter leading-none">
             {title}
             {highlight && (
-              <span className="text-spectre-pink"> {highlight}</span>
+              <span className="text-primary"> {highlight}</span>
             )}
           </h1>
           {description && (

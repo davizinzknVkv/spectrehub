@@ -218,7 +218,7 @@ export function CaptchaModal({
                 </>
               )}
               <br /><br />
-              Para garantir a integridade da conta, o Spectre Hub aplica padrões de comportamento humano. Evite utilizar o Discord em outros dispositivos durante a execução.
+              Para garantir a integridade da conta, o SPECTRE aplica padrões de comportamento humano. Evite utilizar o Discord em outros dispositivos durante a execução.
             </div>
           </div>
         </div>
