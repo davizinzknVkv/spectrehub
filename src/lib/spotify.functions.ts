@@ -12,29 +12,39 @@ export const generateSpotifyLinks = createServerFn({ method: "POST" })
   .inputValidator((data) => spotifyGenInput.parse(data))
   .handler(async ({ data }) => {
     const { quantity, utmSource, utmMedium, utmCampaign } = data;
+    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
     
-    // Lista de URLs legítimas do Spotify para usar como base (campanhas/playlists)
-    const bases = [
+    // Busca links ativos do banco
+    const { data: dbLinks } = await supabaseAdmin
+      .from("spotify_links")
+      .select("url")
+      .eq("active", true);
+
+    const defaultBases = [
       "https://open.spotify.com/playlist/37i9dQZF1DXcBWIGoPBqpw",
       "https://open.spotify.com/playlist/37i9dQZF1DX0XUsKG7Pya2",
       "https://open.spotify.com/album/4eLPsYPBmXAB7uSJ6xg1yk",
       "https://open.spotify.com/artist/0TnOYISjUGaRBMTj61lsaW",
     ];
 
+    const bases = dbLinks && dbLinks.length > 0 ? dbLinks.map(l => l.url) : defaultBases;
+
     const links: string[] = [];
     for (let i = 0; i < quantity; i++) {
       const base = bases[Math.floor(Math.random() * bases.length)];
-      const url = new URL(base);
-      
-      if (utmSource) url.searchParams.set("utm_source", utmSource);
-      if (utmMedium) url.searchParams.set("utm_medium", utmMedium);
-      if (utmCampaign) url.searchParams.set("utm_campaign", utmCampaign);
-      
-      // Adiciona um parâmetro aleatório para garantir unicidade visual se necessário, 
-      // ou apenas para tracking individual
-      url.searchParams.set("s_id", Math.random().toString(36).substring(7));
-      
-      links.push(url.toString());
+      try {
+        const url = new URL(base);
+        
+        if (utmSource) url.searchParams.set("utm_source", utmSource);
+        if (utmMedium) url.searchParams.set("utm_medium", utmMedium);
+        if (utmCampaign) url.searchParams.set("utm_campaign", utmCampaign);
+        
+        url.searchParams.set("s_id", Math.random().toString(36).substring(7));
+        links.push(url.toString());
+      } catch (e) {
+        // Fallback for malformed URLs in DB
+        links.push(base + "?s_id=" + Math.random().toString(36).substring(7));
+      }
     }
 
     return { ok: true, links };

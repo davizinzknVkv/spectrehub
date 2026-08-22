@@ -387,7 +387,7 @@ function TopBar({ onOpenMenu, pathname }: { onOpenMenu: () => void; pathname: st
             <div className="flex flex-col items-center gap-6 py-4">
               <div className="relative w-full flex flex-col items-center">
                 {/* Profile Banner */}
-                <div className="absolute top-0 left-0 w-full h-24 overflow-hidden rounded-t-lg border-x border-t border-border bg-background-secondary">
+                <div className="absolute top-0 left-0 w-full h-24 overflow-hidden rounded-t-lg border-x border-t border-border bg-background-secondary relative group">
                   {me?.banner ? (
                     <img 
                       src={`https://cdn.discordapp.com/banners/${me.id}/${me.banner}.png?size=600`} 
@@ -400,6 +400,19 @@ function TopBar({ onOpenMenu, pathname }: { onOpenMenu: () => void; pathname: st
                       style={{ backgroundColor: me?.banner_color || '#ff0055' }}
                     />
                   )}
+                  {/* Banner Copy Button */}
+                  <button 
+                    onClick={() => {
+                      if (!me?.banner) return;
+                      const url = `https://cdn.discordapp.com/banners/${me.id}/${me.banner}.png?size=4096`;
+                      navigator.clipboard.writeText(url);
+                      toast.success("Link do Banner copiado!");
+                    }}
+                    className="absolute top-2 right-2 p-1.5 bg-black/60 border border-white/10 text-white/60 hover:text-white hover:bg-black transition-all opacity-0 group-hover:opacity-100 rounded-md"
+                    title="Copiar link do Banner"
+                  >
+                    <Copy className="w-3.5 h-3.5" />
+                  </button>
                 </div>
 
                 <div className="relative mt-12 group">
@@ -411,6 +424,19 @@ function TopBar({ onOpenMenu, pathname }: { onOpenMenu: () => void; pathname: st
                        <UserRound className="w-10 h-10" />
                      </div>
                    )}
+                   {/* Avatar Copy Button */}
+                   <button 
+                     onClick={(e) => {
+                       e.stopPropagation();
+                       if (!avatarUrl) return;
+                       const highRes = avatarUrl.replace("?size=64", "?size=4096");
+                       navigator.clipboard.writeText(highRes);
+                       toast.success("Link do Avatar copiado!");
+                     }}
+                     className="absolute inset-0 bg-black/60 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
+                   >
+                     <Copy className="w-6 h-6 text-white" />
+                   </button>
                   </div>
                 </div>
               </div>
@@ -421,8 +447,8 @@ function TopBar({ onOpenMenu, pathname }: { onOpenMenu: () => void; pathname: st
               </div>
             </div>
             
-            <p className="text-foreground-muted text-xs text-center leading-relaxed">
-              Deseja encerrar sua sessão atual no ecossistema Spectre Hub?
+            <p className="text-foreground-muted text-[10px] text-center leading-relaxed uppercase tracking-widest opacity-50">
+              ID: {me?.id}
             </p>
           </div>
         </Modal>
