@@ -435,6 +435,10 @@ export type Database = {
       }
     }
     Functions: {
+      decrement_spotify_stock: {
+        Args: { amount: number; row_id: string }
+        Returns: undefined
+      }
       is_site_admin: { Args: { _user_id: string }; Returns: boolean }
     }
     Enums: {
