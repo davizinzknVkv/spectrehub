@@ -123,7 +123,7 @@ export function Hero({ guildInvite, fallbackMembers, liveMembers = [] }: HeroPro
 
         <div className="mt-20 pt-10 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-6 opacity-40">
            <div className="flex items-center gap-3 font-display text-[9px] tracking-[0.2em] uppercase transition-all duration-300 hover:text-white cursor-default">
-             <span>Spectre Hub</span>
+             <span>SPECTRE</span>
              <span className="text-primary font-black">//</span>
              <span>AGO-2026</span>
            </div>

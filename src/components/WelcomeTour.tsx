@@ -6,7 +6,7 @@ export function WelcomeTour({ onDismiss }: { onDismiss: () => void }) {
 
   const steps = [
     {
-      title: "O que é o Spectre Hub?",
+      title: "O que é o SPECTRE?",
       content: (
         <>
           Automatize suas <span className="text-[#99aab5]">Discord Quests</span> em segundo plano — assista vídeos e "jogue" sem esforço, ganhando <span className="text-[#34d399]">Orbs</span> e recompensas exclusivas. Totalmente client-side, seu token nunca sai criptografado do seu navegador.
@@ -61,7 +61,7 @@ export function WelcomeTour({ onDismiss }: { onDismiss: () => void }) {
             </div>
             
             <h2 className="mb-4 font-display text-2xl font-bold tracking-tight text-white">
-              {steps[step].title.includes('Spectre Hub') ? (
+              {steps[step].title.includes('SPECTRE') ? (
                 <>
                   O que é o <span className="text-white">Spectre<span className="text-[#4DA09E]">hub</span></span>?
                 </>

@@ -30,7 +30,7 @@ export function useIsAdmin() {
   return isAdmin;
 }
 
-/** Atalho do painel admin — visível apenas para o dono do Spectre Hub. */
+/** Atalho do painel admin — visível apenas para o dono do SPECTRE. */
 export function AdminNavLink() {
   const isAdmin = useIsAdmin();
   if (!isAdmin) return null;
