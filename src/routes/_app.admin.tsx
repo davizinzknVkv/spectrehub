@@ -159,6 +159,9 @@ function AdminPage() {
 }
 
 function SpotifyTab({ token, rows, setRows, reload }: any) {
+  const [bulkText, setBulkText] = useState("");
+  const [isBulkOpen, setIsBulkOpen] = useState(false);
+
   const update = (i: number, patch: any) => setRows(rows.map((r: any, idx: number) => (idx === i ? { ...r, ...patch } : r)));
   const save = async (row: any) => {
     try {
@@ -174,15 +177,66 @@ function SpotifyTab({ token, rows, setRows, reload }: any) {
     await reload();
   };
 
+  const handleBulkAdd = async () => {
+    const urls = bulkText.split("\n").map(u => u.trim()).filter(u => u.startsWith("http"));
+    if (urls.length === 0) {
+      toast.error("Nenhuma URL válida encontrada.");
+      return;
+    }
+
+    toast.loading(`Importando ${urls.length} links...`);
+    try {
+      for (const url of urls) {
+        await adminSaveSpotifyLink({ data: { token, link: { url, active: true } } });
+      }
+      toast.dismiss();
+      toast.success("Importação Concluída", { description: `${urls.length} links adicionados.` });
+      setBulkText("");
+      setIsBulkOpen(false);
+      await reload();
+    } catch (err) {
+      toast.dismiss();
+      toast.error("Erro na importação em massa.");
+    }
+  };
+
   return (
     <div className="space-y-6">
       <div className="flex justify-between items-center px-2">
          <div className="font-mono text-[10px] uppercase font-bold text-foreground-muted/50">{rows.length} Links Base</div>
-         <Button 
-           onClick={() => setRows([{ url: "", label: "", active: true }, ...rows])}
-           size="sm"
-         >Adicionar Link</Button>
+         <div className="flex gap-2">
+           <Button 
+             onClick={() => setIsBulkOpen(true)}
+             variant="secondary"
+             size="sm"
+             className="border-primary/20 text-primary"
+           >Multi-Links</Button>
+           <Button 
+             onClick={() => setRows([{ url: "", label: "", active: true }, ...rows])}
+             size="sm"
+           >Adicionar Link</Button>
+         </div>
       </div>
+
+      <Modal 
+        isOpen={isBulkOpen} 
+        onClose={() => setIsBulkOpen(false)}
+        title="Importação em Massa"
+      >
+        <div className="space-y-4 pt-4">
+          <p className="text-[11px] text-foreground-muted uppercase font-bold tracking-wider">Cole os links abaixo (um por linha):</p>
+          <textarea 
+            value={bulkText}
+            onChange={(e) => setBulkText(e.target.value)}
+            className="w-full h-48 bg-background border border-border rounded-lg p-3 font-mono text-xs focus:ring-1 focus:ring-primary outline-none resize-none"
+            placeholder="https://open.spotify.com/...\nhttps://open.spotify.com/..."
+          />
+          <div className="flex gap-2">
+            <Button onClick={handleBulkAdd} className="flex-1">Processar Links</Button>
+            <Button onClick={() => setIsBulkOpen(false)} variant="secondary">Cancelar</Button>
+          </div>
+        </div>
+      </Modal>
 
       <div className="grid grid-cols-1 gap-4">
         {rows.map((row: any, i: number) => (
@@ -198,7 +252,7 @@ function SpotifyTab({ token, rows, setRows, reload }: any) {
              <div className="flex gap-2 w-full md:w-auto">
                 <Button onClick={() => save(row)} className="flex-1 md:flex-none h-10 px-6">Salvar</Button>
                 <Button onClick={() => remove(row)} variant="secondary" className="w-10 h-10 !p-0 text-primary border-primary/20 hover:bg-primary/5">
-                  <Trash2 className="w-4 h-4" />
+                   <Trash2 className="w-4 h-4" />
                 </Button>
              </div>
           </div>

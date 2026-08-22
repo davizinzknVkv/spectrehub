@@ -1,4 +1,4 @@
-/* arruma nao estava dando isso antes */
+/* o adcionar link coloca pra coloca varios link do jeito qau esta tenho q por 1 por 1 */
 import { createFileRoute } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
 import { useState, useEffect } from "react";
