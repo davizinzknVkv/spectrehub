@@ -37,40 +37,45 @@ export function PlansSection({ plans }: PlansSectionProps) {
           <Reveal key={p.name} delay={i * 100} className="h-full">
             <motion.div 
               whileHover={{ y: -10 }}
-              className={`relative flex flex-col h-full p-6 sm:p-8 border border-white/5 bg-obsidian-soft transition-all duration-500 lg:hover:border-spectre-pink/40 group rounded-none ${p.highlight ? 'border-spectre-pink/20 bg-spectre-pink/[0.02]' : ''}`}
+              className={`relative flex flex-col h-full p-8 md:p-10 border border-white/5 bg-[#080808] transition-all duration-500 lg:hover:border-spectre-pink/30 group rounded-none ${p.highlight ? 'ring-1 ring-spectre-pink/20 bg-spectre-pink/[0.01]' : ''}`}
             >
               {p.highlight && (
-                <div className="absolute top-0 right-0 bg-spectre-pink text-white text-[9px] font-display uppercase tracking-widest px-4 py-1 italic">
+                <div className="absolute top-0 right-0 bg-spectre-pink text-white text-[10px] font-display uppercase tracking-widest px-6 py-1.5 italic font-bold">
                   {t('plans.popular')}
                 </div>
               )}
               
-              <div className="mb-8">
-                <h3 className="font-display text-xl text-white uppercase italic mb-2">{t(`plans.tiers.${p.name.toLowerCase()}.name`)}</h3>
-                <div className="flex items-baseline gap-1">
-                  <span className="text-4xl font-display text-white italic">{p.price}</span>
-                  <span className="text-[10px] text-white/30 uppercase tracking-widest">/ {t(`plans.tiers.${p.name.toLowerCase()}.period`)}</span>
+              <div className="mb-10">
+                <h3 className="font-display text-2xl text-white uppercase italic mb-4">{t(`plans.tiers.${p.name.toLowerCase()}.name`)}</h3>
+                <div className="flex flex-col gap-1">
+                  <div className="flex items-baseline gap-2">
+                    <span className="text-4xl font-display text-white italic">{p.price}</span>
+                  </div>
+                  <span className="text-[10px] text-white/30 uppercase tracking-[0.2em] italic font-bold">/ {t(`plans.tiers.${p.name.toLowerCase()}.period`)}</span>
                 </div>
               </div>
 
-              <div className="space-y-4 mb-12 flex-1">
-                {p.features.map(f => (
-                  <div key={f} className="flex items-center gap-3">
-                    <div className="w-1 h-1 bg-spectre-pink/50 group-hover:bg-spectre-pink transition-colors" />
-                    <span className="text-xs font-sans text-white/50 group-hover:text-white/80 transition-colors uppercase tracking-wider">{t(`plans.tiers.${p.name.toLowerCase()}.features.${i}`)}</span>
+              <div className="space-y-5 mb-14 flex-1">
+                {p.features.map((f, fi) => (
+                  <div key={fi} className="flex items-center gap-4">
+                    <div className="w-1.5 h-1.5 bg-spectre-pink shadow-[0_0_8px_rgba(255,0,85,0.4)] shrink-0" />
+                    <span className="text-[11px] font-sans text-white/40 group-hover:text-white/70 transition-colors uppercase tracking-[0.15em] leading-relaxed">
+                       {t(`plans.tiers.${p.name.toLowerCase()}.features.${fi}`)}
+                    </span>
                   </div>
                 ))}
               </div>
 
               {p.name === "Free" ? (
-                <a href="#free" className="ds-btn ds-btn-secondary w-full py-4 text-[10px]">
+                <a href="#free" className="ds-btn ds-btn-secondary w-full py-5 text-[10px] uppercase font-bold tracking-widest">
                   {t('plans.cta')}
                 </a>
               ) : (
-                <Link to="/hub" className={`ds-btn w-full py-4 text-[10px] ${p.highlight ? 'ds-btn-primary' : 'ds-btn-secondary'}`}>
+                <Link to="/hub" className={`ds-btn w-full py-5 text-[10px] uppercase font-bold tracking-widest ${p.highlight ? 'ds-btn-primary shadow-[0_0_20px_rgba(255,0,85,0.2)]' : 'ds-btn-secondary'}`}>
                   {t(`plans.tiers.${p.name.toLowerCase()}.cta`)}
                 </Link>
               )}
+
             </motion.div>
           </Reveal>
         ))}
