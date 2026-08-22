@@ -60,6 +60,24 @@ const FALLBACK_MEMBERS = [
 
 function Index() {
   const { t } = useTranslation();
+  const [liveMembers, setLiveMembers] = import("react").then(m => m.useState<{ id: string; name: string; avatar: string | null }[]>([]));
+  
+  import("react").then(m => m.useEffect(() => {
+    const ctrl = new AbortController();
+    fetch(WIDGET_URL, { signal: ctrl.signal })
+      .then(r => r.ok ? r.json() : null)
+      .then(j => {
+        if (j?.members && Array.isArray(j.members)) {
+          setLiveMembers(j.members.map((m: any) => ({
+            id: m.id,
+            name: m.username,
+            avatar: m.avatar_url
+          })));
+        }
+      })
+      .catch(() => {});
+    return () => ctrl.abort();
+  }, []));
   
   /* aki as imgs puxa da widget do discord */
 
