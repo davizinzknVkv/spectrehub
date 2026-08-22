@@ -62,7 +62,7 @@ function Index() {
   const { t } = useTranslation();
   const [ref] = useInView<HTMLDivElement>();
   
-  /* Adicione ícones consistentes e tooltips explicativos para cada ação rápida no Dashboard. */
+  /* deixa a pagina inicilal assim */
 
   
 
