@@ -52,7 +52,7 @@ export function Hero({ guildInvite, fallbackMembers }: HeroProps) {
           >
             <div className="flex items-center gap-[0.1em] justify-center flex-wrap">
               <span className="inline-block">{t('hero.title1')}</span>
-              <span className="inline-block md:ml-[0.2em]">{t('hero.title2')}</span>
+              <span className="inline-block ml-[0.2em]">{t('hero.title2')}</span>
             </div>
             
             <motion.div 
@@ -62,7 +62,7 @@ export function Hero({ guildInvite, fallbackMembers }: HeroProps) {
               className="flex flex-col md:flex-row items-center justify-center mt-2"
             >
               <span className="text-spectre-pink italic underline decoration-white/10 decoration-2 underline-offset-8">{t('hero.subtitle1')}</span>
-              <span className="inline-block md:ml-[0.2em]">{t('hero.subtitle2')}</span>
+              <span className="inline-block ml-[0.2em]">{t('hero.subtitle2')}</span>
             </motion.div>
           </motion.h1>
           
