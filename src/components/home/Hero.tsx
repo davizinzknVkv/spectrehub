@@ -77,14 +77,19 @@ export function Hero({ guildInvite, fallbackMembers }: HeroProps) {
           </div>
           {/* Adicionando outro efeito no fundo para preencher o espaço */}
           <div className="absolute bottom-1/4 right-0 w-64 h-64 bg-spectre-pink/5 rounded-full blur-[120px] pointer-events-none" />
-          <h1 className="font-display text-[clamp(2rem,7vw,4.5rem)] leading-[0.95] text-foreground uppercase tracking-tighter mb-6 break-words relative z-10 flex flex-col items-center">
-            <div className="flex items-center gap-[0.3em] md:gap-[0.5em] justify-center flex-wrap">
+          <h1 className="font-display text-[clamp(2.5rem,8vw,5.5rem)] leading-[0.9] text-white uppercase tracking-tighter mb-8 break-words relative z-10 flex flex-col items-center">
+            <div className="flex items-center gap-[0.2em] justify-center flex-wrap">
               <span>{t('hero.title1')}</span>
-              <img src={logoAsset.url} alt="" className="h-[0.8em] w-auto animate-pulse drop-shadow-[0_0_20px_rgba(255,0,85,0.4)]" />
+              <div className="flex flex-col items-center mx-2 translate-y-[-0.1em]">
+                <img src={logoAsset.url} alt="" className="h-[0.7em] w-auto animate-pulse drop-shadow-[0_0_25px_rgba(255,0,85,0.6)]" />
+                <span className="text-[10px] tracking-[0.4em] text-white/40 font-sans mt-1">SPECTREHUB</span>
+              </div>
               <span>{t('hero.title2')}</span>
             </div>
-            <span className="text-spectre-pink">{t('hero.subtitle1')}</span> 
-            <span className="inline-block">{t('hero.subtitle2')}</span>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-[0.2em]">
+              <span className="text-spectre-pink">{t('hero.subtitle1')}</span> 
+              <span className="inline-block">{t('hero.subtitle2')}</span>
+            </div>
           </h1>
 
         </Reveal>

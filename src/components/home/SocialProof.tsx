@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
+import { Users, Tractor, Zap, ShieldCheck } from "lucide-react";
 import { useInView, useCountUp } from "./hooks";
+
 import { Product } from "./constants";
 
 
@@ -136,9 +138,12 @@ export function SocialProof({ widgetUrl, products: productsList }: SocialProofPr
          <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-spectre-pink/50 to-transparent" />
       </div>
 
-      <div ref={ref} className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-12 md:gap-px md:bg-white/5 border border-white/5">
-           <div className="bg-obsidian flex flex-col items-center text-center p-8 group hover:bg-white/[0.02] transition-colors rounded-none">
+      <div ref={ref} className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-px md:bg-white/5 border border-white/5 rounded-2xl overflow-hidden bg-white/[0.02]">
+           <div className="bg-obsidian flex flex-col items-center text-center p-8 group hover:bg-white/[0.04] transition-colors">
+              <div className="text-spectre-pink mb-4">
+                <Users className="w-6 h-6" />
+              </div>
               <span className="font-display text-4xl md:text-5xl text-white italic mb-2 tracking-tighter">
                 {Math.round(membersCount)}+
               </span>
@@ -146,7 +151,10 @@ export function SocialProof({ widgetUrl, products: productsList }: SocialProofPr
                 {t('community.statMembers')}
               </span>
            </div>
-           <div className="bg-obsidian flex flex-col items-center text-center p-8 group hover:bg-white/[0.02] transition-colors rounded-none">
+           <div className="bg-obsidian flex flex-col items-center text-center p-8 group hover:bg-white/[0.04] transition-colors">
+              <div className="text-spectre-pink mb-4">
+                <Tractor className="w-6 h-6" />
+              </div>
               <span className="font-display text-4xl md:text-5xl text-white italic mb-2 tracking-tighter">
                 {Math.round(productsCount)}
               </span>
@@ -154,7 +162,10 @@ export function SocialProof({ widgetUrl, products: productsList }: SocialProofPr
                 {t('community.statSystems')}
               </span>
            </div>
-           <div className="bg-obsidian flex flex-col items-center text-center p-8 group hover:bg-white/[0.02] transition-colors rounded-none">
+           <div className="bg-obsidian flex flex-col items-center text-center p-8 group hover:bg-white/[0.04] transition-colors">
+              <div className="text-spectre-pink mb-4">
+                <Zap className="w-6 h-6" />
+              </div>
               <span className="font-display text-4xl md:text-5xl text-white italic mb-2 tracking-tighter">
                 {latencyCount.toFixed(2)}<span className="text-spectre-pink not-italic text-2xl">ms</span>
               </span>
@@ -162,10 +173,13 @@ export function SocialProof({ widgetUrl, products: productsList }: SocialProofPr
                 {t('community.statLatency')}
               </span>
            </div>
-           <div className="bg-obsidian flex flex-col items-center text-center p-8 group hover:bg-white/[0.02] transition-colors rounded-none">
+           <div className="bg-obsidian flex flex-col items-center text-center p-8 group hover:bg-white/[0.04] transition-colors">
+              <div className="text-spectre-pink mb-4">
+                <ShieldCheck className="w-6 h-6" />
+              </div>
               <div className="flex items-center gap-1 mb-2">
                 <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse shadow-[0_0_8px_rgba(34,197,94,0.5)]" />
-                <span className="font-display text-2xl text-white italic tracking-tighter">99.9%</span>
+                <span className="font-display text-2xl md:text-3xl text-white italic tracking-tighter">99.9%</span>
               </div>
               <span className="font-display text-[9px] tracking-[0.3em] text-white/30 uppercase italic group-hover:text-spectre-pink transition-colors">
                 {t('community.statUptime')}
@@ -173,6 +187,7 @@ export function SocialProof({ widgetUrl, products: productsList }: SocialProofPr
            </div>
         </div>
       </div>
+
     </section>
   );
 }
