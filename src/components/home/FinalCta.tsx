@@ -27,9 +27,12 @@ export function FinalCta({ guildInvite }: FinalCtaProps) {
             className="absolute bottom-0 left-0 w-32 h-32 border-b-2 border-l-2 border-spectre-pink/20 m-4 pointer-events-none group-hover:border-spectre-pink/40 transition-colors"
           />
           
-          <Sparkles className="w-12 h-12 text-spectre-pink mx-auto mb-8 animate-pulse" />
-          <h2 className="font-display text-[2.5rem] md:text-[5rem] leading-[0.85] text-white uppercase italic tracking-tighter mb-8 break-words">
-            {t('final.title')} <br />
+          <div className="mb-8 relative w-24 h-24 mx-auto group">
+            <div className="absolute inset-0 bg-spectre-pink/20 blur-2xl rounded-full scale-0 group-hover:scale-150 transition-transform duration-700" />
+            <Sparkles className="w-full h-full text-spectre-pink animate-pulse relative z-10" />
+          </div>
+          <h2 className="font-display text-[2.5rem] md:text-[5rem] leading-[0.85] text-white uppercase italic tracking-tighter mb-8 break-words flex flex-col items-center">
+            <span>{t('final.title')}</span>
             <span className="text-spectre-pink">{t('final.subtitle')}</span>
           </h2>
           <p className="max-w-2xl mx-auto text-white/30 text-xs md:text-sm font-sans mb-12 uppercase tracking-[0.3em] leading-relaxed">

@@ -61,7 +61,7 @@ const FALLBACK_MEMBERS = [
 function Index() {
   const { t } = useTranslation();
   
-  /* na parte inicial onde tem SPECTRE HUB DOMINA O MERCADO MUDA ESSE TEXTO PRA ALGO MENOR E TIRA A LOGO DO MEIO */
+  /* arruma isso arruma esse problema da imagem 1 e na imagem 2 é  oq vc removeu */
 
   
 

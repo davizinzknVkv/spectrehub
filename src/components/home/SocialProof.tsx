@@ -140,7 +140,7 @@ export function SocialProof({ widgetUrl, products: productsList }: SocialProofPr
       </div>
 
       <div ref={ref} className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-px md:bg-white/5 border border-white/5 rounded-3xl overflow-hidden bg-white/[0.02]">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 md:gap-px md:bg-white/5 border border-white/5 rounded-[2rem] overflow-hidden bg-white/[0.02]">
            <motion.div 
              initial={{ opacity: 0, y: 20 }}
              whileInView={{ opacity: 1, y: 0 }}
@@ -151,7 +151,7 @@ export function SocialProof({ widgetUrl, products: productsList }: SocialProofPr
               <div className="text-spectre-pink mb-6 opacity-50 group-hover:opacity-100 transition-opacity scale-125">
                 <Users className="w-6 h-6" />
               </div>
-              <span className="font-display text-5xl md:text-7xl text-white italic mb-3 tracking-tighter leading-none">
+              <span className="font-display text-5xl md:text-7xl lg:text-8xl text-white italic mb-3 tracking-tighter leading-none">
                 {Math.round(membersCount)}+
               </span>
               <span className="font-display text-[10px] tracking-[0.4em] text-white/30 uppercase italic group-hover:text-spectre-pink transition-colors font-bold">
@@ -168,7 +168,7 @@ export function SocialProof({ widgetUrl, products: productsList }: SocialProofPr
               <div className="text-spectre-pink mb-6 opacity-50 group-hover:opacity-100 transition-opacity scale-125">
                 <Tractor className="w-6 h-6" />
               </div>
-              <span className="font-display text-5xl md:text-7xl text-white italic mb-3 tracking-tighter leading-none">
+              <span className="font-display text-5xl md:text-7xl lg:text-8xl text-white italic mb-3 tracking-tighter leading-none">
                 {Math.round(productsCount)}
               </span>
               <span className="font-display text-[10px] tracking-[0.4em] text-white/30 uppercase italic group-hover:text-spectre-pink transition-colors font-bold">
@@ -185,8 +185,8 @@ export function SocialProof({ widgetUrl, products: productsList }: SocialProofPr
               <div className="text-spectre-pink mb-6 opacity-50 group-hover:opacity-100 transition-opacity scale-125">
                 <Zap className="w-6 h-6" />
               </div>
-              <span className="font-display text-5xl md:text-7xl text-white italic mb-3 tracking-tighter leading-none">
-                {latencyCount.toFixed(2)}<span className="text-spectre-pink not-italic text-3xl ml-1">ms</span>
+              <span className="font-display text-5xl md:text-7xl lg:text-8xl text-white italic mb-3 tracking-tighter leading-none">
+                {latencyCount.toFixed(2)}<span className="text-spectre-pink not-italic text-2xl lg:text-3xl ml-1">ms</span>
               </span>
               <span className="font-display text-[10px] tracking-[0.4em] text-white/30 uppercase italic group-hover:text-spectre-pink transition-colors font-bold">
                 {t('community.statLatency')}
@@ -204,7 +204,7 @@ export function SocialProof({ widgetUrl, products: productsList }: SocialProofPr
               </div>
               <div className="flex items-center gap-2 mb-3 leading-none">
                 <span className="w-3 h-3 rounded-full bg-green-500 animate-pulse shadow-[0_0_12px_rgba(34,197,94,0.6)]" />
-                <span className="font-display text-5xl md:text-7xl text-white italic tracking-tighter leading-none">99.9%</span>
+                <span className="font-display text-5xl md:text-7xl lg:text-8xl text-white italic tracking-tighter leading-none">99.9%</span>
               </div>
               <span className="font-display text-[10px] tracking-[0.4em] text-white/30 uppercase italic group-hover:text-spectre-pink transition-colors font-bold">
                 {t('community.statUptime')}
