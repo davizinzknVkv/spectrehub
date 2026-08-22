@@ -62,7 +62,7 @@ function Index() {
   const { t } = useTranslation();
   const [ref] = useInView<HTMLDivElement>();
   
-  /* essa parte de açao rapida deixa com uma caixa igual a da parte de informaçao da conta */
+  /* essa parte ai coloca em açoes rapida */
 
   
 

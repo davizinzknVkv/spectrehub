@@ -376,12 +376,27 @@ function HubPage() {
             { icon: Crosshair, label: "Sniper", val: "Pronto", link: "/nicksgun", desc: "Nicks-Gun v4.2" },
             { icon: Gift, label: "Resgatar", val: "Shop", link: "/resgatar", desc: "Trocar Orbs por Itens" },
             { 
+              icon: Server, 
+              label: "Servidores", 
+              val: `${guilds.length} total`, 
+              onClick: () => setShowGuilds(true),
+              desc: "Gerenciar Guilds" 
+            },
+            { 
+              icon: Trash2, 
+              label: "Limpeza", 
+              val: "DMs & Friends", 
+              onClick: () => setShowDMs(true),
+              desc: "Conta & Amizades" 
+            },
+            { 
               icon: Gamepad2, 
               label: "Presence", 
               val: userSettings?.status?.toUpperCase() || "OFFLINE", 
               onClick: () => setShowPresence(true),
               desc: "Status & Rich Presence" 
             },
+
 
           ].map((item: any) => {
             const Content = (
@@ -473,69 +488,8 @@ function HubPage() {
             </div>
           </section>
 
-          {/* Manage Servers Restored */}
-          <section className="ds-card p-8 border-border bg-card/30 rounded-xl">
-            <div className="flex items-center justify-between mb-8">
-              <div className="flex items-center gap-2">
-                <Server className="w-3.5 h-3.5 text-primary" />
-                <h3 className="font-sans text-xs font-bold uppercase tracking-wider text-foreground">Gerenciar Servidores</h3>
-              </div>
-              <span className="font-mono text-[10px] text-foreground-muted/50 uppercase font-bold">{guilds.length} Total</span>
-            </div>
-            
-            <div className="flex flex-col sm:flex-row gap-4">
-              <button 
-                onClick={() => setShowGuilds(true)}
-                className="flex-1 ds-btn ds-btn-secondary flex items-center justify-center gap-3"
-              >
-                <Search className="w-3.5 h-3.5" />
-                Listar Servidores
-              </button>
-              <button 
-                onClick={handleLeaveAll}
-                disabled={leavingAll}
-                className="flex-1 ds-btn ds-btn-primary flex items-center justify-center gap-3"
-              >
-                <LogOut className="w-3.5 h-3.5" />
-                Sair de Todos
-              </button>
-            </div>
-          </section>
+          {/* Removido duplicado para Ações Rápidas */}
 
-          {/* Limpeza da Conta */}
-          <section className="ds-card p-8 border-border bg-card/30 rounded-xl">
-            <div className="flex items-center justify-between mb-8">
-              <div className="flex items-center gap-2">
-                <Trash2 className="w-3.5 h-3.5 text-primary" />
-                <h3 className="font-sans text-xs font-bold uppercase tracking-wider text-foreground">Limpeza da Conta</h3>
-              </div>
-              <span className="font-mono text-[10px] text-foreground-muted/50 uppercase font-bold">
-                {dmCount ?? 0} DMS / {stats?.friends ?? 0} AMIGOS
-              </span>
-            </div>
-
-            <div className="flex flex-col sm:flex-row gap-4">
-              <button
-                onClick={() => setShowDMs(true)}
-                disabled={cleaningDms}
-                className="flex-1 ds-btn ds-btn-secondary flex items-center justify-center gap-3"
-              >
-                <MessageSquare className="w-3.5 h-3.5" />
-                {cleaningDms ? "Limpando..." : "Listar Conversas"}
-              </button>
-              <button
-                onClick={() => setShowFriends(true)}
-                disabled={cleaningFriends}
-                className="flex-1 ds-btn ds-btn-primary flex items-center justify-center gap-3"
-              >
-                <UserMinus className="w-3.5 h-3.5" />
-                {cleaningFriends ? "Removendo..." : "Listar Amigos"}
-              </button>
-            </div>
-            <p className="mt-4 text-[11px] text-foreground-muted/50 font-sans font-medium uppercase tracking-wider">
-              Estas ações são permanentes e podem levar alguns minutos dependendo do volume.
-            </p>
-          </section>
         </div>
 
         {/* Sidebar: Premium Stats & Plan */}
