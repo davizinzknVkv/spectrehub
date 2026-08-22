@@ -10,9 +10,10 @@ import logoAsset from "@/assets/spectre-logo-main.png.asset.json";
 interface HeroProps {
   guildInvite: string;
   fallbackMembers: string[];
+  liveMembers?: { id: string; name: string; avatar: string | null }[];
 }
 
-export function Hero({ guildInvite, fallbackMembers }: HeroProps) {
+export function Hero({ guildInvite, fallbackMembers, liveMembers = [] }: HeroProps) {
   const { t } = useTranslation();
   const containerRef = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({
