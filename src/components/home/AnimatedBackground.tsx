@@ -17,7 +17,7 @@ export function AnimatedBackground() {
       <div 
         className="absolute inset-0 opacity-[0.05]"
         style={{
-          backgroundImage: `radial-gradient(circle at 1px 1px, var(--color-spectre-pink) 1px, transparent 0)`,
+          backgroundImage: `radial-gradient(circle at 1px 1px, var(--color-primary) 1px, transparent 0)`,
           backgroundSize: '32px 32px'
         }}
       />
@@ -31,7 +31,7 @@ export function AnimatedBackground() {
           y: [0, 30, 0]
         }}
         transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
-        className="absolute top-1/4 -left-1/4 w-[80vw] h-[80vh] bg-spectre-pink rounded-full blur-[160px]"
+        className="absolute top-1/4 -left-1/4 w-[80vw] h-[80vh] bg-primary rounded-full blur-[160px]"
       />
       
       <motion.div 

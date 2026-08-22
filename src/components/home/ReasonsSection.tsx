@@ -15,15 +15,15 @@ export function ReasonsSection({ reasons }: ReasonsSectionProps) {
     <section id="recursos" className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
       <div className="grid grid-cols-1 lg:grid-cols-[450px_1fr] gap-20 items-start">
         <Reveal>
-          <div className="font-display text-[10px] tracking-[0.3em] text-spectre-pink uppercase mb-4 flex items-center gap-2">
-             <span className="w-8 h-px bg-spectre-pink/30" />
+          <div className="font-display text-[10px] tracking-[0.3em] text-primary uppercase mb-4 flex items-center gap-2">
+             <span className="w-8 h-px bg-primary/30" />
              {t('reasons.badge')}
           </div>
           <h2 className="font-display text-[2rem] md:text-[3.5rem] leading-[0.9] text-white uppercase italic tracking-tighter mb-6">
             {t('reasons.title')} <br />
             <span className="text-white/30 text-[1.5rem] md:text-[2.5rem]">{t('reasons.subtitle')}</span>
           </h2>
-          <p className="text-white/40 text-xs leading-relaxed uppercase tracking-widest border-l border-spectre-pink/30 pl-6">
+          <p className="text-white/40 text-xs leading-relaxed uppercase tracking-widest border-l border-primary/30 pl-6">
             {t('reasons.description')}
           </p>
           
@@ -35,7 +35,7 @@ export function ReasonsSection({ reasons }: ReasonsSectionProps) {
                 strokeWidth="1" 
                 strokeLinecap="round" 
                 strokeLinejoin="round" 
-                className="text-spectre-pink animate-[dash_5s_linear_infinite]"
+                className="text-primary animate-[dash_5s_linear_infinite]"
                 style={{ strokeDasharray: '200', strokeDashoffset: '200' }}
               />
             </svg>
@@ -50,7 +50,7 @@ export function ReasonsSection({ reasons }: ReasonsSectionProps) {
                 whileHover={{ backgroundColor: "rgba(255, 255, 255, 0.02)" }}
                 className={`p-10 h-full transition-all duration-500 group relative border-white/10 ${i === 0 ? 'border-b sm:border-r' : i === 1 ? 'border-b' : i === 2 ? 'sm:border-r' : ''}`}
               >
-                <div className="mb-8 w-12 h-12 border border-white/10 flex items-center justify-center text-white group-hover:border-spectre-pink transition-all duration-500 relative z-10 bg-[#0A0A0A]">
+                <div className="mb-8 w-12 h-12 border border-white/10 flex items-center justify-center text-white group-hover:border-primary transition-all duration-500 relative z-10 bg-[#0A0A0A]">
                   <r.icon className="w-5 h-5" />
                 </div>
                 <h3 className="font-display text-lg text-white uppercase italic mb-4 relative z-10">{t(`reasons.items.${i}.title`)}</h3>

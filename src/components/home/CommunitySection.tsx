@@ -25,8 +25,8 @@ function MiniStat({
   value: string;
 }) {
   return (
-    <div className="bg-[#080808] border border-white/5 p-8 group hover:border-spectre-pink/20 transition-all duration-500">
-      <Icon className="h-5 w-5 text-spectre-pink mb-6 group-hover:scale-110 transition-transform" />
+    <div className="bg-[#080808] border border-white/5 p-8 group hover:border-primary/20 transition-all duration-500">
+      <Icon className="h-5 w-5 text-primary mb-6 group-hover:scale-110 transition-transform" />
       <div className="font-display text-3xl text-white uppercase italic mb-1">{value}</div>
       <div className="font-display text-[10px] tracking-[0.3em] text-white/30 uppercase group-hover:text-white/50 transition-colors">
         {label}
@@ -72,15 +72,15 @@ export function CommunitySection({ widgetUrl, guildId, guildInvite, fallbackMemb
       <div className="grid grid-cols-1 lg:grid-cols-[1fr_450px] gap-12 lg:gap-20 items-start">
         <div>
           <Reveal>
-             <div className="font-display text-[10px] tracking-[0.3em] text-spectre-pink uppercase mb-4 flex items-center gap-2">
-               <span className="w-8 h-px bg-spectre-pink/30" />
+             <div className="font-display text-[10px] tracking-[0.3em] text-primary uppercase mb-4 flex items-center gap-2">
+               <span className="w-8 h-px bg-primary/30" />
                {t('community.badge')}
             </div>
             <h2 className="font-display text-[2.5rem] md:text-[4rem] leading-[0.9] text-white uppercase italic tracking-tighter mb-8">
               {t('community.title')} <br />
               <span className="text-white/30 text-[1.8rem] md:text-[3rem]">{t('community.subtitle')}</span>
             </h2>
-            <p className="text-white/40 text-[11px] leading-relaxed uppercase tracking-[0.2em] border-l border-spectre-pink/30 pl-8 mb-12 max-w-xl">
+            <p className="text-white/40 text-[11px] leading-relaxed uppercase tracking-[0.2em] border-l border-primary/30 pl-8 mb-12 max-w-xl">
               {t('community.description')}
             </p>
 
@@ -113,7 +113,7 @@ export function CommunitySection({ widgetUrl, guildId, guildInvite, fallbackMemb
            {/* Terminal Header */}
            <div className="absolute top-0 left-0 right-0 h-12 bg-[#0A0A0A] border-b border-white/5 flex items-center px-6 gap-3 z-30">
               <div className="flex gap-1.5">
-                <div className="w-2 h-2 rounded-full bg-spectre-pink animate-pulse" />
+                <div className="w-2 h-2 rounded-full bg-primary animate-pulse" />
                 <div className="w-2 h-2 rounded-full bg-white/5" />
                 <div className="w-2 h-2 rounded-full bg-white/5" />
               </div>
@@ -186,7 +186,7 @@ export function CommunitySection({ widgetUrl, guildId, guildInvite, fallbackMemb
       <div className="mt-20 pt-10 border-t border-white/5 overflow-hidden relative bg-[#050505]/50">
         <div className="absolute inset-0 opacity-[0.03] pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle, #fff 1px, transparent 1px)', backgroundSize: '24px 24px' }} />
         <div className="mb-8 flex items-center gap-4">
-           <div className="font-display text-[10px] text-spectre-pink uppercase italic tracking-[0.4em] whitespace-nowrap">
+           <div className="font-display text-[10px] text-primary uppercase italic tracking-[0.4em] whitespace-nowrap">
               {t('community.marqueeLabel')}
            </div>
            <div className="h-px w-full bg-white/5" />
@@ -204,10 +204,10 @@ export function CommunitySection({ widgetUrl, guildId, guildInvite, fallbackMemb
               className="flex items-center gap-3 cursor-pointer group"
             >
                <div className="w-8 h-8 rounded-full border border-white/10 bg-black overflow-hidden flex items-center justify-center p-0.5 relative">
-                  <div className="absolute inset-0 bg-spectre-pink/20 opacity-0 group-hover:opacity-100 transition-opacity" />
+                  <div className="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity" />
                   {m.avatar ? <img src={m.avatar} alt="" className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-300" /> : <Avatar seed={m.name} />}
                </div>
-               <span className="font-display text-[10px] text-white uppercase italic tracking-[0.2em] group-hover:text-spectre-pink transition-colors">{m.name}</span>
+               <span className="font-display text-[10px] text-white uppercase italic tracking-[0.2em] group-hover:text-primary transition-colors">{m.name}</span>
             </motion.div>
           ))}
         </div>

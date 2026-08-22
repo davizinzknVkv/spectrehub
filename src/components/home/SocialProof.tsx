@@ -136,7 +136,7 @@ export function SocialProof({ widgetUrl, products: productsList }: SocialProofPr
   return (
     <section className="bg-obsidian border-y border-white/5 relative z-10 overflow-hidden">
       <div className="absolute inset-0 z-0 pointer-events-none opacity-20">
-         <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-spectre-pink/50 to-transparent" />
+         <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent" />
       </div>
 
       <div ref={ref} className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
@@ -148,13 +148,13 @@ export function SocialProof({ widgetUrl, products: productsList }: SocialProofPr
              transition={{ delay: 0.1 }}
              className="bg-obsidian flex flex-col items-center text-center p-12 group hover:bg-white/[0.04] transition-colors"
            >
-              <div className="text-spectre-pink mb-6 opacity-50 group-hover:opacity-100 transition-opacity scale-125">
+              <div className="text-primary mb-6 opacity-50 group-hover:opacity-100 transition-opacity scale-125">
                 <Users className="w-6 h-6" />
               </div>
               <span className="font-display text-5xl md:text-7xl lg:text-8xl text-white italic mb-3 tracking-tighter leading-none">
                 {Math.round(membersCount)}+
               </span>
-              <span className="font-display text-[10px] tracking-[0.4em] text-white/30 uppercase italic group-hover:text-spectre-pink transition-colors font-bold">
+              <span className="font-display text-[10px] tracking-[0.4em] text-white/30 uppercase italic group-hover:text-primary transition-colors font-bold">
                 {t('community.statMembers')}
               </span>
            </motion.div>
@@ -165,13 +165,13 @@ export function SocialProof({ widgetUrl, products: productsList }: SocialProofPr
              transition={{ delay: 0.2 }}
              className="bg-obsidian flex flex-col items-center text-center p-12 group hover:bg-white/[0.04] transition-colors"
            >
-              <div className="text-spectre-pink mb-6 opacity-50 group-hover:opacity-100 transition-opacity scale-125">
+              <div className="text-primary mb-6 opacity-50 group-hover:opacity-100 transition-opacity scale-125">
                 <Tractor className="w-6 h-6" />
               </div>
               <span className="font-display text-5xl md:text-7xl lg:text-8xl text-white italic mb-3 tracking-tighter leading-none">
                 {Math.round(productsCount)}
               </span>
-              <span className="font-display text-[10px] tracking-[0.4em] text-white/30 uppercase italic group-hover:text-spectre-pink transition-colors font-bold">
+              <span className="font-display text-[10px] tracking-[0.4em] text-white/30 uppercase italic group-hover:text-primary transition-colors font-bold">
                 {t('community.statSystems')}
               </span>
            </motion.div>
@@ -182,13 +182,13 @@ export function SocialProof({ widgetUrl, products: productsList }: SocialProofPr
              transition={{ delay: 0.3 }}
              className="bg-obsidian flex flex-col items-center text-center p-12 group hover:bg-white/[0.04] transition-colors"
            >
-              <div className="text-spectre-pink mb-6 opacity-50 group-hover:opacity-100 transition-opacity scale-125">
+              <div className="text-primary mb-6 opacity-50 group-hover:opacity-100 transition-opacity scale-125">
                 <Zap className="w-6 h-6" />
               </div>
               <span className="font-display text-5xl md:text-7xl lg:text-8xl text-white italic mb-3 tracking-tighter leading-none">
-                {latencyCount.toFixed(2)}<span className="text-spectre-pink not-italic text-2xl lg:text-3xl ml-1">ms</span>
+                {latencyCount.toFixed(2)}<span className="text-primary not-italic text-2xl lg:text-3xl ml-1">ms</span>
               </span>
-              <span className="font-display text-[10px] tracking-[0.4em] text-white/30 uppercase italic group-hover:text-spectre-pink transition-colors font-bold">
+              <span className="font-display text-[10px] tracking-[0.4em] text-white/30 uppercase italic group-hover:text-primary transition-colors font-bold">
                 {t('community.statLatency')}
               </span>
            </motion.div>
@@ -199,14 +199,14 @@ export function SocialProof({ widgetUrl, products: productsList }: SocialProofPr
              transition={{ delay: 0.4 }}
              className="bg-obsidian flex flex-col items-center text-center p-12 group hover:bg-white/[0.04] transition-colors"
            >
-              <div className="text-spectre-pink mb-6 opacity-50 group-hover:opacity-100 transition-opacity scale-125">
+              <div className="text-primary mb-6 opacity-50 group-hover:opacity-100 transition-opacity scale-125">
                 <ShieldCheck className="w-6 h-6" />
               </div>
               <div className="flex items-center gap-2 mb-3 leading-none">
                 <span className="w-3 h-3 rounded-full bg-green-500 animate-pulse shadow-[0_0_12px_rgba(34,197,94,0.6)]" />
                 <span className="font-display text-5xl md:text-7xl lg:text-8xl text-white italic tracking-tighter leading-none">99.9%</span>
               </div>
-              <span className="font-display text-[10px] tracking-[0.4em] text-white/30 uppercase italic group-hover:text-spectre-pink transition-colors font-bold">
+              <span className="font-display text-[10px] tracking-[0.4em] text-white/30 uppercase italic group-hover:text-primary transition-colors font-bold">
                 {t('community.statUptime')}
               </span>
            </motion.div>

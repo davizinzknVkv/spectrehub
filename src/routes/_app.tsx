@@ -306,7 +306,7 @@ function TopBar({ onOpenMenu, pathname }: { onOpenMenu: () => void; pathname: st
 
         <div className="flex items-center gap-6">
           <div className="flex items-center gap-2">
-            <div className={`w-1.5 h-1.5 rounded-full ${creds ? 'bg-primary shadow-[0_0_8px_#ff0055]' : 'bg-foreground-muted/20'}`} />
+            <div className={`w-1.5 h-1.5 rounded-full ${creds ? 'bg-primary shadow-[0_0_8px_#4DA09E]' : 'bg-foreground-muted/20'}`} />
             <span className="font-sans text-[9px] font-bold tracking-wider text-foreground-muted/30 uppercase hidden sm:block">
               {creds ? 'Sistema Operacional' : 'Disconectado'}
             </span>
@@ -397,7 +397,7 @@ function TopBar({ onOpenMenu, pathname }: { onOpenMenu: () => void; pathname: st
                   ) : (
                     <div 
                       className="w-full h-full opacity-20" 
-                      style={{ backgroundColor: me?.banner_color || '#ff0055' }}
+                      style={{ backgroundColor: me?.banner_color || '#4DA09E' }}
                     />
                   )}
                   {/* Banner Copy Button */}

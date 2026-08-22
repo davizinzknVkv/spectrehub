@@ -27,10 +27,10 @@ export function ProductsSection({ products }: ProductsSectionProps) {
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <Reveal>
-            <div className="font-display text-[10px] tracking-[0.4em] text-spectre-pink uppercase mb-4 flex items-center justify-center gap-3">
-               <span className="w-12 h-px bg-spectre-pink/30" />
+            <div className="font-display text-[10px] tracking-[0.4em] text-primary uppercase mb-4 flex items-center justify-center gap-3">
+               <span className="w-12 h-px bg-primary/30" />
                NOSSAS FERRAMENTAS
-               <span className="w-12 h-px bg-spectre-pink/30" />
+               <span className="w-12 h-px bg-primary/30" />
             </div>
             <h2 className="font-display text-[2.5rem] md:text-[4.5rem] leading-[0.9] text-white uppercase italic tracking-tighter mb-6">
               EXPLORE OS <span className="text-white/20 italic">SISTEMAS</span>

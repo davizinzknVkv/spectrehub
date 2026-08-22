@@ -169,9 +169,9 @@ function SettingsPage() {
                     </div>
                     
                     <div className="group relative">
-                      <div className="ds-card !p-4 border-border bg-background flex items-center justify-between hover:border-spectre-pink/30 transition-all duration-300 rounded-lg cursor-pointer">
+                      <div className="ds-card !p-4 border-border bg-background flex items-center justify-between hover:border-primary/30 transition-all duration-300 rounded-lg cursor-pointer">
                         <div className="flex items-center gap-4">
-                          <div className="w-10 h-10 border border-white/5 bg-spectre-pink/10 flex items-center justify-center text-spectre-pink">
+                          <div className="w-10 h-10 border border-white/5 bg-primary/10 flex items-center justify-center text-primary">
                             <svg viewBox="0 0 24 24" className="w-5 h-5" fill="currentColor">
                               <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
                             </svg>

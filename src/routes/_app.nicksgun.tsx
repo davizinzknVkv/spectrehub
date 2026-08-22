@@ -149,7 +149,7 @@ function NicksGunPage() {
                             key={n} 
                             onClick={() => setLength(n as 2|3)}
                             disabled={running}
-                            className={`py-2 font-display text-[10px] uppercase italic tracking-widest transition-all ${length === n ? 'bg-spectre-pink text-white' : 'text-white/30 hover:text-white'}`}
+                            className={`py-2 font-display text-[10px] uppercase italic tracking-widest transition-all ${length === n ? 'bg-primary text-white' : 'text-white/30 hover:text-white'}`}
                           >
                              {n} Letras
                           </button>
@@ -162,7 +162,7 @@ function NicksGunPage() {
                        value={concurrency} 
                        onChange={(e) => setConcurrency(Number(e.target.value))}
                        disabled={running}
-                       className="w-full bg-white/[0.02] border border-white/5 py-2.5 px-4 font-display text-[10px] text-white italic uppercase tracking-widest outline-none focus:border-spectre-pink/20"
+                       className="w-full bg-white/[0.02] border border-white/5 py-2.5 px-4 font-display text-[10px] text-white italic uppercase tracking-widest outline-none focus:border-primary/20"
                     >
                        <option value={1} className="bg-obsidian">1x - Silencioso</option>
                        <option value={4} className="bg-obsidian">4x - Padrão</option>
@@ -178,7 +178,7 @@ function NicksGunPage() {
                        value={charset} 
                        onChange={(e) => setCharset(e.target.value as Charset)}
                        disabled={running}
-                       className="w-full bg-white/[0.02] border border-white/5 py-2.5 px-4 font-display text-[10px] text-white italic uppercase tracking-widest outline-none focus:border-spectre-pink/20"
+                       className="w-full bg-white/[0.02] border border-white/5 py-2.5 px-4 font-display text-[10px] text-white italic uppercase tracking-widest outline-none focus:border-primary/20"
                     >
                        <option value="letters" className="bg-obsidian">Apenas letras (A-Z)</option>
                        <option value="alnum" className="bg-obsidian">Letras + Números</option>
@@ -192,7 +192,7 @@ function NicksGunPage() {
                        onChange={(e) => setStartsWith(e.target.value.toLowerCase())}
                        disabled={running}
                        placeholder="OPCIONAL..."
-                       className="w-full bg-white/[0.02] border border-white/5 py-2.5 px-4 font-display text-[10px] text-white italic uppercase tracking-widest outline-none focus:border-spectre-pink/20"
+                       className="w-full bg-white/[0.02] border border-white/5 py-2.5 px-4 font-display text-[10px] text-white italic uppercase tracking-widest outline-none focus:border-primary/20"
                     />
                  </div>
               </div>
@@ -210,10 +210,10 @@ function NicksGunPage() {
            </div>
 
            {(running || total > 0) && (
-              <div className="ds-card p-8 border-spectre-pink/20 bg-spectre-pink/5 space-y-6">
+              <div className="ds-card p-8 border-primary/20 bg-primary/5 space-y-6">
                  <div className="flex justify-between items-center">
                     <div className="space-y-1">
-                        <div className="font-display text-[9px] uppercase tracking-widest text-spectre-pink italic font-bold">Monitoramento de Varredura</div>
+                        <div className="font-display text-[9px] uppercase tracking-widest text-primary italic font-bold">Monitoramento de Varredura</div>
                         <div className="font-mono text-[9px] text-white/40 uppercase">{running ? `Testando: ${current}` : 'Finalizado'}</div>
                     </div>
                     <div className="text-right">
@@ -223,7 +223,7 @@ function NicksGunPage() {
                  </div>
                  <div className="h-1 bg-white/5 overflow-hidden">
                     <div 
-                      className="h-full bg-spectre-pink transition-all duration-300" 
+                      className="h-full bg-primary transition-all duration-300" 
                       style={{ width: `${(checked/total)*100}%` }} 
                     />
                  </div>

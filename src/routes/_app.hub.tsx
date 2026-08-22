@@ -631,7 +631,7 @@ function HubPage() {
                   </div>
                 </div>
                 <div className="flex items-center gap-3">
-                  {g.owner && <Badge variant="spectre-pink">Dono</Badge>}
+                  {g.owner && <Badge variant="primary">Dono</Badge>}
                   {!g.owner && (
                     <button 
                       onClick={async () => {

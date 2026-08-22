@@ -111,10 +111,10 @@ function SpotifyGenPage() {
         <div className="lg:col-span-1 space-y-6">
           <Card className="p-8 border-white/5 bg-white/[0.02] space-y-8 relative overflow-hidden">
             {/* Ambient Pink Glow */}
-            <div className="absolute top-0 right-0 w-32 h-32 bg-spectre-pink/5 blur-[60px] -translate-y-1/2 translate-x-1/2" />
+            <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 blur-[60px] -translate-y-1/2 translate-x-1/2" />
             
             <div className="flex items-center gap-4 relative z-10">
-              <div className="w-12 h-12 flex items-center justify-center border border-spectre-pink/20 bg-spectre-pink/5 text-spectre-pink">
+              <div className="w-12 h-12 flex items-center justify-center border border-primary/20 bg-primary/5 text-primary">
                 <Music className="w-6 h-6" />
               </div>
               <div>
@@ -132,7 +132,7 @@ function SpotifyGenPage() {
                   max={100} 
                   value={quantity} 
                   onChange={(e) => setQuantity(parseInt(e.target.value) || 0)}
-                  className="bg-obsidian border-white/10 font-mono text-xs focus:border-spectre-pink/50 transition-all"
+                  className="bg-obsidian border-white/10 font-mono text-xs focus:border-primary/50 transition-all"
                 />
                 <p className="text-[8px] text-white/20 uppercase tracking-widest pl-1">Máximo: 100 por lote</p>
               </div>
@@ -144,7 +144,7 @@ function SpotifyGenPage() {
                       placeholder="Ex: spectre" 
                       value={utmSource} 
                       onChange={(e) => setUtmSource(e.target.value)}
-                      className="bg-obsidian border-white/10 font-mono text-xs focus:border-spectre-pink/50 transition-all"
+                      className="bg-obsidian border-white/10 font-mono text-xs focus:border-primary/50 transition-all"
                     />
                  </div>
                  <div className="space-y-2">
@@ -153,7 +153,7 @@ function SpotifyGenPage() {
                       placeholder="Ex: discord" 
                       value={utmMedium} 
                       onChange={(e) => setUtmMedium(e.target.value)}
-                      className="bg-obsidian border-white/10 font-mono text-xs focus:border-spectre-pink/50 transition-all"
+                      className="bg-obsidian border-white/10 font-mono text-xs focus:border-primary/50 transition-all"
                     />
                  </div>
                  <div className="space-y-2">
@@ -162,7 +162,7 @@ function SpotifyGenPage() {
                       placeholder="Ex: spotify" 
                       value={utmCampaign} 
                       onChange={(e) => setUtmCampaign(e.target.value)}
-                      className="bg-obsidian border-white/10 font-mono text-xs focus:border-spectre-pink/50 transition-all"
+                      className="bg-obsidian border-white/10 font-mono text-xs focus:border-primary/50 transition-all"
                     />
                  </div>
               </div>
@@ -200,12 +200,12 @@ function SpotifyGenPage() {
                  <div className="flex items-center justify-between">
                     <p className="text-[10px] text-white/40 uppercase tracking-widest font-bold">Estoque Disponível</p>
                     <div className="flex items-center gap-2">
-                      <div className={cn("w-1.5 h-1.5 rounded-full", (stock || 0) > 0 ? "bg-emerald-500 shadow-[0_0_8px_#10b981]" : "bg-primary shadow-[0_0_8px_#ff0055]")} />
+                      <div className={cn("w-1.5 h-1.5 rounded-full", (stock || 0) > 0 ? "bg-emerald-500 shadow-[0_0_8px_#10b981]" : "bg-primary shadow-[0_0_8px_#4DA09E]")} />
                       <span className="font-mono text-xs text-white">{stock !== null ? stock : "---"}</span>
                     </div>
                  </div>
                  <div className="space-y-1">
-                   <p className="text-[10px] text-spectre-pink uppercase tracking-widest font-bold italic">
+                   <p className="text-[10px] text-primary uppercase tracking-widest font-bold italic">
                      Restrição de Acesso:
                    </p>
                    <p className="text-[9px] text-white/50 uppercase tracking-[0.1em] mt-1">
@@ -221,7 +221,7 @@ function SpotifyGenPage() {
            <Card className="p-8 border-white/5 bg-white/[0.02] flex flex-col h-full min-h-[500px]">
               <div className="flex items-center justify-between mb-8">
                  <div className="flex items-center gap-3">
-                    <div className="w-1.5 h-1.5 rounded-full bg-spectre-pink shadow-[0_0_8px_#ff0055]" />
+                    <div className="w-1.5 h-1.5 rounded-full bg-primary shadow-[0_0_8px_#4DA09E]" />
                     <h3 className="font-display text-sm text-white uppercase italic tracking-widest">Output de Resultados</h3>
                  </div>
                  
@@ -280,7 +280,7 @@ function SpotifyGenPage() {
               {links.length > 0 && (
                 <div className="mt-6 flex items-center justify-between text-[9px] uppercase tracking-widest text-white/30 italic">
                    <div className="flex items-center gap-2">
-                      <CheckCircle2 className="w-3 h-3 text-spectre-pink" />
+                      <CheckCircle2 className="w-3 h-3 text-primary" />
                       {links.length} Protocolos Gerados
                    </div>
                    <span>Terminal Ativo</span>

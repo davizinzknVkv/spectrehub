@@ -124,14 +124,14 @@ function FarmsPage() {
       </div>
 
       {running && progress && (
-        <div className="ds-card p-6 border-spectre-pink/20 bg-spectre-pink/5 space-y-4 mt-8">
+        <div className="ds-card p-6 border-primary/20 bg-primary/5 space-y-4 mt-8">
             <div className="flex justify-between items-center">
-                <span className="font-display text-[9px] uppercase tracking-widest text-spectre-pink italic font-bold">Progresso da Missão</span>
+                <span className="font-display text-[9px] uppercase tracking-widest text-primary italic font-bold">Progresso da Missão</span>
                 <span className="font-mono text-xs text-white">{progress.current} / {progress.total}</span>
             </div>
             <div className="h-1 bg-white/5 overflow-hidden">
                 <div 
-                  className="h-full bg-spectre-pink transition-all duration-500" 
+                  className="h-full bg-primary transition-all duration-500" 
                   style={{ width: `${Math.min(100, (progress.current / Math.max(1, progress.total)) * 100)}%` }} 
                 />
             </div>
@@ -149,7 +149,7 @@ function FarmsPage() {
                     </div>
                     <div className="space-y-1">
                         <div className="text-[9px] uppercase tracking-widest text-white/30">Hoje</div>
-                        <div className="font-display text-2xl text-spectre-pink italic">{stats.todayOrbs.toLocaleString()}</div>
+                        <div className="font-display text-2xl text-primary italic">{stats.todayOrbs.toLocaleString()}</div>
                     </div>
                     <div className="space-y-1">
                         <div className="text-[9px] uppercase tracking-widest text-white/30">Taxa Sucesso</div>
@@ -167,7 +167,7 @@ function FarmsPage() {
                         logs.slice().reverse().map(l => (
                             <div key={l.id} className="font-mono text-[10px] py-1 border-b border-white/[0.02] flex gap-3">
                                 <span className="text-white/20 shrink-0">[{new Date(l.ts).toLocaleTimeString()}]</span>
-                                <span className={l.level === 'error' ? 'text-rose-500' : l.level === 'success' ? 'text-spectre-pink' : 'text-white/60'}>
+                                <span className={l.level === 'error' ? 'text-rose-500' : l.level === 'success' ? 'text-primary' : 'text-white/60'}>
                                     {l.text}
                                 </span>
                             </div>
@@ -213,9 +213,9 @@ function FarmsPage() {
 
 function StatItem({ icon: Icon, label, value, sub, active }: any) {
   return (
-    <div className={`ds-card p-6 border-white/5 bg-white/[0.02] space-y-2 transition-all hover:border-spectre-pink/40 ${active ? 'border-spectre-pink/20' : ''}`}>
+    <div className={`ds-card p-6 border-white/5 bg-white/[0.02] space-y-2 transition-all hover:border-primary/40 ${active ? 'border-primary/20' : ''}`}>
         <div className="flex items-center gap-2">
-            <Icon className={`w-3.5 h-3.5 ${active ? 'text-spectre-pink' : 'text-white/20'}`} />
+            <Icon className={`w-3.5 h-3.5 ${active ? 'text-primary' : 'text-white/20'}`} />
             <span className="font-display text-[9px] uppercase tracking-widest text-white/30 italic">{label}</span>
         </div>
         <div className="font-display text-xl text-white uppercase italic tracking-tighter">{value}</div>

@@ -36,7 +36,7 @@ export function AdminNavLink() {
   if (!isAdmin) return null;
   return (
     <Link to="/admin" className="flex items-center gap-3 px-4 py-2.5 text-white/40 hover:text-white transition-all group">
-      <ShieldCheck className="h-4 w-4 shrink-0 text-spectre-pink group-hover:text-spectre-pink transition-colors" />
+      <ShieldCheck className="h-4 w-4 shrink-0 text-primary group-hover:text-primary transition-colors" />
       <span className="font-display text-[11px] uppercase tracking-widest italic">Terminal Admin</span>
     </Link>
   );

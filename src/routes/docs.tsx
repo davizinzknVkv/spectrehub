@@ -95,13 +95,13 @@ function DocsPage() {
   );
 
   return (
-    <div className="min-h-screen bg-[#030303] text-white font-sans selection:bg-spectre-pink/30 flex flex-col">
+    <div className="min-h-screen bg-[#030303] text-white font-sans selection:bg-primary/30 flex flex-col">
       {/* Header */}
       <header className="sticky top-0 z-50 border-b border-white/5 bg-[#030303]/80 backdrop-blur-xl">
         <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
           <Link to="/" className="flex items-center gap-3 group">
             <img src={logoAsset.url} alt="Spectre" className="h-8 w-8 object-contain transition-transform group-hover:scale-110" />
-            <span className="font-display text-lg tracking-tighter uppercase italic">Spectre <span className="text-spectre-pink">Docs</span></span>
+            <span className="font-display text-lg tracking-tighter uppercase italic">Spectre <span className="text-primary">Docs</span></span>
           </Link>
           
           <nav className="hidden md:flex items-center gap-10">
@@ -144,7 +144,7 @@ function DocsPage() {
                 }}
                 className={cn(
                   "flex items-center gap-4 w-full text-left text-lg font-display uppercase tracking-wider transition-colors",
-                  activeSection === item.id ? "text-spectre-pink" : "text-white/40"
+                  activeSection === item.id ? "text-primary" : "text-white/40"
                 )}
               >
                 <item.icon className="w-5 h-5" />
@@ -164,12 +164,12 @@ function DocsPage() {
         <aside className="hidden lg:block w-[280px] shrink-0 sticky top-32 h-[calc(100vh-160px)] space-y-10 overflow-y-auto pr-4 scrollbar-thin">
           <div className="space-y-8">
             <div className="relative group">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-white/20 group-focus-within:text-spectre-pink transition-colors" />
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-white/20 group-focus-within:text-primary transition-colors" />
               <input 
                 placeholder="Pesquisar..." 
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full bg-white/[0.03] border border-white/5 p-3 pl-10 text-[11px] font-bold uppercase tracking-wider rounded-none outline-none focus:border-spectre-pink/50 focus:bg-white/[0.05] transition-all"
+                className="w-full bg-white/[0.03] border border-white/5 p-3 pl-10 text-[11px] font-bold uppercase tracking-wider rounded-none outline-none focus:border-primary/50 focus:bg-white/[0.05] transition-all"
               />
             </div>
             
@@ -182,11 +182,11 @@ function DocsPage() {
                   className={cn(
                     "flex items-center gap-3 w-full text-left text-[11px] font-bold uppercase tracking-[0.15em] py-2.5 px-3 transition-all relative group",
                     activeSection === item.id 
-                      ? "text-white bg-white/[0.05] border-l-2 border-spectre-pink" 
+                      ? "text-white bg-white/[0.05] border-l-2 border-primary" 
                       : "text-white/40 hover:text-white hover:bg-white/[0.02]"
                   )}
                 >
-                  <item.icon className={cn("w-3.5 h-3.5", activeSection === item.id ? "text-spectre-pink" : "text-white/20 group-hover:text-white/40")} />
+                  <item.icon className={cn("w-3.5 h-3.5", activeSection === item.id ? "text-primary" : "text-white/20 group-hover:text-white/40")} />
                   {item.label}
                 </button>
               ))}
@@ -202,8 +202,8 @@ function DocsPage() {
               {activeSection === "introducao" && (
                 <section className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
                   <div className="space-y-4">
-                    <div className="inline-block px-3 py-1 bg-spectre-pink/10 border border-spectre-pink/20 text-spectre-pink text-[9px] font-bold uppercase tracking-widest">Documentação Oficial</div>
-                    <h1 className="font-display text-5xl lg:text-7xl uppercase tracking-tighter leading-[0.9]">Bem-vindo ao <br/><span className="text-spectre-pink">Spectre Hub</span></h1>
+                    <div className="inline-block px-3 py-1 bg-primary/10 border border-primary/20 text-primary text-[9px] font-bold uppercase tracking-widest">Documentação Oficial</div>
+                    <h1 className="font-display text-5xl lg:text-7xl uppercase tracking-tighter leading-[0.9]">Bem-vindo ao <br/><span className="text-primary">Spectre Hub</span></h1>
                   </div>
                   
                   <div className="space-y-6 text-white/60 text-lg max-w-3xl leading-relaxed">
@@ -227,7 +227,7 @@ function DocsPage() {
                       { icon: LifeBuoy, label: "Suporte", desc: "Comunidade ativa e atendimento especializado." },
                     ].map((item, i) => (
                       <div key={i} className="p-6 bg-white/[0.02] border border-white/5 hover:border-white/10 transition-colors">
-                        <item.icon className="w-5 h-5 text-spectre-pink mb-4" />
+                        <item.icon className="w-5 h-5 text-primary mb-4" />
                         <h3 className="font-display text-sm uppercase tracking-wider mb-2">{item.label}</h3>
                         <p className="text-[11px] text-white/40 leading-relaxed">{item.desc}</p>
                       </div>
@@ -240,25 +240,25 @@ function DocsPage() {
               {activeSection === "produtos" && (
                 <section className="space-y-12 animate-in fade-in slide-in-from-bottom-4 duration-700">
                   <div className="space-y-4">
-                    <h2 className="font-display text-4xl uppercase tracking-tighter italic">Produtos & <span className="text-spectre-pink">Sistemas</span></h2>
+                    <h2 className="font-display text-4xl uppercase tracking-tighter italic">Produtos & <span className="text-primary">Sistemas</span></h2>
                     <p className="text-white/50 text-base max-w-2xl">Catálogo completo de ferramentas disponíveis no ecossistema Spectre.</p>
                   </div>
 
                   <div className="grid gap-6">
                     {products.map((p) => (
-                      <div key={p.id} className="group p-8 bg-white/[0.02] border border-white/5 hover:border-spectre-pink/30 transition-all relative overflow-hidden">
+                      <div key={p.id} className="group p-8 bg-white/[0.02] border border-white/5 hover:border-primary/30 transition-all relative overflow-hidden">
                         <div className="absolute top-0 right-0 p-8 opacity-[0.03] group-hover:opacity-[0.07] transition-opacity">
                           <p.icon className="w-24 h-24" />
                         </div>
                         <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 relative z-10">
                           <div className="space-y-4">
                             <div className="flex items-center gap-4">
-                              <p.icon className="w-6 h-6 text-spectre-pink" />
+                              <p.icon className="w-6 h-6 text-primary" />
                               <h3 className="font-display text-xl uppercase tracking-wider">{p.name}</h3>
                               <span className="px-2 py-0.5 bg-white/5 text-[8px] font-bold uppercase tracking-widest text-white/40 border border-white/10">Ativo</span>
                             </div>
                             <p className="text-white/50 text-[13px] max-w-xl leading-relaxed">{p.desc}</p>
-                            <div className="flex items-center gap-2 text-[10px] uppercase font-bold tracking-widest text-spectre-pink/80">
+                            <div className="flex items-center gap-2 text-[10px] uppercase font-bold tracking-widest text-primary/80">
                               <span className="text-white/20">Objetivo:</span> {p.goal}
                             </div>
                           </div>
@@ -279,7 +279,7 @@ function DocsPage() {
               {activeSection === "guia" && (
                 <section className="space-y-12 animate-in fade-in slide-in-from-bottom-4 duration-700">
                   <div className="space-y-4">
-                    <h2 className="font-display text-4xl uppercase tracking-tighter italic">Guia de <span className="text-spectre-pink">Início</span></h2>
+                    <h2 className="font-display text-4xl uppercase tracking-tighter italic">Guia de <span className="text-primary">Início</span></h2>
                     <p className="text-white/50 text-base max-w-2xl">Siga estes passos fundamentais para configurar sua conta e começar a utilizar o Spectre Hub.</p>
                   </div>
 
@@ -291,7 +291,7 @@ function DocsPage() {
                       { step: "04", title: "Monitoramento", desc: "Acompanhe suas estatísticas e logs em tempo real na Dashboard central para garantir que tudo está operando conforme o esperado." },
                     ].map((step, i) => (
                       <div key={i} className="flex gap-8 group">
-                        <div className="font-display text-4xl text-white/10 group-hover:text-spectre-pink/20 transition-colors shrink-0 pt-1 leading-none">{step.step}</div>
+                        <div className="font-display text-4xl text-white/10 group-hover:text-primary/20 transition-colors shrink-0 pt-1 leading-none">{step.step}</div>
                         <div className="space-y-3 pb-8 border-b border-white/5 last:border-0">
                           <h3 className="font-display text-xl uppercase tracking-widest">{step.title}</h3>
                           <p className="text-white/50 text-sm leading-relaxed max-w-2xl">{step.desc}</p>
@@ -306,7 +306,7 @@ function DocsPage() {
               {activeSection === "faq" && (
                 <section className="space-y-12 animate-in fade-in slide-in-from-bottom-4 duration-700">
                   <div className="space-y-4">
-                    <h2 className="font-display text-4xl uppercase tracking-tighter italic">Perguntas <span className="text-spectre-pink">Frequentes</span></h2>
+                    <h2 className="font-display text-4xl uppercase tracking-tighter italic">Perguntas <span className="text-primary">Frequentes</span></h2>
                     <p className="text-white/50 text-base max-w-2xl">Respostas rápidas para as dúvidas mais comuns da comunidade.</p>
                   </div>
                   <div className="grid gap-4">
@@ -316,7 +316,7 @@ function DocsPage() {
                       { q: "Quais são as formas de pagamento?", a: "Aceitamos diversas formas de pagamento através da nossa loja oficial no Discord." }
                     ].map((item, i) => (
                       <div key={i} className="p-6 bg-white/[0.02] border border-white/5">
-                        <h4 className="font-display text-sm uppercase tracking-wider text-spectre-pink mb-2">{item.q}</h4>
+                        <h4 className="font-display text-sm uppercase tracking-wider text-primary mb-2">{item.q}</h4>
                         <p className="text-white/50 text-sm leading-relaxed">{item.a}</p>
                       </div>
                     ))}
@@ -328,7 +328,7 @@ function DocsPage() {
               {activeSection === "termos" && (
                 <section className="space-y-12 animate-in fade-in slide-in-from-bottom-4 duration-700">
                   <div className="space-y-4">
-                    <h2 className="font-display text-4xl uppercase tracking-tighter italic">Termos de <span className="text-spectre-pink">Uso</span></h2>
+                    <h2 className="font-display text-4xl uppercase tracking-tighter italic">Termos de <span className="text-primary">Uso</span></h2>
                     <p className="text-white/50 text-base max-w-2xl">Regras e diretrizes para a utilização dos nossos serviços.</p>
                   </div>
                   <div className="space-y-8 text-white/50 text-sm leading-relaxed max-w-4xl">
@@ -371,7 +371,7 @@ function DocsPage() {
           </div>
           <div className="flex gap-8">
              {["Termos", "Privacidade", "Discord", "Status"].map(link => (
-               <a key={link} href="#" className="text-[10px] font-bold uppercase tracking-widest text-white/20 hover:text-spectre-pink transition-colors">{link}</a>
+               <a key={link} href="#" className="text-[10px] font-bold uppercase tracking-widest text-white/20 hover:text-primary transition-colors">{link}</a>
              ))}
           </div>
           <div className="text-[10px] font-bold uppercase tracking-widest text-white/20">
@@ -382,10 +382,10 @@ function DocsPage() {
 
       {/* Floating AI Chat Window */}
       {aiChatOpen && (
-        <div className="fixed bottom-28 right-8 w-[380px] h-[500px] bg-[#0A0A0D] border border-spectre-pink/20 shadow-[0_20px_60px_rgba(0,0,0,0.8)] z-50 flex flex-col animate-in fade-in slide-in-from-bottom-8 duration-300">
+        <div className="fixed bottom-28 right-8 w-[380px] h-[500px] bg-[#0A0A0D] border border-primary/20 shadow-[0_20px_60px_rgba(0,0,0,0.8)] z-50 flex flex-col animate-in fade-in slide-in-from-bottom-8 duration-300">
           <div className="p-4 border-b border-white/5 bg-white/[0.02] flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <div className="w-2 h-2 bg-spectre-pink rounded-full animate-pulse" />
+              <div className="w-2 h-2 bg-primary rounded-full animate-pulse" />
               <span className="font-display text-[10px] font-bold uppercase tracking-widest italic">Spectre AI Support</span>
             </div>
             <button onClick={() => setAiChatOpen(false)} className="text-white/40 hover:text-white transition-colors">
@@ -402,12 +402,12 @@ function DocsPage() {
             )}
             {chatMessages.map((msg, i) => (
               <div key={i} className={cn("flex gap-3", msg.role === 'user' ? "flex-row-reverse" : "")}>
-                <div className={cn("w-6 h-6 shrink-0 flex items-center justify-center border", msg.role === 'user' ? "border-white/10 bg-white/5" : "border-spectre-pink/20 bg-spectre-pink/5")}>
-                  {msg.role === 'user' ? <User className="w-3 h-3 text-white/40" /> : <Bot className="w-3 h-3 text-spectre-pink" />}
+                <div className={cn("w-6 h-6 shrink-0 flex items-center justify-center border", msg.role === 'user' ? "border-white/10 bg-white/5" : "border-primary/20 bg-primary/5")}>
+                  {msg.role === 'user' ? <User className="w-3 h-3 text-white/40" /> : <Bot className="w-3 h-3 text-primary" />}
                 </div>
                 <div className={cn(
                   "p-3 text-[11px] leading-relaxed max-w-[80%]",
-                  msg.role === 'user' ? "bg-white/[0.03] text-white/80" : "bg-spectre-pink/[0.03] text-spectre-pink/90"
+                  msg.role === 'user' ? "bg-white/[0.03] text-white/80" : "bg-primary/[0.03] text-primary/90"
                 )}>
                   {msg.text}
                 </div>
@@ -415,10 +415,10 @@ function DocsPage() {
             ))}
             {isTyping && (
               <div className="flex gap-3">
-                <div className="w-6 h-6 shrink-0 flex items-center justify-center border border-spectre-pink/20 bg-spectre-pink/5">
-                  <Bot className="w-3 h-3 text-spectre-pink" />
+                <div className="w-6 h-6 shrink-0 flex items-center justify-center border border-primary/20 bg-primary/5">
+                  <Bot className="w-3 h-3 text-primary" />
                 </div>
-                <div className="p-3 bg-spectre-pink/[0.03] text-spectre-pink/90">
+                <div className="p-3 bg-primary/[0.03] text-primary/90">
                   <Loader2 className="w-3 h-3 animate-spin" />
                 </div>
               </div>
@@ -433,7 +433,7 @@ function DocsPage() {
                 onChange={(e) => setChatInput(e.target.value)}
                 onKeyDown={(e) => e.key === 'Enter' && handleSendMessage()}
                 placeholder="Pergunte algo..."
-                className="flex-1 bg-white/[0.03] border border-white/5 p-3 text-[11px] font-bold uppercase tracking-wider outline-none focus:border-spectre-pink/50 transition-all"
+                className="flex-1 bg-white/[0.03] border border-white/5 p-3 text-[11px] font-bold uppercase tracking-wider outline-none focus:border-primary/50 transition-all"
               />
               <button 
                 onClick={handleSendMessage}
