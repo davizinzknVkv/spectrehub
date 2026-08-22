@@ -77,12 +77,12 @@ export function Hero({ guildInvite, fallbackMembers }: HeroProps) {
           </div>
           {/* Adicionando outro efeito no fundo para preencher o espaço */}
           <div className="absolute bottom-1/4 right-0 w-64 h-64 bg-spectre-pink/5 rounded-full blur-[120px] pointer-events-none" />
-          <h1 className="font-display text-[clamp(2.5rem,8vw,5.5rem)] leading-[0.9] text-white uppercase tracking-tighter mb-8 break-words relative z-10 flex flex-col items-center">
+          <h1 className="font-display text-[clamp(2.5rem,8.5vw,6rem)] leading-[0.85] text-white uppercase tracking-tighter mb-8 break-words relative z-10 flex flex-col items-center">
             <div className="flex items-center gap-[0.2em] justify-center flex-wrap">
               <span>{t('hero.title1')}</span>
-              <div className="flex flex-col items-center mx-2 translate-y-[-0.1em]">
-                <img src={logoAsset.url} alt="" className="h-[0.7em] w-auto animate-pulse drop-shadow-[0_0_25px_rgba(255,0,85,0.6)]" />
-                <span className="text-[10px] tracking-[0.4em] text-white/40 font-sans mt-1">SPECTREHUB</span>
+              <div className="flex flex-col items-center mx-3 translate-y-[-0.05em]">
+                <img src={logoAsset.url} alt="" className="h-[0.7em] w-auto animate-pulse drop-shadow-[0_0_30px_rgba(255,0,85,0.7)]" />
+                <span className="text-[11px] tracking-[0.5em] text-white/40 font-sans mt-2 font-black">SPECTREHUB</span>
               </div>
               <span>{t('hero.title2')}</span>
             </div>
@@ -102,12 +102,16 @@ export function Hero({ guildInvite, fallbackMembers }: HeroProps) {
         </Reveal>
 
         <Reveal delay={300}>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6">
-            <a href="#produtos" className="ds-btn ds-btn-primary w-full sm:w-auto sm:min-w-[200px] !py-2.5 !px-6 !text-[11px] !min-h-[40px] rounded-md">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-4">
+            <a href="#produtos" className="ds-btn ds-btn-primary w-full sm:w-auto sm:min-w-[280px] !py-3.5 !px-8 !text-[12px] !min-h-[50px] rounded-lg flex items-center justify-center gap-3 group">
               {t('common.getStarted')}
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </a>
-            <Link to="/docs" className="ds-btn ds-btn-secondary w-full sm:w-auto sm:min-w-[200px] !py-2.5 !px-6 !text-[11px] !min-h-[40px] rounded-md">
+            <Link to="/docs" className="ds-btn ds-btn-secondary w-full sm:w-auto sm:min-w-[280px] !py-3.5 !px-8 !text-[12px] !min-h-[50px] rounded-lg border border-white/10 flex items-center justify-center gap-3 bg-obsidian hover:bg-white/5 transition-all group">
               {t('common.documentation')}
+              <div className="w-4 h-4 opacity-60">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a4 4 0 0 0-4-4H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a4 4 0 0 1 4-4h6z"></path></svg>
+              </div>
             </Link>
           </div>
         </Reveal>

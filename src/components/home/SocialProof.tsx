@@ -141,10 +141,10 @@ export function SocialProof({ widgetUrl, products: productsList }: SocialProofPr
       <div ref={ref} className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-px md:bg-white/5 border border-white/5 rounded-2xl overflow-hidden bg-white/[0.02]">
            <div className="bg-obsidian flex flex-col items-center text-center p-8 group hover:bg-white/[0.04] transition-colors">
-              <div className="text-spectre-pink mb-4">
-                <Users className="w-6 h-6" />
+              <div className="text-spectre-pink mb-4 opacity-50 group-hover:opacity-100 transition-opacity">
+                <Users className="w-5 h-5" />
               </div>
-              <span className="font-display text-4xl md:text-5xl text-white italic mb-2 tracking-tighter">
+              <span className="font-display text-4xl md:text-5xl text-white italic mb-2 tracking-tighter leading-none">
                 {Math.round(membersCount)}+
               </span>
               <span className="font-display text-[9px] tracking-[0.3em] text-white/30 uppercase italic group-hover:text-spectre-pink transition-colors">
@@ -152,10 +152,10 @@ export function SocialProof({ widgetUrl, products: productsList }: SocialProofPr
               </span>
            </div>
            <div className="bg-obsidian flex flex-col items-center text-center p-8 group hover:bg-white/[0.04] transition-colors">
-              <div className="text-spectre-pink mb-4">
-                <Tractor className="w-6 h-6" />
+              <div className="text-spectre-pink mb-4 opacity-50 group-hover:opacity-100 transition-opacity">
+                <Tractor className="w-5 h-5" />
               </div>
-              <span className="font-display text-4xl md:text-5xl text-white italic mb-2 tracking-tighter">
+              <span className="font-display text-4xl md:text-5xl text-white italic mb-2 tracking-tighter leading-none">
                 {Math.round(productsCount)}
               </span>
               <span className="font-display text-[9px] tracking-[0.3em] text-white/30 uppercase italic group-hover:text-spectre-pink transition-colors">
@@ -163,10 +163,10 @@ export function SocialProof({ widgetUrl, products: productsList }: SocialProofPr
               </span>
            </div>
            <div className="bg-obsidian flex flex-col items-center text-center p-8 group hover:bg-white/[0.04] transition-colors">
-              <div className="text-spectre-pink mb-4">
-                <Zap className="w-6 h-6" />
+              <div className="text-spectre-pink mb-4 opacity-50 group-hover:opacity-100 transition-opacity">
+                <Zap className="w-5 h-5" />
               </div>
-              <span className="font-display text-4xl md:text-5xl text-white italic mb-2 tracking-tighter">
+              <span className="font-display text-4xl md:text-5xl text-white italic mb-2 tracking-tighter leading-none">
                 {latencyCount.toFixed(2)}<span className="text-spectre-pink not-italic text-2xl">ms</span>
               </span>
               <span className="font-display text-[9px] tracking-[0.3em] text-white/30 uppercase italic group-hover:text-spectre-pink transition-colors">
@@ -174,18 +174,19 @@ export function SocialProof({ widgetUrl, products: productsList }: SocialProofPr
               </span>
            </div>
            <div className="bg-obsidian flex flex-col items-center text-center p-8 group hover:bg-white/[0.04] transition-colors">
-              <div className="text-spectre-pink mb-4">
-                <ShieldCheck className="w-6 h-6" />
+              <div className="text-spectre-pink mb-4 opacity-50 group-hover:opacity-100 transition-opacity">
+                <ShieldCheck className="w-5 h-5" />
               </div>
-              <div className="flex items-center gap-1 mb-2">
+              <div className="flex items-center gap-1 mb-2 leading-none">
                 <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse shadow-[0_0_8px_rgba(34,197,94,0.5)]" />
-                <span className="font-display text-2xl md:text-3xl text-white italic tracking-tighter">99.9%</span>
+                <span className="font-display text-3xl md:text-4xl text-white italic tracking-tighter">99.9%</span>
               </div>
               <span className="font-display text-[9px] tracking-[0.3em] text-white/30 uppercase italic group-hover:text-spectre-pink transition-colors">
                 {t('community.statUptime')}
               </span>
            </div>
         </div>
+
       </div>
 
     </section>
