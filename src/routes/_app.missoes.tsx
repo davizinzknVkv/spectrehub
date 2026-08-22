@@ -86,10 +86,10 @@ function MissoesPage() {
       ? `${Math.floor(cooldownSecs / 60)}m${(cooldownSecs % 60).toString().padStart(2, "0")}s`
       : null;
 
-  const loadQuests = async () => {
+  const loadQuests = async (includeCompleted = false) => {
     setLoadingQuests(true);
     try {
-      const q = await fetchAvailableQuests();
+      const q = await fetchAvailableQuests(includeCompleted);
       setQuests(q);
       toast.success(`${q.length} missões localizadas.`);
     } catch (err) {
@@ -145,11 +145,18 @@ function MissoesPage() {
              </div>
              <div className="flex gap-2 sm:gap-3 flex-wrap w-full sm:w-auto">
                 <button 
-                  onClick={loadQuests}
+                  onClick={() => loadQuests(false)}
                   disabled={loadingQuests || running}
                   className="ds-btn ds-btn-secondary flex-1 sm:flex-initial !py-2.5 !px-5 !text-[11px] font-bold rounded-lg"
                 >
                   {loadingQuests ? 'Escanear...' : 'Sondagem'}
+                </button>
+                <button 
+                  onClick={() => loadQuests(true)}
+                  disabled={loadingQuests || running}
+                  className="ds-btn ds-btn-secondary flex-1 sm:flex-initial !py-2.5 !px-5 !text-[11px] font-bold rounded-lg border-primary/20"
+                >
+                  Resgate
                 </button>
                 <button 
                   onClick={async () => {

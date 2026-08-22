@@ -12,6 +12,8 @@ export type Quest = {
   imageUrl?: string;
   publisher?: string;
   expiresAt?: string;
+  completedAt?: string;
+  claimedAt?: string;
 };
 
 

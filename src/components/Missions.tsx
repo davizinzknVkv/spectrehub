@@ -84,12 +84,15 @@ export function MissionCard({
   onExec: () => void;
 }) {
   const isOrb = quest.rewardText.includes("Orbs");
-  const p = progress ? Math.min(100, (progress.current / progress.total) * 100) : 0;
+  const isCompleted = !!quest.completedAt;
+  const isClaimed = !!quest.claimedAt;
+  const p = progress ? Math.min(100, (progress.current / progress.total) * 100) : (isCompleted ? 100 : 0);
 
   return (
     <Card className={cn(
       "group relative flex min-h-[180px] flex-col justify-between transition-all duration-500 !p-6 border-border bg-card/30 hover:border-primary/20 h-full rounded-xl overflow-hidden",
-      active && "border-primary/40 bg-primary/[0.02]"
+      active && "border-primary/40 bg-primary/[0.02]",
+      isCompleted && !active && "border-emerald-500/30 bg-emerald-500/[0.02]"
     )}>
       {quest.imageUrl && (
         <div className="absolute inset-0 z-0 overflow-hidden opacity-10 transition-opacity duration-700 group-hover:opacity-20">
@@ -113,7 +116,11 @@ export function MissionCard({
           <div className="font-mono text-[9px] text-foreground-muted/50 font-bold uppercase tracking-widest">
             ID_{quest.questId.slice(0, 8)}
           </div>
-          {isOrb && <Sparkles className="h-4 w-4 text-amber-500 fill-amber-500/20" />}
+          <div className="flex gap-2">
+            {isClaimed && <Badge className="!bg-emerald-500/10 !text-emerald-400 !border-emerald-500/20 !text-[8px]">Resgatado</Badge>}
+            {isCompleted && !isClaimed && <Badge className="!bg-primary/10 !text-primary !border-primary/20 !text-[8px]">Pronto</Badge>}
+            {isOrb && <Sparkles className="h-4 w-4 text-amber-500 fill-amber-500/20" />}
+          </div>
         </div>
         <h3 className="mt-4 line-clamp-2 text-sm font-display uppercase tracking-tight text-foreground group-hover:text-primary transition-colors min-h-[2.4em] flex items-center leading-tight">
           {quest.questName}
@@ -131,6 +138,16 @@ export function MissionCard({
             <div className="h-1.5 overflow-hidden bg-white/5 rounded-full">
               <div className="h-full bg-primary shadow-[0_0_8px_rgba(255,0,85,0.4)] transition-all duration-500 rounded-full" style={{ width: `${p}%` }} />
             </div>
+          </div>
+        ) : isCompleted ? (
+          <div className="space-y-2">
+             <div className="flex items-center justify-between text-[10px] font-bold uppercase tracking-wider text-emerald-400">
+               <span>Missão Concluída</span>
+               <span>100%</span>
+             </div>
+             <div className="h-1.5 overflow-hidden bg-white/5 rounded-full">
+               <div className="h-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.4)] rounded-full w-full" />
+             </div>
           </div>
         ) : (
           <Button
