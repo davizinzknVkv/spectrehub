@@ -5,6 +5,7 @@ import { PageHeader } from "@/components/PageHeader";
 import { Card, Button, Input } from "@/components/ui/ds";
 import { toast } from "sonner";
 import { useServerFn } from "@tanstack/react-start";
+import { useQuestStore } from "@/lib/quest-store";
 import { generateSpotifyLinks } from "@/lib/spotify.functions";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -21,8 +22,14 @@ function SpotifyGenPage() {
   const [links, setLinks] = useState<string[]>([]);
   const [loading, setLoading] = useState(false);
   const genFn = useServerFn(generateSpotifyLinks);
+  const plan = useQuestStore((s) => s.plan);
 
   const handleGenerate = async () => {
+    if (plan !== "premium" && plan !== "lifetime" && plan !== "beta") {
+      toast.error("Acesso negado: Plano Premium ou Lifetime requerido.");
+      return;
+    }
+
     if (quantity < 1 || quantity > 100) {
       toast.error("Quantidade inválida (1-100)");
       return;
@@ -157,13 +164,23 @@ function SpotifyGenPage() {
           </Card>
 
           <Card className="p-6 border-white/5 bg-white/[0.01] border-dashed">
-             <div className="flex items-center gap-2 mb-4 text-white/40">
-                <AlertCircle className="w-4 h-4" />
-                <h4 className="font-display text-[9px] uppercase tracking-widest italic font-bold">Aviso Legal</h4>
+             <div className="flex flex-col gap-4">
+               <div className="flex items-center gap-2 text-white/40">
+                  <AlertCircle className="w-4 h-4" />
+                  <h4 className="font-display text-[9px] uppercase tracking-widest italic font-bold">Aviso Legal</h4>
+               </div>
+               <p className="text-[9px] text-white/30 uppercase tracking-[0.15em] font-sans italic leading-relaxed">
+                  Esta ferramenta gera links legítimos de redirecionamento do Spotify com parâmetros UTM para rastreamento de campanhas. Não gera contas premium, vouchers ou assinaturas gratuitas.
+               </p>
+               <div className="pt-4 border-t border-white/5">
+                 <p className="text-[10px] text-spectre-pink uppercase tracking-widest font-bold italic">
+                   Restrição de Acesso:
+                 </p>
+                 <p className="text-[9px] text-white/50 uppercase tracking-[0.1em] mt-1">
+                   O acesso ao Spotify Gen está disponível apenas para membros Premium (30 dias) e Lifetime. Planos Free e Booster não possuem acesso a esta funcionalidade.
+                 </p>
+               </div>
              </div>
-             <p className="text-[9px] text-white/30 uppercase tracking-[0.15em] font-sans italic leading-relaxed">
-                Esta ferramenta gera links legítimos de redirecionamento do Spotify com parâmetros UTM para rastreamento de campanhas. Não gera contas premium, vouchers ou assinaturas gratuitas.
-             </p>
           </Card>
         </div>
 
