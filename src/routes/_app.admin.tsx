@@ -218,25 +218,26 @@ function SpotifyTab({ token, rows, setRows, reload }: any) {
          </div>
       </div>
 
-      <Modal 
-        isOpen={isBulkOpen} 
-        onClose={() => setIsBulkOpen(false)}
-        title="Importação em Massa"
-      >
-        <div className="space-y-4 pt-4">
-          <p className="text-[11px] text-foreground-muted uppercase font-bold tracking-wider">Cole os links abaixo (um por linha):</p>
-          <textarea 
-            value={bulkText}
-            onChange={(e) => setBulkText(e.target.value)}
-            className="w-full h-48 bg-background border border-border rounded-lg p-3 font-mono text-xs focus:ring-1 focus:ring-primary outline-none resize-none"
-            placeholder="https://open.spotify.com/...\nhttps://open.spotify.com/..."
-          />
-          <div className="flex gap-2">
-            <Button onClick={handleBulkAdd} className="flex-1">Processar Links</Button>
-            <Button onClick={() => setIsBulkOpen(false)} variant="secondary">Cancelar</Button>
+      {isBulkOpen && (
+        <Modal 
+          onClose={() => setIsBulkOpen(false)}
+          title="Importação em Massa"
+        >
+          <div className="space-y-4 pt-4">
+            <p className="text-[11px] text-foreground-muted uppercase font-bold tracking-wider">Cole os links abaixo (um por linha):</p>
+            <textarea 
+              value={bulkText}
+              onChange={(e) => setBulkText(e.target.value)}
+              className="w-full h-48 bg-background border border-border rounded-lg p-3 font-mono text-xs focus:ring-1 focus:ring-primary outline-none resize-none"
+              placeholder={"https://open.spotify.com/...\nhttps://open.spotify.com/..."}
+            />
+            <div className="flex gap-2">
+              <Button onClick={handleBulkAdd} className="flex-1">Processar Links</Button>
+              <Button onClick={() => setIsBulkOpen(false)} variant="secondary">Cancelar</Button>
+            </div>
           </div>
-        </div>
-      </Modal>
+        </Modal>
+      )}
 
       <div className="grid grid-cols-1 gap-4">
         {rows.map((row: any, i: number) => (
