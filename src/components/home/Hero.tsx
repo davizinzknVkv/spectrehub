@@ -95,7 +95,7 @@ export function Hero({ guildInvite, fallbackMembers }: HeroProps) {
               whileHover={{ scale: 1.02, y: -2 }}
               whileTap={{ scale: 0.98 }}
               href="#produtos" 
-              className="ds-btn ds-btn-primary w-full sm:w-auto sm:min-w-[340px] !py-5 !px-12 !text-[14px] !min-h-[64px] rounded-xl flex items-center justify-center gap-4 group shadow-[0_0_40px_rgba(255,0,85,0.4)] hover:shadow-[0_0_60px_rgba(255,0,85,0.6)] transition-all"
+              className="ds-btn ds-btn-primary w-full sm:w-auto sm:min-w-[280px] !py-4 !px-10 !text-[12px] !min-h-[56px] rounded-xl flex items-center justify-center gap-4 group shadow-[0_0_40px_rgba(255,0,85,0.4)] hover:shadow-[0_0_60px_rgba(255,0,85,0.6)] transition-all"
             >
               {t('common.getStarted')}
               <ArrowRight className="w-5 h-5 group-hover:translate-x-3 transition-transform duration-500" />
