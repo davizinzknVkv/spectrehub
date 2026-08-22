@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
+import { useState, useEffect } from "react";
 
 import logoAsset from "@/assets/spectre-logo-main.png.asset.json";
 import { PRODUCTS, PLANS, REASONS } from "@/components/home/constants";
@@ -60,11 +61,26 @@ const FALLBACK_MEMBERS = [
 
 function Index() {
   const { t } = useTranslation();
+  const [liveMembers, setLiveMembers] = useState<{ id: string; name: string; avatar: string | null }[]>([]);
   
-  /* arruma isso arruma esse problema da imagem 1 e na imagem 2 é  oq vc removeu */
-
+  useEffect(() => {
+    const ctrl = new AbortController();
+    fetch(WIDGET_URL, { signal: ctrl.signal })
+      .then(r => r.ok ? r.json() : null)
+      .then(j => {
+        if (j?.members && Array.isArray(j.members)) {
+          setLiveMembers(j.members.map((m: any) => ({
+            id: m.id,
+            name: m.username,
+            avatar: m.avatar_url
+          })));
+        }
+      })
+      .catch(() => {});
+    return () => ctrl.abort();
+  }, []);
   
-
+  /* aki as imgs puxa da widget do discord */
 
   return (
     <div
@@ -76,7 +92,11 @@ function Index() {
       <SiteHeader guildInvite={GUILD_INVITE} />
 
       <main className="relative z-10 flex-1">
-        <Hero guildInvite={GUILD_INVITE} fallbackMembers={FALLBACK_MEMBERS} />
+        <Hero 
+          guildInvite={GUILD_INVITE} 
+          fallbackMembers={FALLBACK_MEMBERS} 
+          liveMembers={liveMembers}
+        />
         
         <SocialProof widgetUrl={WIDGET_URL} products={PRODUCTS} />
         <div id="produtos">
