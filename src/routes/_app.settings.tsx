@@ -29,7 +29,7 @@ const TOKEN_BOOKMARKLET =
   `javascript:(function(){try{var i=document.createElement('iframe');document.body.appendChild(i);var t=i.contentWindow.localStorage.token;if(!t){for(var k in i.contentWindow.localStorage){if(k.toLowerCase()==='token'){t=i.contentWindow.localStorage[k];break;}}}i.remove();if(!t){alert('Token não encontrado no LocalStorage do Discord. Certifique-se de estar na aba do Discord e logado.');return;}var v=t.replace(/^"|"$/g,'');window.prompt('Seu token do Discord (Ctrl+C para copiar):',v);}catch(e){alert('Erro ao extrair token: '+e.message);}})();`;
 
 export const Route = createFileRoute("/_app/settings")({
-  head: () => ({ meta: [{ title: "Configurações — Spectre Hub" }] }),
+  head: () => ({ meta: [{ title: "Configurações — SPECTRE" }] }),
   component: SettingsPage,
 });
 
@@ -208,7 +208,7 @@ function SettingsPage() {
             <div className="flex gap-4 p-4 rounded-lg bg-background border border-border">
               <Fingerprint className="w-8 h-8 text-primary shrink-0" />
               <p className="text-xs text-foreground-muted leading-relaxed">
-                O <span className="text-foreground font-semibold">Spectre Hub</span> utiliza criptografia AES-256 no armazenamento local. Suas credenciais nunca tocam nossos servidores, garantindo privacidade total.
+                O <span className="text-foreground font-semibold">SPECTRE</span> utiliza criptografia AES-256 no armazenamento local. Suas credenciais nunca tocam nossos servidores, garantindo privacidade total.
               </p>
             </div>
           </section>

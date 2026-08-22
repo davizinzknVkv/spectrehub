@@ -17,7 +17,7 @@ import {
 import logoAsset from "@/assets/spectre-logo-nobg.png.asset.json";
 
 export const Route = createFileRoute("/_app/farms")({
-  head: () => ({ meta: [{ title: "Farms — Spectre Hub" }] }),
+  head: () => ({ meta: [{ title: "Farms — SPECTRE" }] }),
   component: FarmsPage,
 });
 

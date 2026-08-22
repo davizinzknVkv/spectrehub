@@ -203,12 +203,12 @@ function DocsPage() {
                 <section className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
                   <div className="space-y-4">
                     <div className="inline-block px-3 py-1 bg-primary/10 border border-primary/20 text-primary text-[9px] font-bold uppercase tracking-widest">Documentação Oficial</div>
-                    <h1 className="font-display text-5xl lg:text-7xl uppercase tracking-tighter leading-[0.9]">Bem-vindo ao <br/><span className="text-primary">Spectre Hub</span></h1>
+                    <h1 className="font-display text-5xl lg:text-7xl uppercase tracking-tighter leading-[0.9]">Bem-vindo ao <br/><span className="text-primary">SPECTRE</span></h1>
                   </div>
                   
                   <div className="space-y-6 text-white/60 text-lg max-w-3xl leading-relaxed">
                     <p>
-                      O Spectre Hub é o ecossistema definitivo para entusiastas de automação e performance no Discord. Nossa plataforma foi construída sob os pilares da segurança extrema, latência zero e interface industrial premium.
+                      O SPECTRE é o ecossistema definitivo para entusiastas de automação e performance no Discord. Nossa plataforma foi construída sob os pilares da segurança extrema, latência zero e interface industrial premium.
                     </p>
                     <p>
                       Esta documentação serve como o guia central para entender nossos produtos, configurar sua infraestrutura e extrair o máximo potencial de cada ferramenta disponível.
@@ -280,7 +280,7 @@ function DocsPage() {
                 <section className="space-y-12 animate-in fade-in slide-in-from-bottom-4 duration-700">
                   <div className="space-y-4">
                     <h2 className="font-display text-4xl uppercase tracking-tighter italic">Guia de <span className="text-primary">Início</span></h2>
-                    <p className="text-white/50 text-base max-w-2xl">Siga estes passos fundamentais para configurar sua conta e começar a utilizar o Spectre Hub.</p>
+                    <p className="text-white/50 text-base max-w-2xl">Siga estes passos fundamentais para configurar sua conta e começar a utilizar o SPECTRE.</p>
                   </div>
 
                   <div className="space-y-8">
@@ -311,7 +311,7 @@ function DocsPage() {
                   </div>
                   <div className="grid gap-4">
                     {[
-                      { q: "O Spectre Hub é seguro?", a: "Sim. Utilizamos métodos de anti-detecção avançados e rotação de headers para garantir a máxima segurança da sua conta." },
+                      { q: "O SPECTRE é seguro?", a: "Sim. Utilizamos métodos de anti-detecção avançados e rotação de headers para garantir a máxima segurança da sua conta." },
                       { q: "Como resgatar as missões?", a: "Basta vincular seu token no Hub e ativar o módulo de Auto Quests. O sistema fará o resto automaticamente." },
                       { q: "Quais são as formas de pagamento?", a: "Aceitamos diversas formas de pagamento através da nossa loja oficial no Discord." }
                     ].map((item, i) => (
@@ -334,7 +334,7 @@ function DocsPage() {
                   <div className="space-y-8 text-white/50 text-sm leading-relaxed max-w-4xl">
                     <div className="space-y-4">
                       <h3 className="font-display text-lg text-white uppercase tracking-widest">1. Aceitação dos Termos</h3>
-                      <p>Ao acessar o Spectre Hub, você concorda em cumprir estes termos de serviço e todas as leis aplicáveis. O uso indevido da plataforma resultará em banimento imediato sem direito a reembolso.</p>
+                      <p>Ao acessar o SPECTRE, você concorda em cumprir estes termos de serviço e todas as leis aplicáveis. O uso indevido da plataforma resultará em banimento imediato sem direito a reembolso.</p>
                     </div>
                     <div className="space-y-4">
                       <h3 className="font-display text-lg text-white uppercase tracking-widest">2. Uso de Automação</h3>
@@ -367,7 +367,7 @@ function DocsPage() {
         <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-8">
           <div className="flex items-center gap-3">
             <img src={logoAsset.url} alt="" className="h-6 w-6 opacity-30" />
-            <span className="font-display text-[10px] tracking-[0.3em] uppercase text-white/20 italic">Spectre Hub <span className="text-white/10 px-2">|</span> Base Rebirth</span>
+            <span className="font-display text-[10px] tracking-[0.3em] uppercase text-white/20 italic">SPECTRE <span className="text-white/10 px-2">|</span> Base Rebirth</span>
           </div>
           <div className="flex gap-8">
              {["Termos", "Privacidade", "Discord", "Status"].map(link => (

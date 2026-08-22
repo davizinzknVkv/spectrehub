@@ -10,7 +10,7 @@ import { cloneServer, getGuilds } from "@/lib/cloner.functions";
 import * as Popover from "@radix-ui/react-popover";
 
 export const Route = createFileRoute("/_app/clone")({
-  head: () => ({ meta: [{ title: "Discord Tools — Spectre Hub" }] }),
+  head: () => ({ meta: [{ title: "Discord Tools — SPECTRE" }] }),
   component: ClonePage,
 });
 

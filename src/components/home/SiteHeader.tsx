@@ -69,7 +69,7 @@ export function SiteHeader({ guildInvite }: SiteHeaderProps) {
           <div className="relative w-10 h-10 flex items-center justify-center">
             <img
               src={logoAsset.url}
-              alt="Spectre Hub"
+              alt="SPECTRE"
               className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500 drop-shadow-[0_0_8px_rgba(77,160,158,0.3)]"
             />
           </div>

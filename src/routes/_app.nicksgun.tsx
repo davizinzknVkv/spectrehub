@@ -8,7 +8,7 @@ import { useQuestStore } from "@/lib/quest-store";
 import logoAsset from "@/assets/spectre-logo-nobg.png.asset.json";
 
 export const Route = createFileRoute("/_app/nicksgun")({
-  head: () => ({ meta: [{ title: "Nicks-Gun — Spectre Hub" }] }),
+  head: () => ({ meta: [{ title: "Nicks-Gun — SPECTRE" }] }),
   component: NicksGunPage,
 });
 
@@ -121,7 +121,7 @@ function NicksGunPage() {
       <div className="pt-20 text-center space-y-8">
         <img src={logoAsset.url} alt="Logo" className="w-24 h-24 mx-auto invert opacity-50" />
         <h1 className="font-display text-4xl uppercase tracking-tighter text-white">Sniper Bloqueado</h1>
-        <p className="text-white/40 max-w-sm mx-auto font-sans italic">O sniper de identidades raras requer uma conexão ativa com o terminal do Spectre Hub.</p>
+        <p className="text-white/40 max-w-sm mx-auto font-sans italic">O sniper de identidades raras requer uma conexão ativa com o terminal do SPECTRE.</p>
         <Link to="/settings" className="ds-btn ds-btn-primary mx-auto">Vincular Conta</Link>
       </div>
     );

@@ -19,9 +19,9 @@ const WIDGET_URL = `https://discord.com/api/guilds/${GUILD_ID}/widget.json`;
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Spectre Hub — A Elite do Discord" },
+      { title: "SPECTRE — A Elite do Discord" },
       { name: "description", content: "O ecossistema mais avançado para automação e gestão de Discord." },
-      { property: "og:title", content: "Spectre Hub — A Elite do Discord" },
+      { property: "og:title", content: "SPECTRE — A Elite do Discord" },
       { property: "og:description", content: "O ecossistema mais avançado para automação e gestão de Discord." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" }

@@ -167,7 +167,7 @@ function SidebarBody({
       <Link to="/" className="flex items-center gap-3 px-8 pb-10 pt-10 group">
         <img
           src={logoUrl}
-          alt="Spectre Hub"
+          alt="SPECTRE"
           className="h-9 w-9 object-contain shrink-0 transition-transform duration-500 group-hover:scale-110"
         />
         <span className="font-display text-lg tracking-tighter text-foreground uppercase">
@@ -299,7 +299,7 @@ function TopBar({ onOpenMenu, pathname }: { onOpenMenu: () => void; pathname: st
           </div>
 
           <Link to="/" className="flex items-center gap-2 lg:hidden">
-            <img src={logoAsset.url} alt="Spectre Hub" className="h-7 w-7 object-contain" />
+            <img src={logoAsset.url} alt="SPECTRE" className="h-7 w-7 object-contain" />
             <span className="font-display text-[10px] tracking-wider uppercase text-foreground">Spectre</span>
           </Link>
         </div>

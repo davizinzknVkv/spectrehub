@@ -57,7 +57,7 @@ import logoAsset from "@/assets/spectre-logo-nobg.png.asset.json";
 import { cn, getDiscordCreationDate, formatDiscordAccountAge } from "@/lib/utils";
 
 export const Route = createFileRoute("/_app/hub")({
-  head: () => ({ meta: [{ title: "Hub — Spectre Hub" }] }),
+  head: () => ({ meta: [{ title: "Hub — SPECTRE" }] }),
   component: HubPage,
 });
 
@@ -266,7 +266,7 @@ function HubPage() {
       <div className="pt-20 text-center space-y-8">
         <img src={logoAsset.url} alt="Logo" className="w-24 h-24 mx-auto invert opacity-50" />
         <h1 className="font-display text-4xl uppercase tracking-tighter text-white">Offline</h1>
-        <p className="text-white/40 max-w-sm mx-auto font-sans">Conecte sua conta no portal de segurança para desbloquear o acesso total ao Spectre Hub.</p>
+        <p className="text-white/40 max-w-sm mx-auto font-sans">Conecte sua conta no portal de segurança para desbloquear o acesso total ao SPECTRE.</p>
         <Link to="/settings" className="ds-btn ds-btn-primary mx-auto">Vincular Conta</Link>
       </div>
     );
@@ -892,7 +892,7 @@ function PresenceModal({
   const [customText, setCustomText] = useState(settings?.custom_status?.text || '');
   const [customEmoji, setCustomEmoji] = useState(settings?.custom_status?.emoji_name || '');
   const [richEnabled, setRichEnabled] = useState(false);
-  const [richName, setRichName] = useState('Spectre Hub');
+  const [richName, setRichName] = useState('SPECTRE');
   const [richDetails, setRichDetails] = useState('Optimizing Discord');
   const [loading, setLoading] = useState(false);
   
@@ -1003,7 +1003,7 @@ function PresenceModal({
               <div className="flex items-center justify-between p-4 bg-primary/5 border border-primary/20 rounded-xl">
                 <span className="text-xs font-bold uppercase tracking-wider text-foreground-muted">Ativar Status Customizado</span>
                 <button 
-                  onClick={() => setCustomText(customText ? '' : 'Spectre Hub User')}
+                  onClick={() => setCustomText(customText ? '' : 'SPECTRE User')}
                   className={cn(
                     "w-10 h-5 rounded-full relative transition-all duration-500",
                     customText ? "bg-primary shadow-[0_0_10px_rgba(255,0,85,0.4)]" : "bg-border"

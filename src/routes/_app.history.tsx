@@ -4,7 +4,7 @@ import { PageHeader } from "@/components/PageHeader";
 import { History, Target, Gift, Clock } from "lucide-react";
 
 export const Route = createFileRoute("/_app/history")({
-  head: () => ({ meta: [{ title: "Histórico — Spectre Hub" }] }),
+  head: () => ({ meta: [{ title: "Histórico — SPECTRE" }] }),
   component: HistoryPage,
 });
 

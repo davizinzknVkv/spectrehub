@@ -47,7 +47,7 @@ export function ProductsSection({ products }: ProductsSectionProps) {
               items={products}
               cardWidth={300}
               gap={32}
-              borderRadius={0} // Spectre Hub style is sharp/clipped
+              borderRadius={0} // SPECTRE style is sharp/clipped
               tilt={15}
               perspective={2000}
               inactiveScale={0.85}

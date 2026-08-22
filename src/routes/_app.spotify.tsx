@@ -12,7 +12,7 @@ import { generateSpotifyLinks } from "@/lib/spotify.functions";
 import { motion, AnimatePresence } from "framer-motion";
 
 export const Route = createFileRoute("/_app/spotify")({
-  head: () => ({ meta: [{ title: "Spotify Gen — Spectre Hub" }] }),
+  head: () => ({ meta: [{ title: "Spotify Gen — SPECTRE" }] }),
   component: SpotifyGenPage,
 });
 

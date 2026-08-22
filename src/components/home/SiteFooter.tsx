@@ -24,7 +24,7 @@ export function SiteFooter({ guildInvite }: SiteFooterProps) {
                 <div className="absolute inset-0 bg-primary/20 blur-lg rounded-full scale-0 group-hover:scale-150 transition-transform duration-500" />
                 <img
                   src={logoAsset.url}
-                  alt="Spectre Hub"
+                  alt="SPECTRE"
                   className="w-12 h-12 object-contain relative z-10 transition-transform duration-500 group-hover:rotate-12"
                 />
               </div>
