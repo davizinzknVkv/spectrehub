@@ -1,4 +1,4 @@
-/* arruma a funçao pra resgatar as misao dai quando clicar mostra as missao que tem pra resgatar */
+/* o acesso ao spotify o free eo boost nao tem acesso so premiun 30 dias e lifetime */
 import { createFileRoute } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
 import { useState, useEffect } from "react";
