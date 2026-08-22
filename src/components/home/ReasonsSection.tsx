@@ -43,19 +43,18 @@ export function ReasonsSection({ reasons }: ReasonsSectionProps) {
 
         </Reveal>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-px bg-white/5 border border-white/5">
+        <div className="grid grid-cols-1 sm:grid-cols-2 border border-white/10">
           {reasons.map((r: Reason, i: number) => (
             <Reveal key={r.title} delay={i * 100}>
               <motion.div 
-                whileHover={{ y: -5, borderColor: "rgba(255, 0, 85, 0.3)" }}
-                className="bg-obsidian p-10 h-full border border-white/5 transition-all duration-500 group rounded-none relative overflow-hidden"
+                whileHover={{ backgroundColor: "rgba(255, 255, 255, 0.02)" }}
+                className={`p-10 h-full transition-all duration-500 group relative border-white/10 ${i === 0 ? 'border-b sm:border-r' : i === 1 ? 'border-b' : i === 2 ? 'sm:border-r' : ''}`}
               >
-                <div className="absolute inset-0 bg-gradient-to-br from-spectre-pink/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-                <div className="mb-8 w-12 h-12 border border-white/10 flex items-center justify-center text-white group-hover:bg-spectre-pink group-hover:border-spectre-pink transition-all duration-500 relative z-10">
+                <div className="mb-8 w-12 h-12 border border-white/10 flex items-center justify-center text-white group-hover:border-spectre-pink transition-all duration-500 relative z-10 bg-[#0A0A0A]">
                   <r.icon className="w-5 h-5" />
                 </div>
                 <h3 className="font-display text-lg text-white uppercase italic mb-4 relative z-10">{t(`reasons.items.${i}.title`)}</h3>
-                <p className="font-sans text-xs text-white/30 leading-relaxed uppercase tracking-wider relative z-10">
+                <p className="font-sans text-[11px] text-white/40 leading-relaxed uppercase tracking-wider relative z-10 max-w-[280px]">
                   {t(`reasons.items.${i}.desc`)}
                 </p>
               </motion.div>

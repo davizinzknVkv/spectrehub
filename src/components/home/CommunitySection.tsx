@@ -25,10 +25,10 @@ function MiniStat({
   value: string;
 }) {
   return (
-    <div className="bg-obsidian border border-white/5 p-6 group hover:border-spectre-pink/30 transition-colors">
-      <Icon className="h-4 w-4 text-spectre-pink mb-4" />
-      <div className="font-display text-2xl text-white uppercase italic">{value}</div>
-      <div className="font-display text-[9px] tracking-[0.2em] text-white/20 uppercase mt-1 group-hover:text-white/40 transition-colors">
+    <div className="bg-[#080808] border border-white/5 p-8 group hover:border-spectre-pink/20 transition-all duration-500">
+      <Icon className="h-5 w-5 text-spectre-pink mb-6 group-hover:scale-110 transition-transform" />
+      <div className="font-display text-3xl text-white uppercase italic mb-1">{value}</div>
+      <div className="font-display text-[10px] tracking-[0.3em] text-white/30 uppercase group-hover:text-white/50 transition-colors">
         {label}
       </div>
     </div>
@@ -76,18 +76,19 @@ export function CommunitySection({ widgetUrl, guildId, guildInvite, fallbackMemb
                <span className="w-8 h-px bg-spectre-pink/30" />
                {t('community.badge')}
             </div>
-            <h2 className="font-display text-[2rem] md:text-[3.5rem] leading-[0.9] text-white uppercase italic tracking-tighter mb-6">
+            <h2 className="font-display text-[2.5rem] md:text-[4rem] leading-[0.9] text-white uppercase italic tracking-tighter mb-8">
               {t('community.title')} <br />
-              <span className="text-white/30 text-[1.5rem] md:text-[2.5rem]">{t('community.subtitle')}</span>
+              <span className="text-white/30 text-[1.8rem] md:text-[3rem]">{t('community.subtitle')}</span>
             </h2>
-            <p className="text-white/40 text-xs leading-relaxed uppercase tracking-widest border-l border-spectre-pink/30 pl-6 mb-8 max-w-xl">
+            <p className="text-white/40 text-[11px] leading-relaxed uppercase tracking-[0.2em] border-l border-spectre-pink/30 pl-8 mb-12 max-w-xl">
               {t('community.description')}
             </p>
+
 
           </Reveal>
 
           <Reveal delay={200}>
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-px bg-white/5 border border-white/5 mb-8">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-px bg-white/5 border border-white/5 mb-12">
                <MiniStat
                   icon={Users}
                   label={t('community.statOnline')}
@@ -95,54 +96,90 @@ export function CommunitySection({ widgetUrl, guildId, guildInvite, fallbackMemb
                 />
                 <MiniStat icon={MessageSquare} label={t('community.statSupport')} value="Ticket" />
                 <MiniStat icon={Sparkles} label={t('community.statRoles')} value="Premium" />
-
             </div>
             <a
               href={guildInvite}
               target="_blank"
               rel="noreferrer"
-              className="ds-btn ds-btn-primary px-12"
+              className="ds-btn ds-btn-primary px-16 py-5 text-[11px]"
             >
               {t('common.getStarted')}
             </a>
+
           </Reveal>
         </div>
 
-        <Reveal className="relative bg-black border border-white/5 p-4 overflow-hidden group rounded-none shadow-[inset_0_0_50px_rgba(0,0,0,0.8)] w-full max-w-full">
-           <div className="absolute top-4 left-4 right-4 h-10 bg-[#080808] border border-white/5 flex items-center px-4 gap-3 z-20">
-              <div className="relative flex items-center justify-center">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#ff0055] animate-pulse" />
-                <span className="absolute w-3 h-3 rounded-full bg-[#ff0055]/20 animate-ping" />
+        <Reveal className="relative bg-[#050505] border border-white/10 p-5 overflow-hidden group shadow-2xl w-full max-w-[500px] mx-auto lg:mx-0">
+           {/* Terminal Header */}
+           <div className="absolute top-0 left-0 right-0 h-12 bg-[#0A0A0A] border-b border-white/5 flex items-center px-6 gap-3 z-30">
+              <div className="flex gap-1.5">
+                <div className="w-2 h-2 rounded-full bg-spectre-pink animate-pulse" />
+                <div className="w-2 h-2 rounded-full bg-white/5" />
+                <div className="w-2 h-2 rounded-full bg-white/5" />
               </div>
-              <span className="font-display text-[9px] text-white/40 uppercase italic tracking-[0.3em]">DISCORD PROTOCOL V2.0</span>
-              <div className="ml-auto flex gap-1">
-                <div className="w-1 h-1 bg-white/10" />
-                <div className="w-1 h-1 bg-white/10" />
-                <div className="w-1 h-1 bg-[#ff0055]/40" />
+              <span className="font-display text-[10px] text-white/40 uppercase italic tracking-[0.4em] ml-4">DISCORD PROTOCOL V2.0</span>
+              <div className="ml-auto flex gap-4">
+                <div className="w-3 h-0.5 bg-white/10" />
+                <div className="w-3 h-3 border border-white/10" />
+                <div className="w-3 h-3 text-white/20 text-[10px] flex items-center justify-center leading-none">×</div>
               </div>
            </div>
-           <div className="pt-14 h-[350px] sm:h-[500px] overflow-hidden relative bg-[#050505]">
-              <div className="absolute inset-0 z-10 pointer-events-none bg-gradient-to-b from-transparent via-transparent to-black" />
-              <iframe
-                src={`https://discord.com/widget?id=${guildId}&theme=dark`}
-                width="100%"
-                height="500"
-                title="Widget do Discord"
-                loading="lazy"
-                // @ts-ignore
-                allowtransparency="true"
-                frameBorder={0}
-                sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"
-                className="opacity-70 group-hover:opacity-100 transition-all duration-700 w-full h-full filter contrast-[1.1] brightness-[0.9]"
-              />
+
+           {/* Discord Mockup Body */}
+           <div className="pt-12 relative z-20 bg-[#313338] min-h-[500px] flex flex-col font-sans">
+              <div className="bg-[#5865F2] p-6 flex items-center justify-between shadow-lg">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center">
+                    <Users className="w-6 h-6 text-white" />
+                  </div>
+                  <span className="font-bold text-white tracking-wide">Discord</span>
+                </div>
+                <span className="text-[11px] text-white/70 font-medium">{presence !== null ? presence : "—"} Members Online</span>
+              </div>
+              
+              <div className="p-6 space-y-4 flex-1">
+                {[
+                  { icon: '🔊', name: 'Sala Geral' },
+                  { icon: '🎮', name: 'Gaming' },
+                  { icon: '💻', name: 'Desenvolvimento' },
+                  { icon: '🎵', name: 'Música' },
+                  { icon: '💎', name: 'Premium' },
+                ].map((ch) => (
+                  <div key={ch.name} className="flex items-center gap-3 text-[#949BA4] hover:bg-[#35373C] hover:text-[#DBDEE1] p-2 rounded transition-colors cursor-pointer group/item">
+                    <span className="text-lg opacity-60 group-hover/item:opacity-100">{ch.icon}</span>
+                    <span className="text-[13px] font-medium">{ch.name}</span>
+                  </div>
+                ))}
+
+                <div className="mt-8 pt-6 border-t border-white/5">
+                  <span className="text-[11px] font-bold text-[#949BA4] uppercase tracking-wider block mb-4">Members Online</span>
+                  <div className="space-y-3">
+                    {list.slice(0, 5).map((m) => (
+                      <div key={m.id} className="flex items-center gap-3 group/member">
+                        <div className="relative">
+                          <div className="w-8 h-8 rounded-full bg-[#1E1F22] overflow-hidden">
+                            {m.avatar ? <img src={m.avatar} alt="" className="w-full h-full object-cover" /> : <Avatar seed={m.name} />}
+                          </div>
+                          <div className="absolute -bottom-0.5 -right-0.5 w-3 h-3 rounded-full bg-[#23A55A] border-[3px] border-[#313338]" />
+                        </div>
+                        <span className="text-[13px] text-[#DBDEE1] font-medium group-hover/member:text-white transition-colors">{m.name}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              <div className="p-4 bg-[#2B2D31]">
+                <button className="w-full bg-[#248046] hover:bg-[#1A6334] text-white text-sm font-medium py-2.5 rounded transition-colors">
+                  Join Discord
+                </button>
+              </div>
            </div>
-           {/* Decorative Corner */}
-           <div className="absolute bottom-0 right-0 w-8 h-8 pointer-events-none">
-              <div className="absolute bottom-2 right-2 w-1 h-1 bg-[#ff0055]/30" />
-              <div className="absolute bottom-2 right-4 w-4 h-[1px] bg-[#ff0055]/20" />
-              <div className="absolute bottom-4 right-2 w-[1px] h-4 bg-[#ff0055]/20" />
-           </div>
+
+           {/* Decorative Grid Overlay */}
+           <div className="absolute inset-0 z-10 pointer-events-none opacity-20" style={{ backgroundImage: 'linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px)', backgroundSize: '20px 20px' }} />
         </Reveal>
+
       </div>
 
       {/* Marquee Members */}

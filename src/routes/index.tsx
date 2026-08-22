@@ -1,4 +1,4 @@
-/* no spotify coloca algo pra mostra a quantidade de stock */
+/* melhora essas 4 partes do site */
 import { createFileRoute } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
 import { useState, useEffect } from "react";

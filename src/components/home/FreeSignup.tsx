@@ -46,68 +46,70 @@ export function FreeSignup({ guildInvite }: FreeSignupProps) {
   return (
     <section id="free" className="mx-auto max-w-7xl px-4 py-24 sm:px-6 lg:px-8">
       <Reveal>
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_450px] gap-12 bg-obsidian-soft border border-white/5 p-8 md:p-16 rounded-none">
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_480px] gap-12 bg-[#050505] border border-white/5 p-8 md:p-20 relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-32 h-32 bg-spectre-pink/5 blur-[100px] pointer-events-none" />
+          
           <div>
             <div className="font-display text-[10px] tracking-[0.3em] text-spectre-pink uppercase mb-4 flex items-center gap-2">
                <span className="w-8 h-px bg-spectre-pink/30" />
                {t('free.badge')}
             </div>
-            <h2 className="font-display text-[2rem] md:text-[3.5rem] leading-[0.9] text-white uppercase italic tracking-tighter mb-12">
+            <h2 className="font-display text-[2.5rem] md:text-[4rem] leading-[0.9] text-white uppercase italic tracking-tighter mb-16">
               {t('free.title')} <br />
-              <span className="text-white/30 text-[1.5rem] md:text-[2.5rem]">{t('free.subtitle')}</span>
+              <span className="text-white/30 text-[1.8rem] md:text-[3rem]">{t('free.subtitle')}</span>
             </h2>
 
-            
-            <div className="space-y-8">
+            <div className="space-y-10">
               {[
                 t('free.step1'),
                 t('free.step2'),
                 t('free.step3'),
               ].map((s, i) => (
-
-                <div key={s} className="flex gap-6 group">
-                   <div className="w-12 h-12 border border-white/10 bg-white/5 flex items-center justify-center font-display text-white italic transition-colors group-hover:border-spectre-pink/40 group-hover:text-spectre-pink shrink-0">
+                <div key={s} className="flex items-center gap-8 group">
+                   <div className={`w-14 h-14 border flex items-center justify-center font-display italic transition-all duration-500 shrink-0 ${i === 1 ? 'border-spectre-pink text-spectre-pink bg-spectre-pink/5' : 'border-white/10 text-white/20 group-hover:border-white/30 group-hover:text-white'}`}>
                      0{i + 1}
                    </div>
-                   <div className="pt-2">
-                     <p className="font-sans text-xs text-white/40 uppercase tracking-widest group-hover:text-white/60 transition-colors">
-                       {s}
-                     </p>
-                   </div>
+                   <p className="font-sans text-[11px] text-white/40 uppercase tracking-[0.2em] group-hover:text-white/70 transition-colors max-w-xs leading-relaxed">
+                     {s}
+                   </p>
                 </div>
               ))}
             </div>
           </div>
 
-          <div className="bg-black/40 border border-white/5 p-8 md:p-10 relative">
-             <div className="absolute top-0 right-0 w-8 h-8 border-t border-r border-spectre-pink/30 pointer-events-none" />
-             <div className="absolute bottom-0 left-0 w-8 h-8 border-b border-l border-spectre-pink/30 pointer-events-none" />
+          <div className="bg-[#080808] border border-white/10 p-10 md:p-14 relative z-10">
+             <div className="absolute -top-px -right-px w-10 h-10 border-t border-r border-spectre-pink/40 pointer-events-none" />
+             <div className="absolute -bottom-px -left-px w-10 h-10 border-b border-l border-spectre-pink/40 pointer-events-none" />
+
              
             {!code ? (
               <form onSubmit={generate} className="space-y-8">
-                <div className="space-y-3">
-                  <label className="font-display text-[9px] uppercase tracking-[0.3em] text-white/30 italic">
+                <div className="space-y-4">
+                  <label className="font-display text-[10px] uppercase tracking-[0.3em] text-white/60 italic block">
                     Identificação
                   </label>
+
                   <input
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     maxLength={40}
                     required
-                    className="w-full bg-white/5 border border-white/10 px-6 py-4 text-xs text-white uppercase tracking-widest outline-none focus:border-spectre-pink/50 transition-all placeholder:text-white/10"
+                    className="w-full bg-[#111] border border-white/5 px-6 py-5 text-[11px] text-white uppercase tracking-widest outline-none focus:border-spectre-pink/40 transition-all placeholder:text-white/5"
+
                     placeholder={t('free.formName')}
                   />
                 </div>
-                <div className="space-y-3">
-                  <label className="font-display text-[9px] uppercase tracking-[0.3em] text-white/30 italic">
+                <div className="space-y-4">
+                  <label className="font-display text-[10px] uppercase tracking-[0.3em] text-white/60 italic block">
                     Usuário Discord
                   </label>
+
                   <input
                     value={discord}
                     onChange={(e) => setDiscord(e.target.value)}
                     maxLength={40}
                     required
-                    className="w-full bg-white/5 border border-white/10 px-6 py-4 text-xs text-white uppercase tracking-widest outline-none focus:border-spectre-pink/50 transition-all placeholder:text-white/10"
+                    className="w-full bg-[#111] border border-white/5 px-6 py-5 text-[11px] text-white uppercase tracking-widest outline-none focus:border-spectre-pink/40 transition-all placeholder:text-white/5"
                     placeholder={t('free.formDiscord')}
                   />
                 </div>
