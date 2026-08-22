@@ -293,7 +293,14 @@ function DocsPage() {
       </footer>
 
       {/* Floating AI Button (Documentation focused) */}
-      <button className="fixed bottom-8 right-8 ds-btn ds-btn-primary !px-6 !py-4 flex items-center gap-3 shadow-[0_10px_40px_rgba(255,0,85,0.2)] group z-50 rounded-none border border-white/10">
+      <button 
+        onClick={() => {
+          // Toggle AI Support (logic can be expanded here)
+          console.log("AI Support Activated");
+          alert("ativa o super de ia no docs");
+        }}
+        className="fixed bottom-8 right-8 ds-btn ds-btn-primary !px-6 !py-4 flex items-center gap-3 shadow-[0_10px_40px_rgba(255,0,85,0.2)] group z-50 rounded-none border border-white/10"
+      >
         <Sparkles className="w-4 h-4 transition-transform group-hover:rotate-12 group-hover:scale-125" />
         <span className="font-display text-[10px] font-bold uppercase tracking-widest italic">Suporte IA Docs</span>
       </button>
