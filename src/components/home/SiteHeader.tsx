@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "@tanstack/react-router";
 import { X, Menu, LogIn, Search, Github, Youtube, Instagram, ChevronDown, MessageSquare, Languages } from "lucide-react";
 import { useTranslation } from 'react-i18next';
+import { motion, AnimatePresence } from "framer-motion";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -99,16 +100,24 @@ export function SiteHeader({ guildInvite }: SiteHeaderProps) {
               <a
                 key={n.href}
                 href={n.href}
-                className="font-display text-[10px] tracking-[0.3em] text-white/40 hover:text-white transition-colors uppercase italic"
+                className="font-display text-[10px] tracking-[0.3em] text-white/40 hover:text-white transition-all uppercase italic relative group"
               >
                 {n.label}
+                <motion.span 
+                  className="absolute -bottom-1 left-0 w-0 h-[1px] bg-spectre-pink transition-all group-hover:w-full"
+                  layoutId={`nav-underline-${n.href}`}
+                />
               </a>
             ))}
             <Link
               to="/docs"
-              className="font-display text-[10px] tracking-[0.3em] text-white/40 hover:text-white transition-colors uppercase italic"
+              className="font-display text-[10px] tracking-[0.3em] text-white/40 hover:text-white transition-all uppercase italic relative group"
             >
               Docs
+              <motion.span 
+                className="absolute -bottom-1 left-0 w-0 h-[1px] bg-spectre-pink transition-all group-hover:w-full"
+                layoutId="nav-underline-docs"
+              />
             </Link>
           </nav>
         </div>
@@ -151,13 +160,19 @@ export function SiteHeader({ guildInvite }: SiteHeaderProps) {
             </DropdownMenuContent>
           </DropdownMenu>
 
-          <Link 
-            to="/hub" 
-            className="ds-btn ds-btn-primary !py-2 !px-5 !text-[9px] flex items-center gap-2"
+          <motion.div
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
           >
-            <LogIn className="w-3 h-3" />
-            {t('common.accessHub')}
-          </Link>
+            <Link 
+              to="/hub" 
+              className="ds-btn ds-btn-primary !py-2 !px-5 !text-[9px] flex items-center gap-2 group overflow-hidden relative"
+            >
+              <LogIn className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
+              {t('common.accessHub')}
+              <div className="absolute inset-0 bg-white/10 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
+            </Link>
+          </motion.div>
 
         </div>
 
