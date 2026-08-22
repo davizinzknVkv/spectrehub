@@ -77,14 +77,19 @@ export function Hero({ guildInvite, fallbackMembers }: HeroProps) {
           </div>
           {/* Adicionando outro efeito no fundo para preencher o espaço */}
           <div className="absolute bottom-1/4 right-0 w-64 h-64 bg-spectre-pink/5 rounded-full blur-[120px] pointer-events-none" />
-          <h1 className="font-display text-[clamp(2rem,7vw,4.5rem)] leading-[0.95] text-foreground uppercase tracking-tighter mb-6 break-words relative z-10 flex flex-col items-center">
-            <div className="flex items-center gap-[0.3em] md:gap-[0.5em] justify-center flex-wrap">
+          <h1 className="font-display text-[clamp(2.5rem,8.5vw,7.5rem)] leading-[0.8] text-white uppercase tracking-tighter mb-8 break-words relative z-10 flex flex-col items-center">
+            <div className="flex items-center gap-[0.1em] justify-center flex-wrap">
               <span>{t('hero.title1')}</span>
-              <img src={logoAsset.url} alt="" className="h-[0.8em] w-auto animate-pulse drop-shadow-[0_0_20px_rgba(255,0,85,0.4)]" />
+              <div className="flex flex-col items-center mx-4 translate-y-[0.05em]">
+                <img src={logoAsset.url} alt="" className="h-[0.7em] w-auto animate-pulse drop-shadow-[0_0_40px_rgba(255,0,85,0.8)]" />
+                <span className="text-[12px] tracking-[0.6em] text-white/40 font-sans mt-2 font-black">SPECTREHUB</span>
+              </div>
               <span>{t('hero.title2')}</span>
             </div>
-            <span className="text-spectre-pink">{t('hero.subtitle1')}</span> 
-            <span className="inline-block">{t('hero.subtitle2')}</span>
+            <div className="flex flex-col md:flex-row items-center justify-center">
+              <span className="text-spectre-pink">{t('hero.subtitle1')}</span>
+              <span className="inline-block md:ml-[0.2em]">{t('hero.subtitle2')}</span>
+            </div>
           </h1>
 
         </Reveal>
@@ -97,20 +102,24 @@ export function Hero({ guildInvite, fallbackMembers }: HeroProps) {
         </Reveal>
 
         <Reveal delay={300}>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6">
-            <a href="#produtos" className="ds-btn ds-btn-primary w-full sm:w-auto sm:min-w-[200px] !py-2.5 !px-6 !text-[11px] !min-h-[40px] rounded-md">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-4">
+            <a href="#produtos" className="ds-btn ds-btn-primary w-full sm:w-auto sm:min-w-[320px] !py-4 !px-10 !text-[13px] !min-h-[60px] rounded-xl flex items-center justify-center gap-4 group shadow-[0_0_30px_rgba(255,0,85,0.3)] hover:shadow-[0_0_50px_rgba(255,0,85,0.5)] transition-all">
               {t('common.getStarted')}
+              <ArrowRight className="w-5 h-5 group-hover:translate-x-2 transition-transform" />
             </a>
-            <Link to="/docs" className="ds-btn ds-btn-secondary w-full sm:w-auto sm:min-w-[200px] !py-2.5 !px-6 !text-[11px] !min-h-[40px] rounded-md">
+            <Link to="/docs" className="ds-btn ds-btn-secondary w-full sm:w-auto sm:min-w-[320px] !py-4 !px-10 !text-[13px] !min-h-[60px] rounded-xl border border-white/10 flex items-center justify-center gap-4 bg-obsidian hover:bg-white/5 transition-all group">
               {t('common.documentation')}
+              <div className="w-5 h-5 opacity-60 group-hover:opacity-100 transition-opacity">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a4 4 0 0 0-4-4H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a4 4 0 0 1 4-4h6z"></path></svg>
+              </div>
             </Link>
           </div>
         </Reveal>
 
         <div className="mt-16 pt-8 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-6 opacity-60">
-           <div className="flex items-center gap-3 font-display text-[9px] tracking-[0.2em] uppercase">
+           <div className="flex items-center gap-3 font-display text-[9px] tracking-[0.2em] uppercase transition-all duration-300 hover:text-white cursor-default">
              <span>Spectre Hub</span>
-             <span className="text-spectre-pink">//</span>
+             <span className="text-spectre-pink font-black">//</span>
              <span>AGO-2026</span>
            </div>
            
