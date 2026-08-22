@@ -60,9 +60,8 @@ const FALLBACK_MEMBERS = [
 
 function Index() {
   const { t } = useTranslation();
-  const [ref] = useInView<HTMLDivElement>();
   
-  /* deixa a pagina inicial assim */
+  /* QUERO ADICIONAR ANIMAÇÕES PREMIUM AO MEU SITE USANDO O 21ST.DEV. */
 
   
 
