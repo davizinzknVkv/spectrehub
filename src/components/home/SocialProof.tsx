@@ -139,53 +139,54 @@ export function SocialProof({ widgetUrl, products: productsList }: SocialProofPr
       </div>
 
       <div ref={ref} className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-px md:bg-white/5 border border-white/5 rounded-2xl overflow-hidden bg-white/[0.02]">
-           <div className="bg-obsidian flex flex-col items-center text-center p-8 group hover:bg-white/[0.04] transition-colors">
-              <div className="text-spectre-pink mb-4 opacity-50 group-hover:opacity-100 transition-opacity">
-                <Users className="w-5 h-5" />
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-px md:bg-white/5 border border-white/5 rounded-3xl overflow-hidden bg-white/[0.02]">
+           <div className="bg-obsidian flex flex-col items-center text-center p-12 group hover:bg-white/[0.04] transition-colors">
+              <div className="text-spectre-pink mb-6 opacity-50 group-hover:opacity-100 transition-opacity scale-125">
+                <Users className="w-6 h-6" />
               </div>
-              <span className="font-display text-4xl md:text-5xl text-white italic mb-2 tracking-tighter leading-none">
+              <span className="font-display text-5xl md:text-7xl text-white italic mb-3 tracking-tighter leading-none">
                 {Math.round(membersCount)}+
               </span>
-              <span className="font-display text-[9px] tracking-[0.3em] text-white/30 uppercase italic group-hover:text-spectre-pink transition-colors">
+              <span className="font-display text-[10px] tracking-[0.4em] text-white/30 uppercase italic group-hover:text-spectre-pink transition-colors font-bold">
                 {t('community.statMembers')}
               </span>
            </div>
-           <div className="bg-obsidian flex flex-col items-center text-center p-8 group hover:bg-white/[0.04] transition-colors">
-              <div className="text-spectre-pink mb-4 opacity-50 group-hover:opacity-100 transition-opacity">
-                <Tractor className="w-5 h-5" />
+           <div className="bg-obsidian flex flex-col items-center text-center p-12 group hover:bg-white/[0.04] transition-colors">
+              <div className="text-spectre-pink mb-6 opacity-50 group-hover:opacity-100 transition-opacity scale-125">
+                <Tractor className="w-6 h-6" />
               </div>
-              <span className="font-display text-4xl md:text-5xl text-white italic mb-2 tracking-tighter leading-none">
+              <span className="font-display text-5xl md:text-7xl text-white italic mb-3 tracking-tighter leading-none">
                 {Math.round(productsCount)}
               </span>
-              <span className="font-display text-[9px] tracking-[0.3em] text-white/30 uppercase italic group-hover:text-spectre-pink transition-colors">
+              <span className="font-display text-[10px] tracking-[0.4em] text-white/30 uppercase italic group-hover:text-spectre-pink transition-colors font-bold">
                 {t('community.statSystems')}
               </span>
            </div>
-           <div className="bg-obsidian flex flex-col items-center text-center p-8 group hover:bg-white/[0.04] transition-colors">
-              <div className="text-spectre-pink mb-4 opacity-50 group-hover:opacity-100 transition-opacity">
-                <Zap className="w-5 h-5" />
+           <div className="bg-obsidian flex flex-col items-center text-center p-12 group hover:bg-white/[0.04] transition-colors">
+              <div className="text-spectre-pink mb-6 opacity-50 group-hover:opacity-100 transition-opacity scale-125">
+                <Zap className="w-6 h-6" />
               </div>
-              <span className="font-display text-4xl md:text-5xl text-white italic mb-2 tracking-tighter leading-none">
-                {latencyCount.toFixed(2)}<span className="text-spectre-pink not-italic text-2xl">ms</span>
+              <span className="font-display text-5xl md:text-7xl text-white italic mb-3 tracking-tighter leading-none">
+                {latencyCount.toFixed(2)}<span className="text-spectre-pink not-italic text-3xl ml-1">ms</span>
               </span>
-              <span className="font-display text-[9px] tracking-[0.3em] text-white/30 uppercase italic group-hover:text-spectre-pink transition-colors">
+              <span className="font-display text-[10px] tracking-[0.4em] text-white/30 uppercase italic group-hover:text-spectre-pink transition-colors font-bold">
                 {t('community.statLatency')}
               </span>
            </div>
-           <div className="bg-obsidian flex flex-col items-center text-center p-8 group hover:bg-white/[0.04] transition-colors">
-              <div className="text-spectre-pink mb-4 opacity-50 group-hover:opacity-100 transition-opacity">
-                <ShieldCheck className="w-5 h-5" />
+           <div className="bg-obsidian flex flex-col items-center text-center p-12 group hover:bg-white/[0.04] transition-colors">
+              <div className="text-spectre-pink mb-6 opacity-50 group-hover:opacity-100 transition-opacity scale-125">
+                <ShieldCheck className="w-6 h-6" />
               </div>
-              <div className="flex items-center gap-1 mb-2 leading-none">
-                <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse shadow-[0_0_8px_rgba(34,197,94,0.5)]" />
-                <span className="font-display text-4xl md:text-5xl text-white italic tracking-tighter leading-none">99.9%</span>
+              <div className="flex items-center gap-2 mb-3 leading-none">
+                <span className="w-3 h-3 rounded-full bg-green-500 animate-pulse shadow-[0_0_12px_rgba(34,197,94,0.6)]" />
+                <span className="font-display text-5xl md:text-7xl text-white italic tracking-tighter leading-none">99.9%</span>
               </div>
-              <span className="font-display text-[9px] tracking-[0.3em] text-white/30 uppercase italic group-hover:text-spectre-pink transition-colors">
+              <span className="font-display text-[10px] tracking-[0.4em] text-white/30 uppercase italic group-hover:text-spectre-pink transition-colors font-bold">
                 {t('community.statUptime')}
               </span>
            </div>
         </div>
+
 
       </div>
 
