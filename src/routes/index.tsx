@@ -80,7 +80,7 @@ function Index() {
     return () => ctrl.abort();
   }, []);
   
-  /* SPOTIFY GEN — NOVA FERRAMENTA EM DISCORD TOOLS */
+  /* REDESIGN DAS PRÉVIAS DAS FUNÇÕES — LENTICULAR CAROUSEL */
 
   return (
     <div

@@ -87,6 +87,36 @@ export const PRODUCTS: Product[] = [
     icon: Music4,
     previewUrl: hubAsset.url
   },
+  {
+    id: "showcase",
+    name: "Showcase",
+    category: "Utilidades",
+    desc: "Galeria de conquistas e status. Exiba suas vitórias e orbs conquistados para toda a comunidade Spectre.",
+    status: "Estável",
+    to: "/showcase",
+    icon: Sparkles,
+    previewUrl: ""
+  },
+  {
+    id: "settings",
+    name: "Settings",
+    category: "Utilidades",
+    desc: "Controle total da sua infraestrutura. Gerencie tokens, segurança 2FA e preferências de automação.",
+    status: "Estável",
+    to: "/settings",
+    icon: ShieldCheck,
+    previewUrl: ""
+  },
+  {
+    id: "docs",
+    name: "Documentação",
+    category: "Utilidades",
+    desc: "Base de conhecimento avançada. Tutoriais detalhados e guias de otimização para extrair o máximo do sistema.",
+    status: "Estável",
+    to: "/docs",
+    icon: LifeBuoy,
+    previewUrl: ""
+  },
 ];
 
 export type Plan = {
