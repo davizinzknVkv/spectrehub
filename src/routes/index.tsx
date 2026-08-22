@@ -1,4 +1,4 @@
-/* o adcionar link coloca pra coloca varios link do jeito qau esta tenho q por 1 por 1 */
+/* arruma a funçao pra resgatar as misao dai quando clicar mostra as missao que tem pra resgatar */
 import { createFileRoute } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
 import { useState, useEffect } from "react";
