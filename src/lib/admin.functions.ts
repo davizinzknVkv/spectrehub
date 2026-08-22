@@ -53,16 +53,38 @@ export const adminLoadAll = createServerFn({ method: "POST" })
   .handler(async ({ data }) => {
     await assertAdmin(data.token);
     const db = await admin();
-    const [plans, previews, features] = await Promise.all([
+    const [plans, previews, features, spotifyLinks] = await Promise.all([
       db.from("site_plans").select("*").order("sort"),
       db.from("site_previews").select("*").order("sort"),
       db.from("site_features").select("*").order("sort"),
+      db.from("spotify_links").select("*").order("created_at", { ascending: false }),
     ]);
     return {
       plans: plans.data ?? [],
       previews: previews.data ?? [],
       features: features.data ?? [],
+      spotifyLinks: spotifyLinks.data ?? [],
     };
+  });
+
+/* ── Spotify Links ─────────────────────────────────────── */
+const spotifyLinkInput = tokenInput.extend({
+  link: z.object({
+    id: z.string().uuid().optional(),
+    url: z.string().url().max(600),
+    label: z.string().max(100).optional(),
+    active: z.boolean().default(true),
+  }),
+});
+
+export const adminSaveSpotifyLink = createServerFn({ method: "POST" })
+  .validator((raw) => spotifyLinkInput.parse(raw))
+  .handler(async ({ data }) => {
+    await assertAdmin(data.token);
+    const db = await admin();
+    const { error } = await db.from("spotify_links").upsert(data.link);
+    if (error) throw new Error(error.message);
+    return { ok: true as const };
   });
 
 /* ── Planos ─────────────────────────────────────────────── */
@@ -140,7 +162,7 @@ export const adminSaveFeature = createServerFn({ method: "POST" })
 
 /* ── Remoção genérica ───────────────────────────────────── */
 const deleteInput = tokenInput.extend({
-  table: z.enum(["site_plans", "site_previews", "site_features"]),
+  table: z.enum(["site_plans", "site_previews", "site_features", "spotify_links"]),
   id: z.string().uuid(),
 });
 

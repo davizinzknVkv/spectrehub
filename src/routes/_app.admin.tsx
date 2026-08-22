@@ -15,6 +15,7 @@ import {
   adminDeleteRow,
 } from "@/lib/admin.functions";
 import logoAsset from "@/assets/spectre-logo-nobg.png.asset.json";
+import { adminSaveSpotifyLink } from "@/lib/admin.functions";
 
 export const Route = createFileRoute("/_app/admin")({
   component: AdminPage,
@@ -58,12 +59,13 @@ type Feature = {
   sort: number;
 };
 
-const TABS = ["previas", "planos", "funcoes"] as const;
+const TABS = ["previas", "planos", "funcoes", "spotify"] as const;
 type Tab = (typeof TABS)[number];
 const TAB_LABEL: Record<Tab, string> = {
   previas: "Prévias",
   planos: "Planos",
   funcoes: "Funções",
+  spotify: "Spotify Links",
 };
 
 const csv = (a: string[]) => a.join(", ");
@@ -79,6 +81,7 @@ function AdminPage() {
   const [plans, setPlans] = useState<Plan[]>([]);
   const [previews, setPreviews] = useState<Preview[]>([]);
   const [features, setFeatures] = useState<Feature[]>([]);
+  const [spotifyLinks, setSpotifyLinks] = useState<any[]>([]);
 
   const load = useCallback(async () => {
     if (!token) return;
@@ -88,6 +91,7 @@ function AdminPage() {
       setPlans(data.plans as Plan[]);
       setPreviews(data.previews as Preview[]);
       setFeatures(data.features as Feature[]);
+      setSpotifyLinks(data.spotifyLinks || []);
     } catch {
       toast.error("Falha na Sincronização", { description: "Não foi possível carregar os dados do terminal." });
     } finally {
@@ -148,6 +152,57 @@ function AdminPage() {
         {tab === "previas" && <PreviewsTab token={token} rows={previews} setRows={setPreviews} reload={load} loading={loading} />}
         {tab === "planos" && <PlansTab token={token} rows={plans} setRows={setPlans} reload={load} loading={loading} />}
         {tab === "funcoes" && <FeaturesTab token={token} rows={features} setRows={setFeatures} reload={load} loading={loading} />}
+        {tab === "spotify" && <SpotifyTab token={token} rows={spotifyLinks} setRows={setSpotifyLinks} reload={load} loading={loading} />}
+      </div>
+    </div>
+  );
+}
+
+function SpotifyTab({ token, rows, setRows, reload }: any) {
+  const update = (i: number, patch: any) => setRows(rows.map((r: any, idx: number) => (idx === i ? { ...r, ...patch } : r)));
+  const save = async (row: any) => {
+    try {
+      await adminSaveSpotifyLink({ data: { token, link: row } });
+      toast.success("Link Salvo", { description: "Link do Spotify atualizado na base." });
+      await reload();
+    } catch { toast.error("Falha ao salvar link."); }
+  };
+  const remove = async (row: any) => {
+    if (!row.id) { setRows(rows.filter((r: any) => r !== row)); return; }
+    await adminDeleteRow({ data: { token, table: "spotify_links", id: row.id } });
+    toast.success("Removido.");
+    await reload();
+  };
+
+  return (
+    <div className="space-y-6">
+      <div className="flex justify-between items-center px-2">
+         <div className="font-mono text-[10px] uppercase font-bold text-foreground-muted/50">{rows.length} Links Base</div>
+         <Button 
+           onClick={() => setRows([{ url: "", label: "", active: true }, ...rows])}
+           size="sm"
+         >Adicionar Link</Button>
+      </div>
+
+      <div className="grid grid-cols-1 gap-4">
+        {rows.map((row: any, i: number) => (
+          <div key={row.id || i} className="ds-card !p-6 border-border bg-card/30 rounded-xl flex flex-col md:flex-row gap-4 items-end">
+             <div className="flex-1 space-y-1 w-full">
+                <label className="text-[10px] font-bold text-foreground-muted uppercase tracking-wider">URL do Spotify</label>
+                <Input value={row.url} onChange={(e) => update(i, { url: e.target.value })} className="font-mono text-[11px]" placeholder="https://open.spotify.com/..." />
+             </div>
+             <div className="w-full md:w-48 space-y-1">
+                <label className="text-[10px] font-bold text-foreground-muted uppercase tracking-wider">Label (Opcional)</label>
+                <Input value={row.label || ""} onChange={(e) => update(i, { label: e.target.value })} className="text-[11px]" placeholder="Ex: Pop Hits" />
+             </div>
+             <div className="flex gap-2 w-full md:w-auto">
+                <Button onClick={() => save(row)} className="flex-1 md:flex-none h-10 px-6">Salvar</Button>
+                <Button onClick={() => remove(row)} variant="secondary" className="w-10 h-10 !p-0 text-primary border-primary/20 hover:bg-primary/5">
+                  <Trash2 className="w-4 h-4" />
+                </Button>
+             </div>
+          </div>
+        ))}
       </div>
     </div>
   );
