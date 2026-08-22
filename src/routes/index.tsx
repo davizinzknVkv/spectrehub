@@ -1,4 +1,4 @@
-/* Você é um Engenheiro de Segurança de nível Staff, especializado em OWASP Top 10, criptografia e infraestrutura segura. Sua missão é realizar um Security Audit profundo no sistema fornecido, identificar vulnerabilidades críticas e implementar correções imediatas (hotfixes) sem comprometer a disponibilidade.
+/* no perfil onde loga coloca isso tb */
 
 1. Auditoria Ofensiva (Vulnerability Assessment):
 

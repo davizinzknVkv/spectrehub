@@ -160,7 +160,28 @@ function SettingsPage() {
                         {show ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                       </button>
                     </div>
-                 </div>
+                  </div>
+                  <div className="pt-4 mt-4 border-t border-border/50">
+                    <h4 className="text-[10px] font-bold text-foreground-muted uppercase tracking-widest mb-4">Contas Salvas</h4>
+                    <div className="space-y-2">
+                      <div className="flex items-center justify-between p-3 bg-background-secondary/50 border border-border rounded-xl group hover:border-primary/30 transition-all">
+                        <div className="flex items-center gap-3">
+                          <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center">
+                            <svg viewBox="0 0 24 24" className="w-4 h-4 text-primary" fill="currentColor">
+                              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
+                            </svg>
+                          </div>
+                          <div className="text-left">
+                            <div className="text-xs font-bold text-foreground leading-none">euvictors2</div>
+                            <div className="text-[9px] text-foreground-muted uppercase tracking-tighter mt-1">Toque para conectar</div>
+                          </div>
+                        </div>
+                        <button type="button" className="p-2 text-foreground-muted hover:text-rose-500 transition-colors opacity-0 group-hover:opacity-100">
+                          <svg viewBox="0 0 24 24" className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth="2"><path d="M3 6h18M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2M10 11v6M14 11v6"/></svg>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
                  <Button type="submit" variant="primary" className="w-full" disabled={saving || !token}>
                     {saving ? "Validando..." : "Sincronizar Conta"}
                  </Button>
