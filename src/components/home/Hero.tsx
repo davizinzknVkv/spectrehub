@@ -48,7 +48,7 @@ export function Hero({ guildInvite, fallbackMembers }: HeroProps) {
             initial={{ opacity: 0, filter: "blur(10px)", y: 20 }}
             animate={{ opacity: 1, filter: "blur(0px)", y: 0 }}
             transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
-            className="font-display text-[clamp(3rem,10vw,8.5rem)] leading-[0.8] text-white uppercase tracking-tighter break-words relative z-10 flex flex-col items-center"
+            className="font-display text-[clamp(2.5rem,7vw,5.5rem)] leading-[0.9] text-white uppercase tracking-tighter break-words relative z-10 flex flex-col items-center"
           >
             <div className="flex items-center gap-[0.1em] justify-center flex-wrap">
               <span className="inline-block">{t('hero.title1')}</span>
