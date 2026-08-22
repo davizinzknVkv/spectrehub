@@ -86,10 +86,10 @@ function MissoesPage() {
       ? `${Math.floor(cooldownSecs / 60)}m${(cooldownSecs % 60).toString().padStart(2, "0")}s`
       : null;
 
-  const loadQuests = async () => {
+  const loadQuests = async (includeCompleted = false) => {
     setLoadingQuests(true);
     try {
-      const q = await fetchAvailableQuests();
+      const q = await fetchAvailableQuests(includeCompleted);
       setQuests(q);
       toast.success(`${q.length} missões localizadas.`);
     } catch (err) {
