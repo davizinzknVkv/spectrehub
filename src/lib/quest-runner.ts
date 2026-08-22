@@ -385,10 +385,13 @@ function logRun(quest: Quest, status: RunRecord["status"], error_message: string
 export async function claimQuestReward(questId: string, questName = "missão"): Promise<boolean> {
   const s = useQuestStore.getState();
   // V1 e V2 do endpoint de claim do Discord, com e sem plataforma especificada
+  // Adicionamos variações de platform (0=Desktop, 3=Web, 4=Console/Switch) e location
   const attempts: Array<{ path: string; body: Record<string, unknown> }> = [
     { path: `/quests/${questId}/claim`, body: {} },
-    { path: `/quests/${questId}/claim-reward`, body: { platform: 0 } }, // 0 = Desktop
-    { path: `/quests/${questId}/claim-reward`, body: { platform: 3, location: 18 } }, // 3 = Web
+    { path: `/quests/${questId}/claim-reward`, body: { platform: 0 } }, 
+    { path: `/quests/${questId}/claim-reward`, body: { platform: 3, location: 18 } },
+    { path: `/quests/${questId}/claim-reward`, body: { platform: 0, location: 1 } }, // Outra variação comum
+    { path: `/quests/${questId}/claim-reward`, body: { platform: 3 } },
   ];
 
   for (const attempt of attempts) {
@@ -401,11 +404,20 @@ export async function claimQuestReward(questId: string, questName = "missão"): 
         return true;
       }
       
-      // Se já foi resgatado, consideramos sucesso para a UI
       const data = res.data as { message?: string; code?: number } | null;
+      
+      // Se já foi resgatado, consideramos sucesso para a UI
       if (res.status === 400 && (data?.message?.includes("already") || data?.code === 40003)) {
         s.log(`ℹ️ Recompensa já estava resgatada: ${questName}`, "info");
         return true;
+      }
+      
+      // Erro 403 Forbidden em quests de drop geralmente significa que o Discord
+      // exige que você tenha "jogado" o jogo ou tenha a conta vinculada.
+      // Nestes casos, mostramos uma mensagem mais útil.
+      if (res.status === 403) {
+        s.log(`⚠️ Falha (403): ${questName} pode exigir conta do jogo vinculada.`, "error");
+        // Não paramos o loop, tentamos as outras plataformas just in case
       }
 
       if (res.status === 429) {
