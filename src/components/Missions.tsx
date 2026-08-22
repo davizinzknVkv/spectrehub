@@ -84,7 +84,9 @@ export function MissionCard({
   onExec: () => void;
 }) {
   const isOrb = quest.rewardText.includes("Orbs");
-  const p = progress ? Math.min(100, (progress.current / progress.total) * 100) : 0;
+  const isCompleted = !!quest.completedAt;
+  const isClaimed = !!quest.claimedAt;
+  const p = progress ? Math.min(100, (progress.current / progress.total) * 100) : (isCompleted ? 100 : 0);
 
   return (
     <Card className={cn(
