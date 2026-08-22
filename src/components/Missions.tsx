@@ -116,7 +116,11 @@ export function MissionCard({
           <div className="font-mono text-[9px] text-foreground-muted/50 font-bold uppercase tracking-widest">
             ID_{quest.questId.slice(0, 8)}
           </div>
-          {isOrb && <Sparkles className="h-4 w-4 text-amber-500 fill-amber-500/20" />}
+          <div className="flex gap-2">
+            {isClaimed && <Badge className="!bg-emerald-500/10 !text-emerald-400 !border-emerald-500/20 !text-[8px]">Resgatado</Badge>}
+            {isCompleted && !isClaimed && <Badge className="!bg-primary/10 !text-primary !border-primary/20 !text-[8px]">Pronto</Badge>}
+            {isOrb && <Sparkles className="h-4 w-4 text-amber-500 fill-amber-500/20" />}
+          </div>
         </div>
         <h3 className="mt-4 line-clamp-2 text-sm font-display uppercase tracking-tight text-foreground group-hover:text-primary transition-colors min-h-[2.4em] flex items-center leading-tight">
           {quest.questName}
