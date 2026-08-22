@@ -363,7 +363,7 @@ function HubPage() {
       </section>
 
       {/* Restored Quick Actions Grid */}
-      <section>
+      <section className="ds-card p-8 border-border bg-card/30 rounded-xl">
         <div className="flex items-center gap-2 mb-6">
           <Sparkles className="w-3.5 h-3.5 text-primary" />
           <h3 className="font-sans text-xs font-bold uppercase tracking-wider text-foreground">Ações Rápidas</h3>
@@ -385,7 +385,7 @@ function HubPage() {
 
           ].map((item: any) => {
             const Content = (
-              <div className="ds-card p-6 border-border bg-card/50 flex flex-col group hover:border-primary/40 transition-all overflow-hidden relative h-full w-full text-left rounded-xl group-hover/action:-translate-y-1">
+              <div className="ds-card p-6 border-border bg-background flex flex-col group hover:border-primary/40 transition-all overflow-hidden relative h-full w-full text-left rounded-xl group-hover/action:-translate-y-1">
                 <div className="absolute -right-4 -bottom-4 opacity-5 group-hover:opacity-10 transition-opacity">
                   <item.icon className="w-24 h-24" />
                 </div>
