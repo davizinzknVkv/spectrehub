@@ -1,4 +1,4 @@
-/* vc nao fez o botao pra copiar a logo e o banner coloca onde eu marquei */
+/* nao ta aparecendo nn */
 import { createFileRoute } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
 import { useState, useEffect } from "react";
