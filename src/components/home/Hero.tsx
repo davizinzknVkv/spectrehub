@@ -52,16 +52,7 @@ export function Hero({ guildInvite, fallbackMembers }: HeroProps) {
           >
             <div className="flex items-center gap-[0.1em] justify-center flex-wrap">
               <span className="inline-block">{t('hero.title1')}</span>
-              <motion.div 
-                initial={{ scale: 0.8, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                transition={{ delay: 0.5, duration: 1 }}
-                className="flex flex-col items-center mx-6 translate-y-[0.05em]"
-              >
-                <img src={logoAsset.url} alt="" className="h-[0.7em] w-auto animate-pulse drop-shadow-[0_0_50px_rgba(255,0,85,0.8)]" />
-                <span className="text-[13px] tracking-[0.6em] text-white/40 font-sans mt-3 font-black">SPECTREHUB</span>
-              </motion.div>
-              <span className="inline-block">{t('hero.title2')}</span>
+              <span className="inline-block md:ml-[0.2em]">{t('hero.title2')}</span>
             </div>
             
             <motion.div 
