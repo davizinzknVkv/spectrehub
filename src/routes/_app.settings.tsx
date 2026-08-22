@@ -161,32 +161,38 @@ function SettingsPage() {
                       </button>
                     </div>
                   </div>
-                  <div className="pt-4 mt-4 border-t border-border/50">
-                    <h4 className="text-[10px] font-bold text-foreground-muted uppercase tracking-widest mb-4">Contas Salvas</h4>
-                    <div className="space-y-2">
-                      <div className="flex items-center justify-between p-3 bg-background-secondary/50 border border-border rounded-xl group hover:border-primary/30 transition-all">
-                        <div className="flex items-center gap-3">
-                          <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center">
-                            <svg viewBox="0 0 24 24" className="w-4 h-4 text-primary" fill="currentColor">
+                  
+                  <div className="pt-6 mt-6 border-t border-white/5 space-y-4">
+                    <div className="flex items-center justify-between">
+                      <h4 className="font-display text-[9px] font-bold text-white/30 uppercase tracking-[0.2em] italic">Contas Salvas</h4>
+                      <span className="w-4 h-4 rounded-full bg-white/5 flex items-center justify-center font-display text-[8px] text-white/40 italic">1</span>
+                    </div>
+                    
+                    <div className="group relative">
+                      <div className="ds-card !p-4 border-border bg-background flex items-center justify-between hover:border-spectre-pink/30 transition-all duration-300 rounded-lg cursor-pointer">
+                        <div className="flex items-center gap-4">
+                          <div className="w-10 h-10 border border-white/5 bg-spectre-pink/10 flex items-center justify-center text-spectre-pink">
+                            <svg viewBox="0 0 24 24" className="w-5 h-5" fill="currentColor">
                               <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
                             </svg>
                           </div>
                           <div className="text-left">
-                            <div className="text-xs font-bold text-foreground leading-none">euvictors2</div>
-                            <div className="text-[9px] text-foreground-muted uppercase tracking-tighter mt-1">Toque para conectar</div>
+                            <div className="font-display text-xs text-white uppercase italic tracking-wider">euvictors2</div>
+                            <div className="font-display text-[9px] text-white/20 uppercase tracking-[0.1em] mt-0.5">Toque para conectar</div>
                           </div>
                         </div>
-                        <button type="button" className="p-2 text-foreground-muted hover:text-rose-500 transition-colors opacity-0 group-hover:opacity-100">
-                          <svg viewBox="0 0 24 24" className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth="2"><path d="M3 6h18M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2M10 11v6M14 11v6"/></svg>
+                        <button type="button" className="p-2 text-white/10 hover:text-rose-500 transition-colors opacity-0 group-hover:opacity-100">
+                          <svg viewBox="0 0 24 24" className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2"><path d="M3 6h18M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2M10 11v6M14 11v6"/></svg>
                         </button>
                       </div>
                     </div>
                   </div>
-                 <Button type="submit" variant="primary" className="w-full" disabled={saving || !token}>
-                    {saving ? "Validando..." : "Sincronizar Conta"}
-                 </Button>
-              </form>
-            )}
+
+                  <Button type="submit" variant="primary" className="w-full" disabled={saving || !token}>
+                     {saving ? "Validando..." : "Sincronizar Conta"}
+                  </Button>
+               </form>
+             )}
           </section>
 
           {/* Segurança & Privacidade */}
