@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { 
   Shield, 
@@ -16,11 +16,17 @@ import {
   X,
   Target,
   ShieldCheck,
-  Music4
+  Music4,
+  Send,
+  Loader2,
+  Bot,
+  User
 } from "lucide-react";
 import logoAsset from "@/assets/spectre-logo-main.png.asset.json";
 import { cn } from "@/lib/utils";
 import { Reveal } from "@/components/home/Reveal";
+import { chatWithDocs } from "@/lib/docs-ai.functions";
+import { useServerFn } from "@tanstack/react-start";
 
 export const Route = createFileRoute("/docs")({
   component: DocsPage,
@@ -30,6 +36,42 @@ function DocsPage() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("introducao");
   const [searchQuery, setSearchQuery] = useState("");
+  
+  // AI Chat State
+  const [aiChatOpen, setAiChatOpen] = useState(false);
+  const [chatInput, setChatInput] = useState("");
+  const [chatMessages, setChatMessages] = useState<{role: 'user' | 'bot', text: string}[]>([]);
+  const [isTyping, setIsTyping] = useState(false);
+  const chatEndRef = useRef<HTMLDivElement>(null);
+  const sendMessage = useServerFn(chatWithDocs);
+
+  useEffect(() => {
+    if (chatEndRef.current) {
+      chatEndRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [chatMessages]);
+
+  const handleSendMessage = async () => {
+    if (!chatInput.trim() || isTyping) return;
+    
+    const userText = chatInput;
+    setChatInput("");
+    setChatMessages(prev => [...prev, { role: 'user', text: userText }]);
+    setIsTyping(true);
+
+    try {
+      const response = await sendMessage({ data: { message: userText } });
+      if ('text' in response) {
+        setChatMessages(prev => [...prev, { role: 'bot', text: response.text }]);
+      } else {
+        setChatMessages(prev => [...prev, { role: 'bot', text: "Erro: " + (response.error || "Falha na conexão.") }]);
+      }
+    } catch (err) {
+      setChatMessages(prev => [...prev, { role: 'bot', text: "Erro ao processar mensagem." }]);
+    } finally {
+      setIsTyping(false);
+    }
+  };
 
   const navItems = [
     { id: "introducao", label: "Introdução", icon: BookOpen },
@@ -338,14 +380,80 @@ function DocsPage() {
         </div>
       </footer>
 
-      {/* Floating AI Button (Documentation focused) */}
+      {/* Floating AI Chat Window */}
+      {aiChatOpen && (
+        <div className="fixed bottom-28 right-8 w-[380px] h-[500px] bg-[#0A0A0D] border border-spectre-pink/20 shadow-[0_20px_60px_rgba(0,0,0,0.8)] z-50 flex flex-col animate-in fade-in slide-in-from-bottom-8 duration-300">
+          <div className="p-4 border-b border-white/5 bg-white/[0.02] flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <div className="w-2 h-2 bg-spectre-pink rounded-full animate-pulse" />
+              <span className="font-display text-[10px] font-bold uppercase tracking-widest italic">Spectre AI Support</span>
+            </div>
+            <button onClick={() => setAiChatOpen(false)} className="text-white/40 hover:text-white transition-colors">
+              <X className="w-4 h-4" />
+            </button>
+          </div>
+          
+          <div className="flex-1 overflow-y-auto p-4 space-y-4 scrollbar-thin">
+            {chatMessages.length === 0 && (
+              <div className="h-full flex flex-col items-center justify-center text-center space-y-4 opacity-40">
+                <Bot className="w-8 h-8" />
+                <p className="text-[10px] font-bold uppercase tracking-widest max-w-[200px]">Como posso ajudar você com a documentação hoje?</p>
+              </div>
+            )}
+            {chatMessages.map((msg, i) => (
+              <div key={i} className={cn("flex gap-3", msg.role === 'user' ? "flex-row-reverse" : "")}>
+                <div className={cn("w-6 h-6 shrink-0 flex items-center justify-center border", msg.role === 'user' ? "border-white/10 bg-white/5" : "border-spectre-pink/20 bg-spectre-pink/5")}>
+                  {msg.role === 'user' ? <User className="w-3 h-3 text-white/40" /> : <Bot className="w-3 h-3 text-spectre-pink" />}
+                </div>
+                <div className={cn(
+                  "p-3 text-[11px] leading-relaxed max-w-[80%]",
+                  msg.role === 'user' ? "bg-white/[0.03] text-white/80" : "bg-spectre-pink/[0.03] text-spectre-pink/90"
+                )}>
+                  {msg.text}
+                </div>
+              </div>
+            ))}
+            {isTyping && (
+              <div className="flex gap-3">
+                <div className="w-6 h-6 shrink-0 flex items-center justify-center border border-spectre-pink/20 bg-spectre-pink/5">
+                  <Bot className="w-3 h-3 text-spectre-pink" />
+                </div>
+                <div className="p-3 bg-spectre-pink/[0.03] text-spectre-pink/90">
+                  <Loader2 className="w-3 h-3 animate-spin" />
+                </div>
+              </div>
+            )}
+            <div ref={chatEndRef} />
+          </div>
+
+          <div className="p-4 border-t border-white/5 bg-white/[0.02]">
+            <div className="relative flex gap-2">
+              <input 
+                value={chatInput}
+                onChange={(e) => setChatInput(e.target.value)}
+                onKeyDown={(e) => e.key === 'Enter' && handleSendMessage()}
+                placeholder="Pergunte algo..."
+                className="flex-1 bg-white/[0.03] border border-white/5 p-3 text-[11px] font-bold uppercase tracking-wider outline-none focus:border-spectre-pink/50 transition-all"
+              />
+              <button 
+                onClick={handleSendMessage}
+                disabled={isTyping}
+                className="ds-btn ds-btn-primary !px-4 shrink-0"
+              >
+                <Send className="w-3 h-3" />
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Floating AI Button */}
       <button 
-        onClick={() => {
-          // Toggle AI Support (logic can be expanded here)
-          console.log("AI Support Activated");
-          alert("ativa o super de ia no docs");
-        }}
-        className="fixed bottom-8 right-8 ds-btn ds-btn-primary !px-6 !py-4 flex items-center gap-3 shadow-[0_10px_40px_rgba(255,0,85,0.2)] group z-50 rounded-none border border-white/10"
+        onClick={() => setAiChatOpen(!aiChatOpen)}
+        className={cn(
+          "fixed bottom-8 right-8 ds-btn ds-btn-primary !px-6 !py-4 flex items-center gap-3 shadow-[0_10px_40px_rgba(255,0,85,0.2)] group z-50 rounded-none border border-white/10 transition-all",
+          aiChatOpen && "scale-90 opacity-50"
+        )}
       >
         <Sparkles className="w-4 h-4 transition-transform group-hover:rotate-12 group-hover:scale-125" />
         <span className="font-display text-[10px] font-bold uppercase tracking-widest italic">Suporte IA Docs</span>
