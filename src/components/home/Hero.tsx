@@ -75,7 +75,6 @@ export function Hero({ guildInvite, fallbackMembers }: HeroProps) {
             </motion.div>
           </motion.h1>
           
-          {/* Subtle Decorative SVG Trails */}
           <div className="absolute top-1/2 -right-16 md:-right-32 -translate-y-1/2 w-32 md:w-80 opacity-20 pointer-events-none select-none">
             <svg viewBox="0 0 100 60" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full">
               <motion.path 
@@ -130,29 +129,36 @@ export function Hero({ guildInvite, fallbackMembers }: HeroProps) {
           </div>
         </Reveal>
 
-        <div className="mt-16 pt-8 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-6 opacity-60">
+        <div className="mt-20 pt-10 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-6 opacity-40">
            <div className="flex items-center gap-3 font-display text-[9px] tracking-[0.2em] uppercase transition-all duration-300 hover:text-white cursor-default">
              <span>Spectre Hub</span>
              <span className="text-spectre-pink font-black">//</span>
              <span>AGO-2026</span>
            </div>
            
-           <div className="flex items-center gap-4">
-             <div className="flex -space-x-3">
+           <div className="flex items-center gap-6">
+             <div className="flex -space-x-4">
                {fallbackMembers.slice(0, 4).map((m, i) => (
-                  <div key={i} className="w-8 h-8 rounded-full border border-obsidian overflow-hidden bg-black flex items-center justify-center p-0.5 relative group ring-2 ring-obsidian">
+                  <motion.div 
+                    key={i} 
+                    whileHover={{ y: -5, zIndex: 20 }}
+                    className="w-10 h-10 rounded-full border-2 border-obsidian overflow-hidden bg-black flex items-center justify-center p-0.5 relative group cursor-pointer"
+                  >
                     <div className="absolute inset-0 bg-gradient-to-tr from-spectre-pink/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
                     <Avatar seed={m} />
-                  </div>
+                  </motion.div>
                ))}
              </div>
-             <div className="font-display text-[9px] tracking-[0.2em] uppercase text-white/60 flex items-center gap-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
+             <div className="font-display text-[9px] tracking-[0.3em] text-white/60 flex items-center gap-3">
+                <span className="relative flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+                </span>
                 {t('hero.activeCommunity')}
              </div>
            </div>
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 }
