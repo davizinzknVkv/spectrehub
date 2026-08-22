@@ -105,7 +105,7 @@ export function Hero({ guildInvite, fallbackMembers }: HeroProps) {
                whileHover={{ scale: 1.02, y: -2 }}
                whileTap={{ scale: 0.98 }}
             >
-              <Link to="/docs" className="ds-btn ds-btn-secondary w-full sm:w-auto sm:min-w-[340px] !py-5 !px-12 !text-[14px] !min-h-[64px] rounded-xl border border-white/10 flex items-center justify-center gap-4 bg-obsidian-soft/50 backdrop-blur-sm hover:bg-white/5 transition-all group overflow-hidden relative">
+              <Link to="/docs" className="ds-btn ds-btn-secondary w-full sm:w-auto sm:min-w-[280px] !py-4 !px-10 !text-[12px] !min-h-[56px] rounded-xl border border-white/10 flex items-center justify-center gap-4 bg-obsidian-soft/50 backdrop-blur-sm hover:bg-white/5 transition-all group overflow-hidden relative">
                 <span className="relative z-10 flex items-center gap-4">
                   {t('common.documentation')}
                   <div className="w-5 h-5 opacity-60 group-hover:opacity-100 transition-opacity">
