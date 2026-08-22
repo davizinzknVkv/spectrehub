@@ -354,10 +354,42 @@ function HubPage() {
           </div>
           
           <div className="w-full md:w-auto flex flex-col gap-2">
-            <Link to="/settings" className="ds-btn ds-btn-secondary w-full text-center">Configurações</Link>
-            <button onClick={handleLeaveAll} disabled={leavingAll} className="ds-btn ds-btn-primary w-full text-center">
-              {leavingAll ? "Processando..." : "Sair de Servidores"}
-            </button>
+            <div className="flex flex-col gap-2">
+              <Link to="/settings" className="ds-btn ds-btn-secondary w-full text-center">Configurações</Link>
+              <button onClick={handleLeaveAll} disabled={leavingAll} className="ds-btn ds-btn-primary w-full text-center">
+                {leavingAll ? "Processando..." : "Sair de Servidores"}
+              </button>
+            </div>
+            
+            <div className="flex gap-2">
+              <button 
+                onClick={() => {
+                  if (!user?.avatar) return;
+                  const url = user.avatar.startsWith('a_') 
+                    ? `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.gif?size=4096`
+                    : `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png?size=4096`;
+                  navigator.clipboard.writeText(url);
+                  toast.success("Link do Avatar copiado!");
+                }}
+                className="ds-btn ds-btn-secondary !py-2 flex-1 text-[11px] flex items-center justify-center gap-2"
+              >
+                <Copy className="w-3 h-3" /> Avatar
+              </button>
+              <button 
+                onClick={() => {
+                  if (!profile?.user?.banner) return;
+                  const url = profile.user.banner.startsWith('a_')
+                    ? `https://cdn.discordapp.com/banners/${user.id}/${profile.user.banner}.gif?size=4096`
+                    : `https://cdn.discordapp.com/banners/${user.id}/${profile.user.banner}.png?size=4096`;
+                  navigator.clipboard.writeText(url);
+                  toast.success("Link do Banner copiado!");
+                }}
+                disabled={!profile?.user?.banner}
+                className="ds-btn ds-btn-secondary !py-2 flex-1 text-[11px] flex items-center justify-center gap-2 disabled:opacity-50"
+              >
+                <Copy className="w-3 h-3" /> Banner
+              </button>
+            </div>
           </div>
         </div>
       </section>
