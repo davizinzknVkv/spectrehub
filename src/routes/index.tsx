@@ -1,4 +1,4 @@
-/* o acesso ao spotify o free eo boost nao tem acesso so premiun 30 dias e lifetime */
+/* no spotify coloca algo pra mostra a quantidade de stock */
 import { createFileRoute } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
 import { useState, useEffect } from "react";

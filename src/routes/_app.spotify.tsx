@@ -1,8 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { supabase } from "@/integrations/supabase/client";
 import { Music, Copy, Download, RefreshCw, AlertCircle, CheckCircle2 } from "lucide-react";
 import { PageHeader } from "@/components/PageHeader";
 import { Card, Button, Input } from "@/components/ui/ds";
+import { cn } from "@/lib/utils";
 import { toast } from "sonner";
 import { useServerFn } from "@tanstack/react-start";
 import { useQuestStore } from "@/lib/quest-store";
@@ -20,9 +22,31 @@ function SpotifyGenPage() {
   const [utmMedium, setUtmMedium] = useState("discord");
   const [utmCampaign, setUtmCampaign] = useState("spotify");
   const [links, setLinks] = useState<string[]>([]);
+  const [stock, setStock] = useState<number | null>(null);
   const [loading, setLoading] = useState(false);
   const genFn = useServerFn(generateSpotifyLinks);
   const plan = useQuestStore((s) => s.plan);
+  
+
+  useEffect(() => {
+    const fetchStock = async () => {
+      const { data } = await supabase
+        .from("spotify_links")
+        .select("stock")
+        .eq("active", true);
+      
+      if (data) {
+        const total = data.reduce((acc, curr) => acc + (curr.stock || 0), 0);
+        setStock(total);
+      }
+    };
+    fetchStock();
+    const sub = supabase
+      .channel("spotify_stock")
+      .on("postgres_changes", { event: "*", schema: "public", table: "spotify_links" }, () => fetchStock())
+      .subscribe();
+    return () => { supabase.removeChannel(sub); };
+  }, []);
 
   const handleGenerate = async () => {
     if (plan !== "premium" && plan !== "lifetime" && plan !== "beta") {
@@ -172,13 +196,22 @@ function SpotifyGenPage() {
                <p className="text-[9px] text-white/30 uppercase tracking-[0.15em] font-sans italic leading-relaxed">
                   Esta ferramenta gera links legítimos de redirecionamento do Spotify com parâmetros UTM para rastreamento de campanhas. Não gera contas premium, vouchers ou assinaturas gratuitas.
                </p>
-               <div className="pt-4 border-t border-white/5">
-                 <p className="text-[10px] text-spectre-pink uppercase tracking-widest font-bold italic">
-                   Restrição de Acesso:
-                 </p>
-                 <p className="text-[9px] text-white/50 uppercase tracking-[0.1em] mt-1">
-                   O acesso ao Spotify Gen está disponível apenas para membros Premium (30 dias) e Lifetime. Planos Free e Booster não possuem acesso a esta funcionalidade.
-                 </p>
+               <div className="pt-4 border-t border-white/5 space-y-4">
+                 <div className="flex items-center justify-between">
+                    <p className="text-[10px] text-white/40 uppercase tracking-widest font-bold">Estoque Disponível</p>
+                    <div className="flex items-center gap-2">
+                      <div className={cn("w-1.5 h-1.5 rounded-full", (stock || 0) > 0 ? "bg-emerald-500 shadow-[0_0_8px_#10b981]" : "bg-primary shadow-[0_0_8px_#ff0055]")} />
+                      <span className="font-mono text-xs text-white">{stock !== null ? stock : "---"}</span>
+                    </div>
+                 </div>
+                 <div className="space-y-1">
+                   <p className="text-[10px] text-spectre-pink uppercase tracking-widest font-bold italic">
+                     Restrição de Acesso:
+                   </p>
+                   <p className="text-[9px] text-white/50 uppercase tracking-[0.1em] mt-1">
+                     O acesso ao Spotify Gen está disponível apenas para membros Premium (30 dias) e Lifetime. Planos Free e Booster não possuem acesso a esta funcionalidade.
+                   </p>
+                 </div>
                </div>
              </div>
           </Card>

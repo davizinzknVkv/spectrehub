@@ -344,6 +344,7 @@ export type Database = {
           created_at: string | null
           id: string
           label: string | null
+          stock: number | null
           url: string
         }
         Insert: {
@@ -351,6 +352,7 @@ export type Database = {
           created_at?: string | null
           id?: string
           label?: string | null
+          stock?: number | null
           url: string
         }
         Update: {
@@ -358,6 +360,7 @@ export type Database = {
           created_at?: string | null
           id?: string
           label?: string | null
+          stock?: number | null
           url?: string
         }
         Relationships: []
@@ -432,6 +435,10 @@ export type Database = {
       }
     }
     Functions: {
+      decrement_spotify_stock: {
+        Args: { amount: number; row_id: string }
+        Returns: undefined
+      }
       is_site_admin: { Args: { _user_id: string }; Returns: boolean }
     }
     Enums: {

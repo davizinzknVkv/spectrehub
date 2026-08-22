@@ -246,6 +246,10 @@ function SpotifyTab({ token, rows, setRows, reload }: any) {
                 <label className="text-[10px] font-bold text-foreground-muted uppercase tracking-wider">URL do Spotify</label>
                 <Input value={row.url} onChange={(e) => update(i, { url: e.target.value })} className="font-mono text-[11px]" placeholder="https://open.spotify.com/..." />
              </div>
+             <div className="w-full md:w-32 space-y-1">
+                <label className="text-[10px] font-bold text-foreground-muted uppercase tracking-wider">Stock</label>
+                <Input type="number" value={row.stock ?? 100} onChange={(e) => update(i, { stock: parseInt(e.target.value) || 0 })} className="font-mono text-[11px]" />
+             </div>
              <div className="w-full md:w-48 space-y-1">
                 <label className="text-[10px] font-bold text-foreground-muted uppercase tracking-wider">Label (Opcional)</label>
                 <Input value={row.label || ""} onChange={(e) => update(i, { label: e.target.value })} className="text-[11px]" placeholder="Ex: Pop Hits" />

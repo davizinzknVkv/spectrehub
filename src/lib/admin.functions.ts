@@ -57,7 +57,7 @@ export const adminLoadAll = createServerFn({ method: "POST" })
       db.from("site_plans").select("*").order("sort"),
       db.from("site_previews").select("*").order("sort"),
       db.from("site_features").select("*").order("sort"),
-      db.from("spotify_links").select("*").order("created_at", { ascending: false }),
+      db.from("spotify_links").select("*").order("stock", { ascending: false }).order("created_at", { ascending: false }),
     ]);
     return {
       plans: plans.data ?? [],
@@ -73,6 +73,7 @@ const spotifyLinkInput = tokenInput.extend({
     id: z.string().uuid().optional(),
     url: z.string().url().max(600),
     label: z.string().max(100).optional(),
+    stock: z.number().int().min(0).default(100),
     active: z.boolean().default(true),
   }),
 });
