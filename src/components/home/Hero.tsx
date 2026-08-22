@@ -130,14 +130,18 @@ export function Hero({ guildInvite, fallbackMembers, liveMembers = [] }: HeroPro
            
            <div className="flex items-center gap-6">
              <div className="flex -space-x-4">
-               {fallbackMembers.slice(0, 4).map((m, i) => (
+               {(liveMembers.length > 0 ? liveMembers : fallbackMembers.map(n => ({ name: n, avatar: null }))).slice(0, 4).map((m, i) => (
                   <motion.div 
                     key={i} 
                     whileHover={{ y: -5, zIndex: 20 }}
                     className="w-10 h-10 rounded-full border-2 border-obsidian overflow-hidden bg-black flex items-center justify-center p-0.5 relative group cursor-pointer"
                   >
                     <div className="absolute inset-0 bg-gradient-to-tr from-spectre-pink/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-                    <Avatar seed={m} />
+                    {m.avatar ? (
+                      <img src={m.avatar} alt={m.name} className="w-full h-full object-cover" />
+                    ) : (
+                      <Avatar seed={m.name} />
+                    )}
                   </motion.div>
                ))}
              </div>
