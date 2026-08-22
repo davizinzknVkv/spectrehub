@@ -40,6 +40,7 @@ function SettingsPage() {
   const setCreds = useQuestStore((s) => s.setCreds);
 
   const [tab, setTab] = useState<Tab>("token");
+  const [category, setCategory] = useState("geral");
   const [token, setToken] = useState("");
   const [saving, setSaving] = useState(false);
   const [show, setShow] = useState(false);
@@ -79,7 +80,7 @@ function SettingsPage() {
         {/* Sidebar de Categorias */}
         <div className="space-y-2">
            {[
-             { id: "geral", label: "Geral", icon: Settings, active: true },
+             { id: "geral", label: "Geral", icon: Settings },
              { id: "conta", label: "Conta & Discord", icon: User },
              { id: "seguranca", label: "Segurança", icon: Lock },
              { id: "interface", label: "Interface", icon: Eye },
@@ -87,12 +88,13 @@ function SettingsPage() {
            ].map(cat => (
              <button 
               key={cat.id} 
+              onClick={() => setCategory(cat.id)}
               className={cn(
                 "w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-200 text-left font-medium text-sm",
-                cat.active ? "bg-primary/10 text-foreground" : "text-foreground-muted hover:text-foreground hover:bg-white/[0.03]"
+                category === cat.id ? "bg-primary/10 text-foreground" : "text-foreground-muted hover:text-foreground hover:bg-white/[0.03]"
               )}
              >
-               <cat.icon className={cn("w-4 h-4", cat.active ? "text-primary" : "text-foreground-muted")} />
+               <cat.icon className={cn("w-4 h-4", category === cat.id ? "text-primary" : "text-foreground-muted")} />
                {cat.label}
              </button>
            ))}
@@ -100,8 +102,10 @@ function SettingsPage() {
 
         {/* Conteúdo das Configurações */}
         <div className="md:col-span-2 space-y-8">
-          {/* Sessão de Acesso */}
-          <section className="ds-card !p-8 border-border bg-card/30 rounded-xl space-y-6">
+          {category === "geral" && (
+            <>
+              {/* Sessão de Acesso */}
+              <section className="ds-card !p-8 border-border bg-card/30 rounded-xl space-y-6">
             <div className="flex items-center gap-3 border-b border-border pb-6">
               <KeyRound className="w-5 h-5 text-primary" />
               <div>
@@ -242,6 +246,115 @@ function SettingsPage() {
                 ))}
              </div>
           </section>
+          </>
+          )}
+
+          {category === "conta" && (
+            <section className="ds-card !p-8 border-border bg-card/30 rounded-xl space-y-6 animate-fade-up">
+              <div className="flex items-center gap-3 border-b border-border pb-6">
+                <User className="w-5 h-5 text-primary" />
+                <div>
+                  <h3 className="font-sans text-base font-bold text-foreground">Conta & Discord</h3>
+                  <p className="text-xs text-foreground-muted">Gerencie a integração com o Discord.</p>
+                </div>
+              </div>
+              <div className="space-y-4">
+                <div className="flex justify-between items-center p-4 bg-background rounded-lg border border-border">
+                  <div>
+                    <div className="text-xs font-bold text-foreground">Vincular Servidor</div>
+                    <div className="text-[10px] text-foreground-muted">Sincroniza seus cargos para desbloquear limites.</div>
+                  </div>
+                  <Button variant="secondary" size="sm" onClick={() => window.open('https://discord.gg/vbYK559Jnb', '_blank')}>Vincular</Button>
+                </div>
+                <div className="flex justify-between items-center p-4 bg-background rounded-lg border border-border">
+                  <div>
+                    <div className="text-xs font-bold text-foreground">Auto-Join Community</div>
+                    <div className="text-[10px] text-foreground-muted">Entra automaticamente em novos servidores parceiros.</div>
+                  </div>
+                  <div className="w-10 h-5 bg-primary/20 rounded-full relative cursor-pointer opacity-50">
+                    <div className="absolute left-1 top-1 w-3 h-3 bg-primary rounded-full" />
+                  </div>
+                </div>
+              </div>
+            </section>
+          )}
+
+          {category === "seguranca" && (
+            <section className="ds-card !p-8 border-border bg-card/30 rounded-xl space-y-6 animate-fade-up">
+              <div className="flex items-center gap-3 border-b border-border pb-6">
+                <Lock className="w-5 h-5 text-primary" />
+                <div>
+                  <h3 className="font-sans text-base font-bold text-foreground">Segurança Avançada</h3>
+                  <p className="text-xs text-foreground-muted">Proteção de dados e chaves de acesso.</p>
+                </div>
+              </div>
+              <div className="space-y-4">
+                <div className="p-4 bg-background rounded-lg border border-border space-y-2">
+                  <div className="text-xs font-bold text-foreground flex items-center gap-2">
+                    <ShieldCheck className="w-3 h-3 text-primary" />
+                    Criptografia de Terminal
+                  </div>
+                  <p className="text-[10px] text-foreground-muted leading-relaxed">
+                    Seu token é criptografado via AES-GCM-256 antes de ser persistido no LocalStorage. 
+                    Nenhuma chave privada é transmitida para o backend do Spectre.
+                  </p>
+                </div>
+                <div className="flex justify-between items-center p-4 bg-background rounded-lg border border-border">
+                  <div>
+                    <div className="text-xs font-bold text-foreground">Limpeza Automática</div>
+                    <div className="text-[10px] text-foreground-muted">Remove credenciais após 24h de inatividade.</div>
+                  </div>
+                  <div className="w-10 h-5 bg-border rounded-full relative cursor-pointer">
+                    <div className="absolute left-1 top-1 w-3 h-3 bg-foreground-muted rounded-full" />
+                  </div>
+                </div>
+              </div>
+            </section>
+          )}
+
+          {category === "interface" && (
+            <section className="ds-card !p-8 border-border bg-card/30 rounded-xl space-y-6 animate-fade-up">
+              <div className="flex items-center gap-3 border-b border-border pb-6">
+                <Eye className="w-5 h-5 text-primary" />
+                <div>
+                  <h3 className="font-sans text-base font-bold text-foreground">Interface & UX</h3>
+                  <p className="text-xs text-foreground-muted">Personalize sua experiência visual.</p>
+                </div>
+              </div>
+              <div className="grid grid-cols-2 gap-4">
+                <div className="p-4 bg-primary/10 border border-primary/20 rounded-lg text-center cursor-pointer">
+                  <div className="text-xs font-bold text-primary">Obsidian Pink</div>
+                  <div className="text-[9px] text-primary/60 uppercase font-bold mt-1">Ativo</div>
+                </div>
+                <div className="p-4 bg-background border border-border rounded-lg text-center cursor-not-allowed opacity-50">
+                  <div className="text-xs font-bold text-foreground-muted">Cyber Blue</div>
+                  <div className="text-[9px] text-foreground-muted uppercase font-bold mt-1">Breve</div>
+                </div>
+              </div>
+            </section>
+          )}
+
+          {category === "notificacoes" && (
+            <section className="ds-card !p-8 border-border bg-card/30 rounded-xl space-y-6 animate-fade-up">
+              <div className="flex items-center gap-3 border-b border-border pb-6">
+                <Bell className="w-5 h-5 text-primary" />
+                <div>
+                  <h3 className="font-sans text-base font-bold text-foreground">Notificações</h3>
+                  <p className="text-xs text-foreground-muted">Alertas de missões e sniper.</p>
+                </div>
+              </div>
+              <div className="space-y-3">
+                {['Alertas de Som', 'Push Desktop', 'Webhook Discord'].map(notif => (
+                  <div key={notif} className="flex justify-between items-center p-4 bg-background rounded-lg border border-border">
+                    <span className="text-xs font-bold text-foreground">{notif}</span>
+                    <div className="w-10 h-5 bg-border rounded-full relative cursor-pointer">
+                      <div className="absolute left-1 top-1 w-3 h-3 bg-foreground-muted rounded-full" />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </section>
+          )}
         </div>
       </div>
 
