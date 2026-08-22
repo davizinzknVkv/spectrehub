@@ -1,199 +1,244 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
-import { useMemo, useState } from "react";
-import { toast } from "sonner";
-import { Copy, ExternalLink, Music, Lock, Sparkles } from "lucide-react";
-import { useQuestStore } from "@/lib/quest-store";
+import { createFileRoute } from "@tanstack/react-router";
+import { useState } from "react";
+import { Music, Copy, Download, RefreshCw, AlertCircle, CheckCircle2 } from "lucide-react";
 import { PageHeader } from "@/components/PageHeader";
-import { ComingSoon } from "@/components/ComingSoon";
-import { Button, Card, Field, Input, buttonClass } from "@/components/ui/ds";
+import { Card, Button, Input } from "@/components/ui/ds";
+import { toast } from "sonner";
+import { useServerFn } from "@tanstack/react-start";
+import { generateSpotifyLinks } from "@/lib/spotify.functions";
+import { motion, AnimatePresence } from "framer-motion";
 
 export const Route = createFileRoute("/_app/spotify")({
-  head: () => ({
-    meta: [
-      { title: "Gerador Spotify — Em breve — Neighborshub" },
-      {
-        name: "description",
-        content: "O gerador Spotify do Neighborshub está em desenvolvimento.",
-      },
-    ],
-  }),
-  component: () => (
-    <ComingSoon
-      name="Gerador Spotify"
-      icon={Music}
-      eyebrow="spotify --soon"
-      description="Gerador Spotify está em desenvolvimento e estará disponível em breve."
-    />
-  ),
+  head: () => ({ meta: [{ title: "Spotify Gen — Spectre Hub" }] }),
+  component: SpotifyGenPage,
 });
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-
-
-const BASE_URL = "https://www.spotify.com/br-pt/premium/";
-const DISCORD_INVITE = "https://discord.gg/JK7cC9je87";
-
-const PRESETS = [
-  { label: "Instagram", source: "instagram", medium: "social" },
-  { label: "TikTok", source: "tiktok", medium: "social" },
-  { label: "Discord", source: "discord", medium: "community" },
-  { label: "WhatsApp", source: "whatsapp", medium: "chat" },
-  { label: "YouTube", source: "youtube", medium: "video" },
-] as const;
-
 function SpotifyGenPage() {
-  const plan = useQuestStore((s) => s.plan);
-  const isVip = plan === "premium" || plan === "boost";
+  const [quantity, setQuantity] = useState(10);
+  const [utmSource, setUtmSource] = useState("spectre");
+  const [utmMedium, setUtmMedium] = useState("discord");
+  const [utmCampaign, setUtmCampaign] = useState("spotify");
+  const [links, setLinks] = useState<string[]>([]);
+  const [loading, setLoading] = useState(false);
+  const genFn = useServerFn(generateSpotifyLinks);
 
-  const [source, setSource] = useState("neighborshub");
-  const [medium, setMedium] = useState("community");
-  const [campaign, setCampaign] = useState("premium_trimestral");
-  const [content, setContent] = useState("");
+  const handleGenerate = async () => {
+    if (quantity < 1 || quantity > 100) {
+      toast.error("Quantidade inválida (1-100)");
+      return;
+    }
 
-  const link = useMemo(() => {
-    const params = new URLSearchParams();
-    if (source) params.set("utm_source", source);
-    if (medium) params.set("utm_medium", medium);
-    if (campaign) params.set("utm_campaign", campaign);
-    if (content) params.set("utm_content", content);
-    const qs = params.toString();
-    return qs ? `${BASE_URL}?${qs}` : BASE_URL;
-  }, [source, medium, campaign, content]);
-
-  const copy = async () => {
+    setLoading(true);
     try {
-      await navigator.clipboard.writeText(link);
-      toast.success("Link copiado!");
-    } catch {
-      toast.error("Falha ao copiar");
+      const res = await genFn({
+        data: {
+          quantity,
+          utmSource,
+          utmMedium,
+          utmCampaign,
+        },
+      });
+
+      if (res.ok) {
+        setLinks(res.links);
+        toast.success("Links gerados com sucesso!");
+      }
+    } catch (err) {
+      toast.error("Falha ao gerar links.");
+    } finally {
+      setLoading(false);
     }
   };
 
-  if (!isVip) {
-    return (
-      <div className="page-stack">
-        <PageHeader
-          eyebrow="access --check"
-          icon={Music}
-          title="Gerador"
-          highlight="Spotify"
-          description="O gerador Spotify Premium é exclusivo para membros VIP."
-        />
+  const handleCopy = () => {
+    if (links.length === 0) return;
+    navigator.clipboard.writeText(links.join("\n"));
+    toast.success("✓ Links copiados");
+  };
 
-        <Card>
-          <div className="flex flex-col items-center gap-3 text-center">
-            <div className="grid h-14 w-14 place-items-center rounded-full border border-[color-mix(in_oklab,var(--warn)_40%,transparent)] bg-[color-mix(in_oklab,var(--warn)_10%,transparent)]">
-              <Lock className="h-6 w-6 text-[var(--warn)]" />
-            </div>
-            <h2 className="ds-h3">Exclusivo VIP</h2>
-            <p className="max-w-md ds-body">
-              O gerador de links Spotify Premium Trimestral está disponível apenas para membros{" "}
-              <span className="text-[var(--primary)]">Premium</span> ou{" "}
-              <span className="text-[var(--primary)]">Boost</span>.
-            </p>
-            <Link to="/hub" className={buttonClass("primary", "sm", "mt-2")}>
-              <Sparkles className="h-3.5 w-3.5" />
-              virar VIP
-            </Link>
-          </div>
-        </Card>
-      </div>
-    );
-  }
+  const handleDownload = () => {
+    if (links.length === 0) return;
+    const blob = new Blob([links.join("\n")], { type: "text/plain" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "spotify_links.txt";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  };
 
   return (
     <div className="page-stack">
-      <PageHeader
-        eyebrow="spotify --gen premium"
-        icon={Music}
-        title="Gerador"
-        highlight="Spotify Premium"
-        description="Personalize os parâmetros UTM e gere um link de Spotify Premium Trimestral para divulgação."
+      <PageHeader 
+        title="SPOTIFY GEN" 
+        description="Gerador de links de campanha para Spotify."
       />
 
-      <div className="flex flex-wrap gap-2">
-        {PRESETS.map((p) => (
-          <Button
-            key={p.label}
-            variant="secondary"
-            size="sm"
-            onClick={() => {
-              setSource(p.source);
-              setMedium(p.medium);
-            }}
-          >
-            + {p.label}
-          </Button>
-        ))}
-      </div>
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div className="lg:col-span-1 space-y-6">
+          <Card className="p-8 border-white/5 bg-white/[0.02] space-y-8 relative overflow-hidden">
+            {/* Ambient Pink Glow */}
+            <div className="absolute top-0 right-0 w-32 h-32 bg-spectre-pink/5 blur-[60px] -translate-y-1/2 translate-x-1/2" />
+            
+            <div className="flex items-center gap-4 relative z-10">
+              <div className="w-12 h-12 flex items-center justify-center border border-spectre-pink/20 bg-spectre-pink/5 text-spectre-pink">
+                <Music className="w-6 h-6" />
+              </div>
+              <div>
+                <h3 className="font-display text-lg text-white uppercase italic tracking-widest leading-none">Gerar links Spotify</h3>
+                <p className="text-[9px] text-white/30 uppercase tracking-[0.2em] mt-2 font-bold font-sans">Protocolo de Campanha</p>
+              </div>
+            </div>
 
-      <Card className="grid gap-4 sm:grid-cols-2">
-        <UtmField label="utm_source" value={source} onChange={setSource} placeholder="ex: instagram" />
-        <UtmField label="utm_medium" value={medium} onChange={setMedium} placeholder="ex: social" />
-        <UtmField
-          label="utm_campaign"
-          value={campaign}
-          onChange={setCampaign}
-          placeholder="premium_trimestral"
-        />
-        <UtmField
-          label="utm_content"
-          value={content}
-          onChange={setContent}
-          placeholder="opcional"
-        />
-      </Card>
+            <div className="space-y-6 relative z-10">
+              <div className="space-y-2">
+                <label className="font-display text-[9px] uppercase tracking-widest text-white/40 italic block px-1">Quantidade de links</label>
+                <Input 
+                  type="number" 
+                  min={1} 
+                  max={100} 
+                  value={quantity} 
+                  onChange={(e) => setQuantity(parseInt(e.target.value) || 0)}
+                  className="bg-obsidian border-white/10 font-mono text-xs focus:border-spectre-pink/50 transition-all"
+                />
+                <p className="text-[8px] text-white/20 uppercase tracking-widest pl-1">Máximo: 100 por lote</p>
+              </div>
 
-      <Card className="space-y-3">
-        <div className="ds-label">→ link gerado</div>
-        <div className="break-all rounded-md border border-[var(--border-1)] bg-[#0a0a0a] px-3 py-3 font-mono text-xs text-[var(--text-1)] sm:text-sm">
-          {link}
+              <div className="space-y-4">
+                 <div className="space-y-2">
+                    <label className="font-display text-[9px] uppercase tracking-widest text-white/40 italic block px-1">UTM Source</label>
+                    <Input 
+                      placeholder="Ex: spectre" 
+                      value={utmSource} 
+                      onChange={(e) => setUtmSource(e.target.value)}
+                      className="bg-obsidian border-white/10 font-mono text-xs focus:border-spectre-pink/50 transition-all"
+                    />
+                 </div>
+                 <div className="space-y-2">
+                    <label className="font-display text-[9px] uppercase tracking-widest text-white/40 italic block px-1">UTM Medium</label>
+                    <Input 
+                      placeholder="Ex: discord" 
+                      value={utmMedium} 
+                      onChange={(e) => setUtmMedium(e.target.value)}
+                      className="bg-obsidian border-white/10 font-mono text-xs focus:border-spectre-pink/50 transition-all"
+                    />
+                 </div>
+                 <div className="space-y-2">
+                    <label className="font-display text-[9px] uppercase tracking-widest text-white/40 italic block px-1">UTM Campaign</label>
+                    <Input 
+                      placeholder="Ex: spotify" 
+                      value={utmCampaign} 
+                      onChange={(e) => setUtmCampaign(e.target.value)}
+                      className="bg-obsidian border-white/10 font-mono text-xs focus:border-spectre-pink/50 transition-all"
+                    />
+                 </div>
+              </div>
+
+              <button 
+                onClick={handleGenerate}
+                disabled={loading}
+                className="ds-btn ds-btn-primary w-full py-4 flex items-center justify-center gap-3 disabled:opacity-50"
+              >
+                {loading ? (
+                  <>
+                    <RefreshCw className="w-4 h-4 animate-spin" />
+                    Gerando Protocolos...
+                  </>
+                ) : (
+                  <>
+                    <Music className="w-4 h-4" />
+                    Gerar Links de Campanha
+                  </>
+                )}
+              </button>
+            </div>
+          </Card>
+
+          <Card className="p-6 border-white/5 bg-white/[0.01] border-dashed">
+             <div className="flex items-center gap-2 mb-4 text-white/40">
+                <AlertCircle className="w-4 h-4" />
+                <h4 className="font-display text-[9px] uppercase tracking-widest italic font-bold">Aviso Legal</h4>
+             </div>
+             <p className="text-[9px] text-white/30 uppercase tracking-[0.15em] font-sans italic leading-relaxed">
+                Esta ferramenta gera links legítimos de redirecionamento do Spotify com parâmetros UTM para rastreamento de campanhas. Não gera contas premium, vouchers ou assinaturas gratuitas.
+             </p>
+          </Card>
         </div>
-        <div className="flex flex-wrap gap-2">
-          <a
-            href={DISCORD_INVITE}
-            target="_blank"
-            rel="noreferrer"
-            onClick={() => toast.success("Redirecionando pro Discord…")}
-            className={buttonClass("primary")}
-          >
-            <ExternalLink className="h-3.5 w-3.5" />
-            comprar no discord
-          </a>
-          <Button variant="secondary" onClick={copy}>
-            <Copy className="h-3.5 w-3.5" />
-            copiar link
-          </Button>
-        </div>
-      </Card>
 
-      <div className="rounded-lg border border-[color-mix(in_oklab,var(--warn)_25%,transparent)] bg-[color-mix(in_oklab,var(--warn)_5%,transparent)] p-4 ds-small">
-        ⚠ apenas links oficiais do domínio spotify.com são gerados. UTM serve
-        para rastrear a origem da divulgação — nada de conta gratuita/pirata.
+        <div className="lg:col-span-2 space-y-6">
+           <Card className="p-8 border-white/5 bg-white/[0.02] flex flex-col h-full min-h-[500px]">
+              <div className="flex items-center justify-between mb-8">
+                 <div className="flex items-center gap-3">
+                    <div className="w-1.5 h-1.5 rounded-full bg-spectre-pink shadow-[0_0_8px_#ff0055]" />
+                    <h3 className="font-display text-sm text-white uppercase italic tracking-widest">Output de Resultados</h3>
+                 </div>
+                 
+                 <div className="flex items-center gap-3">
+                    <Button 
+                      variant="secondary" 
+                      size="sm" 
+                      onClick={handleCopy} 
+                      disabled={links.length === 0}
+                      className="!text-[9px] !py-2 !h-auto flex items-center gap-2"
+                    >
+                       <Copy className="w-3 h-3" /> Copiar
+                    </Button>
+                    <Button 
+                      variant="secondary" 
+                      size="sm" 
+                      onClick={handleDownload} 
+                      disabled={links.length === 0}
+                      className="!text-[9px] !py-2 !h-auto flex items-center gap-2"
+                    >
+                       <Download className="w-3 h-3" /> Baixar .TXT
+                    </Button>
+                 </div>
+              </div>
+
+              <div className="flex-1 bg-black/40 border border-white/5 p-6 font-mono text-[11px] text-white/60 overflow-y-auto custom-scrollbar relative">
+                 <AnimatePresence mode="wait">
+                   {links.length > 0 ? (
+                     <motion.div 
+                       initial={{ opacity: 0 }}
+                       animate={{ opacity: 1 }}
+                       exit={{ opacity: 0 }}
+                       className="space-y-2"
+                     >
+                       {links.map((link, i) => (
+                         <div key={i} className="py-1 border-b border-white/[0.02] break-all hover:text-white transition-colors">
+                           {link}
+                         </div>
+                       ))}
+                     </motion.div>
+                   ) : (
+                     <motion.div 
+                       initial={{ opacity: 0 }}
+                       animate={{ opacity: 1 }}
+                       className="h-full flex flex-col items-center justify-center gap-4 text-white/10"
+                     >
+                        <div className="w-16 h-16 border border-white/5 flex items-center justify-center opacity-20">
+                           <Music className="w-8 h-8" />
+                        </div>
+                        <span className="text-[10px] uppercase tracking-[0.3em] italic">Aguardando geração...</span>
+                     </motion.div>
+                   )}
+                 </AnimatePresence>
+              </div>
+
+              {links.length > 0 && (
+                <div className="mt-6 flex items-center justify-between text-[9px] uppercase tracking-widest text-white/30 italic">
+                   <div className="flex items-center gap-2">
+                      <CheckCircle2 className="w-3 h-3 text-spectre-pink" />
+                      {links.length} Protocolos Gerados
+                   </div>
+                   <span>Terminal Ativo</span>
+                </div>
+              )}
+           </Card>
+        </div>
       </div>
     </div>
-  );
-}
-
-function UtmField({
-  label,
-  value,
-  onChange,
-  placeholder,
-}: {
-  label: string;
-  value: string;
-  onChange: (v: string) => void;
-  placeholder?: string;
-}) {
-  return (
-    <Field label={label}>
-      <Input
-        value={value}
-        onChange={(e) => onChange(e.target.value.trim())}
-        placeholder={placeholder}
-        className="font-mono"
-      />
-    </Field>
   );
 }
