@@ -62,19 +62,7 @@ function Index() {
   const { t } = useTranslation();
   const [ref] = useInView<HTMLDivElement>();
   
-  /*
-    ainda nao mostra o banner do perfil coloca ai da uma ajustada pra fica bom 
-
-    na parte de perfil e segurança faça funcionar 
-
-    geral
-    conta e discord
-    segurança 
-    interface 
-    notificaçao 
-
-    e ajusta a parte onde mostra a bio do perfil do usuario si o msm tiver bio usando gif faça aparecer etc
-  */
+  /* muda isso ta feio dms deixa algo bonito */
 
   
 
