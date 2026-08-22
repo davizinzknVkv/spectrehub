@@ -62,7 +62,7 @@ function Index() {
   const { t } = useTranslation();
   const [ref] = useInView<HTMLDivElement>();
   
-  /* deixa a pagina inicilal assim */
+  /* deixa a pagina inicial assim */
 
   
 
