@@ -260,13 +260,59 @@ function DocsPage() {
                 </section>
               )}
 
-              {/* FAQ & Terms (Placeholders for other sections) */}
-              {["faq", "termos", "suporte"].includes(activeSection) && (
+              {/* FAQ Section */}
+              {activeSection === "faq" && (
+                <section className="space-y-12 animate-in fade-in slide-in-from-bottom-4 duration-700">
+                  <div className="space-y-4">
+                    <h2 className="font-display text-4xl uppercase tracking-tighter italic">Perguntas <span className="text-spectre-pink">Frequentes</span></h2>
+                    <p className="text-white/50 text-base max-w-2xl">Respostas rápidas para as dúvidas mais comuns da comunidade.</p>
+                  </div>
+                  <div className="grid gap-4">
+                    {[
+                      { q: "O Spectre Hub é seguro?", a: "Sim. Utilizamos métodos de anti-detecção avançados e rotação de headers para garantir a máxima segurança da sua conta." },
+                      { q: "Como resgatar as missões?", a: "Basta vincular seu token no Hub e ativar o módulo de Auto Quests. O sistema fará o resto automaticamente." },
+                      { q: "Quais são as formas de pagamento?", a: "Aceitamos diversas formas de pagamento através da nossa loja oficial no Discord." }
+                    ].map((item, i) => (
+                      <div key={i} className="p-6 bg-white/[0.02] border border-white/5">
+                        <h4 className="font-display text-sm uppercase tracking-wider text-spectre-pink mb-2">{item.q}</h4>
+                        <p className="text-white/50 text-sm leading-relaxed">{item.a}</p>
+                      </div>
+                    ))}
+                  </div>
+                </section>
+              )}
+
+              {/* Terms Section */}
+              {activeSection === "termos" && (
+                <section className="space-y-12 animate-in fade-in slide-in-from-bottom-4 duration-700">
+                  <div className="space-y-4">
+                    <h2 className="font-display text-4xl uppercase tracking-tighter italic">Termos de <span className="text-spectre-pink">Uso</span></h2>
+                    <p className="text-white/50 text-base max-w-2xl">Regras e diretrizes para a utilização dos nossos serviços.</p>
+                  </div>
+                  <div className="space-y-8 text-white/50 text-sm leading-relaxed max-w-4xl">
+                    <div className="space-y-4">
+                      <h3 className="font-display text-lg text-white uppercase tracking-widest">1. Aceitação dos Termos</h3>
+                      <p>Ao acessar o Spectre Hub, você concorda em cumprir estes termos de serviço e todas as leis aplicáveis. O uso indevido da plataforma resultará em banimento imediato sem direito a reembolso.</p>
+                    </div>
+                    <div className="space-y-4">
+                      <h3 className="font-display text-lg text-white uppercase tracking-widest">2. Uso de Automação</h3>
+                      <p>Nossas ferramentas são destinadas a otimização e fins educacionais. O usuário assume total responsabilidade por qualquer ação realizada através dos nossos sistemas.</p>
+                    </div>
+                    <div className="space-y-4">
+                      <h3 className="font-display text-lg text-white uppercase tracking-widest">3. Política de Reembolso</h3>
+                      <p>Devido à natureza digital dos nossos serviços, reembolsos são avaliados individualmente apenas em caso de falha técnica comprovada do sistema que não possa ser resolvida em 48h.</p>
+                    </div>
+                  </div>
+                </section>
+              )}
+
+              {/* Support Section */}
+              {activeSection === "suporte" && (
                 <section className="space-y-8 py-20 text-center border border-white/5 bg-white/[0.01]">
-                   <FileText className="w-12 h-12 text-white/10 mx-auto mb-4" />
-                   <h2 className="font-display text-2xl uppercase tracking-widest">{activeSection}</h2>
-                   <p className="text-white/40 text-sm">Seção em atualização. Para informações imediatas, consulte nossa comunidade oficial.</p>
-                   <a href="https://discord.gg/vbYK559Jnb" target="_blank" rel="noreferrer" className="ds-btn ds-btn-primary inline-flex !px-8">Abrir Ticket no Discord</a>
+                   <LifeBuoy className="w-12 h-12 text-white/10 mx-auto mb-4" />
+                   <h2 className="font-display text-2xl uppercase tracking-widest">Central de Suporte</h2>
+                   <p className="text-white/40 text-sm max-w-md mx-auto">Nossa equipe está disponível 24/7 no Discord para ajudar com qualquer problema técnico ou dúvida comercial.</p>
+                   <a href="https://discord.gg/vbYK559Jnb" target="_blank" rel="noreferrer" className="ds-btn ds-btn-primary inline-flex !px-8 mt-4">Abrir Ticket no Discord</a>
                 </section>
               )}
             </div>
