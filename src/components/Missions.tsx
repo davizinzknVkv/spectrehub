@@ -91,7 +91,8 @@ export function MissionCard({
   return (
     <Card className={cn(
       "group relative flex min-h-[180px] flex-col justify-between transition-all duration-500 !p-6 border-border bg-card/30 hover:border-primary/20 h-full rounded-xl overflow-hidden",
-      active && "border-primary/40 bg-primary/[0.02]"
+      active && "border-primary/40 bg-primary/[0.02]",
+      isCompleted && !active && "border-emerald-500/30 bg-emerald-500/[0.02]"
     )}>
       {quest.imageUrl && (
         <div className="absolute inset-0 z-0 overflow-hidden opacity-10 transition-opacity duration-700 group-hover:opacity-20">
