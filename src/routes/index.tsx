@@ -61,7 +61,7 @@ const FALLBACK_MEMBERS = [
 function Index() {
   const { t } = useTranslation();
   
-  /* arruma isso arruma esse problema da imagem 1 e na imagem 2 é  oq vc removeu */
+  /* aki as imgs puxa da widget do discord */
 
   
 
