@@ -338,6 +338,30 @@ export type Database = {
         }
         Relationships: []
       }
+      spotify_links: {
+        Row: {
+          active: boolean | null
+          created_at: string | null
+          id: string
+          label: string | null
+          url: string
+        }
+        Insert: {
+          active?: boolean | null
+          created_at?: string | null
+          id?: string
+          label?: string | null
+          url: string
+        }
+        Update: {
+          active?: boolean | null
+          created_at?: string | null
+          id?: string
+          label?: string | null
+          url?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       site_features_public: {
