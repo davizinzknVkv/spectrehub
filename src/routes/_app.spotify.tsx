@@ -5,6 +5,7 @@ import { PageHeader } from "@/components/PageHeader";
 import { Card, Button, Input } from "@/components/ui/ds";
 import { toast } from "sonner";
 import { useServerFn } from "@tanstack/react-start";
+import { useQuestStore } from "@/lib/quest-store";
 import { generateSpotifyLinks } from "@/lib/spotify.functions";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -21,8 +22,14 @@ function SpotifyGenPage() {
   const [links, setLinks] = useState<string[]>([]);
   const [loading, setLoading] = useState(false);
   const genFn = useServerFn(generateSpotifyLinks);
+  const plan = useQuestStore((s) => s.plan);
 
   const handleGenerate = async () => {
+    if (plan !== "premium" && plan !== "lifetime" && plan !== "beta") {
+      toast.error("Acesso negado: Plano Premium ou Lifetime requerido.");
+      return;
+    }
+
     if (quantity < 1 || quantity > 100) {
       toast.error("Quantidade inválida (1-100)");
       return;
