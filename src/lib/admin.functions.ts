@@ -162,7 +162,7 @@ export const adminSaveFeature = createServerFn({ method: "POST" })
 
 /* ── Remoção genérica ───────────────────────────────────── */
 const deleteInput = tokenInput.extend({
-  table: z.enum(["site_plans", "site_previews", "site_features"]),
+  table: z.enum(["site_plans", "site_previews", "site_features", "spotify_links"]),
   id: z.string().uuid(),
 });
 
