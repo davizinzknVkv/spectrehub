@@ -62,7 +62,7 @@ function Index() {
   const { t } = useTranslation();
   const [ref] = useInView<HTMLDivElement>();
   
-  /* na parte de limpar é 2 coisa dm e amizade dai separa a parte de limpar amizade */
+  /* Adicione ícones consistentes e tooltips explicativos para cada ação rápida no Dashboard. */
 
   
 
