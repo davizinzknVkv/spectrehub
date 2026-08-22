@@ -61,7 +61,7 @@ const FALLBACK_MEMBERS = [
 function Index() {
   const { t } = useTranslation();
   
-  /* QUERO ADICIONAR ANIMAÇÕES PREMIUM AO MEU SITE USANDO O 21ST.DEV.
+  /* na parte inicial onde tem SPECTRE HUB DOMINA O MERCADO MUDA ESSE TEXTO PRA ALGO MENOR E TIRA A LOGO DO MEIO */
 
 Antes de implementar qualquer animação, analise completamente o design atual do meu site e entenda a identidade visual.
 
