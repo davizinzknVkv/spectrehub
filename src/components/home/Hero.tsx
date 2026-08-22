@@ -48,20 +48,11 @@ export function Hero({ guildInvite, fallbackMembers }: HeroProps) {
             initial={{ opacity: 0, filter: "blur(10px)", y: 20 }}
             animate={{ opacity: 1, filter: "blur(0px)", y: 0 }}
             transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
-            className="font-display text-[clamp(3rem,10vw,8.5rem)] leading-[0.8] text-white uppercase tracking-tighter break-words relative z-10 flex flex-col items-center"
+            className="font-display text-[clamp(2.5rem,7vw,5.5rem)] leading-[0.9] text-white uppercase tracking-tighter break-words relative z-10 flex flex-col items-center"
           >
             <div className="flex items-center gap-[0.1em] justify-center flex-wrap">
               <span className="inline-block">{t('hero.title1')}</span>
-              <motion.div 
-                initial={{ scale: 0.8, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                transition={{ delay: 0.5, duration: 1 }}
-                className="flex flex-col items-center mx-6 translate-y-[0.05em]"
-              >
-                <img src={logoAsset.url} alt="" className="h-[0.7em] w-auto animate-pulse drop-shadow-[0_0_50px_rgba(255,0,85,0.8)]" />
-                <span className="text-[13px] tracking-[0.6em] text-white/40 font-sans mt-3 font-black">SPECTREHUB</span>
-              </motion.div>
-              <span className="inline-block">{t('hero.title2')}</span>
+              <span className="inline-block md:ml-[0.2em]">{t('hero.title2')}</span>
             </div>
             
             <motion.div 
@@ -104,7 +95,7 @@ export function Hero({ guildInvite, fallbackMembers }: HeroProps) {
               whileHover={{ scale: 1.02, y: -2 }}
               whileTap={{ scale: 0.98 }}
               href="#produtos" 
-              className="ds-btn ds-btn-primary w-full sm:w-auto sm:min-w-[340px] !py-5 !px-12 !text-[14px] !min-h-[64px] rounded-xl flex items-center justify-center gap-4 group shadow-[0_0_40px_rgba(255,0,85,0.4)] hover:shadow-[0_0_60px_rgba(255,0,85,0.6)] transition-all"
+              className="ds-btn ds-btn-primary w-full sm:w-auto sm:min-w-[280px] !py-4 !px-10 !text-[12px] !min-h-[56px] rounded-xl flex items-center justify-center gap-4 group shadow-[0_0_40px_rgba(255,0,85,0.4)] hover:shadow-[0_0_60px_rgba(255,0,85,0.6)] transition-all"
             >
               {t('common.getStarted')}
               <ArrowRight className="w-5 h-5 group-hover:translate-x-3 transition-transform duration-500" />
@@ -114,7 +105,7 @@ export function Hero({ guildInvite, fallbackMembers }: HeroProps) {
                whileHover={{ scale: 1.02, y: -2 }}
                whileTap={{ scale: 0.98 }}
             >
-              <Link to="/docs" className="ds-btn ds-btn-secondary w-full sm:w-auto sm:min-w-[340px] !py-5 !px-12 !text-[14px] !min-h-[64px] rounded-xl border border-white/10 flex items-center justify-center gap-4 bg-obsidian-soft/50 backdrop-blur-sm hover:bg-white/5 transition-all group overflow-hidden relative">
+              <Link to="/docs" className="ds-btn ds-btn-secondary w-full sm:w-auto sm:min-w-[280px] !py-4 !px-10 !text-[12px] !min-h-[56px] rounded-xl border border-white/10 flex items-center justify-center gap-4 bg-obsidian-soft/50 backdrop-blur-sm hover:bg-white/5 transition-all group overflow-hidden relative">
                 <span className="relative z-10 flex items-center gap-4">
                   {t('common.documentation')}
                   <div className="w-5 h-5 opacity-60 group-hover:opacity-100 transition-opacity">
