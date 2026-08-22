@@ -303,7 +303,7 @@ export async function fetchUserPlan(): Promise<Plan | null> {
 }
 
 
-export async function fetchAvailableQuests(): Promise<Quest[]> {
+export async function fetchAvailableQuests(includeCompleted = false): Promise<Quest[]> {
   const res = await call("/quests/@me");
   if (res.status !== 200) return [];
   const payload = res.data as { quests?: Array<Record<string, unknown>> };
@@ -320,41 +320,24 @@ export async function fetchAvailableQuests(): Promise<Quest[]> {
         rewards_config?: { rewards?: unknown[] };
         assets?: { hero?: string; quest_bar_hero?: string; logotype?: string };
       };
-      user_status?: { completed_at?: string; enrolled_at?: string };
+      user_status?: { completed_at?: string; enrolled_at?: string; claimed_at?: string };
     };
+    
     if (new Date(q.config.expires_at) < now) continue;
-    if (q.user_status?.completed_at) continue;
+    
+    // Se não quisermos incluír as completadas, pulamos as que têm completed_at
+    if (!includeCompleted && q.user_status?.completed_at) continue;
+    
     const tasks = q.config.task_config_v2?.tasks ?? {};
     const best = getBestTask(tasks);
     if (!best) continue;
+    
     const asset = q.config.assets?.hero || q.config.assets?.quest_bar_hero || q.config.assets?.logotype;
-    // Carrega direto do CDN do Discord (sem proxy) — <img> não sofre CORS
     const assetFile = asset ? asset.split("/").pop()! : undefined;
     const imageUrl = assetFile
       ? `https://cdn.discordapp.com/quests/${q.id}/${/\.(png|jpe?g|webp|gif)$/i.test(assetFile) ? assetFile : `${assetFile}.png`}?size=1024`
       : undefined;
-    // 🔎 intercept: log raw assets + resolved URL to inspect Discord's payload
-    console.groupCollapsed(
-      `%c[quest-img] ${q.config.messages.quest_name}`,
-      "color:#22d3ee;font-weight:bold",
-    );
-    console.log("questId:", q.id);
-    console.log("assets:", q.config.assets);
-    console.log("picked asset:", asset);
-    console.log("resolved URL:", imageUrl);
-    console.log("full config keys:", Object.keys(q.config));
-    console.groupEnd();
-    if (typeof window !== "undefined") {
-      const w = window as unknown as { __questImgs?: Array<Record<string, unknown>> };
-      w.__questImgs = w.__questImgs ?? [];
-      w.__questImgs.push({
-        id: q.id,
-        name: q.config.messages.quest_name,
-        assets: q.config.assets,
-        picked: asset,
-        url: imageUrl,
-      });
-    }
+
     result.push({
       questId: q.id,
       questName: q.config.messages.quest_name,
@@ -365,15 +348,23 @@ export async function fetchAvailableQuests(): Promise<Quest[]> {
       imageUrl,
       publisher: q.config.messages.publisher_name,
       expiresAt: q.config.expires_at,
+      completedAt: q.user_status?.completed_at,
+      claimedAt: q.user_status?.claimed_at
     });
   }
+  
   result.sort((a, b) => {
+    // Primeiro as não completadas
+    if (!a.completedAt && b.completedAt) return -1;
+    if (a.completedAt && !b.completedAt) return 1;
+    
     const aO = a.rewardText.includes("Orbs");
     const bO = b.rewardText.includes("Orbs");
     if (aO && !bO) return -1;
     if (!aO && bO) return 1;
     return a.target - b.target;
   });
+  
   return result;
 }
 
