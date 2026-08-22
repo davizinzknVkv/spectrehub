@@ -15,6 +15,7 @@ import {
   adminDeleteRow,
 } from "@/lib/admin.functions";
 import logoAsset from "@/assets/spectre-logo-nobg.png.asset.json";
+import { adminSaveSpotifyLink } from "@/lib/admin.functions";
 
 export const Route = createFileRoute("/_app/admin")({
   component: AdminPage,
