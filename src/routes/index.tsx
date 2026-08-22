@@ -1,7 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
 
-import { useInView } from "@/components/home/hooks";
 import logoAsset from "@/assets/spectre-logo-main.png.asset.json";
 import { PRODUCTS, PLANS, REASONS } from "@/components/home/constants";
 import { SiteHeader } from "@/components/home/SiteHeader";
@@ -14,6 +13,7 @@ import { FreeSignup } from "@/components/home/FreeSignup";
 import { CommunitySection } from "@/components/home/CommunitySection";
 import { FinalCta } from "@/components/home/FinalCta";
 import { SiteFooter } from "@/components/home/SiteFooter";
+import { AnimatedBackground } from "@/components/home/AnimatedBackground";
 
 const TITLE = "Spectre Hub — Elite Discord Automation";
 const DESCRIPTION =
@@ -70,22 +70,13 @@ function Index() {
   return (
     <div
       id="topo"
-      className="relative min-h-screen bg-background font-sans text-foreground antialiased selection:bg-primary/30 flex flex-col"
+      className="relative min-h-screen bg-obsidian font-sans text-foreground antialiased selection:bg-primary/30 flex flex-col"
     >
-      {/* Global Background Grid & Dots */}
-      <div className="fixed inset-0 z-0 pointer-events-none opacity-[0.05]">
-        <div
-          className="absolute inset-0"
-          style={{
-            backgroundImage: `radial-gradient(circle at 1px 1px, currentColor 1px, transparent 0)`,
-            backgroundSize: '32px 32px'
-          }}
-        />
-      </div>
+      <AnimatedBackground />
 
       <SiteHeader guildInvite={GUILD_INVITE} />
 
-      <main ref={ref} className="relative z-10">
+      <main className="relative z-10 flex-1">
         <Hero guildInvite={GUILD_INVITE} fallbackMembers={FALLBACK_MEMBERS} />
         
         <SocialProof widgetUrl={WIDGET_URL} products={PRODUCTS} />
