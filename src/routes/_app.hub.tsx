@@ -381,7 +381,7 @@ function HubPage() {
 
           ].map((item: any) => {
             const Content = (
-              <div className="ds-card p-6 border-border bg-card/50 flex flex-col group hover:border-primary/40 transition-all overflow-hidden relative h-full w-full text-left rounded-xl">
+              <div className="ds-card p-6 border-border bg-card/50 flex flex-col group hover:border-primary/40 transition-all overflow-hidden relative h-full w-full text-left rounded-xl group-hover/action:-translate-y-1">
                 <div className="absolute -right-4 -bottom-4 opacity-5 group-hover:opacity-10 transition-opacity">
                   <item.icon className="w-24 h-24" />
                 </div>
@@ -398,14 +398,14 @@ function HubPage() {
 
             if (item.link) {
               return (
-                <Link to={item.link} key={item.label} className="block transition-all">
+                <Link to={item.link} key={item.label} className="block transition-all group/action">
                   {Content}
                 </Link>
               );
             }
 
             return (
-              <button key={item.label} onClick={item.onClick} className="block transition-all">
+              <button key={item.label} onClick={item.onClick} className="block transition-all group/action">
                 {Content}
               </button>
             );
