@@ -13,8 +13,8 @@ export function PlansSection({ plans }: PlansSectionProps) {
   const { t } = useTranslation();
 
   return (
-    <section id="planos" className="mx-auto max-w-7xl px-4 py-24 sm:px-6 lg:px-8">
-      <div className="text-center max-w-3xl mx-auto mb-20">
+    <section id="planos" className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
+      <div className="text-center max-w-3xl mx-auto mb-12">
         <Reveal>
            <div className="font-display text-[10px] tracking-[0.3em] text-spectre-pink uppercase mb-4 justify-center flex items-center gap-2">
                <span className="w-8 h-px bg-spectre-pink/30" />

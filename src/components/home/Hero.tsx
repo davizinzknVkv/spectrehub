@@ -15,7 +15,7 @@ export function Hero({ guildInvite, fallbackMembers }: HeroProps) {
   const { t } = useTranslation();
 
   return (
-    <section className="relative min-h-[100dvh] flex items-center justify-center overflow-hidden pt-20 px-4 md:px-8 bg-background">
+    <section className="relative min-h-[85dvh] flex items-center justify-center overflow-hidden pt-12 pb-8 px-4 md:px-8 bg-background">
       {/* Background patterns */}
       <div className="absolute inset-0 z-0 overflow-hidden">
         <div 
@@ -30,7 +30,7 @@ export function Hero({ guildInvite, fallbackMembers }: HeroProps) {
 
       <div className="relative z-10 w-full max-w-7xl mx-auto text-center">
         <Reveal>
-          <div className="inline-flex items-center gap-2 px-3 py-1 border border-primary/20 bg-primary/5 rounded-full mb-8">
+          <div className="inline-flex items-center gap-2 px-3 py-1 border border-primary/20 bg-primary/5 rounded-full mb-6">
             <span className="w-1.5 h-1.5 rounded-full bg-spectre-pink animate-pulse" />
             <span className="font-display text-[10px] tracking-[0.3em] text-spectre-pink uppercase">
               {t('hero.badge')}
@@ -77,7 +77,7 @@ export function Hero({ guildInvite, fallbackMembers }: HeroProps) {
           </div>
           {/* Adicionando outro efeito no fundo para preencher o espaço */}
           <div className="absolute bottom-1/4 right-0 w-64 h-64 bg-spectre-pink/5 rounded-full blur-[120px] pointer-events-none" />
-          <h1 className="font-display text-[clamp(2.5rem,8vw,5rem)] leading-[0.95] text-foreground uppercase tracking-tighter mb-8 break-words relative z-10 flex flex-col items-center">
+          <h1 className="font-display text-[clamp(2rem,7vw,4.5rem)] leading-[0.95] text-foreground uppercase tracking-tighter mb-6 break-words relative z-10 flex flex-col items-center">
             <div className="flex items-center gap-[0.3em] md:gap-[0.5em] justify-center flex-wrap">
               <span>{t('hero.title1')}</span>
               <img src={logoAsset.url} alt="" className="h-[0.8em] w-auto animate-pulse drop-shadow-[0_0_20px_rgba(255,0,85,0.4)]" />
@@ -90,7 +90,7 @@ export function Hero({ guildInvite, fallbackMembers }: HeroProps) {
         </Reveal>
 
         <Reveal delay={200}>
-          <p className="max-w-2xl mx-auto text-foreground-muted text-base md:text-lg font-sans mb-10 leading-relaxed">
+          <p className="max-w-2xl mx-auto text-foreground-muted text-sm md:text-base font-sans mb-8 leading-relaxed">
             {t('hero.description')}
           </p>
 
@@ -98,32 +98,32 @@ export function Hero({ guildInvite, fallbackMembers }: HeroProps) {
 
         <Reveal delay={300}>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6">
-            <a href="#produtos" className="ds-btn ds-btn-primary w-full sm:min-w-[240px]">
+            <a href="#produtos" className="ds-btn ds-btn-primary w-full sm:w-auto sm:min-w-[200px] !py-2.5 !px-6 !text-[11px] !min-h-[40px] rounded-md">
               {t('common.getStarted')}
             </a>
-            <Link to="/docs" className="ds-btn ds-btn-secondary w-full sm:min-w-[240px]">
+            <Link to="/docs" className="ds-btn ds-btn-secondary w-full sm:w-auto sm:min-w-[200px] !py-2.5 !px-6 !text-[11px] !min-h-[40px] rounded-md">
               {t('common.documentation')}
             </Link>
           </div>
         </Reveal>
 
-        <div className="mt-24 pt-12 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-8 opacity-40">
-           <div className="flex items-center gap-4 font-display text-[10px] tracking-[0.2em] uppercase">
+        <div className="mt-16 pt-8 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-6 opacity-60">
+           <div className="flex items-center gap-4 font-display text-[9px] tracking-[0.2em] uppercase">
              <span>Spectre Hub</span>
              <span className="text-spectre-pink">//</span>
              <span>AGO-2026</span>
            </div>
            
            <div className="flex items-center gap-4">
-             <div className="flex -space-x-3">
+             <div className="flex -space-x-2">
                {fallbackMembers.slice(0, 3).map((m, i) => (
-                  <div key={i} className="w-8 h-8 rounded-full border border-white/10 overflow-hidden bg-black flex items-center justify-center p-0.5 relative group">
+                  <div key={i} className="w-7 h-7 rounded-full border border-white/20 overflow-hidden bg-black flex items-center justify-center p-0.5 relative group ring-2 ring-obsidian">
                     <div className="absolute inset-0 bg-gradient-to-tr from-spectre-pink/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
                     <Avatar seed={m} />
                   </div>
                ))}
              </div>
-             <span className="font-display text-[10px] tracking-[0.2em] uppercase text-white/60">{t('hero.activeCommunity')}</span>
+             <span className="font-display text-[9px] tracking-[0.2em] uppercase text-white/60">{t('hero.activeCommunity')}</span>
            </div>
         </div>
       </div>
