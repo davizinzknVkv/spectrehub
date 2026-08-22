@@ -1,5 +1,4 @@
-
-/* essa parte nao esta mostrando os sistemas arruma ai */
+/* arruma nao estava dando isso antes */
 import { createFileRoute } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
 import { useState, useEffect } from "react";

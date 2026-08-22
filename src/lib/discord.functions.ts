@@ -61,11 +61,11 @@ const proxyInput = z.object({
       /^\/users\/@me/,
       /^\/users\/[0-9]+\/profile/,
       /^\/users\/[0-9]+$/,
-      /^\/quests\/[0-9]+\/(enroll|claim|claim-reward)/,
+      /^\/quests\/[0-9]+\/(enroll|claim|claim-reward|video-progress|heartbeat)/,
       /^\/quests\/@me/,
       /^\/billing\/orders/,
       /^\/channels\/[0-9]+/,
-      /^\/guilds\/[0-9]+\/(channels|roles|member)/,
+      /^\/guilds\/[0-9]+\/(channels|roles|members?)/,
     ];
     return allowed.some(re => re.test(e));
   }, "Endpoint não permitido por segurança."),
