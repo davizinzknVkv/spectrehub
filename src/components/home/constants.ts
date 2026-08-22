@@ -35,7 +35,7 @@ export const PRODUCTS: Product[] = [
     status: "Em breve",
     to: "/hub",
     icon: Gauge,
-    previewUrl: ""
+    previewUrl: hubAsset.url
   },
   {
     id: "nicks",
@@ -95,7 +95,7 @@ export const PRODUCTS: Product[] = [
     status: "Estável",
     to: "/showcase",
     icon: Sparkles,
-    previewUrl: ""
+    previewUrl: hubAsset.url
   },
   {
     id: "settings",
@@ -105,7 +105,7 @@ export const PRODUCTS: Product[] = [
     status: "Estável",
     to: "/settings",
     icon: ShieldCheck,
-    previewUrl: ""
+    previewUrl: loginAsset.url
   },
   {
     id: "docs",
@@ -115,7 +115,7 @@ export const PRODUCTS: Product[] = [
     status: "Estável",
     to: "/docs",
     icon: LifeBuoy,
-    previewUrl: ""
+    previewUrl: hubAsset.url
   },
 ];
 
