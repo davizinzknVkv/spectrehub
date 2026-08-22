@@ -139,6 +139,16 @@ export function MissionCard({
               <div className="h-full bg-primary shadow-[0_0_8px_rgba(255,0,85,0.4)] transition-all duration-500 rounded-full" style={{ width: `${p}%` }} />
             </div>
           </div>
+        ) : isCompleted ? (
+          <div className="space-y-2">
+             <div className="flex items-center justify-between text-[10px] font-bold uppercase tracking-wider text-emerald-400">
+               <span>Missão Concluída</span>
+               <span>100%</span>
+             </div>
+             <div className="h-1.5 overflow-hidden bg-white/5 rounded-full">
+               <div className="h-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.4)] rounded-full w-full" />
+             </div>
+          </div>
         ) : (
           <Button
             variant={disabled ? "secondary" : "primary"}
