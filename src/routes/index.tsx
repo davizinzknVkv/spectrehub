@@ -1,7 +1,4 @@
-/* [01:11:05]⚠️ Falha no resgate automático: Albion Online - Fogo de Dragão
-[01:10:57]⚠️ Falha no resgate automático: Assuma o Controle
-[01:10:51]⚠️ Falha no resgate automático: NBA 2K27 Content Drop
-[01:10:48]⚠️ Falha no resgate automático: Where Winds Meet 2.0 Wuxia New Era */
+/* oq ´precisa pro resgatar pegar */
 import { createFileRoute } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
 import { useState, useEffect } from "react";
