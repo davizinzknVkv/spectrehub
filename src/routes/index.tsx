@@ -1,4 +1,4 @@
-/* Crie uma página de status do sistema para exibir a saúde do resgate automático e alertas quando houver falhas recorrentes. */
+/* SPECTRE Rebrand in progress: #4DA09E */
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect } from "react";
 import { Hero } from "@/components/home/Hero";

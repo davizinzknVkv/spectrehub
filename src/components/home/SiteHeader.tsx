@@ -11,7 +11,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import logoAsset from "@/assets/spectre-logo-main.png.asset.json";
+import logoAsset from "@/assets/logo-spectre.png.asset.json";
 
 import brFlag from "@/assets/flags/brazil.png.asset.json";
 import usFlag from "@/assets/flags/usa.png.asset.json";
@@ -70,11 +70,11 @@ export function SiteHeader({ guildInvite }: SiteHeaderProps) {
             <img
               src={logoAsset.url}
               alt="Spectre Hub"
-              className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500 drop-shadow-[0_0_8px_rgba(255,0,85,0.3)]"
+              className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500 drop-shadow-[0_0_8px_rgba(77,160,158,0.3)]"
             />
           </div>
           <span className="font-display text-lg tracking-tighter text-white uppercase italic hidden sm:block">
-            Spectre <span className="text-spectre-pink">Hub</span>
+            Spectre <span className="text-primary">Hub</span>
           </span>
         </Link>
 
@@ -88,7 +88,7 @@ export function SiteHeader({ guildInvite }: SiteHeaderProps) {
             <input 
               type="text" 
               placeholder="Buscar" 
-              className="w-full bg-black/40 border border-white/5 py-1.5 pl-9 pr-12 text-[11px] text-white/60 placeholder:text-white/20 focus:outline-none focus:border-spectre-pink/30 focus:bg-black/60 transition-all rounded-md"
+              className="w-full bg-black/40 border border-white/5 py-1.5 pl-9 pr-12 text-[11px] text-white/60 placeholder:text-white/20 focus:outline-none focus:border-primary/30 focus:bg-black/60 transition-all rounded-md"
             />
             <div className="absolute inset-y-0 right-2 flex items-center">
               <span className="text-[9px] text-white/20 border border-white/10 px-1 py-0.5 rounded bg-white/[0.02]">Ctrl K</span>
@@ -104,7 +104,7 @@ export function SiteHeader({ guildInvite }: SiteHeaderProps) {
               >
                 {n.label}
                 <motion.span 
-                  className="absolute -bottom-1 left-0 w-0 h-[1px] bg-spectre-pink transition-all group-hover:w-full"
+                  className="absolute -bottom-1 left-0 w-0 h-[1px] bg-primary transition-all group-hover:w-full"
                   layoutId={`nav-underline-${n.href}`}
                 />
               </a>
@@ -115,7 +115,7 @@ export function SiteHeader({ guildInvite }: SiteHeaderProps) {
             >
               Docs
               <motion.span 
-                className="absolute -bottom-1 left-0 w-0 h-[1px] bg-spectre-pink transition-all group-hover:w-full"
+                className="absolute -bottom-1 left-0 w-0 h-[1px] bg-primary transition-all group-hover:w-full"
                 layoutId="nav-underline-docs"
               />
             </Link>
@@ -140,9 +140,9 @@ export function SiteHeader({ guildInvite }: SiteHeaderProps) {
                 <ChevronDown className="w-3 h-3 text-white/20 group-hover:text-white/40" />
               </div>
             </DropdownMenuTrigger>
-            <DropdownMenuContent align="end" className="w-48 bg-obsidian border-white/5 rounded-none text-white/60">
+            <DropdownMenuContent align="end" className="w-48 bg-background border-white/5 rounded-none text-white/60">
               <DropdownMenuLabel className="font-display text-[9px] uppercase tracking-widest italic py-3 flex items-center gap-2">
-                <Languages className="w-3 h-3 text-spectre-pink" /> {t('common.selectLanguage')}
+                <Languages className="w-3 h-3 text-primary" /> {t('common.selectLanguage')}
               </DropdownMenuLabel>
               <DropdownMenuSeparator className="bg-white/5" />
               {LANGUAGES.map((lang) => (
@@ -151,7 +151,7 @@ export function SiteHeader({ guildInvite }: SiteHeaderProps) {
                   onClick={async () => {
                     await i18n.changeLanguage(lang.code);
                   }}
-                  className="focus:bg-spectre-pink focus:text-white cursor-pointer py-2.5 rounded-none flex items-center gap-3"
+                  className="focus:bg-primary focus:text-white cursor-pointer py-2.5 rounded-none flex items-center gap-3"
                 >
                   <img src={lang.flag} alt="" className="w-4 h-3 object-cover rounded-sm" />
                   <span className="font-display text-[10px] uppercase italic tracking-widest">{lang.label}</span>
@@ -193,8 +193,8 @@ export function SiteHeader({ guildInvite }: SiteHeaderProps) {
       >
         <div className="flex flex-col h-full p-8 pt-24">
           <div className="flex justify-between items-center mb-12">
-             <div className="font-display text-[10px] tracking-[0.3em] text-spectre-pink uppercase flex items-center gap-2">
-               <span className="w-8 h-px bg-spectre-pink/30" />
+             <div className="font-display text-[10px] tracking-[0.3em] text-primary uppercase flex items-center gap-2">
+               <span className="w-8 h-px bg-primary/30" />
                Menu
              </div>
              <button onClick={() => setOpen(false)} className="w-10 h-10 border border-white/10 flex items-center justify-center">
@@ -208,7 +208,7 @@ export function SiteHeader({ guildInvite }: SiteHeaderProps) {
                 key={n.href}
                 href={n.href}
                 onClick={() => setOpen(false)}
-                className="font-display text-3xl text-white uppercase italic tracking-tighter hover:text-spectre-pink transition-colors"
+                className="font-display text-3xl text-white uppercase italic tracking-tighter hover:text-primary transition-colors"
                 style={{ transitionDelay: `${i * 50}ms` }}
               >
                 {n.label}
@@ -228,7 +228,7 @@ export function SiteHeader({ guildInvite }: SiteHeaderProps) {
                     <ChevronDown className="w-4 h-4" />
                   </div>
                 </DropdownMenuTrigger>
-                <DropdownMenuContent className="w-[calc(100vw-4rem)] bg-obsidian border-white/5 rounded-none">
+                <DropdownMenuContent className="w-[calc(100vw-4rem)] bg-background border-white/5 rounded-none">
                   {LANGUAGES.map((lang) => (
                     <DropdownMenuItem 
                       key={lang.code}
@@ -236,7 +236,7 @@ export function SiteHeader({ guildInvite }: SiteHeaderProps) {
                         await i18n.changeLanguage(lang.code);
                         setOpen(false);
                       }}
-                      className="focus:bg-spectre-pink focus:text-white py-4 flex items-center gap-3"
+                      className="focus:bg-primary focus:text-white py-4 flex items-center gap-3"
                     >
                       <img src={lang.flag} alt="" className="w-5 h-3 object-cover rounded-sm" />
                       <span className="font-display text-[11px] uppercase italic tracking-widest">{lang.label}</span>
