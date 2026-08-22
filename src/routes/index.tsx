@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
+import { useState, useEffect } from "react";
 
 import logoAsset from "@/assets/spectre-logo-main.png.asset.json";
 import { PRODUCTS, PLANS, REASONS } from "@/components/home/constants";
