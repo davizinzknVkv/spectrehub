@@ -108,22 +108,25 @@ export function Hero({ guildInvite, fallbackMembers }: HeroProps) {
         </Reveal>
 
         <div className="mt-16 pt-8 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-6 opacity-60">
-           <div className="flex items-center gap-4 font-display text-[9px] tracking-[0.2em] uppercase">
+           <div className="flex items-center gap-3 font-display text-[9px] tracking-[0.2em] uppercase">
              <span>Spectre Hub</span>
              <span className="text-spectre-pink">//</span>
              <span>AGO-2026</span>
            </div>
            
            <div className="flex items-center gap-4">
-             <div className="flex -space-x-2">
-               {fallbackMembers.slice(0, 3).map((m, i) => (
-                  <div key={i} className="w-7 h-7 rounded-full border border-white/20 overflow-hidden bg-black flex items-center justify-center p-0.5 relative group ring-2 ring-obsidian">
+             <div className="flex -space-x-3">
+               {fallbackMembers.slice(0, 4).map((m, i) => (
+                  <div key={i} className="w-8 h-8 rounded-full border border-obsidian overflow-hidden bg-black flex items-center justify-center p-0.5 relative group ring-2 ring-obsidian">
                     <div className="absolute inset-0 bg-gradient-to-tr from-spectre-pink/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
                     <Avatar seed={m} />
                   </div>
                ))}
              </div>
-             <span className="font-display text-[9px] tracking-[0.2em] uppercase text-white/60">{t('hero.activeCommunity')}</span>
+             <div className="font-display text-[9px] tracking-[0.2em] uppercase text-white/60 flex items-center gap-2">
+                <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
+                {t('hero.activeCommunity')}
+             </div>
            </div>
         </div>
       </div>
