@@ -14,11 +14,12 @@ export const generateSpotifyLinks = createServerFn({ method: "POST" })
     const { quantity, utmSource, utmMedium, utmCampaign } = data;
     const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
     
-    // Busca links ativos do banco
+    // Busca links ativos e com estoque do banco
     const { data: dbLinks } = await supabaseAdmin
       .from("spotify_links")
-      .select("url")
-      .eq("active", true);
+      .select("id, url, stock")
+      .eq("active", true)
+      .gt("stock", 0);
 
     const defaultBases = [
       "https://open.spotify.com/playlist/37i9dQZF1DXcBWIGoPBqpw",
@@ -44,6 +45,18 @@ export const generateSpotifyLinks = createServerFn({ method: "POST" })
       } catch (e) {
         // Fallback for malformed URLs in DB
         links.push(base + "?s_id=" + Math.random().toString(36).substring(7));
+      }
+    }
+
+    // Debita o estoque para os links usados que vieram do banco
+    if (usedIds.size > 0) {
+      for (const id of usedIds) {
+        // Reduzimos 1 por link gerado (simplificado: cada link gerado consome 1 do estoque daquela base)
+        // Como o loop pode pegar a mesma base várias vezes, contamos as ocorrências
+        const count = links.filter(l => l.includes(bases.find(b => b.id === id)?.url || "---")).length;
+        if (count > 0) {
+          await supabaseAdmin.rpc("decrement_spotify_stock", { row_id: id, amount: count });
+        }
       }
     }
 
