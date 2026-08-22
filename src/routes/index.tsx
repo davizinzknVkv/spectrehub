@@ -80,7 +80,7 @@ function Index() {
     return () => ctrl.abort();
   }, []);
   
-  /* ainda esta assim e nao refez o rodape */
+  /* SPOTIFY GEN — NOVA FERRAMENTA EM DISCORD TOOLS */
 
   return (
     <div

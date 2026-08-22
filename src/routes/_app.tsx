@@ -28,6 +28,7 @@ import {
   Crosshair,
   UserRound,
   Activity,
+  Music,
 } from "lucide-react";
 import logoAsset from "@/assets/spectre-logo-main.png.asset.json";
 import { AdminNavLink } from "@/components/AdminNavLink";
@@ -56,6 +57,7 @@ const NAV_GROUPS = [
       { to: "/missoes", label: "Missões", icon: Target, soon: false },
       { to: "/farms", label: "Farms Automáticas", icon: Tractor, soon: false },
       { to: "/nicksgun", label: "Nicks-Gun Sniper", icon: Crosshair, soon: false },
+      { to: "/spotify", label: "Spotify Gen", icon: Music, soon: false },
       { to: "/clone", label: "Discord Tools", icon: Copy, soon: false },
     ],
   },
