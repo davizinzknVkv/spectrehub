@@ -799,34 +799,72 @@ function HubPage() {
       {/* Confirmação de Limpeza */}
       {confirmAction && (
         <Modal
-          title={confirmAction === "dms" ? "Limpar Conversas" : "Remover Amizades"}
-          description={
-            confirmAction === "dms"
-              ? `Todas as suas conversas abertas (${dmCount ?? 0}) serão fechadas.`
-              : `Todos os seus amigos (${stats?.friends ?? 0}) serão removidos da sua lista.`
-          }
+          title="Protocolo de Confirmação"
           onClose={() => setConfirmAction(null)}
           className="max-w-md rounded-2xl"
         >
           <div className="space-y-6">
-            <div className="flex items-start gap-4 p-5 border border-primary/20 bg-primary/5 rounded-xl">
-              <ShieldAlert className="w-5 h-5 text-primary shrink-0 mt-0.5" />
-              <p className="text-[12px] text-foreground-muted font-sans font-medium leading-relaxed">
-                Esta ação é permanente e não pode ser desfeita. O protocolo de segurança Spectre processa as remoções gradualmente para proteger a integridade da sua conta.
+            <div className="text-center space-y-2">
+              <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4 border border-primary/20 shadow-[0_0_20px_rgba(255,0,85,0.1)]">
+                <ShieldAlert className="w-8 h-8 text-primary" />
+              </div>
+              <h4 className="font-display text-lg text-foreground tracking-tight uppercase italic">Ação Requerida</h4>
+              <p className="text-[12px] text-foreground-muted font-sans font-medium leading-relaxed px-4">
+                {confirmAction === "dms" && `Deseja realmente fechar TODAS as suas conversas abertas (${dmCount ?? 0})?`}
+                {confirmAction === "friends" && `Deseja realmente remover TODOS os seus amigos (${stats?.friends ?? 0})?`}
+                {typeof confirmAction === 'object' && (
+                  <>
+                    Deseja realmente realizar este protocolo para <span className="text-foreground font-bold">{confirmAction.name}</span>?
+                    <br />
+                    <span className="text-[10px] opacity-30 uppercase tracking-tighter mt-1 block">ID: {confirmAction.id}</span>
+                  </>
+                )}
               </p>
             </div>
-            <div className="flex flex-col sm:flex-row gap-4">
+
+            <div className="flex items-start gap-4 p-4 border border-white/5 bg-white/[0.02] rounded-xl italic">
+              <p className="text-[10px] text-foreground-muted/50 font-sans leading-relaxed">
+                Aviso: Esta operação é final. Os sistemas Spectre processam requisições de forma segura para mitigar riscos à integridade da conta no Discord.
+              </p>
+            </div>
+
+            <div className="flex flex-col sm:flex-row gap-4 pt-2">
               <button
                 onClick={() => setConfirmAction(null)}
-                className="flex-1 ds-btn ds-btn-secondary text-center !py-3 rounded-lg"
+                className="flex-1 ds-btn ds-btn-secondary text-center !py-3 rounded-lg font-bold uppercase tracking-widest text-[11px]"
               >
                 Cancelar
               </button>
               <button
-                onClick={confirmAction === "dms" ? handleClearDMs : handleRemoveFriends}
-                className="flex-1 ds-btn ds-btn-primary text-center !py-3 rounded-lg font-bold"
+                onClick={async () => {
+                  if (confirmAction === "dms") handleClearDMs();
+                  else if (confirmAction === "friends") handleRemoveFriends();
+                  else if (typeof confirmAction === 'object') {
+                    const { type, id, name } = confirmAction;
+                    setConfirmAction(null);
+                    if (type === "leave_guild") {
+                      if (await leaveGuild(id)) {
+                        toast.success(`Saiu de ${name}`);
+                        setGuilds(prev => prev.filter(x => x.id !== id));
+                      }
+                    } else if (type === "close_dm") {
+                      if (await closeDMChannel(id)) {
+                        toast.success(`Conversa fechada`);
+                        setDmChannels(prev => prev.filter(x => x.id !== id));
+                        setDmCount(prev => prev !== null ? prev - 1 : 0);
+                      }
+                    } else if (type === "remove_friend") {
+                      if (await removeRelationship(id)) {
+                        toast.success(`Amizade removida`);
+                        setRelationships(prev => prev.filter(x => x.id !== id));
+                        setStats(prev => prev ? { ...prev, friends: prev.friends - 1 } : null);
+                      }
+                    }
+                  }
+                }}
+                className="flex-1 ds-btn ds-btn-primary text-center !py-3 rounded-lg font-bold uppercase tracking-widest text-[11px] shadow-lg shadow-primary/20"
               >
-                Confirmar Protocolo
+                Confirmar
               </button>
             </div>
           </div>
