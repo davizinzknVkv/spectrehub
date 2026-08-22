@@ -11,18 +11,18 @@ export function ReasonsSection({ reasons }: ReasonsSectionProps) {
   const { t } = useTranslation();
 
   return (
-    <section id="recursos" className="mx-auto max-w-7xl px-4 py-24 sm:px-6 lg:px-8">
+    <section id="recursos" className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
       <div className="grid grid-cols-1 lg:grid-cols-[450px_1fr] gap-20 items-start">
         <Reveal>
           <div className="font-display text-[10px] tracking-[0.3em] text-spectre-pink uppercase mb-4 flex items-center gap-2">
              <span className="w-8 h-px bg-spectre-pink/30" />
              {t('reasons.badge')}
           </div>
-          <h2 className="font-display text-[2rem] md:text-[3.5rem] leading-[0.9] text-white uppercase italic tracking-tighter mb-8">
+          <h2 className="font-display text-[2rem] md:text-[3.5rem] leading-[0.9] text-white uppercase italic tracking-tighter mb-6">
             {t('reasons.title')} <br />
             <span className="text-white/30 text-[1.5rem] md:text-[2.5rem]">{t('reasons.subtitle')}</span>
           </h2>
-          <p className="text-white/40 text-sm leading-relaxed uppercase tracking-widest border-l border-spectre-pink/30 pl-6">
+          <p className="text-white/40 text-xs leading-relaxed uppercase tracking-widest border-l border-spectre-pink/30 pl-6">
             {t('reasons.description')}
           </p>
           

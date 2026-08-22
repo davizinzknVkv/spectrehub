@@ -136,7 +136,7 @@ export function SocialProof({ widgetUrl, products: productsList }: SocialProofPr
          <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-spectre-pink/50 to-transparent" />
       </div>
 
-      <div ref={ref} className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
+      <div ref={ref} className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 md:gap-px md:bg-white/5 border border-white/5">
            <div className="bg-obsidian flex flex-col items-center text-center p-8 group hover:bg-white/[0.02] transition-colors rounded-none">
               <span className="font-display text-4xl md:text-5xl text-white italic mb-2 tracking-tighter">

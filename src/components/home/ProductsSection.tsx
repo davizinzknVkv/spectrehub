@@ -16,8 +16,8 @@ export function ProductsSection({ products }: ProductsSectionProps) {
 
 
   return (
-    <section id="produtos" className="mx-auto max-w-7xl px-4 py-24 sm:px-6 lg:px-8">
-      <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-20">
+    <section id="produtos" className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
+      <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-12">
         <div className="max-w-3xl">
           <Reveal>
             <div className="font-display text-[10px] tracking-[0.3em] text-spectre-pink uppercase mb-4 flex items-center gap-2">

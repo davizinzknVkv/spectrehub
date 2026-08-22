@@ -67,7 +67,7 @@ export function CommunitySection({ widgetUrl, guildId, guildInvite, fallbackMemb
   const loop = [...list, ...list, ...list];
 
   return (
-    <section id="comunidade" className="mx-auto max-w-7xl px-4 py-24 sm:px-6 lg:px-8 border-t border-white/5">
+    <section id="comunidade" className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 border-t border-white/5">
       <div className="grid grid-cols-1 lg:grid-cols-[1fr_450px] gap-12 lg:gap-20 items-start">
         <div>
           <Reveal>
@@ -75,18 +75,18 @@ export function CommunitySection({ widgetUrl, guildId, guildInvite, fallbackMemb
                <span className="w-8 h-px bg-spectre-pink/30" />
                {t('community.badge')}
             </div>
-            <h2 className="font-display text-[2rem] md:text-[3.5rem] leading-[0.9] text-white uppercase italic tracking-tighter mb-8">
+            <h2 className="font-display text-[2rem] md:text-[3.5rem] leading-[0.9] text-white uppercase italic tracking-tighter mb-6">
               {t('community.title')} <br />
               <span className="text-white/30 text-[1.5rem] md:text-[2.5rem]">{t('community.subtitle')}</span>
             </h2>
-            <p className="text-white/40 text-sm leading-relaxed uppercase tracking-widest border-l border-spectre-pink/30 pl-6 mb-12 max-w-xl">
+            <p className="text-white/40 text-xs leading-relaxed uppercase tracking-widest border-l border-spectre-pink/30 pl-6 mb-8 max-w-xl">
               {t('community.description')}
             </p>
 
           </Reveal>
 
           <Reveal delay={200}>
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-px bg-white/5 border border-white/5 mb-12">
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-px bg-white/5 border border-white/5 mb-8">
                <MiniStat
                   icon={Users}
                   label={t('community.statOnline')}
@@ -145,7 +145,7 @@ export function CommunitySection({ widgetUrl, guildId, guildInvite, fallbackMemb
       </div>
 
       {/* Marquee Members */}
-      <div className="mt-32 pt-12 border-t border-white/5 overflow-hidden relative bg-[#050505]/50">
+      <div className="mt-20 pt-10 border-t border-white/5 overflow-hidden relative bg-[#050505]/50">
         <div className="absolute inset-0 opacity-[0.03] pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle, #fff 1px, transparent 1px)', backgroundSize: '24px 24px' }} />
         <div className="mb-8 flex items-center gap-4">
            <div className="font-display text-[10px] text-spectre-pink uppercase italic tracking-[0.4em] whitespace-nowrap">

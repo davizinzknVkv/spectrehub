@@ -12,7 +12,7 @@ export function FinalCta({ guildInvite }: FinalCtaProps) {
   const { t } = useTranslation();
 
   return (
-    <section className="relative overflow-hidden py-32 bg-obsidian border-t border-white/5">
+    <section className="relative overflow-hidden py-16 bg-obsidian border-t border-white/5">
       <div className="absolute inset-0 z-0">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-spectre-pink/10 rounded-full blur-[160px]" />
         <div 
@@ -31,29 +31,29 @@ export function FinalCta({ guildInvite }: FinalCtaProps) {
             {t('footer.badge')}
             <span className="w-8 h-px bg-spectre-pink/30" />
           </div>
-          <h2 className="font-display text-[clamp(2.5rem,8vw,8rem)] leading-[0.85] text-white uppercase italic tracking-tighter mb-12">
+          <h2 className="font-display text-[clamp(2.5rem,8vw,6rem)] leading-[0.85] text-white uppercase italic tracking-tighter mb-8">
             {t('footer.title')} <br />
             <span className="text-spectre-pink">{t('footer.subtitle')}</span>
 
           </h2>
-          <p className="mx-auto max-w-2xl text-white/40 text-base md:text-lg font-sans mb-16 uppercase tracking-[0.1em]">
+          <p className="mx-auto max-w-2xl text-white/40 text-sm md:text-base font-sans mb-12 uppercase tracking-[0.1em]">
             {t('footer.description')}
           </p>
           
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <a 
               href={guildInvite} 
               target="_blank" 
               rel="noreferrer" 
-              className="ds-btn ds-btn-primary min-w-[280px] py-5 shadow-2xl shadow-spectre-pink/20"
+              className="ds-btn ds-btn-primary min-w-[240px] !py-3 !text-[11px] !min-h-[44px] rounded-md shadow-2xl shadow-spectre-pink/20"
             >
               <span className="flex items-center gap-3">
-                {t('common.getStarted')} <ArrowRight className="w-5 h-5" />
+                {t('common.getStarted')} <ArrowRight className="w-4 h-4" />
               </span>
             </a>
             <Link 
               to="/hub" 
-              className="ds-btn ds-btn-secondary min-w-[280px] py-5"
+              className="ds-btn ds-btn-secondary min-w-[240px] !py-3 !text-[11px] !min-h-[44px] rounded-md"
             >
               {t('footer.accessDashboard')}
             </Link>
