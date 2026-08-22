@@ -376,12 +376,27 @@ function HubPage() {
             { icon: Crosshair, label: "Sniper", val: "Pronto", link: "/nicksgun", desc: "Nicks-Gun v4.2" },
             { icon: Gift, label: "Resgatar", val: "Shop", link: "/resgatar", desc: "Trocar Orbs por Itens" },
             { 
+              icon: Server, 
+              label: "Servidores", 
+              val: `${guilds.length} total`, 
+              onClick: () => setShowGuilds(true),
+              desc: "Gerenciar Guilds" 
+            },
+            { 
+              icon: Trash2, 
+              label: "Limpeza", 
+              val: "DMs & Friends", 
+              onClick: () => setShowDMs(true),
+              desc: "Conta & Amizades" 
+            },
+            { 
               icon: Gamepad2, 
               label: "Presence", 
               val: userSettings?.status?.toUpperCase() || "OFFLINE", 
               onClick: () => setShowPresence(true),
               desc: "Status & Rich Presence" 
             },
+
 
           ].map((item: any) => {
             const Content = (
