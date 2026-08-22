@@ -383,12 +383,20 @@ function HubPage() {
               desc: "Gerenciar Guilds" 
             },
             { 
-              icon: Trash2, 
-              label: "Limpeza", 
-              val: "DMs & Friends", 
+              icon: MessageSquare, 
+              label: "Limpar DMs", 
+              val: `${dmCount ?? 0} abertas`, 
               onClick: () => setShowDMs(true),
-              desc: "Conta & Amizades" 
+              desc: "Histórico de Conversas" 
             },
+            { 
+              icon: UserMinus, 
+              label: "Amizades", 
+              val: `${stats?.friends ?? 0} amigos`, 
+              onClick: () => setShowFriends(true),
+              desc: "Gerenciar Conexões" 
+            },
+
             { 
               icon: Gamepad2, 
               label: "Presence", 
