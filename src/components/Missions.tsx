@@ -99,7 +99,7 @@ export function MissionCard({
             alt=""
             className="h-full w-full object-cover grayscale transition-all duration-700 group-hover:grayscale-0 group-hover:scale-110"
           />
-          <div className="absolute inset-0 bg-[#030303]/80" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#030303] via-[#030303]/40 to-transparent" />
         </div>
       )}
 
