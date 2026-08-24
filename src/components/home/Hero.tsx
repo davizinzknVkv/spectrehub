@@ -30,10 +30,13 @@ export function Hero({ guildInvite, fallbackMembers, liveMembers = [] }: HeroPro
   const smoothScale = useSpring(scale, { stiffness: 100, damping: 30 });
 
   return (
-    <section ref={containerRef} className="relative min-h-[95dvh] flex items-center justify-start overflow-hidden pt-32 pb-24 px-6 md:px-12 bg-transparent">
-      {/* Background Micro-details */}
+    <section ref={containerRef} className="relative min-h-[95dvh] flex items-center justify-start overflow-hidden pt-32 pb-24 px-6 md:px-20 bg-transparent">
+      {/* Background Grid Micro-details */}
+      <div className="absolute inset-0 opacity-[0.03] pointer-events-none" 
+           style={{ backgroundImage: `linear-gradient(to right, white 1px, transparent 1px), linear-gradient(to bottom, white 1px, transparent 1px)`, backgroundSize: '40px 40px' }} />
+      
       <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-primary/20 to-transparent" />
-      <div className="absolute top-0 right-[10%] w-px h-64 bg-gradient-to-b from-primary/20 to-transparent" />
+      <div className="absolute top-0 right-[15%] w-px h-[600px] bg-gradient-to-b from-primary/10 to-transparent" />
       
       <motion.div 
         style={{ opacity: smoothOpacity, scale: smoothScale }}
@@ -41,10 +44,10 @@ export function Hero({ guildInvite, fallbackMembers, liveMembers = [] }: HeroPro
       >
         <div className="lg:col-span-8 text-left">
           <Reveal>
-            <div className="flex items-center gap-4 mb-12 opacity-40">
-              <div className="h-px w-12 bg-primary" />
-              <span className="font-display text-[9px] tracking-[0.5em] text-primary uppercase font-black">
-                {t('hero.badge')}
+            <div className="flex items-center gap-6 mb-16">
+              <div className="w-1.5 h-1.5 bg-primary shadow-[0_0_8px_#4DA09E]" />
+              <span className="font-mono text-[9px] tracking-[0.5em] text-white/30 uppercase">
+                {t('hero.badge')} // CORE_SYSTEM_INITIALIZED
               </span>
             </div>
           </Reveal>
@@ -54,17 +57,20 @@ export function Hero({ guildInvite, fallbackMembers, liveMembers = [] }: HeroPro
               initial={{ opacity: 0, x: -30 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
-              className="font-display text-[clamp(3.5rem,10vw,8rem)] leading-[0.85] text-white uppercase tracking-tighter"
+              className="font-display text-[clamp(4rem,12vw,10rem)] leading-[0.8] text-white uppercase tracking-tighter"
             >
               <div className="flex flex-col">
                 <span className="block">{t('hero.title1')}</span>
-                <span className="block text-primary italic opacity-90">{t('hero.title2')}</span>
+                <span className="block text-primary italic relative">
+                  {t('hero.title2')}
+                  <span className="absolute -bottom-4 left-0 w-24 h-px bg-primary opacity-50" />
+                </span>
               </div>
             </motion.h1>
             
             <Reveal delay={400}>
-              <div className="mt-8 max-w-xl">
-                <p className="text-white/40 text-sm md:text-base font-sans leading-relaxed uppercase tracking-[0.2em]">
+              <div className="mt-16 max-w-lg border-l border-white/5 pl-8">
+                <p className="text-white/30 text-xs md:text-sm font-mono leading-loose uppercase tracking-[0.2em]">
                   {t('hero.description')}
                 </p>
               </div>
@@ -72,16 +78,16 @@ export function Hero({ guildInvite, fallbackMembers, liveMembers = [] }: HeroPro
           </div>
 
           <Reveal delay={600}>
-            <div className="flex flex-col sm:flex-row items-center gap-4 mt-12">
+            <div className="flex flex-col sm:flex-row items-center gap-6 mt-20">
               <a 
                 href="#produtos" 
-                className="ds-btn ds-btn-primary w-full sm:w-auto"
+                className="ds-btn ds-btn-primary !h-16 !px-12 flex items-center justify-center gap-4 text-[11px] uppercase tracking-[0.3em]"
               >
                 {t('common.getStarted')}
-                <ArrowRight className="ml-3 w-4 h-4" />
+                <ArrowRight className="w-4 h-4 opacity-50" />
               </a>
               
-              <Link to="/docs" className="ds-btn ds-btn-secondary w-full sm:w-auto">
+              <Link to="/docs" className="ds-btn ds-btn-secondary !h-16 !px-10 flex items-center justify-center text-[11px] uppercase tracking-[0.3em]">
                 {t('common.documentation')}
               </Link>
             </div>
