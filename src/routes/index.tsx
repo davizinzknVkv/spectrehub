@@ -1,151 +1,295 @@
 /* 
-# INTEGRAR O PRISMA HERO NO SPECTRE HUB
+# CORREÇÃO GERAL DO DESIGN — SPECTRE HUB
 
-Quero utilizar o componente **Prisma Hero** fornecido abaixo como referência estrutural e de animação para refazer o **Hero principal da homepage do Spectre Hub**.
+O design atual ficou visualmente inconsistente após a última atualização.
 
-O objetivo é aproveitar a qualidade visual, animações e composição do Prisma Hero, mas **adaptar completamente o componente para a identidade do Spectre Hub**.
+Analise TODAS as páginas e corrija os problemas abaixo.
 
-## REFERÊNCIA DO COMPONENTE
+Não quero um novo redesign do zero.
 
-Use como base:
-
-* `framer-motion`
-* `lucide-react`
-* animação `WordsPullUp`
-* entrada progressiva dos elementos
-* composição em grid
-* background em tela cheia
-* navegação sobreposta
-* CTA animado
-
-O componente original utiliza:
-
-```text
-PrismaHero
-WordsPullUp
-WordsPullUpMultiStyle
-framer-motion
-lucide-react
-```
-
-Não copiar textos, identidade, logo ou conteúdo do Prisma.
+Quero **refinar o design atual**, mantendo a ideia visual premium/futurista, mas eliminando os problemas de proporção, legibilidade, consistência e excesso de efeitos.
 
 ---
 
-# 🎯 OBJETIVO DO NOVO HERO
+# 🚨 PROBLEMAS VISUAIS ATUAIS
 
-Criar um Hero para o:
+As screenshots mostram vários problemas que precisam ser corrigidos:
 
-**SPECTRE HUB**
-
-com a mensagem principal:
-
-**SPECTRE HUB**
-**DOMINA**
-**O MERCADO.**
-
-Manter essa identidade como elemento central.
-
-A composição deve transmitir:
-
-**tecnologia + automação + performance + exclusividade + produto premium**
+* Títulos gigantes demais.
+* Textos se sobrepondo.
+* Elementos cortados.
+* Seções com muito espaço vazio.
+* Cards e blocos desalinhados.
+* Contraste extremamente baixo em alguns textos.
+* Uso de azul/ciano/verde onde deveria existir a identidade principal do Spectre.
+* Muitos textos com `_`.
+* Inglês aparecendo desnecessariamente.
+* Botões com formatos diferentes sem motivo.
+* Elementos decorativos competindo com o conteúdo.
+* Alguns componentes parecem ter sido colocados sem relação com a página.
+* Imagens/avatares aparecem quebrados ou quase invisíveis.
+* Alguns títulos ultrapassam o container.
+* Responsividade aparentemente quebrada.
+* Hierarquia visual exagerada.
+* Alguns elementos ficam muito próximos ou sobrepostos.
+* Existem áreas grandes demais sem conteúdo.
 
 ---
 
 # 🎨 IDENTIDADE VISUAL
 
-Adaptar tudo para o Spectre Hub:
+Voltar a utilizar uma identidade consistente para o Spectre Hub.
+
+Paleta principal:
 
 ```text
 Background: #0A0A0D
-Surface: #101114
-Pink: #FF0050
-White: #FFFFFF
-Muted: #9AA0AA
+Background 2: #101114
+Surface: #151515
+Surface 2: #191919
 Border: #242424
+
+Primary: #FF0050
+Primary Hover: #D90045
+
+Text: #FFFFFF
+Text Secondary: #A0A0AA
+Text Muted: #6F727A
 ```
 
-Usar neon pink somente como destaque.
+## IMPORTANTE
 
-Não utilizar as cores bege/verde do Prisma.
+O **NEON PINK é a cor de identidade do Spectre Hub**.
 
-Não copiar o design visual do Prisma literalmente.
+Não utilizar ciano/turquesa como cor principal.
 
-Apenas utilizar sua estrutura e linguagem de animação como inspiração.
+Não transformar os botões em azul.
+
+Não utilizar verde como cor decorativa.
+
+Verde somente quando tiver significado semântico real, por exemplo:
+
+```text
+ONLINE
+ATIVO
+SUCESSO
+```
+
+Azul somente quando existir uma necessidade funcional específica.
 
 ---
 
-# 🖥️ HERO
+# ❌ REMOVER O EXCESSO DE UNDERSCORES
 
-Criar uma seção Hero premium ocupando aproximadamente a altura da viewport, mas sem criar espaço extra no final da página.
+Nenhum texto visível deve utilizar `_`.
 
-Estrutura visual:
+ERRADO:
 
 ```text
-              [ ALTA TECNOLOGIA ]
-
-          SPECTRE      [LOGO]      HUB
-                  DOMINA
-              O MERCADO.
-
-       O hub definitivo para automação
-       de elite no Discord.
-
-        [ Quero Usar o Spectre ]
-        [ Documentação ]
+JOIN_COMMUNITY
+CORE_SYSTEM_INITIALIZED
+DEPLOYED_MODULES
+LIVE_COMMUNITY_FEED
+RUN_MODULE
+HUB_ACCESS
+2026_VERSION_ELITE
 ```
 
-A composição deve ser compacta e equilibrada.
+CORRETO:
 
-Não deixar o Hero exageradamente alto.
+```text
+Entrar na comunidade
+Sistema inicializado
+MÓDULOS disponíveis
+Comunidade ativa
+Abrir módulo
+Acessar Spectre
+Versão 2026
+```
+
+Se fizer sentido manter algum termo técnico, utilizar:
+
+```text
+SPECTRE HUB / STATUS
+SISTEMA ONLINE
+MÓDULOS ATIVOS
+```
+
+Os underscores podem continuar existindo internamente no código, mas NUNCA em textos apresentados ao usuário.
 
 ---
 
-# ✨ ANIMAÇÃO DO TÍTULO
+# 🇧🇷 PADRONIZAÇÃO DE IDIOMA
 
-Utilizar o `WordsPullUp` do componente de referência.
+A interface pública deve estar em português do Brasil.
 
-Adaptar para:
-
-```text
-SPECTRE
-DOMINA
-O MERCADO.
-```
-
-Cada palavra deve aparecer suavemente:
+Não misturar:
 
 ```text
-opacity: 0 → 1
-y: 20px → 0
+JOIN COMMUNITY
+RUN MODULE
+GENERATE AUTH CODE
+ENTER NAME
+COMMUNITY
+TIMESTAMP
 ```
 
-com stagger pequeno entre as palavras.
+com português sem motivo.
+
+Substituir por:
+
+```text
+Entrar na comunidade
+Abrir módulo
+Gerar código
+Nome
+Comunidade
+Data e hora
+```
+
+Manter somente nomes próprios e termos realmente necessários em inglês.
+
+---
+
+# 🔠 TIPOGRAFIA
+
+Os títulos atuais estão grandes demais.
+
+Reduza significativamente a escala.
+
+Nunca permitir que títulos:
+
+* saiam da viewport;
+* sejam cortados;
+* se sobreponham a outros elementos;
+* ultrapassem seus containers;
+* cubram cards.
+
+Criar uma hierarquia mais realista:
+
+```text
+H1 → grande
+H2 → médio
+H3 → pequeno
+Body → confortável
+Label → compacto
+```
+
+O Hero pode continuar tendo título grande, mas as outras seções NÃO devem ter títulos gigantes do mesmo tamanho.
+
+---
+
+# 📐 REGRA DE CONTAINER
+
+Nenhum conteúdo pode ultrapassar o container.
+
+Usar um sistema consistente semelhante a:
+
+```css
+max-width: 1400px;
+margin-inline: auto;
+padding-inline: 32px;
+```
+
+adaptando aos breakpoints.
+
+Todos os títulos, textos, cards e imagens devem respeitar a largura disponível.
+
+---
+
+# 🧱 SEÇÕES
+
+Cada seção deve possuir um ritmo visual natural.
+
+Evitar:
+
+```text
+Título enorme
+
+[ 300px de espaço ]
+
+Conteúdo
+```
 
 Usar:
 
 ```text
-duration: ~0.6s
-ease: [0.16, 1, 0.3, 1]
+Label
+↓
+Título
+↓
+Descrição
+↓
+Conteúdo
 ```
 
-A animação precisa ser elegante.
+com espaçamento consistente.
 
-Não fazer o texto pular.
+Eliminar áreas vazias sem finalidade.
 
 ---
 
-# 💗 PALAVRA "DOMINA"
+# ⚠️ CORRIGIR SOBREPOSIÇÕES
 
-A palavra:
+Revisar especialmente seções semelhantes às mostradas nas screenshots:
 
-**DOMINA**
+## INFRAESTRUTURA
 
-deve utilizar o Neon Pink como destaque.
+O título:
 
-As demais palavras permanecem claras.
+```text
+INFRAESTRUTURA
+DE ALTO
+PADRÃO.
+```
 
-Criar uma hierarquia semelhante:
+não pode atravessar o conteúdo da direita.
+
+Criar um layout de duas colunas real:
+
+```text
+┌──────────────────────┬──────────────────────┐
+│ TÍTULO               │ INFORMAÇÃO / CARD    │
+│ DESCRIÇÃO            │                      │
+│                      │                      │
+└──────────────────────┴──────────────────────┘
+```
+
+O texto da esquerda deve permanecer dentro de sua coluna.
+
+---
+
+# 🎴 MÓDULOS / CAROUSEL
+
+A seção de módulos está muito escura e os cards quase não aparecem.
+
+Aumentar ligeiramente:
+
+* contraste;
+* superfície dos cards;
+* visibilidade das imagens;
+* bordas;
+* título;
+* descrição.
+
+Os cards precisam ser claramente identificáveis.
+
+Manter o componente de carousel escolhido anteriormente, mas corrigir:
+
+* posição;
+* escala;
+* spacing;
+* visibilidade;
+* clipping;
+* responsividade.
+
+---
+
+# 🎯 HERO
+
+O Hero atual ficou exageradamente grande.
+
+Manter:
 
 ```text
 SPECTRE HUB
@@ -153,283 +297,241 @@ DOMINA
 O MERCADO.
 ```
 
-Não colocar glow exagerado.
+Mas reduzir a escala para que:
 
----
+* o título não domine a tela inteira;
+* descrição fique próxima;
+* botões fiquem próximos;
+* comunidade apareça naturalmente;
+* a seção termine sem excesso de espaço.
 
-# 🖼️ LOGO
-
-Utilizar **o logo real do Spectre Hub existente no projeto**.
-
-Não gerar uma logo nova.
-
-O logo pode aparecer entre "SPECTRE" e "HUB", seguindo a composição atual.
-
-Garantir que o asset seja carregado corretamente.
-
-Nunca mostrar imagem quebrada.
-
----
-
-# 🎥 BACKGROUND
-
-O Prisma Hero utiliza vídeo.
-
-No Spectre Hub, primeiro verificar se o projeto já possui um background/asset apropriado.
-
-Se existir:
-
-* reutilizar o asset existente;
-* otimizar;
-* aplicar overlay escuro;
-* preservar performance.
-
-Se não existir um vídeo adequado, NÃO adicionar um vídeo aleatório.
-
-Nesse caso utilizar:
-
-* grid animado;
-* partículas extremamente sutis;
-* linhas geométricas;
-* spotlight;
-* noise;
-* glow pink discreto.
-
-A animação do background deve ser quase imperceptível.
-
----
-
-# 🧩 ELEMENTOS GEOMÉTRICOS
-
-Utilizar elementos gráficos inspirados na homepage atual:
-
-* linhas;
-* formas angulares;
-* grids;
-* pequenos detalhes pink.
-
-Eles devem possuir movimento lento e discreto.
-
-Não exagerar.
-
----
-
-# 📝 DESCRIÇÃO
-
-Utilizar o texto real já existente no site:
-
-**"O hub definitivo para automação de elite no Discord. Performance absoluta, infraestrutura inabalável e a experiência de usuário mais sofisticada do mercado."**
-
-Não substituir por texto genérico.
-
-A descrição também deve aparecer com `framer-motion` após o título.
+O Hero deve parecer premium, não gigantesco.
 
 ---
 
 # 🔘 BOTÕES
 
-Utilizar os botões existentes:
+Todos os botões precisam seguir o mesmo design system.
 
-### Primary
-
-**Quero Usar o Spectre**
-
-### Secondary
-
-**Documentação**
-
-Usar animações de entrada semelhantes ao Prisma Hero.
-
-No hover:
-
-* pequeno deslocamento;
-* leve alteração de brilho;
-* seta podendo se mover;
-* transição rápida.
-
-Não aumentar exageradamente o tamanho do botão.
-
-Os botões precisam ser compactos.
-
----
-
-# 🧭 NAVBAR
-
-Não substituir a navbar atual por uma navbar do Prisma.
-
-Manter a navbar atual do Spectre Hub.
-
-Apenas melhorar suas microinterações usando:
+Usar:
 
 ```text
-framer-motion
+Primary:
+Neon Pink
+
+Secondary:
+Dark + Border
 ```
 
-Adicionar:
+Padronizar:
 
-* hover suave;
-* underline ou highlight;
-* entrada discreta;
-* botão "Acessar Spectre" animado.
+* altura;
+* padding;
+* radius;
+* tipografia;
+* hover;
+* active;
+* focus.
 
-Não alterar as rotas existentes.
+Não criar um formato diferente para cada botão.
 
----
-
-# 👥 COMUNIDADE
-
-Manter a área:
-
-**COMUNIDADE ATIVA**
-
-na parte inferior do Hero.
-
-Utilizar os avatars reais disponíveis no projeto.
-
-Corrigir qualquer imagem quebrada.
-
-Adicionar somente:
-
-* entrada suave;
-* pequeno pulse no indicador verde;
-* hover nos avatars.
+Evitar botões gigantes.
 
 ---
 
-# 📊 PARTE INFERIOR DO HERO
+# 🟢 STATUS
 
-Manter a informação existente:
+Indicadores de status podem utilizar verde apenas quando necessário:
 
 ```text
-SPECTRE HUB // AGO-2026
+ONLINE
+ATIVO
+SUCESSO
 ```
 
-e a seção de comunidade.
+O restante da interface deve permanecer na paleta principal.
 
-Logo abaixo deve começar naturalmente a seção de estatísticas.
+---
 
-Não criar espaço vazio entre o Hero e a próxima seção.
+# 🖼️ IMAGENS
+
+Revisar todas as imagens.
+
+Não permitir:
+
+* imagens quebradas;
+* thumbnails vazias;
+* avatares invisíveis;
+* imagens excessivamente escuras;
+* assets distorcidos.
+
+Sempre usar:
+
+```text
+object-fit: cover;
+```
+
+quando apropriado.
+
+Criar fallback visual elegante quando um asset realmente não existir.
+
+Não mostrar ícone de imagem quebrada.
+
+---
+
+# 🧩 ELEMENTOS ESTRANHOS
+
+Verifique o elemento circular flutuante com o ícone azul/ciano que aparece no lado esquerdo das screenshots.
+
+Se ele não fizer parte intencionalmente do design do Spectre Hub, remover.
+
+Não deixar widgets, componentes de terceiros ou elementos experimentais aparecendo sobre o conteúdo sem função clara.
 
 ---
 
 # 📱 RESPONSIVIDADE
 
-Adaptar o Prisma Hero para:
+Testar obrigatoriamente:
 
-* Desktop
-* Notebook
-* Tablet
-* Mobile
+```text
+1920px
+1600px
+1440px
+1366px
+1280px
+1024px
+768px
+480px
+390px
+```
 
-No mobile:
+Nenhum título pode quebrar de maneira absurda.
 
-* reduzir escala do título;
-* manter boa leitura;
-* reorganizar SPECTRE / LOGO / HUB;
-* empilhar botões;
-* simplificar efeitos 3D;
-* reduzir elementos decorativos.
+Nenhum botão pode sair da tela.
+
+Nenhum card pode ficar cortado.
+
+Nenhuma seção pode criar scroll horizontal.
 
 ---
 
-# ⚡ PERFORMANCE
+# 🎞️ ANIMAÇÕES
 
-Usar `framer-motion` somente onde realmente necessário.
+Manter as animações premium já adicionadas, mas reduzir a intensidade.
 
-Evitar:
+Não animar tudo.
 
-* dezenas de animações simultâneas;
-* WebGL pesado;
-* vídeos grandes sem necessidade;
-* loops excessivos;
-* re-renderizações desnecessárias.
+Priorizar:
 
-Implementar também:
+* Hero;
+* entrada das seções;
+* hover;
+* carousel;
+* botões;
+* pequenos indicadores.
+
+As animações devem melhorar o design, não competir com ele.
+
+---
+
+# 🧠 REGRA DE HIERARQUIA
+
+Cada seção deve possuir apenas UM elemento dominante.
+
+Exemplo:
 
 ```text
-prefers-reduced-motion
+Seção
+├── Label
+├── Título principal ← dominante
+├── Descrição
+└── Conteúdo
 ```
 
-para usuários que preferirem menos animações.
+Não ter:
+
+```text
+Título gigante
++
+Card gigante
++
+Texto gigante
++
+Botão gigante
++
+Glow gigante
+```
+
+ao mesmo tempo.
+
+---
+
+# ✨ RESULTADO VISUAL
+
+Quero que o site pareça:
+
+**premium**
+**profissional**
+**autoral**
+**tecnológico**
+**limpo**
+**bem projetado**
+
+e não:
+
+**template experimental**
+**site gerado por IA**
+**interface cheia de efeitos**
+**dashboard cyber genérico**
 
 ---
 
 # 🚫 NÃO FAZER
 
-Não copiar:
+Não trocar toda a identidade do site.
 
-* nome Prisma;
-* textos Prisma;
-* cores Prisma;
-* logo Prisma;
-* navegação Prisma;
-* assets Prisma;
-* identidade visual Prisma.
+Não transformar tudo em cards.
 
-Não utilizar o vídeo original do Prisma como background definitivo.
+Não adicionar novas cores aleatoriamente.
 
-Não substituir funcionalidades atuais.
+Não usar underscores na interface.
 
-Não alterar rotas.
+Não exagerar no tamanho dos textos.
 
-Não criar uma homepage completamente diferente.
+Não adicionar elementos só para preencher espaço.
 
-O objetivo é **aproveitar a estrutura e a qualidade das animações do Prisma Hero**, adaptando tudo ao Spectre Hub.
+Não inventar informações.
 
----
+Não alterar funcionalidades.
 
-# 🔧 IMPLEMENTAÇÃO
+Não remover rotas.
 
-Primeiro verificar se o projeto possui:
+Não remover componentes funcionais.
 
-```text
-/components/ui
-```
-
-Se não existir, criar essa estrutura conforme o padrão do projeto.
-
-Instalar somente se necessário:
-
-```bash
-npm install framer-motion lucide-react
-```
-
-Criar o componente em:
-
-```text
-/components/ui/spectre-hero.tsx
-```
-
-e integrar na homepage atual.
-
-Se o projeto já utiliza `framer-motion` ou `lucide-react`, reutilizar as dependências existentes.
-
-Não duplicar bibliotecas.
+Não quebrar navegação.
 
 ---
 
-# ✅ RESULTADO FINAL
+# ✅ PROCESSO
 
-Quero um Hero que tenha a qualidade de animação do **Prisma Hero**, mas que pareça ter sido criado exclusivamente para o **Spectre Hub**.
+Antes de finalizar:
 
-A sensação final deve ser:
+1. Analise todas as páginas.
+2. Identifique problemas de proporção.
+3. Corrija overlays.
+4. Corrija clipping.
+5. Corrija spacing.
+6. Padronize cores.
+7. Padronize botões.
+8. Padronize tipografia.
+9. Remova underscores visíveis.
+10. Padronize português.
+11. Corrija imagens.
+12. Teste responsividade.
+13. Revise todas as animações.
+14. Faça uma última revisão visual página por página.
 
-**SPECTRE HUB + ANIMAÇÕES PREMIUM + DESIGN AUTORAL + PERFORMANCE**
-
-e não:
-
-**PRISMA HERO COPIADO.**
-
-Antes de finalizar, testar o Hero em diferentes resoluções e verificar principalmente:
-
-* animação do título;
-* logo;
-* botões;
-* comunidade;
-* background;
-* responsividade;
-* performance;
-* ausência de espaço extra no final do Hero.
+O resultado final deve parecer **um produto real e polido**, e não uma coleção de componentes adicionados ao site.
 */
 
 import { createFileRoute } from "@tanstack/react-router";
