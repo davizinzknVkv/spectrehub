@@ -106,14 +106,14 @@ export function FreeSignup({ guildInvite }: FreeSignupProps) {
                   />
                 </div>
                 <button type="submit" className="ds-btn ds-btn-primary w-full !h-14">
-                  GENERATE_AUTH_CODE
+                  GERAR CÓDIGO DE ACESSO
                 </button>
               </form>
             ) : (
               <div className="space-y-10">
                 <div>
                   <div className="font-mono text-[8px] uppercase tracking-[0.4em] text-white/20 mb-6 text-center">
-                    UNIQUE_SESSION_CODE
+                    CÓDIGO ÚNICO DE SESSÃO
                   </div>
                   <div className="flex items-center gap-2 border border-primary/20 bg-primary/5 p-8 group">
                     <code className="flex-1 font-display text-3xl text-primary italic text-center tracking-widest">
@@ -135,7 +135,7 @@ export function FreeSignup({ guildInvite }: FreeSignupProps) {
                   rel="noreferrer"
                   className="ds-btn ds-btn-primary w-full !h-14 flex items-center justify-center"
                 >
-                  INITIALIZE_TICKET
+                  ABRIR TICKET
                 </a>
                 
                 <button
@@ -143,7 +143,7 @@ export function FreeSignup({ guildInvite }: FreeSignupProps) {
                   onClick={() => setCode(null)}
                   className="w-full font-mono text-[8px] uppercase tracking-[0.4em] text-white/10 hover:text-white transition-colors"
                 >
-                  REGENERATE_PROTOCOL
+                  GERAR NOVO PROTOCOLO
                 </button>
               </div>
             )}
