@@ -186,34 +186,32 @@ function SpotifyGenPage() {
             </div>
           </div>
 
-          <Card className="p-6 border-white/5 bg-white/[0.01] border-dashed">
-             <div className="flex flex-col gap-4">
-               <div className="flex items-center gap-2 text-white/40">
+          <div className="bg-[#030303] border border-white/5 p-8 space-y-8">
+             <div className="flex flex-col gap-6">
+               <div className="flex items-center gap-3 text-white/20">
                   <AlertCircle className="w-4 h-4" />
-                  <h4 className="font-display text-[9px] uppercase tracking-widest italic font-bold">Aviso Legal</h4>
+                  <h4 className="font-mono text-[8px] uppercase tracking-[0.5em]">LEGAL_DISCLAIMER_NOTICE</h4>
                </div>
-               <p className="text-[9px] text-white/30 uppercase tracking-[0.15em] font-sans italic leading-relaxed">
-                  Esta ferramenta gera links legítimos de redirecionamento do Spotify com parâmetros UTM para rastreamento de campanhas. Não gera contas premium, vouchers ou assinaturas gratuitas.
+               <p className="font-mono text-[9px] text-white/20 uppercase tracking-[0.1em] leading-relaxed">
+                  Esta ferramenta gera links legítimos de redirecionamento do Spotify com parâmetros UTM para rastreamento de campanhas. Não gera contas premium ou vouchers.
                </p>
-               <div className="pt-4 border-t border-white/5 space-y-4">
+               <div className="pt-8 border-t border-white/5 space-y-6">
                  <div className="flex items-center justify-between">
-                    <p className="text-[10px] text-white/40 uppercase tracking-widest font-bold">Estoque Disponível</p>
-                    <div className="flex items-center gap-2">
+                    <p className="font-mono text-[8px] text-white/40 uppercase tracking-[0.4em]">CURRENT_STOCK_STATE</p>
+                    <div className="flex items-center gap-3">
                       <div className={cn("w-1.5 h-1.5 rounded-full", (stock || 0) > 0 ? "bg-emerald-500 shadow-[0_0_8px_#10b981]" : "bg-primary shadow-[0_0_8px_#4DA09E]")} />
                       <span className="font-mono text-xs text-white">{stock !== null ? stock : "---"}</span>
                     </div>
                  </div>
-                 <div className="space-y-1">
-                   <p className="text-[10px] text-primary uppercase tracking-widest font-bold italic">
-                     Restrição de Acesso:
-                   </p>
-                   <p className="text-[9px] text-white/50 uppercase tracking-[0.1em] mt-1">
-                     O acesso ao Spotify Gen está disponível apenas para membros Premium (30 dias) e Lifetime. Planos Free e Booster não possuem acesso a esta funcionalidade.
-                   </p>
+                 <div className="space-y-3">
+                    <p className="font-mono text-[8px] text-primary uppercase tracking-[0.4em]">ACCESS_REQUIREMENTS</p>
+                    <p className="font-mono text-[9px] text-white/30 uppercase tracking-[0.1em] leading-relaxed">
+                      O acesso ao Spotify Gen está disponível apenas para membros PREMIUM e LIFETIME. Planos Free e Booster estão desativados.
+                    </p>
                  </div>
                </div>
              </div>
-          </Card>
+          </div>
         </div>
 
         <div className="lg:col-span-2 space-y-6">
