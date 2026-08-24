@@ -144,7 +144,7 @@ export function SiteHeader({ guildInvite }: SiteHeaderProps) {
             className="fixed inset-0 z-[60] bg-[#030303] p-12 flex flex-col md:hidden"
           >
             <div className="flex justify-between items-center mb-24">
-               <span className="font-display text-[9px] tracking-[0.5em] text-primary uppercase">NAV_ROOT</span>
+               <span className="font-display text-[9px] tracking-[0.5em] text-primary uppercase">NAVEGAÇÃO</span>
                <button onClick={() => setOpen(false)}>
                  <X className="w-6 h-6 text-white" />
                </button>

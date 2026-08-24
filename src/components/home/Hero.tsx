@@ -47,7 +47,7 @@ export function Hero({ guildInvite, fallbackMembers, liveMembers = [] }: HeroPro
             <div className="flex items-center gap-6 mb-16">
               <div className="w-1.5 h-1.5 bg-primary shadow-[0_0_8px_#4DA09E]" />
               <span className="font-mono text-[9px] tracking-[0.5em] text-white/30 uppercase">
-                {t('hero.badge')} // CORE_SYSTEM_INITIALIZED
+                {t('hero.badge')} // SISTEMA INICIALIZADO
               </span>
             </div>
           </Reveal>
@@ -120,11 +120,11 @@ export function Hero({ guildInvite, fallbackMembers, liveMembers = [] }: HeroPro
             </div>
 
             <div className="pt-8 border-t border-white/10 text-[9px] font-mono leading-relaxed max-w-[200px] ml-auto uppercase opacity-50">
-              [SYSTEM_LOADED]
+              [SISTEMA CARREGADO]
               <br />
-              [RLS_ENABLED]
+              [RLS ATIVO]
               <br />
-              [CORE_ACTIVE]
+              [NÚCLEO ATIVO]
             </div>
           </div>
         </div>

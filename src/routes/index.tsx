@@ -57,7 +57,7 @@ function Index() {
             <div className="max-w-xl">
               <div className="font-display text-[9px] tracking-[0.5em] text-white/20 uppercase mb-6 flex items-center gap-4">
                  <div className="w-12 h-px bg-white/5" />
-                 DEPLOYED_MODULES
+                 MÓDULOS IMPLANTADOS
               </div>
               <h2 className="font-display text-4xl sm:text-6xl text-white uppercase leading-tight tracking-tighter">
                 Explore a <br/><span className="text-primary italic">Infraestrutura.</span>
