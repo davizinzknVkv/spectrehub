@@ -263,7 +263,7 @@ body {
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #4DA09E;
+  background: #FF0050;
 }
 
 /* Firefox */
@@ -290,7 +290,7 @@ body {
 }
 
 .spectre-toast [data-icon] {
-  color: #4DA09E !important;
+  color: #FF0050 !important;
 }
 
 .spectre-toast [data-title] {
@@ -299,7 +299,7 @@ body {
   text-transform: uppercase !important;
   letter-spacing: 0.1em !important;
   font-style: italic !important;
-  color: #4DA09E !important;
+  color: #FF0050 !important;
 }
 
 .spectre-toast [data-description] {
@@ -329,18 +329,18 @@ body {
 }
 
 .spectre-toast [data-close-button]:hover {
-  background: #4DA09E !important;
-  border-color: #4DA09E !important;
+  background: #FF0050 !important;
+  border-color: #FF0050 !important;
   transform: rotate(90deg) !important;
 }
 
 /* Toast Variants */
 .spectre-toast[data-type="success"] {
-  border-left: 2px solid #4DA09E !important;
+  border-left: 2px solid #FF0050 !important;
 }
 
 .spectre-toast[data-type="error"] {
-  border-left: 2px solid #4DA09E !important;
+  border-left: 2px solid #FF0050 !important;
 }
 
 .spectre-toast[data-type="info"] {

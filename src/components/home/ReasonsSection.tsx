@@ -16,12 +16,12 @@ export function ReasonsSection({ reasons }: ReasonsSectionProps) {
       <div className="flex flex-col lg:flex-row gap-32 items-start">
         <Reveal className="flex-1 lg:max-w-md lg:sticky lg:top-32">
           <div className="flex items-center gap-6 mb-12">
-            <div className="w-1.5 h-1.5 bg-primary shadow-[0_0_8px_#4DA09E]" />
+            <div className="w-1.5 h-1.5 bg-primary shadow-[0_0_8px_#FF0050]" />
             <span className="font-mono text-[9px] tracking-[0.5em] text-white/30 uppercase">
               {t('reasons.badge')}
             </span>
           </div>
-          <h2 className="font-display text-[4rem] md:text-[6rem] leading-[0.8] text-white uppercase tracking-tighter mb-16">
+          <h2 className="font-display text-4xl md:text-6xl leading-tight text-white uppercase tracking-tighter mb-16">
             {t('reasons.title')} <br />
             <span className="text-primary italic opacity-90">{t('reasons.subtitle')}</span>
           </h2>
@@ -30,7 +30,7 @@ export function ReasonsSection({ reasons }: ReasonsSectionProps) {
               {t('reasons.description')}
             </p>
             <div className="font-mono text-[8px] text-primary/20 uppercase tracking-[0.4em]">
-              [ INFRAESTRUTURA CORE V4 ]
+              INFRAESTRUTURA CORE V4
             </div>
           </div>
         </Reveal>
