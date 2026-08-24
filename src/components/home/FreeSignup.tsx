@@ -64,7 +64,7 @@ export function FreeSignup({ guildInvite }: FreeSignupProps) {
                 t('free.step3'),
               ].map((s, i) => (
                 <div key={s} className="group cursor-default">
-                   <div className="font-mono text-[9px] text-primary/40 mb-3 block">STEP_0{i + 1}</div>
+                   <div className="font-mono text-[9px] text-primary/40 mb-3 block">PASSO 0{i + 1}</div>
                    <p className="font-sans text-[11px] text-white/40 uppercase tracking-[0.2em] group-hover:text-white/60 transition-colors max-w-xs leading-relaxed">
                      {s}
                    </p>
@@ -81,7 +81,7 @@ export function FreeSignup({ guildInvite }: FreeSignupProps) {
               <form onSubmit={generate} className="space-y-10">
                 <div className="space-y-4">
                   <label className="font-mono text-[8px] uppercase tracking-[0.4em] text-white/20 block">
-                    IDENTITY_TAG
+                    TAG DE IDENTIDADE
                   </label>
                   <input
                     value={name}
@@ -89,12 +89,12 @@ export function FreeSignup({ guildInvite }: FreeSignupProps) {
                     maxLength={40}
                     required
                     className="w-full bg-white/[0.02] border border-white/5 px-6 py-5 text-[10px] text-white uppercase tracking-widest outline-none focus:border-primary/30 transition-all placeholder:text-white/5"
-                    placeholder="ENTER_NAME"
+                    placeholder="SEU NOME"
                   />
                 </div>
                 <div className="space-y-4">
                   <label className="font-mono text-[8px] uppercase tracking-[0.4em] text-white/20 block">
-                    DISCORD_UID
+                    ID DO DISCORD
                   </label>
                   <input
                     value={discord}
