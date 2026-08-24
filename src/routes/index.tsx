@@ -1,3 +1,4 @@
+/* 
 # INTEGRAR O PRISMA HERO NO SPECTRE HUB
 
 Quero utilizar o componente **Prisma Hero** fornecido abaixo como referência estrutural e de animação para refazer o **Hero principal da homepage do Spectre Hub**.
@@ -429,6 +430,7 @@ Antes de finalizar, testar o Hero em diferentes resoluções e verificar princip
 * responsividade;
 * performance;
 * ausência de espaço extra no final do Hero.
+*/
 
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect } from "react";
