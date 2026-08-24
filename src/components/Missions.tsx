@@ -188,35 +188,33 @@ export function CaptchaModal({
     <Modal
       title="Autorização de Segurança"
       onClose={onCancel}
-      className="max-w-lg mx-auto rounded-2xl"
+      className="max-w-lg mx-auto bg-[#030303] border border-white/5"
       actions={
-        <div className="flex flex-col sm:flex-row w-full items-center justify-center gap-3 font-sans">
-          <Button 
-            variant="secondary" 
-            className="w-full sm:w-auto uppercase font-bold text-[11px] tracking-wider order-2 sm:order-1 rounded-lg" 
+        <div className="flex flex-col sm:flex-row w-full items-center justify-center gap-4 font-mono">
+          <button 
+            className="w-full sm:w-auto h-12 px-8 uppercase text-[10px] tracking-widest text-white/40 hover:text-white transition-colors order-2 sm:order-1" 
             onClick={onCancel}
           >
-            Cancelar
-          </Button>
-          <Button 
-            variant="primary" 
-            className="w-full sm:w-auto min-w-[200px] uppercase font-bold text-[11px] tracking-widest order-1 sm:order-2 rounded-lg shadow-lg shadow-primary/20" 
+            ABORT
+          </button>
+          <button 
+            className="w-full sm:w-auto h-12 px-10 bg-primary text-white uppercase text-[10px] tracking-widest order-1 sm:order-2 shadow-[0_0_15px_#4DA09E]" 
             onClick={onSolved}
           >
-            Confirmar e Iniciar
-          </Button>
+            CONFIRM_PROTOCOL
+          </button>
         </div>
       }
     >
-      <div className="space-y-6 font-sans">
-        <div className="relative overflow-hidden border border-primary/20 bg-primary/5 p-6 rounded-xl">
-          <div className="flex items-start gap-4">
-            <AlertTriangle className="h-5 w-5 shrink-0 text-primary" />
-            <div className="text-xs leading-relaxed text-foreground-muted">
-              <span className="block mb-2 font-bold text-foreground uppercase tracking-wider">Protocolo de Execução</span>
+      <div className="space-y-8">
+        <div className="relative border border-primary/20 bg-primary/5 p-8">
+          <div className="flex items-start gap-6">
+            <AlertTriangle className="h-5 w-5 shrink-0 text-primary opacity-50" />
+            <div className="font-mono text-[9px] leading-relaxed text-white/40 uppercase tracking-[0.1em]">
+              <span className="block mb-4 text-primary font-display text-[11px] tracking-widest">EXECUTION_PROTOCOL_0x42</span>
               {label || (
                 <>
-                  Você está prestes a iniciar a missão <span className="text-foreground font-bold italic">"{quest?.questName}"</span>.
+                  Você está prestes a iniciar a missão <span className="text-white">"{quest?.questName}"</span>.
                 </>
               )}
               <br /><br />
@@ -225,16 +223,10 @@ export function CaptchaModal({
           </div>
         </div>
         
-        <div className="relative overflow-hidden border border-border bg-background p-8 text-center rounded-xl group">
-          {quest?.imageUrl && (
-            <div className="absolute inset-0 z-0 opacity-10 group-hover:opacity-20 transition-opacity duration-700">
-              <img src={quest.imageUrl} alt="" className="h-full w-full object-cover grayscale" />
-              <div className="absolute inset-0 bg-gradient-to-t from-background to-transparent" />
-            </div>
-          )}
+        <div className="relative border border-white/5 bg-black/40 p-10 text-center group">
           <div className="relative z-10">
-            <div className="text-[10px] mb-3 font-bold uppercase tracking-widest text-foreground-muted/50">Status de Prontidão</div>
-            <div className="font-display text-2xl uppercase tracking-tight text-foreground">SISTEMA_PRONTO</div>
+            <div className="font-mono text-[8px] mb-4 uppercase tracking-[0.5em] text-white/10">READY_STATE_STATUS</div>
+            <div className="font-display text-3xl uppercase tracking-tighter text-white">SYSTEM_READY</div>
           </div>
         </div>
       </div>
