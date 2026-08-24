@@ -78,10 +78,10 @@ const LenticularCard = ({
           scale: isActive ? 1 : inactiveScale,
           opacity: isActive ? 1 : inactiveDim,
           transformStyle: "preserve-3d",
-          borderRadius: borderRadius,
+          borderRadius: 0,
         }}
         transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-        className="w-full h-full relative bg-[#101114] border border-white/5 overflow-hidden shadow-2xl"
+        className="w-full h-full relative bg-[#050505] border border-white/5 overflow-hidden"
       >
         {/* Lenticular / Shine Layer */}
         {isActive && (
@@ -160,9 +160,9 @@ const LenticularCard = ({
           >
             <Link 
               to={item.to}
-              className="ds-btn ds-btn-primary !py-2 !px-4 !text-[9px] flex items-center gap-2 group/btn"
+              className="ds-btn ds-btn-primary !py-2 !px-5 !text-[9px] !min-h-0 !h-10 w-full"
             >
-              Acessar <ArrowUpRight className="w-3 h-3 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform" />
+              RUN_MODULE
             </Link>
           </motion.div>
         </div>
@@ -271,18 +271,18 @@ export function LenticularCarousel({
 
       {/* Controls */}
       {showControls && (
-        <div className="absolute top-1/2 left-0 right-0 -translate-y-1/2 flex justify-between px-4 sm:px-10 pointer-events-none">
+        <div className="absolute top-1/2 left-0 right-0 -translate-y-1/2 flex justify-between px-10 pointer-events-none">
           <button 
             onClick={prev}
-            className="w-12 h-12 bg-black/40 border border-white/5 backdrop-blur-md flex items-center justify-center text-white/40 hover:text-white hover:border-primary/30 transition-all pointer-events-auto"
+            className="w-10 h-10 border border-white/5 flex items-center justify-center text-white/20 hover:text-primary hover:border-primary/30 transition-all pointer-events-auto"
           >
-            <ChevronLeft className="w-6 h-6" />
+            <ChevronLeft className="w-5 h-5" />
           </button>
           <button 
             onClick={next}
-            className="w-12 h-12 bg-black/40 border border-white/5 backdrop-blur-md flex items-center justify-center text-white/40 hover:text-white hover:border-primary/30 transition-all pointer-events-auto"
+            className="w-10 h-10 border border-white/5 flex items-center justify-center text-white/20 hover:text-primary hover:border-primary/30 transition-all pointer-events-auto"
           >
-            <ChevronRight className="w-6 h-6" />
+            <ChevronRight className="w-5 h-5" />
           </button>
         </div>
       )}
@@ -306,9 +306,9 @@ export function LenticularCarousel({
 
       {/* Labels / Info for current card */}
       {showLabels && (
-        <div className="text-center mt-8">
-           <div className="font-display text-[10px] tracking-[0.4em] text-white/20 uppercase italic">
-             {activeIndex + 1} / {items.length} — Sistema {items[activeIndex].name}
+        <div className="text-center mt-12">
+           <div className="font-display text-[9px] tracking-[0.5em] text-white/10 uppercase">
+             SYS_ID: 0{activeIndex + 1} // TOTAL_DEPLOYED: {items.length}
            </div>
         </div>
       )}

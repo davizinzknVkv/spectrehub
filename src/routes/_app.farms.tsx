@@ -116,22 +116,22 @@ function FarmsPage() {
         description="Monitoramento em tempo real das automações e colheita de orbs."
       />
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-        <StatItem icon={Activity} label="Status" value={running ? "Operando" : "Standby"} sub={running ? "Em execução" : "Aguardando"} active={running} />
-        <StatItem icon={Clock} label="Tempo Ativo" value={running ? fmtDuration(activeMs) : "00:00"} sub="Duração da run" />
-        <StatItem icon={Timer} label="Cooldown" value={remainingCd > 0 ? fmtDuration(remainingCd) : "Livre"} sub={limits.label} active={remainingCd > 0} />
-        <StatItem icon={CheckCircle2} label="Concluídas" value={String(stats.todayDone)} sub={`Limite: ${limits.daily === Infinity ? '∞' : limits.daily}`} />
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-px bg-white/5 border border-white/5">
+        <StatItem icon={Activity} label="SYS_STATUS" value={running ? "OPERATING" : "STANDBY"} sub={running ? "EXECUTING_NODE" : "IDLE_STATE"} active={running} />
+        <StatItem icon={Clock} label="UPTIME_CLOCK" value={running ? fmtDuration(activeMs) : "00:00"} sub="RUN_DURATION" />
+        <StatItem icon={Timer} label="COOLDOWN_VAL" value={remainingCd > 0 ? fmtDuration(remainingCd) : "READY"} sub={limits.label} active={remainingCd > 0} />
+        <StatItem icon={CheckCircle2} label="COMPLETED_NODES" value={String(stats.todayDone)} sub={`LIMIT: ${limits.daily === Infinity ? 'INF' : limits.daily}`} />
       </div>
 
       {running && progress && (
-        <div className="ds-card p-6 border-primary/20 bg-primary/5 space-y-4 mt-8">
-            <div className="flex justify-between items-center">
-                <span className="font-display text-[9px] uppercase tracking-widest text-primary italic font-bold">Progresso da Missão</span>
-                <span className="font-mono text-xs text-white">{progress.current} / {progress.total}</span>
+        <div className="bg-[#030303] border border-primary/20 p-10 space-y-6 mt-12">
+            <div className="flex justify-between items-end">
+                <div className="font-mono text-[8px] uppercase tracking-[0.5em] text-primary">MISSION_PHASE_PROGRESS</div>
+                <div className="font-display text-2xl text-white tracking-tighter">{progress.current} / {progress.total}</div>
             </div>
-            <div className="h-1 bg-white/5 overflow-hidden">
+            <div className="h-0.5 bg-white/5 relative overflow-hidden">
                 <div 
-                  className="h-full bg-primary transition-all duration-500" 
+                  className="h-full bg-primary transition-all duration-500 shadow-[0_0_10px_#4DA09E]" 
                   style={{ width: `${Math.min(100, (progress.current / Math.max(1, progress.total)) * 100)}%` }} 
                 />
             </div>
@@ -140,34 +140,34 @@ function FarmsPage() {
 
       <div className="grid grid-cols-1 lg:grid-cols-[1fr_350px] gap-8 mt-8">
         <div className="space-y-8">
-            <div className="ds-card p-8 border-white/5 bg-white/[0.02]">
-                <h3 className="font-display text-xs uppercase tracking-widest text-white mb-6 italic">Performance de Colheita</h3>
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
-                    <div className="space-y-1">
-                        <div className="text-[9px] uppercase tracking-widest text-white/30">Total Orbs</div>
-                        <div className="font-display text-2xl text-white italic">{stats.totalOrbs.toLocaleString()}</div>
+            <div className="bg-[#030303] border border-white/5 p-10 space-y-10">
+                <div className="font-mono text-[8px] uppercase tracking-[0.5em] text-white/20">HARVEST_PERFORMANCE_METRICS</div>
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-12">
+                    <div className="space-y-3">
+                        <div className="font-mono text-[7px] uppercase tracking-[0.3em] text-white/10">TOTAL_ORBS</div>
+                        <div className="font-display text-3xl text-white tracking-tighter">{stats.totalOrbs.toLocaleString()}</div>
                     </div>
-                    <div className="space-y-1">
-                        <div className="text-[9px] uppercase tracking-widest text-white/30">Hoje</div>
-                        <div className="font-display text-2xl text-primary italic">{stats.todayOrbs.toLocaleString()}</div>
+                    <div className="space-y-3">
+                        <div className="font-mono text-[7px] uppercase tracking-[0.3em] text-white/10">DAILY_YIELD</div>
+                        <div className="font-display text-3xl text-primary tracking-tighter">{stats.todayOrbs.toLocaleString()}</div>
                     </div>
-                    <div className="space-y-1">
-                        <div className="text-[9px] uppercase tracking-widest text-white/30">Taxa Sucesso</div>
-                        <div className="font-display text-2xl text-white italic">{runs.length ? `${Math.round((stats.done / runs.length) * 100)}%` : '0%'}</div>
+                    <div className="space-y-3">
+                        <div className="font-mono text-[7px] uppercase tracking-[0.3em] text-white/10">SUCCESS_RATE</div>
+                        <div className="font-display text-3xl text-white tracking-tighter">{runs.length ? `${Math.round((stats.done / runs.length) * 100)}%` : '0%'}</div>
                     </div>
                 </div>
             </div>
 
-            <div className="ds-card p-8 border-white/5 bg-white/[0.02]">
-                <h3 className="font-display text-xs uppercase tracking-widest text-white mb-6 italic">Terminal de Eventos</h3>
-                <div className="space-y-2 max-h-[300px] overflow-y-auto pr-4 custom-scrollbar">
+            <div className="bg-[#030303] border border-white/5 p-10 space-y-8">
+                <div className="font-mono text-[8px] uppercase tracking-[0.5em] text-white/20">EVENT_TERMINAL_STDOUT</div>
+                <div className="space-y-2 max-h-[300px] overflow-y-auto pr-6 custom-scrollbar">
                     {logs.length === 0 ? (
-                        <p className="text-white/20 font-mono text-xs italic">Aguardando sinais do servidor...</p>
+                        <p className="font-mono text-[9px] text-white/10 uppercase tracking-[0.3em]">WAITING_FOR_SIGNAL...</p>
                     ) : (
                         logs.slice().reverse().map(l => (
-                            <div key={l.id} className="font-mono text-[10px] py-1 border-b border-white/[0.02] flex gap-3">
-                                <span className="text-white/20 shrink-0">[{new Date(l.ts).toLocaleTimeString()}]</span>
-                                <span className={l.level === 'error' ? 'text-rose-500' : l.level === 'success' ? 'text-primary' : 'text-white/60'}>
+                            <div key={l.id} className="font-mono text-[9px] py-2 border-b border-white/5 flex gap-4 uppercase tracking-[0.1em]">
+                                <span className="text-white/10 shrink-0">[{new Date(l.ts).toLocaleTimeString()}]</span>
+                                <span className={l.level === 'error' ? 'text-rose-500' : l.level === 'success' ? 'text-primary' : 'text-white/40'}>
                                     {l.text}
                                 </span>
                             </div>
@@ -178,29 +178,29 @@ function FarmsPage() {
         </div>
 
         <aside className="space-y-6">
-            <div className="ds-card p-6 border-white/5 bg-white/[0.02] space-y-4">
-                <div className="font-display text-[9px] uppercase tracking-widest text-white/30 italic">Infraestrutura</div>
-                <div className="space-y-4">
-                    <InfraItem label="Plano Ativo" val={limits.label} />
-                    <InfraItem label="Intervalo" val={`${limits.cooldownMs / 60000}m`} />
-                    <InfraItem label="Limite Diário" val={limits.daily === Infinity ? 'Ilimitado' : String(limits.daily)} />
-                    <InfraItem label="Status API" val="Online" color="text-emerald-500" />
+            <div className="bg-[#030303] border border-white/5 p-8 space-y-8">
+                <div className="font-mono text-[8px] uppercase tracking-[0.5em] text-white/20">INFRASTRUCTURE_DATA</div>
+                <div className="space-y-6">
+                    <InfraItem label="ACTIVE_PLAN" val={limits.label} />
+                    <InfraItem label="INTERVAL_VAL" val={`${limits.cooldownMs / 60000}M`} />
+                    <InfraItem label="DAILY_CEILING" val={limits.daily === Infinity ? 'UNCAPPED' : String(limits.daily)} />
+                    <InfraItem label="API_ENDPOINT" val="ONLINE" color="text-emerald-500" />
                 </div>
             </div>
 
-            <div className="ds-card p-6 border-white/5 bg-white/[0.02] space-y-4">
-                <div className="font-display text-[9px] uppercase tracking-widest text-white/30 italic">Resumo Global</div>
-                <div className="space-y-2">
-                    <div className="flex justify-between font-mono text-[10px]">
-                        <span className="text-white/40">Sucesso</span>
+            <div className="bg-[#030303] border border-white/5 p-8 space-y-8">
+                <div className="font-mono text-[8px] uppercase tracking-[0.5em] text-white/20">GLOBAL_TELEMETRY</div>
+                <div className="space-y-4">
+                    <div className="flex justify-between font-mono text-[9px] uppercase tracking-[0.2em]">
+                        <span className="text-white/20">SUCCESS_NODES</span>
                         <span className="text-white">{stats.done}</span>
                     </div>
-                    <div className="flex justify-between font-mono text-[10px]">
-                        <span className="text-white/40">Falhas</span>
+                    <div className="flex justify-between font-mono text-[9px] uppercase tracking-[0.2em]">
+                        <span className="text-white/20">FAILED_CRITICAL</span>
                         <span className="text-rose-500">{stats.failed}</span>
                     </div>
-                    <div className="flex justify-between font-mono text-[10px]">
-                        <span className="text-white/40">Ignoradas</span>
+                    <div className="flex justify-between font-mono text-[9px] uppercase tracking-[0.2em]">
+                        <span className="text-white/20">SKIPPED_IDLE</span>
                         <span className="text-amber-500">{stats.skipped}</span>
                     </div>
                 </div>
@@ -213,22 +213,22 @@ function FarmsPage() {
 
 function StatItem({ icon: Icon, label, value, sub, active }: any) {
   return (
-    <div className={`ds-card p-6 border-white/5 bg-white/[0.02] space-y-2 transition-all hover:border-primary/40 ${active ? 'border-primary/20' : ''}`}>
-        <div className="flex items-center gap-2">
-            <Icon className={`w-3.5 h-3.5 ${active ? 'text-primary' : 'text-white/20'}`} />
-            <span className="font-display text-[9px] uppercase tracking-widest text-white/30 italic">{label}</span>
+    <div className={`p-8 bg-[#030303] border border-white/5 space-y-4 transition-all duration-500 hover:border-primary/40 group ${active ? 'border-primary/20' : ''}`}>
+        <div className="flex items-center gap-3">
+            <Icon className={`w-3.5 h-3.5 ${active ? 'text-primary' : 'text-white/10'}`} />
+            <span className="font-mono text-[8px] uppercase tracking-[0.4em] text-white/20 group-hover:text-white/40 transition-colors">{label}</span>
         </div>
-        <div className="font-display text-xl text-white uppercase italic tracking-tighter">{value}</div>
-        <div className="text-[9px] text-white/20 uppercase tracking-widest font-mono">{sub}</div>
+        <div className="font-display text-2xl text-white uppercase tracking-tighter group-hover:text-primary transition-colors">{value}</div>
+        <div className="font-mono text-[7px] text-white/10 uppercase tracking-[0.3em]">{sub}</div>
     </div>
   )
 }
 
 function InfraItem({ label, val, color = "text-white" }: any) {
     return (
-        <div className="flex justify-between items-center border-b border-white/[0.02] pb-2">
-            <span className="font-display text-[9px] uppercase tracking-widest text-white/20 italic">{label}</span>
-            <span className={`font-mono text-[10px] uppercase ${color}`}>{val}</span>
+        <div className="flex justify-between items-center border-b border-white/5 pb-4">
+            <span className="font-display text-[9px] uppercase tracking-widest text-white/20">{label}</span>
+            <span className={`font-mono text-[10px] uppercase tracking-wider ${color}`}>{val}</span>
         </div>
     )
 }

@@ -44,32 +44,28 @@ export function FreeSignup({ guildInvite }: FreeSignupProps) {
   }
 
   return (
-    <section id="free" className="mx-auto max-w-7xl px-4 py-24 sm:px-6 lg:px-8">
+    <section id="free" className="mx-auto max-w-7xl px-6 py-24 sm:px-12">
       <Reveal>
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_480px] gap-12 bg-[#050505] border border-white/5 p-8 md:p-20 relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 blur-[100px] pointer-events-none" />
-          
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_480px] gap-20 items-start">
           <div>
-            <div className="font-display text-[10px] tracking-[0.3em] text-primary uppercase mb-4 flex items-center gap-2">
-               <span className="w-8 h-px bg-primary/30" />
+            <div className="font-display text-[9px] tracking-[0.5em] text-primary uppercase mb-6 flex items-center gap-4">
+               <div className="w-12 h-px bg-primary" />
                {t('free.badge')}
             </div>
-            <h2 className="font-display text-[2.5rem] md:text-[4rem] leading-[0.9] text-white uppercase italic tracking-tighter mb-16">
+            <h2 className="font-display text-[3.5rem] md:text-[5rem] leading-[0.85] text-white uppercase tracking-tighter mb-16">
               {t('free.title')} <br />
-              <span className="text-white/30 text-[1.8rem] md:text-[3rem]">{t('free.subtitle')}</span>
+              <span className="text-primary italic opacity-90">{t('free.subtitle')}</span>
             </h2>
 
-            <div className="space-y-10">
+            <div className="space-y-12 border-l border-white/10 pl-8">
               {[
                 t('free.step1'),
                 t('free.step2'),
                 t('free.step3'),
               ].map((s, i) => (
-                <div key={s} className="flex items-center gap-8 group">
-                   <div className={`w-14 h-14 border flex items-center justify-center font-display italic transition-all duration-500 shrink-0 ${i === 1 ? 'border-primary text-primary bg-primary/5' : 'border-white/10 text-white/20 group-hover:border-white/30 group-hover:text-white'}`}>
-                     0{i + 1}
-                   </div>
-                   <p className="font-sans text-[11px] text-white/40 uppercase tracking-[0.2em] group-hover:text-white/70 transition-colors max-w-xs leading-relaxed">
+                <div key={s} className="group cursor-default">
+                   <div className="font-mono text-[9px] text-primary/40 mb-3 block">STEP_0{i + 1}</div>
+                   <p className="font-sans text-[11px] text-white/40 uppercase tracking-[0.2em] group-hover:text-white/60 transition-colors max-w-xs leading-relaxed">
                      {s}
                    </p>
                 </div>
@@ -77,55 +73,50 @@ export function FreeSignup({ guildInvite }: FreeSignupProps) {
             </div>
           </div>
 
-          <div className="bg-[#080808] border border-white/10 p-10 md:p-14 relative z-10">
-             <div className="absolute -top-px -right-px w-10 h-10 border-t border-r border-primary/40 pointer-events-none" />
-             <div className="absolute -bottom-px -left-px w-10 h-10 border-b border-l border-primary/40 pointer-events-none" />
-
+          <div className="bg-[#030303] border border-white/5 p-12 relative">
+             <div className="absolute top-0 right-0 w-1 h-1 bg-primary" />
+             <div className="absolute bottom-0 left-0 w-1 h-1 bg-primary" />
              
             {!code ? (
-              <form onSubmit={generate} className="space-y-8">
+              <form onSubmit={generate} className="space-y-10">
                 <div className="space-y-4">
-                  <label className="font-display text-[10px] uppercase tracking-[0.3em] text-white/60 italic block">
-                    Identificação
+                  <label className="font-mono text-[8px] uppercase tracking-[0.4em] text-white/20 block">
+                    IDENTITY_TAG
                   </label>
-
                   <input
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     maxLength={40}
                     required
-                    className="w-full bg-[#111] border border-white/5 px-6 py-5 text-[11px] text-white uppercase tracking-widest outline-none focus:border-primary/40 transition-all placeholder:text-white/5"
-
-                    placeholder={t('free.formName')}
+                    className="w-full bg-white/[0.02] border border-white/5 px-6 py-5 text-[10px] text-white uppercase tracking-widest outline-none focus:border-primary/30 transition-all placeholder:text-white/5"
+                    placeholder="ENTER_NAME"
                   />
                 </div>
                 <div className="space-y-4">
-                  <label className="font-display text-[10px] uppercase tracking-[0.3em] text-white/60 italic block">
-                    Usuário Discord
+                  <label className="font-mono text-[8px] uppercase tracking-[0.4em] text-white/20 block">
+                    DISCORD_UID
                   </label>
-
                   <input
                     value={discord}
                     onChange={(e) => setDiscord(e.target.value)}
                     maxLength={40}
                     required
-                    className="w-full bg-[#111] border border-white/5 px-6 py-5 text-[11px] text-white uppercase tracking-widest outline-none focus:border-primary/40 transition-all placeholder:text-white/5"
-                    placeholder={t('free.formDiscord')}
+                    className="w-full bg-white/[0.02] border border-white/5 px-6 py-5 text-[10px] text-white uppercase tracking-widest outline-none focus:border-primary/30 transition-all placeholder:text-white/5"
+                    placeholder="USER#0000"
                   />
                 </div>
-                <button type="submit" className="ds-btn ds-btn-primary w-full py-5 text-[10px]">
-                  {t('free.formSubmit')}
+                <button type="submit" className="ds-btn ds-btn-primary w-full !h-14">
+                  GENERATE_AUTH_CODE
                 </button>
-
               </form>
             ) : (
-              <div className="space-y-8">
+              <div className="space-y-10">
                 <div>
-                  <div className="font-display text-[9px] uppercase tracking-[0.3em] text-white/30 italic mb-4 text-center">
-                    {t('free.uniqueCode')}
+                  <div className="font-mono text-[8px] uppercase tracking-[0.4em] text-white/20 mb-6 text-center">
+                    UNIQUE_SESSION_CODE
                   </div>
-                  <div className="flex items-center gap-2 border border-primary/30 bg-primary/5 p-6">
-                    <code className="flex-1 font-display text-2xl text-primary italic text-center tracking-widest">
+                  <div className="flex items-center gap-2 border border-primary/20 bg-primary/5 p-8 group">
+                    <code className="flex-1 font-display text-3xl text-primary italic text-center tracking-widest">
                       {code}
                     </code>
                     <button
@@ -142,17 +133,17 @@ export function FreeSignup({ guildInvite }: FreeSignupProps) {
                   href={guildInvite}
                   target="_blank"
                   rel="noreferrer"
-                  className="ds-btn ds-btn-primary w-full py-5 text-[10px]"
+                  className="ds-btn ds-btn-primary w-full !h-14 flex items-center justify-center"
                 >
-                  {t('common.getStarted')}
+                  INITIALIZE_TICKET
                 </a>
                 
                 <button
                   type="button"
                   onClick={() => setCode(null)}
-                  className="w-full font-display text-[9px] uppercase tracking-[0.3em] text-white/20 hover:text-white transition-colors italic"
+                  className="w-full font-mono text-[8px] uppercase tracking-[0.4em] text-white/10 hover:text-white transition-colors"
                 >
-                  {t('free.generateNew')}
+                  REGENERATE_PROTOCOL
                 </button>
               </div>
             )}

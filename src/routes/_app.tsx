@@ -117,7 +117,7 @@ function AppLayout() {
 
       <div className="relative z-10 grid min-h-screen w-full lg:grid-cols-[260px_1fr] overflow-hidden">
         {/* Desktop sidebar */}
-        <aside className="hidden border-r border-border bg-background-secondary lg:block lg:w-[260px]">
+        <aside className="hidden border-r border-white/5 bg-[#030303] lg:block lg:w-[260px]">
           <SidebarBody pathname={pathname} />
         </aside>
 
@@ -178,7 +178,7 @@ function SidebarBody({
       <nav className="flex flex-col gap-8 px-4 py-2 lg:flex-1 overflow-y-auto">
         {NAV_GROUPS.map((group) => (
           <div key={group.title}>
-            <div className="font-sans px-4 pb-2 text-[10px] font-bold uppercase tracking-wider text-foreground-muted/50">{group.title}</div>
+            <div className="font-mono px-4 pb-3 text-[8px] font-bold uppercase tracking-[0.4em] text-white/10">{group.title}</div>
             <div className="flex flex-col gap-1">
               {group.items.map((item) => {
                 const Icon = item.icon;
@@ -187,10 +187,10 @@ function SidebarBody({
                   <Link
                     key={`${item.to}-${item.label}`}
                     to={item.to}
-                    className={`flex items-center gap-3 px-4 py-2 transition-all duration-200 group rounded-lg ${
+                    className={`flex items-center gap-3 px-4 py-2 transition-all duration-300 group border-l-2 ${
                       active 
-                        ? "bg-primary/10 text-foreground" 
-                        : "text-foreground-muted hover:text-foreground hover:bg-white/[0.03]"
+                        ? "bg-primary/5 text-foreground border-primary" 
+                        : "text-white/20 hover:text-white hover:bg-white/[0.02] border-transparent"
                     }`}
                   >
                     <Icon
@@ -198,7 +198,7 @@ function SidebarBody({
                         active ? "text-primary" : "text-foreground-muted group-hover:text-foreground"
                       }`}
                     />
-                    <span className="font-sans text-[13px] font-medium">
+                    <span className="font-display text-[11px] uppercase tracking-wider">
                       {item.label}
                     </span>
                     {item.soon && (
@@ -275,10 +275,10 @@ function TopBar({ onOpenMenu, pathname }: { onOpenMenu: () => void; pathname: st
 
   return (
     <div
-      className={`sticky top-0 z-20 transition-all duration-300 border-b ${
+      className={`sticky top-0 z-20 transition-all duration-500 border-b ${
         scrolled 
-          ? "bg-background/80 backdrop-blur-xl border-border py-3 px-6" 
-          : "bg-transparent border-transparent py-6 px-10"
+          ? "bg-[#030303]/90 backdrop-blur-md border-white/5 py-4 px-6" 
+          : "bg-transparent border-transparent py-8 px-10"
       }`}
     >
       <div className="mx-auto flex w-full max-w-6xl items-center justify-between gap-3">

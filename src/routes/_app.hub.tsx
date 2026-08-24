@@ -274,34 +274,28 @@ function HubPage() {
 
   return (
     <div className="page-stack">
-      <section className="relative overflow-hidden border border-border bg-card/30 rounded-xl">
-        {/* Banner Area */}
-        <div className="absolute top-0 left-0 w-full h-32 sm:h-40 overflow-hidden pointer-events-none">
-          {profile?.user?.banner ? (
+      <section className="relative overflow-hidden border border-border bg-background-secondary p-8 sm:p-12">
+        {/* Banner Area - Background detail */}
+        <div className="absolute top-0 right-0 w-1/3 h-full opacity-5 pointer-events-none overflow-hidden">
+          {profile?.user?.banner && (
             <img 
               src={`https://cdn.discordapp.com/banners/${user?.id}/${profile.user.banner}.${profile.user.banner.startsWith('a_') ? 'gif' : 'png'}?size=1024`}
-              className="w-full h-full object-cover opacity-30 grayscale hover:grayscale-0 transition-all duration-1000"
+              className="w-full h-full object-cover grayscale"
               alt=""
             />
-          ) : (
-            <div 
-              className="w-full h-full opacity-10"
-              style={{ backgroundColor: profile?.user?.banner_color || 'var(--color-primary)' }}
-            />
           )}
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent to-card/90" />
         </div>
 
-        <div className="relative z-10 p-8 sm:p-12 pt-20 sm:pt-24 flex flex-col md:flex-row gap-8 items-start md:items-center">
+        <div className="relative z-10 flex flex-col lg:flex-row gap-12 items-start lg:items-end">
           {/* Avatar Area */}
-          <div className="relative group">
-            <div className="w-24 h-24 sm:w-32 sm:h-32 bg-background border border-border overflow-hidden relative rounded-2xl shadow-2xl">
+          <div className="relative group shrink-0">
+            <div className="w-32 h-32 bg-background border border-border overflow-hidden relative shadow-2xl">
               {loading ? (
                 <Skeleton className="w-full h-full" />
               ) : user?.avatar ? (
                 <img 
                   src={`https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.${user.avatar.startsWith('a_') ? 'gif' : 'png'}?size=256`} 
-                  className="w-full h-full object-cover transition-all duration-700"
+                  className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700"
                   alt={user.username}
                 />
               ) : (
@@ -309,59 +303,59 @@ function HubPage() {
                   {user?.username?.slice(0, 2) || "??"}
                 </div>
               )}
-              {/* Active Indicator */}
-              <div className="absolute bottom-2 right-2 w-4 h-4 bg-primary border-4 border-background rounded-full shadow-[0_0_12px_rgba(255,0,85,0.4)]" />
             </div>
           </div>
 
-          <div className="space-y-3 flex-1">
-            <div className="flex flex-wrap gap-2">
+          <div className="space-y-6 flex-1">
+            <div className="flex flex-wrap gap-2 opacity-50">
               {loading ? (
                 <Skeleton className="w-16 h-4" />
               ) : (
                 badges.map(b => (
-                  <div key={b.id} title={b.description} className="w-5 h-5 opacity-80 hover:opacity-100 transition-opacity">
-                    <img src={`https://cdn.discordapp.com/badge-icons/${b.icon}.png`} alt="" className="w-full h-full object-contain" />
+                  <div key={b.id} title={b.description} className="w-4 h-4">
+                    <img src={`https://cdn.discordapp.com/badge-icons/${b.icon}.png`} alt="" className="w-full h-full object-contain grayscale" />
                   </div>
                 ))
               )}
             </div>
 
-            <div>
+            <div className="space-y-2">
+              <span className="font-display text-[10px] tracking-[0.4em] text-primary uppercase font-black block">
+                [USER_IDENTITY_VERIFIED]
+              </span>
               {loading ? (
-                <Skeleton className="h-10 w-64 mb-2" />
+                <Skeleton className="h-12 w-64" />
               ) : (
-                <h2 className="font-display text-3xl sm:text-5xl text-foreground uppercase tracking-tight leading-none">
+                <h2 className="font-display text-4xl sm:text-6xl text-white uppercase tracking-tighter leading-none">
                   {user?.global_name || user?.username}
-                  <span className="text-xs ml-3 font-mono text-primary font-bold">#{user?.id}</span>
+                  <span className="text-[10px] ml-4 font-mono text-primary/50 font-bold uppercase tracking-widest leading-none">ID_{user?.id}</span>
                 </h2>
               )}
-              <div className="flex flex-wrap gap-6 mt-4">
-                <div className="flex items-center gap-2">
-                  <Server className="w-3.5 h-3.5 text-foreground-muted" />
-                  <span className="font-sans text-xs font-semibold text-foreground">{loading ? "---" : guilds.length} <span className="text-foreground-muted font-normal">Servidores</span></span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Users className="w-3.5 h-3.5 text-foreground-muted" />
-                  <span className="font-sans text-xs font-semibold text-foreground">{loading ? "---" : (stats?.friends || 0)} <span className="text-foreground-muted font-normal">Amigos</span></span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <MessageSquare className="w-3.5 h-3.5 text-foreground-muted" />
-                  <span className="font-sans text-xs font-semibold text-foreground">{loading ? "---" : (dmCount || 0)} <span className="text-foreground-muted font-normal">DMs</span></span>
-                </div>
+            </div>
+
+            <div className="flex flex-wrap gap-8 pt-4 border-t border-white/5">
+              <div className="space-y-1">
+                <span className="font-display text-[9px] tracking-[0.2em] text-white/30 uppercase block">Servidores</span>
+                <span className="font-mono text-lg text-white font-bold">{loading ? "---" : guilds.length}</span>
+              </div>
+              <div className="space-y-1">
+                <span className="font-display text-[9px] tracking-[0.2em] text-white/30 uppercase block">Amigos</span>
+                <span className="font-mono text-lg text-white font-bold">{loading ? "---" : (stats?.friends || 0)}</span>
+              </div>
+              <div className="space-y-1">
+                <span className="font-display text-[9px] tracking-[0.2em] text-white/30 uppercase block">Mensagens</span>
+                <span className="font-mono text-lg text-white font-bold">{loading ? "---" : (dmCount || 0)}</span>
               </div>
             </div>
           </div>
           
-          <div className="w-full md:w-auto flex flex-col gap-2">
-            <div className="flex flex-col gap-2">
-              <Link to="/settings" className="ds-btn ds-btn-secondary w-full text-center">Configurações</Link>
-              <button onClick={handleLeaveAll} disabled={leavingAll} className="ds-btn ds-btn-primary w-full text-center">
-                {leavingAll ? "Processando..." : "Sair de Servidores"}
-              </button>
-            </div>
+          <div className="w-full lg:w-auto grid grid-cols-2 lg:flex lg:flex-col gap-2">
+            <button onClick={handleLeaveAll} disabled={leavingAll} className="ds-btn ds-btn-primary text-center">
+              {leavingAll ? "STOPPING..." : "TERMINATE_GUILDS"}
+            </button>
+            <Link to="/settings" className="ds-btn ds-btn-secondary text-center">PROPERTIES</Link>
             
-            <div className="flex gap-2">
+            <div className="col-span-2 flex gap-2">
               <button 
                 onClick={() => {
                   if (!user?.avatar) return;
@@ -371,9 +365,9 @@ function HubPage() {
                   navigator.clipboard.writeText(url);
                   toast.success("Link do Avatar copiado!");
                 }}
-                className="ds-btn ds-btn-secondary !py-2 flex-1 text-[11px] flex items-center justify-center gap-2"
+                className="ds-btn ds-btn-secondary flex-1 !text-[9px]"
               >
-                <Copy className="w-3 h-3" /> Avatar
+                CPY_AVATAR
               </button>
               <button 
                 onClick={() => {
@@ -385,9 +379,9 @@ function HubPage() {
                   toast.success("Link do Banner copiado!");
                 }}
                 disabled={!profile?.user?.banner}
-                className="ds-btn ds-btn-secondary !py-2 flex-1 text-[11px] flex items-center justify-center gap-2 disabled:opacity-50"
+                className="ds-btn ds-btn-secondary flex-1 !text-[9px] disabled:opacity-30"
               >
-                <Copy className="w-3 h-3" /> Banner
+                CPY_BANNER
               </button>
             </div>
           </div>
@@ -441,39 +435,42 @@ function HubPage() {
           ].map((item: any) => {
             const Content = (
               <div 
-                className="ds-card p-6 border-border bg-background flex flex-col group hover:border-primary/40 transition-all overflow-hidden relative h-full w-full text-left rounded-xl group-hover/action:-translate-y-1"
+                className="group relative flex flex-col p-6 bg-background border border-white/5 hover:border-primary transition-all overflow-hidden h-full text-left"
                 title={item.desc}
               >
-                <div className="absolute -right-4 -bottom-4 opacity-5 group-hover:opacity-10 transition-opacity">
-                  <item.icon className="w-24 h-24" />
+                <div className="flex justify-between items-start mb-6 relative z-10">
+                   <item.icon className="w-4 h-4 text-primary opacity-50 group-hover:opacity-100 transition-opacity" />
+                   <div className="flex items-center gap-2">
+                     <span className="w-1 h-1 bg-primary/20 group-hover:bg-primary transition-colors" />
+                     <span className="font-mono text-[8px] font-bold uppercase tracking-[0.2em] text-white/20 group-hover:text-white/40">{item.val}</span>
+                   </div>
                 </div>
-                <div className="flex justify-between items-start mb-4 relative z-10">
-                   <item.icon className="w-5 h-5 text-primary" />
-                   <span className="font-sans text-[10px] font-bold uppercase tracking-wider text-foreground-muted/50">{item.val}</span>
+                <div className="relative z-10 space-y-2">
+                  <span className="font-display text-[11px] font-black text-white uppercase tracking-[0.2em] block">{item.label}</span>
+                  <span className="text-[9px] text-white/20 font-mono uppercase tracking-[0.1em] block">{item.desc}</span>
                 </div>
-                <div className="relative z-10">
-                  <span className="font-sans text-sm font-bold text-foreground uppercase block">{item.label}</span>
-                  <span className="text-[11px] text-foreground-muted font-sans font-medium">{item.desc}</span>
-                </div>
+                
+                {/* Micro-detail grid pattern bg on hover */}
+                <div className="absolute inset-0 opacity-0 group-hover:opacity-[0.02] transition-opacity pointer-events-none" 
+                     style={{ backgroundImage: 'radial-gradient(var(--color-primary) 1px, transparent 1px)', backgroundSize: '12px 12px' }} 
+                />
               </div>
-
             );
 
             if (item.link) {
               return (
-                <Link to={item.link} key={item.label} className="block transition-all group/action">
+                <Link to={item.link} key={item.label} className="block group/action">
                   {Content}
                 </Link>
               );
             }
 
             return (
-              <button key={item.label} onClick={item.onClick} className="block transition-all group/action">
+              <button key={item.label} onClick={item.onClick} className="block group/action">
                 {Content}
               </button>
             );
           })}
-
         </div>
       </section>
 
@@ -481,13 +478,13 @@ function HubPage() {
       <div className="grid grid-cols-1 lg:grid-cols-[1fr_350px] gap-8">
         <div className="space-y-8">
           {/* User Bio and Security Info */}
-          <section className="ds-card p-8 border-border bg-card/30 rounded-xl space-y-8">
+          <section className="bg-background border border-white/5 p-8 space-y-12">
             <div>
-              <div className="flex items-center gap-2 mb-4">
-                <UserRound className="w-3.5 h-3.5 text-primary" />
-                <h3 className="font-sans text-xs font-bold uppercase tracking-wider text-foreground">Informações da Conta</h3>
+              <div className="flex items-center gap-4 mb-8">
+                <div className="w-1.5 h-1.5 bg-primary" />
+                <h3 className="font-display text-[10px] font-bold uppercase tracking-[0.4em] text-white/40">USER_PROFILE_DATA</h3>
               </div>
-              <div className="p-4 bg-background border border-border rounded-lg font-sans text-xs text-foreground-muted leading-relaxed min-h-[60px] whitespace-pre-wrap break-words prose prose-invert prose-xs max-w-none">
+              <div className="p-6 bg-white/[0.02] border-l border-primary/30 font-mono text-[10px] text-white/30 uppercase tracking-[0.1em] leading-relaxed whitespace-pre-wrap break-words">
                 {loading ? (
                   <Skeleton className="h-4 w-full" />
                 ) : bio ? (
@@ -500,27 +497,25 @@ function HubPage() {
                                .replace(/<a?:\w+:(\d+)>/g, (match, id) => `<img src="https://cdn.discordapp.com/emojis/${id}.png?size=24" class="inline-block h-5 w-5 mx-0.5 align-middle" alt="" />`)
                   }} />
                 ) : (
-                  <span className="italic">Sem biografia definida.</span>
+                  <span className="opacity-30 italic">BIO_UNDEFINED.</span>
                 )}
               </div>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-12 gap-y-10">
               {[
-                { label: "E-mail", val: user?.email || "N/A", icon: Mail, mask: true },
-                { label: "Telefone", val: user?.phone || "Não Vinculado", icon: Phone, mask: user?.phone ? true : false },
-                { label: "MFA / 2FA", val: user?.mfa_enabled ? "Ativado" : "Desativado", icon: Lock, alert: !user?.mfa_enabled },
-                { label: "Criado em", val: user?.id ? getDiscordCreationDate(user.id).toLocaleDateString('pt-BR') : "N/A", icon: Calendar },
-                { label: "Idade da Conta", val: user?.id ? formatDiscordAccountAge(user.id) : "N/A", icon: History },
+                { label: "MAIL_ADDR", val: user?.email || "N/A", icon: Mail, mask: true },
+                { label: "PHONE_LINK", val: user?.phone || "NOT_VINCULATED", icon: Phone, mask: user?.phone ? true : false },
+                { label: "AUTH_MFA", val: user?.mfa_enabled ? "ENABLED" : "DISABLED", icon: Lock, alert: !user?.mfa_enabled },
+                { label: "STAMP_GEN", val: user?.id ? getDiscordCreationDate(user.id).toLocaleDateString('pt-BR') : "N/A", icon: Calendar },
+                { label: "ACC_AGE", val: user?.id ? formatDiscordAccountAge(user.id) : "N/A", icon: History },
               ].map(info => (
-                <div key={info.label} className="flex gap-4 items-center group/info">
-                  <div className={cn("w-10 h-10 flex items-center justify-center border border-border bg-background rounded-lg", info.alert && "text-primary")}>
-                    <info.icon className="w-4 h-4" />
-                  </div>
+                <div key={info.label} className="flex gap-6 items-start group/info">
+                  <info.icon className={cn("w-4 h-4 mt-0.5", info.alert ? "text-primary" : "text-white/20 group-hover/info:text-white/40 transition-colors")} />
                   <div>
-                    <div className="text-[10px] font-bold uppercase tracking-wider text-foreground-muted/50 mb-1">{info.label}</div>
+                    <div className="text-[8px] font-black uppercase tracking-[0.3em] text-white/10 mb-2">{info.label}</div>
                     <div className={cn(
-                      "font-sans text-[13px] font-semibold text-foreground transition-all duration-300", 
+                      "font-mono text-[11px] font-bold text-white/40 transition-all duration-300", 
                       info.alert && "text-primary",
                       info.mask && "blur-[4px] group-hover/info:blur-0 select-none cursor-help"
                     )}>
@@ -538,54 +533,52 @@ function HubPage() {
 
         {/* Sidebar: Premium Stats & Plan */}
         <aside className="space-y-8">
-          <section className="ds-card !p-8 border-primary/20 bg-primary/5 relative overflow-hidden group rounded-xl">
-            <div className="absolute -right-8 -top-8 opacity-5 rotate-12 group-hover:scale-110 transition-transform duration-700">
-              <Sparkles className="w-32 h-32 text-primary" />
-            </div>
-            
-            <div className="relative z-10 space-y-6">
-              <div className="flex items-center gap-2 text-primary">
-                <ShieldCheck className="w-4 h-4" />
-                <span className="font-sans text-[10px] font-bold uppercase tracking-widest">Spectre Tier</span>
+          <section className="bg-primary/5 border border-primary/20 p-8 group relative overflow-hidden">
+            <div className="relative z-10 space-y-10">
+              <div className="flex items-center gap-3">
+                <div className="w-1 h-1 bg-primary rounded-full animate-ping" />
+                <span className="font-display text-[9px] font-black text-primary uppercase tracking-[0.4em]">TIER_LEVEL_ACCESS</span>
               </div>
               
-              <div className="space-y-2">
-                <div className="text-[10px] font-bold uppercase tracking-wider text-foreground-muted/50">Plano Atual</div>
-                <div className="font-display text-3xl text-foreground tracking-tight uppercase leading-none">
-                  {loading ? <Skeleton className="h-8 w-24" /> : plan.toUpperCase()}
+              <div className="space-y-4">
+                <div className="text-[8px] font-black uppercase tracking-[0.3em] text-primary/40">ACTIVE_PLAN</div>
+                <div className="font-display text-4xl text-white tracking-tighter uppercase leading-none">
+                  {loading ? <Skeleton className="h-8 w-24" /> : plan}
                 </div>
               </div>
 
-              <div className="pt-4 border-t border-white/10 space-y-4">
+              <div className="pt-6 border-t border-primary/10 space-y-4">
                 <div className="flex justify-between items-center">
-                  <span className="text-[10px] font-bold uppercase tracking-wider text-foreground-muted/50">Status</span>
-                  <span className="font-mono text-[10px] font-bold text-primary shadow-[0_0_12px_rgba(255,0,85,0.4)]">ONLINE</span>
+                  <span className="text-[9px] font-bold uppercase tracking-[0.2em] text-white/20">NETWORK_STATUS</span>
+                  <span className="font-mono text-[9px] font-black text-primary tracking-widest">ONLINE</span>
                 </div>
                 <div className="flex justify-between items-center">
-                  <span className="text-[10px] font-bold uppercase tracking-wider text-foreground-muted/50">Encriptação</span>
-                  <span className="font-mono text-[10px] font-bold text-foreground">AES-256</span>
-                </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-[10px] font-bold uppercase tracking-wider text-foreground-muted/50">Prioridade</span>
-                  <span className="font-mono text-[10px] font-bold text-foreground">NÍVEL 4</span>
+                  <span className="text-[9px] font-bold uppercase tracking-[0.2em] text-white/20">ENCRYPTION</span>
+                  <span className="font-mono text-[9px] font-bold text-white/40 tracking-widest">AES_256</span>
                 </div>
               </div>
 
-              <Link to="/resgatar" className="ds-btn ds-btn-primary w-full text-center !py-3">Acessar Loja</Link>
+              <Link to="/resgatar" className="ds-btn ds-btn-primary w-full !text-[9px] !h-12">
+                OPEN_VAULT_SHOP
+              </Link>
+            </div>
+            
+            <div className="absolute -bottom-8 -right-8 opacity-[0.03] group-hover:opacity-[0.08] transition-opacity">
+              <ShieldCheck className="w-32 h-32" />
             </div>
           </section>
 
-          <section className="ds-card !p-6 border-border bg-card/30 rounded-xl space-y-4">
-            <h4 className="font-sans text-[10px] font-bold uppercase tracking-wider text-foreground-muted/50">Atividade Recente</h4>
-            <div className="space-y-3">
+          <section className="bg-background border border-white/5 p-6 space-y-6">
+            <h4 className="font-display text-[9px] font-black uppercase tracking-[0.4em] text-white/10">RECENT_OPS</h4>
+            <div className="space-y-4">
               {[
-                { label: "Sniper Calibrado", time: "2m atrás" },
-                { label: "Orbs Sincronizados", time: "15m atrás" },
-                { label: "Login Realizado", time: "1h atrás" },
+                { label: "SNIPER_CALIBRATED", time: "2M_AGO" },
+                { label: "ORBS_SYNC", time: "15M_AGO" },
+                { label: "LOG_ESTABLISHED", time: "1H_AGO" },
               ].map((act, i) => (
-                <div key={i} className="flex justify-between items-center border-b border-border/20 pb-2 last:border-0 last:pb-0">
-                  <span className="text-[11px] text-foreground-muted font-medium uppercase tracking-wider">{act.label}</span>
-                  <span className="text-[9px] font-mono font-bold text-foreground-muted/30 uppercase">{act.time}</span>
+                <div key={i} className="flex justify-between items-center border-b border-white/5 pb-3 last:border-0 last:pb-0">
+                  <span className="text-[9px] text-white/30 font-mono uppercase tracking-[0.1em]">{act.label}</span>
+                  <span className="text-[8px] font-mono font-black text-white/10 uppercase tracking-widest">{act.time}</span>
                 </div>
               ))}
             </div>

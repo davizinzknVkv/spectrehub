@@ -386,22 +386,22 @@ function Index() {
         
         <ReasonsSection reasons={REASONS} />
         
-        <div id="produtos" className="py-24 sm:py-32 overflow-hidden bg-background relative border-y border-border/5">
-          <div className="container mx-auto px-6 lg:px-12 mb-16">
-            <div className="max-w-3xl">
-              <h2 className="font-display text-4xl sm:text-6xl text-white uppercase leading-none tracking-tighter mb-4">
-                Explore os <span className="text-primary">Sistemas</span>
+        <div id="produtos" className="py-32 overflow-hidden bg-background relative border-y border-white/5">
+          <div className="mx-auto px-6 md:px-12 mb-16">
+            <div className="max-w-xl">
+              <div className="font-display text-[9px] tracking-[0.5em] text-white/20 uppercase mb-6 flex items-center gap-4">
+                 <div className="w-12 h-px bg-white/5" />
+                 DEPLOYED_MODULES
+              </div>
+              <h2 className="font-display text-4xl sm:text-6xl text-white uppercase leading-tight tracking-tighter">
+                Explore a <br/><span className="text-primary italic">Infraestrutura.</span>
               </h2>
-              <p className="text-foreground-muted font-sans text-lg max-w-xl">
-                Tecnologia de ponta em cada módulo. Descubra o poder da automação industrial.
-              </p>
             </div>
           </div>
           <LenticularCarousel items={PRODUCTS} />
         </div>
 
-        <div id="como-funciona" className="py-24 sm:py-32 bg-background-secondary/30 relative">
-          <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-[0.03] pointer-events-none" />
+        <div id="como-funciona" className="relative">
           <FreeSignup guildInvite={DISCORD_INVITE} />
         </div>
 

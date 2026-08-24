@@ -138,132 +138,136 @@ function NicksGunPage() {
       />
 
       <div className="grid grid-cols-1 lg:grid-cols-[1fr_350px] gap-8">
-        <div className="space-y-6">
-           <div className="ds-card p-8 border-white/5 bg-white/[0.02]">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 mb-8">
-                 <div>
-                    <label className="font-display text-[9px] uppercase tracking-widest text-white/30 italic block mb-3">Tamanho</label>
-                    <div className="grid grid-cols-2 gap-px bg-white/5 p-1 border border-white/5">
+        <div className="space-y-8">
+           <div className="bg-[#030303] border border-white/5 p-10 space-y-10 relative">
+              <div className="absolute top-0 right-0 w-1 h-1 bg-primary" />
+              
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-12">
+                 <div className="space-y-4">
+                    <label className="font-mono text-[8px] uppercase tracking-[0.4em] text-white/20 block">SNIPER_LENGTH_CFG</label>
+                    <div className="grid grid-cols-2 gap-px bg-white/5 border border-white/5">
                        {[2, 3].map(n => (
                           <button 
                             key={n} 
                             onClick={() => setLength(n as 2|3)}
                             disabled={running}
-                            className={`py-2 font-display text-[10px] uppercase italic tracking-widest transition-all ${length === n ? 'bg-primary text-white' : 'text-white/30 hover:text-white'}`}
+                            className={`py-4 font-display text-[10px] uppercase tracking-[0.3em] transition-all ${length === n ? 'bg-primary text-white' : 'text-white/20 hover:text-white/60'}`}
                           >
-                             {n} Letras
+                             {n} LETTERS
                           </button>
                        ))}
                     </div>
                  </div>
-                 <div>
-                    <label className="font-display text-[9px] uppercase tracking-widest text-white/30 italic block mb-3">Velocidade</label>
+                 <div className="space-y-4">
+                    <label className="font-mono text-[8px] uppercase tracking-[0.4em] text-white/20 block">THROTTLING_LATENCY</label>
                     <select 
                        value={concurrency} 
                        onChange={(e) => setConcurrency(Number(e.target.value))}
                        disabled={running}
-                       className="w-full bg-white/[0.02] border border-white/5 py-2.5 px-4 font-display text-[10px] text-white italic uppercase tracking-widest outline-none focus:border-primary/20"
+                       className="w-full bg-white/[0.02] border border-white/5 py-4 px-6 font-display text-[10px] text-white uppercase tracking-[0.2em] outline-none focus:border-primary/30 appearance-none"
                     >
-                       <option value={1} className="bg-obsidian">1x - Silencioso</option>
-                       <option value={4} className="bg-obsidian">4x - Padrão</option>
-                       <option value={8} className="bg-obsidian">8x - Agressivo</option>
+                       <option value={1} className="bg-obsidian">1X // STEALTH_MODE</option>
+                       <option value={4} className="bg-obsidian">4X // BALANCED_RUN</option>
+                       <option value={8} className="bg-obsidian">8X // AGGRESSIVE_OVERRIDE</option>
                     </select>
                  </div>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
-                 <div>
-                    <label className="font-display text-[9px] uppercase tracking-widest text-white/30 italic block mb-3">Caracteres</label>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-12">
+                 <div className="space-y-4">
+                    <label className="font-mono text-[8px] uppercase tracking-[0.4em] text-white/20 block">CHARSET_ENCODING</label>
                     <select 
                        value={charset} 
                        onChange={(e) => setCharset(e.target.value as Charset)}
                        disabled={running}
-                       className="w-full bg-white/[0.02] border border-white/5 py-2.5 px-4 font-display text-[10px] text-white italic uppercase tracking-widest outline-none focus:border-primary/20"
+                       className="w-full bg-white/[0.02] border border-white/5 py-4 px-6 font-display text-[10px] text-white uppercase tracking-[0.2em] outline-none focus:border-primary/30 appearance-none"
                     >
-                       <option value="letters" className="bg-obsidian">Apenas letras (A-Z)</option>
-                       <option value="alnum" className="bg-obsidian">Letras + Números</option>
-                       <option value="full" className="bg-obsidian">Full (A-Z, 0-9, _, .)</option>
+                       <option value="letters" className="bg-obsidian">LETTERS_ONLY (A-Z)</option>
+                       <option value="alnum" className="bg-obsidian">ALPHANUMERIC (A-Z, 0-9)</option>
+                       <option value="full" className="bg-obsidian">EXTENDED_SET (A-Z, 0-9, _, .)</option>
                     </select>
                  </div>
-                 <div>
-                    <label className="font-display text-[9px] uppercase tracking-widest text-white/30 italic block mb-3">Prefixo Fixo</label>
+                 <div className="space-y-4">
+                    <label className="font-mono text-[8px] uppercase tracking-[0.4em] text-white/20 block">PREFIX_IDENTIFIER</label>
                     <input 
                        value={startsWith}
                        onChange={(e) => setStartsWith(e.target.value.toLowerCase())}
                        disabled={running}
-                       placeholder="OPCIONAL..."
-                       className="w-full bg-white/[0.02] border border-white/5 py-2.5 px-4 font-display text-[10px] text-white italic uppercase tracking-widest outline-none focus:border-primary/20"
+                       placeholder="NULL..."
+                       className="w-full bg-white/[0.02] border border-white/5 py-4 px-6 font-display text-[10px] text-white uppercase tracking-[0.2em] outline-none focus:border-primary/30 placeholder:text-white/5"
                     />
                  </div>
               </div>
 
-              <div className="mt-8 pt-8 border-t border-white/5 flex items-center justify-between">
-                 <div className="font-display text-[9px] uppercase tracking-widest text-white/20 italic">
-                    ~{estimate.toLocaleString()} candidatos mapeados
+              <div className="pt-10 border-t border-white/5 flex items-center justify-between">
+                 <div className="font-mono text-[8px] uppercase tracking-[0.4em] text-white/10">
+                    MAPPED_CANDIDATES: {estimate.toLocaleString()}
                  </div>
                  {!running ? (
-                    <button onClick={start} className="ds-btn ds-btn-primary !px-10">Deploy Sniper</button>
+                    <button onClick={start} className="ds-btn ds-btn-primary !px-12 !h-14">DEPLOY_SNIPER</button>
                  ) : (
-                    <button onClick={stop} className="ds-btn ds-btn-secondary !text-rose-500 border-rose-500/20 !px-10">Abortar</button>
+                    <button onClick={stop} className="ds-btn ds-btn-secondary !text-rose-500 border-rose-500/20 !px-12 !h-14">ABORT_SEQUENCE</button>
                  )}
               </div>
            </div>
 
            {(running || total > 0) && (
-              <div className="ds-card p-8 border-primary/20 bg-primary/5 space-y-6">
-                 <div className="flex justify-between items-center">
-                    <div className="space-y-1">
-                        <div className="font-display text-[9px] uppercase tracking-widest text-primary italic font-bold">Monitoramento de Varredura</div>
-                        <div className="font-mono text-[9px] text-white/40 uppercase">{running ? `Testando: ${current}` : 'Finalizado'}</div>
-                    </div>
-                    <div className="text-right">
-                        <div className="font-display text-lg text-white italic">{Math.round((checked/total)*100)}%</div>
-                        <div className="font-mono text-[8px] text-white/40 uppercase tracking-widest">{checked} / {total}</div>
-                    </div>
-                 </div>
-                 <div className="h-1 bg-white/5 overflow-hidden">
-                    <div 
-                      className="h-full bg-primary transition-all duration-300" 
-                      style={{ width: `${(checked/total)*100}%` }} 
-                    />
-                 </div>
-              </div>
+               <div className="bg-[#030303] border border-primary/20 p-10 space-y-8">
+                  <div className="flex justify-between items-end">
+                     <div className="space-y-3">
+                        <div className="font-mono text-[8px] uppercase tracking-[0.5em] text-primary">SCAN_MONITOR_ACTIVE</div>
+                        <div className="font-display text-base text-white uppercase tracking-tighter">{running ? `TESTING_NODE: ${current}` : 'SEQUENCE_HALTED'}</div>
+                     </div>
+                     <div className="text-right">
+                        <div className="font-display text-3xl text-white tracking-tighter leading-none">{Math.round((checked/total)*100)}%</div>
+                        <div className="font-mono text-[7px] text-white/20 uppercase tracking-[0.4em] mt-2">{checked} / {total} TOTAL_NODES</div>
+                     </div>
+                  </div>
+                  <div className="h-0.5 bg-white/5 relative overflow-hidden">
+                     <div 
+                       className="h-full bg-primary transition-all duration-500 shadow-[0_0_10px_#4DA09E]" 
+                       style={{ width: `${(checked/total)*100}%` }} 
+                     />
+                  </div>
+               </div>
            )}
 
            <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
               {results.map(r => (
-                 <div key={r.username} className="ds-card p-4 border-emerald-500/20 bg-emerald-500/5 flex justify-between items-center group">
-                    <div>
-                        <div className="font-display text-sm text-white uppercase italic tracking-tighter">@{r.username}</div>
-                        <div className="font-display text-[8px] text-emerald-500 uppercase tracking-widest italic">Disponível</div>
-                    </div>
-                    <div className="flex gap-2">
-                       <button onClick={() => copy(r.username)} className="p-2 text-white/20 hover:text-white transition-colors"><Copy className="w-4 h-4" /></button>
-                       <a href="https://discord.com/register" target="_blank" className="p-2 text-white/20 hover:text-emerald-500 transition-colors"><ExternalLink className="w-4 h-4" /></a>
-                    </div>
-                 </div>
+                  <div key={r.username} className="bg-[#030303] border border-emerald-500/20 p-6 flex justify-between items-center group hover:border-emerald-500/50 transition-all duration-500">
+                     <div>
+                        <div className="font-display text-base text-white uppercase tracking-tighter">@{r.username}</div>
+                        <div className="font-mono text-[7px] text-emerald-500 uppercase tracking-[0.4em] mt-2">AVAIL_NODE_IDENTIFIED</div>
+                     </div>
+                     <div className="flex gap-4">
+                        <button onClick={() => copy(r.username)} className="text-white/10 hover:text-white transition-colors"><Copy className="w-4 h-4" /></button>
+                        <a href="https://discord.com/register" target="_blank" className="text-white/10 hover:text-emerald-500 transition-colors"><ExternalLink className="w-4 h-4" /></a>
+                     </div>
+                  </div>
               ))}
            </div>
         </div>
 
         <aside className="space-y-6">
-           <div className="ds-card p-6 border-white/5 bg-white/[0.02] space-y-4">
-              <div className="font-display text-[9px] uppercase tracking-widest text-white/30 italic">Insights</div>
-              <div className="space-y-4">
-                 <div className="flex justify-between border-b border-white/[0.02] pb-2">
-                    <span className="font-display text-[9px] text-white/20 italic uppercase tracking-widest">Encontrados</span>
+           <div className="bg-[#030303] border border-white/5 p-8 space-y-8">
+              <div className="font-mono text-[8px] uppercase tracking-[0.5em] text-white/20">SESSION_INSIGHTS</div>
+              <div className="space-y-6">
+                 <div className="flex justify-between border-b border-white/5 pb-4">
+                    <span className="font-display text-[10px] text-white/20 uppercase tracking-widest">DETECTED_NODES</span>
                     <span className="font-mono text-xs text-white">{availableCount}</span>
                  </div>
-                 <div className="flex justify-between border-b border-white/[0.02] pb-2">
-                    <span className="font-display text-[9px] text-white/20 italic uppercase tracking-widest">Latência API</span>
-                    <span className="font-mono text-xs text-emerald-500">0.05ms</span>
+                 <div className="flex justify-between border-b border-white/5 pb-4">
+                    <span className="font-display text-[10px] text-white/20 uppercase tracking-widest">API_LATENCY</span>
+                    <span className="font-mono text-xs text-emerald-500">0.05MS</span>
                  </div>
               </div>
            </div>
 
-           <div className="ds-card p-6 border-white/5 bg-white/[0.02] space-y-4">
-              <div className="font-display text-[9px] uppercase tracking-widest text-white/30 italic text-rose-500 font-bold">Protocolo de Risco</div>
-              <p className="text-[10px] text-white/40 leading-relaxed font-sans italic">Nicks de 2 e 3 letras são monitorados globalmente. Se encontrar um, realize o registro imediato antes que o nome seja reivindicado por bots externos.</p>
+           <div className="bg-[#030303] border border-rose-500/10 p-8 space-y-6">
+              <div className="font-mono text-[8px] uppercase tracking-[0.5em] text-rose-500/50">RISK_PROTOCOL</div>
+              <p className="text-[10px] text-white/20 leading-relaxed font-sans uppercase tracking-[0.1em]">
+                 IDENTIDADES RARA SÃO MONITORADAS GLOBALMENTE. REIVINDIQUE O NODO IMEDIATAMENTE APÓS A DETECÇÃO PARA EVITAR INTERCEPTAÇÃO POR BOTS EXTERNOS.
+              </p>
            </div>
         </aside>
       </div>

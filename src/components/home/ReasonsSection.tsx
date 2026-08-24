@@ -12,52 +12,48 @@ export function ReasonsSection({ reasons }: ReasonsSectionProps) {
   const { t } = useTranslation();
 
   return (
-    <section id="recursos" className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
-      <div className="grid grid-cols-1 lg:grid-cols-[450px_1fr] gap-20 items-start">
-        <Reveal>
-          <div className="font-display text-[10px] tracking-[0.3em] text-primary uppercase mb-4 flex items-center gap-2">
-             <span className="w-8 h-px bg-primary/30" />
+    <section id="recursos" className="mx-auto max-w-7xl px-6 py-32 sm:px-12">
+      <div className="flex flex-col lg:flex-row gap-24 items-start">
+        <Reveal className="flex-1 lg:max-w-md sticky top-32">
+          <div className="font-display text-[9px] tracking-[0.5em] text-primary uppercase mb-6 flex items-center gap-4">
+             <div className="w-12 h-px bg-primary" />
              {t('reasons.badge')}
           </div>
-          <h2 className="font-display text-[2rem] md:text-[3.5rem] leading-[0.9] text-white uppercase italic tracking-tighter mb-6">
+          <h2 className="font-display text-[3.5rem] md:text-[5rem] leading-[0.85] text-white uppercase tracking-tighter mb-10">
             {t('reasons.title')} <br />
-            <span className="text-white/30 text-[1.5rem] md:text-[2.5rem]">{t('reasons.subtitle')}</span>
+            <span className="text-primary italic opacity-90">{t('reasons.subtitle')}</span>
           </h2>
-          <p className="text-white/40 text-xs leading-relaxed uppercase tracking-widest border-l border-primary/30 pl-6">
-            {t('reasons.description')}
-          </p>
-          
-          <div className="mt-12 opacity-20 pointer-events-none select-none hidden lg:block">
-            <svg viewBox="0 0 100 60" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-48">
-              <path 
-                d="M5 5L95 25L5 45L95 55" 
-                stroke="currentColor" 
-                strokeWidth="1" 
-                strokeLinecap="round" 
-                strokeLinejoin="round" 
-                className="text-primary animate-[dash_5s_linear_infinite]"
-                style={{ strokeDasharray: '200', strokeDashoffset: '200' }}
-              />
-            </svg>
+          <div className="border-l border-white/10 pl-8 space-y-8">
+            <p className="text-white/40 text-[11px] leading-relaxed uppercase tracking-[0.2em]">
+              {t('reasons.description')}
+            </p>
+            <div className="font-mono text-[8px] text-primary/30 uppercase tracking-[0.4em]">
+              [ PROTOCOL_ESTABLISHED_V2 ]
+            </div>
           </div>
-
         </Reveal>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 border border-white/10">
+        <div className="flex-1 w-full space-y-1">
           {reasons.map((r: Reason, i: number) => (
-            <Reveal key={r.title} delay={i * 100}>
-              <motion.div 
-                whileHover={{ backgroundColor: "rgba(255, 255, 255, 0.02)" }}
-                className={`p-10 h-full transition-all duration-500 group relative border-white/10 ${i === 0 ? 'border-b sm:border-r' : i === 1 ? 'border-b' : i === 2 ? 'sm:border-r' : ''}`}
-              >
-                <div className="mb-8 w-12 h-12 border border-white/10 flex items-center justify-center text-white group-hover:border-primary transition-all duration-500 relative z-10 bg-[#0A0A0A]">
-                  <r.icon className="w-5 h-5" />
+            <Reveal key={r.title} delay={i * 50} className="group">
+              <div className="flex items-start gap-10 p-10 bg-[#030303] border border-white/5 transition-all duration-500 hover:border-primary/30 hover:bg-white/[0.01]">
+                <div className="font-display text-5xl text-white/[0.03] group-hover:text-primary transition-colors duration-700 italic">
+                  {(i + 1).toString().padStart(2, '0')}
                 </div>
-                <h3 className="font-display text-lg text-white uppercase italic mb-4 relative z-10">{t(`reasons.items.${i}.title`)}</h3>
-                <p className="font-sans text-[11px] text-white/40 leading-relaxed uppercase tracking-wider relative z-10 max-w-[280px]">
-                  {t(`reasons.items.${i}.desc`)}
-                </p>
-              </motion.div>
+                <div className="space-y-4">
+                  <div className="flex items-center gap-4">
+                    <r.icon className="w-4 h-4 text-primary opacity-50 group-hover:opacity-100 transition-opacity" />
+                    <h3 className="font-display text-2xl text-white uppercase tracking-tighter">{t(`reasons.items.${i}.title`)}</h3>
+                  </div>
+                  <p className="font-sans text-[11px] text-white/30 leading-relaxed uppercase tracking-[0.1em] max-w-lg group-hover:text-white/50 transition-colors">
+                    {t(`reasons.items.${i}.desc`)}
+                  </p>
+                  <div className="pt-4 flex items-center gap-2">
+                    <div className="w-8 h-px bg-white/5 group-hover:w-12 group-hover:bg-primary/30 transition-all" />
+                    <span className="font-mono text-[7px] text-white/10 uppercase tracking-[0.3em]">SYS_READY</span>
+                  </div>
+                </div>
+              </div>
             </Reveal>
           ))}
         </div>

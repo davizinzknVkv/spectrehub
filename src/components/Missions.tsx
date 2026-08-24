@@ -20,49 +20,47 @@ export function PlanBanner({
   cooldownLeft: number;
 }) {
   return (
-    <div className="relative overflow-hidden rounded-xl border border-border bg-card/30 p-6 sm:p-8 font-sans">
-      <div className="flex flex-col gap-8 sm:flex-row sm:items-center sm:justify-between relative z-10">
-        <div className="flex items-center gap-12 sm:gap-16">
-          <div className="space-y-1">
-            <div className="text-[10px] font-bold uppercase tracking-wider text-foreground-muted/50">Plano Ativo</div>
-            <div className="text-xl font-display uppercase tracking-tight text-foreground flex items-center gap-2">
-              <ShieldCheck className="w-4 h-4 text-primary" />
+    <div className="bg-[#030303] border border-white/5 p-10 font-mono relative">
+      <div className="absolute top-0 left-0 w-1 h-1 bg-white/20" />
+      <div className="flex flex-col gap-10 sm:flex-row sm:items-end sm:justify-between relative z-10">
+        <div className="flex items-center gap-16">
+          <div className="space-y-3">
+            <div className="text-[8px] uppercase tracking-[0.4em] text-white/10">ACTIVE_LICENSE</div>
+            <div className="text-2xl font-display uppercase tracking-tighter text-white flex items-center gap-3">
+              <ShieldCheck className="w-5 h-5 text-primary opacity-50" />
               {limits.label}
             </div>
           </div>
           
-          <div className="space-y-1">
-            <div className="text-[10px] font-bold uppercase tracking-wider text-foreground-muted/50">Restantes Hoje</div>
-            <div className="flex items-center gap-2">
-              <span className="text-3xl font-display text-foreground">{remaining === Infinity ? "∞" : remaining}</span>
+          <div className="space-y-3">
+            <div className="text-[8px] uppercase tracking-[0.4em] text-white/10">DAILY_ALLOWANCE</div>
+            <div className="flex items-center gap-3">
+              <span className="text-3xl font-display text-white tracking-tighter">{remaining === Infinity ? "UNCAPPED" : remaining}</span>
             </div>
           </div>
         </div>
 
-        <div className="flex flex-col sm:items-end">
-          <div className="text-[10px] font-bold uppercase tracking-wider text-foreground-muted/50">
-            {cooldownText ? "Sistema em Resfriamento" : "Status do Terminal"}
+        <div className="flex flex-col sm:items-end space-y-3">
+          <div className="text-[8px] uppercase tracking-[0.4em] text-white/10">
+            {cooldownText ? "COOLING_PROTOCOL" : "TERMINAL_STATUS"}
           </div>
           <div className={cn(
-            "text-2xl font-display uppercase tracking-tight",
+            "text-2xl font-display uppercase tracking-tighter",
             cooldownText ? "text-primary" : "text-emerald-400"
           )}>
-            {cooldownText || "Operação Liberada"}
+            {cooldownText || "READY_TO_DEPLOY"}
           </div>
         </div>
       </div>
 
       {cooldownLeft > 0 && (
-        <div className="absolute bottom-0 left-0 h-1 bg-primary/20 w-full">
+        <div className="absolute bottom-0 left-0 h-0.5 bg-white/5 w-full">
            <div 
-             className="h-full bg-primary shadow-[0_0_12px_rgba(255,0,85,0.4)] transition-[width] duration-1000"
+             className="h-full bg-primary shadow-[0_0_10px_#4DA09E] transition-[width] duration-1000"
              style={{ width: `${Math.min(100, (cooldownLeft / limits.cooldownMs) * 100)}%` }} 
            />
         </div>
       )}
-      
-      {/* Decorative Glow */}
-      <div className="absolute -top-24 -right-24 w-48 h-48 bg-primary/5 rounded-full blur-[80px] pointer-events-none" />
     </div>
   );
 }
@@ -89,84 +87,89 @@ export function MissionCard({
   const p = progress ? Math.min(100, (progress.current / progress.total) * 100) : (isCompleted ? 100 : 0);
 
   return (
-    <Card className={cn(
-      "group relative flex min-h-[180px] flex-col justify-between transition-all duration-500 !p-6 border-border bg-card/30 hover:border-primary/20 h-full rounded-xl overflow-hidden",
-      active && "border-primary/40 bg-primary/[0.02]",
-      isCompleted && !active && "border-emerald-500/30 bg-emerald-500/[0.02]"
+    <div className={cn(
+      "group relative flex min-h-[220px] flex-col justify-between transition-all duration-500 p-8 border border-white/5 bg-[#030303] hover:border-primary/20",
+      active && "border-primary/40",
+      isCompleted && !active && "border-emerald-500/20"
     )}>
       {quest.imageUrl && (
-        <div className="absolute inset-0 z-0 overflow-hidden opacity-10 transition-opacity duration-700 group-hover:opacity-20">
+        <div className="absolute inset-0 z-0 overflow-hidden opacity-5 transition-opacity duration-700 group-hover:opacity-10">
           <img
             src={quest.imageUrl}
             alt=""
             className="h-full w-full object-cover grayscale transition-all duration-700 group-hover:grayscale-0 group-hover:scale-110"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent" />
+          <div className="absolute inset-0 bg-[#030303]/80" />
         </div>
       )}
 
       {active && (
-        <div className="absolute right-4 top-4 z-10">
-          <Loader2 className="h-4 w-4 animate-spin text-primary" />
+        <div className="absolute right-6 top-6 z-10">
+          <Loader2 className="h-3.5 w-3.5 animate-spin text-primary" />
         </div>
       )}
 
-      <div className="relative z-10">
+      <div className="relative z-10 space-y-4">
         <div className="flex items-start justify-between">
-          <div className="font-mono text-[9px] text-foreground-muted/50 font-bold uppercase tracking-widest">
-            ID_{quest.questId.slice(0, 8)}
+          <div className="font-mono text-[8px] text-white/10 uppercase tracking-[0.4em]">
+            NODE_{quest.questId.slice(0, 8)}
           </div>
-          <div className="flex gap-2">
-            {isClaimed && <Badge className="!bg-emerald-500/10 !text-emerald-400 !border-emerald-500/20 !text-[8px]">Resgatado</Badge>}
-            {isCompleted && !isClaimed && <Badge className="!bg-primary/10 !text-primary !border-primary/20 !text-[8px]">Pronto</Badge>}
-            {isOrb && <Sparkles className="h-4 w-4 text-amber-500 fill-amber-500/20" />}
+          <div className="flex gap-3">
+            {isClaimed && <Badge className="!bg-emerald-500/10 !text-emerald-400 !border-emerald-500/20 !text-[7px] uppercase tracking-widest rounded-none px-2">CLAIMED</Badge>}
+            {isCompleted && !isClaimed && <Badge className="!bg-primary/10 !text-primary !border-primary/20 !text-[7px] uppercase tracking-widest rounded-none px-2">VERIFIED</Badge>}
+            {isOrb && <Sparkles className="h-3.5 w-3.5 text-amber-500/40" />}
           </div>
         </div>
-        <h3 className="mt-4 line-clamp-2 text-sm font-display uppercase tracking-tight text-foreground group-hover:text-primary transition-colors min-h-[2.4em] flex items-center leading-tight">
+        <h3 className="text-sm font-display uppercase tracking-tight text-white group-hover:text-primary transition-colors leading-tight">
           {quest.questName}
         </h3>
-        <p className="mt-2 line-clamp-1 font-sans text-[11px] text-foreground-muted font-semibold uppercase tracking-wider">{quest.rewardText}</p>
+        <p className="font-mono text-[8px] text-white/20 uppercase tracking-[0.2em]">{quest.rewardText}</p>
       </div>
 
-      <div className="relative z-10 mt-6">
+      <div className="relative z-10 mt-10">
         {active ? (
-          <div className="space-y-2">
-            <div className="flex items-center justify-between text-[10px] font-bold uppercase tracking-wider text-primary">
-              <span>Processando Protocolo</span>
+          <div className="space-y-3">
+            <div className="flex items-center justify-between font-mono text-[8px] uppercase tracking-[0.3em] text-primary">
+              <span>PROTOCOL_RUNNING</span>
               <span>{Math.round(p)}%</span>
             </div>
-            <div className="h-1.5 overflow-hidden bg-white/5 rounded-full">
-              <div className="h-full bg-primary shadow-[0_0_8px_rgba(255,0,85,0.4)] transition-all duration-500 rounded-full" style={{ width: `${p}%` }} />
+            <div className="h-0.5 overflow-hidden bg-white/5">
+              <div className="h-full bg-primary shadow-[0_0_8px_#4DA09E] transition-all duration-500" style={{ width: `${p}%` }} />
             </div>
           </div>
         ) : isCompleted ? (
-          <div className="space-y-2">
-             <div className="flex items-center justify-between text-[10px] font-bold uppercase tracking-wider text-emerald-400">
-               <span>Missão Concluída</span>
+          <div className="space-y-3">
+             <div className="flex items-center justify-between font-mono text-[8px] uppercase tracking-[0.3em] text-emerald-400">
+               <span>NODE_VERIFIED</span>
                <span>100%</span>
              </div>
-             <div className="h-1.5 overflow-hidden bg-white/5 rounded-full">
-               <div className="h-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.4)] rounded-full w-full" />
+             <div className="h-0.5 overflow-hidden bg-white/5">
+               <div className="h-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.4)] w-full" />
              </div>
           </div>
         ) : (
-          <Button
-            variant={disabled ? "secondary" : "primary"}
-            size="sm"
-            className="w-full !py-2.5 !text-[11px] font-bold uppercase tracking-wider rounded-lg"
+          <button
             onClick={onExec}
             disabled={disabled}
+            className={cn(
+                "w-full h-12 flex items-center justify-center text-[10px] font-mono uppercase tracking-[0.3em] transition-all border",
+                disabled 
+                  ? "bg-white/5 border-white/5 text-white/10 cursor-not-allowed" 
+                  : "bg-transparent border-white/10 text-white hover:border-primary/40 hover:text-primary"
+            )}
           >
             {gateHint || (
               <>
-                <Play className="mr-2 h-3.5 w-3.5 fill-current" />
-                Iniciar Missão
+                <Play className="mr-3 h-3 w-3 fill-current opacity-50" />
+                EXECUTE_NODE
               </>
             )}
-          </Button>
+          </button>
         )}
       </div>
-    </Card>
+    </div>
+  );
+}
   );
 }
 

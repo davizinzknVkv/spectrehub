@@ -7,10 +7,13 @@ import type { LucideIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 /* ── Card ───────────────────────────────────────────────────────────── */
-export function Card({ className, ...props }: HTMLAttributes<HTMLDivElement>) {
+export function Card({ className, variant = "default", ...props }: HTMLAttributes<HTMLDivElement> & { variant?: "default" | "flat" }) {
   return (
     <div
-      className={cn("ds-card border-border bg-card hover:bg-card-elevated", className)}
+      className={cn(
+        variant === "default" ? "ds-card" : "ds-card-flat",
+        className
+      )}
       {...props}
     />
   );

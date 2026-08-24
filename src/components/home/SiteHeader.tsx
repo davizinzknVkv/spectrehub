@@ -56,220 +56,129 @@ export function SiteHeader({ guildInvite }: SiteHeaderProps) {
   }, []);
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 px-4 py-6 md:px-8">
+    <header className="fixed top-0 left-0 right-0 z-50">
       <div 
-        className={`mx-auto max-w-[1400px] flex items-center justify-between transition-all duration-700 rounded-xl ${
+        className={`mx-auto w-full flex items-center justify-between transition-all duration-500 border-b border-white/5 px-6 md:px-12 py-4 ${
           scrolled 
-            ? "bg-black/60 backdrop-blur-2xl px-6 py-2 border border-white/5 shadow-[0_8px_32px_rgba(0,0,0,0.8)]" 
-            : "bg-transparent px-4 py-4"
+            ? "bg-[#030303]/90 backdrop-blur-md" 
+            : "bg-transparent"
         }`}
       >
         {/* Logo */}
-        <Link to="/" className="flex items-center gap-3 group">
-          <div className="relative w-10 h-10 flex items-center justify-center">
-            <img
-              src={logoAsset.url}
-              alt="SPECTRE"
-              className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500 drop-shadow-[0_0_8px_rgba(77,160,158,0.3)]"
-            />
-          </div>
-          <span className="font-display text-lg tracking-tighter text-white uppercase italic hidden sm:block">
-            Spectre <span className="text-primary">Hub</span>
+        <Link to="/" className="flex items-center gap-3">
+          <img
+            src={logoAsset.url}
+            alt="SPECTRE"
+            className="w-6 h-6 object-contain"
+          />
+          <span className="font-display text-sm tracking-[0.2em] text-white uppercase hidden sm:block">
+            Spectre <span className="text-primary opacity-50">//</span> Hub
           </span>
         </Link>
 
         {/* Desktop Nav */}
-        <div className="hidden md:flex items-center gap-8 flex-1 justify-center max-w-2xl px-8">
-          {/* Search Bar (image-80.png) */}
-          <div className="flex-1 relative group max-w-[300px]">
-            <div className="absolute inset-y-0 left-3 flex items-center pointer-events-none">
-              <Search className="w-3.5 h-3.5 text-white/20 group-hover:text-white/40 transition-colors" />
-            </div>
-            <input 
-              type="text" 
-              placeholder="Buscar" 
-              className="w-full bg-black/40 border border-white/5 py-1.5 pl-9 pr-12 text-[11px] text-white/60 placeholder:text-white/20 focus:outline-none focus:border-primary/30 focus:bg-black/60 transition-all rounded-md"
-            />
-            <div className="absolute inset-y-0 right-2 flex items-center">
-              <span className="text-[9px] text-white/20 border border-white/10 px-1 py-0.5 rounded bg-white/[0.02]">Ctrl K</span>
-            </div>
-          </div>
-
-          <nav className="flex items-center gap-8">
-            {NAV.map((n) => (
-              <a
-                key={n.href}
-                href={n.href}
-                className="font-display text-[10px] tracking-[0.3em] text-white/40 hover:text-white transition-all uppercase italic relative group"
-              >
-                {n.label}
-                <motion.span 
-                  className="absolute -bottom-1 left-0 w-0 h-[1px] bg-primary transition-all group-hover:w-full"
-                  layoutId={`nav-underline-${n.href}`}
-                />
-              </a>
-            ))}
-            <Link
-              to="/docs"
-              className="font-display text-[10px] tracking-[0.3em] text-white/40 hover:text-white transition-all uppercase italic relative group"
+        <nav className="hidden md:flex items-center gap-12 flex-1 justify-center">
+          {NAV.map((n) => (
+            <a
+              key={n.href}
+              href={n.href}
+              className="font-display text-[9px] tracking-[0.4em] text-white/30 hover:text-primary transition-colors uppercase"
             >
-              Docs
-              <motion.span 
-                className="absolute -bottom-1 left-0 w-0 h-[1px] bg-primary transition-all group-hover:w-full"
-                layoutId="nav-underline-docs"
-              />
-            </Link>
-          </nav>
-        </div>
+              {n.label}
+            </a>
+          ))}
+          <Link
+            to="/docs"
+            className="font-display text-[9px] tracking-[0.4em] text-white/30 hover:text-primary transition-colors uppercase"
+          >
+            Docs
+          </Link>
+        </nav>
 
-        {/* Actions & Socials (image-81.png) */}
-        <div className="hidden md:flex items-center gap-6">
-          <div className="flex items-center gap-4 text-white/40 pr-6 border-r border-white/5">
-            <a href="https://discord.gg/spectrehub" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors"><MessageSquare className="w-4 h-4" /></a>
-            <a href="https://github.com/davizinzkn" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors"><Github className="w-4 h-4" /></a>
-            <a href="https://youtube.com/@ODAVIZINZKN" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors"><Youtube className="w-4 h-4" /></a>
-            <a href="https://instagram.com/davizinzkn" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors"><Instagram className="w-4 h-4" /></a>
-          </div>
-
+        {/* Actions */}
+        <div className="hidden md:flex items-center gap-8">
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <div className="flex items-center gap-2 px-3 py-1.5 bg-black/40 border border-white/5 rounded-md text-white/60 hover:border-white/10 transition-colors cursor-pointer group">
-                <div className="w-4 h-4 rounded-full overflow-hidden border border-white/10">
-                  <img src={currentLang.flag} alt={currentLang.label} className="w-full h-full object-cover" />
-                </div>
-                <ChevronDown className="w-3 h-3 text-white/20 group-hover:text-white/40" />
-              </div>
+              <button className="flex items-center gap-2 opacity-30 hover:opacity-100 transition-opacity">
+                <img src={currentLang.flag} alt={currentLang.label} className="w-4 h-2.5 object-cover" />
+                <ChevronDown className="w-3 h-3" />
+              </button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent align="end" className="w-48 bg-background border-white/5 rounded-none text-white/60">
-              <DropdownMenuLabel className="font-display text-[9px] uppercase tracking-widest italic py-3 flex items-center gap-2">
-                <Languages className="w-3 h-3 text-primary" /> {t('common.selectLanguage')}
-              </DropdownMenuLabel>
-              <DropdownMenuSeparator className="bg-white/5" />
+            <DropdownMenuContent align="end" className="bg-[#030303] border-white/5 text-white/60">
               {LANGUAGES.map((lang) => (
                 <DropdownMenuItem 
                   key={lang.code}
-                  onClick={async () => {
-                    await i18n.changeLanguage(lang.code);
-                  }}
-                  className="focus:bg-primary focus:text-white cursor-pointer py-2.5 rounded-none flex items-center gap-3"
+                  onClick={async () => i18n.changeLanguage(lang.code)}
+                  className="focus:bg-primary/10 focus:text-primary cursor-pointer text-[9px] uppercase tracking-widest px-4 py-3"
                 >
-                  <img src={lang.flag} alt="" className="w-4 h-3 object-cover rounded-sm" />
-                  <span className="font-display text-[10px] uppercase italic tracking-widest">{lang.label}</span>
+                  {lang.label}
                 </DropdownMenuItem>
               ))}
             </DropdownMenuContent>
           </DropdownMenu>
 
-          <motion.div
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
+          <Link 
+            to="/hub" 
+            className="ds-btn ds-btn-primary !py-2 !px-6 !min-h-0 !h-10"
           >
-            <Link 
-              to="/hub" 
-              className="ds-btn ds-btn-primary !py-2 !px-5 !text-[9px] flex items-center gap-2 group overflow-hidden relative"
-            >
-              <LogIn className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
-              {t('common.accessHub')}
-              <div className="absolute inset-0 bg-white/10 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
-            </Link>
-          </motion.div>
-
+            HUB_ACCESS
+          </Link>
         </div>
 
         {/* Mobile Toggle */}
         <button
           onClick={() => setOpen(!open)}
-          className="md:hidden text-white/60 hover:text-white transition-colors"
+          className="md:hidden text-white/60 hover:text-white"
         >
-          {open ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          {open ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
         </button>
       </div>
 
       {/* Mobile Menu Overlay */}
-      <div 
-        className={`fixed inset-0 z-[60] bg-black/95 backdrop-blur-xl transition-all duration-500 md:hidden ${
-          open ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
-        }`}
-      >
-        <div className="flex flex-col h-full p-8 pt-24">
-          <div className="flex justify-between items-center mb-12">
-             <div className="font-display text-[10px] tracking-[0.3em] text-primary uppercase flex items-center gap-2">
-               <span className="w-8 h-px bg-primary/30" />
-               Menu
-             </div>
-             <button onClick={() => setOpen(false)} className="w-10 h-10 border border-white/10 flex items-center justify-center">
-               <X className="w-5 h-5 text-white/40" />
-             </button>
-          </div>
+      <AnimatePresence>
+        {open && (
+          <motion.div 
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            className="fixed inset-0 z-[60] bg-[#030303] p-12 flex flex-col md:hidden"
+          >
+            <div className="flex justify-between items-center mb-24">
+               <span className="font-display text-[9px] tracking-[0.5em] text-primary uppercase">NAV_ROOT</span>
+               <button onClick={() => setOpen(false)}>
+                 <X className="w-6 h-6 text-white" />
+               </button>
+            </div>
 
-          <nav className="flex flex-col gap-8 mb-auto">
-            {NAV.map((n, i) => (
-              <a
-                key={n.href}
-                href={n.href}
-                onClick={() => setOpen(false)}
-                className="font-display text-3xl text-white uppercase italic tracking-tighter hover:text-primary transition-colors"
-                style={{ transitionDelay: `${i * 50}ms` }}
-              >
-                {n.label}
-              </a>
-            ))}
-          </nav>
+            <nav className="flex flex-col gap-12 mb-auto">
+              {NAV.map((n) => (
+                <a
+                  key={n.href}
+                  href={n.href}
+                  onClick={() => setOpen(false)}
+                  className="font-display text-4xl text-white uppercase tracking-tighter hover:text-primary transition-colors"
+                >
+                  {n.label}
+                </a>
+              ))}
+            </nav>
 
-          <div className="grid grid-cols-2 gap-4 mt-12">
-            <div className="flex flex-col gap-4 col-span-2">
-               <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <div className="flex items-center justify-between w-full p-4 bg-white/5 border border-white/5 text-white/60">
-                    <div className="flex items-center gap-3">
-                      <img src={currentLang.flag} alt="" className="w-5 h-3 object-cover rounded-sm" />
-                      <span className="font-display text-[10px] uppercase italic tracking-widest">{currentLang.label}</span>
-                    </div>
-                    <ChevronDown className="w-4 h-4" />
-                  </div>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent className="w-[calc(100vw-4rem)] bg-background border-white/5 rounded-none">
-                  {LANGUAGES.map((lang) => (
-                    <DropdownMenuItem 
-                      key={lang.code}
-                      onClick={async () => {
-                        await i18n.changeLanguage(lang.code);
-                        setOpen(false);
-                      }}
-                      className="focus:bg-primary focus:text-white py-4 flex items-center gap-3"
-                    >
-                      <img src={lang.flag} alt="" className="w-5 h-3 object-cover rounded-sm" />
-                      <span className="font-display text-[11px] uppercase italic tracking-widest">{lang.label}</span>
-                    </DropdownMenuItem>
-                  ))}
-                </DropdownMenuContent>
-              </DropdownMenu>
-
+            <div className="pt-12 border-t border-white/5">
               <Link 
                 to="/hub" 
-                className="ds-btn ds-btn-secondary w-full py-5 text-center"
+                className="ds-btn ds-btn-primary w-full py-6 mb-4"
                 onClick={() => setOpen(false)}
               >
-                Dashboard
+                HUB_ACCESS
               </Link>
-              <a
-                href={guildInvite}
-                target="_blank"
-                rel="noreferrer"
-                className="ds-btn ds-btn-primary w-full py-5 text-center"
-              >
-                {t('common.getStarted')}
-              </a>
+              <div className="flex items-center gap-8 opacity-20">
+                <a href="https://discord.gg/spectrehub"><MessageSquare className="w-5 h-5" /></a>
+                <a href="https://github.com/davizinzkn"><Github className="w-5 h-5" /></a>
+              </div>
             </div>
-            
-            <div className="flex items-center gap-6 text-white/20 mt-8">
-              <a href="https://discord.gg/spectrehub" target="_blank" rel="noopener noreferrer"><MessageSquare className="w-5 h-5" /></a>
-              <a href="https://github.com/davizinzkn" target="_blank" rel="noopener noreferrer"><Github className="w-5 h-5" /></a>
-              <a href="https://instagram.com/davizinzkn" target="_blank" rel="noopener noreferrer"><Instagram className="w-5 h-5" /></a>
-            </div>
-          </div>
-        </div>
-      </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </header>
   );
 }
