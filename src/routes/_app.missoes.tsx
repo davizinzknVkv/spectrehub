@@ -136,9 +136,9 @@ function MissoesPage() {
 
           <div className="flex flex-col sm:flex-row justify-between items-center bg-[#030303] border border-white/5 p-8 gap-10">
              <div className="flex flex-col space-y-2">
-                <div className="font-mono text-[8px] uppercase tracking-[0.4em] text-white/10">TERMINAL_STATE</div>
+                <div className="font-mono text-[8px] uppercase tracking-[0.4em] text-white/10">STATUS DO TERMINAL</div>
                 <div className="font-display text-[13px] text-white uppercase tracking-wider">
-                  {quests.length} NODES_DETECTED
+                  {quests.length} NODES DETECTADOS
                 </div>
              </div>
              <div className="flex gap-4 flex-wrap w-full sm:w-auto">
@@ -147,14 +147,14 @@ function MissoesPage() {
                   disabled={loadingQuests || running}
                   className="ds-btn ds-btn-secondary !h-12 !px-6 !text-[10px] uppercase tracking-widest"
                 >
-                  {loadingQuests ? 'POLLING...' : 'SCAN_NODES'}
+                  {loadingQuests ? 'ESCANEAR...' : 'PESQUISAR NODOS'}
                 </button>
                 <button 
                   onClick={() => loadQuests(true)}
                   disabled={loadingQuests || running}
                   className="ds-btn ds-btn-secondary !h-12 !px-6 !text-[10px] uppercase tracking-widest"
                 >
-                  LOAD_HISTORY
+                  HISTÓRICO
                 </button>
                 <button 
                   onClick={async () => {
@@ -168,14 +168,14 @@ function MissoesPage() {
                   disabled={running || quests.length === 0}
                   className="ds-btn ds-btn-secondary !h-12 !px-6 !text-[10px] uppercase tracking-widest !text-primary border-primary/20"
                 >
-                  {running ? 'CLAIMING...' : 'AUTO_COLLECT'}
+                  {running ? 'COLETANDO...' : 'COLETA AUTOMÁTICA'}
                 </button>
                 <button 
                   onClick={() => setCaptchaAll(true)}
                   disabled={running || quests.length === 0 || gateBlocked}
                   className="ds-btn ds-btn-primary !h-12 !px-8 !text-[10px] uppercase tracking-widest"
                 >
-                  DEPLOY_ALL
+                  EXECUTAR TUDO
                 </button>
              </div>
           </div>
@@ -211,7 +211,7 @@ function MissoesPage() {
                 
                 <div className="space-y-4 max-h-[600px] overflow-y-auto pr-6 custom-scrollbar font-mono text-[9px] uppercase tracking-[0.1em]">
                    {useQuestStore.getState().logs.length === 0 ? (
-                       <p className="text-white/10 italic">WAITING_FOR_SEQUENCE...</p>
+                       <p className="text-white/10 italic">AGUARDANDO SEQUÊNCIA...</p>
                    ) : (
                        useQuestStore.getState().logs.slice().reverse().map(l => (
                            <div key={l.id} className={cn(
@@ -227,7 +227,7 @@ function MissoesPage() {
                 
                 {running && (
                     <button onClick={requestStop} className="w-full ds-btn ds-btn-secondary !text-rose-500 border-rose-500/20 !h-14 !text-[10px] uppercase tracking-[0.2em]">
-                        ABORT_PROTOCOL
+                        ABORTAR PROTOCOLO
                     </button>
                 )}
             </div>
@@ -235,9 +235,9 @@ function MissoesPage() {
             <div className="bg-[#030303] border border-primary/20 p-8 flex gap-6">
               <AlertCircle className="w-5 h-5 text-primary shrink-0 opacity-50" />
               <div>
-                <h4 className="font-mono text-[8px] uppercase tracking-[0.4em] text-white/40 mb-2">OPERATIONAL_HINT</h4>
+                <h4 className="font-mono text-[8px] uppercase tracking-[0.4em] text-white/40 mb-2">DICA OPERACIONAL</h4>
                 <p className="font-sans text-[11px] text-white/30 uppercase tracking-[0.1em] leading-relaxed">
-                  Utilize o <span className="text-primary">AUTO_COLLECT</span> após completar as missões para resgatar todas as recompensas instantaneamente.
+                  Utilize a <span className="text-primary">COLETA AUTOMÁTICA</span> após completar as missões para resgatar todas as recompensas instantaneamente.
                 </p>
               </div>
             </div>

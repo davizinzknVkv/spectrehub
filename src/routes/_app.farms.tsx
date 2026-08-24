@@ -117,16 +117,16 @@ function FarmsPage() {
       />
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-px bg-white/5 border border-white/5">
-        <StatItem icon={Activity} label="SYS_STATUS" value={running ? "OPERATING" : "STANDBY"} sub={running ? "EXECUTING_NODE" : "IDLE_STATE"} active={running} />
-        <StatItem icon={Clock} label="UPTIME_CLOCK" value={running ? fmtDuration(activeMs) : "00:00"} sub="RUN_DURATION" />
-        <StatItem icon={Timer} label="COOLDOWN_VAL" value={remainingCd > 0 ? fmtDuration(remainingCd) : "READY"} sub={limits.label} active={remainingCd > 0} />
-        <StatItem icon={CheckCircle2} label="COMPLETED_NODES" value={String(stats.todayDone)} sub={`LIMIT: ${limits.daily === Infinity ? 'INF' : limits.daily}`} />
+        <StatItem icon={Activity} label="STATUS DO SISTEMA" value={running ? "OPERANDO" : "EM ESPERA"} sub={running ? "EXECUTANDO NODO" : "SISTEMA OCIOSO"} active={running} />
+        <StatItem icon={Clock} label="TEMPO ATIVO" value={running ? fmtDuration(activeMs) : "00:00"} sub="DURAÇÃO DA SESSÃO" />
+        <StatItem icon={Timer} label="TEMPO DE ESPERA" value={remainingCd > 0 ? fmtDuration(remainingCd) : "PRONTO"} sub={limits.label} active={remainingCd > 0} />
+        <StatItem icon={CheckCircle2} label="NODOS CONCLUÍDOS" value={String(stats.todayDone)} sub={`LIMITE: ${limits.daily === Infinity ? 'INF' : limits.daily}`} />
       </div>
 
       {running && progress && (
         <div className="bg-[#030303] border border-primary/20 p-10 space-y-6 mt-12">
             <div className="flex justify-between items-end">
-                <div className="font-mono text-[8px] uppercase tracking-[0.5em] text-primary">MISSION_PHASE_PROGRESS</div>
+                <div className="font-mono text-[8px] uppercase tracking-[0.5em] text-primary">PROGRESSO DA MISSÃO</div>
                 <div className="font-display text-2xl text-white tracking-tighter">{progress.current} / {progress.total}</div>
             </div>
             <div className="h-0.5 bg-white/5 relative overflow-hidden">
@@ -141,28 +141,28 @@ function FarmsPage() {
       <div className="grid grid-cols-1 lg:grid-cols-[1fr_350px] gap-8 mt-8">
         <div className="space-y-8">
             <div className="bg-[#030303] border border-white/5 p-10 space-y-10">
-                <div className="font-mono text-[8px] uppercase tracking-[0.5em] text-white/20">HARVEST_PERFORMANCE_METRICS</div>
+                <div className="font-mono text-[8px] uppercase tracking-[0.5em] text-white/20">MÉTRICAS DE DESEMPENHO</div>
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-12">
                     <div className="space-y-3">
-                        <div className="font-mono text-[7px] uppercase tracking-[0.3em] text-white/10">TOTAL_ORBS</div>
+                        <div className="font-mono text-[7px] uppercase tracking-[0.3em] text-white/10">TOTAL DE ORBS</div>
                         <div className="font-display text-3xl text-white tracking-tighter">{stats.totalOrbs.toLocaleString()}</div>
                     </div>
                     <div className="space-y-3">
-                        <div className="font-mono text-[7px] uppercase tracking-[0.3em] text-white/10">DAILY_YIELD</div>
+                        <div className="font-mono text-[7px] uppercase tracking-[0.3em] text-white/10">RENDIMENTO DIÁRIO</div>
                         <div className="font-display text-3xl text-primary tracking-tighter">{stats.todayOrbs.toLocaleString()}</div>
                     </div>
                     <div className="space-y-3">
-                        <div className="font-mono text-[7px] uppercase tracking-[0.3em] text-white/10">SUCCESS_RATE</div>
+                        <div className="font-mono text-[7px] uppercase tracking-[0.3em] text-white/10">TAXA DE SUCESSO</div>
                         <div className="font-display text-3xl text-white tracking-tighter">{runs.length ? `${Math.round((stats.done / runs.length) * 100)}%` : '0%'}</div>
                     </div>
                 </div>
             </div>
 
             <div className="bg-[#030303] border border-white/5 p-10 space-y-8">
-                <div className="font-mono text-[8px] uppercase tracking-[0.5em] text-white/20">EVENT_TERMINAL_STDOUT</div>
+                <div className="font-mono text-[8px] uppercase tracking-[0.5em] text-white/20">LOG DE EVENTOS</div>
                 <div className="space-y-2 max-h-[300px] overflow-y-auto pr-6 custom-scrollbar">
                     {logs.length === 0 ? (
-                        <p className="font-mono text-[9px] text-white/10 uppercase tracking-[0.3em]">WAITING_FOR_SIGNAL...</p>
+                        <p className="font-mono text-[9px] text-white/10 uppercase tracking-[0.3em]">AGUARDANDO SINAL...</p>
                     ) : (
                         logs.slice().reverse().map(l => (
                             <div key={l.id} className="font-mono text-[9px] py-2 border-b border-white/5 flex gap-4 uppercase tracking-[0.1em]">
@@ -179,28 +179,28 @@ function FarmsPage() {
 
         <aside className="space-y-6">
             <div className="bg-[#030303] border border-white/5 p-8 space-y-8">
-                <div className="font-mono text-[8px] uppercase tracking-[0.5em] text-white/20">INFRASTRUCTURE_DATA</div>
+                <div className="font-mono text-[8px] uppercase tracking-[0.5em] text-white/20">DADOS DA INFRAESTRUTURA</div>
                 <div className="space-y-6">
-                    <InfraItem label="ACTIVE_PLAN" val={limits.label} />
-                    <InfraItem label="INTERVAL_VAL" val={`${limits.cooldownMs / 60000}M`} />
-                    <InfraItem label="DAILY_CEILING" val={limits.daily === Infinity ? 'UNCAPPED' : String(limits.daily)} />
-                    <InfraItem label="API_ENDPOINT" val="ONLINE" color="text-emerald-500" />
+                    <InfraItem label="PLANO ATIVO" val={limits.label} />
+                    <InfraItem label="INTERVALO" val={`${limits.cooldownMs / 60000}M`} />
+                    <InfraItem label="LIMITE DIÁRIO" val={limits.daily === Infinity ? 'ILIMITADO' : String(limits.daily)} />
+                    <InfraItem label="STATUS DA API" val="ONLINE" color="text-emerald-500" />
                 </div>
             </div>
 
             <div className="bg-[#030303] border border-white/5 p-8 space-y-8">
-                <div className="font-mono text-[8px] uppercase tracking-[0.5em] text-white/20">GLOBAL_TELEMETRY</div>
+                <div className="font-mono text-[8px] uppercase tracking-[0.5em] text-white/20">TELEMETRIA GLOBAL</div>
                 <div className="space-y-4">
                     <div className="flex justify-between font-mono text-[9px] uppercase tracking-[0.2em]">
-                        <span className="text-white/20">SUCCESS_NODES</span>
+                        <span className="text-white/20">MISSÕES BEM SUCEDIDAS</span>
                         <span className="text-white">{stats.done}</span>
                     </div>
                     <div className="flex justify-between font-mono text-[9px] uppercase tracking-[0.2em]">
-                        <span className="text-white/20">FAILED_CRITICAL</span>
+                        <span className="text-white/20">FALHAS CRÍTICAS</span>
                         <span className="text-rose-500">{stats.failed}</span>
                     </div>
                     <div className="flex justify-between font-mono text-[9px] uppercase tracking-[0.2em]">
-                        <span className="text-white/20">SKIPPED_IDLE</span>
+                        <span className="text-white/20">MISSÕES IGNORADAS</span>
                         <span className="text-amber-500">{stats.skipped}</span>
                     </div>
                 </div>

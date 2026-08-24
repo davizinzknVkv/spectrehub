@@ -322,7 +322,7 @@ function HubPage() {
               <div className="flex items-center gap-4">
                 <div className="w-1.5 h-1.5 bg-primary shadow-[0_0_8px_#4DA09E]" />
                 <span className="font-mono text-[9px] tracking-[0.5em] text-white/20 uppercase">
-                  [IDENTITY_STATE_VERIFIED]
+                  [IDENTIDADE VERIFICADA]
                 </span>
               </div>
               {loading ? (
@@ -330,22 +330,22 @@ function HubPage() {
               ) : (
                 <h2 className="font-display text-5xl sm:text-7xl text-white uppercase tracking-tighter leading-none">
                   {user?.global_name || user?.username}
-                  <span className="font-mono text-[10px] text-primary/30 uppercase tracking-[0.3em] block mt-4">NODE_UID_{user?.id}</span>
+                  <span className="font-mono text-[10px] text-primary/30 uppercase tracking-[0.3em] block mt-4">ID DO NÓ: {user?.id}</span>
                 </h2>
               )}
             </div>
 
             <div className="grid grid-cols-3 gap-12 pt-10 border-t border-white/5 max-w-lg">
               <div className="space-y-3">
-                <span className="font-mono text-[8px] uppercase tracking-[0.4em] text-white/10 block">GUILDS_VAL</span>
+                <span className="font-mono text-[8px] uppercase tracking-[0.4em] text-white/10 block">SERVIDORES</span>
                 <span className="font-display text-2xl text-white tracking-tighter">{loading ? "---" : guilds.length}</span>
               </div>
               <div className="space-y-3">
-                <span className="font-mono text-[8px] uppercase tracking-[0.4em] text-white/10 block">REL_FRIENDS</span>
+                <span className="font-mono text-[8px] uppercase tracking-[0.4em] text-white/10 block">AMIGOS</span>
                 <span className="font-display text-2xl text-white tracking-tighter">{loading ? "---" : (stats?.friends || 0)}</span>
               </div>
               <div className="space-y-3">
-                <span className="font-mono text-[8px] uppercase tracking-[0.4em] text-white/10 block">MSGS_PACKETS</span>
+                <span className="font-mono text-[8px] uppercase tracking-[0.4em] text-white/10 block">MENSAGENS</span>
                 <span className="font-display text-2xl text-white tracking-tighter">{loading ? "---" : (dmCount || 0)}</span>
               </div>
             </div>
@@ -354,9 +354,9 @@ function HubPage() {
           <div className="w-full lg:w-auto flex flex-col gap-4">
             <div className="grid grid-cols-1 gap-2">
               <button onClick={handleLeaveAll} disabled={leavingAll} className="ds-btn ds-btn-primary !py-4">
-                {leavingAll ? "STOPPING..." : "TERMINATE_GUILDS"}
+                {leavingAll ? "PARANDO..." : "SAIR DOS SERVIDORES"}
               </button>
-              <Link to="/settings" className="ds-btn ds-btn-secondary !py-4 text-center">PROPERTIES_CONFIG</Link>
+              <Link to="/settings" className="ds-btn ds-btn-secondary !py-4 text-center">CONFIGURAÇÕES</Link>
             </div>
             
             <div className="flex gap-2 border-t border-white/5 pt-4">
@@ -371,7 +371,7 @@ function HubPage() {
                 }}
                 className="font-mono text-[9px] text-white/20 hover:text-primary transition-colors uppercase tracking-[0.2em] px-4 py-2 border border-white/5 hover:border-primary/30 flex-1"
               >
-                CPY_AVATAR
+                COPIAR AVATAR
               </button>
               <button 
                 onClick={() => {
@@ -385,7 +385,7 @@ function HubPage() {
                 disabled={!profile?.user?.banner}
                 className="font-mono text-[9px] text-white/20 hover:text-primary transition-colors uppercase tracking-[0.2em] px-4 py-2 border border-white/5 hover:border-primary/30 flex-1 disabled:opacity-10"
               >
-                CPY_BANNER
+                COPIAR BANNER
               </button>
             </div>
           </div>

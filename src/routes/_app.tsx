@@ -131,7 +131,7 @@ function AppLayout() {
             />
             <aside className="fixed inset-y-0 left-0 z-50 w-[280px] border-r border-white/5 bg-[#030303] lg:hidden">
               <div className="flex items-center justify-between border-b border-white/5 px-8 py-8">
-                <span className="font-mono text-[9px] font-bold uppercase tracking-[0.4em] text-white/20">MENU_ROOT</span>
+                <span className="font-mono text-[9px] font-bold uppercase tracking-[0.4em] text-white/20">MENU PRINCIPAL</span>
                 <button
                   onClick={() => setMobileOpen(false)}
                   className="text-white/20 hover:text-white transition-colors"
@@ -222,7 +222,7 @@ function SidebarBody({
           className="flex items-center gap-4 px-4 py-3 text-white/10 hover:text-white transition-all group"
         >
           <LifeBuoy className="h-3.5 w-3.5 shrink-0 transition-colors group-hover:text-primary" />
-          <span className="font-mono text-[9px] uppercase tracking-[0.2em]">OPERATIONS_SUPPORT</span>
+          <span className="font-mono text-[9px] uppercase tracking-[0.2em]">SUPORTE OPERACIONAL</span>
         </a>
       </div>
     </div>
@@ -294,7 +294,7 @@ function TopBar({ onOpenMenu, pathname }: { onOpenMenu: () => void; pathname: st
           <div className="hidden lg:flex items-center gap-4">
             <div className="w-1 h-1 bg-primary" />
             <h1 className="font-mono text-[9px] font-bold tracking-[0.4em] text-white/20 uppercase">
-              NETWORK_LOCAL <span className="text-white/5 mx-3">::</span> {currentLabel || 'STATUS_IDLE'}
+              REDE LOCAL <span className="text-white/5 mx-3">::</span> {currentLabel || 'STATUS OCIOSO'}
             </h1>
           </div>
 
@@ -308,7 +308,7 @@ function TopBar({ onOpenMenu, pathname }: { onOpenMenu: () => void; pathname: st
           <div className="flex items-center gap-4 border-r border-white/5 pr-10">
             <div className={`w-1.5 h-1.5 ${creds ? 'bg-primary shadow-[0_0_8px_#4DA09E]' : 'bg-white/5'}`} />
             <span className="font-mono text-[8px] font-bold tracking-[0.4em] text-white/20 uppercase hidden sm:block">
-              {creds ? 'LINK_ESTABLISHED' : 'LINK_OFFLINE'}
+              {creds ? 'CONEXÃO ESTABELECIDA' : 'OFFLINE'}
             </span>
           </div>
 
@@ -326,33 +326,33 @@ function TopBar({ onOpenMenu, pathname }: { onOpenMenu: () => void; pathname: st
                 </div>
                 <div className="text-left hidden sm:block">
                    <div className="font-mono text-[9px] text-white uppercase tracking-[0.1em] leading-none mb-1">{me.global_name || me.username}</div>
-                   <div className="font-mono text-[7px] text-primary uppercase tracking-[0.3em] font-bold">OPERATOR_AUTH</div>
+                   <div className="font-mono text-[7px] text-primary uppercase tracking-[0.3em] font-bold">OPERADOR AUTENTICADO</div>
                 </div>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end" className="w-64 bg-[#050505] border-white/10 rounded-none text-white/40 p-2 shadow-2xl">
-                <DropdownMenuLabel className="font-mono text-[8px] font-bold uppercase tracking-[0.4em] text-white/20 px-4 py-4">PROTOCOL_MGMT</DropdownMenuLabel>
+                <DropdownMenuLabel className="font-mono text-[8px] font-bold uppercase tracking-[0.4em] text-white/20 px-4 py-4">GERENCIAR PROTOCOLOS</DropdownMenuLabel>
                 <DropdownMenuSeparator className="bg-white/5 my-2" />
                 <DropdownMenuItem asChild className="focus:bg-white/[0.03] focus:text-primary cursor-pointer py-3 px-4 rounded-none">
                   <Link to="/hub" className="flex items-center gap-4 font-mono text-[9px] uppercase tracking-widest">
-                    <LayoutDashboard className="w-3.5 h-3.5 text-white/20" /> DASHBOARD_ROOT
+                    <LayoutDashboard className="w-3.5 h-3.5 text-white/20" /> PAINEL PRINCIPAL
                   </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem asChild className="focus:bg-white/[0.03] focus:text-primary cursor-pointer py-3 px-4 rounded-none">
                   <Link to="/settings" className="flex items-center gap-4 font-mono text-[9px] uppercase tracking-widest">
-                    <KeyRound className="w-3.5 h-3.5 text-white/20" /> SEC_PROTOCOL
+                    <KeyRound className="w-3.5 h-3.5 text-white/20" /> PROTOCOLO SEGURANÇA
                   </Link>
                 </DropdownMenuItem>
                 <DropdownMenuSeparator className="bg-white/5 my-2" />
                 <DropdownMenuItem onClick={() => setConfirmLogout(true)} className="focus:bg-rose-500/5 focus:text-rose-500 cursor-pointer py-3 px-4 rounded-none">
                    <span className="flex items-center gap-4 font-mono text-[9px] uppercase tracking-widest">
-                     <LogOut className="w-3.5 h-3.5" /> TERMINATE_LINK
+                     <LogOut className="w-3.5 h-3.5" /> ENCERRAR SESSÃO
                    </span>
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
           ) : (
             <Link to="/settings" className="ds-btn ds-btn-primary !py-2 !px-8 !text-[10px] uppercase tracking-widest !h-10">
-               INITIALIZE
+               ENTRAR
             </Link>
           )}
         </div>
