@@ -116,7 +116,7 @@ export function SiteFooter({ guildInvite }: SiteFooterProps) {
                SISTEMA ATIVO NÓ 1
             </div>
             <div className="font-mono text-[8px] tracking-[0.5em] text-white/10 uppercase">
-               PROPRIEDADE SPECTRE ELITE
+               SPECTRE ELITE 2026
             </div>
           </div>
         </div>
