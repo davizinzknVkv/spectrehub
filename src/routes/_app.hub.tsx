@@ -274,9 +274,8 @@ function HubPage() {
 
   return (
     <div className="page-stack">
-      <section className="relative overflow-hidden border border-border bg-background-secondary p-8 sm:p-12">
-        {/* Banner Area - Background detail */}
-        <div className="absolute top-0 right-0 w-1/3 h-full opacity-5 pointer-events-none overflow-hidden">
+      <section className="bg-[#030303] border border-white/5 p-12 relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-full h-full opacity-[0.03] pointer-events-none">
           {profile?.user?.banner && (
             <img 
               src={`https://cdn.discordapp.com/banners/${user?.id}/${profile.user.banner}.${profile.user.banner.startsWith('a_') ? 'gif' : 'png'}?size=1024`}
@@ -286,10 +285,9 @@ function HubPage() {
           )}
         </div>
 
-        <div className="relative z-10 flex flex-col lg:flex-row gap-12 items-start lg:items-end">
-          {/* Avatar Area */}
-          <div className="relative group shrink-0">
-            <div className="w-32 h-32 bg-background border border-border overflow-hidden relative shadow-2xl">
+        <div className="relative z-10 flex flex-col lg:flex-row gap-16 items-start lg:items-end">
+          <div className="relative shrink-0">
+            <div className="w-40 h-40 border border-white/5 relative bg-black/40">
               {loading ? (
                 <Skeleton className="w-full h-full" />
               ) : user?.avatar ? (
@@ -299,15 +297,16 @@ function HubPage() {
                   alt={user.username}
                 />
               ) : (
-                <div className="w-full h-full flex items-center justify-center font-display text-4xl text-foreground-muted uppercase">
+                <div className="w-full h-full flex items-center justify-center font-display text-4xl text-white/10 uppercase">
                   {user?.username?.slice(0, 2) || "??"}
                 </div>
               )}
+              <div className="absolute -bottom-2 -right-2 w-4 h-4 bg-primary" />
             </div>
           </div>
 
-          <div className="space-y-6 flex-1">
-            <div className="flex flex-wrap gap-2 opacity-50">
+          <div className="space-y-8 flex-1">
+            <div className="flex flex-wrap gap-4 opacity-20">
               {loading ? (
                 <Skeleton className="w-16 h-4" />
               ) : (
@@ -319,32 +318,35 @@ function HubPage() {
               )}
             </div>
 
-            <div className="space-y-2">
-              <span className="font-display text-[10px] tracking-[0.4em] text-primary uppercase font-black block">
-                [USER_IDENTITY_VERIFIED]
-              </span>
+            <div className="space-y-4">
+              <div className="flex items-center gap-4">
+                <div className="w-1.5 h-1.5 bg-primary shadow-[0_0_8px_#4DA09E]" />
+                <span className="font-mono text-[9px] tracking-[0.5em] text-white/20 uppercase">
+                  [IDENTITY_STATE_VERIFIED]
+                </span>
+              </div>
               {loading ? (
-                <Skeleton className="h-12 w-64" />
+                <Skeleton className="h-16 w-80" />
               ) : (
-                <h2 className="font-display text-4xl sm:text-6xl text-white uppercase tracking-tighter leading-none">
+                <h2 className="font-display text-5xl sm:text-7xl text-white uppercase tracking-tighter leading-none">
                   {user?.global_name || user?.username}
-                  <span className="text-[10px] ml-4 font-mono text-primary/50 font-bold uppercase tracking-widest leading-none">ID_{user?.id}</span>
+                  <span className="font-mono text-[10px] text-primary/30 uppercase tracking-[0.3em] block mt-4">NODE_UID_{user?.id}</span>
                 </h2>
               )}
             </div>
 
-            <div className="flex flex-wrap gap-8 pt-4 border-t border-white/5">
-              <div className="space-y-1">
-                <span className="font-display text-[9px] tracking-[0.2em] text-white/30 uppercase block">Servidores</span>
-                <span className="font-mono text-lg text-white font-bold">{loading ? "---" : guilds.length}</span>
+            <div className="grid grid-cols-3 gap-12 pt-10 border-t border-white/5 max-w-lg">
+              <div className="space-y-3">
+                <span className="font-mono text-[8px] uppercase tracking-[0.4em] text-white/10 block">GUILDS_VAL</span>
+                <span className="font-display text-2xl text-white tracking-tighter">{loading ? "---" : guilds.length}</span>
               </div>
-              <div className="space-y-1">
-                <span className="font-display text-[9px] tracking-[0.2em] text-white/30 uppercase block">Amigos</span>
-                <span className="font-mono text-lg text-white font-bold">{loading ? "---" : (stats?.friends || 0)}</span>
+              <div className="space-y-3">
+                <span className="font-mono text-[8px] uppercase tracking-[0.4em] text-white/10 block">REL_FRIENDS</span>
+                <span className="font-display text-2xl text-white tracking-tighter">{loading ? "---" : (stats?.friends || 0)}</span>
               </div>
-              <div className="space-y-1">
-                <span className="font-display text-[9px] tracking-[0.2em] text-white/30 uppercase block">Mensagens</span>
-                <span className="font-mono text-lg text-white font-bold">{loading ? "---" : (dmCount || 0)}</span>
+              <div className="space-y-3">
+                <span className="font-mono text-[8px] uppercase tracking-[0.4em] text-white/10 block">MSGS_PACKETS</span>
+                <span className="font-display text-2xl text-white tracking-tighter">{loading ? "---" : (dmCount || 0)}</span>
               </div>
             </div>
           </div>
