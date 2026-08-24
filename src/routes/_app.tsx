@@ -329,30 +329,30 @@ function TopBar({ onOpenMenu, pathname }: { onOpenMenu: () => void; pathname: st
                    <div className="font-mono text-[7px] text-primary uppercase tracking-[0.3em] font-bold">OPERATOR_AUTH</div>
                 </div>
               </DropdownMenuTrigger>
-              <DropdownMenuContent align="end" className="w-56 bg-card border-border rounded-xl text-foreground-muted p-2">
-                <DropdownMenuLabel className="font-sans text-[10px] font-bold uppercase tracking-wider text-foreground-muted/50 px-3 py-2">Gerenciar Conta</DropdownMenuLabel>
-                <DropdownMenuSeparator className="bg-border my-1" />
-                <DropdownMenuItem asChild className="focus:bg-primary/10 focus:text-foreground cursor-pointer py-2 rounded-lg">
-                  <Link to="/hub" className="flex items-center gap-3 font-sans text-sm font-medium">
-                    <LayoutDashboard className="w-4 h-4 text-foreground-muted" /> Dashboard
+              <DropdownMenuContent align="end" className="w-64 bg-[#050505] border-white/10 rounded-none text-white/40 p-2 shadow-2xl">
+                <DropdownMenuLabel className="font-mono text-[8px] font-bold uppercase tracking-[0.4em] text-white/20 px-4 py-4">PROTOCOL_MGMT</DropdownMenuLabel>
+                <DropdownMenuSeparator className="bg-white/5 my-2" />
+                <DropdownMenuItem asChild className="focus:bg-white/[0.03] focus:text-primary cursor-pointer py-3 px-4 rounded-none">
+                  <Link to="/hub" className="flex items-center gap-4 font-mono text-[9px] uppercase tracking-widest">
+                    <LayoutDashboard className="w-3.5 h-3.5 text-white/20" /> DASHBOARD_ROOT
                   </Link>
                 </DropdownMenuItem>
-                <DropdownMenuItem asChild className="focus:bg-primary/10 focus:text-foreground cursor-pointer py-2 rounded-lg">
-                  <Link to="/settings" className="flex items-center gap-3 font-sans text-sm font-medium">
-                    <KeyRound className="w-4 h-4 text-foreground-muted" /> Segurança
+                <DropdownMenuItem asChild className="focus:bg-white/[0.03] focus:text-primary cursor-pointer py-3 px-4 rounded-none">
+                  <Link to="/settings" className="flex items-center gap-4 font-mono text-[9px] uppercase tracking-widest">
+                    <KeyRound className="w-3.5 h-3.5 text-white/20" /> SEC_PROTOCOL
                   </Link>
                 </DropdownMenuItem>
-                <DropdownMenuSeparator className="bg-border my-1" />
-                <DropdownMenuItem onClick={() => setConfirmLogout(true)} className="focus:bg-rose-500/10 focus:text-rose-500 cursor-pointer py-2 rounded-lg">
-                   <span className="flex items-center gap-3 font-sans text-sm font-medium">
-                     <LogOut className="w-4 h-4" /> Encerrar Sessão
+                <DropdownMenuSeparator className="bg-white/5 my-2" />
+                <DropdownMenuItem onClick={() => setConfirmLogout(true)} className="focus:bg-rose-500/5 focus:text-rose-500 cursor-pointer py-3 px-4 rounded-none">
+                   <span className="flex items-center gap-4 font-mono text-[9px] uppercase tracking-widest">
+                     <LogOut className="w-3.5 h-3.5" /> TERMINATE_LINK
                    </span>
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
           ) : (
-            <Link to="/settings" className="ds-btn ds-btn-primary !py-2 !px-5 !text-[11px] !min-height-0 h-9 rounded-full">
-               Entrar
+            <Link to="/settings" className="ds-btn ds-btn-primary !py-2 !px-8 !text-[10px] uppercase tracking-widest !h-10">
+               INITIALIZE
             </Link>
           )}
         </div>
