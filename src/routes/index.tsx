@@ -3,7 +3,6 @@
  * THEME: ABSOLUTE_OBSIDIAN_INDUSTRIAL
  * ACCENT: #4DA09E (TEAL)
  */
- */
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect } from "react";
 import { Hero } from "@/components/home/Hero";
