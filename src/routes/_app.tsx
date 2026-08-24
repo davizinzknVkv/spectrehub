@@ -276,58 +276,57 @@ function TopBar({ onOpenMenu, pathname }: { onOpenMenu: () => void; pathname: st
 
   return (
     <div
-      className={`sticky top-0 z-20 transition-all duration-500 border-b ${
+      className={`sticky top-0 z-20 transition-all duration-700 border-b ${
         scrolled 
-          ? "bg-[#030303]/90 backdrop-blur-md border-white/5 py-4 px-6" 
-          : "bg-transparent border-transparent py-8 px-10"
+          ? "bg-[#030303]/95 border-white/5 py-6 px-8 sm:px-12" 
+          : "bg-transparent border-transparent py-10 px-10 sm:px-16"
       }`}
     >
-      <div className="mx-auto flex w-full max-w-6xl items-center justify-between gap-3">
-        <div className="flex items-center gap-4">
+      <div className="mx-auto flex w-full max-w-7xl items-center justify-between gap-6">
+        <div className="flex items-center gap-6">
           <button
             onClick={onOpenMenu}
-            className="p-2 border border-border text-foreground-muted hover:text-foreground transition-colors lg:hidden rounded-lg"
+            className="p-3 border border-white/5 text-white/20 hover:text-white transition-colors lg:hidden"
           >
-            <Menu className="h-5 w-5" />
+            <Menu className="h-4 w-4" />
           </button>
           
-          <div className="hidden lg:block">
-            {currentLabel && (
-              <h1 className="font-sans text-[11px] font-bold tracking-wider text-foreground-muted uppercase">
-                Terminal <span className="text-primary/50 mx-2">/</span> {currentLabel}
-              </h1>
-            )}
+          <div className="hidden lg:flex items-center gap-4">
+            <div className="w-1 h-1 bg-primary" />
+            <h1 className="font-mono text-[9px] font-bold tracking-[0.4em] text-white/20 uppercase">
+              NETWORK_LOCAL <span className="text-white/5 mx-3">::</span> {currentLabel || 'STATUS_IDLE'}
+            </h1>
           </div>
 
-          <Link to="/" className="flex items-center gap-2 lg:hidden">
-            <img src={logoAsset.url} alt="SPECTRE" className="h-7 w-7 object-contain" />
-            <span className="font-display text-[10px] tracking-wider uppercase text-foreground">Spectre</span>
+          <Link to="/" className="flex items-center gap-4 lg:hidden">
+            <img src={logoAsset.url} alt="SPECTRE" className="h-8 w-8 object-contain grayscale" />
+            <span className="font-display text-xs tracking-tighter uppercase text-white">SPECTRE</span>
           </Link>
         </div>
 
-        <div className="flex items-center gap-6">
-          <div className="flex items-center gap-2">
-            <div className={`w-1.5 h-1.5 rounded-full ${creds ? 'bg-primary shadow-[0_0_8px_#4DA09E]' : 'bg-foreground-muted/20'}`} />
-            <span className="font-sans text-[9px] font-bold tracking-wider text-foreground-muted/30 uppercase hidden sm:block">
-              {creds ? 'Sistema Operacional' : 'Disconectado'}
+        <div className="flex items-center gap-10">
+          <div className="flex items-center gap-4 border-r border-white/5 pr-10">
+            <div className={`w-1.5 h-1.5 ${creds ? 'bg-primary shadow-[0_0_8px_#4DA09E]' : 'bg-white/5'}`} />
+            <span className="font-mono text-[8px] font-bold tracking-[0.4em] text-white/20 uppercase hidden sm:block">
+              {creds ? 'LINK_ESTABLISHED' : 'LINK_OFFLINE'}
             </span>
           </div>
 
           {creds && me ? (
             <DropdownMenu>
-              <DropdownMenuTrigger className="flex items-center gap-3 p-1 rounded-full border border-border bg-background-secondary hover:border-primary/20 transition-all focus:outline-none pr-3">
-                <div className="w-8 h-8 bg-background border border-border overflow-hidden rounded-full">
+              <DropdownMenuTrigger className="flex items-center gap-4 p-1 border border-white/5 bg-black hover:border-primary/30 transition-all focus:outline-none pr-5">
+                <div className="w-10 h-10 bg-[#030303] border border-white/5 overflow-hidden">
                    {avatarUrl ? (
-                    <img src={avatarUrl} alt="" className="w-full h-full object-cover" />
+                    <img src={avatarUrl} alt="" className="w-full h-full object-cover grayscale" />
                   ) : (
-                    <div className="w-full h-full flex items-center justify-center text-foreground-muted">
+                    <div className="w-full h-full flex items-center justify-center text-white/10">
                       <UserRound className="w-4 h-4" />
                     </div>
                   )}
                 </div>
                 <div className="text-left hidden sm:block">
-                   <div className="font-sans text-[11px] font-bold text-foreground leading-none">{me.global_name || me.username}</div>
-                   <div className="font-sans text-[9px] text-foreground-muted uppercase tracking-wider">Premium</div>
+                   <div className="font-mono text-[9px] text-white uppercase tracking-[0.1em] leading-none mb-1">{me.global_name || me.username}</div>
+                   <div className="font-mono text-[7px] text-primary uppercase tracking-[0.3em] font-bold">OPERATOR_AUTH</div>
                 </div>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end" className="w-56 bg-card border-border rounded-xl text-foreground-muted p-2">
