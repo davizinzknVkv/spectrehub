@@ -73,7 +73,7 @@ export function FreeSignup({ guildInvite }: FreeSignupProps) {
             </div>
           </div>
 
-          <div className="bg-[#030303] border border-white/5 p-12 relative">
+          <div className="bg-background border border-white/5 p-12 relative">
              <div className="absolute top-0 right-0 w-1 h-1 bg-primary" />
              <div className="absolute bottom-0 left-0 w-1 h-1 bg-primary" />
              

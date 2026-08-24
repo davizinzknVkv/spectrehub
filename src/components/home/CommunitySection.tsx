@@ -24,7 +24,7 @@ function MiniStat({
   value: string;
 }) {
   return (
-    <div className="bg-[#030303] p-10 group hover:bg-white/[0.02] transition-colors">
+    <div className="bg-background p-10 group hover:bg-white/[0.02] transition-colors">
       <div className="flex justify-between items-start mb-6">
         <Icon className="h-4 w-4 text-primary opacity-50 group-hover:opacity-100 transition-opacity" />
         <div className="w-1 h-1 bg-white/10 group-hover:bg-primary transition-colors" />
@@ -82,7 +82,7 @@ export function CommunitySection({ widgetUrl, guildInvite, fallbackMembers }: Co
               <span className="text-primary italic opacity-90">{t('community.subtitle')}</span>
             </h2>
             <div className="border-l border-white/10 pl-8 space-y-12">
-              <p className="text-white/40 text-sm leading-relaxed uppercase tracking-[0.1em]">
+              <p className="text-white/60 text-sm leading-relaxed uppercase tracking-[0.1em]">
                 {t('community.description')}
               </p>
               

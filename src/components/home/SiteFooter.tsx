@@ -11,7 +11,7 @@ export function SiteFooter({ guildInvite }: SiteFooterProps) {
   const { t } = useTranslation();
 
   return (
-    <footer className="bg-[#030303] pt-48 pb-24 relative overflow-hidden">
+    <footer className="bg-background pt-48 pb-24 relative overflow-hidden">
       <div className="absolute top-0 left-0 w-full h-px bg-white/5" />
       
       <div className="mx-auto max-w-7xl px-6 md:px-20 relative z-10">
@@ -28,7 +28,7 @@ export function SiteFooter({ guildInvite }: SiteFooterProps) {
               </span>
             </Link>
             <div className="border-l border-white/5 pl-8">
-              <p className="font-mono text-white/20 leading-loose text-[10px] uppercase tracking-[0.2em] italic">
+              <p className="font-mono text-white/40 leading-loose text-[10px] uppercase tracking-[0.2em] italic">
                 {t('footer.slogan')}
               </p>
             </div>

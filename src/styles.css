@@ -10,10 +10,10 @@
   --radius-lg: 12px;
   --radius-xl: 16px;
 
-  --color-background: #0A0A0D;
-  --color-background-secondary: #101114;
+  --color-background: #0D0D12;
+  --color-background-secondary: #16171B;
   --color-foreground: #FFFFFF;
-  --color-foreground-muted: #A0A0AA;
+  --color-foreground-muted: #D1D1D6;
   
   --color-card: #151515;
   --color-card-elevated: #191919;
@@ -29,7 +29,7 @@
   --color-secondary-foreground: #A0A0AA;
   
   --color-muted: #191919;
-  --color-muted-foreground: #6F727A;
+  --color-muted-foreground: #9898A1;
   
   --color-accent: #FF0050;
   --color-accent-foreground: #ffffff;
@@ -39,13 +39,13 @@
   --color-ring: rgba(255, 0, 80, 0.5);
 
   /* Spectre Palette */
-  --color-obsidian: #0A0A0D;
+  --color-obsidian: #0D0D12;
   --color-spectre-pink: #FF0050;
 }
 
 :root {
   --radius: 0px;
-  --background: #0A0A0D;
+  --background: #0D0D12;
   --foreground: #FFFFFF;
   --card: #151515;
   --card-foreground: #FFFFFF;
@@ -54,7 +54,7 @@
   --secondary: #101114;
   --accent: #FF0050;
   --muted: #191919;
-  --muted-foreground: #6F727A;
+  --muted-foreground: #9898A1;
   --popover: #151515;
   --popover-foreground: #FFFFFF;
   --input: #101114;
@@ -254,7 +254,7 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: #030303;
+  background: #08080A;
 }
 
 ::-webkit-scrollbar-thumb {

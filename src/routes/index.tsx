@@ -1,4 +1,4 @@
-/* nas missao estao sem as fotos arruma */
+/* arruma isso eo site td esta muito escuro */
 
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect } from "react";
@@ -41,7 +41,7 @@ function Index() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-[#030303] selection:bg-primary/30 selection:text-white">
+    <div className="min-h-screen bg-background selection:bg-primary/30 selection:text-white">
       <SiteHeader guildInvite={DISCORD_INVITE} />
       
       <main className="relative">
@@ -78,7 +78,7 @@ function Index() {
           fallbackMembers={["Spectre", "Elite", "Admin", "Mod"]}
         />
         
-        <div className="relative border-y border-border/5">
+        <div className="relative border-y border-white/5">
            <PlansSection plans={PLANS} />
         </div>
 
