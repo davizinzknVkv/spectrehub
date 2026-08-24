@@ -1,4 +1,4 @@
-/* faça o hero parecido */
+/* nas missao estao sem as fotos arruma */
 
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect } from "react";
