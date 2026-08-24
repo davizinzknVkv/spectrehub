@@ -97,36 +97,36 @@ function DocsPage() {
   return (
     <div className="min-h-screen bg-[#030303] text-white font-sans selection:bg-primary/30 flex flex-col">
       {/* Header */}
-      <header className="sticky top-0 z-50 border-b border-white/5 bg-[#030303]/80 backdrop-blur-xl">
+      <header className="sticky top-0 z-50 border-b border-white/5 bg-[#030303]">
         <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-          <Link to="/" className="flex items-center gap-3 group">
-            <img src={logoAsset.url} alt="Spectre" className="h-8 w-8 object-contain transition-transform group-hover:scale-110" />
-            <span className="font-display text-lg tracking-tighter uppercase italic">Spectre <span className="text-primary">Docs</span></span>
+          <Link to="/" className="flex items-center gap-3">
+            <img src={logoAsset.url} alt="Spectre" className="h-6 w-6 object-contain" />
+            <span className="font-display text-sm tracking-[0.2em] uppercase">Spectre <span className="text-primary opacity-50">//</span> Docs</span>
           </Link>
           
-          <nav className="hidden md:flex items-center gap-10">
-            {["Documentação", "Produtos", "Guia", "Suporte"].map((item) => (
+          <nav className="hidden md:flex items-center gap-12">
+            {["Produtos", "Guia", "Suporte"].map((item) => (
               <a 
                 key={item} 
                 href="#" 
-                className="font-display text-[10px] tracking-[0.3em] uppercase italic text-white/40 hover:text-white transition-all hover:translate-y-[-1px]"
+                className="font-display text-[9px] tracking-[0.4em] uppercase text-white/30 hover:text-primary transition-colors"
               >
                 {item}
               </a>
             ))}
             <Link 
               to="/hub" 
-              className="ds-btn ds-btn-primary !px-6 !py-2.5 !text-[9px] !rounded-none shadow-[0_0_20px_rgba(255,0,85,0.15)] hover:shadow-[0_0_30px_rgba(255,0,85,0.3)]"
+              className="ds-btn ds-btn-primary !px-6 !py-2 !min-h-0 !h-10"
             >
-              ACESSAR SPECTRE
+              HUB_ACCESS
             </Link>
           </nav>
 
           <button 
-            className="md:hidden p-2 text-white/60 hover:text-white transition-colors" 
+            className="md:hidden p-2 text-white/60 hover:text-white" 
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           >
-            {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
         </div>
       </header>
@@ -161,32 +161,31 @@ function DocsPage() {
       {/* Main Content Layout */}
       <div className="flex-1 max-w-7xl mx-auto w-full px-6 py-12 flex flex-col lg:flex-row gap-12">
         {/* Sidebar */}
-        <aside className="hidden lg:block w-[280px] shrink-0 sticky top-32 h-[calc(100vh-160px)] space-y-10 overflow-y-auto pr-4 scrollbar-thin">
-          <div className="space-y-8">
+        <aside className="hidden lg:block w-[240px] shrink-0 sticky top-32 h-[calc(100vh-160px)] space-y-10 overflow-y-auto pr-4 scrollbar-thin">
+          <div className="space-y-12">
             <div className="relative group">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-white/20 group-focus-within:text-primary transition-colors" />
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-white/10 group-focus-within:text-primary transition-colors" />
               <input 
-                placeholder="Pesquisar..." 
+                placeholder="SEARCH_DB..." 
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full bg-white/[0.03] border border-white/5 p-3 pl-10 text-[11px] font-bold uppercase tracking-wider rounded-none outline-none focus:border-primary/50 focus:bg-white/[0.05] transition-all"
+                className="w-full bg-transparent border-b border-white/5 py-2 pl-9 text-[9px] font-bold uppercase tracking-[0.2em] outline-none focus:border-primary/50 transition-all"
               />
             </div>
             
-            <div className="space-y-2">
-              <div className="px-3 text-[9px] font-bold text-white/20 uppercase tracking-[0.2em] mb-4">Navegação</div>
+            <div className="space-y-1">
+              <div className="px-3 text-[8px] font-black text-white/10 uppercase tracking-[0.5em] mb-4">NAV_ROOT</div>
               {filteredNav.map(item => (
                 <button 
                   key={item.id}
                   onClick={() => setActiveSection(item.id)}
                   className={cn(
-                    "flex items-center gap-3 w-full text-left text-[11px] font-bold uppercase tracking-[0.15em] py-2.5 px-3 transition-all relative group",
+                    "flex items-center gap-3 w-full text-left text-[10px] font-bold uppercase tracking-[0.2em] py-2 px-3 transition-colors",
                     activeSection === item.id 
-                      ? "text-white bg-white/[0.05] border-l-2 border-primary" 
-                      : "text-white/40 hover:text-white hover:bg-white/[0.02]"
+                      ? "text-primary border-l border-primary" 
+                      : "text-white/20 hover:text-white/50"
                   )}
                 >
-                  <item.icon className={cn("w-3.5 h-3.5", activeSection === item.id ? "text-primary" : "text-white/20 group-hover:text-white/40")} />
                   {item.label}
                 </button>
               ))}
@@ -200,36 +199,41 @@ function DocsPage() {
             <div className="space-y-16">
               {/* Intro Section */}
               {activeSection === "introducao" && (
-                <section className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
-                  <div className="space-y-4">
-                    <div className="inline-block px-3 py-1 bg-primary/10 border border-primary/20 text-primary text-[9px] font-bold uppercase tracking-widest">Documentação Oficial</div>
-                    <h1 className="font-display text-5xl lg:text-7xl uppercase tracking-tighter leading-[0.9]">Bem-vindo ao <br/><span className="text-primary">SPECTRE</span></h1>
-                  </div>
-                  
-                  <div className="space-y-6 text-white/60 text-lg max-w-3xl leading-relaxed">
-                    <p>
-                      O SPECTRE é o ecossistema definitivo para entusiastas de automação e performance no Discord. Nossa plataforma foi construída sob os pilares da segurança extrema, latência zero e interface industrial premium.
-                    </p>
-                    <p>
-                      Esta documentação serve como o guia central para entender nossos produtos, configurar sua infraestrutura e extrair o máximo potencial de cada ferramenta disponível.
-                    </p>
+                <section className="space-y-24 animate-in fade-in slide-in-from-bottom-4 duration-700">
+                  <div className="space-y-10">
+                    <div className="font-display text-[9px] tracking-[0.5em] text-primary uppercase flex items-center gap-4">
+                       <div className="w-12 h-px bg-primary" />
+                       GUIDE_INIT
+                    </div>
+                    <h1 className="font-display text-5xl md:text-8xl leading-[0.85] text-white uppercase tracking-tighter">
+                      Spectre <br />
+                      <span className="text-primary italic opacity-90">Protocol.</span>
+                    </h1>
+                    <div className="border-l border-white/5 pl-8 space-y-8">
+                      <p className="text-white/40 text-sm leading-relaxed uppercase tracking-[0.1em] max-w-2xl">
+                        O SPECTRE é o ecossistema definitivo para entusiastas de automação e performance no Discord. Nossa plataforma foi construída sob os pilares da segurança extrema, latência zero e interface industrial premium.
+                      </p>
+                      <div className="flex flex-wrap gap-4 pt-4">
+                        <div className="px-4 py-2 border border-white/5 bg-white/[0.02] font-mono text-[9px] text-white/40 uppercase tracking-widest">
+                          VER: 2.0.4_STABLE
+                        </div>
+                        <div className="px-4 py-2 border border-white/5 bg-white/[0.02] font-mono text-[9px] text-primary uppercase tracking-widest">
+                          STATUS: SYSTEMS_ONLINE
+                        </div>
+                      </div>
+                    </div>
                   </div>
 
-                  <div className="flex flex-wrap gap-4 pt-4">
-                    <button onClick={() => setActiveSection("guia")} className="ds-btn ds-btn-primary !px-10 !py-4">Começar Agora</button>
-                    <button onClick={() => setActiveSection("produtos")} className="ds-btn ds-btn-secondary !px-10 !py-4">Conhecer Produtos</button>
-                  </div>
-
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-12 pt-12 border-t border-white/5">
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-white/5 border border-white/5">
                     {[
                       { icon: Zap, label: "Performance", desc: "Infraestrutura otimizada para execução em milissegundos." },
                       { icon: Shield, label: "Segurança", desc: "Protocolos avançados de proteção e anti-detecção." },
                       { icon: LifeBuoy, label: "Suporte", desc: "Comunidade ativa e atendimento especializado." },
                     ].map((item, i) => (
-                      <div key={i} className="p-6 bg-white/[0.02] border border-white/5 hover:border-white/10 transition-colors">
-                        <item.icon className="w-5 h-5 text-primary mb-4" />
-                        <h3 className="font-display text-sm uppercase tracking-wider mb-2">{item.label}</h3>
-                        <p className="text-[11px] text-white/40 leading-relaxed">{item.desc}</p>
+                      <div key={i} className="p-8 bg-[#030303] group hover:bg-white/[0.02] transition-colors">
+                        <item.icon className="w-5 h-5 text-primary mb-6 opacity-50 group-hover:opacity-100 transition-opacity" />
+                        <h3 className="font-display text-[10px] uppercase tracking-[0.3em] mb-4">{item.label}</h3>
+                        <p className="text-[9px] text-white/20 uppercase tracking-[0.1em] leading-relaxed group-hover:text-white/40 transition-colors">{item.desc}</p>
                       </div>
                     ))}
                   </div>
@@ -238,35 +242,36 @@ function DocsPage() {
 
               {/* Products Section */}
               {activeSection === "produtos" && (
-                <section className="space-y-12 animate-in fade-in slide-in-from-bottom-4 duration-700">
-                  <div className="space-y-4">
-                    <h2 className="font-display text-4xl uppercase tracking-tighter italic">Produtos & <span className="text-primary">Sistemas</span></h2>
-                    <p className="text-white/50 text-base max-w-2xl">Catálogo completo de ferramentas disponíveis no ecossistema Spectre.</p>
+                <section className="space-y-16 animate-in fade-in slide-in-from-bottom-4 duration-700">
+                  <div className="space-y-6">
+                    <div className="font-display text-[9px] tracking-[0.5em] text-white/20 uppercase flex items-center gap-4">
+                       <div className="w-12 h-px bg-white/10" />
+                       CORE_CATALOG
+                    </div>
+                    <h2 className="font-display text-4xl md:text-6xl text-white uppercase tracking-tighter">Sistemas <span className="text-primary italic">&</span> Módulos</h2>
                   </div>
 
-                  <div className="grid gap-6">
-                    {products.map((p) => (
-                      <div key={p.id} className="group p-8 bg-white/[0.02] border border-white/5 hover:border-primary/30 transition-all relative overflow-hidden">
-                        <div className="absolute top-0 right-0 p-8 opacity-[0.03] group-hover:opacity-[0.07] transition-opacity">
-                          <p.icon className="w-24 h-24" />
-                        </div>
-                        <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 relative z-10">
-                          <div className="space-y-4">
-                            <div className="flex items-center gap-4">
-                              <p.icon className="w-6 h-6 text-primary" />
-                              <h3 className="font-display text-xl uppercase tracking-wider">{p.name}</h3>
-                              <span className="px-2 py-0.5 bg-white/5 text-[8px] font-bold uppercase tracking-widest text-white/40 border border-white/10">Ativo</span>
+                  <div className="grid gap-px bg-white/5 border border-white/5">
+                    {products.map((p, i) => (
+                      <div key={p.id} className="group p-10 bg-[#030303] hover:bg-white/[0.02] transition-all relative overflow-hidden">
+                        <div className="flex flex-col md:flex-row md:items-start justify-between gap-12 relative z-10">
+                          <div className="space-y-8 flex-1">
+                            <div className="flex items-center gap-6">
+                              <div className="font-mono text-[9px] text-primary/40">ID_0{i + 1}</div>
+                              <h3 className="font-display text-2xl text-white uppercase tracking-tight">{p.name}</h3>
+                              <div className="px-2 py-0.5 border border-primary/20 bg-primary/5 text-[7px] font-black text-primary uppercase tracking-[0.3em]">ACTIVE</div>
                             </div>
-                            <p className="text-white/50 text-[13px] max-w-xl leading-relaxed">{p.desc}</p>
-                            <div className="flex items-center gap-2 text-[10px] uppercase font-bold tracking-widest text-primary/80">
-                              <span className="text-white/20">Objetivo:</span> {p.goal}
+                            <p className="text-white/30 text-[11px] uppercase tracking-[0.1em] leading-relaxed max-w-xl">{p.desc}</p>
+                            <div className="flex items-center gap-4">
+                              <div className="font-mono text-[8px] text-white/10 uppercase tracking-[0.3em]">TARGET_GOAL:</div>
+                              <div className="font-mono text-[8px] text-primary uppercase tracking-[0.3em] opacity-60">{p.goal}</div>
                             </div>
                           </div>
                           <Link 
                             to={p.id === 'spotify' ? '/spotify' : p.id === 'sniper' ? '/nicksgun' : '/hub'} 
-                            className="ds-btn ds-btn-secondary !text-[10px] !px-6 shrink-0"
+                            className="ds-btn ds-btn-primary !text-[9px] !px-8 !min-h-0 !h-12 shrink-0"
                           >
-                            Acessar Sistema
+                            RUN_MODULE
                           </Link>
                         </div>
                       </div>

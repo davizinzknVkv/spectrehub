@@ -115,9 +115,9 @@ function AppLayout() {
           <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/2" />
       </div>
 
-      <div className="relative z-10 grid min-h-screen w-full lg:grid-cols-[260px_1fr] overflow-hidden">
+      <div className="relative z-10 grid min-h-screen w-full lg:grid-cols-[280px_1fr] overflow-hidden">
         {/* Desktop sidebar */}
-        <aside className="hidden border-r border-border bg-background-secondary lg:block lg:w-[260px]">
+        <aside className="hidden border-r border-white/5 bg-[#030303] lg:block lg:w-[280px]">
           <SidebarBody pathname={pathname} />
         </aside>
 
@@ -125,16 +125,16 @@ function AppLayout() {
         {mobileOpen && (
           <>
             <div
-              className="fixed inset-0 z-40 bg-black/80 backdrop-blur-md lg:hidden"
+              className="fixed inset-0 z-40 bg-black/90 lg:hidden"
               onClick={() => setMobileOpen(false)}
               aria-hidden
             />
-            <aside className="fixed inset-y-0 left-0 z-50 w-[280px] border-r border-border bg-background-secondary lg:hidden">
-              <div className="flex items-center justify-between border-b border-border px-6 py-5">
-                <span className="font-sans text-[10px] font-bold uppercase tracking-wider text-foreground-muted/50">Menu Principal</span>
+            <aside className="fixed inset-y-0 left-0 z-50 w-[280px] border-r border-white/5 bg-[#030303] lg:hidden">
+              <div className="flex items-center justify-between border-b border-white/5 px-8 py-8">
+                <span className="font-mono text-[9px] font-bold uppercase tracking-[0.4em] text-white/20">MENU_ROOT</span>
                 <button
                   onClick={() => setMobileOpen(false)}
-                  className="text-foreground-muted hover:text-foreground transition-colors"
+                  className="text-white/20 hover:text-white transition-colors"
                 >
                   <X className="h-5 w-5" />
                 </button>
@@ -145,9 +145,9 @@ function AppLayout() {
         )}
 
         {/* Main Content Area */}
-        <main className="min-w-0 flex flex-col w-full">
+        <main className="min-w-0 flex flex-col w-full bg-[#030303]">
           <TopBar onOpenMenu={() => setMobileOpen(true)} pathname={pathname} />
-          <div className="flex-1 w-full max-w-7xl mx-auto px-4 pb-14 pt-6 sm:px-8 sm:pt-8 lg:px-10 lg:pb-16 lg:pt-10">
+          <div className="flex-1 w-full max-w-7xl mx-auto px-8 pb-24 pt-12 sm:px-12 lg:px-16">
             <Outlet />
           </div>
         </main>
@@ -164,22 +164,22 @@ function SidebarBody({
   const logoUrl = logoAsset.url;
   return (
     <div className="flex h-full flex-col lg:sticky lg:top-0 lg:h-screen">
-      <Link to="/" className="flex items-center gap-3 px-8 pb-10 pt-10 group">
+      <Link to="/" className="flex items-center gap-4 px-10 pb-12 pt-12 group">
         <img
           src={logoUrl}
           alt="SPECTRE"
-          className="h-9 w-9 object-contain shrink-0 transition-transform duration-500 group-hover:scale-110"
+          className="h-10 w-10 object-contain shrink-0 transition-transform duration-700 grayscale group-hover:grayscale-0"
         />
-        <span className="font-display text-lg tracking-tighter text-foreground uppercase">
-          Spectre <span className="text-primary">Hub</span>
+        <span className="font-display text-xl tracking-tighter text-white uppercase group-hover:text-primary transition-colors">
+          SPECTRE
         </span>
       </Link>
 
-      <nav className="flex flex-col gap-8 px-4 py-2 lg:flex-1 overflow-y-auto">
+      <nav className="flex flex-col gap-10 px-6 py-4 lg:flex-1 overflow-y-auto custom-scrollbar">
         {NAV_GROUPS.map((group) => (
-          <div key={group.title}>
-            <div className="font-sans px-4 pb-2 text-[10px] font-bold uppercase tracking-wider text-foreground-muted/50">{group.title}</div>
-            <div className="flex flex-col gap-1">
+          <div key={group.title} className="space-y-4">
+            <div className="font-mono px-4 text-[8px] font-bold uppercase tracking-[0.5em] text-white/10">{group.title}</div>
+            <div className="flex flex-col gap-0.5">
               {group.items.map((item) => {
                 const Icon = item.icon;
                 const active = pathname === item.to;
@@ -187,22 +187,23 @@ function SidebarBody({
                   <Link
                     key={`${item.to}-${item.label}`}
                     to={item.to}
-                    className={`flex items-center gap-3 px-4 py-2 transition-all duration-200 group rounded-lg ${
+                    className={`flex items-center gap-4 px-4 py-3 transition-all duration-500 group relative ${
                       active 
-                        ? "bg-primary/10 text-foreground" 
-                        : "text-foreground-muted hover:text-foreground hover:bg-white/[0.03]"
+                        ? "text-primary bg-primary/[0.03]" 
+                        : "text-white/20 hover:text-white hover:bg-white/[0.01]"
                     }`}
                   >
+                    {active && <div className="absolute left-0 top-0 bottom-0 w-px bg-primary shadow-[0_0_8px_#4DA09E]" />}
                     <Icon
-                      className={`h-4 w-4 shrink-0 transition-colors ${
-                        active ? "text-primary" : "text-foreground-muted group-hover:text-foreground"
+                      className={`h-3.5 w-3.5 shrink-0 transition-colors ${
+                        active ? "text-primary" : "text-white/10 group-hover:text-primary/50"
                       }`}
                     />
-                    <span className="font-sans text-[13px] font-medium">
+                    <span className="font-mono text-[10px] uppercase tracking-[0.2em]">
                       {item.label}
                     </span>
                     {item.soon && (
-                      <span className="ml-auto bg-primary/10 text-primary text-[8px] font-sans font-bold uppercase tracking-wider px-2 py-0.5 rounded-full">beta</span>
+                      <span className="ml-auto bg-primary/10 text-primary text-[7px] font-mono font-bold uppercase tracking-wider px-2 py-0.5">BETA</span>
                     )}
                   </Link>
                 );
@@ -212,16 +213,16 @@ function SidebarBody({
         ))}
       </nav>
 
-      <div className="mt-auto border-t border-border p-4 space-y-2">
+      <div className="mt-auto border-t border-white/5 p-6 space-y-2">
         <AdminNavLink />
         <a 
           href={DISCORD_INVITE} 
           target="_blank" 
           rel="noreferrer" 
-          className="flex items-center gap-3 px-4 py-2.5 text-foreground-muted hover:text-foreground transition-all group rounded-lg hover:bg-white/[0.03]"
+          className="flex items-center gap-4 px-4 py-3 text-white/10 hover:text-white transition-all group"
         >
-          <LifeBuoy className="h-4 w-4 shrink-0 text-foreground-muted group-hover:text-foreground transition-colors" />
-          <span className="font-sans text-[13px] font-medium">Suporte</span>
+          <LifeBuoy className="h-3.5 w-3.5 shrink-0 transition-colors group-hover:text-primary" />
+          <span className="font-mono text-[9px] uppercase tracking-[0.2em]">OPERATIONS_SUPPORT</span>
         </a>
       </div>
     </div>
@@ -275,84 +276,83 @@ function TopBar({ onOpenMenu, pathname }: { onOpenMenu: () => void; pathname: st
 
   return (
     <div
-      className={`sticky top-0 z-20 transition-all duration-300 border-b ${
+      className={`sticky top-0 z-20 transition-all duration-700 border-b ${
         scrolled 
-          ? "bg-background/80 backdrop-blur-xl border-border py-3 px-6" 
-          : "bg-transparent border-transparent py-6 px-10"
+          ? "bg-[#030303]/95 border-white/5 py-6 px-8 sm:px-12" 
+          : "bg-transparent border-transparent py-10 px-10 sm:px-16"
       }`}
     >
-      <div className="mx-auto flex w-full max-w-6xl items-center justify-between gap-3">
-        <div className="flex items-center gap-4">
+      <div className="mx-auto flex w-full max-w-7xl items-center justify-between gap-6">
+        <div className="flex items-center gap-6">
           <button
             onClick={onOpenMenu}
-            className="p-2 border border-border text-foreground-muted hover:text-foreground transition-colors lg:hidden rounded-lg"
+            className="p-3 border border-white/5 text-white/20 hover:text-white transition-colors lg:hidden"
           >
-            <Menu className="h-5 w-5" />
+            <Menu className="h-4 w-4" />
           </button>
           
-          <div className="hidden lg:block">
-            {currentLabel && (
-              <h1 className="font-sans text-[11px] font-bold tracking-wider text-foreground-muted uppercase">
-                Terminal <span className="text-primary/50 mx-2">/</span> {currentLabel}
-              </h1>
-            )}
+          <div className="hidden lg:flex items-center gap-4">
+            <div className="w-1 h-1 bg-primary" />
+            <h1 className="font-mono text-[9px] font-bold tracking-[0.4em] text-white/20 uppercase">
+              NETWORK_LOCAL <span className="text-white/5 mx-3">::</span> {currentLabel || 'STATUS_IDLE'}
+            </h1>
           </div>
 
-          <Link to="/" className="flex items-center gap-2 lg:hidden">
-            <img src={logoAsset.url} alt="SPECTRE" className="h-7 w-7 object-contain" />
-            <span className="font-display text-[10px] tracking-wider uppercase text-foreground">Spectre</span>
+          <Link to="/" className="flex items-center gap-4 lg:hidden">
+            <img src={logoAsset.url} alt="SPECTRE" className="h-8 w-8 object-contain grayscale" />
+            <span className="font-display text-xs tracking-tighter uppercase text-white">SPECTRE</span>
           </Link>
         </div>
 
-        <div className="flex items-center gap-6">
-          <div className="flex items-center gap-2">
-            <div className={`w-1.5 h-1.5 rounded-full ${creds ? 'bg-primary shadow-[0_0_8px_#4DA09E]' : 'bg-foreground-muted/20'}`} />
-            <span className="font-sans text-[9px] font-bold tracking-wider text-foreground-muted/30 uppercase hidden sm:block">
-              {creds ? 'Sistema Operacional' : 'Disconectado'}
+        <div className="flex items-center gap-10">
+          <div className="flex items-center gap-4 border-r border-white/5 pr-10">
+            <div className={`w-1.5 h-1.5 ${creds ? 'bg-primary shadow-[0_0_8px_#4DA09E]' : 'bg-white/5'}`} />
+            <span className="font-mono text-[8px] font-bold tracking-[0.4em] text-white/20 uppercase hidden sm:block">
+              {creds ? 'LINK_ESTABLISHED' : 'LINK_OFFLINE'}
             </span>
           </div>
 
           {creds && me ? (
             <DropdownMenu>
-              <DropdownMenuTrigger className="flex items-center gap-3 p-1 rounded-full border border-border bg-background-secondary hover:border-primary/20 transition-all focus:outline-none pr-3">
-                <div className="w-8 h-8 bg-background border border-border overflow-hidden rounded-full">
+              <DropdownMenuTrigger className="flex items-center gap-4 p-1 border border-white/5 bg-black hover:border-primary/30 transition-all focus:outline-none pr-5">
+                <div className="w-10 h-10 bg-[#030303] border border-white/5 overflow-hidden">
                    {avatarUrl ? (
-                    <img src={avatarUrl} alt="" className="w-full h-full object-cover" />
+                    <img src={avatarUrl} alt="" className="w-full h-full object-cover grayscale" />
                   ) : (
-                    <div className="w-full h-full flex items-center justify-center text-foreground-muted">
+                    <div className="w-full h-full flex items-center justify-center text-white/10">
                       <UserRound className="w-4 h-4" />
                     </div>
                   )}
                 </div>
                 <div className="text-left hidden sm:block">
-                   <div className="font-sans text-[11px] font-bold text-foreground leading-none">{me.global_name || me.username}</div>
-                   <div className="font-sans text-[9px] text-foreground-muted uppercase tracking-wider">Premium</div>
+                   <div className="font-mono text-[9px] text-white uppercase tracking-[0.1em] leading-none mb-1">{me.global_name || me.username}</div>
+                   <div className="font-mono text-[7px] text-primary uppercase tracking-[0.3em] font-bold">OPERATOR_AUTH</div>
                 </div>
               </DropdownMenuTrigger>
-              <DropdownMenuContent align="end" className="w-56 bg-card border-border rounded-xl text-foreground-muted p-2">
-                <DropdownMenuLabel className="font-sans text-[10px] font-bold uppercase tracking-wider text-foreground-muted/50 px-3 py-2">Gerenciar Conta</DropdownMenuLabel>
-                <DropdownMenuSeparator className="bg-border my-1" />
-                <DropdownMenuItem asChild className="focus:bg-primary/10 focus:text-foreground cursor-pointer py-2 rounded-lg">
-                  <Link to="/hub" className="flex items-center gap-3 font-sans text-sm font-medium">
-                    <LayoutDashboard className="w-4 h-4 text-foreground-muted" /> Dashboard
+              <DropdownMenuContent align="end" className="w-64 bg-[#050505] border-white/10 rounded-none text-white/40 p-2 shadow-2xl">
+                <DropdownMenuLabel className="font-mono text-[8px] font-bold uppercase tracking-[0.4em] text-white/20 px-4 py-4">PROTOCOL_MGMT</DropdownMenuLabel>
+                <DropdownMenuSeparator className="bg-white/5 my-2" />
+                <DropdownMenuItem asChild className="focus:bg-white/[0.03] focus:text-primary cursor-pointer py-3 px-4 rounded-none">
+                  <Link to="/hub" className="flex items-center gap-4 font-mono text-[9px] uppercase tracking-widest">
+                    <LayoutDashboard className="w-3.5 h-3.5 text-white/20" /> DASHBOARD_ROOT
                   </Link>
                 </DropdownMenuItem>
-                <DropdownMenuItem asChild className="focus:bg-primary/10 focus:text-foreground cursor-pointer py-2 rounded-lg">
-                  <Link to="/settings" className="flex items-center gap-3 font-sans text-sm font-medium">
-                    <KeyRound className="w-4 h-4 text-foreground-muted" /> Segurança
+                <DropdownMenuItem asChild className="focus:bg-white/[0.03] focus:text-primary cursor-pointer py-3 px-4 rounded-none">
+                  <Link to="/settings" className="flex items-center gap-4 font-mono text-[9px] uppercase tracking-widest">
+                    <KeyRound className="w-3.5 h-3.5 text-white/20" /> SEC_PROTOCOL
                   </Link>
                 </DropdownMenuItem>
-                <DropdownMenuSeparator className="bg-border my-1" />
-                <DropdownMenuItem onClick={() => setConfirmLogout(true)} className="focus:bg-rose-500/10 focus:text-rose-500 cursor-pointer py-2 rounded-lg">
-                   <span className="flex items-center gap-3 font-sans text-sm font-medium">
-                     <LogOut className="w-4 h-4" /> Encerrar Sessão
+                <DropdownMenuSeparator className="bg-white/5 my-2" />
+                <DropdownMenuItem onClick={() => setConfirmLogout(true)} className="focus:bg-rose-500/5 focus:text-rose-500 cursor-pointer py-3 px-4 rounded-none">
+                   <span className="flex items-center gap-4 font-mono text-[9px] uppercase tracking-widest">
+                     <LogOut className="w-3.5 h-3.5" /> TERMINATE_LINK
                    </span>
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
           ) : (
-            <Link to="/settings" className="ds-btn ds-btn-primary !py-2 !px-5 !text-[11px] !min-height-0 h-9 rounded-full">
-               Entrar
+            <Link to="/settings" className="ds-btn ds-btn-primary !py-2 !px-8 !text-[10px] uppercase tracking-widest !h-10">
+               INITIALIZE
             </Link>
           )}
         </div>

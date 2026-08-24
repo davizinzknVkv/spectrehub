@@ -16,7 +16,8 @@ import {
   User, 
   Settings, 
   Bell, 
-  Fingerprint 
+  Fingerprint,
+  X 
 } from "lucide-react";
 import { Button, Input, Modal } from "@/components/ui/ds";
 import step1 from "@/assets/tutorial-step-1.png.asset.json";
@@ -78,24 +79,26 @@ function SettingsPage() {
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8 pt-8">
         {/* Sidebar de Categorias */}
-        <div className="space-y-2">
+        <div className="space-y-4">
            {[
-             { id: "geral", label: "Geral", icon: Settings },
-             { id: "conta", label: "Conta & Discord", icon: User },
-             { id: "seguranca", label: "Segurança", icon: Lock },
-             { id: "interface", label: "Interface", icon: Eye },
-             { id: "notificacoes", label: "Notificações", icon: Bell },
+             { id: "geral", label: "GENERAL_SYS", icon: Settings },
+             { id: "conta", label: "ACCOUNT_LINK", icon: User },
+             { id: "seguranca", label: "SECURITY_AUTH", icon: Lock },
+             { id: "interface", label: "INTERFACE_UI", icon: Eye },
+             { id: "notificacoes", label: "NOTIF_STREAM", icon: Bell },
            ].map(cat => (
              <button 
               key={cat.id} 
               onClick={() => setCategory(cat.id)}
               className={cn(
-                "w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-200 text-left font-medium text-sm",
-                category === cat.id ? "bg-primary/10 text-foreground" : "text-foreground-muted hover:text-foreground hover:bg-white/[0.03]"
+                "w-full flex items-center gap-4 px-6 py-4 transition-all duration-300 border-l-2 text-left",
+                category === cat.id 
+                  ? "bg-primary/5 text-white border-primary" 
+                  : "text-white/20 hover:text-white/60 hover:bg-white/[0.02] border-transparent"
               )}
              >
-               <cat.icon className={cn("w-4 h-4", category === cat.id ? "text-primary" : "text-foreground-muted")} />
-               {cat.label}
+               <cat.icon className={cn("w-4 h-4", category === cat.id ? "text-primary" : "text-white/10")} />
+               <span className="font-display text-[11px] uppercase tracking-wider">{cat.label}</span>
              </button>
            ))}
         </div>
@@ -105,35 +108,37 @@ function SettingsPage() {
           {category === "geral" && (
             <>
               {/* Sessão de Acesso */}
-              <section className="ds-card !p-8 border-border bg-card/30 rounded-xl space-y-6">
-            <div className="flex items-center gap-3 border-b border-border pb-6">
-              <KeyRound className="w-5 h-5 text-primary" />
-              <div>
-                <h3 className="font-sans text-base font-bold text-foreground">Acesso ao Terminal</h3>
-                <p className="text-xs text-foreground-muted">Gerencie sua chave de autorização do Discord.</p>
-              </div>
-            </div>
+              <section className="bg-[#030303] border border-white/5 p-10 space-y-10 relative">
+                <div className="absolute top-0 right-0 w-1 h-1 bg-primary" />
+                
+                <div className="flex items-center gap-4 border-b border-white/5 pb-8">
+                  <KeyRound className="w-5 h-5 text-primary opacity-50" />
+                  <div>
+                    <h3 className="font-display text-base text-white uppercase tracking-tighter">Acesso ao Terminal</h3>
+                    <div className="font-mono text-[8px] text-white/20 uppercase tracking-[0.4em]">AUTH_GATEWAY_CREDENTIALS</div>
+                  </div>
+                </div>
 
-            {creds && (
-              <div className="p-4 rounded-lg bg-primary/5 border border-primary/20 flex justify-between items-center">
-                 <div className="flex items-center gap-3">
-                    <div className="w-2 h-2 rounded-full bg-primary animate-pulse" />
-                    <span className="font-sans text-xs font-semibold text-foreground">Conexão Ativa</span>
-                 </div>
-                 <button onClick={() => setConfirmDisconnect(true)} className="text-xs font-bold text-primary hover:text-foreground transition-colors">Encerrar</button>
-              </div>
-            )}
+                {creds && (
+                  <div className="p-6 bg-primary/5 border border-primary/20 flex justify-between items-center group">
+                     <div className="flex items-center gap-4">
+                        <div className="w-1.5 h-1.5 rounded-full bg-primary shadow-[0_0_8px_#4DA09E]" />
+                        <span className="font-display text-[10px] text-white uppercase tracking-wider">Conexão Ativa</span>
+                     </div>
+                     <button onClick={() => setConfirmDisconnect(true)} className="font-mono text-[9px] text-primary hover:text-white transition-colors uppercase tracking-widest">TERMINATE_SESSION</button>
+                  </div>
+                )}
 
-            <div className="grid grid-cols-2 gap-px bg-border rounded-lg overflow-hidden p-[1px]">
-               <button 
-                 onClick={() => setTab("email")}
-                 className={cn("py-2.5 font-sans text-xs font-bold transition-all", tab === 'email' ? 'bg-primary text-white' : 'bg-background-secondary text-foreground-muted hover:text-foreground')}
-               >E-mail</button>
-               <button 
-                 onClick={() => setTab("token")}
-                 className={cn("py-2.5 font-sans text-xs font-bold transition-all", tab === 'token' ? 'bg-primary text-white' : 'bg-background-secondary text-foreground-muted hover:text-foreground')}
-               >Token</button>
-            </div>
+                <div className="grid grid-cols-2 gap-px bg-white/5 border border-white/5 overflow-hidden">
+                   <button 
+                     onClick={() => setTab("email")}
+                     className={cn("py-4 font-display text-[10px] uppercase tracking-widest transition-all", tab === 'email' ? 'bg-primary text-white' : 'bg-transparent text-white/20 hover:text-white/60')}
+                   >EMAIL_ENTRY</button>
+                   <button 
+                     onClick={() => setTab("token")}
+                     className={cn("py-4 font-display text-[10px] uppercase tracking-widest transition-all", tab === 'token' ? 'bg-primary text-white' : 'bg-transparent text-white/20 hover:text-white/60')}
+                   >TOKEN_PIPE</button>
+                </div>
 
             {tab === 'email' ? (
               <div className="text-center py-12 space-y-4">
@@ -162,27 +167,25 @@ function SettingsPage() {
                     </div>
                   </div>
                   
-                  <div className="pt-6 mt-6 border-t border-white/5 space-y-4">
+                  <div className="pt-10 mt-10 border-t border-white/5 space-y-6">
                     <div className="flex items-center justify-between">
-                      <h4 className="font-display text-[9px] font-bold text-white/30 uppercase tracking-[0.2em] italic">Contas Salvas</h4>
-                      <span className="w-4 h-4 rounded-full bg-white/5 flex items-center justify-center font-display text-[8px] text-white/40 italic">1</span>
+                      <h4 className="font-mono text-[8px] text-white/20 uppercase tracking-[0.4em]">CACHED_TERMINALS</h4>
+                      <span className="font-mono text-[8px] text-primary">01</span>
                     </div>
                     
                     <div className="group relative">
-                      <div className="ds-card !p-4 border-border bg-background flex items-center justify-between hover:border-primary/30 transition-all duration-300 rounded-lg cursor-pointer">
+                      <div className="bg-white/[0.02] border border-white/5 p-6 flex items-center justify-between hover:border-primary/30 transition-all duration-500 cursor-pointer">
                         <div className="flex items-center gap-4">
-                          <div className="w-10 h-10 border border-white/5 bg-primary/10 flex items-center justify-center text-primary">
-                            <svg viewBox="0 0 24 24" className="w-5 h-5" fill="currentColor">
-                              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
-                            </svg>
+                          <div className="w-10 h-10 bg-primary/10 flex items-center justify-center text-primary group-hover:bg-primary/20 transition-colors">
+                            <User className="w-5 h-5" />
                           </div>
-                          <div className="text-left">
-                            <div className="font-display text-xs text-white uppercase italic tracking-wider">euvictors2</div>
-                            <div className="font-display text-[9px] text-white/20 uppercase tracking-[0.1em] mt-0.5">Toque para conectar</div>
+                          <div>
+                            <div className="font-display text-[11px] text-white uppercase tracking-wider">euvictors2</div>
+                            <div className="font-mono text-[8px] text-white/10 uppercase tracking-[0.2em] mt-1">RESTORE_PROTOCOL_AVAILABLE</div>
                           </div>
                         </div>
-                        <button type="button" className="p-2 text-white/10 hover:text-rose-500 transition-colors opacity-0 group-hover:opacity-100">
-                          <svg viewBox="0 0 24 24" className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2"><path d="M3 6h18M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2M10 11v6M14 11v6"/></svg>
+                        <button type="button" className="p-2 text-white/5 hover:text-rose-500 transition-colors opacity-0 group-hover:opacity-100">
+                           <X className="w-4 h-4" />
                         </button>
                       </div>
                     </div>
@@ -218,33 +221,33 @@ function SettingsPage() {
             <h3 className="font-sans text-sm font-bold uppercase tracking-widest text-foreground-muted/50 border-b border-border pb-4">Manual de Extração</h3>
             
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div className="ds-card !p-6 border-border bg-card/20 rounded-xl space-y-4 hover:border-primary/20 transition-all">
-                <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center text-primary font-bold text-xs">01</div>
-                <h4 className="font-sans text-sm font-bold text-foreground">Bookmarklet Helper</h4>
-                <p className="text-xs text-foreground-muted leading-relaxed">Arraste para sua barra de favoritos e clique enquanto estiver no Discord.</p>
+              <div className="bg-[#030303] border border-white/5 p-8 space-y-6 group hover:border-primary/20 transition-all">
+                <div className="font-mono text-[9px] text-primary mb-2">AUTH_MODULE_01</div>
+                <h4 className="font-display text-sm text-white uppercase tracking-wider">Bookmarklet Helper</h4>
+                <p className="font-sans text-[11px] text-white/30 uppercase tracking-[0.1em] leading-relaxed">Arraste para sua barra de favoritos e clique enquanto estiver no Discord.</p>
                 <a 
                   href={TOKEN_BOOKMARKLET}
                   onClick={(e) => e.preventDefault()}
-                  className="ds-btn ds-btn-primary w-full !text-xs rounded-lg cursor-grab active:cursor-grabbing gap-2"
+                  className="ds-btn ds-btn-primary w-full !text-[10px] !h-12 cursor-grab active:cursor-grabbing flex items-center justify-center gap-3"
                 >
                   <Star className="w-3.5 h-3.5" />
-                  SPECTRE HELPER
+                  SPECTRE_HELPER_V2
                 </a>
               </div>
 
-              <div className="ds-card !p-6 border-border bg-card/20 rounded-xl space-y-4 hover:border-primary/20 transition-all">
-                <div className="w-8 h-8 rounded-lg bg-foreground-muted/10 flex items-center justify-center text-foreground-muted font-bold text-xs">02</div>
-                <h4 className="font-sans text-sm font-bold text-foreground">Extração via Console</h4>
-                <p className="text-xs text-foreground-muted leading-relaxed">Utilize o script direto no console do desenvolvedor (F12).</p>
+              <div className="bg-[#030303] border border-white/5 p-8 space-y-6 group hover:border-primary/20 transition-all">
+                <div className="font-mono text-[9px] text-white/10 mb-2">AUTH_MODULE_02</div>
+                <h4 className="font-display text-sm text-white uppercase tracking-wider">Extração via Console</h4>
+                <p className="font-sans text-[11px] text-white/30 uppercase tracking-[0.1em] leading-relaxed">Utilize o script direto no console do desenvolvedor (F12).</p>
                 <button 
                    onClick={() => {
                      navigator.clipboard.writeText(`(webpackChunkdiscord_app.push([[''],{},e=>{m=[];for(c in e.c)m.push(e.c[c])}]),m).find(m=>m?.exports?.default?.getToken!==void 0).exports.default.getToken()`);
                      toast.success("Código Copiado", { description: "Cole no console do Discord (F12)" });
                    }}
-                   className="ds-btn ds-btn-secondary w-full !text-xs rounded-lg gap-2"
+                   className="ds-btn ds-btn-secondary w-full !text-[10px] !h-12 flex items-center justify-center gap-3"
                  >
                    <Copy className="w-3.5 h-3.5" />
-                   COPIAR SCRIPT
+                   EXTRACT_STDOUT
                  </button>
               </div>
             </div>

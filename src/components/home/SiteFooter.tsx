@@ -11,42 +11,39 @@ export function SiteFooter({ guildInvite }: SiteFooterProps) {
   const { t } = useTranslation();
 
   return (
-    <footer className="bg-black pt-32 pb-16 relative overflow-hidden">
-      {/* Background Decor */}
-      <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-white/5 to-transparent" />
-      <div className="absolute inset-0 opacity-[0.02] pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle, #fff 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
+    <footer className="bg-[#030303] pt-48 pb-24 relative overflow-hidden">
+      <div className="absolute top-0 left-0 w-full h-px bg-white/5" />
       
-      <div className="mx-auto max-w-7xl px-4 md:px-8 relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[1.5fr_1fr_1fr_1fr] gap-12 lg:gap-20 mb-24">
-          <div className="max-w-md">
-            <Link to="/" className="flex items-center gap-3 mb-8 group">
-              <div className="relative">
-                <div className="absolute inset-0 bg-primary/20 blur-lg rounded-full scale-0 group-hover:scale-150 transition-transform duration-500" />
-                <img
-                  src={logoAsset.url}
-                  alt="SPECTRE"
-                  className="w-12 h-12 object-contain relative z-10 transition-transform duration-500 group-hover:rotate-12"
-                />
-              </div>
-              <span className="font-display text-3xl tracking-tighter text-white uppercase italic">
-                Spectre <span className="text-primary">Hub</span>
+      <div className="mx-auto max-w-7xl px-6 md:px-20 relative z-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-24 mb-32">
+          <div className="lg:col-span-5 max-w-sm space-y-12">
+            <Link to="/" className="flex items-center gap-4">
+              <img
+                src={logoAsset.url}
+                alt="SPECTRE"
+                className="w-8 h-8 object-contain"
+              />
+              <span className="font-display text-2xl tracking-[0.2em] text-white uppercase italic">
+                SPECTRE
               </span>
             </Link>
-            <p className="font-sans text-white/30 leading-relaxed text-sm uppercase tracking-[0.2em] mb-10 max-w-xs">
-              {t('footer.slogan')}
-            </p>
-            <div className="flex gap-6">
+            <div className="border-l border-white/5 pl-8">
+              <p className="font-mono text-white/20 leading-loose text-[10px] uppercase tracking-[0.2em] italic">
+                {t('footer.slogan')}
+              </p>
+            </div>
+            <div className="flex gap-10">
                {[
-                 { label: "INSTAGRAM", href: "https://instagram.com/davizinzkn" },
-                 { label: "YOUTUBE", href: "https://youtube.com/@ODAVIZINZKN" },
-                 { label: "DISCORD", href: "https://discord.gg/vbYK559Jnb" }
+                 { label: "IG", href: "https://instagram.com/davizinzkn" },
+                 { label: "YT", href: "https://youtube.com/@ODAVIZINZKN" },
+                 { label: "DC", href: "https://discord.gg/vbYK559Jnb" }
                 ].map(social => (
                   <a 
                     key={social.label} 
                     href={social.href} 
                     target="_blank" 
                     rel="noopener noreferrer" 
-                    className="font-display text-[9px] tracking-[0.3em] text-white/20 hover:text-primary transition-all hover:translate-y-[-2px] uppercase italic border-b border-white/0 hover:border-primary/30 pb-1"
+                    className="font-mono text-[9px] tracking-[0.5em] text-white/10 hover:text-primary transition-all duration-500 uppercase"
                   >
                     {social.label}
                   </a>
@@ -54,77 +51,72 @@ export function SiteFooter({ guildInvite }: SiteFooterProps) {
             </div>
           </div>
 
-          <div>
-            <h3 className="font-display text-[11px] tracking-[0.4em] text-primary uppercase italic mb-8 flex items-center gap-2">
-              <span className="w-4 h-[1px] bg-primary/30" />
-              {t('nav.systems')}
-            </h3>
-            <ul className="space-y-4">
-              {["AUTO QUESTS", "OPTIMIZER", "NICKS-GUN", "SERVER CONTROL"].map(item => (
-                <li key={item}>
-                  <a href="#" className="font-display text-[10px] text-white/30 hover:text-white transition-colors uppercase tracking-[0.2em] italic flex items-center gap-2 group">
-                    <span className="w-1 h-1 bg-primary/0 group-hover:bg-primary transition-all" />
-                    {item}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
+          <div className="lg:col-span-7 grid grid-cols-2 md:grid-cols-3 gap-16">
+            <div className="space-y-12">
+              <div className="flex items-center gap-3">
+                <div className="w-1 h-1 bg-primary" />
+                <h3 className="font-mono text-[8px] tracking-[0.5em] text-white/20 uppercase">SYSTEMS_LIST</h3>
+              </div>
+              <ul className="space-y-6">
+                {["AUTO_QUESTS", "OPTIMIZER", "NICKS_GUN", "SERVER_CTL"].map(item => (
+                  <li key={item}>
+                    <a href="#" className="font-mono text-[9px] text-white/10 hover:text-white transition-all duration-500 uppercase tracking-[0.3em]">
+                      {item}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
 
-          <div>
-            <h3 className="font-display text-[11px] tracking-[0.4em] text-white/40 uppercase italic mb-8 flex items-center gap-2">
-              <span className="w-4 h-[1px] bg-white/10" />
-              MENU
-            </h3>
-            <ul className="space-y-4">
-              {[
-                { label: t('footer.navHome'), href: "#topo" },
-                { label: t('footer.navPlans'), href: "#planos" },
-                { label: t('footer.navCommunity'), href: "#comunidade" },
-                { label: t('footer.navDashboard'), href: "/hub" }
-              ].map(item => (
-                <li key={item.label}>
-                  <a href={item.href} className="font-display text-[10px] text-white/30 hover:text-white transition-colors uppercase tracking-[0.2em] italic flex items-center gap-2 group">
-                     <span className="w-1 h-1 bg-white/0 group-hover:bg-white/40 transition-all" />
-                     {item.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
+            <div className="space-y-12">
+              <div className="flex items-center gap-3">
+                <div className="w-1 h-1 bg-white/20" />
+                <h3 className="font-mono text-[8px] tracking-[0.5em] text-white/20 uppercase">ROOT_MENU</h3>
+              </div>
+              <ul className="space-y-6">
+                {[
+                  { label: t('footer.navHome'), href: "#topo" },
+                  { label: t('footer.navPlans'), href: "#planos" },
+                  { label: t('footer.navDashboard'), href: "/hub" }
+                ].map(item => (
+                  <li key={item.label}>
+                    <a href={item.href} className="font-mono text-[9px] text-white/10 hover:text-white transition-all duration-500 uppercase tracking-[0.3em]">
+                       {item.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
 
-          <div>
-            <h3 className="font-display text-[11px] tracking-[0.4em] text-white/40 uppercase italic mb-8 flex items-center gap-2">
-              <span className="w-4 h-[1px] bg-white/10" />
-              LEGAL
-            </h3>
-            <ul className="space-y-4">
-              {[t('footer.legalPrivacy'), t('footer.legalTerms'), "DOCUMENTAÇÃO"].map(item => (
-                <li key={item}>
-                  <a href={item === "DOCUMENTAÇÃO" ? "/docs" : "#"} className="font-display text-[10px] text-white/30 hover:text-white transition-colors uppercase tracking-[0.2em] italic flex items-center gap-2 group">
-                    <span className="w-1 h-1 bg-white/0 group-hover:bg-white/40 transition-all" />
-                    {item}
-                  </a>
-                </li>
-              ))}
-            </ul>
+            <div className="space-y-12">
+              <div className="flex items-center gap-3">
+                <div className="w-1 h-1 bg-white/20" />
+                <h3 className="font-mono text-[8px] tracking-[0.5em] text-white/20 uppercase">LEGAL_PROTO</h3>
+              </div>
+              <ul className="space-y-6">
+                {[t('footer.legalPrivacy'), t('footer.legalTerms'), "DOCS"].map(item => (
+                  <li key={item}>
+                    <a href={item === "DOCS" ? "/docs" : "#"} className="font-mono text-[9px] text-white/10 hover:text-white transition-all duration-500 uppercase tracking-[0.3em]">
+                      {item}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
         </div>
 
-        <div className="pt-12 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-6">
-          <div className="font-display text-[9px] tracking-[0.3em] text-white/20 uppercase italic">
+        <div className="pt-20 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-12">
+          <div className="font-mono text-[8px] tracking-[0.6em] text-white/10 uppercase">
              {t('footer.rights')}
           </div>
-          <div className="flex items-center gap-6">
-            <div className="font-display text-[9px] tracking-[0.3em] text-white/20 uppercase italic flex items-center gap-2">
-               <span className="w-2 h-2 rounded-full bg-green-500/20 flex items-center justify-center">
-                 <span className="w-1 h-1 rounded-full bg-green-500" />
-               </span>
-               SYSTEMS OPERATIONAL
+          <div className="flex items-center gap-16">
+            <div className="font-mono text-[8px] tracking-[0.5em] text-emerald-500 flex items-center gap-4 uppercase">
+               <span className="w-1.5 h-1.5 bg-emerald-500 shadow-[0_0_8px_#10b981] animate-pulse" />
+               SYS_ACTIVE_NODE_1
             </div>
-            <div className="w-px h-3 bg-white/10" />
-            <div className="font-display text-[9px] tracking-[0.3em] text-white/10 uppercase italic">
-               PROPERTY OF SPECTRE GROUP
+            <div className="font-mono text-[8px] tracking-[0.5em] text-white/10 uppercase">
+               PROP_SPECTRE_GRP_ELITE
             </div>
           </div>
         </div>

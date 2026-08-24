@@ -109,60 +109,59 @@ function SpotifyGenPage() {
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         <div className="lg:col-span-1 space-y-6">
-          <Card className="p-8 border-white/5 bg-white/[0.02] space-y-8 relative overflow-hidden">
-            {/* Ambient Pink Glow */}
-            <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 blur-[60px] -translate-y-1/2 translate-x-1/2" />
+          <div className="bg-[#030303] border border-white/5 p-10 space-y-10 relative">
+            <div className="absolute top-0 right-0 w-1 h-1 bg-primary" />
             
-            <div className="flex items-center gap-4 relative z-10">
-              <div className="w-12 h-12 flex items-center justify-center border border-primary/20 bg-primary/5 text-primary">
-                <Music className="w-6 h-6" />
+            <div className="flex items-center gap-6">
+              <div className="w-14 h-14 flex items-center justify-center border border-primary/20 bg-primary/5 text-primary">
+                <Music className="w-6 h-6 opacity-50" />
               </div>
-              <div>
-                <h3 className="font-display text-lg text-white uppercase italic tracking-widest leading-none">Gerar links Spotify</h3>
-                <p className="text-[9px] text-white/30 uppercase tracking-[0.2em] mt-2 font-bold font-sans">Protocolo de Campanha</p>
+              <div className="space-y-2">
+                <h3 className="font-display text-base text-white uppercase tracking-tighter">SPOTIFY_GEN_PROTOCOL</h3>
+                <p className="font-mono text-[8px] text-white/20 uppercase tracking-[0.4em]">SOURCE_LINK_GENERATOR</p>
               </div>
             </div>
 
-            <div className="space-y-6 relative z-10">
-              <div className="space-y-2">
-                <label className="font-display text-[9px] uppercase tracking-widest text-white/40 italic block px-1">Quantidade de links</label>
+            <div className="space-y-8">
+              <div className="space-y-4">
+                <label className="font-mono text-[8px] uppercase tracking-[0.5em] text-white/20 px-1 block">LINK_QUANTITY</label>
                 <Input 
                   type="number" 
                   min={1} 
                   max={100} 
                   value={quantity} 
                   onChange={(e) => setQuantity(parseInt(e.target.value) || 0)}
-                  className="bg-obsidian border-white/10 font-mono text-xs focus:border-primary/50 transition-all"
+                  className="bg-transparent border-white/10 font-mono text-xs focus:border-primary/50 transition-all rounded-none h-12"
                 />
-                <p className="text-[8px] text-white/20 uppercase tracking-widest pl-1">Máximo: 100 por lote</p>
+                <p className="font-mono text-[7px] text-white/10 uppercase tracking-[0.3em] pl-1">MAX_BATCH: 100_UNITS</p>
               </div>
 
-              <div className="space-y-4">
-                 <div className="space-y-2">
-                    <label className="font-display text-[9px] uppercase tracking-widest text-white/40 italic block px-1">UTM Source</label>
+              <div className="space-y-6">
+                 <div className="space-y-3">
+                    <label className="font-mono text-[8px] uppercase tracking-[0.5em] text-white/20 px-1 block">UTM_SOURCE</label>
                     <Input 
-                      placeholder="Ex: spectre" 
+                      placeholder="IDENTIFIER" 
                       value={utmSource} 
                       onChange={(e) => setUtmSource(e.target.value)}
-                      className="bg-obsidian border-white/10 font-mono text-xs focus:border-primary/50 transition-all"
+                      className="bg-transparent border-white/10 font-mono text-xs focus:border-primary/50 transition-all rounded-none h-12"
                     />
                  </div>
-                 <div className="space-y-2">
-                    <label className="font-display text-[9px] uppercase tracking-widest text-white/40 italic block px-1">UTM Medium</label>
+                 <div className="space-y-3">
+                    <label className="font-mono text-[8px] uppercase tracking-[0.5em] text-white/20 px-1 block">UTM_MEDIUM</label>
                     <Input 
-                      placeholder="Ex: discord" 
+                      placeholder="CHANNEL" 
                       value={utmMedium} 
                       onChange={(e) => setUtmMedium(e.target.value)}
-                      className="bg-obsidian border-white/10 font-mono text-xs focus:border-primary/50 transition-all"
+                      className="bg-transparent border-white/10 font-mono text-xs focus:border-primary/50 transition-all rounded-none h-12"
                     />
                  </div>
-                 <div className="space-y-2">
-                    <label className="font-display text-[9px] uppercase tracking-widest text-white/40 italic block px-1">UTM Campaign</label>
+                 <div className="space-y-3">
+                    <label className="font-mono text-[8px] uppercase tracking-[0.5em] text-white/20 px-1 block">UTM_CAMPAIGN</label>
                     <Input 
-                      placeholder="Ex: spotify" 
+                      placeholder="TRACKING_TAG" 
                       value={utmCampaign} 
                       onChange={(e) => setUtmCampaign(e.target.value)}
-                      className="bg-obsidian border-white/10 font-mono text-xs focus:border-primary/50 transition-all"
+                      className="bg-transparent border-white/10 font-mono text-xs focus:border-primary/50 transition-all rounded-none h-12"
                     />
                  </div>
               </div>
@@ -170,94 +169,89 @@ function SpotifyGenPage() {
               <button 
                 onClick={handleGenerate}
                 disabled={loading}
-                className="ds-btn ds-btn-primary w-full py-4 flex items-center justify-center gap-3 disabled:opacity-50"
+                className="ds-btn ds-btn-primary w-full h-14 flex items-center justify-center gap-4 disabled:opacity-50 !text-[10px] uppercase tracking-[0.3em]"
               >
                 {loading ? (
                   <>
                     <RefreshCw className="w-4 h-4 animate-spin" />
-                    Gerando Protocolos...
+                    INITIALIZING_DATA...
                   </>
                 ) : (
                   <>
                     <Music className="w-4 h-4" />
-                    Gerar Links de Campanha
+                    START_GENERATION
                   </>
                 )}
               </button>
             </div>
-          </Card>
+          </div>
 
-          <Card className="p-6 border-white/5 bg-white/[0.01] border-dashed">
-             <div className="flex flex-col gap-4">
-               <div className="flex items-center gap-2 text-white/40">
+          <div className="bg-[#030303] border border-white/5 p-8 space-y-8">
+             <div className="flex flex-col gap-6">
+               <div className="flex items-center gap-3 text-white/20">
                   <AlertCircle className="w-4 h-4" />
-                  <h4 className="font-display text-[9px] uppercase tracking-widest italic font-bold">Aviso Legal</h4>
+                  <h4 className="font-mono text-[8px] uppercase tracking-[0.5em]">LEGAL_DISCLAIMER_NOTICE</h4>
                </div>
-               <p className="text-[9px] text-white/30 uppercase tracking-[0.15em] font-sans italic leading-relaxed">
-                  Esta ferramenta gera links legítimos de redirecionamento do Spotify com parâmetros UTM para rastreamento de campanhas. Não gera contas premium, vouchers ou assinaturas gratuitas.
+               <p className="font-mono text-[9px] text-white/20 uppercase tracking-[0.1em] leading-relaxed">
+                  Esta ferramenta gera links legítimos de redirecionamento do Spotify com parâmetros UTM para rastreamento de campanhas. Não gera contas premium ou vouchers.
                </p>
-               <div className="pt-4 border-t border-white/5 space-y-4">
+               <div className="pt-8 border-t border-white/5 space-y-6">
                  <div className="flex items-center justify-between">
-                    <p className="text-[10px] text-white/40 uppercase tracking-widest font-bold">Estoque Disponível</p>
-                    <div className="flex items-center gap-2">
+                    <p className="font-mono text-[8px] text-white/40 uppercase tracking-[0.4em]">CURRENT_STOCK_STATE</p>
+                    <div className="flex items-center gap-3">
                       <div className={cn("w-1.5 h-1.5 rounded-full", (stock || 0) > 0 ? "bg-emerald-500 shadow-[0_0_8px_#10b981]" : "bg-primary shadow-[0_0_8px_#4DA09E]")} />
                       <span className="font-mono text-xs text-white">{stock !== null ? stock : "---"}</span>
                     </div>
                  </div>
-                 <div className="space-y-1">
-                   <p className="text-[10px] text-primary uppercase tracking-widest font-bold italic">
-                     Restrição de Acesso:
-                   </p>
-                   <p className="text-[9px] text-white/50 uppercase tracking-[0.1em] mt-1">
-                     O acesso ao Spotify Gen está disponível apenas para membros Premium (30 dias) e Lifetime. Planos Free e Booster não possuem acesso a esta funcionalidade.
-                   </p>
+                 <div className="space-y-3">
+                    <p className="font-mono text-[8px] text-primary uppercase tracking-[0.4em]">ACCESS_REQUIREMENTS</p>
+                    <p className="font-mono text-[9px] text-white/30 uppercase tracking-[0.1em] leading-relaxed">
+                      O acesso ao Spotify Gen está disponível apenas para membros PREMIUM e LIFETIME. Planos Free e Booster estão desativados.
+                    </p>
                  </div>
                </div>
              </div>
-          </Card>
+          </div>
         </div>
 
         <div className="lg:col-span-2 space-y-6">
-           <Card className="p-8 border-white/5 bg-white/[0.02] flex flex-col h-full min-h-[500px]">
-              <div className="flex items-center justify-between mb-8">
-                 <div className="flex items-center gap-3">
+           <div className="bg-[#030303] border border-white/5 p-10 flex flex-col h-full min-h-[600px] relative">
+              <div className="absolute top-0 left-0 w-1 h-1 bg-white/20" />
+              <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-10 gap-6">
+                 <div className="flex items-center gap-4">
                     <div className="w-1.5 h-1.5 rounded-full bg-primary shadow-[0_0_8px_#4DA09E]" />
-                    <h3 className="font-display text-sm text-white uppercase italic tracking-widest">Output de Resultados</h3>
+                    <h3 className="font-display text-base text-white uppercase tracking-tighter">TERMINAL_STDOUT_RESULTS</h3>
                  </div>
                  
-                 <div className="flex items-center gap-3">
-                    <Button 
-                      variant="secondary" 
-                      size="sm" 
+                 <div className="flex items-center gap-4 w-full sm:w-auto">
+                    <button 
                       onClick={handleCopy} 
                       disabled={links.length === 0}
-                      className="!text-[9px] !py-2 !h-auto flex items-center gap-2"
+                      className="h-10 px-6 border border-white/10 text-[9px] font-mono uppercase tracking-[0.2em] flex items-center gap-3 hover:border-primary/40 hover:text-primary transition-all disabled:opacity-20"
                     >
-                       <Copy className="w-3 h-3" /> Copiar
-                    </Button>
-                    <Button 
-                      variant="secondary" 
-                      size="sm" 
+                       <Copy className="w-3 h-3" /> COPY_ALL
+                    </button>
+                    <button 
                       onClick={handleDownload} 
                       disabled={links.length === 0}
-                      className="!text-[9px] !py-2 !h-auto flex items-center gap-2"
+                      className="h-10 px-6 border border-white/10 text-[9px] font-mono uppercase tracking-[0.2em] flex items-center gap-3 hover:border-primary/40 hover:text-primary transition-all disabled:opacity-20"
                     >
-                       <Download className="w-3 h-3" /> Baixar .TXT
-                    </Button>
+                       <Download className="w-3 h-3" /> EXPORT_TXT
+                    </button>
                  </div>
               </div>
 
-              <div className="flex-1 bg-black/40 border border-white/5 p-6 font-mono text-[11px] text-white/60 overflow-y-auto custom-scrollbar relative">
+              <div className="flex-1 bg-black/20 border border-white/5 p-8 font-mono text-[10px] text-white/40 overflow-y-auto custom-scrollbar relative">
                  <AnimatePresence mode="wait">
                    {links.length > 0 ? (
                      <motion.div 
                        initial={{ opacity: 0 }}
                        animate={{ opacity: 1 }}
                        exit={{ opacity: 0 }}
-                       className="space-y-2"
+                       className="space-y-3"
                      >
                        {links.map((link, i) => (
-                         <div key={i} className="py-1 border-b border-white/[0.02] break-all hover:text-white transition-colors">
+                         <div key={i} className="py-2 border-b border-white/5 break-all hover:text-white transition-colors uppercase tracking-[0.1em]">
                            {link}
                          </div>
                        ))}
@@ -266,27 +260,27 @@ function SpotifyGenPage() {
                      <motion.div 
                        initial={{ opacity: 0 }}
                        animate={{ opacity: 1 }}
-                       className="h-full flex flex-col items-center justify-center gap-4 text-white/10"
+                       className="h-full flex flex-col items-center justify-center gap-6 text-white/5"
                      >
-                        <div className="w-16 h-16 border border-white/5 flex items-center justify-center opacity-20">
-                           <Music className="w-8 h-8" />
+                        <div className="w-20 h-20 border border-white/5 flex items-center justify-center">
+                           <Music className="w-10 h-10 opacity-10" />
                         </div>
-                        <span className="text-[10px] uppercase tracking-[0.3em] italic">Aguardando geração...</span>
+                        <span className="font-mono text-[9px] uppercase tracking-[0.5em]">SYSTEM_WAITING_FOR_INPUT...</span>
                      </motion.div>
                    )}
                  </AnimatePresence>
               </div>
 
               {links.length > 0 && (
-                <div className="mt-6 flex items-center justify-between text-[9px] uppercase tracking-widest text-white/30 italic">
-                   <div className="flex items-center gap-2">
-                      <CheckCircle2 className="w-3 h-3 text-primary" />
-                      {links.length} Protocolos Gerados
+                <div className="mt-8 flex items-center justify-between font-mono text-[8px] uppercase tracking-[0.3em] text-white/10">
+                   <div className="flex items-center gap-4">
+                      <div className="w-1.5 h-1.5 rounded-full bg-emerald-500/50" />
+                      {links.length} DATA_PACKETS_READY
                    </div>
-                   <span>Terminal Ativo</span>
+                   <span className="text-primary/40">PROTOCOL_ACTIVE</span>
                 </div>
               )}
-           </Card>
+           </div>
         </div>
       </div>
     </div>

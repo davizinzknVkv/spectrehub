@@ -134,29 +134,27 @@ function MissoesPage() {
             cooldownLeft={cooldownLeft}
           />
 
-          <div className="flex flex-col sm:flex-row justify-between items-center bg-card/30 border border-border p-6 rounded-xl gap-6">
-             <div className="flex flex-col">
-                <div className="font-sans text-xs font-bold uppercase tracking-wider text-foreground-muted/50">
-                  Estado do Terminal
-                </div>
-                <div className="font-sans text-[13px] font-semibold text-foreground">
-                  {quests.length} Missões Escaneadas
+          <div className="flex flex-col sm:flex-row justify-between items-center bg-[#030303] border border-white/5 p-8 gap-10">
+             <div className="flex flex-col space-y-2">
+                <div className="font-mono text-[8px] uppercase tracking-[0.4em] text-white/10">TERMINAL_STATE</div>
+                <div className="font-display text-[13px] text-white uppercase tracking-wider">
+                  {quests.length} NODES_DETECTED
                 </div>
              </div>
-             <div className="flex gap-2 sm:gap-3 flex-wrap w-full sm:w-auto">
+             <div className="flex gap-4 flex-wrap w-full sm:w-auto">
                 <button 
                   onClick={() => loadQuests(false)}
                   disabled={loadingQuests || running}
-                  className="ds-btn ds-btn-secondary flex-1 sm:flex-initial !py-2.5 !px-5 !text-[11px] font-bold rounded-lg"
+                  className="ds-btn ds-btn-secondary !h-12 !px-6 !text-[10px] uppercase tracking-widest"
                 >
-                  {loadingQuests ? 'Escanear...' : 'Sondagem'}
+                  {loadingQuests ? 'POLLING...' : 'SCAN_NODES'}
                 </button>
                 <button 
                   onClick={() => loadQuests(true)}
                   disabled={loadingQuests || running}
-                  className="ds-btn ds-btn-secondary flex-1 sm:flex-initial !py-2.5 !px-5 !text-[11px] font-bold rounded-lg border-primary/20"
+                  className="ds-btn ds-btn-secondary !h-12 !px-6 !text-[10px] uppercase tracking-widest"
                 >
-                  Resgate
+                  LOAD_HISTORY
                 </button>
                 <button 
                   onClick={async () => {
@@ -168,16 +166,16 @@ function MissoesPage() {
                     }
                   }}
                   disabled={running || quests.length === 0}
-                  className="ds-btn ds-btn-secondary flex-1 sm:flex-initial !py-2.5 !px-5 !text-[11px] font-bold !text-primary hover:!bg-primary/10 rounded-lg"
+                  className="ds-btn ds-btn-secondary !h-12 !px-6 !text-[10px] uppercase tracking-widest !text-primary border-primary/20"
                 >
-                  {running ? 'Processando...' : 'Auto-Claim'}
+                  {running ? 'CLAIMING...' : 'AUTO_COLLECT'}
                 </button>
                 <button 
                   onClick={() => setCaptchaAll(true)}
                   disabled={running || quests.length === 0 || gateBlocked}
-                  className="ds-btn ds-btn-primary flex-1 sm:flex-initial !py-2.5 !px-5 !text-[11px] font-bold rounded-lg"
+                  className="ds-btn ds-btn-primary !h-12 !px-8 !text-[10px] uppercase tracking-widest"
                 >
-                  Farm All
+                  DEPLOY_ALL
                 </button>
              </div>
           </div>
@@ -200,25 +198,27 @@ function MissoesPage() {
         </div>
 
         <aside className="space-y-6">
-            <div className="ds-card !p-6 border-border bg-card/30 rounded-xl space-y-6">
-                <div className="flex items-center justify-between border-b border-border pb-4">
-                  <div className="flex items-center gap-2">
-                    <Activity className="w-4 h-4 text-primary" />
-                    <h3 className="font-sans text-xs font-bold uppercase tracking-wider text-foreground">Terminal Log</h3>
+            <div className="bg-[#030303] border border-white/5 p-10 space-y-10 relative">
+                <div className="absolute top-0 right-0 w-1 h-1 bg-primary" />
+                
+                <div className="flex items-center justify-between border-b border-white/5 pb-8">
+                  <div className="flex items-center gap-4">
+                    <Activity className="w-4 h-4 text-primary opacity-50" />
+                    <h3 className="font-display text-base text-white uppercase tracking-tighter">Terminal Log</h3>
                   </div>
-                  <Sparkles className="w-3 h-3 text-primary animate-pulse" />
+                  <div className="w-1.5 h-1.5 rounded-full bg-primary shadow-[0_0_8px_#4DA09E]" />
                 </div>
                 
-                <div className="space-y-3 max-h-[600px] overflow-y-auto pr-2 custom-scrollbar font-mono text-[10px]">
+                <div className="space-y-4 max-h-[600px] overflow-y-auto pr-6 custom-scrollbar font-mono text-[9px] uppercase tracking-[0.1em]">
                    {useQuestStore.getState().logs.length === 0 ? (
-                       <p className="text-foreground-muted/30 italic">Aguardando operação...</p>
+                       <p className="text-white/10 italic">WAITING_FOR_SEQUENCE...</p>
                    ) : (
                        useQuestStore.getState().logs.slice().reverse().map(l => (
                            <div key={l.id} className={cn(
-                             "py-2 border-b border-border/20 leading-relaxed",
-                             l.level === 'error' ? 'text-primary' : l.level === 'success' ? 'text-emerald-400' : 'text-foreground-muted'
+                             "py-2 border-b border-white/5 leading-relaxed",
+                             l.level === 'error' ? 'text-primary' : l.level === 'success' ? 'text-emerald-400' : 'text-white/20'
                            )}>
-                               <span className="opacity-30 mr-2">[{new Date(l.ts).toLocaleTimeString()}]</span> 
+                               <span className="opacity-10 mr-4">[{new Date(l.ts).toLocaleTimeString()}]</span> 
                                {l.text}
                            </div>
                        ))
@@ -226,18 +226,18 @@ function MissoesPage() {
                 </div>
                 
                 {running && (
-                    <button onClick={requestStop} className="w-full ds-btn ds-btn-secondary !text-primary hover:!bg-primary/10 border-primary/20 !py-3 rounded-lg font-bold text-xs uppercase tracking-widest">
-                        Interromper Sequência
+                    <button onClick={requestStop} className="w-full ds-btn ds-btn-secondary !text-rose-500 border-rose-500/20 !h-14 !text-[10px] uppercase tracking-[0.2em]">
+                        ABORT_PROTOCOL
                     </button>
                 )}
             </div>
             
-            <div className="ds-card !p-6 border-border bg-primary/5 rounded-xl flex gap-4">
-              <AlertCircle className="w-5 h-5 text-primary shrink-0" />
+            <div className="bg-[#030303] border border-primary/20 p-8 flex gap-6">
+              <AlertCircle className="w-5 h-5 text-primary shrink-0 opacity-50" />
               <div>
-                <h4 className="font-sans text-xs font-bold uppercase tracking-wider text-foreground mb-1">Dica Spectre</h4>
-                <p className="text-[11px] text-foreground-muted leading-relaxed font-medium">
-                  Utilize o <span className="text-primary font-bold">Auto-Claim</span> após completar as missões para resgatar todas as recompensas instantaneamente.
+                <h4 className="font-mono text-[8px] uppercase tracking-[0.4em] text-white/40 mb-2">OPERATIONAL_HINT</h4>
+                <p className="font-sans text-[11px] text-white/30 uppercase tracking-[0.1em] leading-relaxed">
+                  Utilize o <span className="text-primary">AUTO_COLLECT</span> após completar as missões para resgatar todas as recompensas instantaneamente.
                 </p>
               </div>
             </div>

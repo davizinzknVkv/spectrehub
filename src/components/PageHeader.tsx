@@ -16,29 +16,32 @@ type Props = {
  */
 export function PageHeader({ eyebrow, title, highlight, description, icon: Icon, actions }: Props) {
   return (
-    <header className="relative pb-10 mb-8 border-b border-white/5">
-      <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
-        <div className="min-w-0">
+    <header className="relative pb-16 mb-12">
+      <div className="flex flex-col gap-8 sm:flex-row sm:items-end sm:justify-between">
+        <div className="min-w-0 flex-1">
           {eyebrow && (
-            <div className="flex items-center gap-2 mb-3">
-              {Icon && <Icon className="h-3 w-3 text-primary" />}
-              <span className="font-display text-[9px] uppercase tracking-[0.3em] text-white/30 italic">{eyebrow}</span>
+            <div className="flex items-center gap-4 mb-6">
+              <div className="w-1.5 h-1.5 bg-primary shadow-[0_0_8px_#4DA09E]" />
+              <span className="font-mono text-[9px] uppercase tracking-[0.5em] text-white/30">{eyebrow}</span>
             </div>
           )}
-          <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl text-white uppercase italic tracking-tighter leading-none">
+          <h1 className="font-display text-5xl sm:text-7xl lg:text-8xl text-white uppercase tracking-tighter leading-[0.85]">
             {title}
             {highlight && (
-              <span className="text-primary"> {highlight}</span>
+              <span className="text-primary italic block sm:inline"> {highlight}</span>
             )}
           </h1>
           {description && (
-            <p className="mt-4 font-sans text-sm text-white/40 italic leading-relaxed max-w-2xl">
-              {description}
-            </p>
+            <div className="mt-8 flex gap-6 items-start border-l border-white/5 pl-8">
+              {Icon && <Icon className="h-4 w-4 text-white/10 shrink-0 mt-1" />}
+              <p className="font-mono text-[10px] text-white/20 uppercase tracking-[0.2em] leading-relaxed max-w-xl">
+                {description}
+              </p>
+            </div>
           )}
         </div>
         {actions && (
-          <div className="flex flex-wrap items-center gap-3 pb-1">
+          <div className="flex flex-wrap items-center gap-3 shrink-0">
             {actions}
           </div>
         )}
