@@ -10,8 +10,8 @@
   --radius-lg: 12px;
   --radius-xl: 16px;
 
-  --color-background: #0A0A0D;
-  --color-background-secondary: #101114;
+  --color-background: #0D0D12;
+  --color-background-secondary: #16171B;
   --color-foreground: #FFFFFF;
   --color-foreground-muted: #A0A0AA;
   
@@ -39,13 +39,13 @@
   --color-ring: rgba(255, 0, 80, 0.5);
 
   /* Spectre Palette */
-  --color-obsidian: #0A0A0D;
+  --color-obsidian: #0D0D12;
   --color-spectre-pink: #FF0050;
 }
 
 :root {
   --radius: 0px;
-  --background: #0A0A0D;
+  --background: #0D0D12;
   --foreground: #FFFFFF;
   --card: #151515;
   --card-foreground: #FFFFFF;
@@ -254,7 +254,7 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: #030303;
+  background: #08080A;
 }
 
 ::-webkit-scrollbar-thumb {

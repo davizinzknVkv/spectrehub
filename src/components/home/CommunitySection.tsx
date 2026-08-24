@@ -24,7 +24,7 @@ function MiniStat({
   value: string;
 }) {
   return (
-    <div className="bg-[#030303] p-10 group hover:bg-white/[0.02] transition-colors">
+    <div className="bg-background p-10 group hover:bg-white/[0.02] transition-colors">
       <div className="flex justify-between items-start mb-6">
         <Icon className="h-4 w-4 text-primary opacity-50 group-hover:opacity-100 transition-opacity" />
         <div className="w-1 h-1 bg-white/10 group-hover:bg-primary transition-colors" />

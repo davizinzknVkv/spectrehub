@@ -38,7 +38,7 @@ export function ReasonsSection({ reasons }: ReasonsSectionProps) {
         <div className="flex-1 w-full space-y-px bg-white/5 border border-white/5">
           {reasons.map((r: Reason, i: number) => (
             <Reveal key={r.title} delay={i * 50} className="group">
-              <div className="flex items-start gap-12 p-16 bg-[#030303] transition-all duration-700 hover:bg-white/[0.01]">
+              <div className="flex items-start gap-12 p-16 bg-background transition-all duration-700 hover:bg-white/[0.01]">
                 <div className="font-display text-7xl text-white/[0.02] group-hover:text-primary transition-colors duration-1000 italic shrink-0">
                   {(i + 1).toString().padStart(2, '0')}
                 </div>

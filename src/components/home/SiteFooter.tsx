@@ -11,7 +11,7 @@ export function SiteFooter({ guildInvite }: SiteFooterProps) {
   const { t } = useTranslation();
 
   return (
-    <footer className="bg-[#030303] pt-48 pb-24 relative overflow-hidden">
+    <footer className="bg-background pt-48 pb-24 relative overflow-hidden">
       <div className="absolute top-0 left-0 w-full h-px bg-white/5" />
       
       <div className="mx-auto max-w-7xl px-6 md:px-20 relative z-10">

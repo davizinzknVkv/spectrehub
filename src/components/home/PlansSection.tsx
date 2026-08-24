@@ -33,7 +33,7 @@ export function PlansSection({ plans }: PlansSectionProps) {
         </Reveal>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 bg-[#030303] border border-white/5">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 bg-background border border-white/5">
         {plans.map((p, i) => (
           <Reveal key={p.name} delay={i * 50} className="relative group border-r border-b lg:border-b-0 border-white/5 last:border-r-0">
             <div className="p-12 flex flex-col h-full relative z-10 hover:bg-white/[0.01] transition-all duration-500">
