@@ -1,4 +1,4 @@
-/* arruma isso */
+/* faça o hero parecido */
 
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect } from "react";
