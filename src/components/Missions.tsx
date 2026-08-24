@@ -237,15 +237,19 @@ export function CaptchaModal({
 /* ── EmptyState ─────────────────────────────────────────────────────────── */
 export function MissionEmptyState({ onScan }: { onScan: () => void }) {
   return (
-    <div className="flex flex-col items-center justify-center py-20 text-center border-2 border-dashed border-border rounded-xl font-sans bg-card/10">
-      <div className="mb-6 w-16 h-16 rounded-2xl bg-primary/5 border border-primary/20 flex items-center justify-center">
-        <Target className="h-8 w-8 text-primary opacity-50" />
+    <div className="flex flex-col items-center justify-center py-24 text-center border border-white/5 bg-[#030303] font-mono p-12">
+      <div className="mb-10 w-20 h-20 bg-white/[0.02] border border-white/5 flex items-center justify-center relative">
+        <div className="absolute top-0 left-0 w-1 h-1 bg-white/10" />
+        <Target className="h-8 w-8 text-white/10" />
       </div>
-      <h3 className="text-xl font-display uppercase tracking-tight text-foreground">Missões Indisponíveis</h3>
-      <p className="mt-2 max-w-xs text-xs text-foreground-muted font-medium leading-relaxed">Não localizamos missões ativas no momento. Realize uma nova sondagem nos servidores.</p>
-      <Button variant="primary" size="sm" className="mt-8 !px-8 rounded-lg font-bold uppercase tracking-widest text-[11px]" onClick={onScan}>
-        Sondar Terminal
-      </Button>
+      <h3 className="text-xl font-display uppercase tracking-tighter text-white">NODES_NOT_FOUND</h3>
+      <p className="mt-4 max-w-xs text-[9px] text-white/20 uppercase tracking-[0.2em] leading-relaxed">Não localizamos missões ativas no momento. Realize uma nova sondagem nos servidores.</p>
+      <button 
+        className="mt-12 h-12 px-12 border border-white/10 text-white font-mono uppercase tracking-[0.3em] text-[10px] hover:border-primary/40 hover:text-primary transition-all" 
+        onClick={onScan}
+      >
+        INITIALIZE_POLLING
+      </button>
     </div>
   );
 }
