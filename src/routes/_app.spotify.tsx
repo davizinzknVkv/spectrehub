@@ -117,14 +117,14 @@ function SpotifyGenPage() {
                 <Music className="w-6 h-6 opacity-50" />
               </div>
               <div className="space-y-2">
-                <h3 className="font-display text-base text-white uppercase tracking-tighter">SPOTIFY_GEN_PROTOCOL</h3>
-                <p className="font-mono text-[8px] text-white/20 uppercase tracking-[0.4em]">SOURCE_LINK_GENERATOR</p>
+                <h3 className="font-display text-base text-white uppercase tracking-tighter">PROTOCOLO SPOTIFY GEN</h3>
+                <p className="font-mono text-[8px] text-white/20 uppercase tracking-[0.4em]">GERADOR DE LINKS</p>
               </div>
             </div>
 
             <div className="space-y-8">
               <div className="space-y-4">
-                <label className="font-mono text-[8px] uppercase tracking-[0.5em] text-white/20 px-1 block">LINK_QUANTITY</label>
+                <label className="font-mono text-[8px] uppercase tracking-[0.5em] text-white/20 px-1 block">QUANTIDADE DE LINKS</label>
                 <Input 
                   type="number" 
                   min={1} 
@@ -133,7 +133,7 @@ function SpotifyGenPage() {
                   onChange={(e) => setQuantity(parseInt(e.target.value) || 0)}
                   className="bg-transparent border-white/10 font-mono text-xs focus:border-primary/50 transition-all rounded-none h-12"
                 />
-                <p className="font-mono text-[7px] text-white/10 uppercase tracking-[0.3em] pl-1">MAX_BATCH: 100_UNITS</p>
+                <p className="font-mono text-[7px] text-white/10 uppercase tracking-[0.3em] pl-1">LOTE MÁXIMO: 100 UNIDADES</p>
               </div>
 
               <div className="space-y-6">
@@ -179,7 +179,7 @@ function SpotifyGenPage() {
                 ) : (
                   <>
                     <Music className="w-4 h-4" />
-                    START_GENERATION
+                    INICIAR GERAÇÃO
                   </>
                 )}
               </button>
@@ -220,7 +220,7 @@ function SpotifyGenPage() {
               <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-10 gap-6">
                  <div className="flex items-center gap-4">
                     <div className="w-1.5 h-1.5 rounded-full bg-primary shadow-[0_0_8px_#4DA09E]" />
-                    <h3 className="font-display text-base text-white uppercase tracking-tighter">TERMINAL_STDOUT_RESULTS</h3>
+                    <h3 className="font-display text-base text-white uppercase tracking-tighter">RESULTADOS DO TERMINAL</h3>
                  </div>
                  
                  <div className="flex items-center gap-4 w-full sm:w-auto">
@@ -229,14 +229,14 @@ function SpotifyGenPage() {
                       disabled={links.length === 0}
                       className="h-10 px-6 border border-white/10 text-[9px] font-mono uppercase tracking-[0.2em] flex items-center gap-3 hover:border-primary/40 hover:text-primary transition-all disabled:opacity-20"
                     >
-                       <Copy className="w-3 h-3" /> COPY_ALL
+                       <Copy className="w-3 h-3" /> COPIAR TUDO
                     </button>
                     <button 
                       onClick={handleDownload} 
                       disabled={links.length === 0}
                       className="h-10 px-6 border border-white/10 text-[9px] font-mono uppercase tracking-[0.2em] flex items-center gap-3 hover:border-primary/40 hover:text-primary transition-all disabled:opacity-20"
                     >
-                       <Download className="w-3 h-3" /> EXPORT_TXT
+                       <Download className="w-3 h-3" /> EXPORTAR TXT
                     </button>
                  </div>
               </div>

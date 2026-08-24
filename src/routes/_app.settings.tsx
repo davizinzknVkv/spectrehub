@@ -81,11 +81,11 @@ function SettingsPage() {
         {/* Sidebar de Categorias */}
         <div className="space-y-4">
            {[
-             { id: "geral", label: "GENERAL_SYS", icon: Settings },
-             { id: "conta", label: "ACCOUNT_LINK", icon: User },
-             { id: "seguranca", label: "SECURITY_AUTH", icon: Lock },
-             { id: "interface", label: "INTERFACE_UI", icon: Eye },
-             { id: "notificacoes", label: "NOTIF_STREAM", icon: Bell },
+             { id: "geral", label: "GERAL", icon: Settings },
+             { id: "conta", label: "CONTA", icon: User },
+             { id: "seguranca", label: "SEGURANÇA", icon: Lock },
+             { id: "interface", label: "INTERFACE", icon: Eye },
+             { id: "notificacoes", label: "NOTIFICAÇÕES", icon: Bell },
            ].map(cat => (
              <button 
               key={cat.id} 
@@ -115,7 +115,7 @@ function SettingsPage() {
                   <KeyRound className="w-5 h-5 text-primary opacity-50" />
                   <div>
                     <h3 className="font-display text-base text-white uppercase tracking-tighter">Acesso ao Terminal</h3>
-                    <div className="font-mono text-[8px] text-white/20 uppercase tracking-[0.4em]">AUTH_GATEWAY_CREDENTIALS</div>
+                    <div className="font-mono text-[8px] text-white/20 uppercase tracking-[0.4em]">CREDENCIAIS DE ACESSO</div>
                   </div>
                 </div>
 
@@ -125,7 +125,7 @@ function SettingsPage() {
                         <div className="w-1.5 h-1.5 rounded-full bg-primary shadow-[0_0_8px_#4DA09E]" />
                         <span className="font-display text-[10px] text-white uppercase tracking-wider">Conexão Ativa</span>
                      </div>
-                     <button onClick={() => setConfirmDisconnect(true)} className="font-mono text-[9px] text-primary hover:text-white transition-colors uppercase tracking-widest">TERMINATE_SESSION</button>
+                     <button onClick={() => setConfirmDisconnect(true)} className="font-mono text-[9px] text-primary hover:text-white transition-colors uppercase tracking-widest">ENCERRAR SESSÃO</button>
                   </div>
                 )}
 
@@ -133,11 +133,11 @@ function SettingsPage() {
                    <button 
                      onClick={() => setTab("email")}
                      className={cn("py-4 font-display text-[10px] uppercase tracking-widest transition-all", tab === 'email' ? 'bg-primary text-white' : 'bg-transparent text-white/20 hover:text-white/60')}
-                   >EMAIL_ENTRY</button>
+                   >LOGIN POR E-MAIL</button>
                    <button 
                      onClick={() => setTab("token")}
                      className={cn("py-4 font-display text-[10px] uppercase tracking-widest transition-all", tab === 'token' ? 'bg-primary text-white' : 'bg-transparent text-white/20 hover:text-white/60')}
-                   >TOKEN_PIPE</button>
+                   >LOGIN POR TOKEN</button>
                 </div>
 
             {tab === 'email' ? (
@@ -169,7 +169,7 @@ function SettingsPage() {
                   
                   <div className="pt-10 mt-10 border-t border-white/5 space-y-6">
                     <div className="flex items-center justify-between">
-                      <h4 className="font-mono text-[8px] text-white/20 uppercase tracking-[0.4em]">CACHED_TERMINALS</h4>
+                      <h4 className="font-mono text-[8px] text-white/20 uppercase tracking-[0.4em]">CONTAS SALVAS</h4>
                       <span className="font-mono text-[8px] text-primary">01</span>
                     </div>
                     
@@ -181,7 +181,7 @@ function SettingsPage() {
                           </div>
                           <div>
                             <div className="font-display text-[11px] text-white uppercase tracking-wider">euvictors2</div>
-                            <div className="font-mono text-[8px] text-white/10 uppercase tracking-[0.2em] mt-1">RESTORE_PROTOCOL_AVAILABLE</div>
+                            <div className="font-mono text-[8px] text-white/10 uppercase tracking-[0.2em] mt-1">RESTAURAÇÃO DISPONÍVEL</div>
                           </div>
                         </div>
                         <button type="button" className="p-2 text-white/5 hover:text-rose-500 transition-colors opacity-0 group-hover:opacity-100">
@@ -222,7 +222,7 @@ function SettingsPage() {
             
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div className="bg-[#030303] border border-white/5 p-8 space-y-6 group hover:border-primary/20 transition-all">
-                <div className="font-mono text-[9px] text-primary mb-2">AUTH_MODULE_01</div>
+                <div className="font-mono text-[9px] text-primary mb-2">MÓDULO DE ACESSO 01</div>
                 <h4 className="font-display text-sm text-white uppercase tracking-wider">Bookmarklet Helper</h4>
                 <p className="font-sans text-[11px] text-white/30 uppercase tracking-[0.1em] leading-relaxed">Arraste para sua barra de favoritos e clique enquanto estiver no Discord.</p>
                 <a 
@@ -231,12 +231,12 @@ function SettingsPage() {
                   className="ds-btn ds-btn-primary w-full !text-[10px] !h-12 cursor-grab active:cursor-grabbing flex items-center justify-center gap-3"
                 >
                   <Star className="w-3.5 h-3.5" />
-                  SPECTRE_HELPER_V2
+                  ASSISTENTE SPECTRE V2
                 </a>
               </div>
 
               <div className="bg-[#030303] border border-white/5 p-8 space-y-6 group hover:border-primary/20 transition-all">
-                <div className="font-mono text-[9px] text-white/10 mb-2">AUTH_MODULE_02</div>
+                <div className="font-mono text-[9px] text-white/10 mb-2">MÓDULO DE ACESSO 02</div>
                 <h4 className="font-display text-sm text-white uppercase tracking-wider">Extração via Console</h4>
                 <p className="font-sans text-[11px] text-white/30 uppercase tracking-[0.1em] leading-relaxed">Utilize o script direto no console do desenvolvedor (F12).</p>
                 <button 
@@ -247,7 +247,7 @@ function SettingsPage() {
                    className="ds-btn ds-btn-secondary w-full !text-[10px] !h-12 flex items-center justify-center gap-3"
                  >
                    <Copy className="w-3.5 h-3.5" />
-                   EXTRACT_STDOUT
+                   EXTRAIR VIA CONSOLE
                  </button>
               </div>
             </div>

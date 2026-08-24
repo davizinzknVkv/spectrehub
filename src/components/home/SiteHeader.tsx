@@ -121,7 +121,7 @@ export function SiteHeader({ guildInvite }: SiteHeaderProps) {
             to="/hub" 
             className="ds-btn ds-btn-primary !py-2 !px-6 !min-h-0 !h-10"
           >
-            HUB_ACCESS
+              ACESSAR HUB
           </Link>
         </div>
 
@@ -144,7 +144,7 @@ export function SiteHeader({ guildInvite }: SiteHeaderProps) {
             className="fixed inset-0 z-[60] bg-[#030303] p-12 flex flex-col md:hidden"
           >
             <div className="flex justify-between items-center mb-24">
-               <span className="font-display text-[9px] tracking-[0.5em] text-primary uppercase">NAV_ROOT</span>
+               <span className="font-display text-[9px] tracking-[0.5em] text-primary uppercase">NAVEGAÇÃO</span>
                <button onClick={() => setOpen(false)}>
                  <X className="w-6 h-6 text-white" />
                </button>
@@ -169,7 +169,7 @@ export function SiteHeader({ guildInvite }: SiteHeaderProps) {
                 className="ds-btn ds-btn-primary w-full py-6 mb-4"
                 onClick={() => setOpen(false)}
               >
-                HUB_ACCESS
+                ACESSAR HUB
               </Link>
               <div className="flex items-center gap-8 opacity-20">
                 <a href="https://discord.gg/spectrehub"><MessageSquare className="w-5 h-5" /></a>

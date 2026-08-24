@@ -30,7 +30,7 @@ export function ReasonsSection({ reasons }: ReasonsSectionProps) {
               {t('reasons.description')}
             </p>
             <div className="font-mono text-[8px] text-primary/20 uppercase tracking-[0.4em]">
-              [ CORE_INFRASTRUCTURE_V4 ]
+              [ INFRAESTRUTURA CORE V4 ]
             </div>
           </div>
         </Reveal>
@@ -54,7 +54,7 @@ export function ReasonsSection({ reasons }: ReasonsSectionProps) {
                   <div className="pt-10 flex items-center gap-6 opacity-0 group-hover:opacity-100 transition-opacity duration-700">
                     <div className="h-px w-12 bg-primary/20" />
                     <span className="font-mono text-[7px] text-primary uppercase tracking-[0.5em]">
-                      SYS_MODULE_0{i+1}_ACTIVE
+                      MÓDULO 0{i+1} ATIVO
                     </span>
                   </div>
                 </div>

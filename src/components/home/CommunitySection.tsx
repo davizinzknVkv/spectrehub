@@ -92,7 +92,7 @@ export function CommunitySection({ widgetUrl, guildInvite, fallbackMembers }: Co
                 rel="noreferrer"
                 className="ds-btn ds-btn-primary !px-12"
               >
-                JOIN_COMMUNITY
+                {t('community.cta') || "ENTRAR NA COMUNIDADE"}
               </a>
             </div>
           </Reveal>
@@ -117,7 +117,7 @@ export function CommunitySection({ widgetUrl, guildInvite, fallbackMembers }: Co
       <div className="mt-32 pt-16 border-t border-white/5 overflow-hidden relative">
         <div className="mb-12 flex items-center gap-6">
            <div className="font-display text-[8px] text-primary uppercase tracking-[0.5em] whitespace-nowrap">
-              LIVE_COMMUNITY_FEED
+              FEED DA COMUNIDADE
            </div>
            <div className="h-px w-full bg-white/5" />
         </div>

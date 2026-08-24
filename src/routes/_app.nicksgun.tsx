@@ -144,7 +144,7 @@ function NicksGunPage() {
               
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-12">
                  <div className="space-y-4">
-                    <label className="font-mono text-[8px] uppercase tracking-[0.4em] text-white/20 block">SNIPER_LENGTH_CFG</label>
+                    <label className="font-mono text-[8px] uppercase tracking-[0.4em] text-white/20 block">TAMANHO DO USERNAME</label>
                     <div className="grid grid-cols-2 gap-px bg-white/5 border border-white/5">
                        {[2, 3].map(n => (
                           <button 
@@ -153,42 +153,42 @@ function NicksGunPage() {
                             disabled={running}
                             className={`py-4 font-display text-[10px] uppercase tracking-[0.3em] transition-all ${length === n ? 'bg-primary text-white' : 'text-white/20 hover:text-white/60'}`}
                           >
-                             {n} LETTERS
+                             {n} LETRAS
                           </button>
                        ))}
                     </div>
                  </div>
                  <div className="space-y-4">
-                    <label className="font-mono text-[8px] uppercase tracking-[0.4em] text-white/20 block">THROTTLING_LATENCY</label>
+                    <label className="font-mono text-[8px] uppercase tracking-[0.4em] text-white/20 block">LATÊNCIA DE BUSCA</label>
                     <select 
                        value={concurrency} 
                        onChange={(e) => setConcurrency(Number(e.target.value))}
                        disabled={running}
                        className="w-full bg-white/[0.02] border border-white/5 py-4 px-6 font-display text-[10px] text-white uppercase tracking-[0.2em] outline-none focus:border-primary/30 appearance-none"
                     >
-                       <option value={1} className="bg-obsidian">1X // STEALTH_MODE</option>
-                       <option value={4} className="bg-obsidian">4X // BALANCED_RUN</option>
-                       <option value={8} className="bg-obsidian">8X // AGGRESSIVE_OVERRIDE</option>
+                       <option value={1} className="bg-obsidian">1X // MODO FURTIVO</option>
+                       <option value={4} className="bg-obsidian">4X // EXECUÇÃO EQUILIBRADA</option>
+                       <option value={8} className="bg-obsidian">8X // MODO AGRESSIVO</option>
                     </select>
                  </div>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-12">
                  <div className="space-y-4">
-                    <label className="font-mono text-[8px] uppercase tracking-[0.4em] text-white/20 block">CHARSET_ENCODING</label>
+                    <label className="font-mono text-[8px] uppercase tracking-[0.4em] text-white/20 block">TIPO DE CARACTERES</label>
                     <select 
                        value={charset} 
                        onChange={(e) => setCharset(e.target.value as Charset)}
                        disabled={running}
                        className="w-full bg-white/[0.02] border border-white/5 py-4 px-6 font-display text-[10px] text-white uppercase tracking-[0.2em] outline-none focus:border-primary/30 appearance-none"
                     >
-                       <option value="letters" className="bg-obsidian">LETTERS_ONLY (A-Z)</option>
-                       <option value="alnum" className="bg-obsidian">ALPHANUMERIC (A-Z, 0-9)</option>
-                       <option value="full" className="bg-obsidian">EXTENDED_SET (A-Z, 0-9, _, .)</option>
+                       <option value="letters" className="bg-obsidian">APENAS LETRAS (A-Z)</option>
+                       <option value="alnum" className="bg-obsidian">ALFANUMÉRICO (A-Z, 0-9)</option>
+                       <option value="full" className="bg-obsidian">CONJUNTO ESTENDIDO (A-Z, 0-9, _, .)</option>
                     </select>
                  </div>
                  <div className="space-y-4">
-                    <label className="font-mono text-[8px] uppercase tracking-[0.4em] text-white/20 block">PREFIX_IDENTIFIER</label>
+                    <label className="font-mono text-[8px] uppercase tracking-[0.4em] text-white/20 block">PREFIXO DO NICK</label>
                     <input 
                        value={startsWith}
                        onChange={(e) => setStartsWith(e.target.value.toLowerCase())}
@@ -201,12 +201,12 @@ function NicksGunPage() {
 
               <div className="pt-10 border-t border-white/5 flex items-center justify-between">
                  <div className="font-mono text-[8px] uppercase tracking-[0.4em] text-white/10">
-                    MAPPED_CANDIDATES: {estimate.toLocaleString()}
+                    CANDIDATOS MAPEADOS: {estimate.toLocaleString()}
                  </div>
                  {!running ? (
-                    <button onClick={start} className="ds-btn ds-btn-primary !px-12 !h-14">DEPLOY_SNIPER</button>
+                    <button onClick={start} className="ds-btn ds-btn-primary !px-12 !h-14">INICIAR SNIPER</button>
                  ) : (
-                    <button onClick={stop} className="ds-btn ds-btn-secondary !text-rose-500 border-rose-500/20 !px-12 !h-14">ABORT_SEQUENCE</button>
+                    <button onClick={stop} className="ds-btn ds-btn-secondary !text-rose-500 border-rose-500/20 !px-12 !h-14">ABORTAR SEQUÊNCIA</button>
                  )}
               </div>
            </div>
@@ -215,12 +215,12 @@ function NicksGunPage() {
                <div className="bg-[#030303] border border-primary/20 p-10 space-y-8">
                   <div className="flex justify-between items-end">
                      <div className="space-y-3">
-                        <div className="font-mono text-[8px] uppercase tracking-[0.5em] text-primary">SCAN_MONITOR_ACTIVE</div>
-                        <div className="font-display text-base text-white uppercase tracking-tighter">{running ? `TESTING_NODE: ${current}` : 'SEQUENCE_HALTED'}</div>
+                        <div className="font-mono text-[8px] uppercase tracking-[0.5em] text-primary">MONITORAMENTO ATIVO</div>
+                        <div className="font-display text-base text-white uppercase tracking-tighter">{running ? `TESTANDO NICK: ${current}` : 'SEQUÊNCIA PARADA'}</div>
                      </div>
                      <div className="text-right">
                         <div className="font-display text-3xl text-white tracking-tighter leading-none">{Math.round((checked/total)*100)}%</div>
-                        <div className="font-mono text-[7px] text-white/20 uppercase tracking-[0.4em] mt-2">{checked} / {total} TOTAL_NODES</div>
+                        <div className="font-mono text-[7px] text-white/20 uppercase tracking-[0.4em] mt-2">{checked} / {total} NODOS TOTAIS</div>
                      </div>
                   </div>
                   <div className="h-0.5 bg-white/5 relative overflow-hidden">
@@ -237,7 +237,7 @@ function NicksGunPage() {
                   <div key={r.username} className="bg-[#030303] border border-emerald-500/20 p-6 flex justify-between items-center group hover:border-emerald-500/50 transition-all duration-500">
                      <div>
                         <div className="font-display text-base text-white uppercase tracking-tighter">@{r.username}</div>
-                        <div className="font-mono text-[7px] text-emerald-500 uppercase tracking-[0.4em] mt-2">AVAIL_NODE_IDENTIFIED</div>
+                        <div className="font-mono text-[7px] text-emerald-500 uppercase tracking-[0.4em] mt-2">NODO DISPONÍVEL IDENTIFICADO</div>
                      </div>
                      <div className="flex gap-4">
                         <button onClick={() => copy(r.username)} className="text-white/10 hover:text-white transition-colors"><Copy className="w-4 h-4" /></button>
@@ -250,21 +250,21 @@ function NicksGunPage() {
 
         <aside className="space-y-6">
            <div className="bg-[#030303] border border-white/5 p-8 space-y-8">
-              <div className="font-mono text-[8px] uppercase tracking-[0.5em] text-white/20">SESSION_INSIGHTS</div>
+              <div className="font-mono text-[8px] uppercase tracking-[0.5em] text-white/20">DADOS DA SESSÃO</div>
               <div className="space-y-6">
                  <div className="flex justify-between border-b border-white/5 pb-4">
-                    <span className="font-display text-[10px] text-white/20 uppercase tracking-widest">DETECTED_NODES</span>
+                    <span className="font-display text-[10px] text-white/20 uppercase tracking-widest">NICKS DETECTADOS</span>
                     <span className="font-mono text-xs text-white">{availableCount}</span>
                  </div>
                  <div className="flex justify-between border-b border-white/5 pb-4">
-                    <span className="font-display text-[10px] text-white/20 uppercase tracking-widest">API_LATENCY</span>
+                    <span className="font-display text-[10px] text-white/20 uppercase tracking-widest">LATÊNCIA DA API</span>
                     <span className="font-mono text-xs text-emerald-500">0.05MS</span>
                  </div>
               </div>
            </div>
 
            <div className="bg-[#030303] border border-rose-500/10 p-8 space-y-6">
-              <div className="font-mono text-[8px] uppercase tracking-[0.5em] text-rose-500/50">RISK_PROTOCOL</div>
+              <div className="font-mono text-[8px] uppercase tracking-[0.5em] text-rose-500/50">PROTOCOLO DE RISCO</div>
               <p className="text-[10px] text-white/20 leading-relaxed font-sans uppercase tracking-[0.1em]">
                  IDENTIDADES RARA SÃO MONITORADAS GLOBALMENTE. REIVINDIQUE O NODO IMEDIATAMENTE APÓS A DETECÇÃO PARA EVITAR INTERCEPTAÇÃO POR BOTS EXTERNOS.
               </p>
