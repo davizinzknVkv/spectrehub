@@ -215,46 +215,43 @@ function SpotifyGenPage() {
         </div>
 
         <div className="lg:col-span-2 space-y-6">
-           <Card className="p-8 border-white/5 bg-white/[0.02] flex flex-col h-full min-h-[500px]">
-              <div className="flex items-center justify-between mb-8">
-                 <div className="flex items-center gap-3">
+           <div className="bg-[#030303] border border-white/5 p-10 flex flex-col h-full min-h-[600px] relative">
+              <div className="absolute top-0 left-0 w-1 h-1 bg-white/20" />
+              <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-10 gap-6">
+                 <div className="flex items-center gap-4">
                     <div className="w-1.5 h-1.5 rounded-full bg-primary shadow-[0_0_8px_#4DA09E]" />
-                    <h3 className="font-display text-sm text-white uppercase italic tracking-widest">Output de Resultados</h3>
+                    <h3 className="font-display text-base text-white uppercase tracking-tighter">TERMINAL_STDOUT_RESULTS</h3>
                  </div>
                  
-                 <div className="flex items-center gap-3">
-                    <Button 
-                      variant="secondary" 
-                      size="sm" 
+                 <div className="flex items-center gap-4 w-full sm:w-auto">
+                    <button 
                       onClick={handleCopy} 
                       disabled={links.length === 0}
-                      className="!text-[9px] !py-2 !h-auto flex items-center gap-2"
+                      className="h-10 px-6 border border-white/10 text-[9px] font-mono uppercase tracking-[0.2em] flex items-center gap-3 hover:border-primary/40 hover:text-primary transition-all disabled:opacity-20"
                     >
-                       <Copy className="w-3 h-3" /> Copiar
-                    </Button>
-                    <Button 
-                      variant="secondary" 
-                      size="sm" 
+                       <Copy className="w-3 h-3" /> COPY_ALL
+                    </button>
+                    <button 
                       onClick={handleDownload} 
                       disabled={links.length === 0}
-                      className="!text-[9px] !py-2 !h-auto flex items-center gap-2"
+                      className="h-10 px-6 border border-white/10 text-[9px] font-mono uppercase tracking-[0.2em] flex items-center gap-3 hover:border-primary/40 hover:text-primary transition-all disabled:opacity-20"
                     >
-                       <Download className="w-3 h-3" /> Baixar .TXT
-                    </Button>
+                       <Download className="w-3 h-3" /> EXPORT_TXT
+                    </button>
                  </div>
               </div>
 
-              <div className="flex-1 bg-black/40 border border-white/5 p-6 font-mono text-[11px] text-white/60 overflow-y-auto custom-scrollbar relative">
+              <div className="flex-1 bg-black/20 border border-white/5 p-8 font-mono text-[10px] text-white/40 overflow-y-auto custom-scrollbar relative">
                  <AnimatePresence mode="wait">
                    {links.length > 0 ? (
                      <motion.div 
                        initial={{ opacity: 0 }}
                        animate={{ opacity: 1 }}
                        exit={{ opacity: 0 }}
-                       className="space-y-2"
+                       className="space-y-3"
                      >
                        {links.map((link, i) => (
-                         <div key={i} className="py-1 border-b border-white/[0.02] break-all hover:text-white transition-colors">
+                         <div key={i} className="py-2 border-b border-white/5 break-all hover:text-white transition-colors uppercase tracking-[0.1em]">
                            {link}
                          </div>
                        ))}
@@ -263,27 +260,27 @@ function SpotifyGenPage() {
                      <motion.div 
                        initial={{ opacity: 0 }}
                        animate={{ opacity: 1 }}
-                       className="h-full flex flex-col items-center justify-center gap-4 text-white/10"
+                       className="h-full flex flex-col items-center justify-center gap-6 text-white/5"
                      >
-                        <div className="w-16 h-16 border border-white/5 flex items-center justify-center opacity-20">
-                           <Music className="w-8 h-8" />
+                        <div className="w-20 h-20 border border-white/5 flex items-center justify-center">
+                           <Music className="w-10 h-10 opacity-10" />
                         </div>
-                        <span className="text-[10px] uppercase tracking-[0.3em] italic">Aguardando geração...</span>
+                        <span className="font-mono text-[9px] uppercase tracking-[0.5em]">SYSTEM_WAITING_FOR_INPUT...</span>
                      </motion.div>
                    )}
                  </AnimatePresence>
               </div>
 
               {links.length > 0 && (
-                <div className="mt-6 flex items-center justify-between text-[9px] uppercase tracking-widest text-white/30 italic">
-                   <div className="flex items-center gap-2">
-                      <CheckCircle2 className="w-3 h-3 text-primary" />
-                      {links.length} Protocolos Gerados
+                <div className="mt-8 flex items-center justify-between font-mono text-[8px] uppercase tracking-[0.3em] text-white/10">
+                   <div className="flex items-center gap-4">
+                      <div className="w-1.5 h-1.5 rounded-full bg-emerald-500/50" />
+                      {links.length} DATA_PACKETS_READY
                    </div>
-                   <span>Terminal Ativo</span>
+                   <span className="text-primary/40">PROTOCOL_ACTIVE</span>
                 </div>
               )}
-           </Card>
+           </div>
         </div>
       </div>
     </div>
