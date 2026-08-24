@@ -115,9 +115,9 @@ function AppLayout() {
           <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/2" />
       </div>
 
-      <div className="relative z-10 grid min-h-screen w-full lg:grid-cols-[260px_1fr] overflow-hidden">
+      <div className="relative z-10 grid min-h-screen w-full lg:grid-cols-[280px_1fr] overflow-hidden">
         {/* Desktop sidebar */}
-        <aside className="hidden border-r border-white/5 bg-[#030303] lg:block lg:w-[260px]">
+        <aside className="hidden border-r border-white/5 bg-[#030303] lg:block lg:w-[280px]">
           <SidebarBody pathname={pathname} />
         </aside>
 
@@ -125,16 +125,16 @@ function AppLayout() {
         {mobileOpen && (
           <>
             <div
-              className="fixed inset-0 z-40 bg-black/80 backdrop-blur-md lg:hidden"
+              className="fixed inset-0 z-40 bg-black/90 lg:hidden"
               onClick={() => setMobileOpen(false)}
               aria-hidden
             />
-            <aside className="fixed inset-y-0 left-0 z-50 w-[280px] border-r border-border bg-background-secondary lg:hidden">
-              <div className="flex items-center justify-between border-b border-border px-6 py-5">
-                <span className="font-sans text-[10px] font-bold uppercase tracking-wider text-foreground-muted/50">Menu Principal</span>
+            <aside className="fixed inset-y-0 left-0 z-50 w-[280px] border-r border-white/5 bg-[#030303] lg:hidden">
+              <div className="flex items-center justify-between border-b border-white/5 px-8 py-8">
+                <span className="font-mono text-[9px] font-bold uppercase tracking-[0.4em] text-white/20">MENU_ROOT</span>
                 <button
                   onClick={() => setMobileOpen(false)}
-                  className="text-foreground-muted hover:text-foreground transition-colors"
+                  className="text-white/20 hover:text-white transition-colors"
                 >
                   <X className="h-5 w-5" />
                 </button>
@@ -145,9 +145,9 @@ function AppLayout() {
         )}
 
         {/* Main Content Area */}
-        <main className="min-w-0 flex flex-col w-full">
+        <main className="min-w-0 flex flex-col w-full bg-[#030303]">
           <TopBar onOpenMenu={() => setMobileOpen(true)} pathname={pathname} />
-          <div className="flex-1 w-full max-w-7xl mx-auto px-4 pb-14 pt-6 sm:px-8 sm:pt-8 lg:px-10 lg:pb-16 lg:pt-10">
+          <div className="flex-1 w-full max-w-7xl mx-auto px-8 pb-24 pt-12 sm:px-12 lg:px-16">
             <Outlet />
           </div>
         </main>
@@ -164,22 +164,22 @@ function SidebarBody({
   const logoUrl = logoAsset.url;
   return (
     <div className="flex h-full flex-col lg:sticky lg:top-0 lg:h-screen">
-      <Link to="/" className="flex items-center gap-3 px-8 pb-10 pt-10 group">
+      <Link to="/" className="flex items-center gap-4 px-10 pb-12 pt-12 group">
         <img
           src={logoUrl}
           alt="SPECTRE"
-          className="h-9 w-9 object-contain shrink-0 transition-transform duration-500 group-hover:scale-110"
+          className="h-10 w-10 object-contain shrink-0 transition-transform duration-700 grayscale group-hover:grayscale-0"
         />
-        <span className="font-display text-lg tracking-tighter text-foreground uppercase">
-          Spectre <span className="text-primary">Hub</span>
+        <span className="font-display text-xl tracking-tighter text-white uppercase group-hover:text-primary transition-colors">
+          SPECTRE
         </span>
       </Link>
 
-      <nav className="flex flex-col gap-8 px-4 py-2 lg:flex-1 overflow-y-auto">
+      <nav className="flex flex-col gap-10 px-6 py-4 lg:flex-1 overflow-y-auto custom-scrollbar">
         {NAV_GROUPS.map((group) => (
-          <div key={group.title}>
-            <div className="font-mono px-4 pb-3 text-[8px] font-bold uppercase tracking-[0.4em] text-white/10">{group.title}</div>
-            <div className="flex flex-col gap-1">
+          <div key={group.title} className="space-y-4">
+            <div className="font-mono px-4 text-[8px] font-bold uppercase tracking-[0.5em] text-white/10">{group.title}</div>
+            <div className="flex flex-col gap-0.5">
               {group.items.map((item) => {
                 const Icon = item.icon;
                 const active = pathname === item.to;
@@ -187,22 +187,23 @@ function SidebarBody({
                   <Link
                     key={`${item.to}-${item.label}`}
                     to={item.to}
-                    className={`flex items-center gap-3 px-4 py-2 transition-all duration-300 group border-l-2 ${
+                    className={`flex items-center gap-4 px-4 py-3 transition-all duration-500 group relative ${
                       active 
-                        ? "bg-primary/5 text-foreground border-primary" 
-                        : "text-white/20 hover:text-white hover:bg-white/[0.02] border-transparent"
+                        ? "text-primary bg-primary/[0.03]" 
+                        : "text-white/20 hover:text-white hover:bg-white/[0.01]"
                     }`}
                   >
+                    {active && <div className="absolute left-0 top-0 bottom-0 w-px bg-primary shadow-[0_0_8px_#4DA09E]" />}
                     <Icon
-                      className={`h-4 w-4 shrink-0 transition-colors ${
-                        active ? "text-primary" : "text-foreground-muted group-hover:text-foreground"
+                      className={`h-3.5 w-3.5 shrink-0 transition-colors ${
+                        active ? "text-primary" : "text-white/10 group-hover:text-primary/50"
                       }`}
                     />
-                    <span className="font-display text-[11px] uppercase tracking-wider">
+                    <span className="font-mono text-[10px] uppercase tracking-[0.2em]">
                       {item.label}
                     </span>
                     {item.soon && (
-                      <span className="ml-auto bg-primary/10 text-primary text-[8px] font-sans font-bold uppercase tracking-wider px-2 py-0.5 rounded-full">beta</span>
+                      <span className="ml-auto bg-primary/10 text-primary text-[7px] font-mono font-bold uppercase tracking-wider px-2 py-0.5">BETA</span>
                     )}
                   </Link>
                 );
@@ -212,16 +213,16 @@ function SidebarBody({
         ))}
       </nav>
 
-      <div className="mt-auto border-t border-border p-4 space-y-2">
+      <div className="mt-auto border-t border-white/5 p-6 space-y-2">
         <AdminNavLink />
         <a 
           href={DISCORD_INVITE} 
           target="_blank" 
           rel="noreferrer" 
-          className="flex items-center gap-3 px-4 py-2.5 text-foreground-muted hover:text-foreground transition-all group rounded-lg hover:bg-white/[0.03]"
+          className="flex items-center gap-4 px-4 py-3 text-white/10 hover:text-white transition-all group"
         >
-          <LifeBuoy className="h-4 w-4 shrink-0 text-foreground-muted group-hover:text-foreground transition-colors" />
-          <span className="font-sans text-[13px] font-medium">Suporte</span>
+          <LifeBuoy className="h-3.5 w-3.5 shrink-0 transition-colors group-hover:text-primary" />
+          <span className="font-mono text-[9px] uppercase tracking-[0.2em]">OPERATIONS_SUPPORT</span>
         </a>
       </div>
     </div>
