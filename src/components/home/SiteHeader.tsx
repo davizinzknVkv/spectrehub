@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "@tanstack/react-router";
-import { X, Menu, LogIn, Search, Github, Youtube, Instagram, ChevronDown, MessageSquare, Languages } from "lucide-react";
+import { X, Menu, LogIn, Search, Github, Youtube, Instagram, ChevronDown, ChevronRight, MessageSquare, Languages } from "lucide-react";
 import { useTranslation } from 'react-i18next';
 import { motion, AnimatePresence } from "framer-motion";
 import {
