@@ -57,7 +57,7 @@ function ResgatarPage() {
             <div className="mb-20 space-y-6">
               <div className="font-display text-[9px] tracking-[0.5em] text-primary uppercase mb-6 flex items-center gap-4">
                  <div className="w-12 h-px bg-primary" />
-                 INFRASTRUCTURE_MODULES
+                 MÓDULOS DE INFRAESTRUTURA
               </div>
               <h1 className="font-display text-[4rem] md:text-[6rem] leading-[0.85] text-white uppercase tracking-tighter">
                 MEUS <br/><span className="text-primary italic opacity-90">SISTEMAS.</span>
@@ -76,7 +76,7 @@ function ResgatarPage() {
                       </div>
                       <div>
                         <span className="font-mono text-[8px] text-white/10 uppercase tracking-[0.4em] mb-2 block">
-                          MODULE_0{idx + 1} // {product.type}
+                          MÓDULO 0{idx + 1} // {product.type}
                         </span>
                         <h3 className="font-display text-2xl uppercase tracking-tighter text-white group-hover:text-primary transition-colors">
                           {product.name}
@@ -101,7 +101,7 @@ function ResgatarPage() {
                       className={`ds-btn ds-btn-primary flex-1 !h-14 !text-[10px] tracking-[0.2em] ${product.status !== 'Ativo' ? 'opacity-20 cursor-not-allowed grayscale' : ''}`}
                       disabled={product.status !== 'Ativo'}
                     >
-                      ACCESS_TERMINAL
+                      ACESSAR TERMINAL
                     </button>
                     <button className="ds-btn ds-btn-secondary !w-14 !h-14 flex items-center justify-center">
                       <LayoutDashboard className="w-4 h-4" />
