@@ -93,13 +93,13 @@ export function MissionCard({
       isCompleted && !active && "border-emerald-500/20"
     )}>
       {quest.imageUrl && (
-        <div className="absolute inset-0 z-0 overflow-hidden opacity-20 transition-opacity duration-700 group-hover:opacity-40">
+        <div className="absolute inset-0 z-0 overflow-hidden opacity-30 transition-opacity duration-700 group-hover:opacity-50">
           <img
             src={quest.imageUrl}
             alt=""
             className="h-full w-full object-cover grayscale transition-all duration-700 group-hover:grayscale-0 group-hover:scale-110"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#030303] via-[#030303]/40 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#030303] via-[#030303]/60 to-transparent" />
         </div>
       )}
 
@@ -111,19 +111,19 @@ export function MissionCard({
 
       <div className="relative z-10 space-y-4">
         <div className="flex items-start justify-between">
-          <div className="font-mono text-[8px] text-white/10 uppercase tracking-[0.4em]">
+          <div className="font-mono text-[8px] text-white/30 uppercase tracking-[0.4em]">
             NODE_{quest.questId.slice(0, 8)}
           </div>
           <div className="flex gap-3">
-            {isClaimed && <Badge className="!bg-emerald-500/10 !text-emerald-400 !border-emerald-500/20 !text-[7px] uppercase tracking-widest rounded-none px-2">CLAIMED</Badge>}
-            {isCompleted && !isClaimed && <Badge className="!bg-primary/10 !text-primary !border-primary/20 !text-[7px] uppercase tracking-widest rounded-none px-2">VERIFIED</Badge>}
-            {isOrb && <Sparkles className="h-3.5 w-3.5 text-amber-500/40" />}
+            {isClaimed && <Badge className="!bg-emerald-500/10 !text-emerald-400 !border-emerald-500/20 !text-[8px] font-bold uppercase tracking-widest rounded-none px-2">CLAIMED</Badge>}
+            {isCompleted && !isClaimed && <Badge className="!bg-primary/10 !text-primary !border-primary/20 !text-[8px] font-bold uppercase tracking-widest rounded-none px-2">VERIFIED</Badge>}
+            {isOrb && <Sparkles className="h-4 w-4 text-amber-500/60" />}
           </div>
         </div>
-        <h3 className="text-sm font-display uppercase tracking-tight text-white group-hover:text-primary transition-colors leading-tight">
+        <h3 className="text-base font-display uppercase tracking-tight text-white group-hover:text-primary transition-colors leading-tight drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
           {quest.questName}
         </h3>
-        <p className="font-mono text-[8px] text-white/20 uppercase tracking-[0.2em]">{quest.rewardText}</p>
+        <p className="font-mono text-[9px] text-white/60 font-bold uppercase tracking-[0.2em] drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)]">{quest.rewardText}</p>
       </div>
 
       <div className="relative z-10 mt-10">
@@ -152,10 +152,10 @@ export function MissionCard({
             onClick={onExec}
             disabled={disabled}
             className={cn(
-                "w-full h-12 flex items-center justify-center text-[10px] font-mono uppercase tracking-[0.3em] transition-all border",
+                "w-full h-12 flex items-center justify-center text-[10px] font-mono font-bold uppercase tracking-[0.3em] transition-all border",
                 disabled 
-                  ? "bg-white/5 border-white/5 text-white/10 cursor-not-allowed" 
-                  : "bg-transparent border-white/10 text-white hover:border-primary/40 hover:text-primary"
+                  ? "bg-white/5 border-white/5 text-white/20 cursor-not-allowed" 
+                  : "bg-transparent border-white/20 text-white hover:border-primary/40 hover:text-primary hover:bg-primary/5"
             )}
           >
             {gateHint || (
