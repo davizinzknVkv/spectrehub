@@ -10,55 +10,55 @@
   --radius-lg: 12px;
   --radius-xl: 16px;
 
-  --color-background: #030303;
-  --color-background-secondary: #050505;
-  --color-foreground: #EBEBEB;
-  --color-foreground-muted: #9AA0AA;
+  --color-background: #0A0A0D;
+  --color-background-secondary: #101114;
+  --color-foreground: #FFFFFF;
+  --color-foreground-muted: #A0A0AA;
   
   --color-card: #151515;
   --color-card-elevated: #191919;
   --color-card-alternate: #212121;
   
   --color-popover: #151515;
-  --color-popover-foreground: #EBEBEB;
+  --color-popover-foreground: #FFFFFF;
   
-  --color-primary: #4DA09E;
+  --color-primary: #FF0050;
   --color-primary-foreground: #ffffff;
   
   --color-secondary: #101114;
-  --color-secondary-foreground: #9AA0AA;
+  --color-secondary-foreground: #A0A0AA;
   
   --color-muted: #191919;
-  --color-muted-foreground: #9AA0AA;
+  --color-muted-foreground: #6F727A;
   
-  --color-accent: #4DA09E;
+  --color-accent: #FF0050;
   --color-accent-foreground: #ffffff;
   
   --color-border: #242424;
   --color-input: #101114;
-  --color-ring: rgba(77, 160, 158, 0.5);
+  --color-ring: rgba(255, 0, 80, 0.5);
 
   /* Spectre Palette */
   --color-obsidian: #0A0A0D;
-  --color-spectre-teal: #4DA09E;
+  --color-spectre-pink: #FF0050;
 }
 
 :root {
   --radius: 0px;
-  --background: #030303;
-  --foreground: #EBEBEB;
-  --card: #050505;
-  --card-foreground: #EBEBEB;
-  --border: #151515;
-  --primary: #4DA09E;
-  --secondary: #080808;
-  --accent: #4DA09E;
-  --muted: #080808;
-  --muted-foreground: #666666;
-  --popover: #050505;
-  --popover-foreground: #EBEBEB;
-  --input: #050505;
-  --ring: rgba(77, 160, 158, 0.3);
+  --background: #0A0A0D;
+  --foreground: #FFFFFF;
+  --card: #151515;
+  --card-foreground: #FFFFFF;
+  --border: #242424;
+  --primary: #FF0050;
+  --secondary: #101114;
+  --accent: #FF0050;
+  --muted: #191919;
+  --muted-foreground: #6F727A;
+  --popover: #151515;
+  --popover-foreground: #FFFFFF;
+  --input: #101114;
+  --ring: rgba(255, 0, 80, 0.3);
 }
 
 @layer base {
