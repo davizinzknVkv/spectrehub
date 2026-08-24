@@ -193,7 +193,7 @@ function SidebarBody({
                         : "text-white/20 hover:text-white hover:bg-white/[0.01]"
                     }`}
                   >
-                    {active && <div className="absolute left-0 top-0 bottom-0 w-px bg-primary shadow-[0_0_8px_#4DA09E]" />}
+                    {active && <div className="absolute left-0 top-0 bottom-0 w-px bg-primary shadow-[0_0_8px_#FF0050]" />}
                     <Icon
                       className={`h-3.5 w-3.5 shrink-0 transition-colors ${
                         active ? "text-primary" : "text-white/10 group-hover:text-primary/50"
@@ -306,7 +306,7 @@ function TopBar({ onOpenMenu, pathname }: { onOpenMenu: () => void; pathname: st
 
         <div className="flex items-center gap-10">
           <div className="flex items-center gap-4 border-r border-white/5 pr-10">
-            <div className={`w-1.5 h-1.5 ${creds ? 'bg-primary shadow-[0_0_8px_#4DA09E]' : 'bg-white/5'}`} />
+            <div className={`w-1.5 h-1.5 ${creds ? 'bg-primary shadow-[0_0_8px_#FF0050]' : 'bg-white/5'}`} />
             <span className="font-mono text-[8px] font-bold tracking-[0.4em] text-white/20 uppercase hidden sm:block">
               {creds ? 'CONEXÃO ESTABELECIDA' : 'OFFLINE'}
             </span>
@@ -397,7 +397,7 @@ function TopBar({ onOpenMenu, pathname }: { onOpenMenu: () => void; pathname: st
                   ) : (
                     <div 
                       className="w-full h-full opacity-20" 
-                      style={{ backgroundColor: me?.banner_color || '#4DA09E' }}
+                      style={{ backgroundColor: me?.banner_color || '#FF0050' }}
                     />
                   )}
                   {/* Banner Copy Button */}

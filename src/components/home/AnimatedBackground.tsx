@@ -17,7 +17,7 @@ export function AnimatedBackground() {
       <div 
         className="absolute inset-0 opacity-[0.05]"
         style={{
-          backgroundImage: `radial-gradient(circle at 1px 1px, var(--color-spectre-teal) 1px, transparent 0)`,
+          backgroundImage: `radial-gradient(circle at 1px 1px, var(--color-spectre-pink) 1px, transparent 0)`,
           backgroundSize: '32px 32px'
         }}
       />
@@ -31,7 +31,7 @@ export function AnimatedBackground() {
           y: [0, 30, 0]
         }}
         transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
-        className="absolute top-1/4 -left-1/4 w-[80vw] h-[80vh] bg-primary rounded-full blur-[160px]"
+        className="absolute top-1/4 -left-1/4 w-[80vw] h-[80vh] bg-primary/20 rounded-full blur-[160px]"
       />
       
       <motion.div 
@@ -42,7 +42,7 @@ export function AnimatedBackground() {
           y: [0, -20, 0]
         }}
         transition={{ duration: 20, repeat: Infinity, ease: "linear", delay: 2 }}
-        className="absolute bottom-1/4 -right-1/4 w-[60vw] h-[60vh] bg-white rounded-full blur-[140px]"
+        className="absolute bottom-1/4 -right-1/4 w-[60vw] h-[60vh] bg-white/10 rounded-full blur-[140px]"
       />
 
       {/* Scanline Effect */}

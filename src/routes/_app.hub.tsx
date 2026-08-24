@@ -320,15 +320,15 @@ function HubPage() {
 
             <div className="space-y-4">
               <div className="flex items-center gap-4">
-                <div className="w-1.5 h-1.5 bg-primary shadow-[0_0_8px_#4DA09E]" />
+                <div className="w-1.5 h-1.5 bg-primary shadow-[0_0_8px_#FF0050]" />
                 <span className="font-mono text-[9px] tracking-[0.5em] text-white/20 uppercase">
-                  [IDENTIDADE VERIFICADA]
+                  IDENTIDADE VERIFICADA
                 </span>
               </div>
               {loading ? (
                 <Skeleton className="h-16 w-80" />
               ) : (
-                <h2 className="font-display text-5xl sm:text-7xl text-white uppercase tracking-tighter leading-none">
+                <h2 className="font-display text-4xl sm:text-6xl text-white uppercase tracking-tighter leading-none">
                   {user?.global_name || user?.username}
                   <span className="font-mono text-[10px] text-primary/30 uppercase tracking-[0.3em] block mt-4">ID DO NÓ: {user?.id}</span>
                 </h2>

@@ -121,7 +121,7 @@ export function SiteHeader({ guildInvite }: SiteHeaderProps) {
             to="/hub" 
             className="ds-btn ds-btn-primary !py-2 !px-6 !min-h-0 !h-10"
           >
-              ACESSAR HUB
+              ACESSAR SPECTRE
           </Link>
         </div>
 
@@ -169,7 +169,7 @@ export function SiteHeader({ guildInvite }: SiteHeaderProps) {
                 className="ds-btn ds-btn-primary w-full py-6 mb-4"
                 onClick={() => setOpen(false)}
               >
-                ACESSAR HUB
+                ACESSAR SPECTRE
               </Link>
               <div className="flex items-center gap-8 opacity-20">
                 <a href="https://discord.gg/spectrehub"><MessageSquare className="w-5 h-5" /></a>

@@ -148,7 +148,7 @@ export function SocialProof({ widgetUrl, products: productsList }: SocialProofPr
              transition={{ delay: 0.1 }}
              className="bg-obsidian flex flex-col items-center text-center p-12 group hover:bg-white/[0.04] transition-colors"
            >
-              <div className="text-primary mb-6 opacity-50 group-hover:opacity-100 transition-opacity scale-125">
+              <div className="text-primary mb-6 opacity-50 group-hover:opacity-100 transition-opacity">
                 <Users className="w-6 h-6" />
               </div>
               <span className="font-display text-5xl md:text-7xl lg:text-8xl text-white italic mb-3 tracking-tighter leading-none">
@@ -165,7 +165,7 @@ export function SocialProof({ widgetUrl, products: productsList }: SocialProofPr
              transition={{ delay: 0.2 }}
              className="bg-obsidian flex flex-col items-center text-center p-12 group hover:bg-white/[0.04] transition-colors"
            >
-              <div className="text-primary mb-6 opacity-50 group-hover:opacity-100 transition-opacity scale-125">
+              <div className="text-primary mb-6 opacity-50 group-hover:opacity-100 transition-opacity">
                 <Tractor className="w-6 h-6" />
               </div>
               <span className="font-display text-5xl md:text-7xl lg:text-8xl text-white italic mb-3 tracking-tighter leading-none">
@@ -182,7 +182,7 @@ export function SocialProof({ widgetUrl, products: productsList }: SocialProofPr
              transition={{ delay: 0.3 }}
              className="bg-obsidian flex flex-col items-center text-center p-12 group hover:bg-white/[0.04] transition-colors"
            >
-              <div className="text-primary mb-6 opacity-50 group-hover:opacity-100 transition-opacity scale-125">
+              <div className="text-primary mb-6 opacity-50 group-hover:opacity-100 transition-opacity">
                 <Zap className="w-6 h-6" />
               </div>
               <span className="font-display text-5xl md:text-7xl lg:text-8xl text-white italic mb-3 tracking-tighter leading-none">
@@ -199,7 +199,7 @@ export function SocialProof({ widgetUrl, products: productsList }: SocialProofPr
              transition={{ delay: 0.4 }}
              className="bg-obsidian flex flex-col items-center text-center p-12 group hover:bg-white/[0.04] transition-colors"
            >
-              <div className="text-primary mb-6 opacity-50 group-hover:opacity-100 transition-opacity scale-125">
+              <div className="text-primary mb-6 opacity-50 group-hover:opacity-100 transition-opacity">
                 <ShieldCheck className="w-6 h-6" />
               </div>
               <div className="flex items-center gap-2 mb-3 leading-none">

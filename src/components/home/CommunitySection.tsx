@@ -106,8 +106,8 @@ export function CommunitySection({ widgetUrl, guildInvite, fallbackMembers }: Co
                   label={t('community.statOnline')}
                   value={presence !== null ? String(presence) : "—"}
                 />
-                <MiniStat icon={MessageSquare} label={t('community.statSupport')} value="TICKET" />
-                <MiniStat icon={Sparkles} label={t('community.statRoles')} value="PREMIUM" />
+                <MiniStat icon={MessageSquare} label={t('community.statSupport')} value="SUPORTE" />
+                <MiniStat icon={Sparkles} label={t('community.statRoles')} value="ELITE" />
             </div>
           </Reveal>
         </div>

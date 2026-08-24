@@ -55,10 +55,10 @@ export function SiteFooter({ guildInvite }: SiteFooterProps) {
             <div className="space-y-12">
               <div className="flex items-center gap-3">
                 <div className="w-1 h-1 bg-primary" />
-                <h3 className="font-mono text-[8px] tracking-[0.5em] text-white/20 uppercase">SYSTEMS_LIST</h3>
+                <h3 className="font-mono text-[8px] tracking-[0.5em] text-white/20 uppercase">LISTA DE SISTEMAS</h3>
               </div>
               <ul className="space-y-6">
-                {["AUTO_QUESTS", "OPTIMIZER", "NICKS_GUN", "SERVER_CTL"].map(item => (
+                {["Missões", "Otimizador", "Nicks Sniper", "Controle"].map(item => (
                   <li key={item}>
                     <a href="#" className="font-mono text-[9px] text-white/10 hover:text-white transition-all duration-500 uppercase tracking-[0.3em]">
                       {item}
@@ -71,7 +71,7 @@ export function SiteFooter({ guildInvite }: SiteFooterProps) {
             <div className="space-y-12">
               <div className="flex items-center gap-3">
                 <div className="w-1 h-1 bg-white/20" />
-                <h3 className="font-mono text-[8px] tracking-[0.5em] text-white/20 uppercase">ROOT_MENU</h3>
+                <h3 className="font-mono text-[8px] tracking-[0.5em] text-white/20 uppercase">MENU PRINCIPAL</h3>
               </div>
               <ul className="space-y-6">
                 {[
@@ -91,7 +91,7 @@ export function SiteFooter({ guildInvite }: SiteFooterProps) {
             <div className="space-y-12">
               <div className="flex items-center gap-3">
                 <div className="w-1 h-1 bg-white/20" />
-                <h3 className="font-mono text-[8px] tracking-[0.5em] text-white/20 uppercase">LEGAL_PROTO</h3>
+                <h3 className="font-mono text-[8px] tracking-[0.5em] text-white/20 uppercase">PROTOCOLOS LEGAIS</h3>
               </div>
               <ul className="space-y-6">
                 {[t('footer.legalPrivacy'), t('footer.legalTerms'), "DOCS"].map(item => (
@@ -113,10 +113,10 @@ export function SiteFooter({ guildInvite }: SiteFooterProps) {
           <div className="flex items-center gap-16">
             <div className="font-mono text-[8px] tracking-[0.5em] text-emerald-500 flex items-center gap-4 uppercase">
                <span className="w-1.5 h-1.5 bg-emerald-500 shadow-[0_0_8px_#10b981] animate-pulse" />
-               SYS_ACTIVE_NODE_1
+               SISTEMA ATIVO NÓ 1
             </div>
             <div className="font-mono text-[8px] tracking-[0.5em] text-white/10 uppercase">
-               PROP_SPECTRE_GRP_ELITE
+               PROPRIEDADE SPECTRE ELITE
             </div>
           </div>
         </div>

@@ -45,7 +45,7 @@ export function Hero({ guildInvite, fallbackMembers, liveMembers = [] }: HeroPro
         <div className="lg:col-span-8 text-left">
           <Reveal>
             <div className="flex items-center gap-6 mb-16">
-              <div className="w-1.5 h-1.5 bg-primary shadow-[0_0_8px_#4DA09E]" />
+              <div className="w-1.5 h-1.5 bg-primary shadow-[0_0_8px_#FF0050]" />
               <span className="font-mono text-[9px] tracking-[0.5em] text-white/30 uppercase">
                 {t('hero.badge')} // SISTEMA INICIALIZADO
               </span>
@@ -57,7 +57,7 @@ export function Hero({ guildInvite, fallbackMembers, liveMembers = [] }: HeroPro
               initial={{ opacity: 0, x: -30 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
-              className="font-display text-[clamp(4rem,12vw,10rem)] leading-[0.8] text-white uppercase tracking-tighter"
+              className="font-display text-[clamp(2.5rem,8vw,5rem)] leading-[0.9] text-white uppercase tracking-tighter"
             >
               <div className="flex flex-col">
                 <span className="block">{t('hero.title1')}</span>
@@ -98,7 +98,7 @@ export function Hero({ guildInvite, fallbackMembers, liveMembers = [] }: HeroPro
           <div className="space-y-8 opacity-40">
             <div className="space-y-2">
               <span className="font-display text-[9px] tracking-[0.3em] uppercase block">Timestamp</span>
-              <span className="font-mono text-[10px] block uppercase">VERSÃO ELITE 2026</span>
+              <span className="font-mono text-[10px] block uppercase">VERSÃO 2026</span>
             </div>
             
             <div className="space-y-4">
@@ -120,11 +120,11 @@ export function Hero({ guildInvite, fallbackMembers, liveMembers = [] }: HeroPro
             </div>
 
             <div className="pt-8 border-t border-white/10 text-[9px] font-mono leading-relaxed max-w-[200px] ml-auto uppercase opacity-50">
-              [SISTEMA CARREGADO]
+              SISTEMA CARREGADO
               <br />
-              [RLS ATIVO]
+              RLS ATIVO
               <br />
-              [NÚCLEO ATIVO]
+              NÚCLEO ATIVO
             </div>
           </div>
         </div>
