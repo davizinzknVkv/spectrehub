@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "@tanstack/react-router";
-import { X, Menu, LogIn, Search, Github, Youtube, Instagram, ChevronDown, MessageSquare, Languages } from "lucide-react";
+import { X, Menu, LogIn, Search, Github, Youtube, Instagram, ChevronDown, ChevronRight, MessageSquare, Languages } from "lucide-react";
 import { useTranslation } from 'react-i18next';
 import { motion, AnimatePresence } from "framer-motion";
 import {
@@ -56,12 +56,12 @@ export function SiteHeader({ guildInvite }: SiteHeaderProps) {
   }, []);
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50">
+    <header className="fixed top-6 left-0 right-0 z-50 px-6">
       <div 
-        className={`mx-auto w-full flex items-center justify-between transition-all duration-500 border-b border-white/5 px-6 md:px-12 py-4 ${
+        className={`mx-auto max-w-7xl w-full flex items-center justify-between transition-all duration-500 border border-white/5 px-6 py-2 rounded-full ${
           scrolled 
-            ? "bg-[#030303]/90 backdrop-blur-md" 
-            : "bg-transparent"
+            ? "bg-[#0A0A0D]/80 backdrop-blur-xl shadow-2xl" 
+            : "bg-[#0A0A0D]/40 backdrop-blur-md"
         }`}
       >
         {/* Logo */}
@@ -119,9 +119,10 @@ export function SiteHeader({ guildInvite }: SiteHeaderProps) {
 
           <Link 
             to="/hub" 
-            className="ds-btn ds-btn-primary !py-2 !px-6 !min-h-0 !h-10"
+            className="ds-btn ds-btn-primary !py-2 !px-5 !min-h-0 !h-9 !rounded-full text-[10px] flex items-center gap-2 group"
           >
               ACESSAR SPECTRE
+              <ChevronRight className="w-3 h-3 transition-transform group-hover:translate-x-0.5" />
           </Link>
         </div>
 
