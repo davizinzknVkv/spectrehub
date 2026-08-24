@@ -1,4 +1,4 @@
-/* arruma isso eo site td esta muito escuro */
+/* Melhore o contraste e a legibilidade dos cartões de missões para que títulos, recompensas e descrições fiquem nítidos mesmo no fundo escuro. */
 
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect } from "react";
