@@ -27,7 +27,7 @@ export function PlansSection({ plans }: PlansSectionProps) {
             </h2>
         </Reveal>
         <Reveal className="flex-1 lg:max-w-sm border-l border-white/10 pl-8 pb-4">
-            <p className="text-white/40 text-[11px] leading-relaxed uppercase tracking-[0.2em]">
+            <p className="text-white/60 text-[11px] leading-relaxed uppercase tracking-[0.2em]">
               {t('plans.description')}
             </p>
         </Reveal>

@@ -28,7 +28,7 @@ export function SiteFooter({ guildInvite }: SiteFooterProps) {
               </span>
             </Link>
             <div className="border-l border-white/5 pl-8">
-              <p className="font-mono text-white/20 leading-loose text-[10px] uppercase tracking-[0.2em] italic">
+              <p className="font-mono text-white/40 leading-loose text-[10px] uppercase tracking-[0.2em] italic">
                 {t('footer.slogan')}
               </p>
             </div>

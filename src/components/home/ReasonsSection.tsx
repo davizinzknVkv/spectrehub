@@ -26,7 +26,7 @@ export function ReasonsSection({ reasons }: ReasonsSectionProps) {
             <span className="text-primary italic opacity-90">{t('reasons.subtitle')}</span>
           </h2>
           <div className="border-l border-white/5 pl-8 space-y-10">
-            <p className="font-mono text-[10px] leading-relaxed uppercase tracking-[0.2em] text-white/20">
+            <p className="font-mono text-[10px] leading-relaxed uppercase tracking-[0.2em] text-white/40">
               {t('reasons.description')}
             </p>
             <div className="font-mono text-[8px] text-primary/20 uppercase tracking-[0.4em]">
@@ -48,7 +48,7 @@ export function ReasonsSection({ reasons }: ReasonsSectionProps) {
                       {t(`reasons.items.${i}.title`)}
                     </h3>
                   </div>
-                  <p className="font-mono text-[9px] text-white/10 leading-relaxed uppercase tracking-[0.2em] max-w-lg group-hover:text-white/30 transition-colors">
+                  <p className="font-mono text-[9px] text-white/30 leading-relaxed uppercase tracking-[0.2em] max-w-lg group-hover:text-white/60 transition-colors">
                     {t(`reasons.items.${i}.desc`)}
                   </p>
                   <div className="pt-10 flex items-center gap-6 opacity-0 group-hover:opacity-100 transition-opacity duration-700">

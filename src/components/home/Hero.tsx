@@ -70,7 +70,7 @@ export function Hero({ guildInvite, fallbackMembers, liveMembers = [] }: HeroPro
             
             <Reveal delay={400}>
               <div className="mt-16 max-w-lg border-l border-white/5 pl-8">
-                <p className="text-white/30 text-xs md:text-sm font-mono leading-loose uppercase tracking-[0.2em]">
+                <p className="text-white/50 text-xs md:text-sm font-mono leading-loose uppercase tracking-[0.2em]">
                   {t('hero.description')}
                 </p>
               </div>

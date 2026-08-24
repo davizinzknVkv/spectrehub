@@ -35,7 +35,7 @@ export function FinalCta({ guildInvite }: FinalCtaProps) {
             <span>{t('final.title')}</span>
             <span className="text-primary">{t('final.subtitle')}</span>
           </h2>
-          <p className="max-w-2xl mx-auto text-white/30 text-xs md:text-sm font-sans mb-12 uppercase tracking-[0.3em] leading-relaxed">
+          <p className="max-w-2xl mx-auto text-white/50 text-xs md:text-sm font-sans mb-12 uppercase tracking-[0.3em] leading-relaxed">
             {t('final.description')}
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-6">

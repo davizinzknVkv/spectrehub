@@ -82,7 +82,7 @@ export function CommunitySection({ widgetUrl, guildInvite, fallbackMembers }: Co
               <span className="text-primary italic opacity-90">{t('community.subtitle')}</span>
             </h2>
             <div className="border-l border-white/10 pl-8 space-y-12">
-              <p className="text-white/40 text-sm leading-relaxed uppercase tracking-[0.1em]">
+              <p className="text-white/60 text-sm leading-relaxed uppercase tracking-[0.1em]">
                 {t('community.description')}
               </p>
               
