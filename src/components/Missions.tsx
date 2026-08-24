@@ -170,8 +170,7 @@ export function MissionCard({
     </div>
   );
 }
-  );
-}
+
 
 /* ── CaptchaModal ───────────────────────────────────────────────────────── */
 export function CaptchaModal({
