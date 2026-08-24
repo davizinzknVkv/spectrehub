@@ -333,10 +333,16 @@ export async function fetchAvailableQuests(includeCompleted = false): Promise<Qu
     if (!best) continue;
     
     const asset = q.config.assets?.hero || q.config.assets?.quest_bar_hero || q.config.assets?.logotype;
-    const assetFile = asset ? asset.split("/").pop()! : undefined;
-    const imageUrl = assetFile
-      ? `https://cdn.discordapp.com/quests/${q.id}/${/\.(png|jpe?g|webp|gif)$/i.test(assetFile) ? assetFile : `${assetFile}.png`}?size=1024`
-      : undefined;
+    let imageUrl: string | undefined = undefined;
+    
+    if (asset) {
+      if (asset.startsWith('http')) {
+        imageUrl = asset;
+      } else {
+        const assetFile = asset.split("/").pop()!;
+        imageUrl = `https://cdn.discordapp.com/quests/${q.id}/${/\.(png|jpe?g|webp|gif)$/i.test(assetFile) ? assetFile : `${assetFile}.png`}?size=1024`;
+      }
+    }
 
     result.push({
       questId: q.id,
