@@ -44,21 +44,21 @@
 }
 
 :root {
-  --radius: 8px;
-  --background: #0A0A0D;
+  --radius: 0px;
+  --background: #030303;
   --foreground: #EBEBEB;
-  --card: #151515;
+  --card: #050505;
   --card-foreground: #EBEBEB;
-  --border: #242424;
+  --border: #151515;
   --primary: #4DA09E;
-  --secondary: #101114;
+  --secondary: #080808;
   --accent: #4DA09E;
-  --muted: #191919;
-  --muted-foreground: #9AA0AA;
-  --popover: #151515;
+  --muted: #080808;
+  --muted-foreground: #666666;
+  --popover: #050505;
   --popover-foreground: #EBEBEB;
-  --input: #101114;
-  --ring: rgba(77, 160, 158, 0.5);
+  --input: #050505;
+  --ring: rgba(77, 160, 158, 0.3);
 }
 
 @layer base {
