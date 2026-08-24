@@ -351,13 +351,15 @@ function HubPage() {
             </div>
           </div>
           
-          <div className="w-full lg:w-auto grid grid-cols-2 lg:flex lg:flex-col gap-2">
-            <button onClick={handleLeaveAll} disabled={leavingAll} className="ds-btn ds-btn-primary text-center">
-              {leavingAll ? "STOPPING..." : "TERMINATE_GUILDS"}
-            </button>
-            <Link to="/settings" className="ds-btn ds-btn-secondary text-center">PROPERTIES</Link>
+          <div className="w-full lg:w-auto flex flex-col gap-4">
+            <div className="grid grid-cols-1 gap-2">
+              <button onClick={handleLeaveAll} disabled={leavingAll} className="ds-btn ds-btn-primary !py-4">
+                {leavingAll ? "STOPPING..." : "TERMINATE_GUILDS"}
+              </button>
+              <Link to="/settings" className="ds-btn ds-btn-secondary !py-4 text-center">PROPERTIES_CONFIG</Link>
+            </div>
             
-            <div className="col-span-2 flex gap-2">
+            <div className="flex gap-2 border-t border-white/5 pt-4">
               <button 
                 onClick={() => {
                   if (!user?.avatar) return;
@@ -367,7 +369,7 @@ function HubPage() {
                   navigator.clipboard.writeText(url);
                   toast.success("Link do Avatar copiado!");
                 }}
-                className="ds-btn ds-btn-secondary flex-1 !text-[9px]"
+                className="font-mono text-[9px] text-white/20 hover:text-primary transition-colors uppercase tracking-[0.2em] px-4 py-2 border border-white/5 hover:border-primary/30 flex-1"
               >
                 CPY_AVATAR
               </button>
@@ -381,7 +383,7 @@ function HubPage() {
                   toast.success("Link do Banner copiado!");
                 }}
                 disabled={!profile?.user?.banner}
-                className="ds-btn ds-btn-secondary flex-1 !text-[9px] disabled:opacity-30"
+                className="font-mono text-[9px] text-white/20 hover:text-primary transition-colors uppercase tracking-[0.2em] px-4 py-2 border border-white/5 hover:border-primary/30 flex-1 disabled:opacity-10"
               >
                 CPY_BANNER
               </button>
