@@ -44,7 +44,7 @@ export function PlansSection({ plans }: PlansSectionProps) {
               <div className="mb-20">
                 <div className="flex items-center gap-3 mb-8">
                   <div className="w-1 h-1 bg-white/10" />
-                  <span className="font-mono text-[8px] text-white/10 tracking-[0.5em] uppercase">LEVEL_0{i + 1}</span>
+                  <span className="font-mono text-[8px] text-white/10 tracking-[0.5em] uppercase">NÍVEL 0{i + 1}</span>
                 </div>
                 <h3 className="font-display text-4xl text-white uppercase tracking-tighter mb-4 group-hover:text-primary transition-colors">{t(`plans.tiers.${p.name.toLowerCase()}.name`)}</h3>
                 <div className="flex items-baseline gap-3 pt-4 border-t border-white/5">
@@ -67,7 +67,7 @@ export function PlansSection({ plans }: PlansSectionProps) {
               <div className="mt-auto">
                 {p.name === "Free" ? (
                   <a href="#free" className="ds-btn ds-btn-secondary w-full !h-14 !text-[10px] uppercase tracking-[0.3em]">
-                    INITIALIZE_FREE
+                    COMEÇAR AGORA
                   </a>
                 ) : (
                   <Link to="/hub" className={p.highlight ? "ds-btn ds-btn-primary w-full !h-14 !text-[10px] uppercase tracking-[0.3em]" : "ds-btn ds-btn-secondary w-full !h-14 !text-[10px] uppercase tracking-[0.3em]"}>

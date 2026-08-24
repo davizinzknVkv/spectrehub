@@ -98,7 +98,7 @@ export function Hero({ guildInvite, fallbackMembers, liveMembers = [] }: HeroPro
           <div className="space-y-8 opacity-40">
             <div className="space-y-2">
               <span className="font-display text-[9px] tracking-[0.3em] uppercase block">Timestamp</span>
-              <span className="font-mono text-[10px] block uppercase">2026_VERSION_ELITE</span>
+              <span className="font-mono text-[10px] block uppercase">VERSÃO ELITE 2026</span>
             </div>
             
             <div className="space-y-4">

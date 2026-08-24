@@ -92,7 +92,7 @@ export function CommunitySection({ widgetUrl, guildInvite, fallbackMembers }: Co
                 rel="noreferrer"
                 className="ds-btn ds-btn-primary !px-12"
               >
-                JOIN_COMMUNITY
+                {t('community.cta') || "ENTRAR NA COMUNIDADE"}
               </a>
             </div>
           </Reveal>
