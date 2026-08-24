@@ -33,45 +33,48 @@ export function PlansSection({ plans }: PlansSectionProps) {
         </Reveal>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-px bg-white/5 border border-white/5">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 bg-[#030303] border border-white/5">
         {plans.map((p, i) => (
-          <Reveal key={p.name} delay={i * 50} className="bg-[#030303] relative group">
+          <Reveal key={p.name} delay={i * 50} className="relative group border-r border-b lg:border-b-0 border-white/5 last:border-r-0">
             <div className="p-12 flex flex-col h-full relative z-10 hover:bg-white/[0.01] transition-all duration-500">
               {p.highlight && (
-                <div className="absolute top-0 right-0 bg-primary text-white text-[7px] font-display uppercase tracking-[0.3em] px-5 py-1.5 italic">
-                  POPULAR_CHOICE
-                </div>
+                <div className="absolute top-0 right-0 w-1 h-1 bg-primary" />
               )}
               
-              <div className="mb-16">
-                <span className="font-mono text-[8px] text-primary/30 block mb-6 tracking-[0.5em]">L_0{i + 1}</span>
-                <h3 className="font-display text-3xl text-white uppercase tracking-tighter mb-4 italic group-hover:text-primary transition-colors">{t(`plans.tiers.${p.name.toLowerCase()}.name`)}</h3>
-                <div className="flex items-baseline gap-2">
-                  <span className="text-4xl font-display text-white tracking-tighter">{p.price}</span>
-                  <span className="font-mono text-[7px] text-white/20 uppercase tracking-[0.3em]">/ {t(`plans.tiers.${p.name.toLowerCase()}.period`)}</span>
+              <div className="mb-20">
+                <div className="flex items-center gap-3 mb-8">
+                  <div className="w-1 h-1 bg-white/10" />
+                  <span className="font-mono text-[8px] text-white/10 tracking-[0.5em] uppercase">LEVEL_0{i + 1}</span>
+                </div>
+                <h3 className="font-display text-4xl text-white uppercase tracking-tighter mb-4 group-hover:text-primary transition-colors">{t(`plans.tiers.${p.name.toLowerCase()}.name`)}</h3>
+                <div className="flex items-baseline gap-3 pt-4 border-t border-white/5">
+                  <span className="text-4xl font-display text-white tracking-tighter italic">{p.price}</span>
+                  <span className="font-mono text-[8px] text-white/10 uppercase tracking-[0.3em]">/ {t(`plans.tiers.${p.name.toLowerCase()}.period`)}</span>
                 </div>
               </div>
 
-              <div className="space-y-6 mb-20 flex-1">
+              <div className="space-y-6 mb-24 flex-1">
                 {p.features.map((f, fi) => (
                   <div key={fi} className="flex items-center gap-4 group/item">
-                    <div className="w-1 h-1 bg-primary/20 group-hover/item:bg-primary transition-colors" />
-                    <span className="text-[9px] font-display text-white/20 uppercase tracking-[0.2em] group-hover/item:text-white/50 transition-colors leading-none">
+                    <div className="w-1 h-px bg-white/10 group-hover/item:bg-primary transition-colors" />
+                    <span className="font-mono text-[9px] text-white/20 uppercase tracking-[0.2em] group-hover/item:text-white/40 transition-colors leading-none">
                        {t(`plans.tiers.${p.name.toLowerCase()}.features.${fi}`)}
                     </span>
                   </div>
                 ))}
               </div>
 
-              {p.name === "Free" ? (
-                <a href="#free" className="ds-btn ds-btn-secondary w-full !h-14 flex items-center justify-center">
-                  INITIALIZE_FREE
-                </a>
-              ) : (
-                <Link to="/hub" className={p.highlight ? "ds-btn ds-btn-primary w-full !h-14 flex items-center justify-center" : "ds-btn ds-btn-secondary w-full !h-14 flex items-center justify-center"}>
-                  {t(`plans.tiers.${p.name.toLowerCase()}.cta`)}
-                </Link>
-              )}
+              <div className="mt-auto">
+                {p.name === "Free" ? (
+                  <a href="#free" className="ds-btn ds-btn-secondary w-full !h-14 !text-[10px] uppercase tracking-[0.3em]">
+                    INITIALIZE_FREE
+                  </a>
+                ) : (
+                  <Link to="/hub" className={p.highlight ? "ds-btn ds-btn-primary w-full !h-14 !text-[10px] uppercase tracking-[0.3em]" : "ds-btn ds-btn-secondary w-full !h-14 !text-[10px] uppercase tracking-[0.3em]"}>
+                    {t(`plans.tiers.${p.name.toLowerCase()}.cta`)}
+                  </Link>
+                )}
+              </div>
             </div>
           </Reveal>
         ))}
