@@ -93,7 +93,7 @@ export function MissionCard({
       isCompleted && !active && "border-emerald-500/20"
     )}>
       {quest.imageUrl && (
-        <div className="absolute inset-0 z-0 overflow-hidden opacity-5 transition-opacity duration-700 group-hover:opacity-10">
+        <div className="absolute inset-0 z-0 overflow-hidden opacity-20 transition-opacity duration-700 group-hover:opacity-40">
           <img
             src={quest.imageUrl}
             alt=""
