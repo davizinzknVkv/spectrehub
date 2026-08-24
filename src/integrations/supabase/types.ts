@@ -433,6 +433,12 @@ export type Database = {
         }
         Relationships: []
       }
+      spotify_stock_public: {
+        Row: {
+          total_stock: number | null
+        }
+        Relationships: []
+      }
     }
     Functions: {
       decrement_spotify_stock: {
