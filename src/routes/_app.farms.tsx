@@ -124,14 +124,14 @@ function FarmsPage() {
       </div>
 
       {running && progress && (
-        <div className="bg-[#030303] border border-primary/20 p-10 space-y-6 mt-12">
+        <div className="bg-[#0d0f14] border border-primary/20 p-10 space-y-6 mt-12">
             <div className="flex justify-between items-end">
                 <div className="font-mono text-[8px] uppercase tracking-[0.5em] text-primary">PROGRESSO DA MISSÃO</div>
                 <div className="font-display text-2xl text-white tracking-tighter">{progress.current} / {progress.total}</div>
             </div>
             <div className="h-0.5 bg-white/5 relative overflow-hidden">
                 <div 
-                  className="h-full bg-primary transition-all duration-500 shadow-[0_0_10px_#4DA09E]" 
+                  className="h-full bg-primary transition-all duration-500 shadow-[0_0_10px_#005194]" 
                   style={{ width: `${Math.min(100, (progress.current / Math.max(1, progress.total)) * 100)}%` }} 
                 />
             </div>
@@ -140,7 +140,7 @@ function FarmsPage() {
 
       <div className="grid grid-cols-1 lg:grid-cols-[1fr_350px] gap-8 mt-8">
         <div className="space-y-8">
-            <div className="bg-[#030303] border border-white/5 p-10 space-y-10">
+            <div className="bg-[#0d0f14] border border-white/5 p-10 space-y-10">
                 <div className="font-mono text-[8px] uppercase tracking-[0.5em] text-white/20">MÉTRICAS DE DESEMPENHO</div>
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-12">
                     <div className="space-y-3">
@@ -158,7 +158,7 @@ function FarmsPage() {
                 </div>
             </div>
 
-            <div className="bg-[#030303] border border-white/5 p-10 space-y-8">
+            <div className="bg-[#0d0f14] border border-white/5 p-10 space-y-8">
                 <div className="font-mono text-[8px] uppercase tracking-[0.5em] text-white/20">LOG DE EVENTOS</div>
                 <div className="space-y-2 max-h-[300px] overflow-y-auto pr-6 custom-scrollbar">
                     {logs.length === 0 ? (
@@ -178,7 +178,7 @@ function FarmsPage() {
         </div>
 
         <aside className="space-y-6">
-            <div className="bg-[#030303] border border-white/5 p-8 space-y-8">
+            <div className="bg-[#0d0f14] border border-white/5 p-8 space-y-8">
                 <div className="font-mono text-[8px] uppercase tracking-[0.5em] text-white/20">DADOS DA INFRAESTRUTURA</div>
                 <div className="space-y-6">
                     <InfraItem label="PLANO ATIVO" val={limits.label} />
@@ -188,7 +188,7 @@ function FarmsPage() {
                 </div>
             </div>
 
-            <div className="bg-[#030303] border border-white/5 p-8 space-y-8">
+            <div className="bg-[#0d0f14] border border-white/5 p-8 space-y-8">
                 <div className="font-mono text-[8px] uppercase tracking-[0.5em] text-white/20">TELEMETRIA GLOBAL</div>
                 <div className="space-y-4">
                     <div className="flex justify-between font-mono text-[9px] uppercase tracking-[0.2em]">
@@ -213,7 +213,7 @@ function FarmsPage() {
 
 function StatItem({ icon: Icon, label, value, sub, active }: any) {
   return (
-    <div className={`p-8 bg-[#030303] border border-white/5 space-y-4 transition-all duration-500 hover:border-primary/40 group ${active ? 'border-primary/20' : ''}`}>
+    <div className={`p-8 bg-[#0d0f14] border border-white/5 space-y-4 transition-all duration-500 hover:border-primary/40 group ${active ? 'border-primary/20' : ''}`}>
         <div className="flex items-center gap-3">
             <Icon className={`w-3.5 h-3.5 ${active ? 'text-primary' : 'text-white/10'}`} />
             <span className="font-mono text-[8px] uppercase tracking-[0.4em] text-white/20 group-hover:text-white/40 transition-colors">{label}</span>

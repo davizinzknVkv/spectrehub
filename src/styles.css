@@ -333,7 +333,7 @@
 }
 
 h1 {
-  text-shadow: 0 0 40px rgba(77, 160, 158, 0.1);
+  text-shadow: 0 0 40px rgba(0, 81, 148, 0.1);
 }
 
 html {
@@ -365,13 +365,13 @@ body {
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #FF0050;
+  background: #005194;
 }
 
 /* Firefox */
 * {
   scrollbar-width: thin;
-  scrollbar-color: #1a1a1a #030303;
+  scrollbar-color: #1a1a1a #0d0f14;
 }
 
 
@@ -381,7 +381,7 @@ body {
 
 /* Spectre Industrial Notifications */
 .spectre-toast {
-  background: #080808 !important;
+  background: #0d0f14 !important;
   border: 1px solid rgba(255, 255, 255, 0.08) !important;
   border-radius: 0px !important;
   padding: 1rem 1.25rem !important;
@@ -392,7 +392,7 @@ body {
 }
 
 .spectre-toast [data-icon] {
-  color: #FF0050 !important;
+  color: #005194 !important;
 }
 
 .spectre-toast [data-title] {
@@ -401,7 +401,7 @@ body {
   text-transform: uppercase !important;
   letter-spacing: 0.1em !important;
   font-style: italic !important;
-  color: #FF0050 !important;
+  color: #005194 !important;
 }
 
 .spectre-toast [data-description] {
@@ -416,7 +416,7 @@ body {
 .spectre-toast [data-close-button] {
   top: -8px !important;
   right: -8px !important;
-  background: #080808 !important;
+  background: #0d0f14 !important;
   border: 1px solid rgba(255, 255, 255, 0.1) !important;
   color: white !important;
   width: 20px !important;
@@ -431,18 +431,18 @@ body {
 }
 
 .spectre-toast [data-close-button]:hover {
-  background: #FF0050 !important;
-  border-color: #FF0050 !important;
+  background: #005194 !important;
+  border-color: #005194 !important;
   transform: rotate(90deg) !important;
 }
 
 /* Toast Variants */
 .spectre-toast[data-type="success"] {
-  border-left: 2px solid #FF0050 !important;
+  border-left: 2px solid #005194 !important;
 }
 
 .spectre-toast[data-type="error"] {
-  border-left: 2px solid #FF0050 !important;
+  border-left: 2px solid #005194 !important;
 }
 
 .spectre-toast[data-type="info"] {

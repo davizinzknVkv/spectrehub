@@ -21,7 +21,7 @@ export function PageHeader({ eyebrow, title, highlight, description, icon: Icon,
         <div className="min-w-0 flex-1">
           {eyebrow && (
             <div className="flex items-center gap-4 mb-6">
-              <div className="w-1.5 h-1.5 bg-primary shadow-[0_0_8px_#4DA09E]" />
+              <div className="w-1.5 h-1.5 bg-primary shadow-[0_0_8px_#005194]" />
               <span className="font-mono text-[9px] uppercase tracking-[0.5em] text-white/30">{eyebrow}</span>
             </div>
           )}

@@ -134,7 +134,7 @@ function MissoesPage() {
             cooldownLeft={cooldownLeft}
           />
 
-          <div className="flex flex-col sm:flex-row justify-between items-center bg-[#030303] border border-white/5 p-8 gap-10">
+          <div className="flex flex-col sm:flex-row justify-between items-center bg-[#0d0f14] border border-white/5 p-8 gap-10">
              <div className="flex flex-col space-y-2">
                 <div className="font-mono text-[8px] uppercase tracking-[0.4em] text-white/10">STATUS DO TERMINAL</div>
                 <div className="font-display text-[13px] text-white uppercase tracking-wider">
@@ -198,7 +198,7 @@ function MissoesPage() {
         </div>
 
         <aside className="space-y-6">
-            <div className="bg-[#030303] border border-white/5 p-10 space-y-10 relative">
+            <div className="bg-[#0d0f14] border border-white/5 p-10 space-y-10 relative">
                 <div className="absolute top-0 right-0 w-1 h-1 bg-primary" />
                 
                 <div className="flex items-center justify-between border-b border-white/5 pb-8">
@@ -206,7 +206,7 @@ function MissoesPage() {
                     <Activity className="w-4 h-4 text-primary opacity-50" />
                     <h3 className="font-display text-base text-white uppercase tracking-tighter">Terminal Log</h3>
                   </div>
-                  <div className="w-1.5 h-1.5 rounded-full bg-primary shadow-[0_0_8px_#4DA09E]" />
+                  <div className="w-1.5 h-1.5 rounded-full bg-primary shadow-[0_0_8px_#005194]" />
                 </div>
                 
                 <div className="space-y-4 max-h-[600px] overflow-y-auto pr-6 custom-scrollbar font-mono text-[9px] uppercase tracking-[0.1em]">
@@ -232,7 +232,7 @@ function MissoesPage() {
                 )}
             </div>
             
-            <div className="bg-[#030303] border border-primary/20 p-8 flex gap-6">
+            <div className="bg-[#0d0f14] border border-primary/20 p-8 flex gap-6">
               <AlertCircle className="w-5 h-5 text-primary shrink-0 opacity-50" />
               <div>
                 <h4 className="font-mono text-[8px] uppercase tracking-[0.4em] text-white/40 mb-2">DICA OPERACIONAL</h4>

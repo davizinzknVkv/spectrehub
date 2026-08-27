@@ -117,7 +117,7 @@ function AppLayout() {
 
       <div className="relative z-10 grid min-h-screen w-full lg:grid-cols-[280px_1fr] overflow-hidden">
         {/* Desktop sidebar */}
-        <aside className="hidden border-r border-white/5 bg-[#030303] lg:block lg:w-[280px]">
+        <aside className="hidden border-r border-white/5 bg-[#0d0f14] lg:block lg:w-[280px]">
           <SidebarBody pathname={pathname} />
         </aside>
 
@@ -129,7 +129,7 @@ function AppLayout() {
               onClick={() => setMobileOpen(false)}
               aria-hidden
             />
-            <aside className="fixed inset-y-0 left-0 z-50 w-[280px] border-r border-white/5 bg-[#030303] lg:hidden">
+            <aside className="fixed inset-y-0 left-0 z-50 w-[280px] border-r border-white/5 bg-[#0d0f14] lg:hidden">
               <div className="flex items-center justify-between border-b border-white/5 px-8 py-8">
                 <span className="font-mono text-[9px] font-bold uppercase tracking-[0.4em] text-white/20">MENU PRINCIPAL</span>
                 <button
@@ -145,7 +145,7 @@ function AppLayout() {
         )}
 
         {/* Main Content Area */}
-        <main className="min-w-0 flex flex-col w-full bg-[#030303]">
+        <main className="min-w-0 flex flex-col w-full bg-[#0d0f14]">
           <TopBar onOpenMenu={() => setMobileOpen(true)} pathname={pathname} />
           <div className="flex-1 w-full max-w-7xl mx-auto px-8 pb-24 pt-12 sm:px-12 lg:px-16">
             <Outlet />
@@ -193,7 +193,7 @@ function SidebarBody({
                         : "text-white/20 hover:text-white hover:bg-white/[0.01]"
                     }`}
                   >
-                    {active && <div className="absolute left-0 top-0 bottom-0 w-px bg-primary shadow-[0_0_8px_#FF0050]" />}
+                    {active && <div className="absolute left-0 top-0 bottom-0 w-px bg-primary shadow-[0_0_8px_#005194]" />}
                     <Icon
                       className={`h-3.5 w-3.5 shrink-0 transition-colors ${
                         active ? "text-primary" : "text-white/10 group-hover:text-primary/50"
@@ -278,7 +278,7 @@ function TopBar({ onOpenMenu, pathname }: { onOpenMenu: () => void; pathname: st
     <div
       className={`sticky top-0 z-20 transition-all duration-700 border-b ${
         scrolled 
-          ? "bg-[#030303]/95 border-white/5 py-6 px-8 sm:px-12" 
+          ? "bg-[#0d0f14]/95 border-white/5 py-6 px-8 sm:px-12" 
           : "bg-transparent border-transparent py-10 px-10 sm:px-16"
       }`}
     >
@@ -306,7 +306,7 @@ function TopBar({ onOpenMenu, pathname }: { onOpenMenu: () => void; pathname: st
 
         <div className="flex items-center gap-10">
           <div className="flex items-center gap-4 border-r border-white/5 pr-10">
-            <div className={`w-1.5 h-1.5 ${creds ? 'bg-primary shadow-[0_0_8px_#FF0050]' : 'bg-white/5'}`} />
+            <div className={`w-1.5 h-1.5 ${creds ? 'bg-primary shadow-[0_0_8px_#005194]' : 'bg-white/5'}`} />
             <span className="font-mono text-[8px] font-bold tracking-[0.4em] text-white/20 uppercase hidden sm:block">
               {creds ? 'CONEXÃO ESTABELECIDA' : 'OFFLINE'}
             </span>
@@ -315,7 +315,7 @@ function TopBar({ onOpenMenu, pathname }: { onOpenMenu: () => void; pathname: st
           {creds && me ? (
             <DropdownMenu>
               <DropdownMenuTrigger className="flex items-center gap-4 p-1 border border-white/5 bg-black hover:border-primary/30 transition-all focus:outline-none pr-5">
-                <div className="w-10 h-10 bg-[#030303] border border-white/5 overflow-hidden">
+                <div className="w-10 h-10 bg-[#0d0f14] border border-white/5 overflow-hidden">
                    {avatarUrl ? (
                     <img src={avatarUrl} alt="" className="w-full h-full object-cover grayscale" />
                   ) : (
@@ -397,7 +397,7 @@ function TopBar({ onOpenMenu, pathname }: { onOpenMenu: () => void; pathname: st
                   ) : (
                     <div 
                       className="w-full h-full opacity-20" 
-                      style={{ backgroundColor: me?.banner_color || '#FF0050' }}
+                      style={{ backgroundColor: me?.banner_color || '#005194' }}
                     />
                   )}
                   {/* Banner Copy Button */}

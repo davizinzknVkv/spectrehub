@@ -60,8 +60,8 @@ export function SiteHeader({ guildInvite }: SiteHeaderProps) {
       <div 
         className={`mx-auto max-w-7xl w-full flex items-center justify-between transition-all duration-500 border border-white/5 px-6 py-2 rounded-full ${
           scrolled 
-            ? "bg-[#0A0A0D]/80 backdrop-blur-xl shadow-2xl" 
-            : "bg-[#0A0A0D]/40 backdrop-blur-md"
+            ? "bg-[#010b12]/80 backdrop-blur-xl shadow-2xl" 
+            : "bg-[#010b12]/40 backdrop-blur-md"
         }`}
       >
         {/* Logo */}
@@ -104,7 +104,7 @@ export function SiteHeader({ guildInvite }: SiteHeaderProps) {
                 <ChevronDown className="w-3 h-3" />
               </button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent align="end" className="bg-[#030303] border-white/5 text-white/60">
+            <DropdownMenuContent align="end" className="bg-[#0d0f14] border-white/5 text-white/60">
               {LANGUAGES.map((lang) => (
                 <DropdownMenuItem 
                   key={lang.code}
@@ -142,7 +142,7 @@ export function SiteHeader({ guildInvite }: SiteHeaderProps) {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            className="fixed inset-0 z-[60] bg-[#030303] p-12 flex flex-col md:hidden"
+            className="fixed inset-0 z-[60] bg-[#0d0f14] p-12 flex flex-col md:hidden"
           >
             <div className="flex justify-between items-center mb-24">
                <span className="font-display text-[9px] tracking-[0.5em] text-primary uppercase">NAVEGAÇÃO</span>

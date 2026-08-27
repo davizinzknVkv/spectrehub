@@ -139,7 +139,7 @@ function NicksGunPage() {
 
       <div className="grid grid-cols-1 lg:grid-cols-[1fr_350px] gap-8">
         <div className="space-y-8">
-           <div className="bg-[#030303] border border-white/5 p-10 space-y-10 relative">
+           <div className="bg-[#0d0f14] border border-white/5 p-10 space-y-10 relative">
               <div className="absolute top-0 right-0 w-1 h-1 bg-primary" />
               
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-12">
@@ -212,7 +212,7 @@ function NicksGunPage() {
            </div>
 
            {(running || total > 0) && (
-               <div className="bg-[#030303] border border-primary/20 p-10 space-y-8">
+               <div className="bg-[#0d0f14] border border-primary/20 p-10 space-y-8">
                   <div className="flex justify-between items-end">
                      <div className="space-y-3">
                         <div className="font-mono text-[8px] uppercase tracking-[0.5em] text-primary">MONITORAMENTO ATIVO</div>
@@ -225,7 +225,7 @@ function NicksGunPage() {
                   </div>
                   <div className="h-0.5 bg-white/5 relative overflow-hidden">
                      <div 
-                       className="h-full bg-primary transition-all duration-500 shadow-[0_0_10px_#4DA09E]" 
+                       className="h-full bg-primary transition-all duration-500 shadow-[0_0_10px_#005194]" 
                        style={{ width: `${(checked/total)*100}%` }} 
                      />
                   </div>
@@ -234,7 +234,7 @@ function NicksGunPage() {
 
            <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
               {results.map(r => (
-                  <div key={r.username} className="bg-[#030303] border border-emerald-500/20 p-6 flex justify-between items-center group hover:border-emerald-500/50 transition-all duration-500">
+                  <div key={r.username} className="bg-[#0d0f14] border border-emerald-500/20 p-6 flex justify-between items-center group hover:border-emerald-500/50 transition-all duration-500">
                      <div>
                         <div className="font-display text-base text-white uppercase tracking-tighter">@{r.username}</div>
                         <div className="font-mono text-[7px] text-emerald-500 uppercase tracking-[0.4em] mt-2">NODO DISPONÍVEL IDENTIFICADO</div>
@@ -249,7 +249,7 @@ function NicksGunPage() {
         </div>
 
         <aside className="space-y-6">
-           <div className="bg-[#030303] border border-white/5 p-8 space-y-8">
+           <div className="bg-[#0d0f14] border border-white/5 p-8 space-y-8">
               <div className="font-mono text-[8px] uppercase tracking-[0.5em] text-white/20">DADOS DA SESSÃO</div>
               <div className="space-y-6">
                  <div className="flex justify-between border-b border-white/5 pb-4">
@@ -263,7 +263,7 @@ function NicksGunPage() {
               </div>
            </div>
 
-           <div className="bg-[#030303] border border-rose-500/10 p-8 space-y-6">
+           <div className="bg-[#0d0f14] border border-rose-500/10 p-8 space-y-6">
               <div className="font-mono text-[8px] uppercase tracking-[0.5em] text-rose-500/50">PROTOCOLO DE RISCO</div>
               <p className="text-[10px] text-white/20 leading-relaxed font-sans uppercase tracking-[0.1em]">
                  IDENTIDADES RARA SÃO MONITORADAS GLOBALMENTE. REIVINDIQUE O NODO IMEDIATAMENTE APÓS A DETECÇÃO PARA EVITAR INTERCEPTAÇÃO POR BOTS EXTERNOS.

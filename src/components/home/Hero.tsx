@@ -45,7 +45,7 @@ export function Hero({ guildInvite, fallbackMembers, liveMembers = [] }: HeroPro
         <div className="lg:col-span-8 text-left">
           <Reveal>
             <div className="flex items-center gap-6 mb-16">
-              <div className="w-1.5 h-1.5 bg-primary shadow-[0_0_8px_#FF0050]" />
+              <div className="w-1.5 h-1.5 bg-primary shadow-[0_0_8px_#005194]" />
               <span className="font-mono text-[9px] tracking-[0.5em] text-white/30 uppercase">
                 {t('hero.badge')} // SISTEMA INICIALIZADO
               </span>
