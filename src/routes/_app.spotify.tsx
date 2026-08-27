@@ -109,7 +109,7 @@ function SpotifyGenPage() {
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         <div className="lg:col-span-1 space-y-6">
-          <div className="bg-[#030303] border border-white/5 p-10 space-y-10 relative">
+          <div className="bg-[#0d0f14] border border-white/5 p-10 space-y-10 relative">
             <div className="absolute top-0 right-0 w-1 h-1 bg-primary" />
             
             <div className="flex items-center gap-6">
@@ -186,7 +186,7 @@ function SpotifyGenPage() {
             </div>
           </div>
 
-          <div className="bg-[#030303] border border-white/5 p-8 space-y-8">
+          <div className="bg-[#0d0f14] border border-white/5 p-8 space-y-8">
              <div className="flex flex-col gap-6">
                <div className="flex items-center gap-3 text-white/20">
                   <AlertCircle className="w-4 h-4" />
@@ -199,7 +199,7 @@ function SpotifyGenPage() {
                  <div className="flex items-center justify-between">
                     <p className="font-mono text-[8px] text-white/40 uppercase tracking-[0.4em]">CURRENT_STOCK_STATE</p>
                     <div className="flex items-center gap-3">
-                      <div className={cn("w-1.5 h-1.5 rounded-full", (stock || 0) > 0 ? "bg-emerald-500 shadow-[0_0_8px_#10b981]" : "bg-primary shadow-[0_0_8px_#4DA09E]")} />
+                      <div className={cn("w-1.5 h-1.5 rounded-full", (stock || 0) > 0 ? "bg-emerald-500 shadow-[0_0_8px_#10b981]" : "bg-primary shadow-[0_0_8px_#005194]")} />
                       <span className="font-mono text-xs text-white">{stock !== null ? stock : "---"}</span>
                     </div>
                  </div>
@@ -215,11 +215,11 @@ function SpotifyGenPage() {
         </div>
 
         <div className="lg:col-span-2 space-y-6">
-           <div className="bg-[#030303] border border-white/5 p-10 flex flex-col h-full min-h-[600px] relative">
+           <div className="bg-[#0d0f14] border border-white/5 p-10 flex flex-col h-full min-h-[600px] relative">
               <div className="absolute top-0 left-0 w-1 h-1 bg-white/20" />
               <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-10 gap-6">
                  <div className="flex items-center gap-4">
-                    <div className="w-1.5 h-1.5 rounded-full bg-primary shadow-[0_0_8px_#4DA09E]" />
+                    <div className="w-1.5 h-1.5 rounded-full bg-primary shadow-[0_0_8px_#005194]" />
                     <h3 className="font-display text-base text-white uppercase tracking-tighter">RESULTADOS DO TERMINAL</h3>
                  </div>
                  

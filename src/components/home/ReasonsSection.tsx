@@ -16,7 +16,7 @@ export function ReasonsSection({ reasons }: ReasonsSectionProps) {
       <div className="flex flex-col lg:flex-row gap-32 items-start">
         <Reveal className="flex-1 lg:max-w-md lg:sticky lg:top-32">
           <div className="flex items-center gap-6 mb-12">
-            <div className="w-1.5 h-1.5 bg-primary shadow-[0_0_8px_#FF0050]" />
+            <div className="w-1.5 h-1.5 bg-primary shadow-[0_0_8px_#005194]" />
             <span className="font-mono text-[9px] tracking-[0.5em] text-white/30 uppercase">
               {t('reasons.badge')}
             </span>

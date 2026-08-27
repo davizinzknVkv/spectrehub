@@ -95,9 +95,9 @@ function DocsPage() {
   );
 
   return (
-    <div className="min-h-screen bg-[#030303] text-white font-sans selection:bg-primary/30 flex flex-col">
+    <div className="min-h-screen bg-[#0d0f14] text-white font-sans selection:bg-primary/30 flex flex-col">
       {/* Header */}
-      <header className="sticky top-0 z-50 border-b border-white/5 bg-[#030303]">
+      <header className="sticky top-0 z-50 border-b border-white/5 bg-[#0d0f14]">
         <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
           <Link to="/" className="flex items-center gap-3">
             <img src={logoAsset.url} alt="Spectre" className="h-6 w-6 object-contain" />
@@ -133,7 +133,7 @@ function DocsPage() {
 
       {/* Mobile Nav */}
       {mobileMenuOpen && (
-        <div className="fixed inset-0 top-20 z-40 bg-[#030303] p-6 md:hidden">
+        <div className="fixed inset-0 top-20 z-40 bg-[#0d0f14] p-6 md:hidden">
           <nav className="space-y-6">
             {navItems.map(item => (
               <button 
@@ -230,7 +230,7 @@ function DocsPage() {
                       { icon: Shield, label: "Segurança", desc: "Protocolos avançados de proteção e anti-detecção." },
                       { icon: LifeBuoy, label: "Suporte", desc: "Comunidade ativa e atendimento especializado." },
                     ].map((item, i) => (
-                      <div key={i} className="p-8 bg-[#030303] group hover:bg-white/[0.02] transition-colors">
+                      <div key={i} className="p-8 bg-[#0d0f14] group hover:bg-white/[0.02] transition-colors">
                         <item.icon className="w-5 h-5 text-primary mb-6 opacity-50 group-hover:opacity-100 transition-opacity" />
                         <h3 className="font-display text-[10px] uppercase tracking-[0.3em] mb-4">{item.label}</h3>
                         <p className="text-[9px] text-white/20 uppercase tracking-[0.1em] leading-relaxed group-hover:text-white/40 transition-colors">{item.desc}</p>
@@ -253,7 +253,7 @@ function DocsPage() {
 
                   <div className="grid gap-px bg-white/5 border border-white/5">
                     {products.map((p, i) => (
-                      <div key={p.id} className="group p-10 bg-[#030303] hover:bg-white/[0.02] transition-all relative overflow-hidden">
+                      <div key={p.id} className="group p-10 bg-[#0d0f14] hover:bg-white/[0.02] transition-all relative overflow-hidden">
                         <div className="flex flex-col md:flex-row md:items-start justify-between gap-12 relative z-10">
                           <div className="space-y-8 flex-1">
                             <div className="flex items-center gap-6">
@@ -368,7 +368,7 @@ function DocsPage() {
       </div>
 
       {/* Footer */}
-      <footer className="border-t border-white/5 py-16 bg-[#030303]">
+      <footer className="border-t border-white/5 py-16 bg-[#0d0f14]">
         <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-8">
           <div className="flex items-center gap-3">
             <img src={logoAsset.url} alt="" className="h-6 w-6 opacity-30" />
@@ -387,7 +387,7 @@ function DocsPage() {
 
       {/* Floating AI Chat Window */}
       {aiChatOpen && (
-        <div className="fixed bottom-28 right-8 w-[380px] h-[500px] bg-[#0A0A0D] border border-primary/20 shadow-[0_20px_60px_rgba(0,0,0,0.8)] z-50 flex flex-col animate-in fade-in slide-in-from-bottom-8 duration-300">
+        <div className="fixed bottom-28 right-8 w-[380px] h-[500px] bg-[#010b12] border border-primary/20 shadow-[0_20px_60px_rgba(0,0,0,0.8)] z-50 flex flex-col animate-in fade-in slide-in-from-bottom-8 duration-300">
           <div className="p-4 border-b border-white/5 bg-white/[0.02] flex items-center justify-between">
             <div className="flex items-center gap-2">
               <div className="w-2 h-2 bg-primary rounded-full animate-pulse" />

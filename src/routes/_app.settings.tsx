@@ -108,7 +108,7 @@ function SettingsPage() {
           {category === "geral" && (
             <>
               {/* Sessão de Acesso */}
-              <section className="bg-[#030303] border border-white/5 p-10 space-y-10 relative">
+              <section className="bg-[#0d0f14] border border-white/5 p-10 space-y-10 relative">
                 <div className="absolute top-0 right-0 w-1 h-1 bg-primary" />
                 
                 <div className="flex items-center gap-4 border-b border-white/5 pb-8">
@@ -122,7 +122,7 @@ function SettingsPage() {
                 {creds && (
                   <div className="p-6 bg-primary/5 border border-primary/20 flex justify-between items-center group">
                      <div className="flex items-center gap-4">
-                        <div className="w-1.5 h-1.5 rounded-full bg-primary shadow-[0_0_8px_#4DA09E]" />
+                        <div className="w-1.5 h-1.5 rounded-full bg-primary shadow-[0_0_8px_#005194]" />
                         <span className="font-display text-[10px] text-white uppercase tracking-wider">Conexão Ativa</span>
                      </div>
                      <button onClick={() => setConfirmDisconnect(true)} className="font-mono text-[9px] text-primary hover:text-white transition-colors uppercase tracking-widest">ENCERRAR SESSÃO</button>
@@ -221,7 +221,7 @@ function SettingsPage() {
             <h3 className="font-sans text-sm font-bold uppercase tracking-widest text-foreground-muted/50 border-b border-border pb-4">Manual de Extração</h3>
             
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div className="bg-[#030303] border border-white/5 p-8 space-y-6 group hover:border-primary/20 transition-all">
+              <div className="bg-[#0d0f14] border border-white/5 p-8 space-y-6 group hover:border-primary/20 transition-all">
                 <div className="font-mono text-[9px] text-primary mb-2">MÓDULO DE ACESSO 01</div>
                 <h4 className="font-display text-sm text-white uppercase tracking-wider">Bookmarklet Helper</h4>
                 <p className="font-sans text-[11px] text-white/30 uppercase tracking-[0.1em] leading-relaxed">Arraste para sua barra de favoritos e clique enquanto estiver no Discord.</p>
@@ -235,7 +235,7 @@ function SettingsPage() {
                 </a>
               </div>
 
-              <div className="bg-[#030303] border border-white/5 p-8 space-y-6 group hover:border-primary/20 transition-all">
+              <div className="bg-[#0d0f14] border border-white/5 p-8 space-y-6 group hover:border-primary/20 transition-all">
                 <div className="font-mono text-[9px] text-white/10 mb-2">MÓDULO DE ACESSO 02</div>
                 <h4 className="font-display text-sm text-white uppercase tracking-wider">Extração via Console</h4>
                 <p className="font-sans text-[11px] text-white/30 uppercase tracking-[0.1em] leading-relaxed">Utilize o script direto no console do desenvolvedor (F12).</p>

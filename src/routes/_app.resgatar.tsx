@@ -67,7 +67,7 @@ function ResgatarPage() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-white/5 border border-white/5 pb-20">
             {PRODUCTS.map((product, idx) => (
-              <Reveal key={product.id} delay={idx * 50} className="bg-[#030303] group">
+              <Reveal key={product.id} delay={idx * 50} className="bg-[#0d0f14] group">
                 <div className="p-12 flex flex-col h-full relative overflow-hidden hover:bg-white/[0.01] transition-all duration-500">
                   <div className="flex items-start justify-between mb-12">
                     <div className="flex items-center gap-6">

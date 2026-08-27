@@ -12,7 +12,7 @@ export function ProductsSection({ products }: ProductsSectionProps) {
   const { t } = useTranslation();
 
   return (
-    <section id="produtos" className="relative py-24 bg-[#0A0A0D]">
+    <section id="produtos" className="relative py-24 bg-[#010b12]">
       {/* Background Decorator */}
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
           <div 

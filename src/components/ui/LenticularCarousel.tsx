@@ -130,7 +130,7 @@ const LenticularCard = ({
              style={{ x: isActive ? textX : 0, y: isActive ? textY : 0, transform: "translateZ(30px)" }}
              className="flex items-center gap-2 mb-3"
           >
-            <div className="w-1.5 h-1.5 rounded-full bg-primary shadow-[0_0_8px_#4DA09E]" />
+            <div className="w-1.5 h-1.5 rounded-full bg-primary shadow-[0_0_8px_#005194]" />
             <span className="font-display text-[9px] uppercase tracking-[0.2em] text-primary italic font-bold">
               {item.category}
             </span>

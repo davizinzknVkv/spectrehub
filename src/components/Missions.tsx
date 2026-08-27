@@ -20,7 +20,7 @@ export function PlanBanner({
   cooldownLeft: number;
 }) {
   return (
-    <div className="bg-[#030303] border border-white/5 p-10 font-mono relative">
+    <div className="bg-[#0d0f14] border border-white/5 p-10 font-mono relative">
       <div className="absolute top-0 left-0 w-1 h-1 bg-white/20" />
       <div className="flex flex-col gap-10 sm:flex-row sm:items-end sm:justify-between relative z-10">
         <div className="flex items-center gap-16">
@@ -56,7 +56,7 @@ export function PlanBanner({
       {cooldownLeft > 0 && (
         <div className="absolute bottom-0 left-0 h-0.5 bg-white/5 w-full">
            <div 
-             className="h-full bg-primary shadow-[0_0_10px_#4DA09E] transition-[width] duration-1000"
+             className="h-full bg-primary shadow-[0_0_10px_#005194] transition-[width] duration-1000"
              style={{ width: `${Math.min(100, (cooldownLeft / limits.cooldownMs) * 100)}%` }} 
            />
         </div>
@@ -88,7 +88,7 @@ export function MissionCard({
 
   return (
     <div className={cn(
-      "group relative flex min-h-[220px] flex-col justify-between transition-all duration-500 p-8 border border-white/5 bg-[#030303] hover:border-primary/20",
+      "group relative flex min-h-[220px] flex-col justify-between transition-all duration-500 p-8 border border-white/5 bg-[#0d0f14] hover:border-primary/20",
       active && "border-primary/40",
       isCompleted && !active && "border-emerald-500/20"
     )}>
@@ -99,7 +99,7 @@ export function MissionCard({
             alt=""
             className="h-full w-full object-cover grayscale transition-all duration-700 group-hover:grayscale-0 group-hover:scale-110"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#030303] via-[#030303]/60 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#0d0f14] via-[#0d0f14]/60 to-transparent" />
         </div>
       )}
 
@@ -134,7 +134,7 @@ export function MissionCard({
               <span>{Math.round(p)}%</span>
             </div>
             <div className="h-0.5 overflow-hidden bg-white/5">
-              <div className="h-full bg-primary shadow-[0_0_8px_#4DA09E] transition-all duration-500" style={{ width: `${p}%` }} />
+              <div className="h-full bg-primary shadow-[0_0_8px_#005194] transition-all duration-500" style={{ width: `${p}%` }} />
             </div>
           </div>
         ) : isCompleted ? (
@@ -188,7 +188,7 @@ export function CaptchaModal({
     <Modal
       title="Autorização de Segurança"
       onClose={onCancel}
-      className="max-w-lg mx-auto bg-[#030303] border border-white/5"
+      className="max-w-lg mx-auto bg-[#0d0f14] border border-white/5"
       actions={
         <div className="flex flex-col sm:flex-row w-full items-center justify-center gap-4 font-mono">
           <button 
@@ -198,7 +198,7 @@ export function CaptchaModal({
             ABORT
           </button>
           <button 
-            className="w-full sm:w-auto h-12 px-10 bg-primary text-white uppercase text-[10px] tracking-widest order-1 sm:order-2 shadow-[0_0_15px_#4DA09E]" 
+            className="w-full sm:w-auto h-12 px-10 bg-primary text-white uppercase text-[10px] tracking-widest order-1 sm:order-2 shadow-[0_0_15px_#005194]" 
             onClick={onSolved}
           >
             CONFIRM_PROTOCOL
@@ -237,7 +237,7 @@ export function CaptchaModal({
 /* ── EmptyState ─────────────────────────────────────────────────────────── */
 export function MissionEmptyState({ onScan }: { onScan: () => void }) {
   return (
-    <div className="flex flex-col items-center justify-center py-24 text-center border border-white/5 bg-[#030303] font-mono p-12">
+    <div className="flex flex-col items-center justify-center py-24 text-center border border-white/5 bg-[#0d0f14] font-mono p-12">
       <div className="mb-10 w-20 h-20 bg-white/[0.02] border border-white/5 flex items-center justify-center relative">
         <div className="absolute top-0 left-0 w-1 h-1 bg-white/10" />
         <Target className="h-8 w-8 text-white/10" />

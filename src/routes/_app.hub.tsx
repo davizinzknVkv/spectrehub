@@ -274,7 +274,7 @@ function HubPage() {
 
   return (
     <div className="page-stack">
-      <section className="bg-[#030303] border border-white/5 p-12 relative overflow-hidden">
+      <section className="bg-[#0d0f14] border border-white/5 p-12 relative overflow-hidden">
         <div className="absolute top-0 right-0 w-full h-full opacity-[0.03] pointer-events-none">
           {profile?.user?.banner && (
             <img 
@@ -320,7 +320,7 @@ function HubPage() {
 
             <div className="space-y-4">
               <div className="flex items-center gap-4">
-                <div className="w-1.5 h-1.5 bg-primary shadow-[0_0_8px_#FF0050]" />
+                <div className="w-1.5 h-1.5 bg-primary shadow-[0_0_8px_#005194]" />
                 <span className="font-mono text-[9px] tracking-[0.5em] text-white/20 uppercase">
                   IDENTIDADE VERIFICADA
                 </span>
