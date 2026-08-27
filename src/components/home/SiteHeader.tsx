@@ -56,47 +56,47 @@ export function SiteHeader({ guildInvite }: SiteHeaderProps) {
   }, []);
 
   return (
-    <header className="fixed top-6 left-0 right-0 z-50 px-6">
-      <div 
-        className={`mx-auto max-w-7xl w-full flex items-center justify-between transition-all duration-500 border border-white/5 px-6 py-2 rounded-full ${
-          scrolled 
-            ? "bg-[#010b12]/80 backdrop-blur-xl shadow-2xl" 
-            : "bg-[#010b12]/40 backdrop-blur-md"
-        }`}
-      >
+    <header
+      className={`fixed top-0 left-0 right-0 z-50 h-[72px] border-b transition-colors duration-300 ${
+        scrolled
+          ? "bg-background/85 backdrop-blur-xl border-white/[0.06]"
+          : "bg-transparent border-transparent"
+      }`}
+    >
+      <div className="bn-container h-full flex items-center justify-between gap-6">
         {/* Logo */}
-        <Link to="/" className="flex items-center gap-3">
+        <Link to="/" className="flex items-center gap-3 shrink-0">
           <img
             src={logoAsset.url}
-            alt="SPECTRE"
-            className="w-6 h-6 object-contain"
+            alt="Black Network"
+            className="w-7 h-7 object-contain"
           />
-          <span className="font-display text-sm tracking-[0.2em] text-white uppercase hidden sm:block">
-            Spectre <span className="text-primary opacity-50">//</span> Hub
+          <span className="text-[15px] font-semibold tracking-tight text-foreground hidden sm:block">
+            Black Network
           </span>
         </Link>
 
         {/* Desktop Nav */}
-        <nav className="hidden md:flex items-center gap-12 flex-1 justify-center">
+        <nav className="hidden md:flex items-center gap-1 flex-1 justify-center">
           {NAV.map((n) => (
             <a
               key={n.href}
               href={n.href}
-              className="font-display text-[9px] tracking-[0.4em] text-white/30 hover:text-primary transition-colors uppercase"
+              className="px-3 py-2 rounded-lg text-sm font-medium text-foreground-muted hover:text-foreground hover:bg-white/[0.04] transition-colors"
             >
               {n.label}
             </a>
           ))}
           <Link
             to="/docs"
-            className="font-display text-[9px] tracking-[0.4em] text-white/30 hover:text-primary transition-colors uppercase"
+            className="px-3 py-2 rounded-lg text-sm font-medium text-foreground-muted hover:text-foreground hover:bg-white/[0.04] transition-colors"
           >
             Docs
           </Link>
         </nav>
 
         {/* Actions */}
-        <div className="hidden md:flex items-center gap-8">
+        <div className="hidden md:flex items-center gap-4">
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <button className="flex items-center gap-2 opacity-30 hover:opacity-100 transition-opacity">
