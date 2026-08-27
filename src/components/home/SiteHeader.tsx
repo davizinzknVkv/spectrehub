@@ -99,17 +99,17 @@ export function SiteHeader({ guildInvite }: SiteHeaderProps) {
         <div className="hidden md:flex items-center gap-4">
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <button className="flex items-center gap-2 opacity-30 hover:opacity-100 transition-opacity">
-                <img src={currentLang.flag} alt={currentLang.label} className="w-4 h-2.5 object-cover" />
-                <ChevronDown className="w-3 h-3" />
+              <button aria-label="Idioma" className="flex items-center gap-2 h-9 px-3 rounded-lg text-foreground-muted hover:text-foreground hover:bg-white/[0.04] transition-colors">
+                <img src={currentLang.flag} alt={currentLang.label} className="w-4 h-2.5 object-cover rounded-[2px]" />
+                <ChevronDown className="w-3.5 h-3.5" />
               </button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent align="end" className="bg-[#0d0f14] border-white/5 text-white/60">
+            <DropdownMenuContent align="end" className="bg-popover border-white/[0.08] text-foreground-muted rounded-xl">
               {LANGUAGES.map((lang) => (
                 <DropdownMenuItem 
                   key={lang.code}
                   onClick={async () => i18n.changeLanguage(lang.code)}
-                  className="focus:bg-primary/10 focus:text-primary cursor-pointer text-[9px] uppercase tracking-widest px-4 py-3"
+                  className="focus:bg-primary/15 focus:text-foreground cursor-pointer text-sm px-3 py-2 rounded-lg"
                 >
                   {lang.label}
                 </DropdownMenuItem>
@@ -119,10 +119,10 @@ export function SiteHeader({ guildInvite }: SiteHeaderProps) {
 
           <Link 
             to="/hub" 
-            className="ds-btn ds-btn-primary !py-2 !px-5 !min-h-0 !h-9 !rounded-full text-[10px] flex items-center gap-2 group"
+            className="ds-btn ds-btn-primary !min-h-0 !h-10 !px-5 !rounded-xl text-sm group"
           >
-              ACESSAR SPECTRE
-              <ChevronRight className="w-3 h-3 transition-transform group-hover:translate-x-0.5" />
+              Acessar plataforma
+              <ChevronRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />
           </Link>
         </div>
 
