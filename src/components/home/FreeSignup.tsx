@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Check, Copy, ArrowRight } from "lucide-react";
+import { Check, Copy } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { Reveal } from "./Reveal";
 
@@ -44,112 +44,98 @@ export function FreeSignup({ guildInvite }: FreeSignupProps) {
   }
 
   return (
-    <section id="free" className="mx-auto max-w-7xl px-6 py-24 sm:px-12">
-      <Reveal>
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_480px] gap-20 items-start">
-          <div>
-            <div className="font-display text-[9px] tracking-[0.5em] text-primary uppercase mb-6 flex items-center gap-4">
-               <div className="w-12 h-px bg-primary" />
-               {t('free.badge')}
-            </div>
-            <h2 className="font-display text-[3.5rem] md:text-[5rem] leading-[0.85] text-white uppercase tracking-tighter mb-16">
-              {t('free.title')} <br />
-              <span className="text-primary italic opacity-90">{t('free.subtitle')}</span>
-            </h2>
+    <section id="free" className="bn-container py-24 sm:py-32">
+      <div className="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:items-start">
+        <Reveal>
+          <span className="bn-badge">{t("free.badge")}</span>
+          <h2 className="mt-5 text-[clamp(1.75rem,4vw,2.75rem)] font-semibold leading-tight text-foreground">
+            {t("free.title")} <span className="text-primary">{t("free.subtitle")}</span>
+          </h2>
 
-            <div className="space-y-12 border-l border-white/10 pl-8">
-              {[
-                t('free.step1'),
-                t('free.step2'),
-                t('free.step3'),
-              ].map((s, i) => (
-                <div key={s} className="group cursor-default">
-                   <div className="font-mono text-[9px] text-primary/40 mb-3 block">PASSO 0{i + 1}</div>
-                   <p className="font-sans text-[11px] text-white/40 uppercase tracking-[0.2em] group-hover:text-white/60 transition-colors max-w-xs leading-relaxed">
-                     {s}
-                   </p>
-                </div>
-              ))}
-            </div>
-          </div>
+          <ol className="mt-8 space-y-6">
+            {[t("free.step1"), t("free.step2"), t("free.step3")].map((s, i) => (
+              <li key={s} className="flex gap-4">
+                <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-primary/15 font-mono text-xs text-primary">
+                  {i + 1}
+                </span>
+                <p className="text-sm leading-relaxed text-foreground-muted">{s}</p>
+              </li>
+            ))}
+          </ol>
+        </Reveal>
 
-          <div className="bg-background border border-white/5 p-12 relative">
-             <div className="absolute top-0 right-0 w-1 h-1 bg-primary" />
-             <div className="absolute bottom-0 left-0 w-1 h-1 bg-primary" />
-             
+        <Reveal delay={150}>
+          <div className="ds-card">
             {!code ? (
-              <form onSubmit={generate} className="space-y-10">
-                <div className="space-y-4">
-                  <label className="font-mono text-[8px] uppercase tracking-[0.4em] text-white/20 block">
-                    TAG DE IDENTIDADE
+              <form onSubmit={generate} className="space-y-5">
+                <div>
+                  <label htmlFor="free-name" className="mb-2 block text-sm font-medium text-foreground">
+                    Seu nome
                   </label>
                   <input
+                    id="free-name"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     maxLength={40}
                     required
-                    className="w-full bg-white/[0.02] border border-white/5 px-6 py-5 text-[10px] text-white uppercase tracking-widest outline-none focus:border-primary/30 transition-all placeholder:text-white/5"
-                    placeholder="SEU NOME"
+                    className="bn-input"
+                    placeholder="Como devemos te chamar"
                   />
                 </div>
-                <div className="space-y-4">
-                  <label className="font-mono text-[8px] uppercase tracking-[0.4em] text-white/20 block">
-                    ID DO DISCORD
+                <div>
+                  <label htmlFor="free-discord" className="mb-2 block text-sm font-medium text-foreground">
+                    Usuário do Discord
                   </label>
                   <input
+                    id="free-discord"
                     value={discord}
                     onChange={(e) => setDiscord(e.target.value)}
                     maxLength={40}
                     required
-                    className="w-full bg-white/[0.02] border border-white/5 px-6 py-5 text-[10px] text-white uppercase tracking-widest outline-none focus:border-primary/30 transition-all placeholder:text-white/5"
-                    placeholder="USER#0000"
+                    className="bn-input"
+                    placeholder="seu.usuario"
                   />
                 </div>
-                <button type="submit" className="ds-btn ds-btn-primary w-full !h-14">
-                  GERAR CÓDIGO DE ACESSO
+                <button type="submit" className="ds-btn ds-btn-primary w-full">
+                  Gerar código de acesso
                 </button>
               </form>
             ) : (
-              <div className="space-y-10">
-                <div>
-                  <div className="font-mono text-[8px] uppercase tracking-[0.4em] text-white/20 mb-6 text-center">
-                    CÓDIGO ÚNICO DE SESSÃO
-                  </div>
-                  <div className="flex items-center gap-2 border border-primary/20 bg-primary/5 p-8 group">
-                    <code className="flex-1 font-display text-3xl text-primary italic text-center tracking-widest">
-                      {code}
-                    </code>
-                    <button
-                      type="button"
-                      onClick={copy}
-                      className="text-white/20 hover:text-white transition-colors"
-                    >
-                      {copied ? <Check className="w-5 h-5 text-primary" /> : <Copy className="w-5 h-5" />}
-                    </button>
-                  </div>
+              <div className="space-y-6">
+                <p className="text-sm text-foreground-muted">Seu código de acesso gratuito</p>
+                <div className="flex items-center gap-3 rounded-xl border border-primary/30 bg-primary/10 p-5">
+                  <code className="flex-1 text-center font-mono text-2xl tracking-wider text-foreground">
+                    {code}
+                  </code>
+                  <button
+                    type="button"
+                    onClick={copy}
+                    aria-label="Copiar código"
+                    className="flex h-11 w-11 items-center justify-center rounded-lg text-foreground-muted transition-colors hover:bg-white/5 hover:text-foreground"
+                  >
+                    {copied ? <Check className="h-5 w-5 text-accent" /> : <Copy className="h-5 w-5" />}
+                  </button>
                 </div>
-                
                 <a
                   href={guildInvite}
                   target="_blank"
                   rel="noreferrer"
-                  className="ds-btn ds-btn-primary w-full !h-14 flex items-center justify-center"
+                  className="ds-btn ds-btn-primary w-full"
                 >
-                  ABRIR TICKET
+                  Abrir ticket no Discord
                 </a>
-                
                 <button
                   type="button"
                   onClick={() => setCode(null)}
-                  className="w-full font-mono text-[8px] uppercase tracking-[0.4em] text-white/10 hover:text-white transition-colors"
+                  className="ds-btn ds-btn-ghost w-full"
                 >
-                  GERAR NOVO PROTOCOLO
+                  Gerar novo código
                 </button>
               </div>
             )}
           </div>
-        </div>
-      </Reveal>
+        </Reveal>
+      </div>
     </section>
   );
 }
