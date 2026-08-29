@@ -5,7 +5,6 @@ import { useTranslation } from "react-i18next";
 import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import { Reveal } from "./Reveal";
 import { Avatar } from "./Avatar";
-import logoAsset from "@/assets/logo-spectre.png.asset.json";
 
 interface HeroProps {
   guildInvite: string;
@@ -13,130 +12,119 @@ interface HeroProps {
   liveMembers?: { id: string; name: string; avatar: string | null }[];
 }
 
-export function Hero({ guildInvite, fallbackMembers, liveMembers = [] }: HeroProps) {
+export function Hero({ fallbackMembers, liveMembers = [] }: HeroProps) {
   const { t } = useTranslation();
   const containerRef = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({
     target: containerRef,
-    offset: ["start start", "end start"]
+    offset: ["start start", "end start"],
   });
 
-  const y = useTransform(scrollYProgress, [0, 1], [0, 300]);
-  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
-  const scale = useTransform(scrollYProgress, [0, 0.5], [1, 0.95]);
-
-  const smoothY = useSpring(y, { stiffness: 100, damping: 30 });
+  const opacity = useTransform(scrollYProgress, [0, 0.6], [1, 0]);
   const smoothOpacity = useSpring(opacity, { stiffness: 100, damping: 30 });
-  const smoothScale = useSpring(scale, { stiffness: 100, damping: 30 });
+
+  const members = (liveMembers.length > 0
+    ? liveMembers
+    : fallbackMembers.map((n) => ({ id: n, name: n, avatar: null }))
+  ).slice(0, 5);
 
   return (
-    <section ref={containerRef} className="relative min-h-[95dvh] flex items-center justify-start overflow-hidden pt-32 pb-24 px-6 md:px-20 bg-transparent">
-      {/* Background Grid Micro-details */}
-      <div className="absolute inset-0 opacity-[0.03] pointer-events-none" 
-           style={{ backgroundImage: `linear-gradient(to right, white 1px, transparent 1px), linear-gradient(to bottom, white 1px, transparent 1px)`, backgroundSize: '40px 40px' }} />
-      
-      <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-primary/20 to-transparent" />
-      <div className="absolute top-0 right-[15%] w-px h-[600px] bg-gradient-to-b from-primary/10 to-transparent" />
-      
-      <motion.div 
-        style={{ opacity: smoothOpacity, scale: smoothScale }}
-        className="relative z-10 w-full max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-end"
-      >
-        <div className="lg:col-span-8 text-left">
-          <Reveal>
-            <div className="flex items-center gap-6 mb-16">
-              <div className="w-1.5 h-1.5 bg-primary shadow-[0_0_8px_#005194]" />
-              <span className="font-mono text-[9px] tracking-[0.5em] text-white/30 uppercase">
-                {t('hero.badge')} // SISTEMA INICIALIZADO
-              </span>
-            </div>
-          </Reveal>
+    <section
+      ref={containerRef}
+      className="relative flex min-h-[88dvh] items-center overflow-hidden pt-32 pb-20 sm:pt-40 sm:pb-28"
+    >
+      <div
+        className="pointer-events-none absolute inset-0 opacity-[0.025]"
+        style={{
+          backgroundImage:
+            "linear-gradient(to right, white 1px, transparent 1px), linear-gradient(to bottom, white 1px, transparent 1px)",
+          backgroundSize: "56px 56px",
+        }}
+      />
+      <div className="pointer-events-none absolute -top-40 left-1/2 h-[420px] w-[820px] max-w-[120vw] -translate-x-1/2 rounded-full bg-primary/12 blur-[140px]" />
 
-          <div className="relative">
-            <motion.h1 
-              initial={{ opacity: 0, x: -30 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
-              className="font-display text-[clamp(2.5rem,8vw,5rem)] leading-[0.9] text-white uppercase tracking-tighter"
+      <motion.div style={{ opacity: smoothOpacity }} className="bn-container relative z-10">
+        <div className="grid grid-cols-1 items-center gap-16 lg:grid-cols-12">
+          <div className="lg:col-span-7">
+            <Reveal>
+              <span className="bn-badge">{t("hero.badge")}</span>
+            </Reveal>
+
+            <motion.h1
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+              className="mt-6 text-[clamp(2.25rem,6vw,4rem)] font-bold leading-[1.05] text-foreground"
             >
-              <div className="flex flex-col">
-                <span className="block">{t('hero.title1')}</span>
-                <span className="block text-primary italic relative">
-                  {t('hero.title2')}
-                  <span className="absolute -bottom-4 left-0 w-24 h-px bg-primary opacity-50" />
-                </span>
-              </div>
+              {t("hero.title1")}{" "}
+              <span className="text-primary">{t("hero.title2")}</span>
             </motion.h1>
-            
-            <Reveal delay={400}>
-              <div className="mt-16 max-w-lg border-l border-white/5 pl-8">
-                <p className="text-white/50 text-xs md:text-sm font-mono leading-loose uppercase tracking-[0.2em]">
-                  {t('hero.description')}
-                </p>
+
+            <Reveal delay={200}>
+              <p className="mt-6 max-w-xl text-base leading-relaxed text-foreground-muted sm:text-lg">
+                {t("hero.description")}
+              </p>
+            </Reveal>
+
+            <Reveal delay={350}>
+              <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:items-center">
+                <a href="#produtos" className="ds-btn ds-btn-primary w-full sm:w-auto">
+                  {t("common.getStarted")}
+                  <ArrowRight className="h-4 w-4" />
+                </a>
+                <Link to="/docs" className="ds-btn ds-btn-secondary w-full !min-h-12 sm:w-auto">
+                  {t("common.documentation")}
+                </Link>
               </div>
             </Reveal>
-          </div>
 
-          <Reveal delay={600}>
-            <div className="flex flex-col sm:flex-row items-center gap-6 mt-20">
-              <a 
-                href="#produtos" 
-                className="ds-btn ds-btn-primary !h-16 !px-12 flex items-center justify-center gap-4 text-[11px] uppercase tracking-[0.3em]"
-              >
-                {t('common.getStarted')}
-                <ArrowRight className="w-4 h-4 opacity-50" />
-              </a>
-              
-              <Link to="/docs" className="ds-btn ds-btn-secondary !h-16 !px-10 flex items-center justify-center text-[11px] uppercase tracking-[0.3em]">
-                {t('common.documentation')}
-              </Link>
-            </div>
-          </Reveal>
-        </div>
-
-        <div className="lg:col-span-4 lg:text-right hidden lg:block">
-          <div className="space-y-8 opacity-40">
-            <div className="space-y-2">
-              <span className="font-display text-[9px] tracking-[0.3em] uppercase block">Timestamp</span>
-              <span className="font-mono text-[10px] block uppercase">VERSÃO 2026</span>
-            </div>
-            
-            <div className="space-y-4">
-              <span className="font-display text-[9px] tracking-[0.3em] uppercase block">{t('hero.activeCommunity')}</span>
-              <div className="flex justify-end -space-x-3">
-                 {(liveMembers.length > 0 ? liveMembers : fallbackMembers.map(n => ({ name: n, avatar: null }))).slice(0, 5).map((m, i) => (
-                    <div 
-                      key={i} 
-                      className="w-8 h-8 rounded-full border border-obsidian overflow-hidden bg-black flex items-center justify-center grayscale hover:grayscale-0 transition-all cursor-crosshair"
+            <Reveal delay={500}>
+              <div className="mt-12 flex items-center gap-4">
+                <div className="flex -space-x-2.5">
+                  {members.map((m, i) => (
+                    <div
+                      key={`${m.name}-${i}`}
+                      className="h-9 w-9 overflow-hidden rounded-full border-2 border-background bg-surface-2"
                     >
                       {m.avatar ? (
-                        <img src={m.avatar} alt={m.name} className="w-full h-full object-cover" />
+                        <img src={m.avatar} alt="" loading="lazy" className="h-full w-full object-cover" />
                       ) : (
                         <Avatar seed={m.name} />
                       )}
                     </div>
-                 ))}
+                  ))}
+                </div>
+                <p className="text-sm text-foreground-muted">{t("hero.activeCommunity")}</p>
               </div>
-            </div>
+            </Reveal>
+          </div>
 
-            <div className="pt-8 border-t border-white/10 text-[9px] font-mono leading-relaxed max-w-[200px] ml-auto uppercase opacity-50">
-              SISTEMA CARREGADO
-              <br />
-              RLS ATIVO
-              <br />
-              NÚCLEO ATIVO
+          <div className="hidden lg:col-span-5 lg:block">
+            <div className="ds-card space-y-5">
+              <div className="flex items-center justify-between">
+                <span className="text-sm font-medium text-foreground">Status da plataforma</span>
+                <span className="bn-badge">Operacional</span>
+              </div>
+              <dl className="space-y-4">
+                {[
+                  { k: "Versão", v: "2026.1" },
+                  { k: "Missões processadas", v: "128.400+" },
+                  { k: "Disponibilidade", v: "99,9%" },
+                  { k: "Latência média", v: "42 ms" },
+                ].map((row) => (
+                  <div
+                    key={row.k}
+                    className="flex items-center justify-between border-b border-white/[0.05] pb-3 last:border-0 last:pb-0"
+                  >
+                    <dt className="text-sm text-foreground-muted">{row.k}</dt>
+                    <dd className="font-mono text-sm text-foreground">{row.v}</dd>
+                  </div>
+                ))}
+              </dl>
             </div>
           </div>
         </div>
       </motion.div>
-      
-      {/* Industrial Decorative Element */}
-      <div className="absolute bottom-12 left-6 md:left-12 flex items-center gap-6 opacity-20 pointer-events-none">
-        <div className="font-display text-[8px] tracking-[1em] uppercase vertical-text transform rotate-180">
-          SPECTRE HUB
-        </div>
-        <div className="h-32 w-px bg-gradient-to-t from-primary to-transparent" />
-      </div>
     </section>
   );
 }
